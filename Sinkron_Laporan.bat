@@ -1,5 +1,5 @@
 @echo off
-title Sinkronisasi Penuh Foxe Studio (Google Drive)
+title Sinkronisasi Penuh Foxe Studio (Google Drive & Cloud Deploy)
 echo =======================================================
 echo   SINKRONISASI LENGKAP GOOGLE DRIVE FOXE STUDIO
 echo   File 1: Log Order (.xlsm)
@@ -10,5 +10,10 @@ echo.
 cd /d "%~dp0"
 python deep_sync_foxe.py
 echo.
-echo Selesai! Tekan sembarang tombol untuk keluar...
-pause >nul
+echo Mengunggah pembaruan ke live website GitHub...
+git add foxe_full_state.json index.html file1.xlsm file2.xlsx file3_export.xlsx
+git commit -m "Auto-sync Google Drive update" 2>nul
+git push origin main
+echo.
+echo [BERHASIL] Website live https://whynunuu.github.io/FoxeStudio/ sudah terupdate!
+timeout /t 5 >nul
