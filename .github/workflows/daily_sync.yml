@@ -1,16 +1,28 @@
-name: Foxe Studio - Daily 09:00 AM Sync
+name: Foxe Studio - Daily 09:00 AM Sync & Cloud Deploy
 
 on:
   schedule:
     # 02:00 UTC = 09:00 WIB (UTC+7) - Eksekusi setiap hari jam 9 pagi WIB
     - cron: '0 2 * * *'
-  workflow_dispatch: # Memungkinkan tombol "Run workflow" manual dari web GitHub
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Tombol "Run workflow" manual dari web GitHub
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
 
 jobs:
-  sync:
+  sync_and_deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
@@ -32,9 +44,21 @@ jobs:
         run: |
           python deep_sync_foxe.py
 
-      - name: Commit dan Simpan Hasil ke Repository
+      - name: Commit dan Simpan Data ke Repository
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add foxe_full_state.json index.html file1.xlsm file2.xlsx file3_export.xlsx
           git diff --staged --quiet || (git commit -m "Auto-sync Google Drive (09:00 WIB) [skip ci]" && git push)
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload Artifact Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy ke GitHub Pages (Online Live Web)
+        id: deployment
+        uses: actions/deploy-pages@v4
