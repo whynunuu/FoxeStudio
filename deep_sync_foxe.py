@@ -175,6 +175,14 @@ def run_integration():
             shutil.copy("index.html", artifact_target)
             print(f"[OK] Artifact disalin ke: {artifact_target}")
 
+        # Kirim notifikasi otomatis ke Telegram (jika bot & chat sudah terhubung)
+        try:
+            from telegram_notifier import send_telegram_message, build_summary_message
+            tg_msg = build_summary_message(state)
+            send_telegram_message(tg_msg)
+        except Exception as tg_err:
+            print(f"[WARN] Gagal kirim notifikasi Telegram: {tg_err}")
+
         print("\n==================================================")
         print("   INTEGRASI GOOGLE DRIVE BERHASIL LENGKAP!       ")
         print("==================================================")
