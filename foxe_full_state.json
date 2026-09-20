@@ -9769,6 +9769,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260920-2146",
+      "mulai": "2026-09-20T14:46:23.995052+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 500 order, 158 jadwal, COGS/OPEX kosong."
+    },
+    {
       "id": "sy_20260920-2117",
       "mulai": "2026-09-20T14:17:10.110049+00:00",
       "status": "sukses",
@@ -9886,7 +9892,6 @@
   "gdrive": {
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
-    "file3_id": "1ttO8updDK1_F1TZFWxQGIDYtI2tvToMg",
-    "last_sync": "2026-09-20T14:17:10.110049+00:00"
+    "last_sync": "2026-09-20T14:46:23.995052+00:00"
   }
 }

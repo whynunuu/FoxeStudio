@@ -3,13 +3,11 @@
 ## Trigger Kata Kunci: "ayo kerja"
 Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "update data", "sinkronkan data"), Agent **HARUS LANGSUNG mengeksekusi pipeline kerja lengkap** secara mandiri dari awal hingga selesai tanpa perlu konfirmasi manual lagi:
 
-### 1. Eksekusi Sinkronisasi Google Drive (`deep_sync_foxe.py`):
-- Unduh data terbaru dari 3 sumber Google Drive resmi:
-  * **File 1 (Log Order `.xlsm`)**: ID `1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ`
-  * **File 2 (Schedule `.xlsx`)**: ID `14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I`
-  * **File 3 (Master Kalkulasi `.xlsx`)**: ID `1ttO8updDK1_F1TZFWxQGIDYtI2tvToMg`
-- Ekstraksi transaksi harian, shift kru, kontrol kas harian, funnel leads, dan evaluasi 5 pilar KPI.
-- Pindai 3 blok studio (Studio 1, 2, 3) di Schedule dengan mempertahankan entri `manual: true` agar tidak pernah tertimpa.
+### 1. Eksekusi Sinkronisasi Operasional Google Drive (`deep_sync_foxe.py`):
+- Unduh & parse data operasional HANYA dari 2 sumber Google Drive resmi (File 3 / Rekap Global DI-SKIP):
+  * **File 1 (Log Order `.xlsm`)**: ID `1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ` (transaksi pembayaran, akumulasi total shift aktual kru, kas harian, funnel leads marketing & KPI harian).
+  * **File 2 (Schedule `.xlsx`)**: ID `14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I` (jadwal booking Studio 1, 2, 3 dan deteksi jadwal foto besok H+1).
+- **Roster Shift:** Hitung akumulasi total shift slot aktual dari Log Order s.d. tanggal sekarang/cut-off.
 - **ATURAN MUTLAK BIAYA:** Bagian COGS & OPEX (`expenses`) **HARUS SELALU KOSONG (`[]`)** sesuai instruksi pemilik studio.
 - Deteksi cut-off dinamis (mengikuti tanggal transaksi aktif terbaru, misal: 20 September 2026).
 - Simpan state gabungan ke `foxe_full_state.json`.
@@ -17,7 +15,7 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
 
 ### 2. Auto-Commit & Deploy ke GitHub:
 - Otomatis commit dan push pembaruan data ke repository:
-  `git add foxe_full_state.json index.html file1.xlsm file2.xlsx file3_export.xlsx`
+  `git add foxe_full_state.json index.html file1.xlsm file2.xlsx`
   `git commit -m "Auto-sync data update"`
   `git push origin main`
 - Remote URL: `https://github.com/whynunuu/FoxeStudio.git`

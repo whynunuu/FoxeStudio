@@ -22,14 +22,12 @@ import shutil
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# Import parser modular
+# Import parser modular (File 1 & File 2)
 from parser_log_order import parse_log_order
 from parser_schedule import parse_schedule
-from parser_master import parse_master
 
 LOG_ORDER_FILE_ID = "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ"
 SCHEDULE_SHEET_ID = "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I"
-MASTER_CALC_SHEET_ID = "1ttO8updDK1_F1TZFWxQGIDYtI2tvToMg"
 
 def download_gdrive(file_id, dest_path):
     session = requests.Session()
@@ -92,29 +90,23 @@ def run_integration():
         json.dump(state, f, ensure_ascii=False, indent=2)
 
     try:
-        # STEP 4: Unduh ketiga sumber Google Drive
-        print("\n[1/5] Mengunduh ketiga sumber Google Drive...")
+        # STEP 4: Unduh sumber operasional resmi (File 1 & File 2)
+        print("\n[1/4] Mengunduh sumber operasional (Log Order & Schedule)...")
         download_gdrive(LOG_ORDER_FILE_ID, "file1.xlsm")
         download_gsheet(SCHEDULE_SHEET_ID, "file2.xlsx")
-        download_gsheet(MASTER_CALC_SHEET_ID, "file3_export.xlsx")
 
         # STEP 5: Jalankan Parser File 1 (Log Order)
-        print("\n[2/5] Menjalankan parser_log_order.py (File 1)...")
+        print("\n[2/4] Menjalankan parser_log_order.py (File 1)...")
         res_f1 = parse_log_order("file1.xlsm", bulan="2026-09")
         print(f"[OK] File 1 terurai: {len(res_f1['orders'])} transaksi, {len(res_f1['shifts'])} shift, {len(res_f1['cashControl'])} kontrol kas, {len(res_f1['leads'])} data lead.")
 
-        # STEP 6-8: Jalankan Parser File 2 (Schedule) & Merge Booking
-        print("\n[3/5] Menjalankan parser_schedule.py (File 2)...")
+        # STEP 6: Jalankan Parser File 2 (Schedule) & Merge Booking
+        print("\n[3/4] Menjalankan parser_schedule.py (File 2)...")
         existing_bk = (state.get("schedule") or {}).get("bookings", [])
         res_f2_bookings = parse_schedule("file2.xlsx", bulan="2026-09", existing_bookings=existing_bk)
         print(f"[OK] File 2 terurai: {len(res_f2_bookings)} jadwal booking studio.")
 
-        # STEP 9: Jalankan Parser File 3 (Master Kalkulasi)
-        print("\n[4/5] Menjalankan parser_master.py (File 3)...")
-        res_f3 = parse_master("file3_export.xlsx")
-        print(f"[OK] File 3 terurai: {len(res_f3['expenses'])} pos biaya, baseline {res_f3['baseline']['label']}.")
-
-        # STEP 10: Perbarui State Gabungan
+        # STEP 7: Perbarui State Gabungan
         active_days = [int(o["tanggal"].split("-")[2]) for o in res_f1["orders"] if o["tanggal"].startswith("2026-09-") and int(o["tanggal"].split("-")[2]) <= 30]
         latest_day = max(active_days) if active_days else 19
         cutoff_date = f"2026-09-{latest_day:02d}"
@@ -136,9 +128,9 @@ def run_integration():
         state["leads"] = res_f1["leads"] if res_f1["leads"] else state.get("leads", [])
         state["kpi"] = res_f1["kpi"]
         state["expenses"] = []  # COGS & OPEX dikosongkan sesuai instruksi pengguna
-        state["baseline"] = res_f3["baseline"]
-        state["history"] = res_f3["history"]
-        state["ads"] = res_f3["ads"]
+        state["baseline"] = state.get("baseline", {"label": "September 2025", "omzet": 88000000, "net": 35000000})
+        state["history"] = state.get("history", [])
+        state["ads"] = state.get("ads", [])
         state["schedule"] = {
             "bulan": "2026-09",
             "sumber": "Schedule September 2026 (Google Drive)",
@@ -146,11 +138,10 @@ def run_integration():
             "bookings": res_f2_bookings if res_f2_bookings else state.get("schedule", {}).get("bookings", [])
         }
         
-        # Metadata Google Drive
+        # Metadata Google Drive (File 1 & File 2)
         state["gdrive"] = {
             "file1_id": LOG_ORDER_FILE_ID,
             "file2_id": SCHEDULE_SHEET_ID,
-            "file3_id": MASTER_CALC_SHEET_ID,
             "last_sync": now.astimezone(datetime.timezone.utc).isoformat()
         }
 

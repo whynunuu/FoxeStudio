@@ -168,21 +168,22 @@ def build_summary_message(state):
     total_dp = sum(l.get("dp", 0) for l in state.get("leads", []) if int(l.get("tanggal", "2026-09-01").split("-")[2]) <= cutoff_day)
     conv_rate = (total_dp / total_leads * 100) if total_leads > 0 else 0
 
-    # Roster Shift aktual s.d. cutoff
-    unique_days = defaultdict(set)
+    # Roster Shift aktual s.d. cutoff (akumulasi total shift dari Log Order)
+    from collections import Counter
+    shift_counts = Counter()
     for sh in state.get("shifts", []):
         try:
             sh_day = int(sh.get("tanggal", "2026-09-01").split("-")[2])
             if sh_day <= cutoff_day:
-                unique_days[sh.get("nama")].add(sh.get("tanggal"))
+                shift_counts[sh.get("nama")] += 1
         except Exception:
             pass
 
     shift_order = [
-        ("Admin AMEL", len(unique_days.get("AMEL", []))),
-        ("Admin INDAH", len(unique_days.get("INDAH", []))),
-        ("Fotografer ADIF", len(unique_days.get("ADIF", []))),
-        ("Fotografer SAKA", len(unique_days.get("SAKA", [])))
+        ("Admin AMEL", shift_counts.get("AMEL", 0)),
+        ("Admin INDAH", shift_counts.get("INDAH", 0)),
+        ("Fotografer ADIF", shift_counts.get("ADIF", 0)),
+        ("Fotografer SAKA", shift_counts.get("SAKA", 0))
     ]
     tot_shifts = sum(cnt for _, cnt in shift_order)
 
