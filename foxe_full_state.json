@@ -5985,6 +5985,42 @@
       "total": 50000.0,
       "admin": "AMEL",
       "fotografer": "ADIF"
+    },
+    {
+      "id": "or_498",
+      "tanggal": "2026-09-20",
+      "client": "Ezar Nadhif",
+      "paket": "Graduation",
+      "tanggalFoto": "4 okt",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_499",
+      "tanggal": "2026-09-20",
+      "client": "Satria",
+      "paket": "Family A",
+      "tanggalFoto": "20 sept",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_500",
+      "tanggal": "2026-09-20",
+      "client": "Adkesma Fikes",
+      "paket": "Large Group",
+      "tanggalFoto": "20 sept",
+      "cash": 0.0,
+      "transfer": 125000.0,
+      "total": 125000.0,
+      "admin": "AMEL",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -6467,30 +6503,6 @@
       "tanggal": "2026-09-20",
       "nama": "ADIF",
       "slot": 1
-    },
-    {
-      "id": "sh_81",
-      "tanggal": "2026-09-23",
-      "nama": "AMEL",
-      "slot": 1
-    },
-    {
-      "id": "sh_82",
-      "tanggal": "2026-09-23",
-      "nama": "AMEL",
-      "slot": 1
-    },
-    {
-      "id": "sh_83",
-      "tanggal": "2026-09-23",
-      "nama": "SAKA",
-      "slot": 1
-    },
-    {
-      "id": "sh_84",
-      "tanggal": "2026-09-23",
-      "nama": "ADIF",
-      "slot": 1
     }
   ],
   "expenses": [],
@@ -6802,10 +6814,10 @@
     {
       "id": "ld_20",
       "tanggal": "2026-09-20",
-      "leads": 0.0,
+      "leads": 29.0,
       "dp": 5.0,
-      "sesiFoto": 13.0,
-      "transaksi": 18.0
+      "sesiFoto": 16.0,
+      "transaksi": 21.0
     },
     {
       "id": "ld_21",
@@ -6905,19 +6917,19 @@
       "id": "kp_2",
       "nama": "AMEL",
       "role": "Admin 2",
-      "hariDinilai": 18,
+      "hariDinilai": 19,
       "disiplin": 4.89,
-      "akurasi": 4.94,
+      "akurasi": 4.95,
       "sop": 4.89,
       "client": 5.0,
-      "produktivitas": 4.5,
+      "produktivitas": 4.53,
       "referral": 0
     },
     {
       "id": "kp_3",
       "nama": "INDAH",
       "role": "Admin 1",
-      "hariDinilai": 19,
+      "hariDinilai": 20,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -6929,12 +6941,12 @@
       "id": "kp_4",
       "nama": "SAKA",
       "role": "Fotografer 2",
-      "hariDinilai": 18,
-      "disiplin": 4.89,
-      "akurasi": 4.94,
+      "hariDinilai": 20,
+      "disiplin": 4.9,
+      "akurasi": 4.95,
       "sop": 5.0,
       "client": 5.0,
-      "produktivitas": 4.78,
+      "produktivitas": 4.8,
       "referral": 0
     }
   ],
@@ -8806,21 +8818,6 @@
       {
         "id": "sc_bk_125",
         "tgl": "2026-09-20",
-        "waktu": "19:00",
-        "studio": "Studio 1",
-        "studioNama": "Studio 1",
-        "nama": "Adkesma Fikes",
-        "paket": "Large Group",
-        "paketRaw": "LG 9 + individu",
-        "jmlOrang": 9,
-        "harga": 225000.0,
-        "admin": "IN",
-        "noHp": "dp 100",
-        "manual": false
-      },
-      {
-        "id": "sc_bk_126",
-        "tgl": "2026-09-20",
         "waktu": "19:40",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -8831,6 +8828,21 @@
         "harga": 0.0,
         "admin": "AL",
         "noHp": "dp 100 wooden",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_126",
+        "tgl": "2026-09-20",
+        "waktu": "20:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Adkesma Fikes",
+        "paket": "Large Group",
+        "paketRaw": "LG 9 + individu",
+        "jmlOrang": 9,
+        "harga": 225000.0,
+        "admin": "IN",
+        "noHp": "dp 100",
         "manual": false
       },
       {
@@ -8865,6 +8877,21 @@
       },
       {
         "id": "sc_bk_129",
+        "tgl": "2026-09-21",
+        "waktu": "16:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Rosma",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "AL",
+        "noHp": "dp 100 calmblue",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_130",
         "tgl": "2026-09-22",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -8879,7 +8906,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_130",
+        "id": "sc_bk_131",
         "tgl": "2026-09-22",
         "waktu": "12:30",
         "studio": "Studio 1",
@@ -8894,7 +8921,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_131",
+        "id": "sc_bk_132",
         "tgl": "2026-09-22",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -8909,7 +8936,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_132",
+        "id": "sc_bk_133",
         "tgl": "2026-09-22",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -8924,7 +8951,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_133",
+        "id": "sc_bk_134",
         "tgl": "2026-09-22",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -8939,7 +8966,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_134",
+        "id": "sc_bk_135",
         "tgl": "2026-09-22",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -8954,7 +8981,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_135",
+        "id": "sc_bk_136",
         "tgl": "2026-09-22",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -8969,7 +8996,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_136",
+        "id": "sc_bk_137",
         "tgl": "2026-09-22",
         "waktu": "14:40",
         "studio": "Studio 1",
@@ -8984,7 +9011,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_137",
+        "id": "sc_bk_138",
         "tgl": "2026-09-22",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -8995,11 +9022,11 @@
         "jmlOrang": 1,
         "harga": 350000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "wooden",
         "manual": false
       },
       {
-        "id": "sc_bk_138",
+        "id": "sc_bk_139",
         "tgl": "2026-09-22",
         "waktu": "15:40",
         "studio": "Studio 1",
@@ -9014,7 +9041,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_139",
+        "id": "sc_bk_140",
         "tgl": "2026-09-22",
         "waktu": "16:20",
         "studio": "Studio 1",
@@ -9029,7 +9056,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_140",
+        "id": "sc_bk_141",
         "tgl": "2026-09-22",
         "waktu": "17:00",
         "studio": "Studio 1",
@@ -9044,7 +9071,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_141",
+        "id": "sc_bk_142",
         "tgl": "2026-09-22",
         "waktu": "18:40",
         "studio": "Studio 1",
@@ -9059,7 +9086,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_142",
+        "id": "sc_bk_143",
         "tgl": "2026-09-22",
         "waktu": "",
         "studio": "Studio 1",
@@ -9074,7 +9101,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_143",
+        "id": "sc_bk_144",
         "tgl": "2026-09-22",
         "waktu": "13:00",
         "studio": "Studio 2",
@@ -9089,7 +9116,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_144",
+        "id": "sc_bk_145",
         "tgl": "2026-09-22",
         "waktu": "13:20",
         "studio": "Studio 2",
@@ -9104,7 +9131,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_145",
+        "id": "sc_bk_146",
         "tgl": "2026-09-22",
         "waktu": "13:40",
         "studio": "Studio 2",
@@ -9119,7 +9146,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_146",
+        "id": "sc_bk_147",
         "tgl": "2026-09-22",
         "waktu": "14:00",
         "studio": "Studio 2",
@@ -9134,7 +9161,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_147",
+        "id": "sc_bk_148",
         "tgl": "2026-09-22",
         "waktu": "14:20",
         "studio": "Studio 2",
@@ -9149,7 +9176,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_148",
+        "id": "sc_bk_149",
         "tgl": "2026-09-23",
         "waktu": "18:00",
         "studio": "Studio 1",
@@ -9164,7 +9191,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_149",
+        "id": "sc_bk_150",
         "tgl": "2026-09-23",
         "waktu": "19:00",
         "studio": "Studio 1",
@@ -9179,7 +9206,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_150",
+        "id": "sc_bk_151",
         "tgl": "2026-09-23",
         "waktu": "19:40",
         "studio": "Studio 1",
@@ -9194,7 +9221,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_151",
+        "id": "sc_bk_152",
         "tgl": "2026-09-25",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -9209,7 +9236,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_152",
+        "id": "sc_bk_153",
         "tgl": "2026-09-26",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -9224,7 +9251,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_153",
+        "id": "sc_bk_154",
         "tgl": "2026-09-26",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -9239,7 +9266,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_154",
+        "id": "sc_bk_155",
         "tgl": "2026-09-26",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -9254,7 +9281,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_155",
+        "id": "sc_bk_156",
         "tgl": "2026-09-26",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -9269,7 +9296,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_156",
+        "id": "sc_bk_157",
         "tgl": "2026-09-26",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -9284,7 +9311,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_157",
+        "id": "sc_bk_158",
         "tgl": "2026-09-27",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -9742,6 +9769,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260920-2117",
+      "mulai": "2026-09-20T14:17:10.110049+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 500 order, 158 jadwal, COGS/OPEX kosong."
+    },
+    {
       "id": "sy_20260920-1826",
       "mulai": "2026-09-20T11:26:15.447352+00:00",
       "status": "sukses",
@@ -9854,6 +9887,6 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file3_id": "1ttO8updDK1_F1TZFWxQGIDYtI2tvToMg",
-    "last_sync": "2026-09-20T11:26:15.447352+00:00"
+    "last_sync": "2026-09-20T14:17:10.110049+00:00"
   }
 }
