@@ -92,67 +92,164 @@ def send_telegram_message(text, chat_id=None, parse_mode="HTML"):
         return False
 
 def build_summary_message(state):
+    from collections import defaultdict
     cfg = state.get("config", {})
     cutoff = cfg.get("cutoff", "2026-09-20")
-    orders = state.get("orders", [])
-    shifts = state.get("shifts", [])
+    try:
+        cutoff_dt = datetime.datetime.strptime(cutoff, "%Y-%m-%d")
+    except Exception:
+        cutoff_dt = datetime.datetime.now()
+    cutoff_day = cutoff_dt.day
 
-    # Order & Omzet MTD
-    total_mtd = sum(o.get("grandTotal", 0) for o in orders)
-    cash_mtd = sum(o.get("cash", 0) for o in orders)
-    tf_mtd = sum(o.get("transfer", 0) for o in orders)
-    count_mtd = len(orders)
+    tomorrow_dt = cutoff_dt + datetime.timedelta(days=1)
+    tomorrow_str = tomorrow_dt.strftime("%Y-%m-%d")
+    tomorrow_display = tomorrow_dt.strftime("%d %b %Y").upper()
 
-    # Order & Omzet Hari Cut-off (Hari Ini)
-    today_orders = [o for o in orders if o.get("tanggal") == cutoff]
-    today_omzet = sum(o.get("grandTotal", 0) for o in today_orders)
-    today_count = len(today_orders)
+    cash_by_date = defaultdict(float)
+    tf_by_date = defaultdict(float)
+    tot_by_date = defaultdict(float)
+    for o in state.get("orders", []):
+        cash_by_date[o.get("tanggal")] += o.get("cash", 0)
+        tf_by_date[o.get("tanggal")] += o.get("transfer", 0)
+        tot_by_date[o.get("tanggal")] += o.get("grandTotal", o.get("total", 0))
 
-    # Shift Kru Hari Ini
-    today_shifts = [s for s in shifts if s.get("tanggal") == cutoff]
-    crew_list = []
-    for s in today_shifts:
-        crew_list.append(f"• <b>Studio {s.get('studio')}</b>: {s.get('kru', '-')} ({s.get('jam', '-')})")
-    crew_str = "\n".join(crew_list) if crew_list else "• <i>Tidak ada log shift terjadwal</i>"
+    leads_map = {l.get("tanggal"): l for l in state.get("leads", [])}
 
-    # Target
-    target_tier3 = 100000000
-    persen_t3 = (total_mtd / target_tier3) * 100 if target_tier3 else 0
-    sisa_t3 = max(0, target_tier3 - total_mtd)
+    def fmt_k(v):
+        if v <= 0:
+            return "-"
+        return f"{int(round(v / 1000))}k"
+
+    table_lines = []
+    table_lines.append("============================================")
+    table_lines.append("        SUMMARY FOXE STUDIO (HARIAN)        ")
+    table_lines.append("============================================")
+    table_lines.append("Tgl     Cash  Transfer   Total  Leads   Rate")
+    table_lines.append("--------------------------------------------")
+
+    for d in range(1, 31):
+        tgl = f"2026-09-{d:02d}"
+        if d <= cutoff_day:
+            c = cash_by_date.get(tgl, 0)
+            t = tf_by_date.get(tgl, 0)
+            tot = tot_by_date.get(tgl, 0)
+            ld = leads_map.get(tgl)
+            if ld and ld.get("leads") and ld["leads"] > 0:
+                l_str = str(int(ld["leads"]))
+                r_str = f"{int(round(ld.get('dp', 0) / ld['leads'] * 100))}%"
+            else:
+                l_str = "-"
+                r_str = "-"
+        else:
+            c, t, tot = 0, 0, 0
+            l_str = "-"
+            r_str = "-"
+        
+        table_lines.append(f"{d:<3} {fmt_k(c):>9} {fmt_k(t):>9} {fmt_k(tot):>7} {l_str:>6} {r_str:>6}")
+
+    table_lines.append("--------------------------------------------")
+
+    total_cash = sum(cash_by_date.values())
+    total_tf = sum(tf_by_date.values())
+    grand_total = total_cash + total_tf
 
     def rp(n):
         return f"Rp {n:,.0f}".replace(",", ".")
 
-    # Format Pesan
-    msg = (
-        f"🦊 <b>Foxe Studio — Laporan Harian Closing</b>\n"
-        f"━━━━━━━━━━━━━━━━━━━━\n"
-        f"📅 <b>Cut-off:</b> {cutoff}\n"
-        f"🕒 <b>Update:</b> {datetime.datetime.now().strftime('%H:%M WIB')}\n\n"
-        f"💰 <b>Kinerja Hari Ini:</b>\n"
-        f"• Transaksi: <b>{today_count} Order</b>\n"
-        f"• Omzet: <b>{rp(today_omzet)}</b>\n\n"
-        f"📈 <b>Akumulasi Bulan Ini (MTD):</b>\n"
-        f"• Total Order: <b>{count_mtd} Order</b>\n"
-        f"• Total Omzet: <b>{rp(total_mtd)}</b>\n"
-        f"  ├ Tunai (Cash): {rp(cash_mtd)}\n"
-        f"  └ Non-Tunai (TF): {rp(tf_mtd)}\n"
-        f"• Progress Target Tier 3 (100 Juta): <b>{persen_t3:.1f}%</b>\n"
-        f"  └ Sisa ke Target: {rp(sisa_t3)}\n\n"
-        f"👥 <b>Shift Kru Hari Ini:</b>\n"
-        f"{crew_str}\n\n"
-        f"━━━━━━━━━━━━━━━━━━━━\n"
-        f"🔗 <b>Dashboard Live:</b>\n"
-        f"https://whynunuu.github.io/FoxeStudio/\n"
+    table_lines.append(f"{'TOTAL CASH':<24} {rp(total_cash):>19}")
+    table_lines.append(f"{'TOTAL TRANSFER':<24} {rp(total_tf):>19}")
+    table_lines.append(f"{'GRAND TOTAL':<24} {rp(grand_total):>19}")
+    table_lines.append("============================================")
+
+    table_block = "\n".join(table_lines)
+
+    # Leads s.d. cutoff
+    total_leads = sum(l.get("leads", 0) for l in state.get("leads", []) if int(l.get("tanggal", "2026-09-01").split("-")[2]) <= cutoff_day)
+    total_dp = sum(l.get("dp", 0) for l in state.get("leads", []) if int(l.get("tanggal", "2026-09-01").split("-")[2]) <= cutoff_day)
+    conv_rate = (total_dp / total_leads * 100) if total_leads > 0 else 0
+
+    # Roster Shift aktual s.d. cutoff
+    unique_days = defaultdict(set)
+    for sh in state.get("shifts", []):
+        try:
+            sh_day = int(sh.get("tanggal", "2026-09-01").split("-")[2])
+            if sh_day <= cutoff_day:
+                unique_days[sh.get("nama")].add(sh.get("tanggal"))
+        except Exception:
+            pass
+
+    shift_order = [
+        ("Admin AMEL", len(unique_days.get("AMEL", []))),
+        ("Admin INDAH", len(unique_days.get("INDAH", []))),
+        ("Fotografer ADIF", len(unique_days.get("ADIF", []))),
+        ("Fotografer SAKA", len(unique_days.get("SAKA", [])))
+    ]
+    tot_shifts = sum(cnt for _, cnt in shift_order)
+
+    shift_lines = []
+    for label, cnt in shift_order:
+        shift_lines.append(f"• {label:<17} : <b>{cnt}</b>")
+    shift_lines.append(f"• <b>{'TOTAL SHIFT':<17} : {tot_shifts}</b>")
+    shift_block = "\n".join(shift_lines)
+
+    # Jadwal Foto Besok
+    tomorrow_bookings = [
+        b for b in state.get("schedule", {}).get("bookings", [])
+        if b.get("tgl") == tomorrow_str
+    ]
+
+    booking_lines = []
+    if tomorrow_bookings:
+        for idx, b in enumerate(tomorrow_bookings, 1):
+            nama = b.get("nama", "Klien")
+            paket = b.get("paket") or b.get("paketRaw") or "Sesi Foto"
+            nohp = str(b.get("noHp", "")).lower()
+            if "lunas" in nohp:
+                status = "Lunas"
+            elif "dp" in nohp:
+                status = "DP"
+            else:
+                status = "Confirmed"
+            
+            adm_code = str(b.get("admin", "")).strip().upper()
+            adm_name = {"IN": "INDAH", "AM": "AMEL", "AD": "ADDEL"}.get(adm_code, adm_code) if adm_code else "-"
+            waktu = b.get("waktu", "")
+            studio = b.get("studio", "")
+            extra_info = f" | {waktu} @ {studio}" if waktu and studio else ""
+            booking_lines.append(f"{idx}. <b>{nama}</b> | {paket} (Status: {status} | Admin: {adm_name}{extra_info})")
+    else:
+        booking_lines.append("<i>Belum ada jadwal booking terdaftar untuk besok.</i>")
+
+    booking_block = "\n".join(booking_lines)
+    total_klien_besok = len(tomorrow_bookings)
+
+    now_str = datetime.datetime.now().strftime("%d %B %Y, %H:%M WIB")
+
+    full_msg = (
+        f"<pre>{table_block}</pre>\n\n"
+        f"🎯 <b>LEADS (s.d. {cutoff_day} Sept):</b>\n"
+        f"• Leads   : <b>{int(total_leads)}</b>\n"
+        f"• DP      : <b>{int(total_dp)}</b>\n"
+        f"• Rate    : <b>{conv_rate:.2f}%</b>\n\n"
+        f"👥 <b>ROSTER SHIFT (aktual s.d. {cutoff_day} Sept):</b>\n"
+        f"{shift_block}\n\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"📅 <b>JADWAL FOTO BESOK ({tomorrow_display})</b>\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"{booking_block}\n\n"
+        f"Total Jadwal Besok: <b>{total_klien_besok} Klien</b>\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"📌 <i>Sumber: Foxe Studio — Schedule dan Log Order.xlsm</i>\n"
+        f"🕒 <i>Last Updated: {now_str}</i>\n"
+        f"👉 <a href=\"https://whynunuu.github.io/FoxeStudio/\"><b>Buka Dashboard Live Foxe Studio</b></a>"
     )
-    return msg
+    return full_msg
 
 if __name__ == "__main__":
-    import sys
-    print("Testing Telegram Notifier...")
-    cid = detect_chat_id()
-    if cid:
-        print(f"Chat ID terdeteksi: {cid}")
-        send_telegram_message("🦊 <b>Halo Bos!</b> Bot notifikasi Foxe Studio sudah siap terhubung ke sistem cron!", cid)
-    else:
-        print("Menunggu user klik /start pada @NunuFxBot...")
+    print("Testing Telegram Notifier with new format...")
+    if os.path.exists("foxe_full_state.json"):
+        with open("foxe_full_state.json", "r", encoding="utf-8") as f:
+            st = json.load(f)
+        msg = build_summary_message(st)
+        send_telegram_message(msg)
+
