@@ -158,7 +158,18 @@ def build_summary_message(state):
 
     table_lines.append(f"{'TOTAL CASH':<24} {rp(total_cash):>19}")
     table_lines.append(f"{'TOTAL TRANSFER':<24} {rp(total_tf):>19}")
-    table_lines.append(f"{'GRAND TOTAL':<24} {rp(grand_total):>19}")
+    table_lines.append(f"{'GRAND TOTAL OMZET':<24} {rp(grand_total):>19}")
+
+    exps = state.get("expenses", [])
+    if exps:
+        cogs_tot = sum(e.get("nilai", 0) for e in exps if e.get("jenis") == "COGS")
+        opex_tot = sum(e.get("nilai", 0) for e in exps if e.get("jenis") == "OPEX")
+        nett_profit = grand_total - cogs_tot - opex_tot
+        table_lines.append("--------------------------------------------")
+        table_lines.append(f"{'TOTAL COGS (Produksi)':<24} {rp(cogs_tot):>19}")
+        table_lines.append(f"{'TOTAL OPEX (Studio)':<24} {rp(opex_tot):>19}")
+        table_lines.append(f"{'ESTIMASI NETT PROFIT':<24} {rp(nett_profit):>19}")
+
     table_lines.append("============================================")
 
     table_block = "\n".join(table_lines)

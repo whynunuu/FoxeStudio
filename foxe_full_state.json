@@ -6057,6 +6057,30 @@
       "total": 50000.0,
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_504",
+      "tanggal": "2026-09-21",
+      "client": "Lyra",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-09-21",
+      "cash": 175000.0,
+      "transfer": 0.0,
+      "total": 175000.0,
+      "admin": "INDAH",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_505",
+      "tanggal": "2026-09-21",
+      "client": "kresna",
+      "paket": "Couple A",
+      "tanggalFoto": "2026-10-05",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "INDAH",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -6565,7 +6589,467 @@
       "slot": 1
     }
   ],
-  "expenses": [],
+  "expenses": [
+    {
+      "id": "ex_nrc_1",
+      "tanggal": "2026-09-01",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Internet & Telekomunikasi",
+      "deskripsi": "Wifi",
+      "nilai": 730000.0
+    },
+    {
+      "id": "ex_nrc_2",
+      "tanggal": "2026-09-01",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 503000.0
+    },
+    {
+      "id": "ex_nrc_3",
+      "tanggal": "2026-09-01",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Marketing / Ads / KOL",
+      "deskripsi": "Ads",
+      "nilai": 500000.0
+    },
+    {
+      "id": "ex_nrc_4",
+      "tanggal": "2026-09-02",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 750000.0
+    },
+    {
+      "id": "ex_nrc_5",
+      "tanggal": "2026-09-02",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Konsumsi Crew",
+      "deskripsi": "Makan Wisuda",
+      "nilai": 240000.0
+    },
+    {
+      "id": "ex_nrc_6",
+      "tanggal": "2026-09-02",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Office & Cleaning Supplies",
+      "deskripsi": "Parfum Ruangan",
+      "nilai": 67000.0
+    },
+    {
+      "id": "ex_nrc_7",
+      "tanggal": "2026-09-03",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Konsumsi Crew",
+      "deskripsi": "Makan Wisuda",
+      "nilai": 155000.0
+    },
+    {
+      "id": "ex_nrc_8",
+      "tanggal": "2026-09-03",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Properti / Consumable Sesi",
+      "deskripsi": "Sewa Batrei",
+      "nilai": 108000.0
+    },
+    {
+      "id": "ex_nrc_9",
+      "tanggal": "2026-09-03",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Konsumsi Crew",
+      "deskripsi": "Makan Wisuda",
+      "nilai": 170000.0
+    },
+    {
+      "id": "ex_nrc_10",
+      "tanggal": "2026-09-04",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Outsource / Freelancer Produksi",
+      "deskripsi": "Vero Freelance + Camera",
+      "nilai": 300000.0
+    },
+    {
+      "id": "ex_nrc_11",
+      "tanggal": "2026-09-04",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Outsource / Freelancer Produksi",
+      "deskripsi": "Addell Freelance",
+      "nilai": 200000.0
+    },
+    {
+      "id": "ex_nrc_12",
+      "tanggal": "2026-09-04",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Marketing / Ads / KOL",
+      "deskripsi": "Ads",
+      "nilai": 500000.0
+    },
+    {
+      "id": "ex_nrc_13",
+      "tanggal": "2026-09-05",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Software / Subscription",
+      "deskripsi": "Adobe",
+      "nilai": 315500.0
+    },
+    {
+      "id": "ex_nrc_14",
+      "tanggal": "2026-09-05",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Software / Subscription",
+      "deskripsi": "Adobe",
+      "nilai": 618500.0
+    },
+    {
+      "id": "ex_nrc_15",
+      "tanggal": "2026-09-05",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Frame / Album / Packaging",
+      "deskripsi": "Frame",
+      "nilai": 950000.0
+    },
+    {
+      "id": "ex_nrc_16",
+      "tanggal": "2026-09-06",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Cetak Foto & Photo Paper",
+      "deskripsi": "Cetakan",
+      "nilai": 1521500.0
+    },
+    {
+      "id": "ex_nrc_17",
+      "tanggal": "2026-09-06",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Marketing / Ads / KOL",
+      "deskripsi": "Ads",
+      "nilai": 1000000.0
+    },
+    {
+      "id": "ex_nrc_18",
+      "tanggal": "2026-09-06",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Maintenance Studio & Equipment",
+      "deskripsi": "Cat Limbo",
+      "nilai": 160000.0
+    },
+    {
+      "id": "ex_nrc_19",
+      "tanggal": "2026-09-07",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Frame / Album / Packaging",
+      "deskripsi": "Frame",
+      "nilai": 950000.0
+    },
+    {
+      "id": "ex_nrc_20",
+      "tanggal": "2026-09-07",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Office & Cleaning Supplies",
+      "deskripsi": "Galon",
+      "nilai": 16000.0
+    },
+    {
+      "id": "ex_nrc_21",
+      "tanggal": "2026-09-07",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Properti / Consumable Sesi",
+      "deskripsi": "Batrei AA",
+      "nilai": 70000.0
+    },
+    {
+      "id": "ex_nrc_22",
+      "tanggal": "2026-09-08",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Konsumsi Crew",
+      "deskripsi": "Makan Wisuda",
+      "nilai": 125000.0
+    },
+    {
+      "id": "ex_nrc_23",
+      "tanggal": "2026-09-08",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Konsumsi Crew",
+      "deskripsi": "Makan Malem Wisuda",
+      "nilai": 220000.0
+    },
+    {
+      "id": "ex_nrc_24",
+      "tanggal": "2026-09-08",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Outsource / Freelancer Produksi",
+      "deskripsi": "Rent Equipment Wisuda",
+      "nilai": 252000.0
+    },
+    {
+      "id": "ex_nrc_25",
+      "tanggal": "2026-09-09",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Properti / Consumable Sesi",
+      "deskripsi": "Rent Batrei",
+      "nilai": 110000.0
+    },
+    {
+      "id": "ex_nrc_26",
+      "tanggal": "2026-09-09",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Konsumsi Crew",
+      "deskripsi": "Makan Wisuda",
+      "nilai": 125000.0
+    },
+    {
+      "id": "ex_nrc_27",
+      "tanggal": "2026-09-09",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Outsource / Freelancer Produksi",
+      "deskripsi": "Rent Equipment Wisuda",
+      "nilai": 684000.0
+    },
+    {
+      "id": "ex_nrc_28",
+      "tanggal": "2026-09-10",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Frame / Album / Packaging",
+      "deskripsi": "Frame",
+      "nilai": 950000.0
+    },
+    {
+      "id": "ex_nrc_29",
+      "tanggal": "2026-09-10",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Konsumsi Crew",
+      "deskripsi": "Makan Malem Wisuda",
+      "nilai": 170000.0
+    },
+    {
+      "id": "ex_nrc_30",
+      "tanggal": "2026-09-10",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Outsource / Freelancer Produksi",
+      "deskripsi": "Addell Freelance",
+      "nilai": 200000.0
+    },
+    {
+      "id": "ex_nrc_31",
+      "tanggal": "2026-09-11",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 503000.0
+    },
+    {
+      "id": "ex_nrc_32",
+      "tanggal": "2026-09-11",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Marketing / Ads / KOL",
+      "deskripsi": "Ads",
+      "nilai": 500000.0
+    },
+    {
+      "id": "ex_nrc_33",
+      "tanggal": "2026-09-12",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 750000.0
+    },
+    {
+      "id": "ex_nrc_34",
+      "tanggal": "2026-09-12",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Marketing / Ads / KOL",
+      "deskripsi": "Ads",
+      "nilai": 500000.0
+    },
+    {
+      "id": "ex_nrc_35",
+      "tanggal": "2026-09-13",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Cetak Foto & Photo Paper",
+      "deskripsi": "Cetakan",
+      "nilai": 3537000.0
+    },
+    {
+      "id": "ex_nrc_36",
+      "tanggal": "2026-09-14",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Marketing / Ads / KOL",
+      "deskripsi": "Ads",
+      "nilai": 500000.0
+    },
+    {
+      "id": "ex_nrc_37",
+      "tanggal": "2026-09-15",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Outsource / Freelancer Produksi",
+      "deskripsi": "Ruslan",
+      "nilai": 560000.0
+    },
+    {
+      "id": "ex_nrc_38",
+      "tanggal": "2026-09-15",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Outsource / Freelancer Produksi",
+      "deskripsi": "Abror Fg Freelance",
+      "nilai": 250000.0
+    },
+    {
+      "id": "ex_nrc_39",
+      "tanggal": "2026-09-15",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Outsource / Freelancer Produksi",
+      "deskripsi": "Vero Fg Freelance",
+      "nilai": 150000.0
+    },
+    {
+      "id": "ex_nrc_40",
+      "tanggal": "2026-09-16",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Maintenance Studio & Equipment",
+      "deskripsi": "Dop Paralon",
+      "nilai": 112000.0
+    },
+    {
+      "id": "ex_nrc_41",
+      "tanggal": "2026-09-16",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Office & Cleaning Supplies",
+      "deskripsi": "Galon",
+      "nilai": 16000.0
+    },
+    {
+      "id": "ex_nrc_42",
+      "tanggal": "2026-09-16",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Frame / Album / Packaging",
+      "deskripsi": "Frame",
+      "nilai": 950000.0
+    },
+    {
+      "id": "ex_nrc_43",
+      "tanggal": "2026-09-17",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Maintenance Studio & Equipment",
+      "deskripsi": "Cat Limbo",
+      "nilai": 154000.0
+    },
+    {
+      "id": "ex_nrc_44",
+      "tanggal": "2026-09-17",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Cetak Foto & Photo Paper",
+      "deskripsi": "Cetakan",
+      "nilai": 2342500.0
+    },
+    {
+      "id": "ex_nrc_45",
+      "tanggal": "2026-09-18",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 503000.0
+    },
+    {
+      "id": "ex_nrc_46",
+      "tanggal": "2026-09-18",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Maintenance Studio & Equipment",
+      "deskripsi": "Cat Limbo",
+      "nilai": 160000.0
+    },
+    {
+      "id": "ex_nrc_47",
+      "tanggal": "2026-09-19",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Cetak Foto & Photo Paper",
+      "deskripsi": "Cetakan",
+      "nilai": 2626000.0
+    },
+    {
+      "id": "ex_nrc_48",
+      "tanggal": "2026-09-19",
+      "bulan": "2026-09",
+      "jenis": "NON-P&L",
+      "kategori": "Prive / Owner Draw",
+      "deskripsi": "Bon",
+      "nilai": 1576000.0
+    },
+    {
+      "id": "ex_nrc_49",
+      "tanggal": "2026-09-19",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Pajak & Perizinan",
+      "deskripsi": "Pajak",
+      "nilai": 443275.0
+    },
+    {
+      "id": "ex_nrc_50",
+      "tanggal": "2026-09-19",
+      "bulan": "2026-09",
+      "jenis": "Biaya Lainnya",
+      "kategori": "Biaya Lainnya",
+      "deskripsi": "Amal",
+      "nilai": 1329825.0
+    },
+    {
+      "id": "ex_nrc_51",
+      "tanggal": "2026-09-19",
+      "bulan": "2026-09",
+      "jenis": "NON-P&L",
+      "kategori": "Prive / Owner Draw",
+      "deskripsi": "Bon manajemen",
+      "nilai": 45191205.0
+    }
+  ],
   "cashControl": [
     {
       "id": "cc_2026-09-01",
@@ -6670,7 +7154,7 @@
     {
       "id": "cc_2026-09-21",
       "tanggal": "2026-09-21",
-      "nilai": 0.0
+      "nilai": 175000.0
     },
     {
       "id": "cc_2026-09-22",
@@ -6883,9 +7367,9 @@
       "id": "ld_21",
       "tanggal": "2026-09-21",
       "leads": 0.0,
-      "dp": 2.0,
-      "sesiFoto": 1.0,
-      "transaksi": 3.0
+      "dp": 3.0,
+      "sesiFoto": 2.0,
+      "transaksi": 5.0
     },
     {
       "id": "ld_22",
@@ -9889,6 +10373,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260921-1633",
+      "mulai": "2026-09-21T09:33:41.670583+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 505 order, 162 jadwal, COGS/OPEX kosong."
+    },
+    {
       "id": "sy_20260921-1600",
       "mulai": "2026-09-21T09:00:56.390533+00:00",
       "status": "sukses",
@@ -10024,6 +10514,7 @@
   "gdrive": {
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
-    "last_sync": "2026-09-21T09:00:56.390533+00:00"
+    "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
+    "last_sync": "2026-09-21T09:33:41.670583+00:00"
   }
 }

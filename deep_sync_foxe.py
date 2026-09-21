@@ -22,12 +22,14 @@ import shutil
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# Import parser modular (File 1 & File 2)
+# Import parser modular (File 1, File 2, dan File Neraca)
 from parser_log_order import parse_log_order
 from parser_schedule import parse_schedule
+from parser_neraca import parse_neraca
 
 LOG_ORDER_FILE_ID = "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ"
 SCHEDULE_SHEET_ID = "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I"
+NERACA_SHEET_ID = "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM"
 
 def download_gdrive(file_id, dest_path):
     session = requests.Session()
@@ -90,10 +92,11 @@ def run_integration():
         json.dump(state, f, ensure_ascii=False, indent=2)
 
     try:
-        # STEP 4: Unduh sumber operasional resmi (File 1 & File 2)
-        print("\n[1/4] Mengunduh sumber operasional (Log Order & Schedule)...")
+        # STEP 4: Unduh sumber operasional resmi (File 1, File 2, dan File Neraca)
+        print("\n[1/4] Mengunduh sumber operasional (Log Order, Schedule, dan Neraca)...")
         download_gdrive(LOG_ORDER_FILE_ID, "file1.xlsm")
         download_gsheet(SCHEDULE_SHEET_ID, "file2.xlsx")
+        download_gsheet(NERACA_SHEET_ID, "file_neraca.xlsx")
 
         # STEP 5: Jalankan Parser File 1 (Log Order)
         print("\n[2/4] Menjalankan parser_log_order.py (File 1)...")
@@ -106,7 +109,11 @@ def run_integration():
         res_f2_bookings = parse_schedule("file2.xlsx", bulan="2026-09", existing_bookings=existing_bk)
         print(f"[OK] File 2 terurai: {len(res_f2_bookings)} jadwal booking studio.")
 
-        # STEP 7: Perbarui State Gabungan
+        # STEP 7: Jalankan Parser File Neraca (COGS & OPEX dari Section Detail)
+        print("\n[4/4] Menjalankan parser_neraca.py (File Neraca)...")
+        res_neraca = parse_neraca("file_neraca.xlsx", sheet_name="September 2026")
+
+        # STEP 8: Perbarui State Gabungan
         active_days = [int(o["tanggal"].split("-")[2]) for o in res_f1["orders"] if o["tanggal"].startswith("2026-09-") and int(o["tanggal"].split("-")[2]) <= 30]
         latest_day = max(active_days) if active_days else 19
         cutoff_date = f"2026-09-{latest_day:02d}"
@@ -127,7 +134,7 @@ def run_integration():
         state["cashControl"] = res_f1["cashControl"]
         state["leads"] = res_f1["leads"] if res_f1["leads"] else state.get("leads", [])
         state["kpi"] = res_f1["kpi"]
-        state["expenses"] = []  # COGS & OPEX dikosongkan sesuai instruksi pengguna
+        state["expenses"] = res_neraca  # COGS & OPEX terurai otomatis dari File Neraca
         state["baseline"] = state.get("baseline", {"label": "September 2025", "omzet": 88000000, "net": 35000000})
         state["history"] = state.get("history", [])
         state["ads"] = state.get("ads", [])
@@ -138,16 +145,17 @@ def run_integration():
             "bookings": res_f2_bookings if res_f2_bookings else state.get("schedule", {}).get("bookings", [])
         }
         
-        # Metadata Google Drive (File 1 & File 2)
+        # Metadata Google Drive (File 1, File 2, dan File Neraca)
         state["gdrive"] = {
             "file1_id": LOG_ORDER_FILE_ID,
             "file2_id": SCHEDULE_SHEET_ID,
+            "file_neraca_id": NERACA_SHEET_ID,
             "last_sync": now.astimezone(datetime.timezone.utc).isoformat()
         }
 
         # STEP 11: Tutup sync -> status 'sukses'
         current_sync["status"] = "sukses"
-        current_sync["ringkas"] = f"Integrasi berhasil: {len(res_f1['orders'])} order, {len(res_f2_bookings)} jadwal, COGS/OPEX kosong."
+        current_sync["ringkas"] = f"Integrasi berhasil: {len(res_f1['orders'])} order, {len(res_f2_bookings)} jadwal, {len(res_neraca)} pos pengeluaran Neraca."
 
         print("\n[5/5] Menyimpan state dan merender artefak...")
         with open("foxe_full_state.json", "w", encoding="utf-8") as f:
