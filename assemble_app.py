@@ -304,9 +304,100 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
   .vhead h2{font-size:31px}
   .topbar{padding:11px 16px}
 }
+
+/* ---------- lock screen (autentikasi studio) ---------- */
+.lock-screen{position:fixed;inset:0;z-index:99999;
+  background:radial-gradient(circle at 50% 35%, #22201d 0%, #100f0e 100%);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.lock-card{width:100%;max-width:360px;background:rgba(27,26,24,0.94);
+  border:1px solid rgba(217,119,87,0.3);
+  box-shadow:0 24px 48px rgba(0,0,0,0.7),0 0 32px rgba(217,119,87,0.12);
+  border-radius:24px;padding:32px 24px;text-align:center;color:#faf9f5;
+  animation:lockFadeIn .35s cubic-bezier(0.16,1,0.3,1)}
+@keyframes lockFadeIn{from{opacity:0;transform:scale(0.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.lock-logo{margin-bottom:14px;display:inline-flex;filter:drop-shadow(0 2px 8px rgba(217,119,87,0.4))}
+.lock-title{font-family:var(--ff-display,serif);font-size:29px;font-weight:700;letter-spacing:-.5px;color:#faf9f5;margin-bottom:3px}
+.lock-subtitle{font-size:13px;color:#a09d96;margin-bottom:12px}
+.lock-badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
+  padding:3px 12px;border-radius:9999px;background:rgba(217,119,87,0.15);color:#d97757;
+  border:1px solid rgba(217,119,87,0.3);margin-bottom:22px}
+.pin-display{display:flex;justify-content:center;gap:12px;margin-bottom:20px}
+.pin-display .dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(160,157,150,0.4);
+  background:transparent;transition:all .18s cubic-bezier(0.16,1,0.3,1)}
+.pin-display .dot.filled{background:#d97757;border-color:#d97757;box-shadow:0 0 12px rgba(217,119,87,0.6);transform:scale(1.15)}
+.pin-display.shake{animation:pinShake .45s cubic-bezier(0.36,0.07,0.19,0.97)}
+@keyframes pinShake{10%,90%{transform:translate3d(-3px,0,0)}20%,80%{transform:translate3d(5px,0,0)}30%,50%,70%{transform:translate3d(-6px,0,0)}40%,60%{transform:translate3d(6px,0,0)}}
+.pin-hidden-input{position:absolute;opacity:0;pointer-events:none}
+.lock-error{color:#e07a68;font-size:12.5px;font-weight:500;margin-top:-8px;margin-bottom:14px;min-height:18px}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.key-btn{background:rgba(37,35,32,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:12px;
+  padding:13px 0;font-size:19px;font-weight:600;color:#faf9f5;cursor:pointer;
+  transition:all .12s ease;user-select:none;-webkit-user-select:none}
+.key-btn:hover{background:rgba(52,50,45,0.95);border-color:rgba(217,119,87,0.35)}
+.key-btn:active{transform:scale(0.92);background:#d97757;color:#fff}
+.key-btn.action-btn{font-size:16px;color:#a09d96}
+.key-btn.ok-btn{background:rgba(217,119,87,0.25);color:#d97757;border-color:rgba(217,119,87,0.4)}
+.key-btn.ok-btn:active{background:#d97757;color:#fff}
+.remember-wrap{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:#a09d96;
+  cursor:pointer;margin-bottom:14px;user-select:none}
+.remember-wrap input{accent-color:#d97757;cursor:pointer}
+.lock-footer{font-size:11.5px;color:#6c6a64}
 </style>
 </head>
 <body>
+
+<div id="lockScreen" class="lock-screen">
+  <div class="lock-card">
+    <div class="lock-logo">
+      <svg width="42" height="42" viewBox="0 0 22 22" aria-hidden="true">
+        <circle cx="11" cy="11" r="9.25" fill="none" stroke="#d97757" stroke-width="1.4"/>
+        <path d="M11 1.75 L11 11 L19.01 15.62" fill="none" stroke="#d97757" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M19.01 6.38 L11 11 L2.99 15.62" fill="none" stroke="#d97757" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M2.99 6.38 L11 11 L11 20.25" fill="none" stroke="#d97757" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="11" cy="11" r="2.1" fill="#d97757"/>
+      </svg>
+    </div>
+    <h2 class="lock-title">Foxe Studio</h2>
+    <p class="lock-subtitle">Portal Keuangan &amp; Operasional</p>
+    <div class="lock-badge">🔒 Akses Terbatas</div>
+    
+    <div class="pin-display" id="pinDots">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <input type="password" id="pinInput" maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" class="pin-hidden-input" autofocus>
+
+    <div class="lock-error" id="lockError" hidden>PIN Salah. Silakan coba lagi.</div>
+
+    <div class="keypad" id="pinKeypad">
+      <button class="key-btn" type="button" data-val="1">1</button>
+      <button class="key-btn" type="button" data-val="2">2</button>
+      <button class="key-btn" type="button" data-val="3">3</button>
+      <button class="key-btn" type="button" data-val="4">4</button>
+      <button class="key-btn" type="button" data-val="5">5</button>
+      <button class="key-btn" type="button" data-val="6">6</button>
+      <button class="key-btn" type="button" data-val="7">7</button>
+      <button class="key-btn" type="button" data-val="8">8</button>
+      <button class="key-btn" type="button" data-val="9">9</button>
+      <button class="key-btn action-btn" type="button" id="keyClear">⌫</button>
+      <button class="key-btn" type="button" data-val="0">0</button>
+      <button class="key-btn action-btn ok-btn" type="button" id="keySubmit">➔</button>
+    </div>
+
+    <label class="remember-wrap">
+      <input type="checkbox" id="chkRemember" checked>
+      <span>Ingat perangkat ini (30 hari)</span>
+    </label>
+
+    <p class="lock-footer">Akses internal khusus Owner &amp; Manajemen Foxe Studio</p>
+  </div>
+</div>
 
 <div class="app">
   <aside class="rail">
@@ -332,6 +423,7 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
       <span class="pill prog" id="tbStatus">Progressive</span>
       <span class="spacer"></span>
       <button class="btn sm" id="btnTheme" title="Ganti Tema">🌓 Tema</button>
+      <button class="btn sm" id="btnLock" title="Kunci Dashboard">🔒 Kunci</button>
       <span class="pill neutral" id="tbLive" hidden></span>
       <span class="pill neutral" id="tbUpd" hidden></span>
       <span class="pill final" id="tbSync">aktif</span>
@@ -2220,6 +2312,190 @@ document.getElementById("btnExport").onclick=async e=>{
 // Initialize Theme
 const savedTheme = localStorage.getItem("foxe_studio_theme") || "dark";
 document.documentElement.setAttribute("data-theme", savedTheme);
+
+/* ============================ AUTHENTICATION SYSTEM (SOLUSI 1) ============================ */
+const AUTH_KEY = "foxe_studio_auth_token_v1";
+const VALID_HASHES = [
+  "85ec11c08e12c6db362082a46267150136507c7dac5712c6cf526feaceea7241", // 202688 (Default Studio PIN)
+  "fd05a2c03c09715cdf08acd15f01abd477f7e7a32d34cc5282eeb8d2dd996a44", // 123456
+  "b2558bd3f534e7c602b6f893138512a1e20948be8d9fa2b044560e92f1ead53b", // 202609
+  "a634cdf391c6b7b911c46e9c873de639fc933434d17b277b3ee6fe419f244cc2"  // 889900
+];
+
+async function hashPin(pin) {
+  const msgUint8 = new TextEncoder().encode(pin + "_foxe_studio_secret_salt_2026");
+  const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+function checkSavedAuth() {
+  try {
+    const raw = localStorage.getItem(AUTH_KEY);
+    if (!raw) return false;
+    const parsed = JSON.parse(raw);
+    if (parsed.expires && Date.now() < parsed.expires && VALID_HASHES.includes(parsed.token)) {
+      return true;
+    }
+  } catch(e){}
+  return false;
+}
+
+let enteredPin = "";
+
+function updatePinDots() {
+  const dots = document.querySelectorAll("#pinDots .dot");
+  dots.forEach((dot, idx) => {
+    if (idx < enteredPin.length) {
+      dot.classList.add("filled");
+    } else {
+      dot.classList.remove("filled");
+    }
+  });
+}
+
+async function verifyPin() {
+  if (enteredPin.length < 4) return;
+  const hash = await hashPin(enteredPin);
+  const customHash = localStorage.getItem("foxe_custom_pin_hash");
+  if (VALID_HASHES.includes(hash) || (customHash && hash === customHash)) {
+    const remember = document.getElementById("chkRemember") ? document.getElementById("chkRemember").checked : true;
+    if (remember) {
+      const authData = {
+        token: hash,
+        expires: Date.now() + (30 * 24 * 60 * 60 * 1000)
+      };
+      localStorage.setItem(AUTH_KEY, JSON.stringify(authData));
+    }
+    unlockDashboard();
+  } else {
+    const errEl = document.getElementById("lockError");
+    if (errEl) {
+      errEl.hidden = false;
+      errEl.textContent = "PIN salah. Silakan coba lagi.";
+    }
+    const pinDots = document.getElementById("pinDots");
+    if (pinDots) {
+      pinDots.classList.add("shake");
+      setTimeout(() => {
+        pinDots.classList.remove("shake");
+        enteredPin = "";
+        updatePinDots();
+        const pinInp = document.getElementById("pinInput");
+        if (pinInp) pinInp.value = "";
+      }, 500);
+    }
+  }
+}
+
+function unlockDashboard() {
+  const lock = document.getElementById("lockScreen");
+  const appEl = document.querySelector(".app");
+  if (lock) {
+    lock.style.transition = "opacity 0.25s ease, transform 0.25s ease";
+    lock.style.opacity = "0";
+    lock.style.transform = "scale(1.04)";
+    setTimeout(() => {
+      lock.style.display = "none";
+      if (appEl) {
+        appEl.style.filter = "none";
+        appEl.style.pointerEvents = "auto";
+      }
+    }, 250);
+  }
+}
+
+function lockDashboard() {
+  localStorage.removeItem(AUTH_KEY);
+  enteredPin = "";
+  updatePinDots();
+  const lock = document.getElementById("lockScreen");
+  const appEl = document.querySelector(".app");
+  if (lock) {
+    lock.style.display = "flex";
+    lock.style.opacity = "1";
+    lock.style.transform = "none";
+    if (appEl) {
+      appEl.style.filter = "blur(14px)";
+      appEl.style.pointerEvents = "none";
+    }
+    const pinInp = document.getElementById("pinInput");
+    if (pinInp) {
+      pinInp.value = "";
+      pinInp.focus();
+    }
+    const errEl = document.getElementById("lockError");
+    if (errEl) errEl.hidden = true;
+  }
+}
+
+// Bind Keypad & Events
+const pinInput = document.getElementById("pinInput");
+const pinKeypad = document.getElementById("pinKeypad");
+const keyClear = document.getElementById("keyClear");
+const keySubmit = document.getElementById("keySubmit");
+const btnLock = document.getElementById("btnLock");
+
+if (btnLock) {
+  btnLock.onclick = () => lockDashboard();
+}
+
+if (pinKeypad) {
+  pinKeypad.querySelectorAll(".key-btn[data-val]").forEach(btn => {
+    btn.onclick = () => {
+      if (enteredPin.length < 6) {
+        enteredPin += btn.dataset.val;
+        if (pinInput) pinInput.value = enteredPin;
+        updatePinDots();
+        if (enteredPin.length === 6) verifyPin();
+      }
+    };
+  });
+}
+
+if (keyClear) {
+  keyClear.onclick = () => {
+    enteredPin = enteredPin.slice(0, -1);
+    if (pinInput) pinInput.value = enteredPin;
+    updatePinDots();
+    const errEl = document.getElementById("lockError");
+    if (errEl) errEl.hidden = true;
+  };
+}
+
+if (keySubmit) {
+  keySubmit.onclick = () => verifyPin();
+}
+
+if (pinInput) {
+  pinInput.oninput = () => {
+    enteredPin = pinInput.value.replace(/[^0-9]/g, "").slice(0, 6);
+    pinInput.value = enteredPin;
+    updatePinDots();
+    if (enteredPin.length === 6) verifyPin();
+  };
+  pinInput.onkeydown = e => {
+    if (e.key === "Enter") verifyPin();
+  };
+}
+
+// Focus input when clicking anywhere on lock card
+const lockCard = document.querySelector(".lock-card");
+if (lockCard && pinInput) {
+  lockCard.addEventListener("click", e => {
+    if (!e.target.closest("button") && !e.target.closest("input")) {
+      pinInput.focus();
+    }
+  });
+}
+
+// Initial Auth Check
+if (checkSavedAuth()) {
+  const lock = document.getElementById("lockScreen");
+  if (lock) lock.style.display = "none";
+} else {
+  lockDashboard();
+}
 
 /* ============================ start ============================ */
 render();
