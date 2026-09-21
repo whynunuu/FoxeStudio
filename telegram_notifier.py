@@ -18,15 +18,20 @@ DEFAULT_TOKEN = "8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s"
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "telegram_config.json")
 
 def load_config():
+    token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    chat_id_env = os.environ.get("TELEGRAM_CHAT_ID")
+    chat_id = int(chat_id_env) if chat_id_env and chat_id_env.isdigit() else None
+
+    cfg = {}
     if os.path.exists(CONFIG_FILE):
         try:
             with open(CONFIG_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
+                cfg = json.load(f)
         except Exception:
             pass
     return {
-        "token": DEFAULT_TOKEN,
-        "chat_id": None
+        "token": token or cfg.get("token", DEFAULT_TOKEN),
+        "chat_id": chat_id or cfg.get("chat_id")
     }
 
 def save_config(cfg):

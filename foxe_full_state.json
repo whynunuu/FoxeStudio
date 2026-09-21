@@ -6081,6 +6081,42 @@
       "total": 100000.0,
       "admin": "INDAH",
       "fotografer": ""
+    },
+    {
+      "id": "or_506",
+      "tanggal": "2026-09-21",
+      "client": "Mein",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-09-25",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_507",
+      "tanggal": "2026-09-21",
+      "client": "Rosma",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-09-21",
+      "cash": 290000.0,
+      "transfer": 0.0,
+      "total": 290000.0,
+      "admin": "INDAH",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_508",
+      "tanggal": "2026-09-21",
+      "client": "Aghnia",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-09-21",
+      "cash": 25000.0,
+      "transfer": 150000.0,
+      "total": 175000.0,
+      "admin": "",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -7145,7 +7181,7 @@
     {
       "id": "cc_2026-09-21",
       "tanggal": "2026-09-21",
-      "nilai": 175000.0
+      "nilai": 490000.0
     },
     {
       "id": "cc_2026-09-22",
@@ -7358,9 +7394,9 @@
       "id": "ld_21",
       "tanggal": "2026-09-21",
       "leads": 0.0,
-      "dp": 3.0,
-      "sesiFoto": 2.0,
-      "transaksi": 5.0
+      "dp": 4.0,
+      "sesiFoto": 4.0,
+      "transaksi": 8.0
     },
     {
       "id": "ld_22",
@@ -10364,6 +10400,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260921-1810",
+      "mulai": "2026-09-21T11:10:11.026595+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 508 order, 162 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260921-1649",
       "mulai": "2026-09-21T09:49:58.141458+00:00",
       "status": "sukses",
@@ -10512,7 +10554,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-21T09:49:58.141458+00:00"
+    "last_sync": "2026-09-21T11:10:11.026595+00:00"
   },
   "neracaDetail": [
     {
