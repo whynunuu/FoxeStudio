@@ -7039,15 +7039,6 @@
       "kategori": "Biaya Lainnya",
       "deskripsi": "Amal",
       "nilai": 1329825.0
-    },
-    {
-      "id": "ex_nrc_51",
-      "tanggal": "2026-09-19",
-      "bulan": "2026-09",
-      "jenis": "NON-P&L",
-      "kategori": "Prive / Owner Draw",
-      "deskripsi": "Bon manajemen",
-      "nilai": 45191205.0
     }
   ],
   "cashControl": [
@@ -10373,6 +10364,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260921-1649",
+      "mulai": "2026-09-21T09:49:58.141458+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 505 order, 162 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260921-1633",
       "mulai": "2026-09-21T09:33:41.670583+00:00",
       "status": "sukses",
@@ -10515,6 +10512,619 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-21T09:33:41.670583+00:00"
+    "last_sync": "2026-09-21T09:49:58.141458+00:00"
+  },
+  "neracaDetail": [
+    {
+      "id": "det_nrc_1",
+      "tgl": 1,
+      "tanggal_iso": "2026-09-01",
+      "first_of_day": true,
+      "masuk": 6110000.0,
+      "keluar": 730000.0,
+      "balance": 5380000.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Wifi"
+    },
+    {
+      "id": "det_nrc_2",
+      "tgl": 1,
+      "tanggal_iso": "2026-09-01",
+      "first_of_day": false,
+      "masuk": 1780000.0,
+      "keluar": 503000.0,
+      "balance": 6657000.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Listrik"
+    },
+    {
+      "id": "det_nrc_3",
+      "tgl": 1,
+      "tanggal_iso": "2026-09-01",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 500000.0,
+      "balance": 6157000.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Ads"
+    },
+    {
+      "id": "det_nrc_4",
+      "tgl": 2,
+      "tanggal_iso": "2026-09-02",
+      "first_of_day": true,
+      "masuk": 5620000.0,
+      "keluar": 750000.0,
+      "balance": 11027000.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Listrik"
+    },
+    {
+      "id": "det_nrc_5",
+      "tgl": 2,
+      "tanggal_iso": "2026-09-02",
+      "first_of_day": false,
+      "masuk": 4880000.0,
+      "keluar": 240000.0,
+      "balance": 15667000.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Makan Wisuda"
+    },
+    {
+      "id": "det_nrc_6",
+      "tgl": 2,
+      "tanggal_iso": "2026-09-02",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 67000.0,
+      "balance": 15600000.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Parfum Ruangan"
+    },
+    {
+      "id": "det_nrc_7",
+      "tgl": 3,
+      "tanggal_iso": "2026-09-03",
+      "first_of_day": true,
+      "masuk": 6400000.0,
+      "keluar": 155000.0,
+      "balance": 21845000.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Makan Wisuda"
+    },
+    {
+      "id": "det_nrc_8",
+      "tgl": 3,
+      "tanggal_iso": "2026-09-03",
+      "first_of_day": false,
+      "masuk": 100000.0,
+      "keluar": 108000.0,
+      "balance": 21837000.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Sewa Batrei"
+    },
+    {
+      "id": "det_nrc_9",
+      "tgl": 3,
+      "tanggal_iso": "2026-09-03",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 170000.0,
+      "balance": 21667000.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Makan Wisuda"
+    },
+    {
+      "id": "det_nrc_10",
+      "tgl": 4,
+      "tanggal_iso": "2026-09-04",
+      "first_of_day": true,
+      "masuk": 2800000.0,
+      "keluar": 300000.0,
+      "balance": 24167000.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Vero Freelance + Camera"
+    },
+    {
+      "id": "det_nrc_11",
+      "tgl": 4,
+      "tanggal_iso": "2026-09-04",
+      "first_of_day": false,
+      "masuk": 500000.0,
+      "keluar": 200000.0,
+      "balance": 24467000.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Addell Freelance"
+    },
+    {
+      "id": "det_nrc_12",
+      "tgl": 4,
+      "tanggal_iso": "2026-09-04",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 500000.0,
+      "balance": 23967000.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Ads"
+    },
+    {
+      "id": "det_nrc_13",
+      "tgl": 5,
+      "tanggal_iso": "2026-09-05",
+      "first_of_day": true,
+      "masuk": 1765000.0,
+      "keluar": 315500.0,
+      "balance": 25416500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Adobe"
+    },
+    {
+      "id": "det_nrc_14",
+      "tgl": 5,
+      "tanggal_iso": "2026-09-05",
+      "first_of_day": false,
+      "masuk": 1205000.0,
+      "keluar": 618500.0,
+      "balance": 26003000.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Adobe"
+    },
+    {
+      "id": "det_nrc_15",
+      "tgl": 5,
+      "tanggal_iso": "2026-09-05",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 950000.0,
+      "balance": 25053000.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Frame"
+    },
+    {
+      "id": "det_nrc_16",
+      "tgl": 6,
+      "tanggal_iso": "2026-09-06",
+      "first_of_day": true,
+      "masuk": 3225000.0,
+      "keluar": 1521500.0,
+      "balance": 26756500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Cetakan"
+    },
+    {
+      "id": "det_nrc_17",
+      "tgl": 6,
+      "tanggal_iso": "2026-09-06",
+      "first_of_day": false,
+      "masuk": 175000.0,
+      "keluar": 1000000.0,
+      "balance": 25931500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Ads"
+    },
+    {
+      "id": "det_nrc_18",
+      "tgl": 6,
+      "tanggal_iso": "2026-09-06",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 160000.0,
+      "balance": 25771500.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Cat Limbo"
+    },
+    {
+      "id": "det_nrc_19",
+      "tgl": 7,
+      "tanggal_iso": "2026-09-07",
+      "first_of_day": true,
+      "masuk": 1375000.0,
+      "keluar": 950000.0,
+      "balance": 26196500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Frame"
+    },
+    {
+      "id": "det_nrc_20",
+      "tgl": 7,
+      "tanggal_iso": "2026-09-07",
+      "first_of_day": false,
+      "masuk": 705000.0,
+      "keluar": 16000.0,
+      "balance": 26885500.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Galon"
+    },
+    {
+      "id": "det_nrc_21",
+      "tgl": 7,
+      "tanggal_iso": "2026-09-07",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 70000.0,
+      "balance": 26815500.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Batrei AA"
+    },
+    {
+      "id": "det_nrc_22",
+      "tgl": 8,
+      "tanggal_iso": "2026-09-08",
+      "first_of_day": true,
+      "masuk": 9195000.0,
+      "keluar": 125000.0,
+      "balance": 35885500.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Makan Wisuda"
+    },
+    {
+      "id": "det_nrc_23",
+      "tgl": 8,
+      "tanggal_iso": "2026-09-08",
+      "first_of_day": false,
+      "masuk": 5090000.0,
+      "keluar": 220000.0,
+      "balance": 40755500.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Makan Malem Wisuda"
+    },
+    {
+      "id": "det_nrc_24",
+      "tgl": 8,
+      "tanggal_iso": "2026-09-08",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 252000.0,
+      "balance": 40503500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Rent Equipment Wisuda"
+    },
+    {
+      "id": "det_nrc_25",
+      "tgl": 9,
+      "tanggal_iso": "2026-09-09",
+      "first_of_day": true,
+      "masuk": 6275000.0,
+      "keluar": 110000.0,
+      "balance": 46668500.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Rent Batrei"
+    },
+    {
+      "id": "det_nrc_26",
+      "tgl": 9,
+      "tanggal_iso": "2026-09-09",
+      "first_of_day": false,
+      "masuk": 3910000.0,
+      "keluar": 125000.0,
+      "balance": 50453500.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Makan Wisuda"
+    },
+    {
+      "id": "det_nrc_27",
+      "tgl": 9,
+      "tanggal_iso": "2026-09-09",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 684000.0,
+      "balance": 49769500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Rent Equipment Wisuda"
+    },
+    {
+      "id": "det_nrc_28",
+      "tgl": 10,
+      "tanggal_iso": "2026-09-10",
+      "first_of_day": true,
+      "masuk": 2570000.0,
+      "keluar": 950000.0,
+      "balance": 51389500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Frame"
+    },
+    {
+      "id": "det_nrc_29",
+      "tgl": 10,
+      "tanggal_iso": "2026-09-10",
+      "first_of_day": false,
+      "masuk": 175000.0,
+      "keluar": 170000.0,
+      "balance": 51394500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Makan Malem Wisuda"
+    },
+    {
+      "id": "det_nrc_30",
+      "tgl": 10,
+      "tanggal_iso": "2026-09-10",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 200000.0,
+      "balance": 51194500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Addell Freelance"
+    },
+    {
+      "id": "det_nrc_31",
+      "tgl": 11,
+      "tanggal_iso": "2026-09-11",
+      "first_of_day": true,
+      "masuk": 2800000.0,
+      "keluar": 503000.0,
+      "balance": 53491500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Listrik"
+    },
+    {
+      "id": "det_nrc_32",
+      "tgl": 11,
+      "tanggal_iso": "2026-09-11",
+      "first_of_day": false,
+      "masuk": 650000.0,
+      "keluar": 500000.0,
+      "balance": 53641500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Ads"
+    },
+    {
+      "id": "det_nrc_33",
+      "tgl": 11,
+      "tanggal_iso": "2026-09-11",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 0.0,
+      "balance": 53641500.0,
+      "ket_masuk": "",
+      "ket_keluar": ""
+    },
+    {
+      "id": "det_nrc_34",
+      "tgl": 12,
+      "tanggal_iso": "2026-09-12",
+      "first_of_day": true,
+      "masuk": 2250000.0,
+      "keluar": 750000.0,
+      "balance": 55141500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Listrik"
+    },
+    {
+      "id": "det_nrc_35",
+      "tgl": 12,
+      "tanggal_iso": "2026-09-12",
+      "first_of_day": false,
+      "masuk": 750000.0,
+      "keluar": 500000.0,
+      "balance": 55391500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Ads"
+    },
+    {
+      "id": "det_nrc_36",
+      "tgl": 12,
+      "tanggal_iso": "2026-09-12",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 0.0,
+      "balance": 55391500.0,
+      "ket_masuk": "",
+      "ket_keluar": ""
+    },
+    {
+      "id": "det_nrc_37",
+      "tgl": 13,
+      "tanggal_iso": "2026-09-13",
+      "first_of_day": true,
+      "masuk": 2350000.0,
+      "keluar": 3537000.0,
+      "balance": 54204500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Cetakan"
+    },
+    {
+      "id": "det_nrc_38",
+      "tgl": 13,
+      "tanggal_iso": "2026-09-13",
+      "first_of_day": false,
+      "masuk": 1255000.0,
+      "keluar": 0.0,
+      "balance": 55459500.0,
+      "ket_masuk": "",
+      "ket_keluar": ""
+    },
+    {
+      "id": "det_nrc_39",
+      "tgl": 13,
+      "tanggal_iso": "2026-09-13",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 0.0,
+      "balance": 55459500.0,
+      "ket_masuk": "",
+      "ket_keluar": ""
+    },
+    {
+      "id": "det_nrc_40",
+      "tgl": 14,
+      "tanggal_iso": "2026-09-14",
+      "first_of_day": true,
+      "masuk": 995000.0,
+      "keluar": 500000.0,
+      "balance": 55954500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Ads"
+    },
+    {
+      "id": "det_nrc_41",
+      "tgl": 14,
+      "tanggal_iso": "2026-09-14",
+      "first_of_day": false,
+      "masuk": 2290000.0,
+      "keluar": 0.0,
+      "balance": 58244500.0,
+      "ket_masuk": "",
+      "ket_keluar": ""
+    },
+    {
+      "id": "det_nrc_42",
+      "tgl": 14,
+      "tanggal_iso": "2026-09-14",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 0.0,
+      "balance": 58244500.0,
+      "ket_masuk": "",
+      "ket_keluar": ""
+    },
+    {
+      "id": "det_nrc_43",
+      "tgl": 15,
+      "tanggal_iso": "2026-09-15",
+      "first_of_day": true,
+      "masuk": 2425000.0,
+      "keluar": 560000.0,
+      "balance": 60109500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Ruslan"
+    },
+    {
+      "id": "det_nrc_44",
+      "tgl": 15,
+      "tanggal_iso": "2026-09-15",
+      "first_of_day": false,
+      "masuk": 475000.0,
+      "keluar": 250000.0,
+      "balance": 60334500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Abror Fg Freelance"
+    },
+    {
+      "id": "det_nrc_45",
+      "tgl": 15,
+      "tanggal_iso": "2026-09-15",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 150000.0,
+      "balance": 60184500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Vero Fg Freelance"
+    },
+    {
+      "id": "det_nrc_46",
+      "tgl": 16,
+      "tanggal_iso": "2026-09-16",
+      "first_of_day": true,
+      "masuk": 1315000.0,
+      "keluar": 112000.0,
+      "balance": 61387500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Dop Paralon"
+    },
+    {
+      "id": "det_nrc_47",
+      "tgl": 16,
+      "tanggal_iso": "2026-09-16",
+      "first_of_day": false,
+      "masuk": 650000.0,
+      "keluar": 16000.0,
+      "balance": 62021500.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Galon"
+    },
+    {
+      "id": "det_nrc_48",
+      "tgl": 16,
+      "tanggal_iso": "2026-09-16",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 950000.0,
+      "balance": 61071500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Frame"
+    },
+    {
+      "id": "det_nrc_49",
+      "tgl": 17,
+      "tanggal_iso": "2026-09-17",
+      "first_of_day": true,
+      "masuk": 1675000.0,
+      "keluar": 154000.0,
+      "balance": 62592500.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Cat Limbo"
+    },
+    {
+      "id": "det_nrc_50",
+      "tgl": 17,
+      "tanggal_iso": "2026-09-17",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 2342500.0,
+      "balance": 60250000.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Cetakan"
+    },
+    {
+      "id": "det_nrc_51",
+      "tgl": 18,
+      "tanggal_iso": "2026-09-18",
+      "first_of_day": true,
+      "masuk": 2125000.0,
+      "keluar": 503000.0,
+      "balance": 61872000.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Listrik"
+    },
+    {
+      "id": "det_nrc_52",
+      "tgl": 18,
+      "tanggal_iso": "2026-09-18",
+      "first_of_day": false,
+      "masuk": 400000.0,
+      "keluar": 160000.0,
+      "balance": 62112000.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Cat Limbo"
+    },
+    {
+      "id": "det_nrc_53",
+      "tgl": 18,
+      "tanggal_iso": "2026-09-18",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 0.0,
+      "balance": 62112000.0,
+      "ket_masuk": "",
+      "ket_keluar": ""
+    },
+    {
+      "id": "det_nrc_54",
+      "tgl": 19,
+      "tanggal_iso": "2026-09-19",
+      "first_of_day": true,
+      "masuk": 2395000.0,
+      "keluar": 2626000.0,
+      "balance": 61881000.0,
+      "ket_masuk": "Transfer",
+      "ket_keluar": "Cetakan"
+    },
+    {
+      "id": "det_nrc_55",
+      "tgl": 19,
+      "tanggal_iso": "2026-09-19",
+      "first_of_day": false,
+      "masuk": 0.0,
+      "keluar": 0.0,
+      "balance": 61881000.0,
+      "ket_masuk": "",
+      "ket_keluar": ""
+    }
+  ],
+  "neracaSummary": {
+    "total_masuk": 88655000.0,
+    "total_keluar": 26774000.0,
+    "ending_balance": 61881000.0,
+    "total_rows": 55
   }
 }

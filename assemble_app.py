@@ -467,9 +467,10 @@ let S = (() => {
     const saved = localStorage.getItem("foxe_studio_keuangan_state");
     if (saved && savedSync === syncId) {
       const parsed = JSON.parse(saved);
-      if (parsed && parsed.orders && parsed.orders.length > 0 && parsed.config && parsed.config.cutoff === INITIAL_STATE.config.cutoff && (parsed.expenses || []).length === (INITIAL_STATE.expenses || []).length) {
+      if (parsed && parsed.orders && parsed.orders.length > 0 && parsed.config && parsed.config.cutoff === INITIAL_STATE.config.cutoff && (parsed.expenses || []).length === (INITIAL_STATE.expenses || []).length && (parsed.neracaDetail || []).length === (INITIAL_STATE.neracaDetail || []).length) {
         return parsed;
       }
+
     }
   } catch (e) {
     console.warn("Gagal load localStorage, menggunakan initial state:", e);
@@ -697,8 +698,10 @@ function compute(){
     gajiNeraca,gajiBlok,gajiSelisih,grossProfit,operatingProfit,nettProfit,cashOut,adaBiaya,
     nettMargin:omzet?nettProfit/omzet:null,
     rekon,rekonBeda,rekonAda,tiers,tierAktif,tierBerikut,pool,kpi,kpiDinilai,avgOp,bonusCair,
-    ld,totLeads,totDP,totSesi,totTx,conv,leadKosong,leadTerakhir,baseline:S.baseline};
+    ld,totLeads,totDP,totSesi,totTx,conv,leadKosong,leadTerakhir,baseline:S.baseline,
+    neracaDetail:S.neracaDetail||[],neracaSummary:S.neracaSummary||{}};
 }
+
 
 /* ============================ final screening ============================ */
 function screening(R){
@@ -1463,8 +1466,83 @@ function vBiaya(R){
       <td>${sisa<=0?'<span class="pill final">Lunas</span>':`<span class="pill prog">Sisa termin</span>`}</td>
       <td class="n"><button class="del" data-del="expenses" data-id="${e.id}" aria-label="Hapus">✕</button></td></tr>`}).join("")
       :`<tr><td colspan="11"><div class="empty">Belum ada biaya tercatat.</div></td></tr>`}
-  </tbody></table></div>`;
+  </tbody></table></div>
+
+  <!-- SECTION NERACA DEBIT KREDIT MENURUN SESUAI LOG TANGGAL -->
+  <div class="vhead" style="margin-top:36px">
+    <div>
+      <div class="eyebrow">Section Detail · File Neraca Keuangan</div>
+      <h2>Buku Detail Neraca (Debit &amp; Kredit)</h2>
+    </div>
+    <p>Rincian mutasi kas masuk (transfer/cash), pengeluaran riil per pos, dan running balance menurun per tanggal transaksi sesuai buku neraca resmi Foxe Studio.</p>
+  </div>
+  <div class="stats" style="margin-bottom:14px">
+    <div class="stat">
+      <span class="k">Total Saldo Masuk</span>
+      <span class="v sm" style="color:var(--cash)">${rp(R.neracaSummary&&R.neracaSummary.total_masuk!=null?R.neracaSummary.total_masuk:R.neracaDetail.reduce((s,x)=>s+dnum(x.masuk),0))}</span>
+      <span class="m">Debit Kas &amp; Bank</span>
+    </div>
+    <div class="stat">
+      <span class="k">Total Saldo Keluar</span>
+      <span class="v sm" style="color:var(--crit)">${rp(R.neracaSummary&&R.neracaSummary.total_keluar!=null?R.neracaSummary.total_keluar:R.neracaDetail.reduce((s,x)=>s+dnum(x.keluar),0))}</span>
+      <span class="m">Kredit Beban Riil</span>
+    </div>
+    <div class="stat">
+      <span class="k">Ending Balance</span>
+      <span class="v sm" style="color:var(--accent)">${rp(R.neracaSummary&&R.neracaSummary.ending_balance!=null?R.neracaSummary.ending_balance:(R.neracaDetail.length?dnum(R.neracaDetail[R.neracaDetail.length-1].balance):0))}</span>
+      <span class="m">Saldo Berjalan Terakhir</span>
+    </div>
+  </div>
+  <div class="tw">
+    <table>
+      <thead>
+        <tr style="background:var(--surface2)">
+          <th style="width:65px;text-align:center">Tgl</th>
+          <th class="n" style="color:var(--cash)">Saldo Masuk</th>
+          <th class="n" style="color:var(--crit)">Saldo Keluar</th>
+          <th class="n">Balance</th>
+          <th>Ket. Masuk</th>
+          <th>Ket. Keluar</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${(R.neracaDetail||[]).length ? R.neracaDetail.map((d, i) => {
+          const isNewDate = d.first_of_day;
+          const borderStyle = (isNewDate && i > 0) ? 'style="border-top:1.5px solid var(--hairline-strong)"' : '';
+          const dateCell = isNewDate 
+            ? `<span class="pill neutral" style="font-weight:700;font-size:12px;min-width:32px;justify-content:center;background:var(--surface3)">${d.tgl}</span>`
+            : `<span class="muted" style="font-size:11px;opacity:0.35">·</span>`;
+          
+          const masukFmt = d.masuk > 0 ? `<b style="color:var(--cash)">${rpc(d.masuk)}</b>` : `<span class="muted">—</span>`;
+          const keluarFmt = d.keluar > 0 ? `<b style="color:var(--crit)">${rpc(d.keluar)}</b>` : `<span class="muted">—</span>`;
+          const balFmt = d.balance > 0 ? `<span class="mono" style="font-weight:600">${rpc(d.balance)}</span>` : `<span class="muted">—</span>`;
+          const badgeMasuk = d.ket_masuk ? `<span class="pill ${d.ket_masuk.toLowerCase().includes('cash')?'final':'neutral'}" style="font-size:11px">${esc(d.ket_masuk)}</span>` : `<span class="muted">—</span>`;
+          const ketKeluar = d.ket_keluar ? `<span style="font-weight:500">${esc(d.ket_keluar)}</span>` : `<span class="muted">—</span>`;
+
+          return `<tr ${borderStyle}>
+            <td style="text-align:center">${dateCell}</td>
+            <td class="n">${masukFmt}</td>
+            <td class="n">${keluarFmt}</td>
+            <td class="n">${balFmt}</td>
+            <td>${badgeMasuk}</td>
+            <td>${ketKeluar}</td>
+          </tr>`;
+        }).join("") : `<tr><td colspan="6"><div class="empty">Belum ada data detail neraca.</div></td></tr>`}
+      </tbody>
+      <tfoot>
+        <tr class="total">
+          <td style="text-align:center">Total</td>
+          <td class="n" style="color:var(--cash)">${rp(R.neracaSummary&&R.neracaSummary.total_masuk!=null?R.neracaSummary.total_masuk:R.neracaDetail.reduce((s,x)=>s+dnum(x.masuk),0))}</td>
+          <td class="n" style="color:var(--crit)">${rp(R.neracaSummary&&R.neracaSummary.total_keluar!=null?R.neracaSummary.total_keluar:R.neracaDetail.reduce((s,x)=>s+dnum(x.keluar),0))}</td>
+          <td class="n" style="color:var(--accent)">${rp(R.neracaSummary&&R.neracaSummary.ending_balance!=null?R.neracaSummary.ending_balance:(R.neracaDetail.length?dnum(R.neracaDetail[R.neracaDetail.length-1].balance):0))}</td>
+          <td>MTD Saldo Masuk</td>
+          <td>MTD Saldo Keluar</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>`;
 }
+
 
 function vShift(R){
   const nama=[...new Set([...S.shifts.map(s=>String(s.nama).toUpperCase()),...R.admin.arr.map(a=>a.nama),...R.fotografer.arr.map(f=>f.nama)])].sort();

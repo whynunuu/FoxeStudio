@@ -109,9 +109,19 @@ def run_integration():
         res_f2_bookings = parse_schedule("file2.xlsx", bulan="2026-09", existing_bookings=existing_bk)
         print(f"[OK] File 2 terurai: {len(res_f2_bookings)} jadwal booking studio.")
 
-        # STEP 7: Jalankan Parser File Neraca (COGS & OPEX dari Section Detail)
+        # STEP 7: Jalankan Parser File Neraca (COGS, OPEX & Log Debit Kredit)
         print("\n[4/4] Menjalankan parser_neraca.py (File Neraca)...")
         res_neraca = parse_neraca("file_neraca.xlsx", sheet_name="September 2026")
+        if isinstance(res_neraca, dict):
+            state["expenses"] = res_neraca.get("expenses", [])
+            state["neracaDetail"] = res_neraca.get("detail", [])
+            state["neracaSummary"] = res_neraca.get("summary", {})
+            neraca_count = len(state["expenses"])
+            detail_count = len(state["neracaDetail"])
+        else:
+            state["expenses"] = res_neraca
+            neraca_count = len(res_neraca)
+            detail_count = 0
 
         # STEP 8: Perbarui State Gabungan
         active_days = [int(o["tanggal"].split("-")[2]) for o in res_f1["orders"] if o["tanggal"].startswith("2026-09-") and int(o["tanggal"].split("-")[2]) <= 30]
@@ -134,7 +144,6 @@ def run_integration():
         state["cashControl"] = res_f1["cashControl"]
         state["leads"] = res_f1["leads"] if res_f1["leads"] else state.get("leads", [])
         state["kpi"] = res_f1["kpi"]
-        state["expenses"] = res_neraca  # COGS & OPEX terurai otomatis dari File Neraca
         state["baseline"] = state.get("baseline", {"label": "September 2025", "omzet": 88000000, "net": 35000000})
         state["history"] = state.get("history", [])
         state["ads"] = state.get("ads", [])
