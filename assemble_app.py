@@ -433,7 +433,7 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
       <button class="btn sm" id="btnLock" title="Kunci Dashboard">🔒 Kunci</button>
       <span class="pill neutral" id="tbLive" hidden></span>
       <span class="pill neutral" id="tbUpd" hidden></span>
-      <span class="pill final" id="tbSync">aktif</span>
+      <a href="terminal.html" class="btn sm" style="background:#0a0a0a;color:#F28C00;border:1px solid #F28C00;font-family:var(--ff-mono);font-weight:700;display:inline-flex;align-items:center;gap:4px;" title="Buka Mode Finance Terminal (Bloomberg ASCII)"><span>&gt;_</span> TERMINAL</a>
       <button class="btn sm" id="btnReset" title="Kembalikan ke data awal file">Reset Data</button>
       <button class="btn pri" id="btnExport">Export Excel</button>
     </div>
@@ -2593,3 +2593,20 @@ with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_template)
 
 print("Generated index.html successfully with full embedded state and persistence!")
+
+import os, re
+if os.path.exists("terminal.html"):
+    try:
+        with open("terminal.html", "r", encoding="utf-8") as tf:
+            t_content = tf.read()
+        t_updated = re.sub(
+            r'window\.FOXE_DEFAULT_STATE\s*=\s*\{[\s\S]*?\n\};',
+            f'window.FOXE_DEFAULT_STATE = {state_json_str};',
+            t_content
+        )
+        with open("terminal.html", "w", encoding="utf-8") as tf:
+            tf.write(t_updated)
+        print("Updated terminal.html with latest embedded state successfully!")
+    except Exception as e:
+        print(f"[WARN] Gagal update terminal.html embedded state: {e}")
+
