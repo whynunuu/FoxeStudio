@@ -431,6 +431,8 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
       <span class="spacer"></span>
       <button class="btn sm" id="btnTheme" title="Ganti Tema">🌓 Tema</button>
       <button class="btn sm" id="btnLock" title="Kunci Dashboard">🔒 Kunci</button>
+      <span class="pill neutral" id="tbLive" hidden></span>
+      <span class="pill neutral" id="tbUpd" hidden></span>
       <span class="pill final" id="tbSync">aktif</span>
       <button class="btn sm" id="btnReset" title="Kembalikan ke data awal file">Reset Data</button>
       <button class="btn pri" id="btnExport">Export Excel</button>
@@ -1077,12 +1079,14 @@ function render(){
   st.textContent=R.c.status; st.className="pill "+(R.c.status==="Final"?"final":"prog");
 
   const up=document.getElementById("tbUpd"), ok=syncSukses(), akhir=syncUrut()[0];
-  if(ok){ const w=wibParts(ok.mulai);
-    up.hidden=false;
-    up.textContent=`Diperbarui ${w.tgl.split(" ").slice(0,2).join(" ")} ${w.jam}`;
-    up.title=`Terakhir berhasil ${tgljam(ok.mulai)} — ${lalu(ok.mulai)}`;
-    up.className="pill "+(akhir&&akhir.status==="gagal"?"bad":"neutral");
-  } else up.hidden=true;
+  if(up){
+    if(ok){ const w=wibParts(ok.mulai);
+      up.hidden=false;
+      up.textContent=`Diperbarui ${w.tgl.split(" ").slice(0,2).join(" ")} ${w.jam}`;
+      up.title=`Terakhir berhasil ${tgljam(ok.mulai)} — ${lalu(ok.mulai)}`;
+      up.className="pill "+(akhir&&akhir.status==="gagal"?"bad":"neutral");
+    } else up.hidden=true;
+  }
 
   // nav
   const nav=document.getElementById("nav"); const tabs=document.getElementById("tabsm");
