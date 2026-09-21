@@ -118,7 +118,7 @@ a{color:var(--accent)}
 .presence{display:flex;align-items:center}
 .dot{width:9px;height:9px;border-radius:50%;background:var(--good)}
 
-.view{padding:28px 32px 80px;max-width:1200px}
+.view{padding:28px 32px 80px;max-width:1600px;width:100%;margin:0 auto;box-sizing:border-box}
 .view[hidden]{display:none}
 .vhead{display:flex;align-items:flex-end;gap:16px;margin-bottom:22px;flex-wrap:wrap}
 .vhead h2{font-family:var(--ff-display);font-size:38px;font-weight:600;letter-spacing:-.8px;
@@ -132,31 +132,35 @@ a{color:var(--accent)}
 .card > h3{font-size:16px;font-weight:500;margin-bottom:14px;display:flex;align-items:center;
   gap:10px;justify-content:space-between;color:var(--ink)}
 .grid{display:grid;gap:16px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:0;
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0;
   background:var(--surface);border:1px solid var(--hairline);border-radius:12px;overflow:hidden}
 .stat{padding:16px 20px;border-right:1px solid var(--hairline);display:flex;flex-direction:column;
   gap:4px;min-width:0}
 .stat:last-child{border-right:0}
 .stat .k{font-family:var(--ff-body);font-size:11px;font-weight:500;letter-spacing:1.4px;
   text-transform:uppercase;color:var(--muted-soft)}
-.stat .v{font-family:var(--ff-display);font-size:31px;font-weight:600;line-height:1.1;
-  letter-spacing:-.6px;font-variant-numeric:tabular-nums;color:var(--ink)}
-.stat .v.sm{font-size:25px;letter-spacing:-.4px}
+.stat .v{font-family:var(--ff-display);font-size:clamp(20px,1.9vw,31px);font-weight:600;line-height:1.1;
+  letter-spacing:-.6px;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stat .v.sm{font-size:clamp(17px,1.6vw,25px);letter-spacing:-.4px}
 .stat .m{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 .stat .bar{height:3px;border-radius:2px;background:var(--surface4);overflow:hidden;margin-top:5px}
 .stat .bar i{display:block;height:100%;background:var(--accent)}
 
 table{width:100%;border-collapse:collapse;font-size:13.5px}
-.tw{overflow-x:auto;border:1px solid var(--hairline);border-radius:12px;background:var(--surface)}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--hairline);border-radius:12px;background:var(--surface);width:100%;max-width:100%;scrollbar-width:thin;scrollbar-color:var(--hairline-strong) var(--surface)}
+.tw::-webkit-scrollbar{height:6px}
+.tw::-webkit-scrollbar-track{background:var(--surface)}
+.tw::-webkit-scrollbar-thumb{background:var(--hairline-strong);border-radius:3px}
 th{text-align:left;font-family:var(--ff-body);font-size:11px;letter-spacing:1.2px;
   text-transform:uppercase;color:var(--muted-soft);font-weight:500;padding:11px 14px;
   border-bottom:1px solid var(--hairline);white-space:nowrap;background:var(--surface2);
-  position:sticky;top:0}
-td{padding:9px 14px;border-bottom:1px solid var(--hairline-soft);white-space:nowrap;color:var(--ink2)}
+  position:sticky;top:0;z-index:2}
+td{padding:9px 14px;border-bottom:1px solid var(--hairline-soft);color:var(--ink2);word-break:normal}
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover td{background:var(--surface2)}
 td.n,th.n{text-align:right;font-family:var(--ff-mono);font-variant-numeric:tabular-nums;
-  font-size:12.5px}
+  font-size:12.5px;white-space:nowrap}
+td.mono,th.mono{white-space:nowrap}
 tr.future td{color:var(--muted-soft);background:var(--surface)}
 tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(--hairline-strong);
   color:var(--ink)}
@@ -276,8 +280,8 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
 .urow .us.wait{color:var(--warn)} .urow .us.skip{color:var(--muted-soft)}
 
 .empty{padding:34px 18px;text-align:center;color:var(--muted-soft);font-size:13.5px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
-.three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px;align-items:start}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:start}
 .tabsm{display:none;gap:6px;overflow-x:auto;padding:10px 16px;border-bottom:1px solid var(--hairline);
   background:var(--surface)}
 .tabsm button{white-space:nowrap;background:var(--surface2);border:1px solid var(--hairline);
@@ -285,15 +289,18 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
   font-weight:500}
 .tabsm button[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .chartscroll{overflow-x:auto}
+@media (max-width:1080px){
+  .two,.three{grid-template-columns:1fr}
+}
 @media (max-width:900px){
   .chartscroll .chart{min-width:720px}
   .app{grid-template-columns:1fr}
   .rail{display:none}
   .tabsm{display:flex}
-  .two,.three{grid-template-columns:1fr}
   .view{padding:20px 16px 64px}
   .vhead h2{font-size:31px}
   .topbar{padding:11px 16px}
+  .f.wide{grid-column:span 1}
 }
 
 /* ---------- lock screen (autentikasi studio) ---------- */
@@ -1443,21 +1450,19 @@ function vBiaya(R){
   </div>
   <div class="two" style="margin-bottom:14px">${grup("COGS",KAT_COGS)}${
       grup("OPEX",KAT_OPEX,R.kasbon?[{k:"Kasbon Karyawan",v:R.kasbon}]:null)}</div>
-  <div class="tw"><table><thead><tr><th>Tgl</th><th>Deskripsi</th><th>Jenis</th><th>Kategori</th><th>Vendor</th>
-    <th class="n">Nilai</th><th>Skema</th><th class="n">Dibayar</th><th class="n">Sisa</th><th>Status</th><th></th></tr></thead><tbody>
+  <div class="tw"><table><thead><tr><th>Tgl</th><th>Deskripsi</th><th>Jenis</th><th>Kategori</th>
+    <th class="n">Nilai</th><th>Status</th><th style="width:40px;text-align:center"></th></tr></thead><tbody>
     ${R.ex.length?[...R.ex].sort((a,b)=>(b.tanggal||"")<(a.tanggal||"")?-1:(b.tanggal||"")>(a.tanggal||"")?1:dnum(a.urutan)-dnum(b.urutan)).map(e=>{
       const n=dnum(e.nilai),b=dnum(e.nominalDibayar),sisa=n-b;
       const belum=!e.jenis||!e.kategori;
-      return `<tr${belum?' style="background:var(--warn-bg)"':""}><td class="mono">${e.tanggal?esc(e.tanggal):'<span class="muted">—</span>'}</td><td>${esc(e.deskripsi)}${e.metode?` <span class="tiny muted">${esc(e.metode)}</span>`:""}</td>
-      <td>${e.jenis?esc(e.jenis):'<span class="pill bad">belum</span>'}</td>
-      <td class="tiny">${e.kategori?esc(e.kategori):'<span class="muted">belum</span>'}</td>
-      <td class="tiny muted">${esc(e.vendor||"—")}</td><td class="n">${rp(n)}</td>
-      <td class="tiny">${esc(e.skema||"Lunas")}${e.terminKe?` <span class="muted">#${esc(e.terminKe)}</span>`:""}</td>
-      <td class="n">${b?rp(b):'<span class="muted">—</span>'}</td>
-      <td class="n"${sisa>0?' style="color:var(--warn)"':""}>${sisa>0?rp(sisa):"lunas"}</td>
-      <td>${sisa<=0?'<span class="pill final">Lunas</span>':`<span class="pill prog">Sisa termin</span>`}</td>
-      <td class="n"><button class="del" data-del="expenses" data-id="${e.id}" aria-label="Hapus">✕</button></td></tr>`}).join("")
-      :`<tr><td colspan="11"><div class="empty">Belum ada biaya tercatat.</div></td></tr>`}
+      return `<tr${belum?' style="background:var(--warn-bg)"':""}><td class="mono">${e.tanggal?esc(e.tanggal):'<span class="muted">—</span>'}</td>
+      <td><div style="font-weight:500">${esc(e.deskripsi)}</div>${e.vendor?`<div class="tiny muted">Vendor: ${esc(e.vendor)}</div>`:""}${e.metode?`<span class="tiny muted" style="margin-top:2px;display:inline-block">${esc(e.metode)}</span>`:""}</td>
+      <td>${e.jenis?`<span class="pill ${e.jenis==='COGS'?'neutral':e.jenis==='OPEX'?'neutral':'prog'}" style="font-weight:600;font-size:11px">${esc(e.jenis)}</span>`:'<span class="pill bad">belum</span>'}</td>
+      <td class="tiny" style="color:var(--ink2)">${e.kategori?esc(e.kategori):'<span class="muted">belum</span>'}</td>
+      <td class="n"><div style="font-weight:600">${rp(n)}</div>${sisa>0?`<div class="tiny" style="color:var(--warn)">Sisa ${rp(sisa)} (Dibayar ${rp(b)})</div>`:(e.skema==='Termin'?`<div class="tiny muted">Termin lunas</div>`:"")}</td>
+      <td>${sisa<=0?'<span class="pill final">Lunas</span>':`<span class="pill prog">Sisa termin${e.terminKe?` #${esc(e.terminKe)}`:''}</span>`}</td>
+      <td class="n" style="text-align:center"><button class="del" data-del="expenses" data-id="${e.id}" aria-label="Hapus">✕</button></td></tr>`}).join("")
+      :`<tr><td colspan="7"><div class="empty">Belum ada biaya tercatat.</div></td></tr>`}
   </tbody></table></div>
 
   <!-- SECTION NERACA DEBIT KREDIT MENURUN SESUAI LOG TANGGAL -->
