@@ -1,0 +1,1275 @@
+{
+  "name": "FOXE WF 01-04 — Incoming WhatsApp + AI + Scoring (Fixed)",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {
+          "messageStatusUpdates": [
+            "all"
+          ]
+        }
+      },
+      "id": "fade9242-4fbc-40fa-832d-f2f59c51236e",
+      "name": "WhatsApp In",
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        464
+      ],
+      "webhookId": "969ca448-13f3-44b4-8ea3-4eaa46009c7c",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "rjG2IDmbvIZArONB",
+          "name": "WhatsApp OAuth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = [];\nfor (const item of $input.all()) {\n  const j = item.json || {};\n  const contacts = j.contacts || [];\n  const messages = j.messages || [];\n  for (const m of messages) {\n    if (!m || !m.from) continue;\n    if (m.type !== \"text\" && !(m.text && m.text.body)) continue;\n    const phone = String(m.from);\n    let name = \"\";\n    for (const c of contacts) { if (String(c.wa_id) === phone && c.profile && c.profile.name) { name = c.profile.name; break; } }\n    if (!name) name = phone;\n    const ts = m.timestamp ? new Date(Number(m.timestamp) * 1000).toISOString() : new Date().toISOString();\n    items.push({ json: { phone, customer_name: name, message: String(m.text.body), timestamp: ts, message_id: m.id || \"\" } });\n  }\n}\nreturn items;"
+      },
+      "id": "796bad67-e139-4921-897a-bc16c9ed4325",
+      "name": "Ekstrak Pesan",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/15xHroDFaN1gI4m9Li5BxSNwqLbup-PBjh7IufiG5WQ4/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "04_Admin_Shift"
+        },
+        "options": {}
+      },
+      "id": "5c7b4e15-ba60-496f-9d7d-d30e97bd3b65",
+      "name": "Baca Shift Admin",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        448,
+        464
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "MyPSHDwa1CikZ9w0",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const ctx = $(\"Ekstrak Pesan\").item.json;\nfunction normalizePhone(p) {\n  let d = String(p || \"\").replace(/\\D/g, \"\");\n  if (d.startsWith(\"0\")) d = \"62\" + d.slice(1);\n  return d;\n}\nlet admin = \"\", shift = \"\";\ntry {\n  const shiftRows = $(\"Baca Shift Admin\").all();\n  for (const s of shiftRows) {\n    const row = s.json || {};\n    const cur = String(row[\"Current_Admin\"] || \"\").trim();\n    if (cur) { admin = cur; shift = String(row[\"Shift\"] || \"\"); break; }\n  }\n} catch (e) { /* sheet belum ada */ }\nconst j = ctx;\nconst hour = Number(new Date(j.timestamp).toLocaleString(\"en-US\", { timeZone: \"Asia/Jakarta\", hour: \"numeric\", hour12: false }));\nconst withinHours = hour >= 9 && hour < 21;\nreturn [{ json: {\n  phone: normalizePhone(j.phone),\n  customer_name: j.customer_name,\n  message: j.message,\n  timestamp: j.timestamp,\n  message_id: j.message_id,\n  active_admin: admin,\n  shift,\n  within_hours: withinHours,\n  status: withinHours ? \"Lead\" : \"Outside Operational Hours\"\n} }];"
+      },
+      "id": "3f1e8182-16d9-40b9-8ef8-e20d3e5c113c",
+      "name": "Normalisasi & Konteks",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/15xHroDFaN1gI4m9Li5BxSNwqLbup-PBjh7IufiG5WQ4/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "01_Leads_Master"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Phone",
+              "lookupValue": "={{ $json.phone }}"
+            }
+          ]
+        },
+        "options": {
+          "returnFirstMatch": true
+        }
+      },
+      "id": "2b3a5e0a-85a5-410a-a7e5-c9d544593fbf",
+      "name": "Cari Lead",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        896,
+        464
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "MyPSHDwa1CikZ9w0",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "found",
+              "leftValue": "={{ $json.row_number }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "8811a26c-4ff6-4420-992d-0d470b4a5d11",
+      "name": "Lead Ditemukan?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1120,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const ctx = $(\"Normalisasi & Konteks\").item.json;\nconst d = new Date(ctx.timestamp);\nconst yy = String(d.getFullYear()).slice(2);\nconst mm = String(d.getMonth() + 1).padStart(2, \"0\");\nconst seq = String(Math.floor(Math.random() * 9000) + 1000);\nconst leadId = \"FL-\" + yy + mm + \"-\" + seq;\nreturn [{ json: {\n  phone: ctx.phone,\n  customer_name: ctx.customer_name,\n  message: ctx.message,\n  timestamp: ctx.timestamp,\n  message_id: ctx.message_id,\n  active_admin: ctx.active_admin,\n  shift: ctx.shift,\n  within_hours: ctx.within_hours,\n  is_new: true,\n  lead_id: leadId,\n  lead_owner: ctx.active_admin,\n  closing_admin: \"\",\n  first_contact: ctx.timestamp,\n  prev_summary: \"\",\n  status: ctx.status,\n  revenue: \"\"\n} }];"
+      },
+      "id": "5cf6a793-8d94-4d36-a47f-01c41656fb54",
+      "name": "Lead Baru",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1792,
+        368
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "15xHroDFaN1gI4m9Li5BxSNwqLbup-PBjh7IufiG5WQ4",
+          "mode": "list",
+          "cachedResultName": "N8N Report",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15xHroDFaN1gI4m9Li5BxSNwqLbup-PBjh7IufiG5WQ4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Booking"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Phone",
+              "lookupValue": "={{ $('Lead Baru').item.json.phone }}"
+            }
+          ]
+        },
+        "options": {
+          "returnFirstMatch": true
+        }
+      },
+      "id": "5f06eb40-66a4-4995-9c2e-a5bc9c095f71",
+      "name": "Cek Booking",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1792,
+        560
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "MyPSHDwa1CikZ9w0",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const lead = $(\"Lead Baru\").item.json;\nconst bk = $json || {};\nconst hasBooking = Object.keys(bk).some(k => k !== \"row_number\" && bk[k] !== \"\" && bk[k] !== undefined && bk[k] !== null);\nlet revenue = \"\";\nfor (const k of Object.keys(bk)) {\n  if (/revenue|total|harga|nilai|amount/i.test(k)) { revenue = bk[k]; break; }\n}\nreturn [{ json: Object.assign({}, lead, {\n  status: hasBooking ? \"Booking\" : lead.status,\n  closing_admin: hasBooking ? lead.active_admin : \"\",\n  revenue: revenue\n}) }];"
+      },
+      "id": "474fd05a-11df-4c08-a7f5-b5756786e26f",
+      "name": "Gabung Cek Booking",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1792,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": []
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "7ae43019-f1a8-40d7-9517-9ce235f9e61b",
+      "name": "Distribusi Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2016,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ JSON.stringify(Object.assign({}, $json, { row_number: undefined })) }}",
+        "options": {}
+      },
+      "id": "ca2271a7-baca-44bd-ba52-e0e10e69bc3f",
+      "name": "Data Lead Lama",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1344,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f1",
+              "name": "phone",
+              "value": "={{ $('Normalisasi & Konteks').item.json.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "f2",
+              "name": "customer_name",
+              "value": "={{ $json.Customer_Name || $('Normalisasi & Konteks').item.json.customer_name }}",
+              "type": "string"
+            },
+            {
+              "id": "f3",
+              "name": "message",
+              "value": "={{ $('Normalisasi & Konteks').item.json.message }}",
+              "type": "string"
+            },
+            {
+              "id": "f4",
+              "name": "timestamp",
+              "value": "={{ $('Normalisasi & Konteks').item.json.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "f5",
+              "name": "message_id",
+              "value": "={{ $('Normalisasi & Konteks').item.json.message_id }}",
+              "type": "string"
+            },
+            {
+              "id": "f6",
+              "name": "active_admin",
+              "value": "={{ $('Normalisasi & Konteks').item.json.active_admin }}",
+              "type": "string"
+            },
+            {
+              "id": "f7",
+              "name": "shift",
+              "value": "={{ $('Normalisasi & Konteks').item.json.shift }}",
+              "type": "string"
+            },
+            {
+              "id": "f8",
+              "name": "within_hours",
+              "value": "={{ $('Normalisasi & Konteks').item.json.within_hours }}",
+              "type": "boolean"
+            },
+            {
+              "id": "f9",
+              "name": "is_new",
+              "value": "={{ false }}",
+              "type": "boolean"
+            },
+            {
+              "id": "f10",
+              "name": "lead_id",
+              "value": "={{ $json.Lead_ID }}",
+              "type": "string"
+            },
+            {
+              "id": "f11",
+              "name": "lead_owner",
+              "value": "={{ $json.Lead_Owner || $('Normalisasi & Konteks').item.json.active_admin }}",
+              "type": "string"
+            },
+            {
+              "id": "f12",
+              "name": "closing_admin",
+              "value": "={{ $json.Closing_Admin }}",
+              "type": "string"
+            },
+            {
+              "id": "f13",
+              "name": "first_contact",
+              "value": "={{ $json.First_Contact }}",
+              "type": "string"
+            },
+            {
+              "id": "f14",
+              "name": "prev_summary",
+              "value": "={{ $json.AI_Summary }}",
+              "type": "string"
+            },
+            {
+              "id": "f15",
+              "name": "status",
+              "value": "={{ $json.Status === \"Booking\" || $json.Status === \"Not Booking\" ? $json.Status : $('Normalisasi & Konteks').item.json.status }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d7aafd7f-703e-48a5-8fb9-d1bf2d0ed471",
+      "name": "Konteks Lead Lama",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1568,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": []
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "d9701813-9812-4bd5-96bb-051497c134a4",
+      "name": "Siapkan Konteks AI",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2240,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "gpt-4o-mini"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=Pesan pelanggan: {{ $json.message }}\nNama: {{ $json.customer_name }}\nNomor: {{ $json.phone }}\nWaktu pesan: {{ $json.timestamp }} (zona Asia/Jakarta)\nTanggal hari ini: {{ $now.toFormat(\"yyyy-MM-dd\") }}\nRingkasan percakapan sebelumnya: {{ $json.prev_summary || \"(tidak ada - lead baru)\" }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "instructions": "Anda adalah asisten analisis lead untuk Foxe Studio, studio foto & video (wedding, prewedding, foto grup, dll) di Indonesia. Analisis pesan WhatsApp pelanggan berbahasa Indonesia dan hasilkan RAW JSON murni tanpa markdown/backticks. Skema JSON:\n{\n  \"customer_summary\": \"ringkasan kebutuhan pelanggan\",\n  \"intent\": \"Tanya Harga / Booking / Info Paket / Reschedule / Keluhan / Lainnya\",\n  \"score\": 0-100,\n  \"priority\": \"Low\" / \"Medium\" / \"High\",\n  \"priority_reason\": \"alasan penentuan prioritas\",\n  \"suggested_action\": \"langkah selanjutnya oleh admin\",\n  \"follow_up_date\": \"YYYY-MM-DD\",\n  \"follow_up_reason\": \"alasan follow up\",\n  \"suggested_reply\": \"draft balasan ramah & profesional\",\n  \"confidence\": 0.0-1.0\n}\nAturan skor: Tanya harga/paket/tanggal/ketersediaan/DP (+poin). 0-30 Cold, 31-65 Warm, 66-100 Hot. Priority High jika skor tinggi, intent beli kuat, minta nomor rekening, atau booking fix.",
+          "maxTokens": 800,
+          "temperature": 0.2
+        }
+      },
+      "id": "4bd42543-f433-4b24-b494-c5838f0ddd82",
+      "name": "AI Analisis Rutin",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        2464,
+        80
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "Gateway credits",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const ctx = $(\"Distribusi Data\").item.json;\nlet rawAi = ($json.output && $json.output[0] && $json.output[0].content && $json.output[0].content[0] && $json.output[0].content[0].text) || \"\";\nlet ai = {};\nif (typeof rawAi === \"string\") {\n  try {\n    const cleaned = rawAi.replace(/```json/gi, \"\").replace(/```/g, \"\").trim();\n    ai = JSON.parse(cleaned);\n  } catch (e) { ai = {}; }\n} else if (typeof rawAi === \"object\" && rawAi !== null) {\n  ai = rawAi;\n}\nconst msg = String(ctx.message || \"\");\nlet ruleScore = 0;\nif (/harga|price|biaya|berapa/i.test(msg)) ruleScore += 15;\nif (/paket|package/i.test(msg)) ruleScore += 15;\nif (/tanggal|tgl|date/i.test(msg)) ruleScore += 20;\nif (/slot|tersedia|available|ketersediaan|kosong/i.test(msg)) ruleScore += 20;\nif (/\\b\\d+\\s*(orang|pax|org|tamu)/i.test(msg)) ruleScore += 10;\nif (/\\bdp\\b|down\\s*payment/i.test(msg)) ruleScore += 15;\nif (/rekening|transfer|bank|no.?\\s*rek/i.test(msg)) ruleScore += 20;\nruleScore = Math.min(ruleScore, 100);\nlet score = (typeof ai.score === \"number\") ? ai.score : 0;\nif (ruleScore > 0) score = Math.round(score * 0.6 + ruleScore * 0.4);\nscore = Math.max(0, Math.min(100, score));\nconst temperature = score <= 30 ? \"Cold\" : (score <= 65 ? \"Warm\" : \"Hot\");\nlet priority = ai.priority || \"Low\";\nif (score >= 66 || /tanggal (sudah )?(dipilih|fix)|mau booking|siap dp|jadi transfer/i.test(msg)) priority = \"High\";\nconst conf = (typeof ai.confidence === \"number\") ? ai.confidence : 0.5;\nreturn [{ json: Object.assign({}, ctx, {\n  ai_summary: ai.customer_summary || \"\",\n  intent: ai.intent || \"Lainnya\",\n  score,\n  temperature,\n  priority,\n  priority_reason: ai.priority_reason || \"\",\n  suggested_action: ai.suggested_action || \"\",\n  follow_up_date: ai.follow_up_date || \"\",\n  follow_up_reason: ai.follow_up_reason || \"\",\n  suggested_reply: ai.suggested_reply || \"\",\n  confidence: conf,\n  needs_escalation: conf < 0.6 || msg.length > 800\n}) }];"
+      },
+      "id": "7b728057-55a8-4ee8-9f84-464494b791b9",
+      "name": "Parse Analisis AI",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2688,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "esc",
+              "leftValue": "={{ $json.needs_escalation }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "14dd1856-81d9-4d6b-be8b-5b4d62d17fe1",
+      "name": "Perlu AI Kuat?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2912,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "gpt-4o"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=Pesan pelanggan: {{ $json.message }}\nNama: {{ $json.customer_name }}\nNomor: {{ $json.phone }}\nWaktu pesan: {{ $json.timestamp }} (zona Asia/Jakarta)\nTanggal hari ini: {{ $now.toFormat(\"yyyy-MM-dd\") }}\nRingkasan percakapan sebelumnya: {{ $json.prev_summary || \"(tidak ada - lead baru)\" }}"
+            },
+            {
+              "role": "assistant",
+              "content": "={{ JSON.stringify({ customer_summary: $json.ai_summary, intent: $json.intent, score: $json.score, temperature: $json.temperature, priority: $json.priority, suggested_reply: $json.suggested_reply }) }}"
+            },
+            {
+              "content": "Analisis awal di atas memiliki confidence rendah / konteks ambigu. Mohon perbaiki dan lengkapi dalam format RAW JSON, terutama intent, skor, prioritas, tanggal follow-up, dan draft balasan."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "instructions": "Anda adalah asisten analisis lead untuk Foxe Studio, studio foto & video di Indonesia. Hasilkan output RAW JSON murni tanpa markdown. Schema: { customer_summary, intent, score (0-100), priority ('Low'/'Medium'/'High'), priority_reason, suggested_action, follow_up_date (YYYY-MM-DD), follow_up_reason, suggested_reply, confidence (0-1) }.",
+          "maxTokens": 1200,
+          "temperature": 0.2
+        }
+      },
+      "id": "bf00e7a4-61b1-4f5d-9cae-7c82174051ab",
+      "name": "AI Analisis Kuat",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        3136,
+        0
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "Gateway credits",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "let base = {};\ntry { base = $(\"Parse Analisis AI\").item.json; } catch (e) {}\nlet strong = null;\ntry {\n  let t = $json.output && $json.output[0] && $json.output[0].content && $json.output[0].content[0] && $json.output[0].content[0].text;\n  if (typeof t === \"string\") {\n    const cleaned = t.replace(/```json/gi, \"\").replace(/```/g, \"\").trim();\n    strong = JSON.parse(cleaned);\n  } else if (typeof t === \"object\" && t !== null) {\n    strong = t;\n  }\n} catch (e) { strong = null; }\nif (!strong || !strong.customer_summary) return [{ json: base }];\nlet score = (typeof strong.score === \"number\") ? strong.score : base.score;\nscore = Math.max(0, Math.min(100, score));\nreturn [{ json: Object.assign({}, base, {\n  ai_summary: strong.customer_summary,\n  intent: strong.intent || base.intent,\n  score,\n  temperature: score <= 30 ? \"Cold\" : (score <= 65 ? \"Warm\" : \"Hot\"),\n  priority: strong.priority || base.priority,\n  priority_reason: strong.priority_reason || base.priority_reason,\n  suggested_action: strong.suggested_action || base.suggested_action,\n  follow_up_date: strong.follow_up_date || base.follow_up_date,\n  follow_up_reason: strong.follow_up_reason || base.follow_up_reason,\n  suggested_reply: strong.suggested_reply || base.suggested_reply,\n  confidence: (typeof strong.confidence === \"number\") ? strong.confidence : base.confidence\n}) }];"
+      },
+      "id": "f93705cd-d605-4b2f-bc3d-a60e099a0918",
+      "name": "Gabung Hasil AI",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3360,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/15xHroDFaN1gI4m9Li5BxSNwqLbup-PBjh7IufiG5WQ4/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "01_Leads_Master"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "Lead_ID"
+          ],
+          "value": {
+            "Lead_ID": "={{ $('Gabung Hasil AI').item.json.lead_id }}",
+            "Customer_Name": "={{ $('Gabung Hasil AI').item.json.customer_name }}",
+            "Phone": "={{ $('Gabung Hasil AI').item.json.phone }}",
+            "First_Contact": "={{ $('Gabung Hasil AI').item.json.first_contact }}",
+            "Last_Contact": "={{ $('Gabung Hasil AI').item.json.timestamp }}",
+            "Lead_Owner": "={{ $('Gabung Hasil AI').item.json.lead_owner }}",
+            "Closing_Admin": "={{ $('Gabung Hasil AI').item.json.closing_admin }}",
+            "Intent": "={{ $('Gabung Hasil AI').item.json.intent }}",
+            "Lead_Score": "={{ $('Gabung Hasil AI').item.json.score }}",
+            "Temperature": "={{ $('Gabung Hasil AI').item.json.temperature }}",
+            "Priority": "={{ $('Gabung Hasil AI').item.json.priority }}",
+            "Status": "={{ $('Gabung Hasil AI').item.json.status }}",
+            "Follow_Up_Date": "={{ $('Gabung Hasil AI').item.json.follow_up_date }}",
+            "AI_Summary": "={{ $('Gabung Hasil AI').item.json.ai_summary }}",
+            "Revenue": "={{ $('Gabung Hasil AI').item.json.revenue }}"
+          },
+          "schema": [
+            {
+              "id": "Lead_ID",
+              "displayName": "Lead_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Customer_Name",
+              "displayName": "Customer_Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "First_Contact",
+              "displayName": "First_Contact",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last_Contact",
+              "displayName": "Last_Contact",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Lead_Owner",
+              "displayName": "Lead_Owner",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Closing_Admin",
+              "displayName": "Closing_Admin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Intent",
+              "displayName": "Intent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Lead_Score",
+              "displayName": "Lead_Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Temperature",
+              "displayName": "Temperature",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Priority",
+              "displayName": "Priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Follow_Up_Date",
+              "displayName": "Follow_Up_Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AI_Summary",
+              "displayName": "AI_Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Revenue",
+              "displayName": "Revenue",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c52103b6-8bef-433a-8778-9d59651105ed",
+      "name": "Simpan Lead",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3600,
+        -100
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "MyPSHDwa1CikZ9w0",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/15xHroDFaN1gI4m9Li5BxSNwqLbup-PBjh7IufiG5WQ4/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "02_Interaction_Log"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $('Gabung Hasil AI').item.json.timestamp }}",
+            "Lead_ID": "={{ $('Gabung Hasil AI').item.json.lead_id }}",
+            "Direction": "in",
+            "Message": "={{ $('Gabung Hasil AI').item.json.message }}",
+            "Admin": "={{ $('Gabung Hasil AI').item.json.active_admin }}",
+            "Response_Time": ""
+          },
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Lead_ID",
+              "displayName": "Lead_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Direction",
+              "displayName": "Direction",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Message",
+              "displayName": "Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Admin",
+              "displayName": "Admin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Response_Time",
+              "displayName": "Response_Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "70c192ec-1e35-475f-b6f2-152c96aa2bd9",
+      "name": "Catat Interaksi",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3600,
+        100
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "MyPSHDwa1CikZ9w0",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "fu",
+              "leftValue": "={{ $('Gabung Hasil AI').item.json.follow_up_date }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            },
+            {
+              "id": "st",
+              "leftValue": "={{ $('Gabung Hasil AI').item.json.status }}",
+              "rightValue": "Booking",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d1dba2eb-f786-4e11-aa44-77b69052e520",
+      "name": "Ada Follow-Up?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3600,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/15xHroDFaN1gI4m9Li5BxSNwqLbup-PBjh7IufiG5WQ4/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "03_Follow_Up_Queue"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Priority": "={{ $('Gabung Hasil AI').item.json.priority }}",
+            "Customer": "={{ $('Gabung Hasil AI').item.json.customer_name }}",
+            "Phone": "={{ $('Gabung Hasil AI').item.json.phone }}",
+            "Due_Date": "={{ $('Gabung Hasil AI').item.json.follow_up_date }}",
+            "Reason": "={{ $('Gabung Hasil AI').item.json.follow_up_reason }}",
+            "Suggested_Reply": "={{ $('Gabung Hasil AI').item.json.suggested_reply }}",
+            "Follow_Up_Status": "Pending"
+          },
+          "schema": [
+            {
+              "id": "Priority",
+              "displayName": "Priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Customer",
+              "displayName": "Customer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Due_Date",
+              "displayName": "Due_Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Reason",
+              "displayName": "Reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Suggested_Reply",
+              "displayName": "Suggested_Reply",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Follow_Up_Status",
+              "displayName": "Follow_Up_Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c918671b-e638-4444-bac7-830af67716cb",
+      "name": "Antrian Follow-Up",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3824,
+        300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "MyPSHDwa1CikZ9w0",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "hp",
+              "leftValue": "={{ $('Gabung Hasil AI').item.json.priority }}",
+              "rightValue": "High",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b788add3-114a-4544-bf6b-2172bfec0981",
+      "name": "Prioritas Tinggi?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3600,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "<__PLACEHOLDER_VALUE__Phone Number ID dari Meta WhatsApp Business__>",
+        "recipientPhoneNumber": "<__PLACEHOLDER_VALUE__Nomor WhatsApp admin internal untuk alert, format 62xxx__>",
+        "textBody": "=LEAD PRIORITAS TINGGI — Foxe Studio\nNama: {{ $('Gabung Hasil AI').item.json.customer_name }}\nWA: {{ $('Gabung Hasil AI').item.json.phone }}\nSkor: {{ $('Gabung Hasil AI').item.json.score }} ({{ $('Gabung Hasil AI').item.json.temperature }})\nIntent: {{ $('Gabung Hasil AI').item.json.intent }}\nRingkasan: {{ $('Gabung Hasil AI').item.json.ai_summary }}\nAksi disarankan: {{ $('Gabung Hasil AI').item.json.suggested_action }}\nDraft balasan: {{ $('Gabung Hasil AI').item.json.suggested_reply }}\n(AI tidak mengirim ke pelanggan — review & kirim manual. SLA respons: 45 menit)",
+        "additionalFields": {}
+      },
+      "id": "75171aa8-26b4-4b50-81b5-43d24ea6842e",
+      "name": "Alert Admin",
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        3824,
+        500
+      ],
+      "webhookId": "bd0bfc57-ad3c-4372-b1f3-cbbf76e9bdfb"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "WhatsApp In": {
+      "main": [
+        [
+          {
+            "node": "Ekstrak Pesan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ekstrak Pesan": {
+      "main": [
+        [
+          {
+            "node": "Baca Shift Admin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Baca Shift Admin": {
+      "main": [
+        [
+          {
+            "node": "Normalisasi & Konteks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalisasi & Konteks": {
+      "main": [
+        [
+          {
+            "node": "Cari Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cari Lead": {
+      "main": [
+        [
+          {
+            "node": "Lead Ditemukan?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lead Ditemukan?": {
+      "main": [
+        [
+          {
+            "node": "Data Lead Lama",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Lead Baru",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lead Baru": {
+      "main": [
+        [
+          {
+            "node": "Cek Booking",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cek Booking": {
+      "main": [
+        [
+          {
+            "node": "Gabung Cek Booking",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gabung Cek Booking": {
+      "main": [
+        [
+          {
+            "node": "Distribusi Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Distribusi Data": {
+      "main": [
+        [
+          {
+            "node": "Siapkan Konteks AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data Lead Lama": {
+      "main": [
+        [
+          {
+            "node": "Konteks Lead Lama",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Konteks Lead Lama": {
+      "main": [
+        [
+          {
+            "node": "Distribusi Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Siapkan Konteks AI": {
+      "main": [
+        [
+          {
+            "node": "AI Analisis Rutin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Analisis Rutin": {
+      "main": [
+        [
+          {
+            "node": "Parse Analisis AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Analisis AI": {
+      "main": [
+        [
+          {
+            "node": "Perlu AI Kuat?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Perlu AI Kuat?": {
+      "main": [
+        [
+          {
+            "node": "AI Analisis Kuat",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gabung Hasil AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Analisis Kuat": {
+      "main": [
+        [
+          {
+            "node": "Gabung Hasil AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gabung Hasil AI": {
+      "main": [
+        [
+          {
+            "node": "Simpan Lead",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Catat Interaksi",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Ada Follow-Up?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Prioritas Tinggi?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ada Follow-Up?": {
+      "main": [
+        [
+          {
+            "node": "Antrian Follow-Up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prioritas Tinggi?": {
+      "main": [
+        [
+          {
+            "node": "Alert Admin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "5fa4ab3d-aa2b-4df4-8648-c66a4479411e",
+  "meta": {
+    "instanceId": "c86acd28aaa9491d002dc1dbd6a7d0d0b39631d434654ec3f45a7781a1364761"
+  },
+  "nodeGroups": [],
+  "id": "lkTtIyhw5TTJRF0R",
+  "tags": []
+}
