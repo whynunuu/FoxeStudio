@@ -431,9 +431,7 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
       <span class="spacer"></span>
       <button class="btn sm" id="btnTheme" title="Ganti Tema">🌓 Tema</button>
       <button class="btn sm" id="btnLock" title="Kunci Dashboard">🔒 Kunci</button>
-      <span class="pill neutral" id="tbLive" hidden></span>
-      <span class="pill neutral" id="tbUpd" hidden></span>
-      <a href="terminal.html" class="btn sm" style="background:#0a0a0a;color:#F28C00;border:1px solid #F28C00;font-family:var(--ff-mono);font-weight:700;display:inline-flex;align-items:center;gap:4px;" title="Buka Mode Finance Terminal (Bloomberg ASCII)"><span>&gt;_</span> TERMINAL</a>
+      <span class="pill final" id="tbSync">aktif</span>
       <button class="btn sm" id="btnReset" title="Kembalikan ke data awal file">Reset Data</button>
       <button class="btn pri" id="btnExport">Export Excel</button>
     </div>
