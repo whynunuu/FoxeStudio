@@ -10,7 +10,8 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
   * **File Neraca (`.xlsx`)**: ID `1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM` (pengeluaran operasional & produksi dari section `Detail` sheet September 2026, diklasifikasikan ke COGS & OPEX via `parser_neraca.py`).
 - **Roster Shift:** Hitung akumulasi total shift slot aktual dari Log Order s.d. tanggal sekarang/cut-off.
 - **ATURAN MUTLAK BIAYA:** Pengeluaran COGS & OPEX murni diambil dari section `Detail` File Neraca (kolom P s.d. U). JANGAN mengambil pengeluaran dari File Log Order karena referensinya berbeda.
-- Deteksi cut-off dinamis (mengikuti tanggal transaksi aktif terbaru, misal: 20 September 2026).
+- **SECTION TERPADU:** Section COGS dan OPEX digabung menjadi satu section resmi bernama **`Neraca (COGS & OPEX)`** yang dilengkapi **Buku Detail Neraca (Debit & Kredit)**.
+- Deteksi cut-off dinamis (mengikuti tanggal transaksi aktif terbaru, misal: 21 September 2026).
 - Simpan state gabungan ke `foxe_full_state.json`.
 - Rakit ulang file visual `index.html` dan salin ke artefak `foxe_studio_keuangan.html`.
 
@@ -27,3 +28,15 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
 - Sertakan link website resmi live (terproteksi PIN: `202688`):
   👉 **https://whynunuu.github.io/FoxeStudio/**
 
+---
+
+## Standar Desain Visual & Larangan Sistem:
+1. **Layout Fit-In & Anti-Tabrakan:**
+   - `.view` menggunakan lebar adaptif `max-width: 1600px; width: 100%; margin: 0 auto;`.
+   - Tabel Biaya Neraca menggunakan format **7 kolom responsif**: `Tgl | Deskripsi | Jenis | Kategori | Nilai | Status | Aksi`. Kolom Status dan tombol ✕ wajib terlihat utuh tanpa terpotong.
+   - Grid `.two` dan `.three` wajib responsif (`minmax(360px, 1fr)`) dan breakpoint di 1080px agar tidak saling bertabrakan.
+   - Angka KPI besar menggunakan `clamp(20px, 1.9vw, 31px)` dengan `text-overflow: ellipsis`.
+2. **Larangan Fitur Terminal:**
+   - Fitur Terminal View (Bloomberg style/trading) dilarang dimasukkan ke repositori ini. Repositori Foxe Studio murni fokus pada aplikasi manajemen keuangan studio foto.
+   - Topbar atas wajib bersih dan mempertahankan tag `#tbUpd` serta `#tbLive`.
+   - Fungsi `render()` JavaScript wajib menyertakan guard `if(up)`.
