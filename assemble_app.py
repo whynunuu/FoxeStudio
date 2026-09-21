@@ -1053,7 +1053,7 @@ const VIEWS=[
   {id:"target",grp:"Ringkasan",label:"Target & Skenario"},
   {id:"est",grp:"Ringkasan",label:"Estimasi Omzet"},
   {id:"trx",grp:"Input",label:"Transaksi"},
-  {id:"biaya",grp:"Input",label:"Biaya COGS/OPEX"},
+  {id:"biaya",grp:"Input",label:"Neraca (COGS & OPEX)"},
   {id:"gaji",grp:"Input",label:"Gaji Karyawan"},
   {id:"shift",grp:"Input",label:"Shift"},
   {id:"lead",grp:"Input",label:"Lead"},
@@ -1424,8 +1424,9 @@ function vBiaya(R){
       <tr class="total"><td>Total ${j}</td><td class="n">${rp(tot)}</td><td class="n">${R.omzet?pct(tot/R.omzet):""}</td></tr>
     </tbody></table></div>`};
   return `
-  <div class="vhead"><div><div class="eyebrow">Sheet 6</div><h2>Biaya COGS & OPEX</h2></div>
-    <p>Setiap biaya yang dikategorikan langsung masuk ke laba rugi di dashboard. Skema termin dipakai untuk beban yang dibayar bertahap.</p></div>
+  <div class="vhead"><div><div class="eyebrow">Buku Neraca Keuangan · September 2026</div><h2>Neraca (COGS &amp; OPEX)</h2></div>
+    <p>Laporan terpadu neraca Foxe Studio: klasifikasi otomatis COGS (beban produksi langsung) &amp; OPEX (operasional studio), mutasi kas &amp; bank harian, serta estimasi laba rugi.</p></div>
+
   <div class="stats" style="margin-bottom:14px">
     <div class="stat"><span class="k">Total COGS</span><span class="v sm">${rp(R.cogs)}</span><span class="m">${R.omzet?pct(R.cogs/R.omzet):""} dari omzet</span></div>
     <div class="stat"><span class="k">Gross profit</span><span class="v sm">${rp(R.grossProfit)}</span></div>
