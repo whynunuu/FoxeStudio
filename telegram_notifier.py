@@ -13,6 +13,7 @@ import json
 import urllib.request
 import urllib.parse
 import datetime
+import re
 
 DEFAULT_TOKEN = "8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s"
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "telegram_config.json")
@@ -174,6 +175,32 @@ def build_summary_message(state):
         table_lines.append(f"{'TOTAL COGS (Produksi)':<24} {rp(cogs_tot):>19}")
         table_lines.append(f"{'TOTAL OPEX (Studio)':<24} {rp(opex_tot):>19}")
         table_lines.append(f"{'ESTIMASI NETT PROFIT':<24} {rp(nett_profit):>19}")
+
+    # Estimate Omzet Sampai Akhir Bulan dari Jadwal Booking Terdaftar
+    future_bookings = [
+        b for b in state.get("schedule", {}).get("bookings", [])
+        if b.get("tgl") and b.get("tgl") > cutoff and b.get("tgl").startswith(cutoff[:7])
+    ]
+    if future_bookings:
+        unrealized_cash_in = sum(b.get("harga", 0) for b in future_bookings)
+        total_dp_future = 0.0
+        for b in future_bookings:
+            hp = str(b.get("noHp", "")).lower()
+            m = re.search(r'dp\s*(\d+)', hp)
+            if m:
+                total_dp_future += float(m.group(1)) * 1000
+            elif "lunas" in hp:
+                total_dp_future += float(b.get("harga", 0))
+
+        sisa_pelunasan = max(0.0, unrealized_cash_in - total_dp_future)
+        unrealized_omzet = grand_total + sisa_pelunasan
+
+        table_lines.append("--------------------------------------------")
+        table_lines.append(f"{'Unrealized Cash In':<24} {rp(unrealized_cash_in):>19}")
+        table_lines.append(f"{'DP (-)':<24} {rp(total_dp_future):>19}")
+        table_lines.append(f"{'Total':<24} {rp(sisa_pelunasan):>19}")
+        table_lines.append("")
+        table_lines.append(f"{'Unrealized Omzet':<24} {rp(unrealized_omzet):>19}")
 
     table_lines.append("============================================")
 
