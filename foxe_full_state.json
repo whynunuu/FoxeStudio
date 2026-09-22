@@ -9929,6 +9929,21 @@
       {
         "id": "sc_bk_161",
         "tgl": "2026-09-27",
+        "waktu": "10:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Nasla",
+        "paket": "Photofox",
+        "paketRaw": "Photofox",
+        "jmlOrang": 1,
+        "harga": 200000.0,
+        "admin": "IN",
+        "noHp": "",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_162",
+        "tgl": "2026-09-27",
         "waktu": "11:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -9942,7 +9957,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_162",
+        "id": "sc_bk_163",
         "tgl": "2026-09-27",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -10400,6 +10415,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260922-0211",
+      "mulai": "2026-09-22T02:11:37.706127+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 508 order, 163 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260921-1413",
       "mulai": "2026-09-21T14:13:20.529145+00:00",
       "status": "sukses",
@@ -10596,7 +10617,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-21T14:13:20.529145+00:00"
+    "last_sync": "2026-09-22T02:11:37.706127+00:00"
   },
   "neracaDetail": [
     {
