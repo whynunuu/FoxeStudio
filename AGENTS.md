@@ -7,8 +7,9 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
    - Hitung total shift aktual kru s.d. hari ini dari Log Order, deteksi cut-off dinamis.
    - Parse section `Detail` File Neraca (kolom P s.d. U) untuk klasifikasi COGS & OPEX serta Buku Detail Neraca (Debit/Kredit).
    - Simpan `foxe_full_state.json`, rakit `index.html`, dan kirim notifikasi Telegram via `@NunuFxBot`.
+   - Di dalam struk laporan Telegram (blok monospace), sertakan kalkulasi **Estimate Omzet Sampai Akhir Bulan** (Unrealized Cash In, DP (-), Total, dan Unrealized Omzet) yang menyatu di dalam struk di bawah Estimasi Nett Profit.
 2. Jalankan git commit & push ke `origin main`:
-   `git add foxe_full_state.json index.html assemble_app.py file1.xlsm file2.xlsx file_neraca.xlsx parser_neraca.py deep_sync_foxe.py telegram_notifier.py`
+   `git add foxe_full_state.json index.html assemble_app.py file1.xlsm file2.xlsx file_neraca.xlsx parser_neraca.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md`
    `git commit -m "Auto-sync data update"`
    `git push origin main`
 3. Tampilkan ringkasan metrik pembaruan hari ini dan tautan website live:
@@ -38,3 +39,12 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
 - Fitur Terminal View (Bloomberg/trading terminal) **DILARANG & DIHAPUS PERMANEN** dari repositori Foxe Studio utama.
 - Topbar harus tetap bersih, resmi, dan menyertakan elemen `#tbUpd` dan `#tbLive`.
 - Fungsi `render()` pada JavaScript wajib menyertakan pemeriksaan defensif `if(up)` agar tidak terjadi error `TypeError: null`.
+
+### 4. Format Laporan Telegram (Estimate Omzet Akhir Bulan):
+- Di dalam struk ringkasan harian Telegram (blok `<pre>`), tepat di bawah `ESTIMASI NETT PROFIT` dan sebelum garis penutup `============================================`, wajib menyertakan section **Estimate Omzet Sampai Akhir Bulan** yang menyatu di dalam struk:
+  * `Unrealized Cash In : Rp .....` (Total harga paket sesi booking terdaftar dari H+1 s.d. akhir bulan di File 2 Schedule)
+  * `DP (-)             : Rp .....` (Total DP yang sudah diterima dari booking tersebut)
+  * `Total              : Rp .....` (Sisa uang pelunasan yang riil akan masuk saat foto)
+  * (baris kosong)
+  * `Unrealized Omzet   : Rp .....` (Estimasi omzet akhir bulan = Omzet Realized MTD + Total Pelunasan)
+- Format harus sejajar rata kanan 44 karakter presisi mengikuti lebar struk kasir.

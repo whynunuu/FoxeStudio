@@ -17,13 +17,13 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
 
 ### 2. Auto-Commit & Deploy ke GitHub:
 - Otomatis commit dan push pembaruan data ke repository:
-  `git add foxe_full_state.json index.html assemble_app.py file1.xlsm file2.xlsx file_neraca.xlsx parser_neraca.py deep_sync_foxe.py telegram_notifier.py`
+  `git add foxe_full_state.json index.html assemble_app.py file1.xlsm file2.xlsx file_neraca.xlsx parser_neraca.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md`
   `git commit -m "Auto-sync data update"`
   `git push origin main`
 - Remote URL: `https://github.com/whynunuu/FoxeStudio.git`
 
 ### 3. Berikan Laporan Ringkas, Kirim Telegram & Tautan Live:
-- Kirim notifikasi otomatis laporan harian closing ke Telegram via `@NunuFxBot` (`telegram_notifier.py`) mencakup breakdown Kas/Transfer, Total COGS, OPEX, Estimasi Nett Profit, Leads, Shift Kru, dan Jadwal Foto Besok H+1.
+- Kirim notifikasi otomatis laporan harian closing ke Telegram via `@NunuFxBot` (`telegram_notifier.py`) mencakup breakdown Kas/Transfer, Total COGS, OPEX, Estimasi Nett Profit, **Estimate Omzet Sampai Akhir Bulan (Unrealized Cash In, DP (-), Total, dan Unrealized Omzet)** yang menyatu di dalam struk, Leads, Shift Kru, dan Jadwal Foto Besok H+1.
 - Sajikan tabel ringkasan: Cut-off hari ini, total order MTD, omzet MTD (Cash vs Transfer), omzet hari ini, shift kru, dan capaian target.
 - Sertakan link website resmi live (terproteksi PIN: `202688`):
   👉 **https://whynunuu.github.io/FoxeStudio/**
@@ -40,3 +40,11 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
    - Fitur Terminal View (Bloomberg style/trading) dilarang dimasukkan ke repositori ini. Repositori Foxe Studio murni fokus pada aplikasi manajemen keuangan studio foto.
    - Topbar atas wajib bersih dan mempertahankan tag `#tbUpd` serta `#tbLive`.
    - Fungsi `render()` JavaScript wajib menyertakan guard `if(up)`.
+3. **Format Struk Telegram (Estimate Omzet Akhir Bulan):**
+   - Di dalam struk ringkasan harian Telegram (blok `<pre>`), tepat di bawah `ESTIMASI NETT PROFIT` dan sebelum garis penutup `============================================`, wajib menyertakan section **Estimate Omzet Sampai Akhir Bulan** yang menyatu di dalam struk:
+     * `Unrealized Cash In : Rp .....` (Total harga paket sesi booking terdaftar dari H+1 s.d. akhir bulan di File 2 Schedule)
+     * `DP (-)             : Rp .....` (Total DP yang sudah diterima dari booking tersebut)
+     * `Total              : Rp .....` (Sisa uang pelunasan yang riil akan masuk saat foto)
+     * (baris kosong)
+     * `Unrealized Omzet   : Rp .....` (Estimasi omzet akhir bulan = Omzet Realized MTD + Total Pelunasan)
+   - Format wajib rata kanan presisi 44 karakter mengikuti format struk.
