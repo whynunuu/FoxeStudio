@@ -5752,9 +5752,9 @@
       "client": "Vivi",
       "paket": "Large Group",
       "tanggalFoto": "19 sept",
-      "cash": 5000.0,
+      "cash": 375000.0,
       "transfer": 170000.0,
-      "total": 175000.0,
+      "total": 545000.0,
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -6391,6 +6391,54 @@
       "cash": 270000.0,
       "transfer": 0.0,
       "total": 270000.0,
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_532",
+      "tanggal": "2026-09-22",
+      "client": "Muti",
+      "paket": "Large Group",
+      "tanggalFoto": "22 sept",
+      "cash": 0.0,
+      "transfer": 500000.0,
+      "total": 500000.0,
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_533",
+      "tanggal": "2026-09-22",
+      "client": "Adioni",
+      "paket": "Graduation Premium",
+      "tanggalFoto": "22 sept",
+      "cash": 0.0,
+      "transfer": 420000.0,
+      "total": 420000.0,
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_534",
+      "tanggal": "2026-09-22",
+      "client": "Yunita",
+      "paket": "Large Group",
+      "tanggalFoto": "22 sept",
+      "cash": 0.0,
+      "transfer": 150000.0,
+      "total": 150000.0,
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_535",
+      "tanggal": "2026-09-22",
+      "client": "Dedik Purwanto",
+      "paket": "Family A",
+      "tanggalFoto": "22 sept",
+      "cash": 350000.0,
+      "transfer": 0.0,
+      "total": 350000.0,
       "admin": "AMEL",
       "fotografer": "ADIF"
     }
@@ -7471,7 +7519,7 @@
     {
       "id": "cc_2026-09-19",
       "tanggal": "2026-09-19",
-      "nilai": 2040000.0
+      "nilai": 2410000.0
     },
     {
       "id": "cc_2026-09-20",
@@ -7486,7 +7534,7 @@
     {
       "id": "cc_2026-09-22",
       "tanggal": "2026-09-22",
-      "nilai": 2490000.0
+      "nilai": 2840000.0
     },
     {
       "id": "cc_2026-09-23",
@@ -7701,10 +7749,10 @@
     {
       "id": "ld_22",
       "tanggal": "2026-09-22",
-      "leads": 0.0,
+      "leads": 34.0,
       "dp": 5.0,
-      "sesiFoto": 18.0,
-      "transaksi": 23.0
+      "sesiFoto": 22.0,
+      "transaksi": 27.0
     },
     {
       "id": "ld_23",
@@ -9959,6 +10007,21 @@
       {
         "id": "sc_bk_143",
         "tgl": "2026-09-22",
+        "waktu": "20:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Dedik Purwanto",
+        "paket": "Family A",
+        "paketRaw": "Family A",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "AL",
+        "noHp": "",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_144",
+        "tgl": "2026-09-22",
         "waktu": "",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -9972,7 +10035,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_144",
+        "id": "sc_bk_145",
         "tgl": "2026-09-22",
         "waktu": "13:00",
         "studio": "Studio 2",
@@ -9987,7 +10050,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_145",
+        "id": "sc_bk_146",
         "tgl": "2026-09-22",
         "waktu": "13:20",
         "studio": "Studio 2",
@@ -10002,7 +10065,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_146",
+        "id": "sc_bk_147",
         "tgl": "2026-09-22",
         "waktu": "13:40",
         "studio": "Studio 2",
@@ -10017,7 +10080,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_147",
+        "id": "sc_bk_148",
         "tgl": "2026-09-22",
         "waktu": "14:00",
         "studio": "Studio 2",
@@ -10032,7 +10095,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_148",
+        "id": "sc_bk_149",
         "tgl": "2026-09-22",
         "waktu": "14:20",
         "studio": "Studio 2",
@@ -10047,7 +10110,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_149",
+        "id": "sc_bk_150",
         "tgl": "2026-09-22",
         "waktu": "14:40",
         "studio": "Studio 2",
@@ -10062,7 +10125,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_150",
+        "id": "sc_bk_151",
         "tgl": "2026-09-22",
         "waktu": "15:40",
         "studio": "Studio 2",
@@ -10077,7 +10140,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_151",
+        "id": "sc_bk_152",
         "tgl": "2026-09-22",
         "waktu": "16:00",
         "studio": "Studio 2",
@@ -10092,7 +10155,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_152",
+        "id": "sc_bk_153",
         "tgl": "2026-09-23",
         "waktu": "18:00",
         "studio": "Studio 1",
@@ -10107,7 +10170,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_153",
+        "id": "sc_bk_154",
         "tgl": "2026-09-23",
         "waktu": "19:00",
         "studio": "Studio 1",
@@ -10122,7 +10185,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_154",
+        "id": "sc_bk_155",
         "tgl": "2026-09-23",
         "waktu": "19:40",
         "studio": "Studio 1",
@@ -10137,7 +10200,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_155",
+        "id": "sc_bk_156",
         "tgl": "2026-09-25",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -10152,7 +10215,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_156",
+        "id": "sc_bk_157",
         "tgl": "2026-09-25",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -10167,7 +10230,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_157",
+        "id": "sc_bk_158",
         "tgl": "2026-09-25",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -10182,7 +10245,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_158",
+        "id": "sc_bk_159",
         "tgl": "2026-09-26",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -10197,7 +10260,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_159",
+        "id": "sc_bk_160",
         "tgl": "2026-09-26",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -10212,7 +10275,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_160",
+        "id": "sc_bk_161",
         "tgl": "2026-09-26",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -10227,7 +10290,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_161",
+        "id": "sc_bk_162",
         "tgl": "2026-09-26",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -10242,7 +10305,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_162",
+        "id": "sc_bk_163",
         "tgl": "2026-09-26",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -10257,7 +10320,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_163",
+        "id": "sc_bk_164",
         "tgl": "2026-09-27",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -10272,7 +10335,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_164",
+        "id": "sc_bk_165",
         "tgl": "2026-09-27",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -10287,7 +10350,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_165",
+        "id": "sc_bk_166",
         "tgl": "2026-09-27",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -10745,6 +10808,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260922-1413",
+      "mulai": "2026-09-22T14:13:59.447574+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 535 order, 166 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260922-1727",
       "mulai": "2026-09-22T10:27:02.335996+00:00",
       "status": "sukses",
@@ -10947,7 +11016,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-22T10:27:02.335996+00:00"
+    "last_sync": "2026-09-22T14:13:59.447574+00:00"
   },
   "neracaDetail": [
     {
