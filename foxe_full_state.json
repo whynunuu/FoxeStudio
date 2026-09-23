@@ -1,7 +1,7 @@
 {
   "config": {
     "bulan": "2026-09",
-    "cutoff": "2026-09-22",
+    "cutoff": "2026-09-23",
     "status": "Progressive",
     "targets": [
       {
@@ -6441,6 +6441,42 @@
       "total": 350000.0,
       "admin": "AMEL",
       "fotografer": "ADIF"
+    },
+    {
+      "id": "or_536",
+      "tanggal": "2026-09-23",
+      "client": "Nashita cahyaningrum",
+      "paket": "Large Group",
+      "tanggalFoto": "24 sept",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_537",
+      "tanggal": "2026-09-23",
+      "client": "Mayliza",
+      "paket": "Large Group",
+      "tanggalFoto": "24 sept",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_538",
+      "tanggal": "2026-09-23",
+      "client": "Pass photo",
+      "paket": "Pas Foto",
+      "tanggalFoto": "26 sept",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -7770,9 +7806,9 @@
       "id": "ld_23",
       "tanggal": "2026-09-23",
       "leads": 0.0,
-      "dp": 0.0,
-      "sesiFoto": 0.0,
-      "transaksi": 0.0
+      "dp": 2.0,
+      "sesiFoto": 1.0,
+      "transaksi": 3.0
     },
     {
       "id": "ld_24",
@@ -10169,6 +10205,21 @@
       {
         "id": "sc_bk_153",
         "tgl": "2026-09-23",
+        "waktu": "17:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Tiara",
+        "paket": "Large Group",
+        "paketRaw": "LG 16",
+        "jmlOrang": 16,
+        "harga": 400000.0,
+        "admin": "AL",
+        "noHp": "",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_154",
+        "tgl": "2026-09-23",
         "waktu": "18:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -10182,7 +10233,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_154",
+        "id": "sc_bk_155",
         "tgl": "2026-09-23",
         "waktu": "19:00",
         "studio": "Studio 1",
@@ -10197,7 +10248,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_155",
+        "id": "sc_bk_156",
         "tgl": "2026-09-23",
         "waktu": "19:40",
         "studio": "Studio 1",
@@ -10212,7 +10263,37 @@
         "manual": false
       },
       {
-        "id": "sc_bk_156",
+        "id": "sc_bk_157",
+        "tgl": "2026-09-24",
+        "waktu": "15:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Mayliza",
+        "paket": "Large Group",
+        "paketRaw": "LG 8",
+        "jmlOrang": 8,
+        "harga": 200000.0,
+        "admin": "AL",
+        "noHp": "dp 100",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_158",
+        "tgl": "2026-09-24",
+        "waktu": "18:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Nashita cahyaningrum",
+        "paket": "Large Group",
+        "paketRaw": "LG 20",
+        "jmlOrang": 20,
+        "harga": 500000.0,
+        "admin": "AL",
+        "noHp": "dp 100",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_159",
         "tgl": "2026-09-25",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -10227,7 +10308,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_157",
+        "id": "sc_bk_160",
         "tgl": "2026-09-25",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -10242,7 +10323,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_158",
+        "id": "sc_bk_161",
         "tgl": "2026-09-25",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -10257,7 +10338,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_159",
+        "id": "sc_bk_162",
         "tgl": "2026-09-26",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -10272,7 +10353,22 @@
         "manual": false
       },
       {
-        "id": "sc_bk_160",
+        "id": "sc_bk_163",
+        "tgl": "2026-09-26",
+        "waktu": "12:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Ema Rosiani",
+        "paket": "Pas Foto",
+        "paketRaw": "Pass photo",
+        "jmlOrang": 1,
+        "harga": 50000.0,
+        "admin": "AL",
+        "noHp": "lunas",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_164",
         "tgl": "2026-09-26",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -10287,7 +10383,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_161",
+        "id": "sc_bk_165",
         "tgl": "2026-09-26",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -10302,7 +10398,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_162",
+        "id": "sc_bk_166",
         "tgl": "2026-09-26",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -10317,7 +10413,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_163",
+        "id": "sc_bk_167",
         "tgl": "2026-09-26",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -10332,7 +10428,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_164",
+        "id": "sc_bk_168",
         "tgl": "2026-09-27",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -10347,7 +10443,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_165",
+        "id": "sc_bk_169",
         "tgl": "2026-09-27",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -10362,7 +10458,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_166",
+        "id": "sc_bk_170",
         "tgl": "2026-09-27",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -10820,10 +10916,10 @@
   ],
   "sync": [
     {
-      "id": "sy_20260923-0211",
-      "mulai": "2026-09-23T02:11:48.482324+00:00",
+      "id": "sy_20260923-1103",
+      "mulai": "2026-09-23T04:03:04.976237+00:00",
       "status": "sukses",
-      "ringkas": "Integrasi berhasil: 535 order, 166 jadwal, 3 pos pengeluaran Neraca."
+      "ringkas": "Integrasi berhasil: 538 order, 170 jadwal, 3 pos pengeluaran Neraca."
     },
     {
       "id": "sy_20260922-2242",
@@ -11034,7 +11130,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-23T02:11:48.482324+00:00"
+    "last_sync": "2026-09-23T04:03:04.976237+00:00"
   },
   "neracaDetail": [
     {
