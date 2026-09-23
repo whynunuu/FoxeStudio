@@ -6971,6 +6971,18 @@
       "tanggal": "2026-09-22",
       "nama": "ADIF",
       "slot": 1
+    },
+    {
+      "id": "sh_89",
+      "tanggal": "2026-09-23",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_90",
+      "tanggal": "2026-09-23",
+      "nama": "ADIF",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -10808,6 +10820,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260923-0211",
+      "mulai": "2026-09-23T02:11:48.482324+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 535 order, 166 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260922-2242",
       "mulai": "2026-09-22T15:42:02.681291+00:00",
       "status": "sukses",
@@ -11016,7 +11034,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-22T15:42:02.681291+00:00"
+    "last_sync": "2026-09-23T02:11:48.482324+00:00"
   },
   "neracaDetail": [
     {
