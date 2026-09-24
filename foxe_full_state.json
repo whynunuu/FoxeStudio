@@ -6633,6 +6633,90 @@
       "total": 100000.0,
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_552",
+      "tanggal": "2026-09-24",
+      "client": "Mayliza",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-09-24",
+      "cash": 100000.0,
+      "transfer": 0.0,
+      "total": 100000.0,
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_553",
+      "tanggal": "2026-09-24",
+      "client": "Renaldy",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_554",
+      "tanggal": "2026-09-24",
+      "client": "Amel",
+      "paket": "Family A",
+      "tanggalFoto": "2026-09-24",
+      "cash": 0.0,
+      "transfer": 350000.0,
+      "total": 350000.0,
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_555",
+      "tanggal": "2026-09-24",
+      "client": "Fadil",
+      "paket": "Single",
+      "tanggalFoto": "2026-09-24",
+      "cash": 150000.0,
+      "transfer": 0.0,
+      "total": 150000.0,
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_556",
+      "tanggal": "2026-09-24",
+      "client": "Sulaiman",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-09-24",
+      "cash": 0.0,
+      "transfer": 200000.0,
+      "total": 200000.0,
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_557",
+      "tanggal": "2026-09-24",
+      "client": "Fina",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-17",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_558",
+      "tanggal": "2026-09-24",
+      "client": "Decky",
+      "paket": "Add Frame",
+      "tanggalFoto": "2026-09-08",
+      "cash": 0.0,
+      "transfer": 250000.0,
+      "total": 250000.0,
+      "admin": "INDAH",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -7784,7 +7868,7 @@
     {
       "id": "cc_2026-09-24",
       "tanggal": "2026-09-24",
-      "nilai": 0.0
+      "nilai": 250000.0
     },
     {
       "id": "cc_2026-09-25",
@@ -8005,10 +8089,10 @@
     {
       "id": "ld_24",
       "tanggal": "2026-09-24",
-      "leads": 0.0,
-      "dp": 3.0,
-      "sesiFoto": 0.0,
-      "transaksi": 3.0
+      "leads": 29.0,
+      "dp": 5.0,
+      "sesiFoto": 5.0,
+      "transaksi": 10.0
     },
     {
       "id": "ld_25",
@@ -10457,7 +10541,7 @@
       {
         "id": "sc_bk_157",
         "tgl": "2026-09-24",
-        "waktu": "18:40",
+        "waktu": "19:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "Sulaiman",
@@ -10486,6 +10570,21 @@
       },
       {
         "id": "sc_bk_159",
+        "tgl": "2026-09-24",
+        "waktu": "20:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Rio",
+        "paket": "Single",
+        "paketRaw": "Single",
+        "jmlOrang": 1,
+        "harga": 100000.0,
+        "admin": "IN",
+        "noHp": "",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_160",
         "tgl": "2026-09-25",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -10496,11 +10595,11 @@
         "jmlOrang": 1,
         "harga": 350000.0,
         "admin": "IN",
-        "noHp": "",
+        "noHp": "dp 100 concrete",
         "manual": false
       },
       {
-        "id": "sc_bk_160",
+        "id": "sc_bk_161",
         "tgl": "2026-09-25",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -10512,21 +10611,6 @@
         "harga": 200000.0,
         "admin": "AL",
         "noHp": "dp 100",
-        "manual": false
-      },
-      {
-        "id": "sc_bk_161",
-        "tgl": "2026-09-25",
-        "waktu": "16:00",
-        "studio": "Studio 1",
-        "studioNama": "Studio 1",
-        "nama": "Kaliori",
-        "paket": "Large Group",
-        "paketRaw": "LG 10",
-        "jmlOrang": 10,
-        "harga": 250000.0,
-        "admin": "IN",
-        "noHp": "dp 100 concrete",
         "manual": false
       },
       {
@@ -10546,6 +10630,21 @@
       },
       {
         "id": "sc_bk_163",
+        "tgl": "2026-09-25",
+        "waktu": "17:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Kaliori",
+        "paket": "Large Group",
+        "paketRaw": "LG 10",
+        "jmlOrang": 10,
+        "harga": 250000.0,
+        "admin": "IN",
+        "noHp": "dp 100 concrete",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_164",
         "tgl": "2026-09-26",
         "waktu": "09:30",
         "studio": "Studio 1",
@@ -10560,7 +10659,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_164",
+        "id": "sc_bk_165",
         "tgl": "2026-09-26",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -10575,7 +10674,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_165",
+        "id": "sc_bk_166",
         "tgl": "2026-09-26",
         "waktu": "12:00",
         "studio": "Studio 1",
@@ -10590,7 +10689,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_166",
+        "id": "sc_bk_167",
         "tgl": "2026-09-26",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -10605,7 +10704,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_167",
+        "id": "sc_bk_168",
         "tgl": "2026-09-26",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -10620,7 +10719,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_168",
+        "id": "sc_bk_169",
         "tgl": "2026-09-26",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -10635,7 +10734,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_169",
+        "id": "sc_bk_170",
         "tgl": "2026-09-26",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -10650,7 +10749,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_170",
+        "id": "sc_bk_171",
         "tgl": "2026-09-27",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -10665,7 +10764,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_171",
+        "id": "sc_bk_172",
         "tgl": "2026-09-27",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -10680,7 +10779,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_172",
+        "id": "sc_bk_173",
         "tgl": "2026-09-27",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -10695,7 +10794,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_173",
+        "id": "sc_bk_174",
         "tgl": "2026-09-27",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -10707,21 +10806,6 @@
         "harga": 600000.0,
         "admin": "AL",
         "noHp": "dp 100",
-        "manual": false
-      },
-      {
-        "id": "sc_bk_174",
-        "tgl": "2026-09-28",
-        "waktu": "13:00",
-        "studio": "Studio 1",
-        "studioNama": "Studio 1",
-        "nama": "ines",
-        "paket": "Graduation",
-        "paketRaw": "Graduation",
-        "jmlOrang": 1,
-        "harga": 350000.0,
-        "admin": "IN",
-        "noHp": "limbo",
         "manual": false
       },
       {
@@ -11198,6 +11282,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260924-1414",
+      "mulai": "2026-09-24T14:14:22.094754+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 558 order, 176 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260924-0809",
       "mulai": "2026-09-24T08:09:50.969837+00:00",
       "status": "sukses",
@@ -11430,7 +11520,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-24T08:09:50.969837+00:00"
+    "last_sync": "2026-09-24T14:14:22.094754+00:00"
   },
   "neracaDetail": [
     {
