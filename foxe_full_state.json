@@ -6585,6 +6585,18 @@
       "total": 100000.0,
       "admin": "INDAH",
       "fotografer": ""
+    },
+    {
+      "id": "or_548",
+      "tanggal": "2026-09-23",
+      "client": "Tiara",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-09-23",
+      "cash": 325000.0,
+      "transfer": 0.0,
+      "total": 325000.0,
+      "admin": "INDAH",
+      "fotografer": "SAKA"
     }
   ],
   "shifts": [
@@ -7707,7 +7719,7 @@
     {
       "id": "cc_2026-09-23",
       "tanggal": "2026-09-23",
-      "nilai": 0.0
+      "nilai": 325000.0
     },
     {
       "id": "cc_2026-09-24",
@@ -7925,10 +7937,10 @@
     {
       "id": "ld_23",
       "tanggal": "2026-09-23",
-      "leads": 0.0,
+      "leads": 41.0,
       "dp": 8.0,
-      "sesiFoto": 4.0,
-      "transaksi": 12.0
+      "sesiFoto": 5.0,
+      "transaksi": 13.0
     },
     {
       "id": "ld_24",
@@ -11096,6 +11108,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260924-0211",
+      "mulai": "2026-09-24T02:11:35.091956+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 548 order, 174 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260923-1414",
       "mulai": "2026-09-23T14:14:02.865494+00:00",
       "status": "sukses",
@@ -11316,7 +11334,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-23T14:14:02.865494+00:00"
+    "last_sync": "2026-09-24T02:11:35.091956+00:00"
   },
   "neracaDetail": [
     {
