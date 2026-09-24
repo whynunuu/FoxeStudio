@@ -1,7 +1,7 @@
 {
   "config": {
     "bulan": "2026-09",
-    "cutoff": "2026-09-23",
+    "cutoff": "2026-09-24",
     "status": "Progressive",
     "targets": [
       {
@@ -6597,6 +6597,42 @@
       "total": 325000.0,
       "admin": "INDAH",
       "fotografer": "SAKA"
+    },
+    {
+      "id": "or_549",
+      "tanggal": "2026-09-24",
+      "client": "Sembilan E",
+      "paket": "Large Group",
+      "tanggalFoto": "27 sept",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_550",
+      "tanggal": "2026-09-24",
+      "client": "Bela Amarwati",
+      "paket": "Graduation",
+      "tanggalFoto": "30 sept",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_551",
+      "tanggal": "2026-09-24",
+      "client": "Rio Furqon",
+      "paket": "Graduation",
+      "tanggalFoto": "4 okt",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -7149,6 +7185,30 @@
     {
       "id": "sh_92",
       "tanggal": "2026-09-23",
+      "nama": "SAKA",
+      "slot": 1
+    },
+    {
+      "id": "sh_93",
+      "tanggal": "2026-09-24",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_94",
+      "tanggal": "2026-09-24",
+      "nama": "INDAH",
+      "slot": 1
+    },
+    {
+      "id": "sh_95",
+      "tanggal": "2026-09-24",
+      "nama": "SAKA",
+      "slot": 1
+    },
+    {
+      "id": "sh_96",
+      "tanggal": "2026-09-24",
       "nama": "SAKA",
       "slot": 1
     }
@@ -7946,9 +8006,9 @@
       "id": "ld_24",
       "tanggal": "2026-09-24",
       "leads": 0.0,
-      "dp": 0.0,
+      "dp": 3.0,
       "sesiFoto": 0.0,
-      "transaksi": 0.0
+      "transaksi": 3.0
     },
     {
       "id": "ld_25",
@@ -9316,21 +9376,6 @@
       },
       {
         "id": "sc_bk_85",
-        "tgl": "2026-09-15",
-        "waktu": "20:00",
-        "studio": "Studio 1",
-        "studioNama": "Studio 1",
-        "nama": "Dela",
-        "paket": "Large Group",
-        "paketRaw": "LG 11",
-        "jmlOrang": 11,
-        "harga": 275000.0,
-        "admin": "IN",
-        "noHp": "dp 100",
-        "manual": false
-      },
-      {
-        "id": "sc_bk_86",
         "tgl": "2026-09-16",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -9345,7 +9390,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_87",
+        "id": "sc_bk_86",
         "tgl": "2026-09-16",
         "waktu": "17:40",
         "studio": "Studio 1",
@@ -9360,7 +9405,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_88",
+        "id": "sc_bk_87",
         "tgl": "2026-09-16",
         "waktu": "18:20",
         "studio": "Studio 1",
@@ -9375,7 +9420,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_89",
+        "id": "sc_bk_88",
         "tgl": "2026-09-16",
         "waktu": "19:00",
         "studio": "Studio 1",
@@ -9390,7 +9435,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_90",
+        "id": "sc_bk_89",
         "tgl": "2026-09-16",
         "waktu": "20:00",
         "studio": "Studio 1",
@@ -9405,7 +9450,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_91",
+        "id": "sc_bk_90",
         "tgl": "2026-09-17",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -9420,7 +9465,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_92",
+        "id": "sc_bk_91",
         "tgl": "2026-09-17",
         "waktu": "19:00",
         "studio": "Studio 1",
@@ -9435,7 +9480,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_93",
+        "id": "sc_bk_92",
         "tgl": "2026-09-17",
         "waktu": "20:00",
         "studio": "Studio 1",
@@ -9450,7 +9495,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_94",
+        "id": "sc_bk_93",
         "tgl": "2026-09-18",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -9465,7 +9510,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_95",
+        "id": "sc_bk_94",
         "tgl": "2026-09-18",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -9480,7 +9525,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_96",
+        "id": "sc_bk_95",
         "tgl": "2026-09-18",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -9495,7 +9540,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_97",
+        "id": "sc_bk_96",
         "tgl": "2026-09-18",
         "waktu": "17:00",
         "studio": "Studio 1",
@@ -9510,7 +9555,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_98",
+        "id": "sc_bk_97",
         "tgl": "2026-09-18",
         "waktu": "17:40",
         "studio": "Studio 1",
@@ -9525,7 +9570,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_99",
+        "id": "sc_bk_98",
         "tgl": "2026-09-18",
         "waktu": "18:20",
         "studio": "Studio 1",
@@ -9540,7 +9585,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_100",
+        "id": "sc_bk_99",
         "tgl": "2026-09-18",
         "waktu": "19:00",
         "studio": "Studio 1",
@@ -9555,7 +9600,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_101",
+        "id": "sc_bk_100",
         "tgl": "2026-09-18",
         "waktu": "19:40",
         "studio": "Studio 1",
@@ -9570,7 +9615,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_102",
+        "id": "sc_bk_101",
         "tgl": "2026-09-19",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -9585,7 +9630,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_103",
+        "id": "sc_bk_102",
         "tgl": "2026-09-19",
         "waktu": "11:30",
         "studio": "Studio 1",
@@ -9600,7 +9645,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_104",
+        "id": "sc_bk_103",
         "tgl": "2026-09-19",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -9615,7 +9660,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_105",
+        "id": "sc_bk_104",
         "tgl": "2026-09-19",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -9630,7 +9675,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_106",
+        "id": "sc_bk_105",
         "tgl": "2026-09-19",
         "waktu": "14:40",
         "studio": "Studio 1",
@@ -9645,7 +9690,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_107",
+        "id": "sc_bk_106",
         "tgl": "2026-09-19",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -9660,7 +9705,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_108",
+        "id": "sc_bk_107",
         "tgl": "2026-09-19",
         "waktu": "15:20",
         "studio": "Studio 1",
@@ -9675,7 +9720,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_109",
+        "id": "sc_bk_108",
         "tgl": "2026-09-19",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -9690,7 +9735,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_110",
+        "id": "sc_bk_109",
         "tgl": "2026-09-19",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -9705,7 +9750,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_111",
+        "id": "sc_bk_110",
         "tgl": "2026-09-19",
         "waktu": "19:40",
         "studio": "Studio 1",
@@ -9720,7 +9765,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_112",
+        "id": "sc_bk_111",
         "tgl": "2026-09-19",
         "waktu": "20:00",
         "studio": "Studio 1",
@@ -9735,7 +9780,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_113",
+        "id": "sc_bk_112",
         "tgl": "2026-09-19",
         "waktu": "",
         "studio": "Studio 1",
@@ -9750,7 +9795,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_114",
+        "id": "sc_bk_113",
         "tgl": "2026-09-19",
         "waktu": "13:20",
         "studio": "Studio 2",
@@ -9765,7 +9810,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_115",
+        "id": "sc_bk_114",
         "tgl": "2026-09-19",
         "waktu": "14:40",
         "studio": "Studio 2",
@@ -9780,7 +9825,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_116",
+        "id": "sc_bk_115",
         "tgl": "2026-09-19",
         "waktu": "15:00",
         "studio": "Studio 2",
@@ -9795,7 +9840,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_117",
+        "id": "sc_bk_116",
         "tgl": "2026-09-20",
         "waktu": "12:00",
         "studio": "Studio 1",
@@ -9810,7 +9855,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_118",
+        "id": "sc_bk_117",
         "tgl": "2026-09-20",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -9825,7 +9870,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_119",
+        "id": "sc_bk_118",
         "tgl": "2026-09-20",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -9840,7 +9885,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_120",
+        "id": "sc_bk_119",
         "tgl": "2026-09-20",
         "waktu": "15:40",
         "studio": "Studio 1",
@@ -9855,7 +9900,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_121",
+        "id": "sc_bk_120",
         "tgl": "2026-09-20",
         "waktu": "16:20",
         "studio": "Studio 1",
@@ -9870,7 +9915,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_122",
+        "id": "sc_bk_121",
         "tgl": "2026-09-20",
         "waktu": "17:00",
         "studio": "Studio 1",
@@ -9885,7 +9930,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_123",
+        "id": "sc_bk_122",
         "tgl": "2026-09-20",
         "waktu": "17:40",
         "studio": "Studio 1",
@@ -9900,7 +9945,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_124",
+        "id": "sc_bk_123",
         "tgl": "2026-09-20",
         "waktu": "18:20",
         "studio": "Studio 1",
@@ -9915,7 +9960,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_125",
+        "id": "sc_bk_124",
         "tgl": "2026-09-20",
         "waktu": "19:40",
         "studio": "Studio 1",
@@ -9930,7 +9975,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_126",
+        "id": "sc_bk_125",
         "tgl": "2026-09-20",
         "waktu": "20:20",
         "studio": "Studio 1",
@@ -9945,7 +9990,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_127",
+        "id": "sc_bk_126",
         "tgl": "2026-09-20",
         "waktu": "11:00",
         "studio": "Studio 2",
@@ -9960,7 +10005,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_128",
+        "id": "sc_bk_127",
         "tgl": "2026-09-21",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -9975,7 +10020,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_129",
+        "id": "sc_bk_128",
         "tgl": "2026-09-21",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -9990,7 +10035,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_130",
+        "id": "sc_bk_129",
         "tgl": "2026-09-22",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -10005,7 +10050,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_131",
+        "id": "sc_bk_130",
         "tgl": "2026-09-22",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -10020,7 +10065,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_132",
+        "id": "sc_bk_131",
         "tgl": "2026-09-22",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -10035,7 +10080,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_133",
+        "id": "sc_bk_132",
         "tgl": "2026-09-22",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -10050,7 +10095,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_134",
+        "id": "sc_bk_133",
         "tgl": "2026-09-22",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -10065,7 +10110,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_135",
+        "id": "sc_bk_134",
         "tgl": "2026-09-22",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -10080,7 +10125,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_136",
+        "id": "sc_bk_135",
         "tgl": "2026-09-22",
         "waktu": "14:40",
         "studio": "Studio 1",
@@ -10095,7 +10140,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_137",
+        "id": "sc_bk_136",
         "tgl": "2026-09-22",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -10110,7 +10155,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_138",
+        "id": "sc_bk_137",
         "tgl": "2026-09-22",
         "waktu": "15:40",
         "studio": "Studio 1",
@@ -10125,7 +10170,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_139",
+        "id": "sc_bk_138",
         "tgl": "2026-09-22",
         "waktu": "16:20",
         "studio": "Studio 1",
@@ -10140,7 +10185,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_140",
+        "id": "sc_bk_139",
         "tgl": "2026-09-22",
         "waktu": "17:00",
         "studio": "Studio 1",
@@ -10155,7 +10200,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_141",
+        "id": "sc_bk_140",
         "tgl": "2026-09-22",
         "waktu": "18:40",
         "studio": "Studio 1",
@@ -10170,7 +10215,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_142",
+        "id": "sc_bk_141",
         "tgl": "2026-09-22",
         "waktu": "19:20",
         "studio": "Studio 1",
@@ -10185,7 +10230,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_143",
+        "id": "sc_bk_142",
         "tgl": "2026-09-22",
         "waktu": "20:00",
         "studio": "Studio 1",
@@ -10200,7 +10245,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_144",
+        "id": "sc_bk_143",
         "tgl": "2026-09-22",
         "waktu": "",
         "studio": "Studio 1",
@@ -10215,7 +10260,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_145",
+        "id": "sc_bk_144",
         "tgl": "2026-09-22",
         "waktu": "13:00",
         "studio": "Studio 2",
@@ -10230,7 +10275,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_146",
+        "id": "sc_bk_145",
         "tgl": "2026-09-22",
         "waktu": "13:20",
         "studio": "Studio 2",
@@ -10245,7 +10290,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_147",
+        "id": "sc_bk_146",
         "tgl": "2026-09-22",
         "waktu": "13:40",
         "studio": "Studio 2",
@@ -10260,7 +10305,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_148",
+        "id": "sc_bk_147",
         "tgl": "2026-09-22",
         "waktu": "14:00",
         "studio": "Studio 2",
@@ -10275,7 +10320,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_149",
+        "id": "sc_bk_148",
         "tgl": "2026-09-22",
         "waktu": "14:20",
         "studio": "Studio 2",
@@ -10290,7 +10335,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_150",
+        "id": "sc_bk_149",
         "tgl": "2026-09-22",
         "waktu": "14:40",
         "studio": "Studio 2",
@@ -10305,7 +10350,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_151",
+        "id": "sc_bk_150",
         "tgl": "2026-09-22",
         "waktu": "15:40",
         "studio": "Studio 2",
@@ -10320,7 +10365,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_152",
+        "id": "sc_bk_151",
         "tgl": "2026-09-22",
         "waktu": "16:00",
         "studio": "Studio 2",
@@ -10335,7 +10380,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_153",
+        "id": "sc_bk_152",
         "tgl": "2026-09-23",
         "waktu": "18:00",
         "studio": "Studio 1",
@@ -10350,7 +10395,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_154",
+        "id": "sc_bk_153",
         "tgl": "2026-09-23",
         "waktu": "19:00",
         "studio": "Studio 1",
@@ -10365,7 +10410,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_155",
+        "id": "sc_bk_154",
         "tgl": "2026-09-23",
         "waktu": "19:40",
         "studio": "Studio 1",
@@ -10380,7 +10425,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_156",
+        "id": "sc_bk_155",
         "tgl": "2026-09-23",
         "waktu": "20:20",
         "studio": "Studio 1",
@@ -10395,7 +10440,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_157",
+        "id": "sc_bk_156",
         "tgl": "2026-09-24",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -10410,7 +10455,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_158",
+        "id": "sc_bk_157",
         "tgl": "2026-09-24",
         "waktu": "18:40",
         "studio": "Studio 1",
@@ -10422,6 +10467,21 @@
         "harga": 350000.0,
         "admin": "AL",
         "noHp": "dp 100",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_158",
+        "tgl": "2026-09-24",
+        "waktu": "19:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Dela",
+        "paket": "Large Group",
+        "paketRaw": "LG 11",
+        "jmlOrang": 11,
+        "harga": 275000.0,
+        "admin": "AL",
+        "noHp": "dp 100 limbo",
         "manual": false
       },
       {
@@ -10636,6 +10696,21 @@
       },
       {
         "id": "sc_bk_173",
+        "tgl": "2026-09-27",
+        "waktu": "15:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Sembilan E",
+        "paket": "Large Group",
+        "paketRaw": "LG 24",
+        "jmlOrang": 24,
+        "harga": 600000.0,
+        "admin": "AL",
+        "noHp": "dp 100",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_174",
         "tgl": "2026-09-28",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -10650,7 +10725,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_174",
+        "id": "sc_bk_175",
         "tgl": "2026-09-30",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -10662,6 +10737,21 @@
         "harga": 350000.0,
         "admin": "AL",
         "noHp": "dp 100 calmblue",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_176",
+        "tgl": "2026-09-30",
+        "waktu": "14:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Bela Amarwati",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "AL",
+        "noHp": "dp 100",
         "manual": false
       }
     ]
@@ -11108,6 +11198,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260924-0809",
+      "mulai": "2026-09-24T08:09:50.969837+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 551 order, 176 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260924-0211",
       "mulai": "2026-09-24T02:11:35.091956+00:00",
       "status": "sukses",
@@ -11334,7 +11430,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-24T02:11:35.091956+00:00"
+    "last_sync": "2026-09-24T08:09:50.969837+00:00"
   },
   "neracaDetail": [
     {
