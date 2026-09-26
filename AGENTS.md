@@ -9,7 +9,7 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
    - Simpan `foxe_full_state.json`, rakit `index.html`, dan kirim notifikasi Telegram via `@NunuFxBot`.
    - Di dalam struk laporan Telegram (blok monospace), sertakan kalkulasi **Estimate Omzet Sampai Akhir Bulan** (Unrealized Cash In, DP (-), Total, dan Unrealized Omzet) yang menyatu di dalam struk di bawah Estimasi Nett Profit.
 2. Jalankan git commit & push ke `origin main`:
-   `git add foxe_full_state.json index.html assemble_app.py file1.xlsm file2.xlsx file_neraca.xlsx parser_neraca.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md`
+   `git add foxe_full_state.json index.html assemble_app.py file1.xlsm file2.xlsx file_neraca.xlsx parser_neraca.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
    `git commit -m "Auto-sync data update"`
    `git push origin main`
 3. Tampilkan ringkasan metrik pembaruan hari ini dan tautan website live:
@@ -19,12 +19,24 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
 
 ## Aturan Mutlak Desain & Arsitektur Dashboard:
 
-### 1. Struktur Section Neraca (COGS & OPEX):
+### 1. Section No. 1: Laporan Tahunan & Seasonality Index
+- **Posisi Prioritas #1**: `Laporan Tahunan` berada di urutan teratas pada daftar navigasi Ringkasan dan menjadi tampilan pembuka (**default landing view**) saat website pertama kali dimuat.
+- **ATURAN MUTLAK DATA REAL (Anti-Fabrikasi)**:
+  - Bulan sebelum dan sesudah September 2026 (Januari–Agustus & Oktober–Desember 2026) **WAJIB DIKOSONGKAN (`—`)** dengan status badge `<span class="pill neutral">Belum Dicocokkan</span>`.
+  - Jangan pernah menampilkan angka omzet buatan/proyeksi spekulatif untuk bulan-bulan tersebut karena belum lulus verifikasi pembukuan riil oleh owner.
+  - **Hanya September 2026** yang menampilkan data riil live terverifikasi (`R.omzet`, proyeksi run-rate, indikator live dot berdenyut, dan badge `<span class="pill crit">Berjalan (Terverifikasi)</span>`).
+- **Benchmark Seasonality 12 Bulan**:
+  - Matriks Seasonality Index 12 bulan (Januari s.d. Desember) tetap aktif penuh menggunakan benchmark tahun 2025 (garis tengah 1.00×, Super Peak September 2.10×).
+  - Pada grafik tahunan, batang 2026 HANYA dirender untuk bulan September.
+- **12 Kotak Bulan Interaktif**:
+  - Setiap kotak bulan dapat diklik dan dilengkapi tombol menuju ke section laporan bulanan operasional (`view = "dash"`).
+
+### 2. Struktur Section Neraca (COGS & OPEX):
 - Section COGS dan OPEX digabung menjadi satu section resmi bernama **`Neraca (COGS & OPEX)`**.
 - **Sumber Data Biaya:** Pengeluaran COGS & OPEX murni diambil dari section `Detail` File Neraca (kolom P s.d. U via `parser_neraca.py`). JANGAN mengambil dari File Log Order karena referensinya berbeda.
 - Di bawah rekap COGS & OPEX, wajib menyertakan **Buku Detail Neraca (Debit & Kredit)** yang mencatat mutasi kas masuk, kas keluar, dan saldo berjalan per tanggal transaksi.
 
-### 2. Standar Tampilan Fit-In & Anti-Tabrakan:
+### 3. Standar Tampilan Fit-In & Anti-Tabrakan:
 - **Lebar Kontainer (`.view`):** Gunakan `max-width: 1600px; width: 100%; margin: 0 auto; padding: 28px 32px 80px;`. JANGAN batasi ke 1200px kaku agar tidak muncul ruang hitam kosong di kanan layar.
 - **Format Tabel Biaya 7 Kolom:**
   $$\text{Tgl} \ \mid\ \text{Deskripsi} \ \mid\ \text{Jenis} \ \mid\ \text{Kategori} \ \mid\ \text{Nilai} \ \mid\ \text{Status} \ \mid\ \text{Aksi}$$
@@ -35,12 +47,18 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
 - **Tipografi KPI Adaptif:** Nilai uang besar pada `.stat .v` menggunakan `clamp(20px, 1.9vw, 31px)` dengan `text-overflow: ellipsis` agar tidak meluber keluar kotak kartu.
 - **Wrapping Teks:** Jangan gunakan blanket `white-space: nowrap` pada semua `td`. Izinkan deskripsi membungkus alami (*wrap*), sementara angka `.n`, tanggal `.mono`, dan badge `.pill` tetap *nowrap*.
 
-### 3. Kebijakan Fitur Terminal:
+### 4. Kebijakan Fitur Terminal:
 - Fitur Terminal View (Bloomberg/trading terminal) **DILARANG & DIHAPUS PERMANEN** dari repositori Foxe Studio utama.
-- Topbar harus tetap bersih, resmi, dan menyertakan elemen `#tbUpd` dan `#tbLive`.
+- Topbar harus tetap bersih, resmi, dan menyertakan elemen `#tbUpd`, `#tbLive`, dan tombol update `#btnSyncWeb`.
 - Fungsi `render()` pada JavaScript wajib menyertakan pemeriksaan defensif `if(up)` agar tidak terjadi error `TypeError: null`.
 
-### 4. Format Laporan Telegram (Estimate Omzet Akhir Bulan):
+### 5. Tombol Update Otomatis di Web & GitHub Actions:
+- Topbar aplikasi web dilengkapi tombol **`🔄 Update`** yang bekerja dalam dua mode:
+  1. **Fast Refresh**: Memeriksa `foxe_full_state.json` terbaru di GitHub repository tanpa membebani kuota API.
+  2. **Cloud Sync**: Memanggil GitHub API `workflow_dispatch` untuk memicu `.github/workflows/daily_sync.yml`. Sinkronisasi langsung berjalan di server cloud GitHub Actions tanpa perlu perangkat/laptop owner menyala.
+- **Jadwal Cron Otomatis Cloud**: Workflow berjalan otomatis setiap hari pada pukul **09:00 WIB** (pagi studio buka) dan **21:00 WIB** (malam rekap closing).
+
+### 6. Format Laporan Telegram (Estimate Omzet Akhir Bulan):
 - Di dalam struk ringkasan harian Telegram (blok `<pre>`), tepat di bawah `ESTIMASI NETT PROFIT` dan sebelum garis penutup `============================================`, wajib menyertakan section **Estimate Omzet Sampai Akhir Bulan** yang menyatu di dalam struk:
   * `Unrealized Cash In : Rp .....` (Total harga paket sesi booking terdaftar dari H+1 s.d. akhir bulan di File 2 Schedule)
   * `DP (-)             : Rp .....` (Total DP yang sudah diterima dari booking tersebut)
