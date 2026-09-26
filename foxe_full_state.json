@@ -6945,6 +6945,42 @@
       "total": 100000.0,
       "admin": "INDAH",
       "fotografer": ""
+    },
+    {
+      "id": "or_578",
+      "tanggal": "2026-09-26",
+      "client": "Putri",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-09-29",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_579",
+      "tanggal": "2026-09-26",
+      "client": "Inggar evelyn",
+      "paket": "Family A",
+      "tanggalFoto": "2026-09-26",
+      "cash": 0.0,
+      "transfer": 250000.0,
+      "total": 250000.0,
+      "admin": "INDAH",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_580",
+      "tanggal": "2026-09-26",
+      "client": "Diska",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-09-27",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "INDAH",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -8426,10 +8462,10 @@
     {
       "id": "ld_26",
       "tanggal": "2026-09-26",
-      "leads": 0.0,
-      "dp": 1.0,
-      "sesiFoto": 8.0,
-      "transaksi": 9.0
+      "leads": 18.0,
+      "dp": 3.0,
+      "sesiFoto": 9.0,
+      "transaksi": 12.0
     },
     {
       "id": "ld_27",
@@ -11162,6 +11198,21 @@
       {
         "id": "sc_bk_177",
         "tgl": "2026-09-27",
+        "waktu": "14:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Diska",
+        "paket": "Large Group",
+        "paketRaw": "LG 12",
+        "jmlOrang": 12,
+        "harga": 300000.0,
+        "admin": "IN",
+        "noHp": "dp 100",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_178",
+        "tgl": "2026-09-27",
         "waktu": "15:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -11175,7 +11226,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_178",
+        "id": "sc_bk_179",
         "tgl": "2026-09-27",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -11190,7 +11241,22 @@
         "manual": false
       },
       {
-        "id": "sc_bk_179",
+        "id": "sc_bk_180",
+        "tgl": "2026-09-27",
+        "waktu": "16:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Putri",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "IN",
+        "noHp": "dp 100 calmblue",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_181",
         "tgl": "2026-09-27",
         "waktu": "10:00",
         "studio": "Studio 2",
@@ -11205,7 +11271,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_180",
+        "id": "sc_bk_182",
         "tgl": "2026-09-29",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -11220,7 +11286,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_181",
+        "id": "sc_bk_183",
         "tgl": "2026-09-30",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -11235,7 +11301,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_182",
+        "id": "sc_bk_184",
         "tgl": "2026-09-30",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -11693,6 +11759,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260926-1412",
+      "mulai": "2026-09-26T14:12:46.973964+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 580 order, 184 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260926-1200",
       "mulai": "2026-09-26T12:00:24.516942+00:00",
       "status": "sukses",
@@ -11985,7 +12057,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-26T12:00:24.516942+00:00"
+    "last_sync": "2026-09-26T14:12:46.973964+00:00"
   },
   "neracaDetail": [
     {
