@@ -1,58 +1,49 @@
-# Foxe Studio Keuangan — Security & Secrets Vault
+# Foxe Studio — Vault & Preferensi Integrasi
 
-Dokumen ini adalah brankas referensi resmi (*vault*) untuk arsitektur keamanan, manajemen kredensial, dan tata kelola data sistem keuangan Foxe Studio.
-
----
-
-## 1. Kebijakan Keamanan Kredensial (Zero-Leakage Policy)
-> [!IMPORTANT]
-> Repositori **`whynunuu/FoxeStudio`** bersifat publik untuk melayani GitHub Pages.
-> **DILARANG KERAS** melakukan hardcode token, API key, atau kredensial rahasia apa pun ke dalam file skrip Python publik, HTML, JavaScript, atau commit git.
+Dokumentasi ini menghubungkan workspace Foxe Agent dengan **Obsidian Vault** pribadi pengguna (`C:\Users\ASUS\OneDrive\Documents\Obsidian Vault`).
 
 ---
 
-## 2. Manajemen Kredensial & Secrets
+## 1. Lokasi Dokumen Preferensi di Vault
 
-### A. GitHub Personal Access Token (PAT)
-* **Kegunaan**: Memanggil GitHub REST API endpoint `POST /repos/whynunuu/FoxeStudio/actions/workflows/daily_sync.yml/dispatches` untuk memicu sinkronisasi on-demand dari tombol **`🔄 Update`** di website.
-* **Scope Minimal**: `repo` (atau `workflow`).
-* **Penyimpanan**:
-  * **Hanya di Browser Klien**: Disimpan di `localStorage.getItem("foxe_gh_token")` pada perangkat pemilik yang terautentikasi.
-  * Jika belum ada, sistem menampilkan prompt modal yang aman dan ramah di browser untuk memasukkan token satu kali.
-  * **Tidak Pernah Masuk Repository**: Token tidak pernah dikirim ke backend selain langsung ke API resmi GitHub via koneksi HTTPS terenkripsi.
-
-### B. Notifikasi Telegram (`@NunuFxBot`)
-* **Kegunaan**: Mengirimkan laporan harian closing otomatis, struk POS monospace, rincian omzet, shift kru, dan jadwal foto H+1.
-* **Bot Username**: `@NunuFxBot`
-* **Penyimpanan Cloud**: GitHub Repository Secrets:
-  * `TELEGRAM_BOT_TOKEN`
-  * `TELEGRAM_CHAT_ID`
-* **Penyimpanan Lokal**: `telegram_config.json` pada mesin lokal ASUS.
-
-### C. Google Drive Operational File IDs
-File operasional yang diunduh dan diparsing otomatis oleh `deep_sync_foxe.py`:
-| File | Format | ID Google Drive | Fungsi Utama |
-|---|---|---|---|
-| **File 1 (Log Order)** | `.xlsm` | `1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ` | Log transaksi pembayaran, kas harian, funnel lead, shift slot kru |
-| **File 2 (Schedule)** | `.xlsx` | `14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I` | Jadwal booking studio 1, 2, 3 & deteksi sesi foto H+1 |
-| **File Neraca** | `.xlsx` | `1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM` | Pengeluaran riil COGS & OPEX (sheet September kolom P s.d. U) |
-
-*(Catatan: File 3 / Rekap Global sengaja di-skip sesuai arsitektur resmi).*
+| File Vault | Jalur Dokumen | Deskripsi |
+|---|---|---|
+| **Preferensi Pengguna** | `01 Profile/Preferensi Pengguna.md` | Preferensi kerja otomatis (YOLO), jadwal cron 2x sehari, dan standar format laporan Telegram. |
+| **Workflow Foxe Studio** | `04 Projects/Workflow Foxe Studio.md` | Prosedur pelaporan operasional studio foto, alur trigger otomatis `ayo kerja`, dan jadwal cloud cron. |
+| **Arsitektur Keuangan** | `04 Projects/Foxe Studio - Arsitektur Keuangan & Log Sistem.md` | Standar mutlak COGS/OPEX dari section Detail Neraca, layout responsif 7 kolom, dan sistem serverless GitHub Actions. |
 
 ---
 
-## 3. Autentikasi Portal Website
-* **Master PIN**: `202688`
-* **Mekanisme Kunci**: Keypad interaktif virtual 6-digit dengan fitur *"Ingat perangkat ini (30 hari)"* berbasis `localStorage` key `foxe_auth_pass`.
-* **URL Live**: 👉 **https://whynunuu.github.io/FoxeStudio/**
+## 2. Rincian Konfigurasi Cron & Otomasi
+
+### A. Cloud Cron Serverless (GitHub Actions)
+- **File Workflow**: `.github/workflows/daily_sync.yml`
+- **Jadwal 1 (Pagi Buka Studio)**: `0 2 * * *` UTC = **09:00 WIB**
+- **Jadwal 2 (Malam Closing Studio)**: `0 14 * * *` UTC = **21:00 WIB**
+- **Kredensial**: Menggunakan GitHub Secrets `TELEGRAM_BOT_TOKEN` dan `TELEGRAM_CHAT_ID`.
+- **Aksi Otomatis**: Menjalankan `python deep_sync_foxe.py`, merakit ulang dashboard, mengunggah pembaruan ke GitHub Pages, dan mengirim notifikasi closing ke Telegram via `@NunuFxBot`.
+
+### B. Local Task Scheduler (Windows)
+- **Script Pendaftaran**: `Pasang_Jadwal_Windows_Task.bat`
+- **Nama Task**: `FoxeStudioDailySync`
+- **Jadwal**: Setiap hari pukul 09:00 WIB via `schtasks`.
 
 ---
 
-## 4. Vault Status Rekonsiliasi & Kebenaran Data (Data Truth Status)
-* **Bulan Terverifikasi (Live Verified)**:
-  * **September 2026**: Status `Berjalan (Terverifikasi)`. Mengambil langsung data harian dari Log Order transaksi, perhitungan shift kru, dan neraca biaya resmi.
-* **Bulan Unverified (Pending Verification)**:
-  * **Januari – Agustus 2026 & Oktober – Desember 2026**: Status `Belum Dicocokkan`.
-  * **Aturan Mutlak**: Seluruh angka omzet 2026 untuk bulan-bulan ini **wajib dikosongkan (`—`)** di dashboard maupun tabel komparasi sampai proses audit pencocokan data riil diselesaikan oleh owner.
-* **Benchmark Musiman (Seasonality Index)**:
-  * Menggunakan acuan siklus tahunan studio tahun 2025 dengan rata-rata 1.00× (Super Peak September 2.10×).
+## 3. Format Struk Monospace Telegram (Estimate Omzet Akhir Bulan)
+
+Di dalam struk laporan harian closing Telegram (blok `<pre>`), tepat di bawah `ESTIMASI NETT PROFIT` dan sebelum garis penutup `============================================`, wajib disematkan:
+```text
+--------------------------------------------
+Unrealized Cash In             Rp  4.300.000
+DP (-)                         Rp  1.300.000
+Total                          Rp  3.000.000
+
+Unrealized Omzet               Rp 104.625.000
+============================================
+```
+- **Unrealized Cash In**: Total nilai paket seluruh sesi booking terdaftar dari H+1 s.d. akhir bulan di `File 2 (Schedule)`.
+- **DP (-)**: Total uang muka yang sudah diterima dari booking tersebut.
+- **Total**: Sisa kas/pelunasan riil yang akan masuk saat klien datang foto.
+- **Unrealized Omzet**: Estimasi total omzet akhir bulan (Omzet Realized MTD + Total Pelunasan).
+- Seluruh teks diformat rata kanan sejajar 44 karakter presisi mengikuti lebar struk.
