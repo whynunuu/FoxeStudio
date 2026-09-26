@@ -646,7 +646,7 @@ function saveLocal() {
   }
 }
 
-let db=null,downloads=null,room=null,view="dash";
+let db=null,downloads=null,room=null,view="tahunan";
 
 function nkey(s){
   return String(s||"").normalize("NFKD").replace(/[̀-ͯ]/g,"")
@@ -1203,8 +1203,8 @@ function barlist(items,colorVar,valFmt){
 
 /* ============================ views ============================ */
 const VIEWS=[
-  {id:"dash",grp:"Ringkasan",label:"Dashboard"},
   {id:"tahunan",grp:"Ringkasan",label:"Laporan Tahunan"},
+  {id:"dash",grp:"Ringkasan",label:"Dashboard (Bulanan)"},
   {id:"omzet",grp:"Ringkasan",label:"Omzet Harian"},
   {id:"target",grp:"Ringkasan",label:"Target & Skenario"},
   {id:"est",grp:"Ringkasan",label:"Estimasi Omzet"},
@@ -1414,30 +1414,27 @@ function chartTahunanSeasonality(months, yr, avg25) {
   // Baseline 1.00x horizontal dashed line
   const yAvg = yy(avg25);
   g += `<line x1="${PL}" y1="${yAvg.toFixed(1)}" x2="${W - PR}" y2="${yAvg.toFixed(1)}" stroke="var(--warn)" stroke-dasharray="3 3" stroke-width="1.2"/>
-  <text x="${W - PR + 6}" y="${(yAvg + 3.5).toFixed(1)}" font-size="9" font-family="JetBrains Mono,monospace" fill="var(--warn)">1.00× (Rata-rata)</text>`;
+  <text x="${W - PR + 6}" y="${(yAvg + 3.5).toFixed(1)}" font-size="9" font-family="JetBrains Mono,monospace" fill="var(--warn)">1.00× (Rata-rata Musiman)</text>`;
 
   // Bars and points
   let bars = "", curvePoints = [];
   months.forEach((m, i) => {
     const cx = PL + step * i + step / 2;
-    // Bar 2025
+    // Bar 2025 (Acuan Seasonality)
     if (m.omzet25 > 0) {
       const h = (m.omzet25 / maxO) * ih;
       bars += `<rect x="${(cx - bw - 1).toFixed(1)}" y="${yy(m.omzet25).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="var(--hairline-strong)"/>`;
     }
-    // Bar 2026
-    const val26 = m.proyeksi26;
-    if (val26 > 0) {
-      const h = (val26 / maxO) * ih;
-      const isCur = m.isCurrent;
-      const isFut = m.isFuture;
-      bars += `<rect x="${(cx + 1).toFixed(1)}" y="${yy(val26).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="var(--accent)"${isCur ? ' stroke="var(--accent-ink)" stroke-width="1.5"' : (isFut ? ' opacity=".55" stroke-dasharray="2 2"' : '')}/>`;
+    // Bar 2026: HANYA dirender jika terverifikasi (September 2026)
+    if (m.isCurrent && m.proyeksi26 > 0) {
+      const h = (m.proyeksi26 / maxO) * ih;
+      bars += `<rect x="${(cx + 1).toFixed(1)}" y="${yy(m.proyeksi26).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="var(--accent)" stroke="var(--accent-ink)" stroke-width="1.5"/>`;
     }
 
     // X Axis Month Label
     bars += `<text x="${cx.toFixed(1)}" y="${H2 - PB + 14}" text-anchor="middle" font-size="10" font-family="JetBrains Mono,monospace" font-weight="${m.isCurrent ? '700' : '500'}" fill="${m.isCurrent ? 'var(--accent)' : 'var(--muted)'}">${m.short}</text>`;
 
-    // Seasonality Index Dot
+    // Seasonality Index Dot (berdasarkan acuan musiman)
     const dotY = yy(m.omzet25);
     curvePoints.push({ x: cx, y: dotY, sIndex: m.sIndex, pill: m.seasonPill });
   });
@@ -1452,8 +1449,8 @@ function chartTahunanSeasonality(months, yr, avg25) {
 
   return `
   <div class="legend">
-    <span><i class="swatch" style="background:var(--hairline-strong)"></i>${yr-1} Aktual</span>
-    <span><i class="swatch" style="background:var(--accent)"></i>${yr} Realisasi &amp; Proyeksi</span>
+    <span><i class="swatch" style="background:var(--hairline-strong)"></i>${yr-1} Benchmark Musiman</span>
+    <span><i class="swatch" style="background:var(--accent)"></i>${yr} Terverifikasi (September)</span>
     <span><i class="swatch" style="background:var(--crit)"></i>Super Peak (&gt;1.50×)</span>
     <span><i class="swatch" style="background:var(--good)"></i>High Season (1.10–1.49×)</span>
     <span class="muted" style="margin-left:auto;">Garis putus-putus kuning = 1.00× Rata-rata Musiman</span>
@@ -1466,17 +1463,10 @@ function vTahunan(R) {
   const curM = +R.c.bulan.split("-")[1]; // 9 (September)
   const H = (S.history && S.history.months) || [];
   
-  // Ambil data 2025 & 2026
+  // Data acuan musiman 2025
   const data25 = H.filter(m => m.tahun === yr - 1);
-  const data26 = H.filter(m => m.tahun === yr);
-  
   const tot25 = data25.reduce((s, m) => s + dnum(m.omzet), 0) || 720036150;
   const avg25 = tot25 / 12;
-
-  // Pertumbuhan YTD 2026 Jan-Agt (bulan 1 s.d. 8)
-  const ytd25_8 = data25.filter(m => m.no < curM).reduce((s, m) => s + dnum(m.omzet), 0);
-  const ytd26_8 = data26.filter(m => m.no < curM).reduce((s, m) => s + dnum(m.omzet), 0);
-  const ytdGrowthRate = ytd25_8 ? (ytd26_8 - ytd25_8) / ytd25_8 : 0.125;
 
   const SEASON_INFO = [
     { no: 1, label: "Januari", momentum: "Pasca Liburan & Tahun Baru", note: "Low season awal tahun, fokus pada couple & self-photo" },
@@ -1508,32 +1498,33 @@ function vTahunan(R) {
     const isPast = (info.no < curM);
     const isFuture = (info.no > curM);
 
-    let o26 = 0;
-    let status = "";
-    if (isPast) {
-      const m26 = data26.find(m => m.no === info.no) || {};
-      o26 = dnum(m26.omzet);
-      status = "Aktual Selesai";
-    } else if (isCurrent) {
-      o26 = R.omzet;
-      status = "Berjalan (Live)";
-    } else {
-      o26 = Math.round(o25 * (1 + ytdGrowthRate));
-      status = "Estimasi Q4";
-    }
+    // USER REQUIREMENT:
+    // Bulan sebelum & sesudah September dikosongkan karena belum dicocokkan (belum lulus untuk laporan real).
+    let o26 = null;
+    let proyeksi26 = null;
+    let status = "Belum Dicocokkan";
+    let statusPill = "neutral";
+    let yoy = null;
 
-    const yoy = o25 ? (((isCurrent ? R.proyeksi : o26) - o25) / o25) : null;
+    if (isCurrent) {
+      o26 = R.omzet;
+      proyeksi26 = R.proyeksi;
+      status = "Berjalan (Terverifikasi)";
+      statusPill = "crit";
+      yoy = o25 ? (((R.proyeksi || R.omzet) - o25) / o25) : null;
+    }
 
     return {
       ...info,
       short: info.label.slice(0, 3),
       omzet25: o25,
       omzet26: o26,
-      proyeksi26: isCurrent ? R.proyeksi : o26,
+      proyeksi26: proyeksi26,
       sIndex: sIndex,
       seasonTag: seasonTag,
       seasonPill: seasonPill,
       status: status,
+      statusPill: statusPill,
       isCurrent: isCurrent,
       isPast: isPast,
       isFuture: isFuture,
@@ -1541,12 +1532,10 @@ function vTahunan(R) {
     };
   });
 
-  // Top KPI calculations
-  const totRealizedYTD = months.filter(m => m.isPast || m.isCurrent).reduce((s, m) => s + m.omzet26, 0);
-  const totFYProjected = months.reduce((s, m) => s + m.proyeksi26, 0);
-  const growthFY = tot25 ? (totFYProjected - tot25) / tot25 : null;
-  const avgMonthlyFY = totFYProjected / 12;
-  const peakMonth = months.reduce((max, m) => m.proyeksi26 > max.proyeksi26 ? m : max, months[0]);
+  // Komparasi September 2026 vs September 2025
+  const sep25 = months.find(m => m.no === 9)?.omzet25 || 151036150;
+  const growthSepYoY = sep25 ? ((R.proyeksi - sep25) / sep25) : null;
+  const peakMonth = months.reduce((max, m) => m.sIndex > max.sIndex ? m : max, months[0]);
 
   return `
   <div class="vhead"><div><div class="eyebrow">Tahun Fiskal ${yr} · Multi-Bulan &amp; Siklus Musiman</div>
@@ -1556,25 +1545,25 @@ function vTahunan(R) {
   <!-- Top KPI Cards -->
   <div class="stats" style="margin-bottom:16px">
     <div class="stat">
-      <span class="k">Realized YTD ${yr} (Jan–Sep)</span>
-      <span class="v" style="color:var(--accent);">${rp(totRealizedYTD)}</span>
-      <span class="m">1 Jan s.d. ${R.cutDay} Sep ${yr} (9 bulan)</span>
+      <span class="k">Omzet Terverifikasi ${yr}</span>
+      <span class="v" style="color:var(--accent);">${rp(R.omzet)}</span>
+      <span class="m">September MTD (s.d. ${R.cutDay} Sep · Live Log Order)</span>
     </div>
     <div class="stat">
-      <span class="k">Proyeksi Full Year ${yr}</span>
-      <span class="v sm">${rp(totFYProjected)}</span>
-      <span class="m">Aktual Jan–Agt + Run-rate Sep + Est Q4</span>
-      <div class="bar"><i style="width:${Math.min(100, (totRealizedYTD/totFYProjected)*100).toFixed(0)}%"></i></div>
+      <span class="k">Proyeksi September ${yr}</span>
+      <span class="v sm">${rp(R.proyeksi)}</span>
+      <span class="m">Run-rate akhir bulan Super Peak</span>
+      <div class="bar"><i style="width:${Math.min(100, (R.omzet/R.proyeksi)*100).toFixed(0)}%"></i></div>
     </div>
     <div class="stat">
-      <span class="k">Pertumbuhan YoY vs ${yr-1}</span>
-      <span class="v sm" style="color:${growthFY>=0?"var(--good)":"var(--crit)"};">${(growthFY>=0?"+":"")+pct(growthFY)}</span>
-      <span class="m">Total ${yr-1}: ${rp(tot25)}</span>
+      <span class="k">Pertumbuhan Sep YoY vs ${yr-1}</span>
+      <span class="v sm" style="color:${growthSepYoY>=0?"var(--good)":"var(--crit)"};">${(growthSepYoY>=0?"+":"")+pct(growthSepYoY)}</span>
+      <span class="m">Realisasi Sep ${yr-1}: ${rp(sep25)}</span>
     </div>
     <div class="stat">
-      <span class="k">Puncak Musim (Super Peak)</span>
-      <span class="v sm">${peakMonth.label} (${peakMonth.sIndex.toFixed(2)}×)</span>
-      <span class="m">${esc(peakMonth.momentum)}</span>
+      <span class="k">Status Rekonsiliasi Tahunan</span>
+      <span class="v sm" style="font-size:21px;">1 / 12 Terverifikasi</span>
+      <span class="m">Sep ${yr} aktif · 11 bln menunggu pencocokan</span>
     </div>
   </div>
 
@@ -1583,7 +1572,10 @@ function vTahunan(R) {
     <b>Pola Musiman Studio Foto (Seasonality Index):</b>
     Indeks <b>1.00×</b> adalah garis tengah rata-rata bulanan studio.
     Bulan <b>September (1.85× – 2.50×)</b> adalah puncak tahunan tertinggi (Super Peak) berkat wisuda akbar universitas di Magelang dan sekitarnya.
-    Bulan <b>Juni &amp; Agustus</b> menjadi High Season kedua, sementara <b>Januari, Februari &amp; November</b> merupakan Low Season alami yang cocok untuk riset, maintenance, dan promosi booking lebih awal.
+    Bulan <b>Juni &amp; Agustus</b> menjadi High Season kedua, sementara <b>Januari, Februari &amp; November</b> merupakan Low Season alami.
+    <div style="margin-top:6px;font-size:12px;opacity:.9;border-top:1px dashed currentColor;padding-top:6px;">
+      🔒 <b>Status Data Real:</b> Sesuai standarisasi audit, data tahun ${yr} untuk bulan <b>Januari–Agustus</b> dan <b>Oktober–Desember</b> saat ini <b>dikosongkan</b> karena belum dicocokkan dengan data pembukuan riil. Hanya <b>September ${yr}</b> yang terverifikasi aktif &amp; live.
+    </div>
   </div>
 
   <!-- Chart Seasonality & Omzet 12 Bulan -->
@@ -1609,14 +1601,16 @@ function vTahunan(R) {
             <span class="mname">${m.label} ${yr} ${m.isCurrent ? '<i class="live-dot" title="Bulan Berjalan Live"></i>' : ''}</span>
             <div class="mmomentum">${esc(m.momentum)}</div>
           </div>
-          <span class="pill ${m.isCurrent ? 'crit' : (m.isPast ? 'final' : 'prog')}" style="font-size:10.5px;">${m.status}</span>
+          <span class="pill ${m.statusPill}" style="font-size:10.5px;">${m.status}</span>
         </div>
 
         <div class="mbody">
           <div class="mstat">
-            <span class="mk">${m.isCurrent ? 'Omzet Masuk (Live)' : (m.isPast ? 'Omzet Realisasi' : 'Estimasi Target')}</span>
-            <span class="mv ${m.isCurrent ? 'active' : ''}">${rp(m.omzet26)}</span>
-            ${m.isCurrent ? `<span class="msub" style="color:var(--accent);">Proyeksi run-rate: ${rp(R.proyeksi)}</span>` : `<span class="msub">Tahun ${yr-1}: ${rp(m.omzet25)}</span>`}
+            <span class="mk">${m.isCurrent ? 'Omzet Masuk (Live)' : 'Omzet Realisasi'}</span>
+            <span class="mv ${m.isCurrent ? 'active' : ''}" style="${!m.isCurrent ? 'color:var(--muted-soft);font-weight:500;' : ''}">${m.omzet26 != null ? rp(m.omzet26) : '—'}</span>
+            ${m.isCurrent 
+              ? `<span class="msub" style="color:var(--accent);">Proyeksi run-rate: ${rp(R.proyeksi)} · Acuan ${yr-1}: ${rp(m.omzet25)}</span>` 
+              : `<span class="msub muted">Belum dicocokkan · Acuan ${yr-1}: ${rp(m.omzet25)}</span>`}
           </div>
 
           <div class="mseason">
@@ -1629,7 +1623,7 @@ function vTahunan(R) {
 
           <div class="myoy">
             <span class="myoy-label">YoY vs ${yr-1}</span>
-            <span class="myoy-val" style="color:${m.yoy >= 0 ? 'var(--good)' : 'var(--crit)'};">
+            <span class="myoy-val" style="${m.yoy != null ? (m.yoy >= 0 ? 'color:var(--good);' : 'color:var(--crit);') : 'color:var(--muted-soft);'}">
               ${m.yoy == null ? '—' : (m.yoy >= 0 ? '+' : '') + pct(m.yoy)}
             </span>
           </div>
@@ -1637,7 +1631,7 @@ function vTahunan(R) {
 
         <div class="mfoot">
           <button class="btn sm ${m.isCurrent ? 'pri' : ''} btn-go-month" data-month="${m.no}" style="width:100%;display:flex;justify-content:center;align-items:center;gap:6px;">
-            ${m.isCurrent ? '👉 Buka Laporan Live Bulan Ini' : 'Lihat Laporan Bulanan ➔'}
+            ${m.isCurrent ? '👉 Buka Laporan September (Live)' : 'Lihat Laporan Bulanan ➔'}
           </button>
         </div>
       </div>
@@ -1651,8 +1645,8 @@ function vTahunan(R) {
       <thead>
         <tr>
           <th>Bulan</th>
-          <th>Status</th>
-          <th class="n">Omzet ${yr-1}</th>
+          <th>Status Verifikasi</th>
+          <th class="n">Acuan ${yr-1}</th>
           <th class="n">Omzet ${yr}</th>
           <th class="n">YoY Growth</th>
           <th class="n">Seasonality</th>
@@ -1663,12 +1657,12 @@ function vTahunan(R) {
       </thead>
       <tbody>
         ${months.map(m => `
-          <tr class="${m.isCurrent ? 'active-row' : (m.isFuture ? 'future' : '')}">
+          <tr class="${m.isCurrent ? 'active-row' : ''}">
             <td><b>${m.label} ${yr}</b></td>
-            <td><span class="pill ${m.isCurrent ? 'crit' : (m.isPast ? 'final' : 'prog')}" style="font-size:10.5px;">${m.status}</span></td>
+            <td><span class="pill ${m.statusPill}" style="font-size:10.5px;">${m.status}</span></td>
             <td class="n mono">${rp(m.omzet25)}</td>
-            <td class="n mono" style="${m.isCurrent ? 'font-weight:700;color:var(--accent);' : ''}">${rp(m.omzet26)}</td>
-            <td class="n mono" style="color:${m.yoy >= 0 ? 'var(--good)' : 'var(--crit)'};">${m.yoy == null ? '—' : (m.yoy >= 0 ? '+' : '') + pct(m.yoy)}</td>
+            <td class="n mono" style="${m.isCurrent ? 'font-weight:700;color:var(--accent);' : 'color:var(--muted-soft);'}">${m.omzet26 != null ? rp(m.omzet26) : "—"}</td>
+            <td class="n mono" style="${m.yoy != null ? (m.yoy >= 0 ? 'color:var(--good);' : 'color:var(--crit);') : 'color:var(--muted-soft);'}">${m.yoy == null ? '—' : (m.yoy >= 0 ? '+' : '') + pct(m.yoy)}</td>
             <td class="n mono"><b>${m.sIndex.toFixed(2)}×</b></td>
             <td><span class="pill ${m.seasonPill}" style="font-size:10px;">${m.seasonTag}</span></td>
             <td class="tiny"><b>${esc(m.momentum)}</b> — ${esc(m.note)}</td>
@@ -1678,10 +1672,10 @@ function vTahunan(R) {
         <tr class="total">
           <td colspan="2">TOTAL TAHUNAN</td>
           <td class="n mono">${rp(tot25)}</td>
-          <td class="n mono">${rp(totFYProjected)}</td>
-          <td class="n mono" style="color:${growthFY >= 0 ? 'var(--good)' : 'var(--crit)'};">${(growthFY >= 0 ? '+' : '') + pct(growthFY)}</td>
+          <td class="n mono" style="font-weight:700;color:var(--accent);">${rp(R.omzet)}*</td>
+          <td class="n mono">—</td>
           <td class="n mono">1.00× avg</td>
-          <td colspan="3" class="tiny">Rata-rata ${rp(avgMonthlyFY)} / bulan</td>
+          <td colspan="3" class="tiny">*Hanya September ${yr} yang telah terverifikasi live. 11 bulan lainnya dikosongkan karena menunggu pencocokan laporan riil.</td>
         </tr>
       </tbody>
     </table></div>
@@ -2769,7 +2763,7 @@ function wire(R){
         showToast("📊 Membuka Dashboard Live September 2026", "ok", 2500);
       } else {
         const bln = BULAN[m - 1] || "";
-        showToast(`📊 Membuka Dashboard Bulanan (${bln}). Data harian live terhubung ke bulan berjalan.`, "ok", 3000);
+        showToast(`ℹ️ Bulan ${bln} 2026 belum dicocokkan. Menampilkan Dashboard September 2026 (Live).`, "neutral", 3500);
       }
     };
   });
