@@ -6933,6 +6933,18 @@
       "total": 390000.0,
       "admin": "INDAH",
       "fotografer": "ADIF"
+    },
+    {
+      "id": "or_577",
+      "tanggal": "2026-09-26",
+      "client": "Diva",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-09-29",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "INDAH",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -8415,9 +8427,9 @@
       "id": "ld_26",
       "tanggal": "2026-09-26",
       "leads": 0.0,
-      "dp": 0.0,
+      "dp": 1.0,
       "sesiFoto": 8.0,
-      "transaksi": 8.0
+      "transaksi": 9.0
     },
     {
       "id": "ld_27",
@@ -11194,6 +11206,21 @@
       },
       {
         "id": "sc_bk_180",
+        "tgl": "2026-09-29",
+        "waktu": "15:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Diva",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "IN",
+        "noHp": "dp 100 wooden",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_181",
         "tgl": "2026-09-30",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -11208,7 +11235,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_181",
+        "id": "sc_bk_182",
         "tgl": "2026-09-30",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -11666,6 +11693,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260926-1135",
+      "mulai": "2026-09-26T11:35:21.084937+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 577 order, 182 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260926-1048",
       "mulai": "2026-09-26T10:48:52.983253+00:00",
       "status": "sukses",
@@ -11934,7 +11967,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-26T10:48:52.983253+00:00"
+    "last_sync": "2026-09-26T11:35:21.084937+00:00"
   },
   "neracaDetail": [
     {
