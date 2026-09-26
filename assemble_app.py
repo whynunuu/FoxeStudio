@@ -2852,12 +2852,16 @@ const savedTheme = localStorage.getItem("foxe_studio_theme") || "dark";
 document.documentElement.setAttribute("data-theme", savedTheme);
 
 /* ============================ AUTHENTICATION SYSTEM (SOLUSI 1) ============================ */
-const AUTH_KEY = "foxe_studio_auth_token_v1";
+// Invalidate and force logout all previous sessions
+try {
+  localStorage.removeItem("foxe_studio_auth_token_v1");
+  localStorage.removeItem("foxe_auth_pass");
+  localStorage.removeItem("foxe_custom_pin_hash");
+} catch(e){}
+
+const AUTH_KEY = "foxe_studio_auth_token_v2";
 const VALID_HASHES = [
-  "85ec11c08e12c6db362082a46267150136507c7dac5712c6cf526feaceea7241", // 202688 (Default Studio PIN)
-  "fd05a2c03c09715cdf08acd15f01abd477f7e7a32d34cc5282eeb8d2dd996a44", // 123456
-  "b2558bd3f534e7c602b6f893138512a1e20948be8d9fa2b044560e92f1ead53b", // 202609
-  "a634cdf391c6b7b911c46e9c873de639fc933434d17b277b3ee6fe419f244cc2"  // 889900
+  "23d30fa4f4b950822914594ad82a6544b292ccb35be03075425abc266c7dbf40" // 363636 (Master Studio PIN)
 ];
 
 async function hashPin(pin) {
@@ -2895,8 +2899,7 @@ function updatePinDots() {
 async function verifyPin() {
   if (enteredPin.length < 4) return;
   const hash = await hashPin(enteredPin);
-  const customHash = localStorage.getItem("foxe_custom_pin_hash");
-  if (VALID_HASHES.includes(hash) || (customHash && hash === customHash)) {
+  if (VALID_HASHES.includes(hash)) {
     const remember = document.getElementById("chkRemember") ? document.getElementById("chkRemember").checked : true;
     if (remember) {
       const authData = {

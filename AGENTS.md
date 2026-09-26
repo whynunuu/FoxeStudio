@@ -13,7 +13,7 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
    `git commit -m "Auto-sync data update"`
    `git push origin main`
 3. Tampilkan ringkasan metrik pembaruan hari ini dan tautan website live:
-   👉 **https://whynunuu.github.io/FoxeStudio/** (PIN: `202688`)
+   👉 **https://whynunuu.github.io/FoxeStudio/** (PIN: `363636`)
 
 ---
 

@@ -47,3 +47,14 @@ Unrealized Omzet               Rp 104.625.000
 - **Total**: Sisa kas/pelunasan riil yang akan masuk saat klien datang foto.
 - **Unrealized Omzet**: Estimasi total omzet akhir bulan (Omzet Realized MTD + Total Pelunasan).
 - Seluruh teks diformat rata kanan sejajar 44 karakter presisi mengikuti lebar struk.
+
+---
+
+## 4. Keamanan Autentikasi & Master PIN Portal
+- **Master PIN Aktif**: `363636`
+- **Mekanisme Session Invalidation**: 
+  - Token autentikasi menggunakan versi `foxe_studio_auth_token_v2`.
+  - Seluruh sesi lama (`v1`, custom PIN, dan sesi tersimpan) otomatis dihapus dan dipaksa keluar (*forced logout*).
+  - Siapa pun yang mengakses atau me-refresh portal web wajib memasukkan PIN baru `363636`.
+- **URL Live**: 👉 **https://whynunuu.github.io/FoxeStudio/**
+

@@ -10,4 +10,4 @@ Whenever the user prompts "ayo kerja" (or "update data", "sinkronkan data"), imm
    `git commit -m "Auto-sync data update"`
    `git push origin main`
 3. Print summary of changes (cutoff, MTD omzet, daily omzet, cash vs transfer, shifts).
-4. Provide the live link: 👉 https://whynunuu.github.io/FoxeStudio/ (PIN: `202688`)
+4. Provide the live link: 👉 https://whynunuu.github.io/FoxeStudio/ (PIN: `363636`)

@@ -25,7 +25,7 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
 ### 3. Berikan Laporan Ringkas, Kirim Telegram & Tautan Live:
 - Kirim notifikasi otomatis laporan harian closing ke Telegram via `@NunuFxBot` (`telegram_notifier.py`) mencakup breakdown Kas/Transfer, Total COGS, OPEX, Estimasi Nett Profit, **Estimate Omzet Sampai Akhir Bulan (Unrealized Cash In, DP (-), Total, dan Unrealized Omzet)** yang menyatu di dalam struk, Leads, Shift Kru, dan Jadwal Foto Besok H+1.
 - Sajikan tabel ringkasan: Cut-off hari ini, total order MTD, omzet MTD (Cash vs Transfer), omzet hari ini, shift kru, dan capaian target.
-- Sertakan link website resmi live (terproteksi PIN: `202688`):
+- Sertakan link website resmi live (terproteksi PIN: `363636`):
   👉 **https://whynunuu.github.io/FoxeStudio/**
 
 ---
