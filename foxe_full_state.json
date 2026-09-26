@@ -11693,6 +11693,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260926-1146",
+      "mulai": "2026-09-26T11:46:11.098641+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 577 order, 182 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260926-1135",
       "mulai": "2026-09-26T11:35:21.084937+00:00",
       "status": "sukses",
@@ -11967,7 +11973,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-26T11:35:21.084937+00:00"
+    "last_sync": "2026-09-26T11:46:11.098641+00:00"
   },
   "neracaDetail": [
     {
