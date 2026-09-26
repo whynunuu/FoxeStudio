@@ -16,4 +16,8 @@ git commit -m "Auto-sync Google Drive update (Log Order, Schedule & Neraca)" 2>n
 git push origin main
 echo.
 echo [BERHASIL] Website live https://whynunuu.github.io/FoxeStudio/ sudah terupdate!
+echo.
+echo Mengirim laporan terpisah AI CRM, Leads & Performa CS ke Telegram...
+python "c:\Users\ASUS\OneDrive\Documents\General\scripts\telegram_crm_notifier.py"
+echo.
 timeout /t 5 >nul

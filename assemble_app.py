@@ -350,6 +350,45 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
   cursor:pointer;margin-bottom:14px;user-select:none}
 .remember-wrap input{accent-color:#d97757;cursor:pointer}
 .lock-footer{font-size:11.5px;color:#6c6a64}
+
+/* ---------- toast notification ---------- */
+.toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--rail);
+  border:1px solid var(--rail-line);color:var(--on-rail);padding:12px 18px;border-radius:10px;
+  font-size:13.5px;box-shadow:0 10px 25px rgba(0,0,0,0.3);display:flex;align-items:center;
+  gap:10px;transform:translateY(80px);opacity:0;transition:all .25s cubic-bezier(0.16,1,0.3,1);
+  pointer-events:none;max-width:420px}
+.toast.show{transform:translateY(0);opacity:1;pointer-events:auto}
+.toast.ok{border-color:var(--good);background:var(--rail)}
+.toast.err{border-color:var(--crit);background:var(--rail)}
+
+/* ---------- sync modal & components ---------- */
+.btn-group{display:inline-flex;align-items:stretch}
+.btn-group .btn:first-child{border-top-right-radius:0;border-bottom-right-radius:0}
+.btn-group .btn:last-child{border-top-left-radius:0;border-bottom-left-radius:0;border-left:0}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);
+  z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .2s ease}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal-box{background:var(--surface);border:1px solid var(--hairline-strong);border-radius:16px;
+  width:100%;max-width:480px;box-shadow:0 20px 40px rgba(0,0,0,0.4);overflow:hidden;
+  transform:scale(0.96);transition:transform .2s cubic-bezier(0.16,1,0.3,1)}
+.modal-overlay.open .modal-box{transform:scale(1)}
+.modal-head{padding:18px 22px;border-bottom:1px solid var(--hairline);display:flex;align-items:center;
+  justify-content:space-between}
+.modal-head h3{font-family:var(--ff-display);font-size:22px;font-weight:600;margin:0;color:var(--ink)}
+.modal-close{background:none;border:0;color:var(--muted);cursor:pointer;font-size:18px;padding:4px}
+.modal-close:hover{color:var(--crit)}
+.modal-body{padding:22px;display:flex;flex-direction:column;gap:16px}
+.sync-option{background:var(--surface2);border:1px solid var(--hairline);border-radius:12px;
+  padding:14px 16px;cursor:pointer;transition:all .15s;text-align:left;display:flex;flex-direction:column;gap:4px}
+.sync-option:hover{border-color:var(--accent);background:var(--surface3)}
+.sync-option b{color:var(--ink);font-size:14px;display:flex;align-items:center;gap:8px}
+.sync-option span{font-size:12px;color:var(--muted);line-height:1.4}
+.sync-status-box{background:var(--surface3);border:1px solid var(--hairline);border-radius:10px;
+  padding:14px;font-size:12.5px;color:var(--ink2);display:flex;flex-direction:column;gap:6px}
+.sync-spinner{width:16px;height:16px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -434,6 +473,10 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
       <span class="pill neutral" id="tbLive" hidden></span>
       <span class="pill neutral" id="tbUpd" hidden></span>
       <span class="pill final" id="tbSync">aktif</span>
+      <div class="btn-group" id="btnGroupUpdate">
+        <button class="btn sm" id="btnUpdateData" style="display:inline-flex;align-items:center;gap:5px;font-weight:600;border-color:var(--accent);color:var(--accent);background:var(--surface);" title="Perbarui data terbaru ke website">🔄 Update</button>
+        <button class="btn sm" id="btnSyncSettings" style="padding:4px 7px;border-left:0;border-color:var(--accent);color:var(--accent);background:var(--surface);" title="Pilihan &amp; Pengaturan Sinkronisasi">▾</button>
+      </div>
       <button class="btn sm" id="btnReset" title="Kembalikan ke data awal file">Reset Data</button>
       <button class="btn pri" id="btnExport">Export Excel</button>
     </div>
@@ -442,6 +485,75 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
   </div>
 </div>
 <div class="tip" id="tip"></div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Modal Sinkronisasi Data -->
+<div class="modal-overlay" id="syncModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>🔄 Perbarui Data Website</h3>
+      <button class="modal-close" id="btnCloseSyncModal" title="Tutup">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;padding:0 2px;">
+        <span id="modalCutoff">Cut-off: memuat…</span>
+        <span id="modalLastSync">Terakhir: memuat…</span>
+      </div>
+
+      <div class="sync-actions" id="syncActions" style="display:flex;flex-direction:column;gap:10px;">
+        <button class="sync-option" id="btnOptFast">
+          <b>⚡ Refresh Cepat (Instan)</b>
+          <span>Tarik pembaruan data yang sudah tersimpan di cloud ke layar ini (&lt; 1 detik, tanpa delay).</span>
+        </button>
+
+        <button class="sync-option" id="btnOptDrive" style="border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);">
+          <b style="color:var(--accent);">🌐 Tarik Data Baru dari Google Drive (Full Sync)</b>
+          <span>Jalankan sinkronisasi File 1 Log Order, File 2 Schedule, dan File Neraca dari Google Drive via cloud (~20-25 detik).</span>
+        </button>
+      </div>
+
+      <!-- Kotak Progress saat sync berjalan -->
+      <div class="sync-status-box" id="syncStatusBox" hidden>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="sync-spinner"></div>
+          <b id="syncStatusTitle">Menjalankan sinkronisasi cloud...</b>
+        </div>
+        <p id="syncStatusDesc" style="font-size:12px;color:var(--muted);margin:4px 0 0 0;">Menghubungkan ke GitHub Actions &amp; Google Drive...</p>
+      </div>
+
+      <!-- Bagian Pengaturan Token (Aman di LocalStorage) -->
+      <div class="sync-token-sec" style="margin-top:6px;border-top:1px solid var(--hairline);padding-top:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-size:11.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted-soft);">Otorisasi Google Drive Sync</span>
+          <span id="tokenStatusBadge" class="pill neutral" style="font-size:10px;padding:1px 6px;">Belum Terhubung</span>
+        </div>
+
+        <div id="tokenInputSec">
+          <p style="font-size:11.5px;color:var(--muted);line-height:1.45;margin-bottom:8px;">
+            Token GitHub disimpan <b>hanya di browser HP/Laptop Anda</b> (localStorage) dan aman dari publik. Cukup masukkan sekali.
+          </p>
+          <div style="display:flex;gap:8px;">
+            <input type="password" id="txtGithubToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="flex:1;background:var(--canvas);border:1px solid var(--hairline-strong);border-radius:8px;padding:6px 10px;font-size:12px;color:var(--ink);" autocomplete="off">
+            <button class="btn sm pri" id="btnSaveToken">Simpan</button>
+          </div>
+        </div>
+
+        <div id="tokenSavedSec" hidden style="display:flex;align-items:center;justify-content:space-between;background:var(--surface2);padding:8px 12px;border-radius:8px;border:1px solid var(--hairline);">
+          <div style="font-size:12px;color:var(--ink2);">
+            <span style="color:var(--good);margin-right:4px;">●</span> Token aktif tersimpan di perangkat ini
+          </div>
+          <button class="btn sm" id="btnRemoveToken" style="font-size:11px;padding:2px 8px;color:var(--crit);" title="Hapus token dari browser">Hapus</button>
+        </div>
+
+        <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin-top:12px;cursor:pointer;">
+          <input type="checkbox" id="chkAutoFullSync" style="accent-color:var(--accent);">
+          <span>Otomatis Full Sync Google Drive setiap tombol 🔄 Update diklik</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 "use strict";
@@ -2583,7 +2695,301 @@ if (checkSavedAuth()) {
   lockDashboard();
 }
 
+/* ============================ MODUL UPDATE & SINKRONISASI ============================ */
+const GITHUB_TOKEN_KEY = "foxe_github_token";
+const AUTO_FULL_SYNC_KEY = "foxe_auto_drive_sync";
+const GITHUB_REPO = "whynunuu/FoxeStudio";
+const GITHUB_WORKFLOW = "daily_sync.yml";
+
+function showToast(msg, type="ok", duration=3500) {
+  const t = document.getElementById("toast");
+  if (!t) return;
+  t.textContent = msg;
+  t.className = "toast show " + (type === "err" ? "err" : "ok");
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => {
+    t.className = "toast";
+  }, duration);
+}
+
+function getSavedGithubToken() {
+  return localStorage.getItem(GITHUB_TOKEN_KEY) || "";
+}
+
+function updateTokenUI() {
+  const token = getSavedGithubToken();
+  const badge = document.getElementById("tokenStatusBadge");
+  const inputSec = document.getElementById("tokenInputSec");
+  const savedSec = document.getElementById("tokenSavedSec");
+  const chkAuto = document.getElementById("chkAutoFullSync");
+  const autoSync = localStorage.getItem(AUTO_FULL_SYNC_KEY) === "true";
+
+  if (chkAuto) chkAuto.checked = autoSync;
+
+  if (token) {
+    if (badge) { badge.textContent = "Terhubung"; badge.className = "pill final"; }
+    if (inputSec) inputSec.hidden = true;
+    if (savedSec) savedSec.hidden = false;
+  } else {
+    if (badge) { badge.textContent = "Belum Terhubung"; badge.className = "pill neutral"; }
+    if (inputSec) inputSec.hidden = false;
+    if (savedSec) savedSec.hidden = true;
+  }
+}
+
+function openSyncModal() {
+  const modal = document.getElementById("syncModal");
+  if (!modal) return;
+  const R = compute();
+  const cutEl = document.getElementById("modalCutoff");
+  const lastEl = document.getElementById("modalLastSync");
+  const ok = syncSukses();
+  if (cutEl) cutEl.textContent = `Cut-off: s.d. ${R.cutDay} ${BULAN[+R.c.bulan.split("-")[1]-1]}`;
+  if (lastEl) lastEl.textContent = ok ? `Terakhir: ${wibParts(ok.mulai).tgl.split(" ").slice(0,2).join(" ")} ${wibParts(ok.mulai).jam}` : "Terakhir: —";
+
+  // Reset status box
+  const act = document.getElementById("syncActions");
+  const sb = document.getElementById("syncStatusBox");
+  if (act) act.hidden = false;
+  if (sb) sb.hidden = true;
+
+  updateTokenUI();
+  modal.classList.add("open");
+}
+
+function closeSyncModal() {
+  const modal = document.getElementById("syncModal");
+  if (modal) modal.classList.remove("open");
+}
+
+async function fastRefresh(silent = false) {
+  const btn = document.getElementById("btnUpdateData");
+  const originalHtml = btn ? btn.innerHTML : "🔄 Update";
+  if (btn) { btn.innerHTML = "⏳ Refresh..."; btn.disabled = true; }
+
+  try {
+    const res = await fetch("foxe_full_state.json?t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error("Gagal mengambil data dari server (HTTP " + res.status + ")");
+    const latest = await res.json();
+    
+    const curSyncId = (S.sync && S.sync[0] && S.sync[0].id) || "";
+    const newSyncId = (latest.sync && latest.sync[0] && latest.sync[0].id) || "";
+    
+    S = latest;
+    localStorage.setItem("foxe_studio_keuangan_state", JSON.stringify(S));
+    localStorage.setItem("foxe_studio_keuangan_sync_id", newSyncId || "sync_" + Date.now());
+    render();
+
+    if (!silent) {
+      const ok = syncSukses();
+      const jam = ok ? wibParts(ok.mulai).jam : "";
+      showToast("✅ Data tampilan berhasil diperbarui!" + (jam ? ` (Update ${jam} WIB)` : ""));
+    }
+    closeSyncModal();
+    return true;
+  } catch (err) {
+    if (!silent) showToast("⚠️ " + err.message, "err");
+    return false;
+  } finally {
+    if (btn) {
+      btn.innerHTML = "✅ Terkini";
+      setTimeout(() => { btn.innerHTML = originalHtml; btn.disabled = false; }, 1800);
+    }
+  }
+}
+
+async function triggerGoogleDriveSync() {
+  const token = getSavedGithubToken();
+  if (!token) {
+    openSyncModal();
+    const inp = document.getElementById("txtGithubToken");
+    if (inp) {
+      inp.focus();
+      inp.style.borderColor = "var(--crit)";
+      setTimeout(() => { inp.style.borderColor = "var(--hairline-strong)"; }, 1500);
+    }
+    showToast("Masukkan GitHub Token Anda terlebih dahulu untuk Full Sync Google Drive", "err");
+    return;
+  }
+
+  const act = document.getElementById("syncActions");
+  const sb = document.getElementById("syncStatusBox");
+  const title = document.getElementById("syncStatusTitle");
+  const desc = document.getElementById("syncStatusDesc");
+  const btnTop = document.getElementById("btnUpdateData");
+
+  if (act) act.hidden = true;
+  if (sb) sb.hidden = false;
+  if (title) title.textContent = "Memicu sinkronisasi Google Drive...";
+  if (desc) desc.textContent = "Mengirim instruksi ke GitHub Cloud...";
+  if (btnTop) { btnTop.innerHTML = "⏳ Syncing..."; btnTop.disabled = true; }
+
+  try {
+    // 1. Trigger workflow_dispatch
+    const dispatchUrl = `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/${GITHUB_WORKFLOW}/dispatches`;
+    const res = await fetch(dispatchUrl, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Accept": "application/vnd.github.v3+json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ ref: "main" })
+    });
+
+    if (res.status !== 204 && !res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.message || `Gagal memicu GitHub Actions (Status: ${res.status})`);
+    }
+
+    if (title) title.textContent = "Sedang mengunduh dari Google Drive...";
+    if (desc) desc.textContent = "Memproses File 1 Log Order, File 2 Schedule, dan File Neraca...";
+    showToast("🚀 Sinkronisasi Google Drive telah dimulai di cloud!");
+
+    // 2. Poll foxe_full_state.json sampai update (maksimal 45 detik)
+    const startSyncId = (S.sync && S.sync[0] && S.sync[0].id) || "";
+    let completed = false;
+    let attempts = 0;
+    const maxAttempts = 15; // 15 x 3 detik = 45 detik
+
+    const pollInterval = setInterval(async () => {
+      attempts++;
+      if (desc) desc.textContent = `Menunggu hasil kalkulasi cloud... (${attempts * 3} detik)`;
+
+      try {
+        const checkRes = await fetch("foxe_full_state.json?t=" + Date.now(), { cache: "no-store" });
+        if (checkRes.ok) {
+          const checkData = await checkRes.json();
+          const checkSyncId = (checkData.sync && checkData.sync[0] && checkData.sync[0].id) || "";
+          if (checkSyncId && checkSyncId !== startSyncId) {
+            clearInterval(pollInterval);
+            completed = true;
+
+            S = checkData;
+            localStorage.setItem("foxe_studio_keuangan_state", JSON.stringify(S));
+            localStorage.setItem("foxe_studio_keuangan_sync_id", checkSyncId);
+            render();
+
+            if (title) title.textContent = "✅ Sinkronisasi Berhasil!";
+            if (desc) desc.textContent = "Data terbaru telah aktif di website.";
+            showToast("✅ Berhasil! Data website telah diperbarui dari Google Drive.");
+
+            setTimeout(() => {
+              closeSyncModal();
+              if (btnTop) { btnTop.innerHTML = "🔄 Update"; btnTop.disabled = false; }
+            }, 1200);
+          }
+        }
+      } catch (e) {
+        console.warn("Polling state check:", e);
+      }
+
+      if (attempts >= maxAttempts && !completed) {
+        clearInterval(pollInterval);
+        if (title) title.textContent = "Sinkronisasi Masih Berjalan di Cloud";
+        if (desc) desc.textContent = "GitHub Actions sedang memproses. Klik 'Refresh Cepat' beberapa saat lagi untuk memuatnya.";
+        showToast("ℹ️ Proses cloud masih berlangsung. Silakan klik Update lagi dalam 15-20 detik.", "ok", 5000);
+        setTimeout(() => {
+          closeSyncModal();
+          if (btnTop) { btnTop.innerHTML = "🔄 Update"; btnTop.disabled = false; }
+        }, 3000);
+      }
+    }, 3000);
+
+  } catch (err) {
+    if (title) title.textContent = "Gagal Sinkronisasi";
+    if (desc) desc.textContent = err.message;
+    showToast("❌ " + err.message, "err", 5000);
+    if (btnTop) { btnTop.innerHTML = "🔄 Update"; btnTop.disabled = false; }
+  }
+}
+
+function wireSyncEvents() {
+  const btnUpd = document.getElementById("btnUpdateData");
+  const btnSettings = document.getElementById("btnSyncSettings");
+  const btnClose = document.getElementById("btnCloseSyncModal");
+  const modal = document.getElementById("syncModal");
+  const optFast = document.getElementById("btnOptFast");
+  const optDrive = document.getElementById("btnOptDrive");
+  const btnSaveToken = document.getElementById("btnSaveToken");
+  const btnRemoveToken = document.getElementById("btnRemoveToken");
+  const txtToken = document.getElementById("txtGithubToken");
+  const chkAuto = document.getElementById("chkAutoFullSync");
+
+  if (btnUpd) {
+    btnUpd.onclick = (e) => {
+      if (e.shiftKey) {
+        openSyncModal();
+        return;
+      }
+      const token = getSavedGithubToken();
+      const autoSync = localStorage.getItem(AUTO_FULL_SYNC_KEY) === "true";
+      if (token && autoSync) {
+        triggerGoogleDriveSync();
+      } else {
+        openSyncModal();
+      }
+    };
+  }
+
+  if (btnSettings) {
+    btnSettings.onclick = () => openSyncModal();
+  }
+
+  if (btnClose) {
+    btnClose.onclick = () => closeSyncModal();
+  }
+
+  if (modal) {
+    modal.onclick = (e) => {
+      if (e.target === modal) closeSyncModal();
+    };
+  }
+
+  if (optFast) {
+    optFast.onclick = () => fastRefresh();
+  }
+
+  if (optDrive) {
+    optDrive.onclick = () => triggerGoogleDriveSync();
+  }
+
+  if (btnSaveToken && txtToken) {
+    btnSaveToken.onclick = () => {
+      const val = txtToken.value.trim();
+      if (!val) {
+        showToast("Masukkan token GitHub yang valid", "err");
+        return;
+      }
+      localStorage.setItem(GITHUB_TOKEN_KEY, val);
+      txtToken.value = "";
+      updateTokenUI();
+      showToast("✅ Token GitHub berhasil disimpan aman di browser ini!");
+    };
+    txtToken.onkeydown = (e) => {
+      if (e.key === "Enter") btnSaveToken.click();
+    };
+  }
+
+  if (btnRemoveToken) {
+    btnRemoveToken.onclick = () => {
+      if (confirm("Hapus token GitHub dari browser ini?")) {
+        localStorage.removeItem(GITHUB_TOKEN_KEY);
+        updateTokenUI();
+        showToast("Token GitHub telah dihapus.");
+      }
+    };
+  }
+
+  if (chkAuto) {
+    chkAuto.onchange = () => {
+      localStorage.setItem(AUTO_FULL_SYNC_KEY, chkAuto.checked ? "true" : "false");
+    };
+  }
+}
+
 /* ============================ start ============================ */
+wireSyncEvents();
 render();
 </script>
 
