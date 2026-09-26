@@ -1,7 +1,7 @@
 {
   "config": {
     "bulan": "2026-09",
-    "cutoff": "2026-09-25",
+    "cutoff": "2026-09-26",
     "status": "Progressive",
     "targets": [
       {
@@ -6837,6 +6837,102 @@
       "total": 200000.0,
       "admin": "AMEL",
       "fotografer": "ADIF"
+    },
+    {
+      "id": "or_569",
+      "tanggal": "2026-09-26",
+      "client": "Vieri",
+      "paket": "Packing",
+      "tanggalFoto": "2026-09-09",
+      "cash": 0.0,
+      "transfer": 20000.0,
+      "total": 20000.0,
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_570",
+      "tanggal": "2026-09-26",
+      "client": "Nashita",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-09-26",
+      "cash": 0.0,
+      "transfer": 375000.0,
+      "total": 375000.0,
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_571",
+      "tanggal": "2026-09-26",
+      "client": "Salma Ngarifatul",
+      "paket": "Couple A",
+      "tanggalFoto": "2026-09-26",
+      "cash": 0.0,
+      "transfer": 150000.0,
+      "total": 150000.0,
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_572",
+      "tanggal": "2026-09-26",
+      "client": "Ema",
+      "paket": "Pas Foto",
+      "tanggalFoto": "2026-09-26",
+      "cash": 0.0,
+      "transfer": 0.0,
+      "total": 0.0,
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_573",
+      "tanggal": "2026-09-26",
+      "client": "Nurul Latiifa",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-09-26",
+      "cash": 250000.0,
+      "transfer": 0.0,
+      "total": 250000.0,
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_574",
+      "tanggal": "2026-09-26",
+      "client": "Umi Fatmah",
+      "paket": "Graduation Premium",
+      "tanggalFoto": "2026-09-26",
+      "cash": 0.0,
+      "transfer": 670000.0,
+      "total": 670000.0,
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_575",
+      "tanggal": "2026-09-26",
+      "client": "Khofifah Wardah",
+      "paket": "All File",
+      "tanggalFoto": "2026-09-26",
+      "cash": 0.0,
+      "transfer": 50000.0,
+      "total": 50000.0,
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_576",
+      "tanggal": "2026-09-26",
+      "client": "Melody",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-09-26",
+      "cash": 0.0,
+      "transfer": 390000.0,
+      "total": 390000.0,
+      "admin": "INDAH",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -7439,6 +7535,30 @@
       "tanggal": "2026-09-25",
       "nama": "ADIF",
       "slot": 1
+    },
+    {
+      "id": "sh_101",
+      "tanggal": "2026-09-26",
+      "nama": "INDAH",
+      "slot": 1
+    },
+    {
+      "id": "sh_102",
+      "tanggal": "2026-09-26",
+      "nama": "INDAH",
+      "slot": 1
+    },
+    {
+      "id": "sh_103",
+      "tanggal": "2026-09-26",
+      "nama": "SAKA",
+      "slot": 1
+    },
+    {
+      "id": "sh_104",
+      "tanggal": "2026-09-26",
+      "nama": "ADIF",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -7869,28 +7989,64 @@
       "id": "ex_nrc_48",
       "tanggal": "2026-09-19",
       "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Properti / Consumable Sesi",
+      "deskripsi": "Batrei",
+      "nilai": 20000.0
+    },
+    {
+      "id": "ex_nrc_49",
+      "tanggal": "2026-09-22",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Batre Np",
+      "nilai": 19000.0
+    },
+    {
+      "id": "ex_nrc_50",
+      "tanggal": "2026-09-22",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Baygon",
+      "nilai": 45000.0
+    },
+    {
+      "id": "ex_nrc_51",
+      "tanggal": "2026-09-24",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Kabel HDMI",
+      "nilai": 45000.0
+    },
+    {
+      "id": "ex_nrc_52",
+      "tanggal": "2026-09-25",
+      "bulan": "2026-09",
       "jenis": "NON-P&L",
       "kategori": "Prive / Owner Draw",
       "deskripsi": "Bon",
       "nilai": 1576000.0
     },
     {
-      "id": "ex_nrc_49",
-      "tanggal": "2026-09-19",
+      "id": "ex_nrc_53",
+      "tanggal": "2026-09-25",
       "bulan": "2026-09",
       "jenis": "OPEX",
       "kategori": "Pajak & Perizinan",
       "deskripsi": "Pajak",
-      "nilai": 443275.0
+      "nilai": 532625.0
     },
     {
-      "id": "ex_nrc_50",
-      "tanggal": "2026-09-19",
+      "id": "ex_nrc_54",
+      "tanggal": "2026-09-25",
       "bulan": "2026-09",
       "jenis": "Biaya Lainnya",
       "kategori": "Biaya Lainnya",
       "deskripsi": "Amal",
-      "nilai": 1329825.0
+      "nilai": 1597875.0
     }
   ],
   "cashControl": [
@@ -8022,7 +8178,7 @@
     {
       "id": "cc_2026-09-26",
       "tanggal": "2026-09-26",
-      "nilai": 0.0
+      "nilai": 250000.0
     },
     {
       "id": "cc_2026-09-27",
@@ -8251,8 +8407,8 @@
       "tanggal": "2026-09-26",
       "leads": 0.0,
       "dp": 0.0,
-      "sesiFoto": 0.0,
-      "transaksi": 0.0
+      "sesiFoto": 8.0,
+      "transaksi": 8.0
     },
     {
       "id": "ld_27",
@@ -8292,35 +8448,35 @@
       "id": "kp_1",
       "nama": "ADIF",
       "role": "Fotografer 1",
-      "hariDinilai": 21,
+      "hariDinilai": 25,
       "disiplin": 5.0,
       "akurasi": 5.0,
-      "sop": 4.95,
+      "sop": 4.96,
       "client": 5.0,
-      "produktivitas": 4.76,
+      "produktivitas": 4.8,
       "referral": 0
     },
     {
       "id": "kp_2",
       "nama": "AMEL",
       "role": "Admin 2",
-      "hariDinilai": 22,
-      "disiplin": 4.91,
-      "akurasi": 4.95,
-      "sop": 4.86,
+      "hariDinilai": 25,
+      "disiplin": 4.92,
+      "akurasi": 4.96,
+      "sop": 4.84,
       "client": 5.0,
-      "produktivitas": 4.5,
+      "produktivitas": 4.52,
       "referral": 0
     },
     {
       "id": "kp_3",
       "nama": "INDAH",
       "role": "Admin 1",
-      "hariDinilai": 21,
+      "hariDinilai": 26,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
-      "client": 4.95,
+      "client": 4.96,
       "produktivitas": 5.0,
       "referral": 0
     },
@@ -8328,12 +8484,12 @@
       "id": "kp_4",
       "nama": "SAKA",
       "role": "Fotografer 2",
-      "hariDinilai": 22,
-      "disiplin": 4.91,
-      "akurasi": 4.95,
+      "hariDinilai": 26,
+      "disiplin": 4.92,
+      "akurasi": 4.96,
       "sop": 5.0,
       "client": 5.0,
-      "produktivitas": 4.82,
+      "produktivitas": 4.85,
       "referral": 0
     }
   ],
@@ -10895,16 +11051,16 @@
       {
         "id": "sc_bk_171",
         "tgl": "2026-09-26",
-        "waktu": "17:00",
+        "waktu": "18:20",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
-        "nama": "Fadel",
-        "paket": "Family",
-        "paketRaw": "Family",
+        "nama": "Salma Ngarifatul",
+        "paket": "Couple A",
+        "paketRaw": "Couple A",
         "jmlOrang": 1,
-        "harga": 0.0,
-        "admin": "FA",
-        "noHp": "",
+        "harga": 150000.0,
+        "admin": "IN",
+        "noHp": "lunas",
         "manual": false
       },
       {
@@ -10940,21 +11096,6 @@
       {
         "id": "sc_bk_174",
         "tgl": "2026-09-27",
-        "waktu": "10:00",
-        "studio": "Studio 1",
-        "studioNama": "Studio 1",
-        "nama": "Nasla",
-        "paket": "Photofox",
-        "paketRaw": "Photofox",
-        "jmlOrang": 1,
-        "harga": 200000.0,
-        "admin": "IN",
-        "noHp": "",
-        "manual": false
-      },
-      {
-        "id": "sc_bk_175",
-        "tgl": "2026-09-27",
         "waktu": "11:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -10968,7 +11109,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_176",
+        "id": "sc_bk_175",
         "tgl": "2026-09-27",
         "waktu": "12:30",
         "studio": "Studio 1",
@@ -10983,7 +11124,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_177",
+        "id": "sc_bk_176",
         "tgl": "2026-09-27",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -10994,11 +11135,11 @@
         "jmlOrang": 1,
         "harga": 150000.0,
         "admin": "AL",
-        "noHp": "dp 100",
+        "noHp": "dp 100 calmblue",
         "manual": false
       },
       {
-        "id": "sc_bk_178",
+        "id": "sc_bk_177",
         "tgl": "2026-09-27",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -11009,11 +11150,11 @@
         "jmlOrang": 24,
         "harga": 600000.0,
         "admin": "AL",
-        "noHp": "dp 100",
+        "noHp": "dp 100 limbo",
         "manual": false
       },
       {
-        "id": "sc_bk_179",
+        "id": "sc_bk_178",
         "tgl": "2026-09-27",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -11024,7 +11165,22 @@
         "jmlOrang": 1,
         "harga": 450000.0,
         "admin": "AL",
-        "noHp": "dp 100",
+        "noHp": "dp 100 limbo",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_179",
+        "tgl": "2026-09-27",
+        "waktu": "10:00",
+        "studio": "Studio 2",
+        "studioNama": "Studio 2",
+        "nama": "ACONG",
+        "paket": "STUDIO RENT",
+        "paketRaw": "STUDIO RENT",
+        "jmlOrang": 1,
+        "harga": 0.0,
+        "admin": "FA",
+        "noHp": "",
         "manual": false
       },
       {
@@ -11501,6 +11657,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260926-1026",
+      "mulai": "2026-09-26T10:26:39.496625+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 576 order, 181 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260926-0211",
       "mulai": "2026-09-26T02:11:18.717422+00:00",
       "status": "sukses",
@@ -11757,7 +11919,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-26T02:11:18.717422+00:00"
+    "last_sync": "2026-09-26T10:26:39.496625+00:00"
   },
   "neracaDetail": [
     {
@@ -12359,17 +12521,17 @@
       "tgl": 19,
       "tanggal_iso": "2026-09-19",
       "first_of_day": false,
-      "masuk": 0.0,
-      "keluar": 0.0,
-      "balance": 61881000.0,
-      "ket_masuk": "",
-      "ket_keluar": ""
+      "masuk": 2410000.0,
+      "keluar": 20000.0,
+      "balance": 64271000.0,
+      "ket_masuk": "Cash",
+      "ket_keluar": "Batrei"
     }
   ],
   "neracaSummary": {
-    "total_masuk": 88655000.0,
-    "total_keluar": 26774000.0,
-    "ending_balance": 61881000.0,
+    "total_masuk": 91065000.0,
+    "total_keluar": 26794000.0,
+    "ending_balance": 64271000.0,
     "total_rows": 55
   }
 }
