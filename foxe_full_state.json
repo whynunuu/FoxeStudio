@@ -10820,21 +10820,6 @@
       {
         "id": "sc_bk_166",
         "tgl": "2026-09-26",
-        "waktu": "11:00",
-        "studio": "Studio 1",
-        "studioNama": "Studio 1",
-        "nama": "inggar evelyn",
-        "paket": "Family A",
-        "paketRaw": "Family A",
-        "jmlOrang": 1,
-        "harga": 350000.0,
-        "admin": "AL",
-        "noHp": "dp 100 calmblue",
-        "manual": false
-      },
-      {
-        "id": "sc_bk_167",
-        "tgl": "2026-09-26",
         "waktu": "12:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -10848,7 +10833,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_168",
+        "id": "sc_bk_167",
         "tgl": "2026-09-26",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -10863,7 +10848,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_169",
+        "id": "sc_bk_168",
         "tgl": "2026-09-26",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -10878,7 +10863,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_170",
+        "id": "sc_bk_169",
         "tgl": "2026-09-26",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -10893,7 +10878,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_171",
+        "id": "sc_bk_170",
         "tgl": "2026-09-26",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -10908,7 +10893,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_172",
+        "id": "sc_bk_171",
         "tgl": "2026-09-26",
         "waktu": "17:00",
         "studio": "Studio 1",
@@ -10923,7 +10908,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_173",
+        "id": "sc_bk_172",
         "tgl": "2026-09-26",
         "waktu": "19:00",
         "studio": "Studio 1",
@@ -10935,6 +10920,21 @@
         "harga": 250000.0,
         "admin": "AL",
         "noHp": "dp 100 limbo",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_173",
+        "tgl": "2026-09-26",
+        "waktu": "20:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "inggar evelyn",
+        "paket": "Family A",
+        "paketRaw": "Family A",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "AL",
+        "noHp": "dp 100 calmblue",
         "manual": false
       },
       {
@@ -11501,6 +11501,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260926-0211",
+      "mulai": "2026-09-26T02:11:18.717422+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 568 order, 181 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260925-1414",
       "mulai": "2026-09-25T14:14:37.610272+00:00",
       "status": "sukses",
@@ -11751,7 +11757,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-25T14:14:37.610272+00:00"
+    "last_sync": "2026-09-26T02:11:18.717422+00:00"
   },
   "neracaDetail": [
     {
