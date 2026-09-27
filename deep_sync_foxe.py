@@ -22,6 +22,9 @@ import shutil
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 # Import parser modular (File 1, File 2, dan File Neraca)
 from parser_log_order import parse_log_order
 from parser_schedule import parse_schedule

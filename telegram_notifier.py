@@ -12,8 +12,12 @@ import os
 import json
 import urllib.request
 import urllib.parse
+import sys
 import datetime
 import re
+
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
 
 DEFAULT_TOKEN = "8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s"
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "telegram_config.json")
