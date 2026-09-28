@@ -7207,8 +7207,92 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
-      "admin": "",
+      "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_600",
+      "tanggal": "2026-09-28",
+      "client": "Pandu",
+      "paket": "Graduation",
+      "tanggalFoto": "28 sept",
+      "cash": 250000.0,
+      "transfer": 0.0,
+      "total": 250000.0,
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_601",
+      "tanggal": "2026-09-28",
+      "client": "Azzahra",
+      "paket": "Single",
+      "tanggalFoto": "28 sept",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_602",
+      "tanggal": "2026-09-28",
+      "client": "salsabila",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-09-29",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_603",
+      "tanggal": "2026-09-28",
+      "client": "Merlin",
+      "paket": "Add Edit",
+      "tanggalFoto": "2026-09-27",
+      "cash": 0.0,
+      "transfer": 10000.0,
+      "total": 10000.0,
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_604",
+      "tanggal": "2026-09-28",
+      "client": "Falah",
+      "paket": "Graduation",
+      "tanggalFoto": "28 sept",
+      "cash": 0.0,
+      "transfer": 250000.0,
+      "total": 250000.0,
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_605",
+      "tanggal": "2026-09-28",
+      "client": "Azzahra",
+      "paket": "Single",
+      "tanggalFoto": "28 sept",
+      "cash": 0.0,
+      "transfer": 50000.0,
+      "total": 50000.0,
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_606",
+      "tanggal": "2026-09-28",
+      "client": "Kiran",
+      "paket": "Large Group",
+      "tanggalFoto": "28 sept",
+      "cash": 0.0,
+      "transfer": 475000.0,
+      "total": 475000.0,
+      "admin": "AMEL",
+      "fotografer": "SAKA"
     }
   ],
   "shifts": [
@@ -7869,7 +7953,19 @@
     {
       "id": "sh_110",
       "tanggal": "2026-09-28",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_111",
+      "tanggal": "2026-09-28",
       "nama": "ADIF",
+      "slot": 1
+    },
+    {
+      "id": "sh_112",
+      "tanggal": "2026-09-28",
+      "nama": "SAKA",
       "slot": 1
     }
   ],
@@ -8509,7 +8605,7 @@
     {
       "id": "cc_2026-09-28",
       "tanggal": "2026-09-28",
-      "nilai": 0.0
+      "nilai": 250000.0
     },
     {
       "id": "cc_2026-09-29",
@@ -8742,10 +8838,10 @@
     {
       "id": "ld_28",
       "tanggal": "2026-09-28",
-      "leads": 0.0,
-      "dp": 3.0,
-      "sesiFoto": 3.0,
-      "transaksi": 6.0
+      "leads": 29.0,
+      "dp": 4.0,
+      "sesiFoto": 9.0,
+      "transaksi": 13.0
     },
     {
       "id": "ld_29",
@@ -11567,7 +11663,7 @@
       {
         "id": "sc_bk_184",
         "tgl": "2026-09-28",
-        "waktu": "18:00",
+        "waktu": "17:20",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "Falah",
@@ -11582,6 +11678,21 @@
       {
         "id": "sc_bk_185",
         "tgl": "2026-09-28",
+        "waktu": "19:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Azzahra",
+        "paket": "Single",
+        "paketRaw": "Single",
+        "jmlOrang": 1,
+        "harga": 100000.0,
+        "admin": "AL",
+        "noHp": "dp 100 limbo",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_186",
+        "tgl": "2026-09-28",
         "waktu": "19:40",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -11595,7 +11706,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_186",
+        "id": "sc_bk_187",
         "tgl": "2026-09-29",
         "waktu": "10:30",
         "studio": "Studio 1",
@@ -11610,7 +11721,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_187",
+        "id": "sc_bk_188",
         "tgl": "2026-09-29",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -11625,7 +11736,22 @@
         "manual": false
       },
       {
-        "id": "sc_bk_188",
+        "id": "sc_bk_189",
+        "tgl": "2026-09-29",
+        "waktu": "16:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "salsabila",
+        "paket": "Large Group",
+        "paketRaw": "LG 16",
+        "jmlOrang": 16,
+        "harga": 400000.0,
+        "admin": "IN",
+        "noHp": "dp 100",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_190",
         "tgl": "2026-09-30",
         "waktu": "10:30",
         "studio": "Studio 1",
@@ -11640,7 +11766,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_189",
+        "id": "sc_bk_191",
         "tgl": "2026-09-30",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -11655,7 +11781,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_190",
+        "id": "sc_bk_192",
         "tgl": "2026-09-30",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -12113,6 +12239,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260928-1415",
+      "mulai": "2026-09-28T14:15:38.834433+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 606 order, 192 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260928-1429",
       "mulai": "2026-09-28T07:29:37.976100+00:00",
       "status": "sukses",
@@ -12411,7 +12543,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-28T07:29:37.976100+00:00"
+    "last_sync": "2026-09-28T14:15:38.834433+00:00"
   },
   "neracaDetail": [
     {
