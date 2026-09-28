@@ -7787,6 +7787,12 @@
       "tanggal": "2026-09-27",
       "nama": "SAKA",
       "slot": 1
+    },
+    {
+      "id": "sh_109",
+      "tanggal": "2026-09-28",
+      "nama": "INDAH",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -11969,6 +11975,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260928-0211",
+      "mulai": "2026-09-28T02:11:13.812620+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 593 order, 186 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260927-1654",
       "mulai": "2026-09-27T16:54:12.502255+00:00",
       "status": "sukses",
@@ -12267,7 +12279,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-27T16:54:12.502255+00:00"
+    "last_sync": "2026-09-28T02:11:13.812620+00:00"
   },
   "neracaDetail": [
     {
