@@ -638,7 +638,12 @@ let S = (() => {
       if (Array.isArray(parsedPay) && parsedPay.length > 0) {
         parsedPay.forEach(r => {
           if (r.additional === undefined) r.additional = 0;
-          if (r.bonus_kpi === undefined) r.bonus_kpi = 0;
+          if (!r.bonus_kpi || Number(r.bonus_kpi) === 0) {
+            const initR = (INITIAL_STATE.rosterGaji || []).find(x => x.id === r.id || String(x.nama).trim().toUpperCase() === String(r.nama).trim().toUpperCase());
+            if (initR && initR.bonus_kpi) {
+              r.bonus_kpi = initR.bonus_kpi;
+            }
+          }
         });
         resState.rosterGaji = parsedPay;
       }
@@ -876,7 +881,7 @@ function compute(){
         });
         if (km && km.bonusCair != null) kpiNom = Math.round(km.bonusCair);
       }
-      const bonus_kpi = (r.bonus_kpi !== undefined && r.bonus_kpi !== null && r.bonus_kpi !== "") ? dnum(r.bonus_kpi) : kpiNom;
+      const bonus_kpi = (dnum(r.bonus_kpi) > 0) ? dnum(r.bonus_kpi) : kpiNom;
       const thp = totG + bonus_kpi + additional + bonus - huk - bon;
       return {...r, q, cost, total_gaji:totG, bonus_kpi, additional, bonus, hukuman:huk, bon, thp};
     }),
@@ -892,7 +897,8 @@ function compute(){
           });
           if (km && km.bonusCair != null) kpiNom = Math.round(km.bonusCair);
         }
-        return s + ((r.bonus_kpi !== undefined && r.bonus_kpi !== null && r.bonus_kpi !== "") ? dnum(r.bonus_kpi) : kpiNom);
+        const bk = (dnum(r.bonus_kpi) > 0) ? dnum(r.bonus_kpi) : kpiNom;
+        return s + bk;
       },0),
       total_additional:(S.rosterGaji||[]).reduce((s,r)=>s+dnum(r.additional),0),
       total_bonus:(S.rosterGaji||[]).reduce((s,r)=>s+dnum(r.bonus),0),
@@ -908,7 +914,7 @@ function compute(){
           });
           if (km && km.bonusCair != null) kpiNom = Math.round(km.bonusCair);
         }
-        const bk = (r.bonus_kpi !== undefined && r.bonus_kpi !== null && r.bonus_kpi !== "") ? dnum(r.bonus_kpi) : kpiNom;
+        const bk = (dnum(r.bonus_kpi) > 0) ? dnum(r.bonus_kpi) : kpiNom;
         const add = dnum(r.additional);
         return s+((dnum(r.q)*dnum(r.cost))+bk+add+dnum(r.bonus)-dnum(r.hukuman)-dnum(r.bon));
       },0),

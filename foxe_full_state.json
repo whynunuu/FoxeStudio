@@ -12458,7 +12458,7 @@
   ],
   "sync": [
     {
-      "id": "sy_20260929-1241",
+      "id": "sy_kpi_1790686182",
       "mulai": "2026-09-29T12:41:10.371684+00:00",
       "status": "sukses",
       "ringkas": "Integrasi berhasil: 618 order, 193 jadwal, 5 pos pengeluaran Neraca."
@@ -16445,12 +16445,12 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1120000.0,
-      "bonus_kpi": 0.0,
+      "bonus_kpi": 346981.0,
       "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1120000.0,
+      "thp": 1466981.0,
       "status": "Draft"
     },
     {
@@ -16464,12 +16464,12 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1200000.0,
-      "bonus_kpi": 0.0,
+      "bonus_kpi": 346544.0,
       "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1200000.0,
+      "thp": 1546544.0,
       "status": "Draft"
     },
     {
@@ -16483,12 +16483,12 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1160000.0,
-      "bonus_kpi": 0.0,
+      "bonus_kpi": 340769.0,
       "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1160000.0,
+      "thp": 1500769.0,
       "status": "Draft"
     },
     {
@@ -16502,12 +16502,12 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1160000.0,
-      "bonus_kpi": 0.0,
+      "bonus_kpi": 349475.0,
       "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1160000.0,
+      "thp": 1509475.0,
       "status": "Draft"
     },
     {
@@ -16665,12 +16665,12 @@
   ],
   "rosterSummary": {
     "total_gaji": 12790000.0,
-    "total_bonus_kpi": 0.0,
+    "total_bonus_kpi": 1383769.0,
     "total_additional": 0.0,
     "total_bonus": 0.0,
     "total_hukuman": 0.0,
     "total_bon": 0.0,
-    "grand_total_thp": 12790000.0,
+    "grand_total_thp": 14173769.0,
     "total_karyawan": 12
   }
 }

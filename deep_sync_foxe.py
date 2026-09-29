@@ -171,6 +171,40 @@ def run_integration():
         state["cashControl"] = res_f1["cashControl"]
         state["leads"] = res_f1["leads"] if res_f1["leads"] else state.get("leads", [])
         state["kpi"] = res_f1["kpi"]
+
+        # Injeksi otomatis Bonus KPI dari Sheet 9 ke Roster Gaji (Adif, Saka, Amel, Indah)
+        kpi_list = state.get("kpi", [])
+        if kpi_list and state.get("rosterGaji"):
+            pool = 7000000.0
+            bobot = 1.0 / len(kpi_list) if len(kpi_list) else 0.25
+            kpi_cair_map = {}
+            for kp in kpi_list:
+                nm = str(kp.get("nama", "")).strip().upper()
+                basic = float(kp.get("disiplin", 0) or 0)
+                in_job = ((float(kp.get("akurasi", 0) or 0) + float(kp.get("sop", 0) or 0) + float(kp.get("client", 0) or 0) + float(kp.get("produktivitas", 0) or 0)) / 4.0) * 3.0
+                op = basic + in_job + float(kp.get("referral", 0) or 0)
+                b_cair = round((pool * bobot) * (op / 100.0))
+                kpi_cair_map[nm] = b_cair
+
+            for r in state["rosterGaji"]:
+                rn = str(r.get("nama", "")).strip().upper()
+                matched_kpi = 0
+                for knm, bcair in kpi_cair_map.items():
+                    if knm == rn or knm in rn or rn in knm:
+                        matched_kpi = bcair
+                        break
+                r["bonus_kpi"] = float(matched_kpi)
+                tot_gaji = float(r.get("total_gaji", 0) or 0)
+                add = float(r.get("additional", 0) or 0)
+                bon = float(r.get("bon", 0) or 0)
+                bonus = float(r.get("bonus", 0) or 0)
+                huk = float(r.get("hukuman", 0) or 0)
+                r["thp"] = tot_gaji + float(matched_kpi) + add + bonus - huk - bon
+
+            if "rosterSummary" in state:
+                state["rosterSummary"]["total_bonus_kpi"] = sum(r.get("bonus_kpi", 0) for r in state["rosterGaji"])
+                state["rosterSummary"]["grand_total_thp"] = sum(r.get("thp", 0) for r in state["rosterGaji"])
+
         state["baseline"] = state.get("baseline", {"label": "September 2025", "omzet": 88000000, "net": 35000000})
         state["history"] = state.get("history", [])
         state["ads"] = state.get("ads", [])
