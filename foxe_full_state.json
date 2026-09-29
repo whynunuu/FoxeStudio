@@ -8574,7 +8574,7 @@
       "jenis": "OPEX",
       "kategori": "Pajak & Perizinan",
       "deskripsi": "Pajak",
-      "nilai": 532625.0
+      "nilai": 559275.0
     },
     {
       "id": "ex_nrc_55",
@@ -8583,7 +8583,7 @@
       "jenis": "Biaya Lainnya",
       "kategori": "Biaya Lainnya",
       "deskripsi": "Amal",
-      "nilai": 1597875.0
+      "nilai": 1677825.0
     }
   ],
   "cashControl": [
@@ -8985,31 +8985,31 @@
       "id": "kp_1",
       "nama": "ADIF",
       "role": "Fotografer 1",
-      "hariDinilai": 25,
+      "hariDinilai": 27,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 4.96,
       "client": 5.0,
-      "produktivitas": 4.8,
+      "produktivitas": 4.81,
       "referral": 0
     },
     {
       "id": "kp_2",
       "nama": "AMEL",
       "role": "Admin 2",
-      "hariDinilai": 25,
-      "disiplin": 4.92,
+      "hariDinilai": 28,
+      "disiplin": 4.93,
       "akurasi": 4.96,
-      "sop": 4.84,
+      "sop": 4.86,
       "client": 5.0,
-      "produktivitas": 4.52,
+      "produktivitas": 4.57,
       "referral": 0
     },
     {
       "id": "kp_3",
       "nama": "INDAH",
       "role": "Admin 1",
-      "hariDinilai": 26,
+      "hariDinilai": 28,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -9021,12 +9021,12 @@
       "id": "kp_4",
       "nama": "SAKA",
       "role": "Fotografer 2",
-      "hariDinilai": 26,
-      "disiplin": 4.92,
-      "akurasi": 4.96,
+      "hariDinilai": 29,
+      "disiplin": 4.93,
+      "akurasi": 4.97,
       "sop": 5.0,
       "client": 5.0,
-      "produktivitas": 4.85,
+      "produktivitas": 4.86,
       "referral": 0
     }
   ],
@@ -11888,7 +11888,7 @@
       {
         "id": "sc_bk_191",
         "tgl": "2026-09-30",
-        "waktu": "10:30",
+        "waktu": "10:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "Raka (Radiologi UMP)",
@@ -12374,6 +12374,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260929-1147",
+      "mulai": "2026-09-29T11:47:55.749493+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 614 order, 193 jadwal, 5 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260929-1118",
       "mulai": "2026-09-29T11:18:51.807307+00:00",
       "status": "sukses",
@@ -12708,7 +12714,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-29T11:18:51.807307+00:00"
+    "last_sync": "2026-09-29T11:47:55.749493+00:00"
   },
   "neracaDetail": [
     {
@@ -16282,13 +16288,13 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1120000.0,
+      "bonus_kpi": 0.0,
+      "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1466850.0,
-      "status": "Draft",
-      "bonus_kpi": 346850.0,
-      "additional": 0.0
+      "thp": 1120000.0,
+      "status": "Draft"
     },
     {
       "id": "pay_2",
@@ -16301,13 +16307,13 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1200000.0,
+      "bonus_kpi": 0.0,
+      "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1546106.0,
-      "status": "Draft",
-      "bonus_kpi": 346106.0,
-      "additional": 0.0
+      "thp": 1200000.0,
+      "status": "Draft"
     },
     {
       "id": "pay_3",
@@ -16320,13 +16326,13 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1160000.0,
+      "bonus_kpi": 0.0,
+      "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1499675.0,
-      "status": "Draft",
-      "bonus_kpi": 339675.0,
-      "additional": 0.0
+      "thp": 1160000.0,
+      "status": "Draft"
     },
     {
       "id": "pay_4",
@@ -16339,13 +16345,13 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1160000.0,
+      "bonus_kpi": 0.0,
+      "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1509475.0,
-      "status": "Draft",
-      "bonus_kpi": 349475.0,
-      "additional": 0.0
+      "thp": 1160000.0,
+      "status": "Draft"
     },
     {
       "id": "pay_5",
@@ -16358,13 +16364,13 @@
       "cost": 1850000.0,
       "is_fixed": true,
       "total_gaji": 1850000.0,
+      "bonus_kpi": 0.0,
+      "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
       "thp": 1850000.0,
-      "status": "Draft",
-      "bonus_kpi": 0.0,
-      "additional": 0.0
+      "status": "Draft"
     },
     {
       "id": "pay_6",
@@ -16377,13 +16383,13 @@
       "cost": 1300000.0,
       "is_fixed": true,
       "total_gaji": 1300000.0,
+      "bonus_kpi": 0.0,
+      "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
       "thp": 1300000.0,
-      "status": "Draft",
-      "bonus_kpi": 0.0,
-      "additional": 0.0
+      "status": "Draft"
     },
     {
       "id": "pay_7",
@@ -16396,13 +16402,13 @@
       "cost": 1000000.0,
       "is_fixed": true,
       "total_gaji": 1000000.0,
+      "bonus_kpi": 0.0,
+      "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
       "thp": 1000000.0,
-      "status": "Draft",
-      "bonus_kpi": 0.0,
-      "additional": 0.0
+      "status": "Draft"
     },
     {
       "id": "pay_8",
@@ -16415,13 +16421,13 @@
       "cost": 4000000.0,
       "is_fixed": true,
       "total_gaji": 4000000.0,
+      "bonus_kpi": 0.0,
+      "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
       "thp": 4000000.0,
-      "status": "Draft",
-      "bonus_kpi": 0.0,
-      "additional": 0.0
+      "status": "Draft"
     },
     {
       "id": "pay_9",
@@ -16434,13 +16440,13 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 0.0,
+      "bonus_kpi": 0.0,
+      "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
       "thp": 0.0,
-      "status": "Draft",
-      "bonus_kpi": 0.0,
-      "additional": 0.0
+      "status": "Draft"
     },
     {
       "id": "pay_10",
@@ -16453,13 +16459,13 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 0.0,
+      "bonus_kpi": 0.0,
+      "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
       "thp": 0.0,
-      "status": "Draft",
-      "bonus_kpi": 0.0,
-      "additional": 0.0
+      "status": "Draft"
     },
     {
       "id": "pay_11",
@@ -16472,13 +16478,13 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 0.0,
+      "bonus_kpi": 0.0,
+      "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
       "thp": 0.0,
-      "status": "Draft",
-      "bonus_kpi": 0.0,
-      "additional": 0.0
+      "status": "Draft"
     },
     {
       "id": "pay_12",
@@ -16491,23 +16497,23 @@
       "cost": 0.0,
       "is_fixed": false,
       "total_gaji": 0.0,
+      "bonus_kpi": 0.0,
+      "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
       "thp": 0.0,
-      "status": "Draft",
-      "bonus_kpi": 0.0,
-      "additional": 0.0
+      "status": "Draft"
     }
   ],
   "rosterSummary": {
     "total_gaji": 12790000.0,
-    "total_bonus_kpi": 1382106.0,
+    "total_bonus_kpi": 0.0,
     "total_additional": 0.0,
     "total_bonus": 0.0,
     "total_hukuman": 0.0,
     "total_bon": 0.0,
-    "grand_total_thp": 14172106.0,
+    "grand_total_thp": 12790000.0,
     "total_karyawan": 12
   }
 }
