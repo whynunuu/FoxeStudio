@@ -611,107 +611,6 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
   </div>
 </div>
 
-<!-- Modal Slip Gaji Karyawan -->
-<div class="modal-overlay" id="slipModal" style="display:none">
-  <div class="modal-box" style="max-width:540px;width:100%">
-    <div class="modal-head no-print">
-      <h3>📄 Slip Gaji Karyawan</h3>
-      <button class="modal-close" id="btnCloseSlipModal" title="Tutup">✕</button>
-    </div>
-    <div class="modal-body" style="padding:16px 20px">
-      <!-- Printable Slip Area -->
-      <div id="printableSlip" style="background:#fff;color:#111;padding:24px;border-radius:10px;font-family:'Inter',system-ui,sans-serif;box-shadow:0 1px 4px rgba(0,0,0,0.12)">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #222;padding-bottom:12px;margin-bottom:16px">
-          <div>
-            <h2 style="margin:0;font-size:20px;font-weight:800;letter-spacing:-0.5px;color:#d97757">FOXE STUDIO</h2>
-            <p style="margin:2px 0 0 0;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:1px">Professional Photography Studio</p>
-          </div>
-          <div style="text-align:right">
-            <span style="display:inline-block;padding:3px 10px;background:#f3f4f6;border:1px solid #ccc;border-radius:6px;font-size:11px;font-weight:700" id="slipBadgeStatus">SLIP GAJI</span>
-            <div style="font-size:11px;color:#666;margin-top:3px" id="slipDocNo">NO: FS/PAY/2026/09</div>
-          </div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;background:#f9fafb;padding:12px;border-radius:8px;font-size:12.5px">
-          <div>
-            <div style="font-size:10px;color:#777;text-transform:uppercase">Nama Karyawan</div>
-            <b style="font-size:14px;color:#111" id="slipNama">—</b>
-            <div style="color:#555;font-size:11.5px" id="slipJob">—</div>
-          </div>
-          <div style="text-align:right">
-            <div style="font-size:10px;color:#777;text-transform:uppercase">Periode Penggajian</div>
-            <b style="font-size:13px;color:#111" id="slipPeriode">September 2026</b>
-            <div style="color:#777;font-size:11px" id="slipTglCetak">Dicetak: 29 Sep 2026</div>
-          </div>
-        </div>
-
-        <!-- Section Penghasilan -->
-        <div style="margin-bottom:14px">
-          <div style="font-size:11px;font-weight:700;color:#333;text-transform:uppercase;border-bottom:1px solid #ddd;padding-bottom:4px;margin-bottom:6px">1. Penghasilan (Earnings)</div>
-          <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px">
-            <span id="slipShiftLabel">Gaji Shift (0 shift @ Rp 0)</span>
-            <b id="slipGajiPokok">Rp 0</b>
-          </div>
-          <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px">
-            <span>Bonus &amp; Insentif Target</span>
-            <b id="slipBonus">Rp 0</b>
-          </div>
-          <div style="display:flex;justify-content:space-between;font-size:12.5px;padding-top:4px;border-top:1px dashed #ccc;color:#444">
-            <span>Total Penghasilan Kotor</span>
-            <b id="slipTotalKotor">Rp 0</b>
-          </div>
-        </div>
-
-        <!-- Section Potongan -->
-        <div style="margin-bottom:16px">
-          <div style="font-size:11px;font-weight:700;color:#c53030;text-transform:uppercase;border-bottom:1px solid #ddd;padding-bottom:4px;margin-bottom:6px">2. Potongan (Deductions)</div>
-          <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px">
-            <span>Kasbon / Pinjaman Karyawan</span>
-            <span id="slipKasbon" style="color:#c53030">Rp 0</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px">
-            <span>Denda / Keterlambatan</span>
-            <span id="slipDenda" style="color:#c53030">Rp 0</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;font-size:12.5px;padding-top:4px;border-top:1px dashed #ccc;color:#444">
-            <span>Total Potongan</span>
-            <b id="slipTotalPotongan" style="color:#c53030">Rp 0</b>
-          </div>
-        </div>
-
-        <!-- Take Home Pay Box -->
-        <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:8px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-          <div>
-            <div style="font-size:10.5px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:0.5px">Gaji Bersih Diterima (Take Home Pay)</div>
-            <div style="font-size:11px;color:#15803d;margin-top:2px" id="slipTerbilang">Status: Draft / Siap Dicairkan</div>
-          </div>
-          <div style="font-size:20px;font-weight:800;color:#166534" id="slipTHP">Rp 0</div>
-        </div>
-
-        <!-- Tanda Tangan -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:center;font-size:11.5px;margin-top:24px;padding-top:12px;border-top:1px solid #eee">
-          <div>
-            <div style="color:#777">Diterima oleh,</div>
-            <div style="height:48px"></div>
-            <b id="slipSignNama">( ........................................ )</b>
-          </div>
-          <div>
-            <div style="color:#777">Disetujui oleh Manajemen,</div>
-            <div style="height:48px"></div>
-            <b>Foxe Studio Management</b>
-          </div>
-        </div>
-      </div>
-
-      <!-- Action buttons -->
-      <div class="no-print" style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px">
-        <button class="btn sm" id="btnCopySlipWa" style="border-color:#22c55e;color:#16a34a">📋 Salin Teks WA</button>
-        <button class="btn sm pri" id="btnPrintSlip">🖨️ Cetak / Simpan PDF</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
 "use strict";
 /* ============================ konstanta & util ============================ */
@@ -1353,7 +1252,7 @@ const VIEWS=[
   {id:"est",grp:"Ringkasan",label:"Estimasi Omzet"},
   {id:"trx",grp:"Input",label:"Transaksi"},
   {id:"biaya",grp:"Input",label:"Neraca (COGS & OPEX)"},
-  {id:"gaji",grp:"Input",label:"Slip Gaji & Payroll"},
+  {id:"gaji",grp:"Input",label:"Gaji Karyawan"},
   {id:"shift",grp:"Input",label:"Shift"},
   {id:"lead",grp:"Input",label:"Lead"},
   {id:"kpi",grp:"Input",label:"KPI & Bonus"},
@@ -2831,7 +2730,7 @@ function vGaji(R){
         </select>
       </td>
       <td style="text-align:center;white-space:nowrap">
-        <button class="btn sm pri btn-cetak-slip" data-id="${r.id}" title="Lihat & Cetak Slip Gaji" style="padding:3px 9px;font-size:12px">📄 Slip</button>
+        <button class="btn sm pri btn-cetak-slip" data-id="${r.id}" title="Lihat Slip Gaji di Bawah" style="padding:3px 9px;font-size:12px">📄 Lihat Slip</button>
         <button class="btn sm btn-del-payroll" data-id="${r.id}" title="Hapus Kru" style="padding:3px 7px;font-size:11px;color:var(--crit);margin-left:4px">✕</button>
       </td>
     </tr>
@@ -2841,8 +2740,8 @@ function vGaji(R){
   <div class="vhead" style="justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px">
     <div>
       <div class="eyebrow">Payroll &amp; Penggajian Karyawan</div>
-      <h2>Slip Gaji &amp; Payroll</h2>
-      <p>Data pos gaji terhubung dengan section Gaji Karyawan File Neraca. Nilai shift, tarif, bonus, dan potongan kasbon <b>dapat diedit langsung</b> untuk penyesuaian akhir bulan, serta dicetak menjadi slip gaji resmi.</p>
+      <h2>Gaji Karyawan</h2>
+      <p>Data pos gaji terhubung dengan File Neraca. Nilai shift, tarif, bonus, dan potongan kasbon <b>dapat diedit langsung</b>. Di bagian bawah langsung tersedia slip gaji resmi siap cetak.</p>
     </div>
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
       <span class="pill prog" id="payrollEditBadge" style="font-size:11.5px">✏️ Mode Edit Aktif</span>
@@ -2890,7 +2789,7 @@ function vGaji(R){
           <th class="n" style="width:95px">Kasbon (-)</th>
           <th class="n" style="width:125px">Take Home Pay</th>
           <th style="text-align:center;width:95px">Status</th>
-          <th style="text-align:center;width:95px">Aksi</th>
+          <th style="text-align:center;width:110px">Aksi</th>
         </tr>
       </thead>
       <tbody id="payrollTableBody">
@@ -2910,26 +2809,107 @@ function vGaji(R){
     </table>
   </div>
 
-  <div class="two">
-    <div class="card">
-      <h3>ℹ️ Panduan Pengisian &amp; Tutup Bulan</h3>
-      <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px">
-        1. <b>Q (Shift / Qty)</b>: Otomatis membaca kehadiran dari Log Order s.d. cut-off hari ini. Anda bisa mengubahnya jika ada revisi jadwal akhir bulan.<br>
-        2. <b>Bonus</b>: Diisi sesuai pencapaian tier omzet studio atau reward sesi khusus.<br>
-        3. <b>Kasbon &amp; Denda</b>: Diinputkan untuk memotong take home pay karyawan.<br>
-        4. Klik <b>"💾 Simpan Perubahan"</b> untuk menyimpan ke browser, atau <b>"📄 Slip"</b> untuk mencetak/membagikan slip resmi ke WhatsApp karyawan.
-      </p>
+  <!-- SECTION SLIP GAJI DI BAGIAN BAWAH -->
+  <div class="card" id="secSlipDirect" style="margin-top:28px;border:1.5px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface))">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px;border-bottom:1px solid var(--hairline);padding-bottom:14px">
+      <div>
+        <div class="eyebrow" style="color:var(--accent)">Preview &amp; Cetak Langsung</div>
+        <h3 style="margin:0;font-size:20px;color:var(--ink);display:flex;align-items:center;gap:8px">📄 Slip Gaji Karyawan</h3>
+        <p style="margin:4px 0 0 0;font-size:13px;color:var(--muted)">Pilih kru untuk melihat slip gaji resmi, mencetak, atau membagikannya ke WhatsApp.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <label style="font-size:12.5px;color:var(--muted);font-weight:600">Pilih Kru:</label>
+        <select id="selSlipKru" style="background:var(--surface);border:1px solid var(--accent);border-radius:8px;padding:7px 14px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer">
+          ${list.map(r => `<option value="${r.id}">${r.nama} (${r.job || 'Kru'})</option>`).join("")}
+        </select>
+        <button class="btn sm" id="btnCopySlipWaInline" style="border-color:#22c55e;color:#16a34a;padding:7px 14px;font-weight:600">📋 Salin Teks WA</button>
+        <button class="btn sm pri" id="btnPrintSlipInline" style="padding:7px 14px;font-weight:600">🖨️ Cetak / Simpan PDF</button>
+      </div>
     </div>
-    <div class="card">
-      <h3>🔗 Rekonsiliasi Neraca OPEX</h3>
-      <div class="tw">
-        <table>
-          <tbody>
-            <tr><td>Total Take Home Pay Roster</td><td class="n mono"><b>${rp(sm.grand_total_thp)}</b></td></tr>
-            <tr><td>Tercatat di Neraca (Kategori Gaji)</td><td class="n mono">${rp(R.gajiNeraca)}</td></tr>
-            <tr><td>Selisih / Estimasi Jatuh Tempo</td><td class="n mono" style="color:${(sm.grand_total_thp - R.gajiNeraca) > 0 ? 'var(--warn)' : 'var(--good)'}"><b>${rp(Math.max(0, sm.grand_total_thp - R.gajiNeraca))}</b></td></tr>
-          </tbody>
-        </table>
+
+    <!-- Tampilan Slip Gaji Resmi -->
+    <div style="max-width:640px;margin:0 auto">
+      <div id="printableSlip" style="background:#fff;color:#111;padding:28px 32px;border-radius:12px;font-family:'Inter',system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,0.18)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #222;padding-bottom:14px;margin-bottom:16px">
+          <div>
+            <h2 style="margin:0;font-size:22px;font-weight:800;letter-spacing:-0.5px;color:#d97757">FOXE STUDIO</h2>
+            <p style="margin:3px 0 0 0;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:1px">Professional Photography Studio</p>
+          </div>
+          <div style="text-align:right">
+            <span style="display:inline-block;padding:3px 10px;background:#f3f4f6;border:1px solid #ccc;border-radius:6px;font-size:11px;font-weight:700" id="slipBadgeStatus">SLIP GAJI</span>
+            <div style="font-size:11px;color:#666;margin-top:4px" id="slipDocNo">NO: FS/PAY/${yr}/${R.c.bulan.split("-")[1]}</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;background:#f9fafb;padding:12px 14px;border-radius:8px;font-size:12.5px">
+          <div>
+            <div style="font-size:10px;color:#777;text-transform:uppercase;letter-spacing:0.5px">Nama Karyawan</div>
+            <b style="font-size:15px;color:#111" id="slipNama">—</b>
+            <div style="color:#555;font-size:12px" id="slipJob">—</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:10px;color:#777;text-transform:uppercase;letter-spacing:0.5px">Periode Penggajian</div>
+            <b style="font-size:13px;color:#111" id="slipPeriode">${mn} ${yr}</b>
+            <div style="color:#777;font-size:11px" id="slipTglCetak">Dicetak: ${R.cutDay} ${mn} ${yr}</div>
+          </div>
+        </div>
+
+        <!-- Section Penghasilan -->
+        <div style="margin-bottom:14px">
+          <div style="font-size:11px;font-weight:700;color:#333;text-transform:uppercase;border-bottom:1px solid #ddd;padding-bottom:5px;margin-bottom:8px">1. Penghasilan (Earnings)</div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
+            <span id="slipShiftLabel">Gaji Shift</span>
+            <b id="slipGajiPokok">Rp 0</b>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
+            <span>Bonus &amp; Insentif Target</span>
+            <b id="slipBonus" style="color:#16a34a">Rp 0</b>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;padding-top:6px;border-top:1px dashed #ccc;color:#333">
+            <span>Total Penghasilan Kotor</span>
+            <b id="slipTotalKotor">Rp 0</b>
+          </div>
+        </div>
+
+        <!-- Section Potongan -->
+        <div style="margin-bottom:18px">
+          <div style="font-size:11px;font-weight:700;color:#c53030;text-transform:uppercase;border-bottom:1px solid #ddd;padding-bottom:5px;margin-bottom:8px">2. Potongan (Deductions)</div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
+            <span>Kasbon / Pinjaman Karyawan</span>
+            <span id="slipKasbon" style="color:#c53030">Rp 0</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
+            <span>Denda / Keterlambatan</span>
+            <span id="slipDenda" style="color:#c53030">Rp 0</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;padding-top:6px;border-top:1px dashed #ccc;color:#333">
+            <span>Total Potongan</span>
+            <b id="slipTotalPotongan" style="color:#c53030">Rp 0</b>
+          </div>
+        </div>
+
+        <!-- Take Home Pay Box -->
+        <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:0.5px">Gaji Bersih Diterima (Take Home Pay)</div>
+            <div style="font-size:11.5px;color:#15803d;margin-top:2px" id="slipTerbilang">Transfer Bank / Kas Studio</div>
+          </div>
+          <div style="font-size:22px;font-weight:800;color:#166534" id="slipTHP">Rp 0</div>
+        </div>
+
+        <!-- Tanda Tangan -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:center;font-size:12px;margin-top:26px;padding-top:14px;border-top:1px solid #eee">
+          <div>
+            <div style="color:#777">Diterima oleh,</div>
+            <div style="height:50px"></div>
+            <b id="slipSignNama">( ........................................ )</b>
+          </div>
+          <div>
+            <div style="color:#777">Disetujui oleh Manajemen,</div>
+            <div style="height:50px"></div>
+            <b>Foxe Studio Management</b>
+          </div>
+        </div>
       </div>
     </div>
   </div>`;
@@ -3238,90 +3218,101 @@ function wire(R){
     };
   });
 
-  // Modal Cetak Slip Gaji
-  const slipModal = document.getElementById('slipModal');
-  const btnCloseSlipModal = document.getElementById('btnCloseSlipModal');
-  if (btnCloseSlipModal && slipModal) {
-    btnCloseSlipModal.onclick = () => { slipModal.style.display = 'none'; };
-    slipModal.onclick = (e) => { if (e.target === slipModal) slipModal.style.display = 'none'; };
+  // Update & Render Inline Slip Gaji
+  const updateInlineSlip = (r) => {
+    if (!r) return;
+    const mn = BULAN[+S.config.bulan.split("-")[1]-1] + " " + S.config.bulan.split("-")[0];
+    const now = new Date();
+    const tglStr = `${now.getDate()} ${BULAN[now.getMonth()]} ${now.getFullYear()}`;
+    
+    const elNama = document.getElementById('slipNama'); if (elNama) elNama.textContent = r.nama;
+    const elJob = document.getElementById('slipJob'); if (elJob) elJob.textContent = r.job || 'Kru Foxe Studio';
+    const elPer = document.getElementById('slipPeriode'); if (elPer) elPer.textContent = mn;
+    const elCetak = document.getElementById('slipTglCetak'); if (elCetak) elCetak.textContent = 'Dicetak: ' + tglStr;
+    const elBadge = document.getElementById('slipBadgeStatus');
+    if (elBadge) {
+      elBadge.textContent = r.status ? r.status.toUpperCase() : 'SLIP GAJI';
+      elBadge.style.background = r.status === 'Terbayar' ? '#dcfce7' : '#fef9c3';
+      elBadge.style.color = r.status === 'Terbayar' ? '#15803d' : '#854d0e';
+    }
+    const elSign = document.getElementById('slipSignNama'); if (elSign) elSign.textContent = `( ${r.nama} )`;
+    
+    const isShift = r.cost <= 100000;
+    const elLabel = document.getElementById('slipShiftLabel');
+    if (elLabel) elLabel.textContent = isShift ? `Gaji Shift (${r.q} shift × ${rp(r.cost)})` : `Gaji Pokok / Fixed (${r.q} bln)`;
+    const elGaji = document.getElementById('slipGajiPokok'); if (elGaji) elGaji.textContent = rp(r.total_gaji);
+    const elBonus = document.getElementById('slipBonus'); if (elBonus) elBonus.textContent = rp(r.bonus || 0);
+    const elKotor = document.getElementById('slipTotalKotor'); if (elKotor) elKotor.textContent = rp((r.total_gaji || 0) + (r.bonus || 0));
+    
+    const elKasbon = document.getElementById('slipKasbon'); if (elKasbon) elKasbon.textContent = rp(r.bon || 0);
+    const elDenda = document.getElementById('slipDenda'); if (elDenda) elDenda.textContent = rp(r.hukuman || 0);
+    const elPot = document.getElementById('slipTotalPotongan'); if (elPot) elPot.textContent = rp((r.bon || 0) + (r.hukuman || 0));
+    
+    const elTHP = document.getElementById('slipTHP'); if (elTHP) elTHP.textContent = rp(r.thp || 0);
+  };
+
+  const selKru = document.getElementById('selSlipKru');
+  if (selKru) {
+    const initId = selKru.value;
+    const initR = (S.rosterGaji || []).find(x => x.id === initId) || (S.rosterGaji || [])[0];
+    if (initR) updateInlineSlip(initR);
+
+    selKru.onchange = () => {
+      const selectedR = (S.rosterGaji || []).find(x => x.id === selKru.value);
+      if (selectedR) updateInlineSlip(selectedR);
+    };
   }
 
-  let activeSlipData = null;
+  // Tombol 'Lihat Slip' di tabel
   document.querySelectorAll('.btn-cetak-slip').forEach(btn => {
     btn.onclick = () => {
       const id = btn.dataset.id;
       const r = (S.rosterGaji || []).find(x => x.id === id);
-      if (!r || !slipModal) return;
-      activeSlipData = r;
-      
-      const mn = BULAN[+S.config.bulan.split("-")[1]-1] + " " + S.config.bulan.split("-")[0];
-      const now = new Date();
-      const tglStr = `${now.getDate()} ${BULAN[now.getMonth()]} ${now.getFullYear()}`;
-      
-      document.getElementById('slipNama').textContent = r.nama;
-      document.getElementById('slipJob').textContent = r.job || 'Kru Foxe Studio';
-      document.getElementById('slipPeriode').textContent = mn;
-      document.getElementById('slipTglCetak').textContent = 'Dicetak: ' + tglStr;
-      document.getElementById('slipBadgeStatus').textContent = r.status ? r.status.toUpperCase() : 'SLIP GAJI';
-      document.getElementById('slipBadgeStatus').style.background = r.status === 'Terbayar' ? '#dcfce7' : '#fef9c3';
-      document.getElementById('slipBadgeStatus').style.color = r.status === 'Terbayar' ? '#15803d' : '#854d0e';
-      document.getElementById('slipSignNama').textContent = `( ${r.nama} )`;
-      
-      const isShift = r.cost <= 100000;
-      document.getElementById('slipShiftLabel').textContent = isShift ? `Gaji Shift (${r.q} shift × ${rp(r.cost)})` : `Gaji Pokok / Fixed (${r.q} bln)`;
-      document.getElementById('slipGajiPokok').textContent = rp(r.total_gaji);
-      document.getElementById('slipBonus').textContent = rp(r.bonus || 0);
-      document.getElementById('slipTotalKotor').textContent = rp((r.total_gaji || 0) + (r.bonus || 0));
-      
-      document.getElementById('slipKasbon').textContent = rp(r.bon || 0);
-      document.getElementById('slipDenda').textContent = rp(r.hukuman || 0);
-      document.getElementById('slipTotalPotongan').textContent = rp((r.bon || 0) + (r.hukuman || 0));
-      
-      document.getElementById('slipTHP').textContent = rp(r.thp || 0);
-      
-      slipModal.style.display = 'flex';
+      if (!r) return;
+      if (selKru) selKru.value = id;
+      updateInlineSlip(r);
+      const targetSec = document.getElementById('secSlipDirect');
+      if (targetSec) targetSec.scrollIntoView({behavior: 'smooth', block: 'start'});
     };
   });
 
-  const btnPrintSlip = document.getElementById('btnPrintSlip');
-  if (btnPrintSlip) {
-    btnPrintSlip.onclick = () => {
-      window.print();
-    };
-  }
+  const printFn = () => window.print();
+  const copyWaFn = () => {
+    const curId = selKru ? selKru.value : null;
+    const r = (S.rosterGaji || []).find(x => x.id === curId) || (S.rosterGaji || [])[0];
+    if (!r) return;
+    const mn = BULAN[+S.config.bulan.split("-")[1]-1] + " " + S.config.bulan.split("-")[0];
+    const isShift = r.cost <= 100000;
+    const text = `*SLIP GAJI FOXE STUDIO*\n` +
+      `Periode: ${mn}\n` +
+      `Nama: *${r.nama}* (${r.job || 'Kru'})\n` +
+      `----------------------------------------\n` +
+      `1. Penghasilan:\n` +
+      `   • ${isShift ? `Gaji Shift (${r.q} shift × ${rp(r.cost)})` : 'Gaji Pokok'}: ${rp(r.total_gaji)}\n` +
+      `   • Bonus Target: ${rp(r.bonus || 0)}\n` +
+      `   Total Kotor: ${rp((r.total_gaji||0) + (r.bonus||0))}\n\n` +
+      `2. Potongan:\n` +
+      `   • Kasbon: ${rp(r.bon || 0)}\n` +
+      `   • Denda/Potongan: ${rp(r.hukuman || 0)}\n` +
+      `   Total Potongan: ${rp((r.bon||0) + (r.hukuman||0))}\n` +
+      `----------------------------------------\n` +
+      `*TAKE HOME PAY (BERSIH): ${rp(r.thp || 0)}*\n` +
+      `Status: ${r.status || 'Draft'}\n` +
+      `----------------------------------------\n` +
+      `Terima kasih atas dedikasi dan kerja kerasmu!`;
+    
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('📋 Format teks WhatsApp berhasil disalin ke clipboard!', 'ok', 2500);
+    }).catch(() => {
+      showToast('Gagal menyalin ke clipboard.', 'bad', 2500);
+    });
+  };
 
-  const btnCopySlipWa = document.getElementById('btnCopySlipWa');
-  if (btnCopySlipWa) {
-    btnCopySlipWa.onclick = () => {
-      if (!activeSlipData) return;
-      const r = activeSlipData;
-      const mn = BULAN[+S.config.bulan.split("-")[1]-1] + " " + S.config.bulan.split("-")[0];
-      const isShift = r.cost <= 100000;
-      const text = `*SLIP GAJI FOXE STUDIO*\n` +
-        `Periode: ${mn}\n` +
-        `Nama: *${r.nama}* (${r.job || 'Kru'})\n` +
-        `----------------------------------------\n` +
-        `1. Penghasilan:\n` +
-        `   • ${isShift ? `Gaji Shift (${r.q} shift × ${rp(r.cost)})` : 'Gaji Pokok'}: ${rp(r.total_gaji)}\n` +
-        `   • Bonus Target: ${rp(r.bonus || 0)}\n` +
-        `   Total Kotor: ${rp((r.total_gaji||0) + (r.bonus||0))}\n\n` +
-        `2. Potongan:\n` +
-        `   • Kasbon: ${rp(r.bon || 0)}\n` +
-        `   • Denda/Potongan: ${rp(r.hukuman || 0)}\n` +
-        `   Total Potongan: ${rp((r.bon||0) + (r.hukuman||0))}\n` +
-        `----------------------------------------\n` +
-        `*TAKE HOME PAY (BERSIH): ${rp(r.thp || 0)}*\n` +
-        `Status: ${r.status || 'Draft'}\n` +
-        `----------------------------------------\n` +
-        `Terima kasih atas dedikasi dan kerja kerasmu!`;
-      
-      navigator.clipboard.writeText(text).then(() => {
-        showToast('📋 Format teks WhatsApp berhasil disalin ke clipboard!', 'ok', 2500);
-      }).catch(() => {
-        showToast('Gagal menyalin ke clipboard.', 'bad', 2500);
-      });
-    };
-  }
+  const btnPrintInline = document.getElementById('btnPrintSlipInline');
+  if (btnPrintInline) btnPrintInline.onclick = printFn;
+
+  const btnCopyWaInline = document.getElementById('btnCopySlipWaInline');
+  if (btnCopyWaInline) btnCopyWaInline.onclick = copyWaFn;
 }
 
 /* ============================ export xlsx ============================ */
