@@ -147,6 +147,8 @@ def parse_neraca(filepath="file_neraca.xlsx", sheet_name="September 2026", actua
                     "cost": cost,
                     "is_fixed": is_fixed,
                     "total_gaji": tot_gaji,
+                    "bonus_kpi": 0.0,
+                    "additional": 0.0,
                     "bonus": bonus,
                     "hukuman": hukuman,
                     "bon": bon,
@@ -234,6 +236,8 @@ def parse_neraca(filepath="file_neraca.xlsx", sheet_name="September 2026", actua
 
     roster_summary = {
         "total_gaji": sum(p["total_gaji"] for p in roster_gaji),
+        "total_bonus_kpi": sum(p.get("bonus_kpi", 0) for p in roster_gaji),
+        "total_additional": sum(p.get("additional", 0) for p in roster_gaji),
         "total_bonus": sum(p["bonus"] for p in roster_gaji),
         "total_hukuman": sum(p["hukuman"] for p in roster_gaji),
         "total_bon": sum(p["bon"] for p in roster_gaji),
