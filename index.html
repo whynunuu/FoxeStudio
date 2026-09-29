@@ -2800,6 +2800,55 @@ function vGaji(R){
     </table>
   </div>
 
+  <!-- BAGIAN CATATAN BON TIAP KARYAWAN -->
+  ${R.bonDoc ? `
+  <div class="two" style="margin-top:24px;margin-bottom:20px">
+    <div class="card">
+      <h3>Kasbon Karyawan <span class="pill neutral">${rp(R.kasbon)} masuk OPEX</span></h3>
+      <p class="tiny muted" style="margin:-6px 0 12px">Uang yang diambil sebelum gajian. Dipotong dari take home pay akhir bulan.</p>
+      ${Object.entries(R.bonOrang).filter(([,d])=>d.kasbon>0).length ? `
+      <div class="tw"><table><thead><tr><th>Nama</th><th class="n">Kasbon</th>
+        <th class="n">Gaji Berjalan</th><th class="n">Sisa Kalau Digaji Sekarang</th>
+        </tr></thead><tbody>
+        ${Object.entries(R.bonOrang).filter(([,d])=>d.kasbon>0).map(([nm,d])=>{
+          const rs=list.filter(r=>String(r.nama).toLowerCase()===nm.toLowerCase());
+          const gj=rs.reduce((s,r)=>s+r.total_gaji,0);
+          const sisa=gj-d.kasbon;
+          return `<tr><td><b>${esc(nm)}</b></td>
+            <td class="n" style="color:var(--crit);font-weight:600">${rp(d.kasbon)}</td>
+            <td class="n">${rs.length?rp(gj):'<span class="muted">tidak di kartu tarif</span>'}</td>
+            <td class="n"${rs.length&&sisa<0?' style="color:var(--crit)"':""}>${
+              rs.length?rp(sisa):'<span class="muted">—</span>'}</td></tr>`}).join("")}
+        <tr class="total"><td>Total Kasbon</td><td class="n mono" style="color:var(--crit)">${rp(R.kasbon)}</td>
+          <td class="n mono">${rp(sm.total_gaji)}</td><td class="n mono" style="color:var(--accent)">${rp(sm.total_gaji-R.kasbon)}</td></tr>
+      </tbody></table></div>` : `<div class="empty">Belum ada kasbon bulan ini.</div>`}
+    </div>
+
+    <div class="card">
+      <h3>Di Luar Foxe <span class="pill neutral">tidak masuk OPEX</span></h3>
+      <p class="tiny muted" style="margin:-6px 0 12px">Pengeluaran pribadi / bisnis lain di luar operasional studio Foxe.</p>
+      <div class="stats" style="margin-bottom:14px">
+        <div class="stat"><span class="k">Atas nama Aiz</span><span class="v sm mono">${rp(R.bonAizio)}</span>
+          <span class="m">dikelompokkan Aizio</span></div>
+        <div class="stat"><span class="k">Nama lain</span><span class="v sm mono">${rp(R.bonLain)}</span>
+          <span class="m">${R.bonLain?"perlu diputuskan":"belum ada"}</span></div>
+        <div class="stat"><span class="k">Tarikan pemilik</span><span class="v sm mono">${rp(R.bonOwner)}</span>
+          <span class="m">prive, bukan biaya</span></div>
+      </div>
+      ${R.bonDoc.rows && R.bonDoc.rows.length ? `
+      <div class="tw" style="max-height:190px;overflow-y:auto"><table><thead><tr>
+        <th>Tgl</th><th>Nama</th><th>Keterangan</th><th class="n">Nilai</th>
+      </tr></thead><tbody>
+        ${R.bonDoc.rows.slice(0, 10).map(b => `<tr>
+          <td class="mono muted" style="font-size:11.5px">${b.tanggal ? b.tanggal.slice(8) : ''} ${mn}</td>
+          <td><b>${esc(b.nama)}</b></td>
+          <td class="tiny muted">${esc(b.keterangan || b.grup)}</td>
+          <td class="n mono" style="font-size:12px">${rp(b.nilai)}</td>
+        </tr>`).join("")}
+      </tbody></table></div>` : ''}
+    </div>
+  </div>` : ''}
+
   <!-- SECTION SLIP GAJI DI BAGIAN BAWAH -->
   <div class="card" id="secSlipDirect" style="margin-top:28px;border:1.5px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface))">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px;border-bottom:1px solid var(--hairline);padding-bottom:14px">
