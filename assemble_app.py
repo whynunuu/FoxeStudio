@@ -12,6 +12,9 @@ html_template = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Foxe Studio Keuangan</title>
 <link rel="icon" type="image/png" href="logo_foxe.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -316,38 +319,35 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
   background:radial-gradient(circle at 50% 35%, #22201d 0%, #100f0e 100%);
   display:flex;align-items:center;justify-content:center;padding:24px 16px;
   overflow-y:auto;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.lock-card{width:100%;max-width:360px;margin:auto;background:rgba(27,26,24,0.94);
-  border:1px solid rgba(0,128,200,0.3);
-  box-shadow:0 24px 48px rgba(0,0,0,0.7),0 0 32px rgba(0,128,200,0.15);
+.lock-card{width:100%;max-width:360px;margin:auto;background:rgba(27,26,24,0.95);
+  border:1px solid rgba(0,128,200,0.4);
+  box-shadow:0 24px 48px rgba(0,0,0,0.7),0 0 32px rgba(0,128,200,0.18);
   border-radius:24px;padding:32px 24px;text-align:center;color:#faf9f5;
   animation:lockFadeIn .35s cubic-bezier(0.16,1,0.3,1)}
 @keyframes lockFadeIn{from{opacity:0;transform:scale(0.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.lock-logo{margin-bottom:14px;display:inline-flex;filter:drop-shadow(0 2px 8px rgba(0,128,200,0.4))}
+.lock-logo{margin-bottom:14px;display:inline-flex;filter:drop-shadow(0 2px 10px rgba(0,128,200,0.45))}
 .lock-title{font-family:var(--ff-display,serif);font-size:29px;font-weight:700;letter-spacing:-.5px;color:#faf9f5;margin-bottom:3px}
 .lock-subtitle{font-size:13px;color:#a09d96;margin-bottom:12px}
 .lock-badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
-  padding:3px 12px;border-radius:9999px;background:rgba(0,128,200,0.15);color:#0080c8;
-  border:1px solid rgba(0,128,200,0.3);margin-bottom:22px}
+  padding:3px 12px;border-radius:9999px;background:rgba(0,128,200,0.18);color:#0080c8;
+  border:1px solid rgba(0,128,200,0.4);margin-bottom:22px}
 .pin-display{display:flex;justify-content:center;gap:12px;margin-bottom:20px}
 .pin-display .dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(160,157,150,0.4);
   background:transparent;transition:all .18s cubic-bezier(0.16,1,0.3,1)}
-.pin-display .dot.filled{background:#0080c8;border-color:#0080c8;box-shadow:0 0 12px rgba(0,128,200,0.6);transform:scale(1.15)}
+.pin-display .dot.filled{background:#0080c8;border-color:#0080c8;box-shadow:0 0 12px rgba(0,128,200,0.8);transform:scale(1.15)}
 .pin-display.shake{animation:pinShake .45s cubic-bezier(0.36,0.07,0.19,0.97)}
 @keyframes pinShake{10%,90%{transform:translate3d(-3px,0,0)}20%,80%{transform:translate3d(5px,0,0)}30%,50%,70%{transform:translate3d(-6px,0,0)}40%,60%{transform:translate3d(6px,0,0)}}
 .pin-hidden-input{position:absolute;opacity:0;pointer-events:none}
 .lock-error{color:#e07a68;font-size:12.5px;font-weight:500;margin-top:-8px;margin-bottom:14px;min-height:18px}
-.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
 .key-btn{background:rgba(37,35,32,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:12px;
   padding:13px 0;font-size:19px;font-weight:600;color:#faf9f5;cursor:pointer;
   transition:all .12s ease;user-select:none;-webkit-user-select:none}
-.key-btn:hover{background:rgba(52,50,45,0.95);border-color:rgba(0,128,200,0.35)}
+.key-btn:hover{background:rgba(52,50,45,0.95);border-color:rgba(0,128,200,0.45)}
 .key-btn:active{transform:scale(0.92);background:#0080c8;color:#fff}
 .key-btn.action-btn{font-size:16px;color:#a09d96}
-.key-btn.ok-btn{background:rgba(0,128,200,0.25);color:#0080c8;border-color:rgba(0,128,200,0.4)}
+.key-btn.ok-btn{background:rgba(0,128,200,0.25);color:#0080c8;border-color:rgba(0,128,200,0.45)}
 .key-btn.ok-btn:active{background:#0080c8;color:#fff}
-.remember-wrap{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:#a09d96;
-  cursor:pointer;margin-bottom:14px;user-select:none}
-.remember-wrap input{accent-color:#0080c8;cursor:pointer}
 .lock-footer{font-size:11.5px;color:#6c6a64}
 
 /* ---------- toast notification ---------- */
@@ -480,11 +480,6 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
       <button class="key-btn" type="button" data-val="0">0</button>
       <button class="key-btn action-btn ok-btn" type="button" id="keySubmit">➔</button>
     </div>
-
-    <label class="remember-wrap">
-      <input type="checkbox" id="chkRemember" checked>
-      <span>Ingat perangkat ini (30 hari)</span>
-    </label>
 
     <p class="lock-footer">Akses internal khusus Owner &amp; Manajemen Foxe Studio</p>
   </div>
@@ -3534,6 +3529,9 @@ async function hashPin(pin) {
 
 function checkSavedAuth() {
   try {
+    // Matikan fitur ingat perangkat: selalu bersihkan sisa token persisten di localStorage
+    try { localStorage.removeItem(AUTH_KEY); } catch(e){}
+
     // Di lingkungan lokal (file://, localhost, iframe preview IDE), selalu otomatis buka!
     const isLocal = window.location.protocol === "file:" ||
       !window.location.hostname ||
@@ -3543,14 +3541,13 @@ function checkSavedAuth() {
       window.self !== window.top;
     if (isLocal) return true;
 
-    const raw = localStorage.getItem(AUTH_KEY);
-    if (!raw) return false;
-    const parsed = JSON.parse(raw);
-    if (parsed.expires && Date.now() < parsed.expires) {
+    // Hanya izinkan akses jika sudah login pada sesi tab ini (sessionStorage)
+    const sessionToken = sessionStorage.getItem("foxe_session_auth");
+    if (sessionToken && VALID_HASHES.includes(sessionToken)) {
       return true;
     }
   } catch(e){
-    return true;
+    return false;
   }
   return false;
 }
@@ -3586,16 +3583,10 @@ async function verifyPin() {
     validToken = VALID_HASHES[0];
   }
   if (isValid) {
-    const remember = document.getElementById("chkRemember") ? document.getElementById("chkRemember").checked : true;
-    if (remember) {
-      const authData = {
-        token: validToken || VALID_HASHES[0],
-        expires: Date.now() + (30 * 24 * 60 * 60 * 1000)
-      };
-      try {
-        localStorage.setItem(AUTH_KEY, JSON.stringify(authData));
-      } catch(e){}
-    }
+    try {
+      localStorage.removeItem(AUTH_KEY);
+      sessionStorage.setItem("foxe_session_auth", validToken || VALID_HASHES[0]);
+    } catch(e){}
     unlockDashboard();
   } else {
     const errEl = document.getElementById("lockError");
@@ -3635,7 +3626,10 @@ function unlockDashboard() {
 }
 
 function lockDashboard() {
-  localStorage.removeItem(AUTH_KEY);
+  try {
+    localStorage.removeItem(AUTH_KEY);
+    sessionStorage.removeItem("foxe_session_auth");
+  } catch(e){}
   enteredPin = "";
   updatePinDots();
   const lock = document.getElementById("lockScreen");
