@@ -3,13 +3,17 @@
 ## Trigger Kata Kunci: "ayo kerja"
 Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan data"), Agent **HARUS LANGSUNG mengeksekusi pipeline kerja lengkap** secara mandiri:
 1. Jalankan `python deep_sync_foxe.py`:
-   - Unduh File 1 Log Order, File 2 Schedule, dan File Neraca dari Google Drive (File 3 Rekap Global DI-SKIP).
+   - Unduh File 1 Log Order, File 2 Schedule Sept, File Neraca, serta 3 File Jadwal Oktober:
+     * Schedule Reguler Oktober: ID `17QPAAhmPZqkomwajFhAw3JBmDyBFuklfNMqyVqlK484` (`file2_okt.xlsx`)
+     * Wisuda UMP Hari 1 (3 Okt): ID `1sRILPoZD09Rm5aKn6tswNxvxOiRkSu4Z` (`file_wisuda_3okt.xlsx`)
+     * Wisuda UMP Hari 2 (4 Okt): ID `1hDeuOh-6fnsP7vzWAl4HVwlYoEumu1hA` (`file_wisuda_4okt.xlsx`)
    - Hitung total shift aktual kru s.d. hari ini dari Log Order, deteksi cut-off dinamis.
    - Parse section `Detail` File Neraca (kolom P s.d. U) untuk klasifikasi COGS & OPEX serta Buku Detail Neraca (Debit/Kredit).
+   - Parse Pipeline Oktober: 154 booking terdaftar (23 Reguler + 131 Wisuda UMP), hitung potensi omzet paket dan estimasi pelunasan (cash in hari-H foto).
    - Simpan `foxe_full_state.json`, rakit `index.html`, dan kirim notifikasi Telegram via `@NunuFxBot`.
    - Di dalam struk laporan Telegram (blok monospace), sertakan kalkulasi **Estimate Omzet Sampai Akhir Bulan** (Unrealized Cash In, DP (-), Total, dan Unrealized Omzet) yang menyatu di dalam struk di bawah Estimasi Nett Profit.
 2. Jalankan git commit & push ke `origin main`:
-   `git add foxe_full_state.json index.html assemble_app.py file1.xlsm file2.xlsx file_neraca.xlsx parser_neraca.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
+   `git add foxe_full_state.json index.html assemble_app.py file1.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx parser_neraca.py parser_schedule.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
    `git commit -m "Auto-sync data update"`
    `git push origin main`
 3. Tampilkan ringkasan metrik pembaruan hari ini dan tautan website live:
@@ -22,14 +26,14 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
 ### 1. Section No. 1: Laporan Tahunan & Seasonality Index
 - **Posisi Prioritas #1**: `Laporan Tahunan` berada di urutan teratas pada daftar navigasi Ringkasan dan menjadi tampilan pembuka (**default landing view**) saat website pertama kali dimuat.
 - **ATURAN MUTLAK DATA REAL (Anti-Fabrikasi)**:
-  - Bulan sebelum dan sesudah September 2026 (Januari–Agustus & Oktober–Desember 2026) **WAJIB DIKOSONGKAN (`—`)** dengan status badge `<span class="pill neutral">Belum Dicocokkan</span>`.
-  - Jangan pernah menampilkan angka omzet buatan/proyeksi spekulatif untuk bulan-bulan tersebut karena belum lulus verifikasi pembukuan riil oleh owner.
-  - **Hanya September 2026** yang menampilkan data riil live terverifikasi (`R.omzet`, proyeksi run-rate, indikator live dot berdenyut, dan badge `<span class="pill crit">Berjalan (Terverifikasi)</span>`).
+  - Bulan sebelum September 2026 (Januari–Agustus) dan sesudah Oktober 2026 (November–Desember 2026) **WAJIB DIKOSONGKAN (`—`)** dengan status badge `<span class="pill neutral">Belum Dicocokkan</span>`.
+  - **September 2026**: Menampilkan data riil live terverifikasi (`R.omzet`, proyeksi run-rate, indikator live dot berdenyut, dan badge `<span class="pill crit">Berjalan (Terverifikasi)</span>`).
+  - **Oktober 2026**: Menampilkan data riil pipeline booking terdaftar (`S.oktoberPipeline`: 154 booking terdaftar dari Schedule Reguler + Wisuda UMP 3 & 4 Okt, badge `<span class="pill prog">Pipeline (154 Booking)</span>`, potensi omzet, dan estimasi pelunasan riil).
 - **Benchmark Seasonality 12 Bulan**:
   - Matriks Seasonality Index 12 bulan (Januari s.d. Desember) tetap aktif penuh menggunakan benchmark tahun 2025 (garis tengah 1.00×, Super Peak September 2.10×).
-  - Pada grafik tahunan, batang 2026 HANYA dirender untuk bulan September.
+  - Pada grafik tahunan, batang 2026 dirender untuk bulan September (realized) dan Oktober (pipeline terdaftar).
 - **12 Kotak Bulan Interaktif**:
-  - Setiap kotak bulan dapat diklik dan dilengkapi tombol menuju ke section laporan bulanan operasional (`view = "dash"`).
+  - Setiap kotak bulan dapat diklik: September membuka dashboard live (`view = "dash"`), Oktober membuka rincian pipeline estimasi booking (`view = "est"`).
 
 ### 2. Struktur Section Neraca (COGS & OPEX):
 - Section COGS dan OPEX digabung menjadi satu section resmi bernama **`Neraca (COGS & OPEX)`**.

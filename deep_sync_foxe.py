@@ -27,12 +27,17 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 # Import parser modular (File 1, File 2, dan File Neraca)
 from parser_log_order import parse_log_order
-from parser_schedule import parse_schedule
+from parser_schedule import parse_schedule, parse_october_pipeline
 from parser_neraca import parse_neraca
 
 LOG_ORDER_FILE_ID = "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ"
 SCHEDULE_SHEET_ID = "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I"
 NERACA_SHEET_ID = "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM"
+
+# Sumber Jadwal Oktober 2026 (Reguler & Wisuda UMP 3 & 4 Okt)
+SCHEDULE_OKT_SHEET_ID = "17QPAAhmPZqkomwajFhAw3JBmDyBFuklfNMqyVqlK484"
+WISUDA_3OKT_FILE_ID = "1sRILPoZD09Rm5aKn6tswNxvxOiRkSu4Z"
+WISUDA_4OKT_FILE_ID = "1hDeuOh-6fnsP7vzWAl4HVwlYoEumu1hA"
 
 def download_gdrive(file_id, dest_path):
     session = requests.Session()
@@ -95,25 +100,28 @@ def run_integration():
         json.dump(state, f, ensure_ascii=False, indent=2)
 
     try:
-        # STEP 4: Unduh sumber operasional resmi (File 1, File 2, dan File Neraca)
-        print("\n[1/4] Mengunduh sumber operasional (Log Order, Schedule, dan Neraca)...")
+        # STEP 4: Unduh sumber operasional resmi (Log Order, Schedule, Wisuda, dan Neraca)
+        print("\n[1/5] Mengunduh sumber operasional (Log Order, Schedule, Wisuda, dan Neraca)...")
         download_gdrive(LOG_ORDER_FILE_ID, "file1.xlsm")
         download_gsheet(SCHEDULE_SHEET_ID, "file2.xlsx")
         download_gsheet(NERACA_SHEET_ID, "file_neraca.xlsx")
+        download_gsheet(SCHEDULE_OKT_SHEET_ID, "file2_okt.xlsx")
+        download_gsheet(WISUDA_3OKT_FILE_ID, "file_wisuda_3okt.xlsx")
+        download_gsheet(WISUDA_4OKT_FILE_ID, "file_wisuda_4okt.xlsx")
 
         # STEP 5: Jalankan Parser File 1 (Log Order)
-        print("\n[2/4] Menjalankan parser_log_order.py (File 1)...")
+        print("\n[2/5] Menjalankan parser_log_order.py (File 1)...")
         res_f1 = parse_log_order("file1.xlsm", bulan="2026-09")
         print(f"[OK] File 1 terurai: {len(res_f1['orders'])} transaksi, {len(res_f1['shifts'])} shift, {len(res_f1['cashControl'])} kontrol kas, {len(res_f1['leads'])} data lead.")
 
         # STEP 6: Jalankan Parser File 2 (Schedule) & Merge Booking
-        print("\n[3/4] Menjalankan parser_schedule.py (File 2)...")
+        print("\n[3/5] Menjalankan parser_schedule.py (File 2)...")
         existing_bk = (state.get("schedule") or {}).get("bookings", [])
         res_f2_bookings = parse_schedule("file2.xlsx", bulan="2026-09", existing_bookings=existing_bk)
         print(f"[OK] File 2 terurai: {len(res_f2_bookings)} jadwal booking studio.")
 
         # STEP 7: Jalankan Parser File Neraca (COGS, OPEX & Log Debit Kredit)
-        print("\n[4/4] Menjalankan parser_neraca.py (File Neraca)...")
+        print("\n[4/5] Menjalankan parser_neraca.py (File Neraca)...")
         res_neraca = parse_neraca("file_neraca.xlsx", sheet_name="September 2026")
         if isinstance(res_neraca, dict):
             state["expenses"] = res_neraca.get("expenses", [])
@@ -125,6 +133,12 @@ def run_integration():
             state["expenses"] = res_neraca
             neraca_count = len(res_neraca)
             detail_count = 0
+
+        # STEP 7.5: Jalankan Parser Schedule Pipeline Oktober 2026 (Reguler + Wisuda 3 & 4 Okt)
+        print("\n[5/5] Menjalankan parse_october_pipeline()...")
+        okt_pipeline = parse_october_pipeline("file2_okt.xlsx", "file_wisuda_3okt.xlsx", "file_wisuda_4okt.xlsx")
+        state["oktoberPipeline"] = okt_pipeline
+        print(f"[OK] Pipeline Oktober terurai: {okt_pipeline['totalBookings']} booking terdaftar (Potensi: Rp {okt_pipeline['potentialOmzet']:,.0f}, Estimasi Pelunasan: Rp {okt_pipeline['estimateCashIn']:,.0f}).")
 
         # STEP 8: Perbarui State Gabungan
         active_days = [int(o["tanggal"].split("-")[2]) for o in res_f1["orders"] if o["tanggal"].startswith("2026-09-") and int(o["tanggal"].split("-")[2]) <= 30]

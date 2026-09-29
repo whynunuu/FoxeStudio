@@ -4,20 +4,24 @@
 Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "update data", "sinkronkan data"), Agent **HARUS LANGSUNG mengeksekusi pipeline kerja lengkap** secara mandiri dari awal hingga selesai tanpa perlu konfirmasi manual lagi:
 
 ### 1. Eksekusi Sinkronisasi Operasional Google Drive (`deep_sync_foxe.py`):
-- Unduh & parse data operasional dari 3 sumber Google Drive resmi (File 3 / Rekap Global DI-SKIP):
+- Unduh & parse data operasional dari sumber Google Drive resmi (File 3 / Rekap Global DI-SKIP):
   * **File 1 (Log Order `.xlsm`)**: ID `1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ` (transaksi pembayaran, akumulasi total shift aktual kru, kas harian, funnel leads marketing & KPI harian).
-  * **File 2 (Schedule `.xlsx`)**: ID `14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I` (jadwal booking Studio 1, 2, 3 dan deteksi jadwal foto besok H+1).
+  * **File 2 (Schedule Sept `.xlsx`)**: ID `14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I` (jadwal booking Studio 1, 2, 3 dan deteksi jadwal foto besok H+1).
   * **File Neraca (`.xlsx`)**: ID `1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM` (pengeluaran operasional & produksi dari section `Detail` sheet September 2026, diklasifikasikan ke COGS & OPEX via `parser_neraca.py`).
+  * **Schedule Reguler Oktober (`.xlsx`)**: ID `17QPAAhmPZqkomwajFhAw3JBmDyBFuklfNMqyVqlK484` (`file2_okt.xlsx`).
+  * **Wisuda UMP Hari 1 / 3 Okt (`.xlsx`)**: ID `1sRILPoZD09Rm5aKn6tswNxvxOiRkSu4Z` (`file_wisuda_3okt.xlsx`).
+  * **Wisuda UMP Hari 2 / 4 Okt (`.xlsx`)**: ID `1hDeuOh-6fnsP7vzWAl4HVwlYoEumu1hA` (`file_wisuda_4okt.xlsx`).
+- **Pipeline Oktober:** Otomatis parse & merge 154 booking terdaftar (23 Reguler + 131 Wisuda UMP 5 backdrop) menjadi estimasi pipeline (potensi paket Rp 55,95 jt, estimasi pelunasan Rp 45,85 jt).
 - **Roster Shift:** Hitung akumulasi total shift slot aktual dari Log Order s.d. tanggal sekarang/cut-off.
 - **ATURAN MUTLAK BIAYA:** Pengeluaran COGS & OPEX murni diambil dari section `Detail` File Neraca (kolom P s.d. U). JANGAN mengambil pengeluaran dari File Log Order karena referensinya berbeda.
 - **SECTION TERPADU:** Section COGS dan OPEX digabung menjadi satu section resmi bernama **`Neraca (COGS & OPEX)`** yang dilengkapi **Buku Detail Neraca (Debit & Kredit)**.
-- Deteksi cut-off dinamis (mengikuti tanggal transaksi aktif terbaru, misal: 21 September 2026).
+- Deteksi cut-off dinamis (mengikuti tanggal transaksi aktif terbaru, misal: 29 September 2026).
 - Simpan state gabungan ke `foxe_full_state.json`.
 - Rakit ulang file visual `index.html` dan salin ke artefak `foxe_studio_keuangan.html`.
 
 ### 2. Auto-Commit & Deploy ke GitHub:
 - Otomatis commit dan push pembaruan data ke repository:
-  `git add foxe_full_state.json index.html assemble_app.py file1.xlsm file2.xlsx file_neraca.xlsx parser_neraca.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
+  `git add foxe_full_state.json index.html assemble_app.py file1.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx parser_neraca.py parser_schedule.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
   `git commit -m "Auto-sync data update"`
   `git push origin main`
 - Remote URL: `https://github.com/whynunuu/FoxeStudio.git`
@@ -35,14 +39,14 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
 ### 1. Section No. 1: Laporan Tahunan & Seasonality Index
 - **Urutan Navigasi Teratas**: `Laporan Tahunan` berposisi di urutan pertama (paling atas) pada sidebar ringkasan dan menjadi landing view bawaan (**default view**) saat web pertama kali dibuka.
 - **ATURAN MUTLAK DATA REAL (Anti-Spekulasi)**:
-  - Bulan sebelum dan sesudah September 2026 (Januari–Agustus & Oktober–Desember 2026) **WAJIB DIKOSONGKAN (`—`)** dengan status badge `<span class="pill neutral">Belum Dicocokkan</span>`.
-  - Jangan pernah merekayasa atau membuat angka estimasi buatan untuk bulan-bulan unverified tersebut karena belum lulus rekonsiliasi data riil oleh owner.
-  - **Hanya September 2026** yang terverifikasi aktif & live (`R.omzet`, proyeksi run-rate, indikator live dot, badge `<span class="pill crit">Berjalan (Terverifikasi)</span>`).
+  - Bulan sebelum September 2026 (Jan–Ags) dan sesudah Oktober 2026 (Nov–Des) **WAJIB DIKOSONGKAN (`—`)** dengan status badge `<span class="pill neutral">Belum Dicocokkan</span>`.
+  - **September 2026**: Menampilkan data riil live terverifikasi (`R.omzet`, proyeksi run-rate, indikator live dot, badge `<span class="pill crit">Berjalan (Terverifikasi)</span>`).
+  - **Oktober 2026**: Menampilkan data riil pipeline booking terdaftar (`S.oktoberPipeline`: 154 booking terdaftar dari Schedule Reguler + Wisuda UMP 3 & 4 Okt, badge `<span class="pill prog">Pipeline (154 Booking)</span>`, potensi omzet, dan estimasi pelunasan riil).
 - **Seasonality Index 12 Bulan**:
   - Matriks Seasonality Index 12 bulan (Jan–Des) tetap aktif penuh menggunakan benchmark tahun 2025 (garis tengah 1.00× rata-rata, Super Peak September 2.10×).
-  - Pada chart tahunan, batang 2026 HANYA dirender untuk bulan September.
+  - Pada chart tahunan, batang 2026 dirender untuk bulan September (realized) dan Oktober (pipeline terdaftar).
 - **12 Kotak Bulan Interaktif**:
-  - Setiap kotak bulan dapat diklik untuk membuka section laporan bulanan (`view = "dash"`).
+  - Setiap kotak bulan dapat diklik: September membuka dashboard live (`view = "dash"`), Oktober membuka rincian pipeline estimasi booking (`view = "est"`).
 
 ### 2. Layout Fit-In & Anti-Tabrakan:
 - `.view` menggunakan lebar adaptif `max-width: 1600px; width: 100%; margin: 0 auto;`.

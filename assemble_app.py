@@ -1499,7 +1499,7 @@ function vTahunan(R) {
     const isFuture = (info.no > curM);
 
     // USER REQUIREMENT:
-    // Bulan sebelum & sesudah September dikosongkan karena belum dicocokkan (belum lulus untuk laporan real).
+    // Bulan sebelum & sesudah September dikosongkan kecuali yang memiliki data pipeline terverifikasi.
     let o26 = null;
     let proyeksi26 = null;
     let status = "Belum Dicocokkan";
@@ -1512,6 +1512,13 @@ function vTahunan(R) {
       status = "Berjalan (Terverifikasi)";
       statusPill = "crit";
       yoy = o25 ? (((R.proyeksi || R.omzet) - o25) / o25) : null;
+    } else if (info.no === 10 && S.oktoberPipeline) {
+      const okp = S.oktoberPipeline;
+      o26 = okp.estimateCashIn;
+      proyeksi26 = okp.potentialOmzet;
+      status = `Pipeline (${okp.totalBookings} Booking)`;
+      statusPill = "prog";
+      yoy = o25 ? ((okp.estimateCashIn - o25) / o25) : null;
     }
 
     return {
@@ -1606,11 +1613,13 @@ function vTahunan(R) {
 
         <div class="mbody">
           <div class="mstat">
-            <span class="mk">${m.isCurrent ? 'Omzet Masuk (Live)' : 'Omzet Realisasi'}</span>
-            <span class="mv ${m.isCurrent ? 'active' : ''}" style="${!m.isCurrent ? 'color:var(--muted-soft);font-weight:500;' : ''}">${m.omzet26 != null ? rp(m.omzet26) : '—'}</span>
+            <span class="mk">${m.isCurrent ? 'Omzet Masuk (Live)' : (m.no === 10 && S.oktoberPipeline ? 'Estimasi Pelunasan (Pipeline)' : 'Omzet Realisasi')}</span>
+            <span class="mv ${m.isCurrent ? 'active' : ''}" style="${!m.isCurrent && !(m.no === 10 && S.oktoberPipeline) ? 'color:var(--muted-soft);font-weight:500;' : (m.no === 10 && S.oktoberPipeline ? 'color:var(--good);' : '')}">${m.omzet26 != null ? rp(m.omzet26) : '—'}</span>
             ${m.isCurrent 
               ? `<span class="msub" style="color:var(--accent);">Proyeksi run-rate: ${rp(R.proyeksi)} · Acuan ${yr-1}: ${rp(m.omzet25)}</span>` 
-              : `<span class="msub muted">Belum dicocokkan · Acuan ${yr-1}: ${rp(m.omzet25)}</span>`}
+              : (m.no === 10 && S.oktoberPipeline
+                  ? `<span class="msub" style="color:var(--accent);">Potensi Total: ${rp(m.proyeksi26)} · DP terkunci: ${rp(S.oktoberPipeline.totalDp)}</span>`
+                  : `<span class="msub muted">Belum dicocokkan · Acuan ${yr-1}: ${rp(m.omzet25)}</span>`)}
           </div>
 
           <div class="mseason">
@@ -1631,7 +1640,7 @@ function vTahunan(R) {
 
         <div class="mfoot">
           <button class="btn sm ${m.isCurrent ? 'pri' : ''} btn-go-month" data-month="${m.no}" style="width:100%;display:flex;justify-content:center;align-items:center;gap:6px;">
-            ${m.isCurrent ? '👉 Buka Laporan September (Live)' : 'Lihat Laporan Bulanan ➔'}
+            ${m.isCurrent ? '👉 Buka Laporan September (Live)' : (m.no === 10 && S.oktoberPipeline ? '📅 Buka Estimasi & Jadwal Oktober ➔' : 'Lihat Laporan Bulanan ➔')}
           </button>
         </div>
       </div>
@@ -2522,7 +2531,110 @@ function vEst(R){
         <td class="n"${b.sisa?'':' style="color:var(--muted)"'}>${rp(b.sisa)}</td>
         <td class="tiny muted">${esc(b.studioNama||String(b.studio))}${b.manual?' <span class="pill neutral" style="font-size:9px;padding:1px 5px">manual</span>':""}</td></tr>`).join("")}
     </tbody></table></div>
-  </div>`;
+  </div>
+
+  ${S.oktoberPipeline ? `
+  <div class="card" style="margin-top:20px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+      <div>
+        <div class="eyebrow" style="color:var(--accent);">Forward Pipeline · Bulan Berikutnya</div>
+        <h3 style="margin:2px 0 4px;font-size:17px;">Estimasi Pipeline Booking Oktober 2026</h3>
+        <p class="tiny muted">Jadwal booking studio reguler + wisuda akbar (Graduation UMP 3 &amp; 4 Oktober 2026) yang sudah terdaftar.</p>
+      </div>
+      <span class="pill crit" style="font-size:11px;">154 Booking Terdaftar</span>
+    </div>
+
+    <div class="stats" style="margin-bottom:14px;">
+      <div class="stat"><span class="k">Potensi Nilai Paket</span><span class="v sm" style="font-size:20px;">${rp(S.oktoberPipeline.potentialOmzet)}</span><span class="m">154 sesi foto terdaftar</span></div>
+      <div class="stat"><span class="k">DP Terdata Masuk</span><span class="v sm" style="font-size:20px;color:var(--crit);">${rp(S.oktoberPipeline.totalDp)}</span><span class="m">masuk di kasir bulan sebelumnya</span></div>
+      <div class="stat"><span class="k">Estimasi Pelunasan Riil</span><span class="v sm" style="font-size:20px;color:var(--good);">${rp(S.oktoberPipeline.estimateCashIn)}</span><span class="m">uang masuk saat hari-H foto</span></div>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Sumber Jadwal</th>
+            <th>Spot / Studio</th>
+            <th class="n">Jumlah Sesi</th>
+            <th class="n">Nilai Paket</th>
+            <th class="n">DP Terkunci</th>
+            <th class="n">Estimasi Pelunasan (Cash In)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Schedule Reguler Studio</b></td>
+            <td>Studio 1, 2, 3 (1–31 Okt)</td>
+            <td class="n">${S.oktoberPipeline.breakdown.reguler.sesi} sesi</td>
+            <td class="n">${rp(S.oktoberPipeline.breakdown.reguler.nilai)}</td>
+            <td class="n" style="color:var(--crit);">${rp(S.oktoberPipeline.breakdown.reguler.dp)}</td>
+            <td class="n" style="color:var(--good);font-weight:600;">${rp(S.oktoberPipeline.breakdown.reguler.nilai - S.oktoberPipeline.breakdown.reguler.dp)}</td>
+          </tr>
+          <tr>
+            <td><b>Graduation UMP (Hari 1)</b></td>
+            <td>5 Backdrop (Sabtu, 3 Okt)</td>
+            <td class="n">${S.oktoberPipeline.breakdown.wisudaDay1.sesi} sesi</td>
+            <td class="n">${rp(S.oktoberPipeline.breakdown.wisudaDay1.nilai)}</td>
+            <td class="n" style="color:var(--crit);">${rp(S.oktoberPipeline.breakdown.wisudaDay1.dp)}</td>
+            <td class="n" style="color:var(--good);font-weight:600;">${rp(S.oktoberPipeline.breakdown.wisudaDay1.nilai - S.oktoberPipeline.breakdown.wisudaDay1.dp)}</td>
+          </tr>
+          <tr>
+            <td><b>Graduation UMP (Hari 2)</b></td>
+            <td>5 Backdrop (Minggu, 4 Okt)</td>
+            <td class="n">${S.oktoberPipeline.breakdown.wisudaDay2.sesi} sesi</td>
+            <td class="n">${rp(S.oktoberPipeline.breakdown.wisudaDay2.nilai)}</td>
+            <td class="n" style="color:var(--crit);">${rp(S.oktoberPipeline.breakdown.wisudaDay2.dp)}</td>
+            <td class="n" style="color:var(--good);font-weight:600;">${rp(S.oktoberPipeline.breakdown.wisudaDay2.nilai - S.oktoberPipeline.breakdown.wisudaDay2.dp)}</td>
+          </tr>
+          <tr class="total">
+            <td colspan="2">TOTAL PIPELINE OKTOBER 2026</td>
+            <td class="n">${S.oktoberPipeline.totalBookings} sesi</td>
+            <td class="n">${rp(S.oktoberPipeline.potentialOmzet)}</td>
+            <td class="n" style="color:var(--crit);">${rp(S.oktoberPipeline.totalDp)}</td>
+            <td class="n" style="color:var(--good);font-weight:700;">${rp(S.oktoberPipeline.estimateCashIn)}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:14px;">
+      <h4 class="eyebrow" style="margin-bottom:8px;">Daftar 154 Booking Terdaftar Oktober 2026</h4>
+      <div class="tw" style="max-height:360px;overflow-y:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Waktu</th>
+              <th>Client</th>
+              <th>Paket</th>
+              <th>Studio / Spot</th>
+              <th>Admin</th>
+              <th class="n">Harga Paket</th>
+              <th class="n">DP Terdata</th>
+              <th class="n">Sisa Pelunasan</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${S.oktoberPipeline.bookings.map(b => `
+              <tr>
+                <td class="mono">${b.tgl}</td>
+                <td class="mono muted">${esc(b.waktu||"—")}</td>
+                <td><b>${esc(b.nama)}</b></td>
+                <td class="tiny">${esc(b.paket)}</td>
+                <td class="tiny muted">${esc(b.studio)}</td>
+                <td>${esc(b.admin||"—")}</td>
+                <td class="n">${rp(b.harga)}</td>
+                <td class="n" style="color:var(--crit);">${b.dp ? rp(b.dp) : "—"}</td>
+                <td class="n" style="color:var(--good);font-weight:600;">${rp(b.sisaPelunasan)}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  ` : ""}`;
 }
 
 function vGaji(R){
@@ -2756,14 +2868,21 @@ function wire(R){
     el.onclick = (e) => {
       e.stopPropagation();
       const m = +el.dataset.month;
-      view = "dash";
-      render();
-      document.querySelector(".main").scrollIntoView({block: "start"});
-      if (m === 9) {
-        showToast("📊 Membuka Dashboard Live September 2026", "ok", 2500);
+      if (m === 10 && S.oktoberPipeline) {
+        view = "est";
+        render();
+        document.querySelector(".main").scrollIntoView({block: "start"});
+        showToast("📅 Membuka Estimasi & Pipeline 154 Booking Oktober 2026", "ok", 3000);
       } else {
-        const bln = BULAN[m - 1] || "";
-        showToast(`ℹ️ Bulan ${bln} 2026 belum dicocokkan. Menampilkan Dashboard September 2026 (Live).`, "neutral", 3500);
+        view = "dash";
+        render();
+        document.querySelector(".main").scrollIntoView({block: "start"});
+        if (m === 9) {
+          showToast("📊 Membuka Dashboard Live September 2026", "ok", 2500);
+        } else {
+          const bln = BULAN[m - 1] || "";
+          showToast(`ℹ️ Bulan ${bln} 2026 belum dicocokkan. Menampilkan Dashboard September 2026 (Live).`, "neutral", 3500);
+        }
       }
     };
   });

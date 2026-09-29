@@ -142,6 +142,113 @@ def parse_schedule(filepath="file2.xlsx", bulan="2026-09", existing_bookings=Non
     wb.close()
     return bookings
 
+def parse_wisuda_schedule(filepath, tgl_str, start_id=1):
+    import os
+    if not os.path.exists(filepath):
+        return []
+    spots = ['LIMBO', 'WOODEN', 'CONCRETE', 'DIPAN', 'CALMBLUE']
+    wb = openpyxl.load_workbook(filepath, data_only=True)
+    if "GRADUATION UMP" in wb.sheetnames:
+        ws = wb["GRADUATION UMP"]
+    else:
+        ws = wb.active
+    
+    bookings = []
+    b_idx = start_id
+    for r in range(11, ws.max_row + 1):
+        for s_idx, s_name in enumerate(spots):
+            base_c = s_idx * 6 + 1
+            waktu_val = ws.cell(r, base_c + 1).value
+            nama_val = ws.cell(r, base_c + 2).value
+            if not nama_val:
+                continue
+            nama = str(nama_val).strip()
+            if not nama or nama.lower() in ["nama", "none", "-"]:
+                continue
+            
+            waktu = str_time(waktu_val)
+            paket_raw = str(ws.cell(r, base_c + 3).value or "Graduation").strip()
+            admin = str(ws.cell(r, base_c + 4).value or "").strip().upper()
+            hp = str(ws.cell(r, base_c + 5).value or "").strip()
+            
+            paket_std = npak(paket_raw)
+            if "prem" in paket_raw.lower():
+                paket_std = "Graduation Premium"
+                harga = 500000.0
+            elif "wisuda" in paket_raw.lower() or "grad" in paket_raw.lower():
+                paket_std = "Graduation"
+                harga = 350000.0
+            elif paket_std in PRICING_TABLE:
+                harga = float(PRICING_TABLE[paket_std])
+            else:
+                harga = 350000.0
+            
+            dp = 0.0
+            m = re.search(r'dp\s*(\d+)', hp.lower())
+            if m:
+                dp = float(m.group(1)) * 1000
+            elif "lunas" in hp.lower():
+                dp = harga
+            
+            bookings.append({
+                "id": f"sc_wisuda_{tgl_str}_{b_idx}",
+                "tgl": tgl_str,
+                "waktu": waktu,
+                "studio": f"Wisuda ({s_name})",
+                "studioNama": f"Spot {s_name}",
+                "spot": s_name,
+                "nama": nama,
+                "paket": paket_std,
+                "paketRaw": paket_raw,
+                "jmlOrang": 1,
+                "harga": harga,
+                "dp": dp,
+                "sisaPelunasan": max(0.0, harga - dp),
+                "admin": admin,
+                "noHp": hp,
+                "manual": False,
+                "kategori": "Wisuda UMP"
+            })
+            b_idx += 1
+            
+    wb.close()
+    return bookings
+
+def parse_october_pipeline(file_default="file2_okt.xlsx", file_w1="file_wisuda_3okt.xlsx", file_w2="file_wisuda_4okt.xlsx"):
+    import os
+    b_reg = []
+    if os.path.exists(file_default):
+        b_reg = parse_schedule(file_default, bulan="2026-10")
+        for b in b_reg:
+            hp = str(b.get("noHp", "")).lower()
+            m = re.search(r'dp\s*(\d+)', hp)
+            dp = float(m.group(1)) * 1000 if m else (b.get("harga", 0.0) if "lunas" in hp else 0.0)
+            b["dp"] = dp
+            b["sisaPelunasan"] = max(0.0, b.get("harga", 0.0) - dp)
+            b["kategori"] = "Studio Reguler"
+            
+    b_w1 = parse_wisuda_schedule(file_w1, "2026-10-03", start_id=1)
+    b_w2 = parse_wisuda_schedule(file_w2, "2026-10-04", start_id=len(b_w1)+1)
+    
+    all_okt = b_reg + b_w1 + b_w2
+    total_val = sum(b.get("harga", 0.0) for b in all_okt)
+    total_dp = sum(b.get("dp", 0.0) for b in all_okt)
+    estimate_cash_in = max(0.0, total_val - total_dp)
+    
+    return {
+        "bulan": "2026-10",
+        "totalBookings": len(all_okt),
+        "potentialOmzet": total_val,
+        "totalDp": total_dp,
+        "estimateCashIn": estimate_cash_in,
+        "breakdown": {
+            "reguler": {"sesi": len(b_reg), "nilai": sum(b.get("harga",0) for b in b_reg), "dp": sum(b.get("dp",0) for b in b_reg)},
+            "wisudaDay1": {"sesi": len(b_w1), "nilai": sum(b.get("harga",0) for b in b_w1), "dp": sum(b.get("dp",0) for b in b_w1)},
+            "wisudaDay2": {"sesi": len(b_w2), "nilai": sum(b.get("harga",0) for b in b_w2), "dp": sum(b.get("dp",0) for b in b_w2)}
+        },
+        "bookings": all_okt
+    }
+
 if __name__ == "__main__":
     res = parse_schedule()
     print(f"Hasil Parser Schedule: {len(res)} sesi foto terdata.")
