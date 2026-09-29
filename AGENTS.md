@@ -13,7 +13,7 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
    - Simpan `foxe_full_state.json`, rakit `index.html`, dan kirim notifikasi Telegram via `@NunuFxBot`.
    - Di dalam struk laporan Telegram (blok monospace), sertakan kalkulasi **Estimate Omzet Sampai Akhir Bulan** (Unrealized Cash In, DP (-), Total, dan Unrealized Omzet) yang menyatu di dalam struk di bawah Estimasi Nett Profit.
 2. Jalankan git commit & push ke `origin main`:
-   `git add foxe_full_state.json index.html assemble_app.py file1.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx parser_neraca.py parser_schedule.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
+   `git add foxe_full_state.json index.html assemble_app.py logo_foxe.png file1.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx parser_neraca.py parser_schedule.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
    `git commit -m "Auto-sync data update"`
    `git push origin main`
 3. Tampilkan ringkasan metrik pembaruan hari ini dan tautan website live:

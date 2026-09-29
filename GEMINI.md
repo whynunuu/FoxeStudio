@@ -21,7 +21,7 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
 
 ### 2. Auto-Commit & Deploy ke GitHub:
 - Otomatis commit dan push pembaruan data ke repository:
-  `git add foxe_full_state.json index.html assemble_app.py file1.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx parser_neraca.py parser_schedule.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
+  `git add foxe_full_state.json index.html assemble_app.py logo_foxe.png file1.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx parser_neraca.py parser_schedule.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
   `git commit -m "Auto-sync data update"`
   `git push origin main`
 - Remote URL: `https://github.com/whynunuu/FoxeStudio.git`
