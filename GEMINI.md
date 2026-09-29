@@ -45,7 +45,9 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
 - **Seasonality Index 12 Bulan**:
   - Matriks Seasonality Index 12 bulan (Jan–Des) tetap aktif penuh menggunakan benchmark tahun 2025 (garis tengah 1.00× rata-rata, Super Peak September 2.10×).
   - Pada chart tahunan, batang 2026 dirender untuk bulan September (realized) dan Oktober (pipeline terdaftar).
-- **12 Kotak Bulan Interaktif**:
+- **12 Kotak Bulan Interaktif & Urutan Layout**:
+  - **Posisi Paling Atas**: Tepat di bawah kartu KPI, urutan pertama adalah **12 Kotak Bulan Interaktif (`.mgrid`)** dan **Tabel Komparasi 12 Bulan**.
+  - **Posisi Bawah**: Banner penjelasan Seasonality Index dan Grafik Chart Seasonality diletakkan di bawah tabel bulanan.
   - Setiap kotak bulan dapat diklik: September membuka dashboard live (`view = "dash"`), Oktober membuka rincian pipeline estimasi booking (`view = "est"`).
 
 ### 2. Layout Fit-In & Anti-Tabrakan:
