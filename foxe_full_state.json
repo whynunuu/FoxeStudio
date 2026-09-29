@@ -12338,22 +12338,10 @@
   ],
   "sync": [
     {
-      "id": "sy_20260929-0956",
-      "mulai": "2026-09-29T09:56:33.348324+00:00",
+      "id": "sy_20260929-1655",
+      "mulai": "2026-09-29T09:55:57.827664+00:00",
       "status": "sukses",
       "ringkas": "Integrasi berhasil: 611 order, 193 jadwal, 3 pos pengeluaran Neraca."
-    },
-    {
-      "id": "sy_20260929-0210",
-      "mulai": "2026-09-29T02:10:51.413502+00:00",
-      "status": "sukses",
-      "ringkas": "Integrasi berhasil: 606 order, 192 jadwal, 3 pos pengeluaran Neraca."
-    },
-    {
-      "id": "sy_20260928-1415",
-      "mulai": "2026-09-28T14:15:38.834433+00:00",
-      "status": "sukses",
-      "ringkas": "Integrasi berhasil: 606 order, 192 jadwal, 3 pos pengeluaran Neraca."
     },
     {
       "id": "sy_20260928-1429",
@@ -12654,7 +12642,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-29T09:56:33.348324+00:00"
+    "last_sync": "2026-09-29T09:55:57.827664+00:00"
   },
   "neracaDetail": [
     {
