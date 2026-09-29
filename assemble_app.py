@@ -1633,23 +1633,6 @@ function vTahunan(R) {
     </div>
   </div>
 
-  <!-- Banner Penjelasan Seasonality Studio -->
-  <div class="note ok" style="margin-bottom:16px">
-    <b>Pola Musiman Studio Foto (Seasonality Index):</b>
-    Indeks <b>1.00×</b> adalah garis tengah rata-rata bulanan studio.
-    Bulan <b>September (1.85× – 2.50×)</b> adalah puncak tahunan tertinggi (Super Peak) berkat wisuda akbar universitas di Magelang dan sekitarnya.
-    Bulan <b>Juni &amp; Agustus</b> menjadi High Season kedua, sementara <b>Januari, Februari &amp; November</b> merupakan Low Season alami.
-    <div style="margin-top:6px;font-size:12px;opacity:.9;border-top:1px dashed currentColor;padding-top:6px;">
-      🔒 <b>Status Data Real:</b> Sesuai standarisasi audit, data tahun ${yr} untuk bulan <b>Januari–Agustus</b> dan <b>Oktober–Desember</b> saat ini <b>dikosongkan</b> karena belum dicocokkan dengan data pembukuan riil. Hanya <b>September ${yr}</b> yang terverifikasi aktif &amp; live.
-    </div>
-  </div>
-
-  <!-- Chart Seasonality & Omzet 12 Bulan -->
-  <div class="card" style="margin-bottom:20px">
-    <h3>Siklus Seasonality &amp; Tren Omzet 12 Bulan (${yr-1} vs ${yr})</h3>
-    ${chartTahunanSeasonality(months, yr, avg25)}
-  </div>
-
   <!-- Section 12 Kotak Bulan (Grid of 12 Month Cards) -->
   <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
     <div>
@@ -1747,6 +1730,23 @@ function vTahunan(R) {
         </tr>
       </tbody>
     </table></div>
+  </div>
+
+  <!-- Banner Penjelasan Seasonality Studio -->
+  <div class="note ok" style="margin-bottom:16px">
+    <b>Pola Musiman Studio Foto (Seasonality Index):</b>
+    Indeks <b>1.00×</b> adalah garis tengah rata-rata bulanan studio.
+    Bulan <b>September (1.85× – 2.50×)</b> adalah puncak tahunan tertinggi (Super Peak) berkat wisuda akbar universitas di Magelang dan sekitarnya.
+    Bulan <b>Juni &amp; Agustus</b> menjadi High Season kedua, sementara <b>Januari, Februari &amp; November</b> merupakan Low Season alami.
+    <div style="margin-top:6px;font-size:12px;opacity:.9;border-top:1px dashed currentColor;padding-top:6px;">
+      🔒 <b>Status Data Real:</b> Sesuai standarisasi audit, data tahun ${yr} untuk bulan <b>Januari–Agustus</b> dan <b>Oktober–Desember</b> saat ini <b>dikosongkan</b> karena belum dicocokkan dengan data pembukuan riil. Hanya <b>September ${yr}</b> yang terverifikasi aktif &amp; live.
+    </div>
+  </div>
+
+  <!-- Chart Seasonality & Omzet 12 Bulan -->
+  <div class="card" style="margin-bottom:20px">
+    <h3>Siklus Seasonality &amp; Tren Omzet 12 Bulan (${yr-1} vs ${yr})</h3>
+    ${chartTahunanSeasonality(months, yr, avg25)}
   </div>
   `;
 }
