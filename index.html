@@ -22,13 +22,13 @@
   --ink:#141413; --ink2:#3d3d3a; --ink-strong:#252523;
   --muted:#6c6a64; --muted-soft:#8e8b82;
   /* voltase */
-  --accent:#cc785c; --accent-ink:#a9583e; --accent-soft:#f6e9e2;
+  --accent:#0065b8; --accent-ink:#0048a9; --accent-soft:#e6f1fa;
   --on-accent:#ffffff;
   /* permukaan gelap — dipakai untuk rail, bukan latar halaman */
   --rail:#181715; --rail2:#1f1e1b; --rail3:#252320;
   --on-rail:#faf9f5; --on-rail-soft:#a09d96; --rail-line:#2e2b27;
   /* seri data */
-  --cash:#1f7a68; --transfer:#b3603f; --lead:#96702a; --dp:#7d4a5f; --omzet:#3d3d3a;
+  --cash:#1f7a68; --transfer:#0065b8; --lead:#96702a; --dp:#7d4a5f; --omzet:#3d3d3a;
   /* semantik */
   --good:#2f7d4f; --warn:#8a6408; --crit:#a83b2e;
   --good-bg:#e6efe7; --warn-bg:#f5ecd9; --crit-bg:#f7e7e1;
@@ -45,11 +45,11 @@
   --hairline:#2a2926; --hairline-soft:#242320; --hairline-strong:#3a3834;
   --ink:#faf9f5; --ink2:#d3cfc7; --ink-strong:#ebe7df;
   --muted:#a09d96; --muted-soft:#87847d;
-  --accent:#d97757; --accent-ink:#e99072; --accent-soft:#2e211b;
+  --accent:#0080c8; --accent-ink:#38bdf8; --accent-soft:#0c2340;
   --on-accent:#ffffff;
   --rail:#100f0e; --rail2:#181715; --rail3:#22201d;
   --on-rail:#faf9f5; --on-rail-soft:#a09d96; --rail-line:#24221f;
-  --cash:#3eb89b; --transfer:#d97757; --lead:#e8a55a; --dp:#cf93a8; --omzet:#cfcbc3;
+  --cash:#3eb89b; --transfer:#0080c8; --lead:#e8a55a; --dp:#cf93a8; --omzet:#cfcbc3;
   --good:#5db872; --warn:#d4a017; --crit:#e07a68;
   --good-bg:#19271f; --warn-bg:#2a2414; --crit-bg:#2d1e1a;
   --grid:#242320;
@@ -308,21 +308,21 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
   display:flex;align-items:center;justify-content:center;padding:24px 16px;
   overflow-y:auto;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .lock-card{width:100%;max-width:360px;margin:auto;background:rgba(27,26,24,0.94);
-  border:1px solid rgba(217,119,87,0.3);
-  box-shadow:0 24px 48px rgba(0,0,0,0.7),0 0 32px rgba(217,119,87,0.12);
+  border:1px solid rgba(0,128,200,0.3);
+  box-shadow:0 24px 48px rgba(0,0,0,0.7),0 0 32px rgba(0,128,200,0.15);
   border-radius:24px;padding:32px 24px;text-align:center;color:#faf9f5;
   animation:lockFadeIn .35s cubic-bezier(0.16,1,0.3,1)}
 @keyframes lockFadeIn{from{opacity:0;transform:scale(0.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.lock-logo{margin-bottom:14px;display:inline-flex;filter:drop-shadow(0 2px 8px rgba(217,119,87,0.4))}
+.lock-logo{margin-bottom:14px;display:inline-flex;filter:drop-shadow(0 2px 8px rgba(0,128,200,0.4))}
 .lock-title{font-family:var(--ff-display,serif);font-size:29px;font-weight:700;letter-spacing:-.5px;color:#faf9f5;margin-bottom:3px}
 .lock-subtitle{font-size:13px;color:#a09d96;margin-bottom:12px}
 .lock-badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
-  padding:3px 12px;border-radius:9999px;background:rgba(217,119,87,0.15);color:#d97757;
-  border:1px solid rgba(217,119,87,0.3);margin-bottom:22px}
+  padding:3px 12px;border-radius:9999px;background:rgba(0,128,200,0.15);color:#0080c8;
+  border:1px solid rgba(0,128,200,0.3);margin-bottom:22px}
 .pin-display{display:flex;justify-content:center;gap:12px;margin-bottom:20px}
 .pin-display .dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(160,157,150,0.4);
   background:transparent;transition:all .18s cubic-bezier(0.16,1,0.3,1)}
-.pin-display .dot.filled{background:#d97757;border-color:#d97757;box-shadow:0 0 12px rgba(217,119,87,0.6);transform:scale(1.15)}
+.pin-display .dot.filled{background:#0080c8;border-color:#0080c8;box-shadow:0 0 12px rgba(0,128,200,0.6);transform:scale(1.15)}
 .pin-display.shake{animation:pinShake .45s cubic-bezier(0.36,0.07,0.19,0.97)}
 @keyframes pinShake{10%,90%{transform:translate3d(-3px,0,0)}20%,80%{transform:translate3d(5px,0,0)}30%,50%,70%{transform:translate3d(-6px,0,0)}40%,60%{transform:translate3d(6px,0,0)}}
 .pin-hidden-input{position:absolute;opacity:0;pointer-events:none}
@@ -331,14 +331,14 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
 .key-btn{background:rgba(37,35,32,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:12px;
   padding:13px 0;font-size:19px;font-weight:600;color:#faf9f5;cursor:pointer;
   transition:all .12s ease;user-select:none;-webkit-user-select:none}
-.key-btn:hover{background:rgba(52,50,45,0.95);border-color:rgba(217,119,87,0.35)}
-.key-btn:active{transform:scale(0.92);background:#d97757;color:#fff}
+.key-btn:hover{background:rgba(52,50,45,0.95);border-color:rgba(0,128,200,0.35)}
+.key-btn:active{transform:scale(0.92);background:#0080c8;color:#fff}
 .key-btn.action-btn{font-size:16px;color:#a09d96}
-.key-btn.ok-btn{background:rgba(217,119,87,0.25);color:#d97757;border-color:rgba(217,119,87,0.4)}
-.key-btn.ok-btn:active{background:#d97757;color:#fff}
+.key-btn.ok-btn{background:rgba(0,128,200,0.25);color:#0080c8;border-color:rgba(0,128,200,0.4)}
+.key-btn.ok-btn:active{background:#0080c8;color:#fff}
 .remember-wrap{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:#a09d96;
   cursor:pointer;margin-bottom:14px;user-select:none}
-.remember-wrap input{accent-color:#d97757;cursor:pointer}
+.remember-wrap input{accent-color:#0080c8;cursor:pointer}
 .lock-footer{font-size:11.5px;color:#6c6a64}
 
 /* ---------- toast notification ---------- */
@@ -389,7 +389,7 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
   box-shadow:0 8px 24px rgba(0,0,0,0.12)}
 .month-card.active-month{border:1.5px solid var(--accent);
   background:color-mix(in srgb,var(--accent) 4%,var(--surface));
-  box-shadow:0 0 24px rgba(217,119,87,0.15)}
+  box-shadow:0 0 24px rgba(0,101,184,0.18)}
 .month-card .mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .month-card .mname{font-family:var(--ff-display);font-size:22px;font-weight:700;letter-spacing:-.4px;
   color:var(--ink);display:flex;align-items:center;gap:7px}
@@ -2940,7 +2940,7 @@ function vGaji(R){
           </div>
           <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px" id="slipRowAdditional">
             <span>Additional (Insentif Project)</span>
-            <b id="slipAdditional" style="color:#d97757">Rp 0</b>
+            <b id="slipAdditional" style="color:var(--accent)">Rp 0</b>
           </div>
           <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px" id="slipRowBonusLain">
             <span>Bonus Umum &amp; Lembur</span>
