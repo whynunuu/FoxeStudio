@@ -8,9 +8,10 @@ Dokumentasi ini menghubungkan workspace Foxe Agent dengan **Obsidian Vault** pri
 
 | File Vault | Jalur Dokumen | Deskripsi |
 |---|---|---|
-| **Preferensi Pengguna** | `01 Profile/Preferensi Pengguna.md` | Preferensi kerja otomatis (YOLO), jadwal cron 2x sehari, dan standar format laporan Telegram. |
-| **Workflow Foxe Studio** | `04 Projects/Workflow Foxe Studio.md` | Prosedur pelaporan operasional studio foto, alur trigger otomatis `ayo kerja`, dan jadwal cloud cron. |
-| **Arsitektur Keuangan** | `04 Projects/Foxe Studio - Arsitektur Keuangan & Log Sistem.md` | Standar mutlak COGS/OPEX dari section Detail Neraca, layout responsif 7 kolom, dan sistem serverless GitHub Actions. |
+| **Preferensi Pengguna** | `01 Profile/Preferensi Pengguna.md` | Preferensi kerja otomatis (YOLO), jadwal cron 2x sehari, Biru Foxe, PIN 363636, dan standar struk Telegram. |
+| **Workflow Foxe Studio** | `04 Projects/Workflow Foxe Studio.md` | Prosedur pelaporan studio foto, alur trigger otomatis `ayo kerja`, dan jadwal cloud cron. |
+| **Arsitektur Keuangan** | `04 Projects/Foxe Studio - Arsitektur Keuangan & Log Sistem.md` | Standar mutlak COGS/OPEX dari section Detail Neraca, layout responsif 7 kolom, logo resmi, dan modul gaji karyawan. |
+| **Spesifikasi Parser** | `04 Projects/Foxe Studio - Parser Specs & Data Pipeline.md` | Dokumentasi teknis mendalam 4 parser produksi (`parser_neraca.py`, `parser_schedule.py`, `parser_log_order.py`, `deep_sync_foxe.py`). |
 
 ---
 
@@ -21,7 +22,7 @@ Dokumentasi ini menghubungkan workspace Foxe Agent dengan **Obsidian Vault** pri
 - **Jadwal 1 (Pagi Buka Studio)**: `0 2 * * *` UTC = **09:00 WIB**
 - **Jadwal 2 (Malam Closing Studio)**: `0 14 * * *` UTC = **21:00 WIB**
 - **Kredensial**: Menggunakan GitHub Secrets `TELEGRAM_BOT_TOKEN` dan `TELEGRAM_CHAT_ID`.
-- **Aksi Otomatis**: Menjalankan `python deep_sync_foxe.py`, merakit ulang dashboard, mengunggah pembaruan ke GitHub Pages, dan mengirim notifikasi closing ke Telegram via `@NunuFxBot`.
+- **Aksi Otomatis**: Mengunduh 6 file resmi Google Drive, mengeksekusi semua parser, merakit ulang dashboard, mengunggah pembaruan ke GitHub Pages, dan mengirim notifikasi closing ke Telegram via `@NunuFxBot`.
 
 ### B. Local Task Scheduler (Windows)
 - **Script Pendaftaran**: `Pasang_Jadwal_Windows_Task.bat`
@@ -35,6 +36,7 @@ Dokumentasi ini menghubungkan workspace Foxe Agent dengan **Obsidian Vault** pri
 Di dalam struk laporan harian closing Telegram (blok `<pre>`), tepat di bawah `ESTIMASI NETT PROFIT` dan sebelum garis penutup `============================================`, wajib disematkan:
 ```text
 --------------------------------------------
+ESTIMATE OMZET SAMPAI AKHIR BULAN
 Unrealized Cash In             Rp  4.300.000
 DP (-)                         Rp  1.300.000
 Total                          Rp  3.000.000
@@ -52,9 +54,9 @@ Unrealized Omzet               Rp 104.625.000
 
 ## 4. Keamanan Autentikasi & Master PIN Portal
 - **Master PIN Aktif**: `363636`
-- **Mekanisme Session Invalidation**: 
-  - Token autentikasi menggunakan versi `foxe_studio_auth_token_v2`.
-  - Seluruh sesi lama (`v1`, custom PIN, dan sesi tersimpan) otomatis dihapus dan dipaksa keluar (*forced logout*).
-  - Siapa pun yang mengakses atau me-refresh portal web wajib memasukkan PIN baru `363636`.
+- **Mekanisme Anti-Ingat Perangkat**:
+  - Fitur "Ingat perangkat ini (30 hari)" dinonaktifkan dan dihapus total dari lock screen.
+  - Sisa token lama di `localStorage` otomatis dibersihkan saat web dibuka.
+  - Autentikasi murni berbasis tab browser (`sessionStorage`). Setiap tab/browser ditutup, pengguna wajib memasukkan ulang PIN `363636`.
+  - Dilengkapi header meta `Cache-Control: no-cache, no-store, must-revalidate` untuk mencegah browser menahan cache usang.
 - **URL Live**: 👉 **https://whynunuu.github.io/FoxeStudio/**
-
