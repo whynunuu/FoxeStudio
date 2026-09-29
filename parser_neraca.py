@@ -72,10 +72,10 @@ def clean_num(v):
     except:
         return 0.0
 
-def parse_neraca(filepath="file_neraca.xlsx", sheet_name="September 2026"):
+def parse_neraca(filepath="file_neraca.xlsx", sheet_name="September 2026", actual_shifts=None):
     if not os.path.exists(filepath):
         print(f"[WARN] File neraca {filepath} tidak ditemukan.")
-        return {"expenses": [], "detail": [], "summary": {}}
+        return {"expenses": [], "detail": [], "summary": {}, "rosterGaji": [], "rosterSummary": {}}
 
     wb = openpyxl.load_workbook(filepath, read_only=True, data_only=True)
     if sheet_name not in wb.sheetnames:
@@ -87,6 +87,7 @@ def parse_neraca(filepath="file_neraca.xlsx", sheet_name="September 2026"):
     prev_tgl = None
     expenses = []
     detail = []
+    roster_gaji = []
     idx = 1
     det_idx = 1
 
@@ -103,7 +104,58 @@ def parse_neraca(filepath="file_neraca.xlsx", sheet_name="September 2026"):
     # Col 21 (U): Keterangan Keluar
 
     for r_idx, row in enumerate(ws.iter_rows(values_only=True)):
-        if r_idx < 10 or r_idx > 130 or len(row) < 21:
+        if r_idx < 9 or r_idx > 130:
+            continue
+
+        # 1. Parse Section Gaji Karyawan (Kolom 32 s.d. 42 / AF s.d. AP baris 9 s.d. 27)
+        if 9 <= r_idx <= 28 and len(row) >= 37:
+            nama = row[33]
+            if nama and str(nama).strip() != "" and str(nama).lower() not in ["total", "nama", "keterangan"]:
+                nama_str = str(nama).strip()
+                job = str(row[34] or "").strip()
+                q = clean_num(row[35])
+                cost = clean_num(row[36])
+                bonus = clean_num(row[38])
+                hukuman = clean_num(row[39])
+                bon = clean_num(row[40])
+
+                act_shift = 0
+                if actual_shifts:
+                    for k, cnt in actual_shifts.items():
+                        if str(k).upper() in nama_str.upper() or nama_str.upper() in str(k).upper():
+                            act_shift = cnt
+                            break
+
+                is_fixed = (cost >= 500000) or any(k in job.lower() for k in ["manager", "editor", "marketing", "tetap"])
+                eff_q = q
+                if is_fixed:
+                    eff_q = 1.0 if q == 0 else q
+                elif q == 0 and act_shift > 0:
+                    eff_q = float(act_shift)
+
+                tot_gaji = eff_q * cost
+                thp = tot_gaji + bonus - hukuman - bon
+
+                roster_gaji.append({
+                    "id": f"pay_{len(roster_gaji)+1}",
+                    "row_idx": r_idx,
+                    "nama": nama_str,
+                    "job": job if job else ("Operasional" if cost == 40000 else "Khusus"),
+                    "q": eff_q,
+                    "q_raw": q,
+                    "actual_shift": act_shift,
+                    "cost": cost,
+                    "is_fixed": is_fixed,
+                    "total_gaji": tot_gaji,
+                    "bonus": bonus,
+                    "hukuman": hukuman,
+                    "bon": bon,
+                    "thp": thp,
+                    "status": "Draft"
+                })
+
+        # 2. Parse Section Detail (Debit/Kredit/Expenses)
+        if len(row) < 21:
             continue
             
         tgl_val = row[15]
@@ -180,11 +232,22 @@ def parse_neraca(filepath="file_neraca.xlsx", sheet_name="September 2026"):
         "total_rows": len(detail)
     }
 
-    print(f"[OK] File Neraca berhasil diurai: {len(expenses)} pos pengeluaran, {len(detail)} baris log debit/kredit.")
+    roster_summary = {
+        "total_gaji": sum(p["total_gaji"] for p in roster_gaji),
+        "total_bonus": sum(p["bonus"] for p in roster_gaji),
+        "total_hukuman": sum(p["hukuman"] for p in roster_gaji),
+        "total_bon": sum(p["bon"] for p in roster_gaji),
+        "grand_total_thp": sum(p["thp"] for p in roster_gaji),
+        "total_karyawan": len(roster_gaji)
+    }
+
+    print(f"[OK] File Neraca berhasil diurai: {len(expenses)} pos pengeluaran, {len(detail)} baris log debit/kredit, {len(roster_gaji)} roster gaji.")
     return {
         "expenses": expenses,
         "detail": detail,
-        "summary": summary
+        "summary": summary,
+        "rosterGaji": roster_gaji,
+        "rosterSummary": roster_summary
     }
 
 if __name__ == "__main__":

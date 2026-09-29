@@ -120,19 +120,29 @@ def run_integration():
         res_f2_bookings = parse_schedule("file2.xlsx", bulan="2026-09", existing_bookings=existing_bk)
         print(f"[OK] File 2 terurai: {len(res_f2_bookings)} jadwal booking studio.")
 
-        # STEP 7: Jalankan Parser File Neraca (COGS, OPEX & Log Debit Kredit)
+        # STEP 7: Jalankan Parser File Neraca (COGS, OPEX, Log Debit Kredit & Gaji Karyawan)
         print("\n[4/5] Menjalankan parser_neraca.py (File Neraca)...")
-        res_neraca = parse_neraca("file_neraca.xlsx", sheet_name="September 2026")
+        actual_shift_counts = {}
+        for s in res_f1.get("shifts", []):
+            nm = str(s.get("nama") or "").upper().strip()
+            if nm:
+                actual_shift_counts[nm] = actual_shift_counts.get(nm, 0) + s.get("slot", 1)
+
+        res_neraca = parse_neraca("file_neraca.xlsx", sheet_name="September 2026", actual_shifts=actual_shift_counts)
         if isinstance(res_neraca, dict):
             state["expenses"] = res_neraca.get("expenses", [])
             state["neracaDetail"] = res_neraca.get("detail", [])
             state["neracaSummary"] = res_neraca.get("summary", {})
+            state["rosterGaji"] = res_neraca.get("rosterGaji", [])
+            state["rosterSummary"] = res_neraca.get("rosterSummary", {})
             neraca_count = len(state["expenses"])
             detail_count = len(state["neracaDetail"])
+            gaji_count = len(state["rosterGaji"])
         else:
             state["expenses"] = res_neraca
             neraca_count = len(res_neraca)
             detail_count = 0
+            gaji_count = 0
 
         # STEP 7.5: Jalankan Parser Schedule Pipeline Oktober 2026 (Reguler + Wisuda 3 & 4 Okt)
         print("\n[5/5] Menjalankan parse_october_pipeline()...")
