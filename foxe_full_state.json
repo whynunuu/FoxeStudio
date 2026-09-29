@@ -1,7 +1,7 @@
 {
   "config": {
     "bulan": "2026-09",
-    "cutoff": "2026-09-28",
+    "cutoff": "2026-09-29",
     "status": "Progressive",
     "targets": [
       {
@@ -7293,6 +7293,66 @@
       "total": 475000.0,
       "admin": "AMEL",
       "fotografer": "SAKA"
+    },
+    {
+      "id": "or_607",
+      "tanggal": "2026-09-29",
+      "client": "ella nur",
+      "paket": "Large Group",
+      "tanggalFoto": "29 sept",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_608",
+      "tanggal": "2026-09-29",
+      "client": "Anggi Anggriani",
+      "paket": "Graduation",
+      "tanggalFoto": "6 okt",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_609",
+      "tanggal": "2026-09-29",
+      "client": "Hasnna Arista",
+      "paket": "Single",
+      "tanggalFoto": "29 sept",
+      "cash": 50000.0,
+      "transfer": 0.0,
+      "total": 50000.0,
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_610",
+      "tanggal": "2026-09-29",
+      "client": "Zahra",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-06",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_611",
+      "tanggal": "2026-09-29",
+      "client": "Diva",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-09-29",
+      "cash": 0.0,
+      "transfer": 250000.0,
+      "total": 250000.0,
+      "admin": "INDAH",
+      "fotografer": "SAKA"
     }
   ],
   "shifts": [
@@ -7967,6 +8027,30 @@
       "tanggal": "2026-09-28",
       "nama": "SAKA",
       "slot": 1
+    },
+    {
+      "id": "sh_113",
+      "tanggal": "2026-09-29",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_114",
+      "tanggal": "2026-09-29",
+      "nama": "INDAH",
+      "slot": 1
+    },
+    {
+      "id": "sh_115",
+      "tanggal": "2026-09-29",
+      "nama": "SAKA",
+      "slot": 1
+    },
+    {
+      "id": "sh_116",
+      "tanggal": "2026-09-29",
+      "nama": "SAKA",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -8610,7 +8694,7 @@
     {
       "id": "cc_2026-09-29",
       "tanggal": "2026-09-29",
-      "nilai": 0.0
+      "nilai": 50000.0
     },
     {
       "id": "cc_2026-09-30",
@@ -8847,9 +8931,9 @@
       "id": "ld_29",
       "tanggal": "2026-09-29",
       "leads": 0.0,
-      "dp": 0.0,
-      "sesiFoto": 0.0,
-      "transaksi": 0.0
+      "dp": 3.0,
+      "sesiFoto": 2.0,
+      "transaksi": 5.0
     },
     {
       "id": "ld_30",
@@ -11752,6 +11836,21 @@
       },
       {
         "id": "sc_bk_190",
+        "tgl": "2026-09-29",
+        "waktu": "17:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "ella nur",
+        "paket": "Large Group",
+        "paketRaw": "LG 7",
+        "jmlOrang": 7,
+        "harga": 175000.0,
+        "admin": "AL",
+        "noHp": "dp 100",
+        "manual": false
+      },
+      {
+        "id": "sc_bk_191",
         "tgl": "2026-09-30",
         "waktu": "10:30",
         "studio": "Studio 1",
@@ -11766,7 +11865,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_191",
+        "id": "sc_bk_192",
         "tgl": "2026-09-30",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -11781,7 +11880,7 @@
         "manual": false
       },
       {
-        "id": "sc_bk_192",
+        "id": "sc_bk_193",
         "tgl": "2026-09-30",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -12239,6 +12338,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260929-0956",
+      "mulai": "2026-09-29T09:56:33.348324+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 611 order, 193 jadwal, 3 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260929-0210",
       "mulai": "2026-09-29T02:10:51.413502+00:00",
       "status": "sukses",
@@ -12549,7 +12654,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-29T02:10:51.413502+00:00"
+    "last_sync": "2026-09-29T09:56:33.348324+00:00"
   },
   "neracaDetail": [
     {
