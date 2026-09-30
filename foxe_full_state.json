@@ -8135,6 +8135,12 @@
       "tanggal": "2026-09-29",
       "nama": "SAKA",
       "slot": 1
+    },
+    {
+      "id": "sh_117",
+      "tanggal": "2026-09-30",
+      "nama": "INDAH",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -8590,6 +8596,24 @@
     },
     {
       "id": "ex_nrc_51",
+      "tanggal": "2026-09-22",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Subs Claude",
+      "nilai": 452500.0
+    },
+    {
+      "id": "ex_nrc_52",
+      "tanggal": "2026-09-23",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Marketing / Ads / KOL",
+      "deskripsi": "Ads",
+      "nilai": 500000.0
+    },
+    {
+      "id": "ex_nrc_53",
       "tanggal": "2026-09-24",
       "bulan": "2026-09",
       "jenis": "OPEX",
@@ -8598,7 +8622,7 @@
       "nilai": 45000.0
     },
     {
-      "id": "ex_nrc_52",
+      "id": "ex_nrc_54",
       "tanggal": "2026-09-25",
       "bulan": "2026-09",
       "jenis": "OPEX",
@@ -8607,7 +8631,7 @@
       "nilai": 125000.0
     },
     {
-      "id": "ex_nrc_53",
+      "id": "ex_nrc_55",
       "tanggal": "2026-09-26",
       "bulan": "2026-09",
       "jenis": "OPEX",
@@ -8616,7 +8640,16 @@
       "nilai": 65000.0
     },
     {
-      "id": "ex_nrc_54",
+      "id": "ex_nrc_56",
+      "tanggal": "2026-09-26",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 403000.0
+    },
+    {
+      "id": "ex_nrc_57",
       "tanggal": "2026-09-27",
       "bulan": "2026-09",
       "jenis": "COGS",
@@ -8625,7 +8658,7 @@
       "nilai": 3099000.0
     },
     {
-      "id": "ex_nrc_55",
+      "id": "ex_nrc_58",
       "tanggal": "2026-09-27",
       "bulan": "2026-09",
       "jenis": "OPEX",
@@ -8634,7 +8667,7 @@
       "nilai": 112000.0
     },
     {
-      "id": "ex_nrc_56",
+      "id": "ex_nrc_59",
       "tanggal": "2026-09-28",
       "bulan": "2026-09",
       "jenis": "COGS",
@@ -8643,16 +8676,25 @@
       "nilai": 950000.0
     },
     {
-      "id": "ex_nrc_57",
+      "id": "ex_nrc_60",
+      "tanggal": "2026-09-28",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Cetak Foto & Photo Paper",
+      "deskripsi": "Cetakan",
+      "nilai": 1809000.0
+    },
+    {
+      "id": "ex_nrc_61",
       "tanggal": "2026-09-28",
       "bulan": "2026-09",
       "jenis": "NON-P&L",
       "kategori": "Prive / Owner Draw",
       "deskripsi": "Bon",
-      "nilai": 1614000.0
+      "nilai": 2314000.0
     },
     {
-      "id": "ex_nrc_58",
+      "id": "ex_nrc_62",
       "tanggal": "2026-09-28",
       "bulan": "2026-09",
       "jenis": "OPEX",
@@ -8661,7 +8703,7 @@
       "nilai": 567050.0
     },
     {
-      "id": "ex_nrc_59",
+      "id": "ex_nrc_63",
       "tanggal": "2026-09-28",
       "bulan": "2026-09",
       "jenis": "Biaya Lainnya",
@@ -12458,6 +12500,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260930-0212",
+      "mulai": "2026-09-30T02:12:03.558885+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 618 order, 193 jadwal, 5 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260929-1415",
       "mulai": "2026-09-29T14:15:05.855904+00:00",
       "status": "sukses",
@@ -12828,7 +12876,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-29T14:15:05.855904+00:00"
+    "last_sync": "2026-09-30T02:12:03.558885+00:00"
   },
   "neracaDetail": [
     {
@@ -16508,18 +16556,18 @@
       "row_idx": 16,
       "nama": "Indah",
       "job": "Admin",
-      "q": 29.0,
+      "q": 30.0,
       "q_raw": 0.0,
-      "actual_shift": 29,
+      "actual_shift": 30,
       "cost": 40000.0,
       "is_fixed": false,
-      "total_gaji": 1160000.0,
+      "total_gaji": 1200000.0,
       "bonus_kpi": 349475.0,
       "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1509475.0,
+      "thp": 1549475.0,
       "status": "Draft"
     },
     {
@@ -16676,13 +16724,13 @@
     }
   ],
   "rosterSummary": {
-    "total_gaji": 12790000.0,
+    "total_gaji": 12830000.0,
     "total_bonus_kpi": 1383769.0,
     "total_additional": 0.0,
     "total_bonus": 0.0,
     "total_hukuman": 0.0,
     "total_bon": 0.0,
-    "grand_total_thp": 14173769.0,
+    "grand_total_thp": 14213769.0,
     "total_karyawan": 12
   }
 }
