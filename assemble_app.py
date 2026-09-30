@@ -70,9 +70,10 @@ html_template = """<!doctype html>
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{background:var(--canvas);color:var(--ink2);font-family:var(--ff-body);
+html,body{background:var(--canvas);color:var(--ink2);font-family:var(--ff-body);
   font-size:14.5px;line-height:1.55;-webkit-font-smoothing:antialiased;
-  font-feature-settings:"cv05","ss01";margin:0;padding:0}
+  font-feature-settings:"cv05","ss01";margin:0;padding:0;
+  max-width:100vw;width:100%;overflow-x:hidden;position:relative}
 h1,h2,h3,h4{margin:0;text-wrap:balance;color:var(--ink)}
 h3,h4{font-family:var(--ff-body);font-weight:500;letter-spacing:0}
 p{margin:0}
@@ -82,7 +83,7 @@ a{color:var(--accent)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* ---------- shell ---------- */
-.app{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}
+.app{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh;max-width:100%;width:100%;overflow-x:hidden}
 .rail{background:var(--rail);border-right:1px solid var(--rail-line);padding:22px 0 30px;
   position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;gap:18px}
 .brand{padding:0 20px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
@@ -101,10 +102,12 @@ a{color:var(--accent)}
 .nav button[aria-current="true"] .cnt{color:rgba(255,255,255,0.85)}
 .nav .cnt{font-family:var(--ff-mono);font-size:11px;color:var(--on-rail-soft);
   font-variant-numeric:tabular-nums}
-.main{min-width:0;display:flex;flex-direction:column;background:var(--canvas)}
+.main{min-width:0;display:flex;flex-direction:column;background:var(--canvas);max-width:100%;width:100%;overflow-x:hidden}
 
-.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--canvas) 92%,transparent);
-  backdrop-filter:blur(10px);border-bottom:1px solid var(--hairline);padding:13px 28px;
+.app-header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--canvas) 92%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.mobile-brand{display:none}
+.topbar{position:relative;border-bottom:1px solid var(--hairline);padding:13px 28px;
   display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .period{display:flex;align-items:baseline;gap:10px}
 .period b{font-family:var(--ff-display);font-size:22px;font-weight:600;letter-spacing:-.3px;
@@ -129,7 +132,7 @@ a{color:var(--accent)}
 .presence{display:flex;align-items:center}
 .dot{width:9px;height:9px;border-radius:50%;background:var(--good)}
 
-.view{padding:28px 32px 80px;max-width:1600px;width:100%;margin:0 auto;box-sizing:border-box}
+.view{padding:28px 32px 80px;max-width:1600px;width:100%;margin:0 auto;box-sizing:border-box;min-width:0}
 .view[hidden]{display:none}
 .vhead{display:flex;align-items:flex-end;gap:16px;margin-bottom:22px;flex-wrap:wrap}
 .vhead h2{font-family:var(--ff-display);font-size:38px;font-weight:600;letter-spacing:-.8px;
@@ -139,7 +142,7 @@ a{color:var(--accent)}
   text-transform:uppercase;color:var(--muted-soft)}
 
 /* ---------- blok ---------- */
-.card{background:var(--surface);border:1px solid var(--hairline);border-radius:12px;padding:22px}
+.card{background:var(--surface);border:1px solid var(--hairline);border-radius:12px;padding:22px;min-width:0;max-width:100%;box-sizing:border-box}
 .card > h3{font-size:16px;font-weight:500;margin-bottom:14px;display:flex;align-items:center;
   gap:10px;justify-content:space-between;color:var(--ink)}
 .grid{display:grid;gap:16px}
@@ -158,7 +161,7 @@ a{color:var(--accent)}
 .stat .bar i{display:block;height:100%;background:var(--accent)}
 
 table{width:100%;border-collapse:collapse;font-size:13.5px}
-.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--hairline);border-radius:12px;background:var(--surface);width:100%;max-width:100%;scrollbar-width:thin;scrollbar-color:var(--hairline-strong) var(--surface)}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x pan-y;border:1px solid var(--hairline);border-radius:12px;background:var(--surface);width:100%;max-width:100%;min-width:0;scrollbar-width:thin;scrollbar-color:var(--hairline-strong) var(--surface)}
 .tw::-webkit-scrollbar{height:6px}
 .tw::-webkit-scrollbar-track{background:var(--surface)}
 .tw::-webkit-scrollbar-thumb{background:var(--hairline-strong);border-radius:3px}
@@ -228,7 +231,7 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
 .chk.warn .badge{background:var(--warn-bg);color:var(--warn)}
 
 /* ---------- kalender bulanan ---------- */
-.calwrap{overflow-x:auto}
+.calwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x pan-y;width:100%;max-width:100%;min-width:0}
 .cal{display:grid;grid-template-columns:repeat(7,minmax(76px,1fr)) 104px;gap:1px;
   background:var(--hairline);border:1px solid var(--hairline);border-radius:12px;overflow:hidden;
   min-width:680px;--hc:var(--accent)}
@@ -293,25 +296,92 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
 .empty{padding:34px 18px;text-align:center;color:var(--muted-soft);font-size:13.5px}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px;align-items:start}
 .three{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:start}
-.tabsm{display:none;gap:6px;overflow-x:auto;padding:10px 16px;border-bottom:1px solid var(--hairline);
-  background:var(--surface)}
+.chartscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x pan-y;max-width:100%;min-width:0}
+
+/* Mobile locked tabs container */
+.tabsm-container{display:none;position:relative;width:100%;overflow:hidden;border-top:1px solid var(--hairline)}
+.tabsm{display:flex;gap:6px;overflow-x:auto;padding:8px 16px;background:var(--surface);
+  overscroll-behavior-x:contain;touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;-ms-overflow-style:none;scroll-snap-type:x proximity}
+.tabsm::-webkit-scrollbar{display:none}
 .tabsm button{white-space:nowrap;background:var(--surface2);border:1px solid var(--hairline);
-  border-radius:9999px;padding:6px 14px;font-size:13px;cursor:pointer;color:var(--muted);
-  font-weight:500}
-.tabsm button[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.chartscroll{overflow-x:auto}
+  border-radius:9999px;padding:6px 13px;font-size:12.5px;cursor:pointer;color:var(--muted);
+  font-weight:500;scroll-snap-align:center;flex-shrink:0;transition:all .15s ease;display:inline-flex;align-items:center;gap:4px}
+.tabsm button:active{transform:scale(0.96)}
+.tabsm button[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:600;box-shadow:0 2px 8px rgba(0,85,184,0.3)}
+.tabsm .tab-icon{font-size:13px;display:inline-block;line-height:1}
+
 @media (max-width:1080px){
   .two,.three{grid-template-columns:1fr}
 }
+
 @media (max-width:900px){
-  .chartscroll .chart{min-width:720px}
-  .app{grid-template-columns:1fr}
+  html,body{overflow-x:hidden}
+  .app{grid-template-columns:1fr;overflow-x:hidden}
   .rail{display:none}
-  .tabsm{display:flex}
-  .view{padding:20px 16px 64px}
-  .vhead h2{font-size:31px}
-  .topbar{padding:11px 16px}
+
+  /* Locked sticky app-header on mobile */
+  .app-header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--canvas) 96%,transparent);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--hairline);
+    width:100%;max-width:100vw;box-shadow:0 4px 16px rgba(0,0,0,0.06)}
+  .topbar{position:relative;border-bottom:none;
+    padding:8px 12px;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+
+  .mobile-brand{display:flex;align-items:center;margin-right:2px}
+  .brand-img-mobile{height:22px;width:auto;object-fit:contain;filter:brightness(1.15) drop-shadow(0 2px 6px rgba(0,85,184,0.35))}
+
+  .period b{font-size:16px}
+  .period .co{font-size:11px}
+
+  .tabsm-container{display:block}
+  .tabsm{padding:7px 12px;background:transparent}
+
+  .chartscroll .chart{min-width:720px}
+  .view{padding:16px 12px 64px;max-width:100vw;overflow-x:clip}
+  .vhead{margin-bottom:16px;gap:8px}
+  .vhead h2{font-size:26px;letter-spacing:-.5px}
+  .vhead p{font-size:13px;line-height:1.45}
+  .card{padding:16px 14px;border-radius:12px}
+  .card > h3{font-size:15px;flex-wrap:wrap;gap:8px}
   .f.wide{grid-column:span 1}
+}
+
+@media (max-width:600px){
+  .topbar{padding:6px 10px;gap:6px}
+  .period b{font-size:14.5px}
+  .period .co{display:none}
+  .period{gap:6px}
+  .topbar .btn.sm{padding:4px 8px;font-size:11.5px}
+  #btnReset{display:none}
+  #btnExport{padding:4px 8px;font-size:11.5px}
+
+  /* Stats 2-column native mobile app widget style */
+  .stats{grid-template-columns:repeat(2,1fr);gap:1px;background:var(--hairline);border-radius:10px}
+  .stat{padding:10px 11px;background:var(--surface);border-right:none}
+  .stat .v{font-size:clamp(16px,4.5vw,20px)!important}
+  .stat .v.sm{font-size:clamp(14px,3.8vw,17px)!important}
+  .stat .k{font-size:9.5px;letter-spacing:1px}
+  .stat .m{font-size:10.5px}
+
+  /* 12 Month Cards fit-in */
+  .mgrid{grid-template-columns:1fr;gap:12px}
+  .month-card{padding:14px 12px}
+  .month-card .mhead{flex-wrap:wrap;gap:8px}
+  .month-card .mname{font-size:18px;flex-wrap:wrap}
+  .month-card .mv{font-size:20px}
+  .month-card .msub{word-break:break-word;white-space:normal}
+
+  /* Form stacking */
+  .form{grid-template-columns:1fr;gap:9px}
+  .f input,.f select{height:38px;font-size:13px}
+
+  /* Calendar header wrap */
+  .calhead{flex-direction:column;align-items:flex-start;gap:8px}
+  .seg{width:100%}
+  .seg button{flex:1;text-align:center;padding:6px 8px;font-size:12px}
+}
+@media (max-width:380px){
+  .stats{grid-template-columns:1fr}
 }
 
 /* ---------- lock screen (autentikasi studio) ---------- */
@@ -399,9 +469,9 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
 .month-card.active-month{border:1.5px solid var(--accent);
   background:color-mix(in srgb,var(--accent) 4%,var(--surface));
   box-shadow:0 0 24px rgba(0,101,184,0.18)}
-.month-card .mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.month-card .mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap}
 .month-card .mname{font-family:var(--ff-display);font-size:22px;font-weight:700;letter-spacing:-.4px;
-  color:var(--ink);display:flex;align-items:center;gap:7px}
+  color:var(--ink);display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .month-card .live-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;
   box-shadow:0 0 8px var(--accent);animation:pulseDot 1.6s infinite}
 @keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.25)}}
@@ -495,23 +565,30 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
   </aside>
 
   <div class="main">
-    <div class="topbar">
-      <div class="period"><b id="tbPeriod">September 2026</b><span class="co" id="tbCut">memuat…</span></div>
-      <span class="pill prog" id="tbStatus">Progressive</span>
-      <span class="spacer"></span>
-      <button class="btn sm" id="btnTheme" title="Ganti Tema">🌓 Tema</button>
-      <button class="btn sm" id="btnLock" title="Kunci Dashboard">🔒 Kunci</button>
-      <span class="pill neutral" id="tbLive" hidden></span>
-      <span class="pill neutral" id="tbUpd" hidden></span>
-      <span class="pill final" id="tbSync">aktif</span>
-      <div class="btn-group" id="btnGroupUpdate">
-        <button class="btn sm" id="btnUpdateData" style="display:inline-flex;align-items:center;gap:5px;font-weight:600;border-color:var(--accent);color:var(--accent);background:var(--surface);" title="Perbarui data terbaru ke website">🔄 Update</button>
-        <button class="btn sm" id="btnSyncSettings" style="padding:4px 7px;border-left:0;border-color:var(--accent);color:var(--accent);background:var(--surface);" title="Pilihan &amp; Pengaturan Sinkronisasi">▾</button>
+    <header class="app-header" id="appHeader">
+      <div class="topbar">
+        <div class="mobile-brand" id="mobileBrand">
+          <img src="logo_foxe.png" alt="Foxe Studio" class="brand-img-mobile">
+        </div>
+        <div class="period"><b id="tbPeriod">September 2026</b><span class="co" id="tbCut">memuat…</span></div>
+        <span class="pill prog" id="tbStatus">Progressive</span>
+        <span class="spacer"></span>
+        <button class="btn sm" id="btnTheme" title="Ganti Tema">🌓 Tema</button>
+        <button class="btn sm" id="btnLock" title="Kunci Dashboard">🔒 Kunci</button>
+        <span class="pill neutral" id="tbLive" hidden></span>
+        <span class="pill neutral" id="tbUpd" hidden></span>
+        <span class="pill final" id="tbSync">aktif</span>
+        <div class="btn-group" id="btnGroupUpdate">
+          <button class="btn sm" id="btnUpdateData" style="display:inline-flex;align-items:center;gap:5px;font-weight:600;border-color:var(--accent);color:var(--accent);background:var(--surface);" title="Perbarui data terbaru ke website">🔄 Update</button>
+          <button class="btn sm" id="btnSyncSettings" style="padding:4px 7px;border-left:0;border-color:var(--accent);color:var(--accent);background:var(--surface);" title="Pilihan &amp; Pengaturan Sinkronisasi">▾</button>
+        </div>
+        <button class="btn sm" id="btnReset" title="Kembalikan ke data awal file">Reset Data</button>
+        <button class="btn pri" id="btnExport">Export Excel</button>
       </div>
-      <button class="btn sm" id="btnReset" title="Kembalikan ke data awal file">Reset Data</button>
-      <button class="btn pri" id="btnExport">Export Excel</button>
-    </div>
-    <div class="tabsm" id="tabsm"></div>
+      <div class="tabsm-container">
+        <div class="tabsm" id="tabsm"></div>
+      </div>
+    </header>
     <main id="views"></main>
   </div>
 </div>
@@ -1268,21 +1345,21 @@ function barlist(items,colorVar,valFmt){
 
 /* ============================ views ============================ */
 const VIEWS=[
-  {id:"tahunan",grp:"Ringkasan",label:"Laporan Tahunan"},
-  {id:"dash",grp:"Ringkasan",label:"Dashboard (Bulanan)"},
-  {id:"omzet",grp:"Ringkasan",label:"Omzet Harian"},
-  {id:"target",grp:"Ringkasan",label:"Target & Skenario"},
-  {id:"est",grp:"Ringkasan",label:"Estimasi Omzet"},
-  {id:"trx",grp:"Input",label:"Transaksi"},
-  {id:"biaya",grp:"Input",label:"Neraca (COGS & OPEX)"},
-  {id:"gaji",grp:"Input",label:"Gaji Karyawan"},
-  {id:"shift",grp:"Input",label:"Shift"},
-  {id:"lead",grp:"Input",label:"Lead"},
-  {id:"kpi",grp:"Input",label:"KPI & Bonus"},
-  {id:"crew",grp:"Analisis",label:"Paket & Crew"},
-  {id:"yoy",grp:"Analisis",label:"Perbandingan YoY"},
-  {id:"ads",grp:"Analisis",label:"Jadwal Ads"},
-  {id:"set",grp:"Analisis",label:"Pengaturan"},
+  {id:"tahunan",grp:"Ringkasan",label:"Laporan Tahunan",icon:"📅"},
+  {id:"dash",grp:"Ringkasan",label:"Dashboard (Bulanan)",icon:"📊"},
+  {id:"omzet",grp:"Ringkasan",label:"Omzet Harian",icon:"📈"},
+  {id:"target",grp:"Ringkasan",label:"Target & Skenario",icon:"🎯"},
+  {id:"est",grp:"Ringkasan",label:"Estimasi Omzet",icon:"🔮"},
+  {id:"trx",grp:"Input",label:"Transaksi",icon:"📝"},
+  {id:"biaya",grp:"Input",label:"Neraca (COGS & OPEX)",icon:"⚖️"},
+  {id:"gaji",grp:"Input",label:"Gaji Karyawan",icon:"👥"},
+  {id:"shift",grp:"Input",label:"Shift",icon:"⏱️"},
+  {id:"lead",grp:"Input",label:"Lead",icon:"🎯"},
+  {id:"kpi",grp:"Input",label:"KPI & Bonus",icon:"⭐"},
+  {id:"crew",grp:"Analisis",label:"Paket & Crew",icon:"📸"},
+  {id:"yoy",grp:"Analisis",label:"Perbandingan YoY",icon:"📊"},
+  {id:"ads",grp:"Analisis",label:"Jadwal Ads",icon:"📢"},
+  {id:"set",grp:"Analisis",label:"Pengaturan",icon:"⚙️"},
 ];
 
 function render(){
@@ -1309,9 +1386,19 @@ function render(){
   VIEWS.forEach(v=>{ if(v.grp!==lastGrp){html+=`<div class="grp">${v.grp}</div>`;lastGrp=v.grp}
     html+=`<button data-v="${v.id}" aria-current="${view===v.id}">${v.label}${counts[v.id]!=null?`<span class="cnt">${counts[v.id]}</span>`:""}</button>`;});
   nav.innerHTML=html;
-  tabs.innerHTML=VIEWS.map(v=>`<button data-v="${v.id}" aria-current="${view===v.id}">${v.label}</button>`).join("");
-  [...nav.querySelectorAll("button"),...tabs.querySelectorAll("button")].forEach(b=>
-    b.onclick=()=>{view=b.dataset.v;render();document.querySelector(".main").scrollIntoView({block:"start"})});
+  if(tabs){
+    tabs.innerHTML=VIEWS.map(v=>`<button data-v="${v.id}" aria-current="${view===v.id}">${v.icon?`<span class="tab-icon">${v.icon}</span> `:""}${v.label}</button>`).join("");
+    const curTab=tabs.querySelector(`button[data-v="${view}"]`);
+    if(curTab){
+      setTimeout(()=>{ curTab.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}); },20);
+    }
+  }
+  [...nav.querySelectorAll("button"),...(tabs?tabs.querySelectorAll("button"):[])].forEach(b=>
+    b.onclick=()=>{
+      view=b.dataset.v;
+      render();
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
 
   document.getElementById("views").innerHTML=`<section class="view">${({
     dash:vDash,tahunan:vTahunan,omzet:vOmzet,target:vTarget,trx:vTrx,biaya:vBiaya,
@@ -3132,12 +3219,12 @@ function wire(R){
       if (m === 10 && S.oktoberPipeline) {
         view = "est";
         render();
-        document.querySelector(".main").scrollIntoView({block: "start"});
+        window.scrollTo({top: 0, behavior: "smooth"});
         showToast("📅 Membuka Estimasi & Pipeline 154 Booking Oktober 2026", "ok", 3000);
       } else {
         view = "dash";
         render();
-        document.querySelector(".main").scrollIntoView({block: "start"});
+        window.scrollTo({top: 0, behavior: "smooth"});
         if (m === 9) {
           showToast("📊 Membuka Dashboard Live September 2026", "ok", 2500);
         } else {
