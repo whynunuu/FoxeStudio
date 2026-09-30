@@ -9,7 +9,7 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
      * Wisuda UMP Hari 2 (4 Okt): ID `1hDeuOh-6fnsP7vzWAl4HVwlYoEumu1hA` (`file_wisuda_4okt.xlsx`)
    - Hitung total shift aktual kru s.d. hari ini dari Log Order, deteksi cut-off dinamis.
    - Parse section `Detail` File Neraca (kolom P s.d. U) untuk klasifikasi COGS & OPEX serta Buku Detail Neraca (Debit/Kredit).
-   - Parse Pipeline Oktober: 154 booking terdaftar (23 Reguler + 131 Wisuda UMP), hitung potensi omzet paket dan estimasi pelunasan (cash in hari-H foto).
+   - Parse Pipeline Oktober: 163 booking terdaftar (29 Reguler + 134 Wisuda UMP: 70 hari 1 & 64 hari 2), hitung potensi omzet paket (Rp 58,88 jt), DP terkunci (Rp 11,35 jt), dan estimasi pelunasan (cash in hari-H foto: Rp 47,52 jt).
    - Simpan `foxe_full_state.json`, rakit `index.html`, dan kirim notifikasi Telegram via `@NunuFxBot`.
    - Di dalam struk laporan Telegram (blok monospace), sertakan kalkulasi **Estimate Omzet Sampai Akhir Bulan** (Unrealized Cash In, DP (-), Total, dan Unrealized Omzet) yang menyatu di dalam struk di bawah Estimasi Nett Profit.
 2. Jalankan git commit & push ke `origin main`:
@@ -28,21 +28,36 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
 - **ATURAN MUTLAK DATA REAL (Anti-Fabrikasi)**:
   - Bulan sebelum September 2026 (Januari–Agustus) dan sesudah Oktober 2026 (November–Desember 2026) **WAJIB DIKOSONGKAN (`—`)** dengan status badge `<span class="pill neutral">Belum Dicocokkan</span>`.
   - **September 2026**: Menampilkan data riil live terverifikasi (`R.omzet`, proyeksi run-rate, indikator live dot berdenyut, dan badge `<span class="pill crit">Berjalan (Terverifikasi)</span>`).
-  - **Oktober 2026**: Menampilkan data riil pipeline booking terdaftar (`S.oktoberPipeline`: 154 booking terdaftar dari Schedule Reguler + Wisuda UMP 3 & 4 Okt, badge `<span class="pill prog">Pipeline (154 Booking)</span>`, potensi omzet, dan estimasi pelunasan riil).
+  - **Oktober 2026**: Menampilkan data riil pipeline booking terdaftar (`S.oktoberPipeline`: 163 booking terdaftar dari Schedule Reguler + Wisuda UMP 3 & 4 Okt, badge `<span class="pill prog">Pipeline (163 Booking)</span>`, potensi omzet Rp 58,88 jt, dan estimasi pelunasan riil Rp 47,52 jt).
 - **Benchmark Seasonality 12 Bulan**:
   - Matriks Seasonality Index 12 bulan (Januari s.d. Desember) tetap aktif penuh menggunakan benchmark tahun 2025 (garis tengah 1.00×, Super Peak September 2.10×).
-  - Pada grafik tahunan, batang 2026 dirender untuk bulan September (realized) dan Oktober (pipeline terdaftar).
+  - Pada grafik tahunan dan grafik YoY, batang 2026 dirender untuk bulan September (realized) dan Oktober (pipeline terdaftar).
 - **12 Kotak Bulan Interaktif & Urutan Layout**:
   - **Posisi Paling Atas**: Tepat di bawah kartu KPI, urutan pertama adalah **12 Kotak Bulan Interaktif (`.mgrid`)** dan **Tabel Komparasi 12 Bulan**.
   - **Posisi Bawah**: Banner penjelasan Seasonality Index dan Grafik Chart Seasonality diletakkan di bawah tabel bulanan.
-  - Setiap kotak bulan dapat diklik: September membuka dashboard live (`view = "dash"`), Oktober membuka rincian pipeline estimasi booking (`view = "est"`).
+  - Setiap kotak bulan dapat diklik: September membuka dashboard live (`view = "dash"`), Oktober langsung membuka rincian pipeline booking Oktober 2026 (`estMonth = 10; view = "est"`).
 
-### 2. Struktur Section Neraca (COGS & OPEX):
+### 2. Navigasi & Integrasi Lintas Section (Cross-Section Harmony):
+- **Navigasi Langsung Oktober 2026 (`estMonth = 10`)**:
+  - Mengklik kotak atau tombol bulan Oktober pada Laporan Tahunan langsung membuka halaman **Oktober 2026** di Estimasi Omzet.
+  - **Topbar Adaptif**: Topbar otomatis menampilkan periode *"Oktober 2026 | Pipeline 163 Booking · Reguler & Wisuda UMP"*.
+  - Dilengkapi **Dual-Period Switcher**:
+    - `[ 📅 Oktober 2026 (Pipeline 163 Booking) ]`
+    - `[ 📅 September 2026 (Sisa Jadwal) ]`
+  - Tabel 163 booking dilengkapi pencarian cepat client/paket/spot instan dan tombol filter kategori (*Semua*, *Wisuda UMP*, *Studio Reguler*).
+- **Integrasi Lintas Section**:
+  - **Dashboard Bulanan (`vDash`)**: Kartu forward outlook pipeline Oktober (163 booking) dengan tombol pintas ke rincian estimasi.
+  - **Target & Skenario (`vTarget`)**: Kartu kesiapan target Q4 / Oktober 2026 dengan modal terkunci Rp 58,88 jt.
+  - **Perbandingan YoY (`vYoy`)**: Grafik chart YoY merender batang Oktober 2026 (hijau putus-putus) berdampingan dengan September run-rate, serta kartu forward outlook YoY.
+  - **Paket & Crew (`vCrew`)**: Alert operasional persiapan kru menangani 134 sesi wisuda di 5 backdrop dan 29 sesi reguler studio.
+  - **Rekap Shift (`vShift`)**: Peringatan kesiapan roster shift menyambut Super Peak Wisuda UMP (70 sesi pada 3 Okt dan 64 sesi pada 4 Okt).
+
+### 3. Struktur Section Neraca (COGS & OPEX):
 - Section COGS dan OPEX digabung menjadi satu section resmi bernama **`Neraca (COGS & OPEX)`**.
 - **Sumber Data Biaya:** Pengeluaran COGS & OPEX murni diambil dari section `Detail` File Neraca (kolom P s.d. U via `parser_neraca.py`). JANGAN mengambil dari File Log Order karena referensinya berbeda.
 - Di bawah rekap COGS & OPEX, wajib menyertakan **Buku Detail Neraca (Debit & Kredit)** yang mencatat mutasi kas masuk, kas keluar, dan saldo berjalan per tanggal transaksi.
 
-### 3. Standar Tampilan Fit-In & Anti-Tabrakan:
+### 4. Standar Tampilan Fit-In & Anti-Tabrakan:
 - **Lebar Kontainer (`.view`):** Gunakan `max-width: 1600px; width: 100%; margin: 0 auto; padding: 28px 32px 80px;`. JANGAN batasi ke 1200px kaku agar tidak muncul ruang hitam kosong di kanan layar.
 - **Format Tabel Biaya 7 Kolom:**
   $$\text{Tgl} \ \mid\ \text{Deskripsi} \ \mid\ \text{Jenis} \ \mid\ \text{Kategori} \ \mid\ \text{Nilai} \ \mid\ \text{Status} \ \mid\ \text{Aksi}$$
@@ -52,19 +67,20 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
 - **Pencegahan Benturan Grid (`.two` & `.three`):** Wajib menggunakan `repeat(auto-fit, minmax(360px, 1fr))` dengan breakpoint di `1080px` (otomatis menjadi 1 kolom tumpuk saat layar menyempit).
 - **Tipografi KPI Adaptif:** Nilai uang besar pada `.stat .v` menggunakan `clamp(20px, 1.9vw, 31px)` dengan `text-overflow: ellipsis` agar tidak meluber keluar kotak kartu.
 - **Wrapping Teks:** Jangan gunakan blanket `white-space: nowrap` pada semua `td`. Izinkan deskripsi membungkus alami (*wrap*), sementara angka `.n`, tanggal `.mono`, dan badge `.pill` tetap *nowrap*.
+- **Dropdown KPI Interaktif:** Input Nama dan Posisi pada form KPI menggunakan dropdown interaktif dengan opsi kru aktif dan input kustom.
 
-### 4. Kebijakan Fitur Terminal:
+### 5. Kebijakan Fitur Terminal:
 - Fitur Terminal View (Bloomberg/trading terminal) **DILARANG & DIHAPUS PERMANEN** dari repositori Foxe Studio utama.
 - Topbar harus tetap bersih, resmi, dan menyertakan elemen `#tbUpd`, `#tbLive`, dan tombol update `#btnSyncWeb`.
 - Fungsi `render()` pada JavaScript wajib menyertakan pemeriksaan defensif `if(up)` agar tidak terjadi error `TypeError: null`.
 
-### 5. Tombol Update Otomatis di Web & GitHub Actions:
+### 6. Tombol Update Otomatis di Web & GitHub Actions:
 - Topbar aplikasi web dilengkapi tombol **`🔄 Update`** yang bekerja dalam dua mode:
   1. **Fast Refresh**: Memeriksa `foxe_full_state.json` terbaru di GitHub repository tanpa membebani kuota API.
   2. **Cloud Sync**: Memanggil GitHub API `workflow_dispatch` untuk memicu `.github/workflows/daily_sync.yml`. Sinkronisasi langsung berjalan di server cloud GitHub Actions tanpa perlu perangkat/laptop owner menyala.
 - **Jadwal Cron Otomatis Cloud**: Workflow berjalan otomatis setiap hari pada pukul **09:00 WIB** (pagi studio buka) dan **21:00 WIB** (malam rekap closing).
 
-### 6. Format Laporan Telegram (Estimate Omzet Akhir Bulan):
+### 7. Format Laporan Telegram (Estimate Omzet Akhir Bulan):
 - Di dalam struk ringkasan harian Telegram (blok `<pre>`), tepat di bawah `ESTIMASI NETT PROFIT` dan sebelum garis penutup `============================================`, wajib menyertakan section **Estimate Omzet Sampai Akhir Bulan** yang menyatu di dalam struk:
   * `Unrealized Cash In : Rp .....` (Total harga paket sesi booking terdaftar dari H+1 s.d. akhir bulan di File 2 Schedule)
   * `DP (-)             : Rp .....` (Total DP yang sudah diterima dari booking tersebut)
