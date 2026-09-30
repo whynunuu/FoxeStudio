@@ -9286,7 +9286,7 @@
     {
       "id": "ld_30",
       "tanggal": "2026-09-30",
-      "leads": 0.0,
+      "leads": 32.0,
       "dp": 6.0,
       "sesiFoto": 8.0,
       "transaksi": 14.0
@@ -12701,6 +12701,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20260930-1417",
+      "mulai": "2026-09-30T14:17:13.082229+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order, 194 jadwal, 5 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260930-1315",
       "mulai": "2026-09-30T13:15:40.506052+00:00",
       "status": "sukses",
@@ -13107,7 +13113,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-30T13:15:40.506052+00:00"
+    "last_sync": "2026-09-30T14:17:13.082229+00:00"
   },
   "neracaDetail": [
     {
@@ -13724,14 +13730,14 @@
   },
   "oktoberPipeline": {
     "bulan": "2026-10",
-    "totalBookings": 164,
-    "potentialOmzet": 59150000.0,
+    "totalBookings": 165,
+    "potentialOmzet": 59500000.0,
     "totalDp": 11350000.0,
-    "estimateCashIn": 47800000.0,
+    "estimateCashIn": 48150000.0,
     "breakdown": {
       "reguler": {
-        "sesi": 30,
-        "nilai": 10500000.0,
+        "sesi": 31,
+        "nilai": 10850000.0,
         "dp": 2500000.0
       },
       "wisudaDay1": {
@@ -14036,6 +14042,24 @@
       },
       {
         "id": "sc_bk_17",
+        "tgl": "2026-10-06",
+        "waktu": "15:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Hanifah",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "IN",
+        "noHp": "concrete",
+        "manual": false,
+        "dp": 0.0,
+        "sisaPelunasan": 350000.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_18",
         "tgl": "2026-10-07",
         "waktu": "12:00",
         "studio": "Studio 1",
@@ -14053,7 +14077,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_18",
+        "id": "sc_bk_19",
         "tgl": "2026-10-08",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -14071,7 +14095,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_19",
+        "id": "sc_bk_20",
         "tgl": "2026-10-10",
         "waktu": "11:30",
         "studio": "Studio 1",
@@ -14089,7 +14113,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_20",
+        "id": "sc_bk_21",
         "tgl": "2026-10-11",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -14107,7 +14131,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_21",
+        "id": "sc_bk_22",
         "tgl": "2026-10-11",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -14125,7 +14149,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_22",
+        "id": "sc_bk_23",
         "tgl": "2026-10-17",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -14143,7 +14167,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_23",
+        "id": "sc_bk_24",
         "tgl": "2026-10-17",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -14161,7 +14185,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_24",
+        "id": "sc_bk_25",
         "tgl": "2026-10-17",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -14179,7 +14203,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_25",
+        "id": "sc_bk_26",
         "tgl": "2026-10-17",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -14197,7 +14221,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_26",
+        "id": "sc_bk_27",
         "tgl": "2026-10-22",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -14215,7 +14239,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_27",
+        "id": "sc_bk_28",
         "tgl": "2026-10-22",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -14233,7 +14257,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_28",
+        "id": "sc_bk_29",
         "tgl": "2026-10-22",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -14251,7 +14275,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_29",
+        "id": "sc_bk_30",
         "tgl": "2026-10-22",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -14269,7 +14293,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_30",
+        "id": "sc_bk_31",
         "tgl": "2026-10-22",
         "waktu": "15:00",
         "studio": "Studio 1",
