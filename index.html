@@ -2274,6 +2274,7 @@ function vBiaya(R){
             <td class="n">${balFmt}</td>
             <td>${badgeMasuk}</td>
             <td>${ketKeluar}</td>
+          </tr>`;
         }).join("") : `<tr><td colspan="6"><div class="empty" style="padding:22px 0">
           Belum ada pencatatan mutasi di Buku Detail Neraca ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}.<br>
           <span class="tiny muted">Sheet '${BULAN[+R.c.bulan.split("-")[1]-1]} 2026' di File Neraca telah terikat aktif. Begitu tim finance mengisi mutasi debit/kredit, data akan otomatis terurai live saat cron harian sinkronisasi berjalan.</span>
