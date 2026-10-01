@@ -10,15 +10,22 @@ import os
 import json
 import time
 import datetime
+import asyncio
+from datetime import timezone, timedelta
+from typing import Optional
 from fastapi import FastAPI, Request, BackgroundTasks
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from agentic_lead_engine import AgenticLeadEngine, FOXE_PAYMENT_INFO, FONNTE_TOKEN
 
+WIB = timezone(timedelta(hours=7))
+REMINDER_HOURS = [9, 12, 15, 18, 21] # Jam operasional Foxe Studio (09:00 - 21:00 WIB, interval 3 jam)
+last_reminder_hour = -1
+
 app = FastAPI(
-    title="Foxe Studio AI Lead Webhook",
-    description="Webhook listener & AI Lead Assistant for Foxe Studio WhatsApp",
-    version="1.0.0"
+    title="Foxe Studio AI Lead Webhook & Follow-Up Reminder",
+    description="Webhook listener, 3-hour Follow-up Reminder & AI Lead Assistant for Foxe Studio WhatsApp",
+    version="1.1.0"
 )
 
 app.add_middleware(
@@ -32,15 +39,48 @@ app.add_middleware(
 # Inisialisasi engine
 engine = AgenticLeadEngine()
 
+async def reminder_scheduler_loop():
+    """
+    Background Task Scheduler 24/7 di Railway:
+    Mengecek waktu lokal WIB setiap menit. Jika berada di jam operasional studio
+    pada interval 3 jam (09:00, 12:00, 15:00, 18:00, 21:00 WIB), kirim reminder follow-up.
+    """
+    global last_reminder_hour
+    print("[SCHEDULER] Background 3-Hour Reminder Scheduler Aktif (09:00 - 21:00 WIB)")
+    while True:
+        try:
+            now_wib = datetime.datetime.now(WIB)
+            current_hour = now_wib.hour
+
+            if current_hour in REMINDER_HOURS and current_hour != last_reminder_hour:
+                hour_label = f"{current_hour:02d}:00 WIB"
+                print(f"[{now_wib.strftime('%H:%M:%S')} WIB] Mengeksekusi trigger reminder 3 jam ({hour_label})...")
+                last_reminder_hour = current_hour
+                res = engine.send_followup_reminder(current_hour_str=hour_label)
+                print(f"[SCHEDULER SELESAI] Hasil: {res}")
+            elif current_hour not in REMINDER_HOURS:
+                last_reminder_hour = -1
+        except Exception as e:
+            print(f"[SCHEDULER ERROR] {e}")
+
+        await asyncio.sleep(40)
+
+@app.on_event("startup")
+async def on_startup():
+    asyncio.create_task(reminder_scheduler_loop())
+
 @app.get("/")
 def root():
+    now_wib = datetime.datetime.now(WIB)
     return {
         "status": "online",
-        "service": "Foxe Studio Agentic AI Lead Engine",
+        "service": "Foxe Studio Agentic AI Lead & Reminder Engine",
         "studio": "Foxe Studio (Purwokerto)",
         "whatsapp_device": "0851-5921-0021 (Foxe Admin)",
         "gemini_ai": "Connected",
-        "time": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        "operational_hours": "09:00 - 21:00 WIB",
+        "reminder_interval": "Setiap 3 Jam (09:00, 12:00, 15:00, 18:00, 21:00 WIB)",
+        "current_time_wib": now_wib.strftime("%Y-%m-%d %H:%M:%S WIB")
     }
 
 @app.get("/health")
@@ -51,6 +91,17 @@ def health():
 def get_leads():
     """Mengambil daftar leads tersimpan untuk disinkronkan ke dashboard."""
     return engine.get_leads_summary()
+
+@app.get("/api/trigger-reminder")
+@app.post("/api/trigger-reminder")
+def trigger_reminder_endpoint(hour: Optional[str] = None):
+    """
+    Endpoint pemicu reminder manual/tes via WhatsApp & Telegram.
+    """
+    now_wib = datetime.datetime.now(WIB)
+    hour_label = hour or f"{now_wib.strftime('%H:%M')} WIB"
+    result = engine.send_followup_reminder(current_hour_str=hour_label)
+    return result
 
 @app.post("/webhook")
 @app.post("/api/webhook")

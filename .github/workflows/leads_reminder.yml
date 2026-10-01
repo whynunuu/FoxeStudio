@@ -1,0 +1,37 @@
+name: Foxe Studio 3-Hour Follow-Up Reminder
+
+on:
+  schedule:
+    # Berjalan di jam operasional Foxe Studio setiap 3 jam (WIB = UTC+7):
+    # 02:00 UTC = 09:00 WIB (Buka studio)
+    # 05:00 UTC = 12:00 WIB (Siang)
+    # 08:00 UTC = 15:00 WIB (Sore)
+    # 11:00 UTC = 18:00 WIB (Petang)
+    # 14:00 UTC = 21:00 WIB (Closing studio)
+    - cron: '0 2,5,8,11,14 * * *'
+  workflow_dispatch:
+
+jobs:
+  send-reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install requests
+
+      - name: Run Follow-Up Reminder Script
+        env:
+          FONNTE_TOKEN: ${{ secrets.FONNTE_TOKEN || 'Q87WP9YMCkXEWYEg4pRz' }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN || '8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s' }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID || '1608969830' }}
+          ADMIN_PHONE: ${{ secrets.ADMIN_PHONE || '6285159210021' }}
+        run: |
+          python trigger_leads_reminder.py

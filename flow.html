@@ -735,6 +735,9 @@
         </p>
       </div>
       <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+        <button id="btnTriggerReminderWeb" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#f87171; border:1px solid #ef4444;" title="Kirim reminder daftar chat urgent ke WhatsApp & Telegram Admin">
+          🔔 Trigger Reminder Admin (3 Jam)
+        </button>
         <button id="btnSyncStateSheet" class="btn btn-sm" style="background:#1e293b; color:#38bdf8; border:1px solid #38bdf8;">
           🔄 Sinkronkan Data Sheet
         </button>
@@ -3210,6 +3213,55 @@
             btnSync.textContent = '✓ Sinkron Selesai';
             setTimeout(() => { btnSync.textContent = '🔄 Sinkronkan Data Sheet'; }, 2000);
           }, 600);
+        });
+      }
+
+      // Trigger 3-Hour Reminder button
+      const btnReminder = document.getElementById('btnTriggerReminderWeb');
+      if (btnReminder) {
+        btnReminder.addEventListener('click', async () => {
+          btnReminder.textContent = '⏳ Mengirim Reminder...';
+          const unconverted = leadsData.filter(l => l.status !== 'CONVERTED');
+          const hot = unconverted.filter(l => l.tier === 'HOT');
+          const warm = unconverted.filter(l => l.tier === 'WARM');
+          const totalVal = unconverted.reduce((sum, l) => sum + (Number(l.estimated_value) || 0), 0);
+
+          const now = new Date();
+          const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} WIB`;
+
+          const waMsg = `🚨 *REMINDER FOLLOW-UP FOXE STUDIO*\n⏰ *Pukul ${timeStr}* (09:00 - 21:00 WIB)\n\n🔥 *HOT LEADS:*\n${hot.slice(0, 2).map((l, i) => `${i+1}. ${l.display_name} (${l.phone}) - ${l.admin}`).join('\n')}\n\n⚡ *WARM LEADS:*\n${warm.slice(0, 2).map((l, i) => `${i+1}. ${l.display_name} (${l.phone}) - ${l.admin}`).join('\n')}\n\n💰 Potensi: Rp ${totalVal.toLocaleString('id-ID')}\nCRM: whynunuu.github.io/FoxeStudio/flow.html`;
+
+          const tgMsg = `🚨 *REMINDER FOLLOW-UP ADMIN FOXE STUDIO*\n⏰ *Pukul ${timeStr}* | Jam Operasional (09:00 - 21:00 WIB)\n\nDitemukan *${hot.length + warm.length} Calon Klien Prioritas* yang butuh balasan follow-up agar segera closing DP:\n\n🔥 *[HOT LEADS]*\n${hot.map((l, i) => `${i+1}. *${l.display_name}* (${l.phone}) — Admin ${l.admin}\n   • Situasi: ${l.summary || 'Menunggu konfirmasi'}\n   • Nilai: Rp ${(Number(l.estimated_value) || 0).toLocaleString('id-ID')}\n   • Aksi: Segera amankan slot & tagih DP 100K ke Rek BCA 0462897055 an Dicky Ferry A`).join('\n\n')}\n\n⚡ *[WARM LEADS]*\n${warm.map((l, i) => `${i+1}. *${l.display_name}* (${l.phone}) — Admin ${l.admin}\n   • Pertanyaan: ${l.summary || 'Konsultasi paket'}`).join('\n\n')}\n\n💰 *Potensi Tertahan:* Rp ${totalVal.toLocaleString('id-ID')}\n👉 *Buka CRM:* https://whynunuu.github.io/FoxeStudio/flow.html`;
+
+          // Send to Telegram
+          const tgToken = '8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s';
+          const tgChatId = '1608969830';
+          try {
+            await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: new URLSearchParams({ chat_id: tgChatId, text: tgMsg, parse_mode: 'Markdown' })
+            });
+          } catch (e) {
+            console.warn('Telegram send error:', e);
+          }
+
+          // Send to WhatsApp via Fonnte
+          const fonnteToken = 'Q87WP9YMCkXEWYEg4pRz';
+          try {
+            await fetch('https://api.fonnte.com/send', {
+              method: 'POST',
+              headers: { 'Authorization': fonnteToken, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ target: '6285159210021', message: waMsg })
+            });
+          } catch (e) {
+            console.warn('Fonnte send error:', e);
+          }
+
+          btnReminder.textContent = '✓ Reminder Terkirim';
+          setTimeout(() => { btnReminder.textContent = '🔔 Trigger Reminder Admin (3 Jam)'; }, 2500);
+
+          alert(`🔔 REMINDER BERHASIL DIKIRIM!\n\n• Waktu: ${timeStr}\n• Saluran: WhatsApp (Foxe Admin) & Telegram (@NunuFxBot)\n• Daftar: ${hot.length} Hot Leads & ${warm.length} Warm Leads\n• Potensi Tertahan: Rp ${totalVal.toLocaleString('id-ID')}\n\nJadwal otomatis 24/7 di Railway & GitHub Actions aktif setiap 3 jam (09:00, 12:00, 15:00, 18:00, 21:00 WIB).`);
         });
       }
 

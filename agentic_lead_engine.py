@@ -32,6 +32,9 @@ if os.path.exists(SECRETS_FILE):
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") or _local_secrets.get("GEMINI_API_KEY", "")
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-flash-latest")
 FONNTE_TOKEN = os.environ.get("FONNTE_TOKEN") or _local_secrets.get("FONNTE_TOKEN", "")
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN") or _local_secrets.get("TELEGRAM_BOT_TOKEN", "8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID") or _local_secrets.get("TELEGRAM_CHAT_ID", "1608969830")
+ADMIN_PHONE = os.environ.get("ADMIN_PHONE") or _local_secrets.get("ADMIN_PHONE", "6285159210021")
 
 
 FOXE_PAYMENT_INFO = {
@@ -449,6 +452,151 @@ class AgenticLeadEngine:
             "admin_metrics": metrics,
             "leads": self.leads
         }
+
+    def format_followup_reminder(self, current_hour_str: str = "12:00 WIB") -> str:
+        """
+        Meracik pesan reminder terstruktur untuk Admin Studio:
+        - Memprioritaskan HOT leads (hampir closing/minta rekening/lock slot)
+        - Diikuti WARM leads (butuh konsultasi paket)
+        - Sertakan total potensi nominal yang tertahan
+        """
+        unconverted = [l for l in self.leads if l.get("status") != "CONVERTED"]
+        hot_leads = [l for l in unconverted if l.get("tier") == "HOT"]
+        warm_leads = [l for l in unconverted if l.get("tier") == "WARM"]
+        cold_leads = [l for l in unconverted if l.get("tier") == "COLD"]
+        total_potensi = sum(l.get("estimated_value", 0) for l in unconverted)
+
+        if not unconverted:
+            return (
+                f"✅ *REMINDER FOXE STUDIO ({current_hour_str})*\n\n"
+                f"Luar biasa! Tidak ada leads yang menggantung saat ini.\n"
+                f"Semua calon klien telah terkonversi / tercatat di spreadsheet!"
+            )
+
+        lines = [
+            "🚨 *REMINDER FOLLOW-UP ADMIN FOXE STUDIO*",
+            f"⏰ *Pukul {current_hour_str}* | Jam Operasional (09:00 - 21:00 WIB)\n",
+            f"Ditemukan *{len(hot_leads) + len(warm_leads)} Calon Klien Prioritas* yang butuh balasan follow-up agar segera closing DP:\n"
+        ]
+
+        if hot_leads:
+            lines.append("🔥 *[HOT LEADS - PRIORITAS AMANKAN SLOT]*")
+            for i, l in enumerate(hot_leads, 1):
+                name = l.get("display_name", "Klien")
+                phone = l.get("phone", "")
+                adm = l.get("admin", "AMEL")
+                val = l.get("estimated_value", 0)
+                summary = l.get("summary", "Menunggu konfirmasi")
+                lines.append(f"{i}. *{name}* ({phone}) — Admin {adm}")
+                lines.append(f"   • Situasi: {summary}")
+                lines.append(f"   • Potensi: Rp {val:,}")
+                lines.append(f"   • Aksi: Segera amankan slot & ingatkan DP min 100K ke BCA 0462897055 an Dicky Ferry A\n")
+
+        if warm_leads:
+            lines.append("⚡ *[WARM LEADS - PERLU KONSULTASI]*")
+            for i, l in enumerate(warm_leads, 1):
+                name = l.get("display_name", "Klien")
+                phone = l.get("phone", "")
+                adm = l.get("admin", "AMEL")
+                summary = l.get("summary", "Konsultasi paket")
+                lines.append(f"{i}. *{name}* ({phone}) — Admin {adm}")
+                lines.append(f"   • Pertanyaan: {summary}\n")
+
+        lines.append("📊 *Ringkasan Status:*")
+        lines.append(f"• Hot Leads: {len(hot_leads)} Klien")
+        lines.append(f"• Warm Leads: {len(warm_leads)} Klien")
+        lines.append(f"• Potensi Tertahan: Rp {total_potensi:,}\n")
+        lines.append("👉 *Buka CRM & Draft Balasan AI:*")
+        lines.append("https://whynunuu.github.io/FoxeStudio/flow.html")
+
+        return "\n".join(lines)
+
+    def format_followup_reminder_wa(self, current_hour_str: str = "12:00 WIB") -> str:
+        """
+        Format ringkas padat khusus WhatsApp agar kompatibel dengan limit karakter Fonnte Free Package.
+        """
+        unconverted = [l for l in self.leads if l.get("status") != "CONVERTED"]
+        hot_leads = [l for l in unconverted if l.get("tier") == "HOT"]
+        warm_leads = [l for l in unconverted if l.get("tier") == "WARM"]
+        total_potensi = sum(l.get("estimated_value", 0) for l in unconverted)
+
+        if not unconverted:
+            return f"✅ *REMINDER FOXE STUDIO ({current_hour_str})*\nSemua leads telah closing / terkonversi!"
+
+        lines = [
+            "🚨 *REMINDER FOLLOW-UP FOXE STUDIO*",
+            f"⏰ *Pukul {current_hour_str}* (09:00 - 21:00 WIB)\n",
+            "🔥 *HOT LEADS:*"
+        ]
+        for i, l in enumerate(hot_leads[:2], 1):
+            lines.append(f"{i}. {l.get('display_name')} ({l.get('phone')}) - {l.get('admin')}")
+
+        if warm_leads:
+            lines.append("\n⚡ *WARM LEADS:*")
+            for i, l in enumerate(warm_leads[:2], 1):
+                lines.append(f"{i}. {l.get('display_name')} ({l.get('phone')}) - {l.get('admin')}")
+
+        lines.append(f"\n💰 Potensi: Rp {total_potensi:,}")
+        lines.append("CRM: whynunuu.github.io/FoxeStudio/flow.html")
+        return "\n".join(lines)
+
+    def send_followup_reminder(self, current_hour_str: str = "12:00 WIB", target_phone: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Mengirimkan notifikasi reminder otomatis ke:
+        1. Telegram Bot (@NunuFxBot) — Format detail
+        2. WhatsApp Admin via Fonnte Gateway — Format ringkas kompatibel
+        """
+        msg_tg = self.format_followup_reminder(current_hour_str)
+        msg_wa = self.format_followup_reminder_wa(current_hour_str)
+
+        results = {
+            "status": "success",
+            "time": current_hour_str,
+            "telegram": False,
+            "whatsapp": False,
+            "recipients": []
+        }
+
+        # 1. Kirim ke Telegram (Format Detail Lengkap)
+        if TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID:
+            try:
+                tg_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+                payload = urllib.parse.urlencode({
+                    "chat_id": TELEGRAM_CHAT_ID,
+                    "text": msg_tg,
+                    "parse_mode": "Markdown"
+                }).encode("utf-8")
+                req = urllib.request.Request(tg_url, data=payload)
+                with urllib.request.urlopen(req, timeout=10) as r:
+                    if r.getcode() == 200:
+                        results["telegram"] = True
+                        results["recipients"].append(f"Telegram (Chat ID: {TELEGRAM_CHAT_ID})")
+            except Exception as e:
+                print(f"[WARN] Gagal kirim reminder ke Telegram: {e}")
+
+        # 2. Kirim ke WhatsApp via Fonnte (Format Ringkas Kompatibel)
+        phone_dest = target_phone or ADMIN_PHONE
+        if FONNTE_TOKEN and phone_dest:
+            try:
+                wa_url = "https://api.fonnte.com/send"
+                payload = json.dumps({
+                    "target": phone_dest,
+                    "message": msg_wa
+                }).encode("utf-8")
+                req = urllib.request.Request(
+                    wa_url,
+                    data=payload,
+                    headers={"Authorization": FONNTE_TOKEN, "Content-Type": "application/json"}
+                )
+                with urllib.request.urlopen(req, timeout=10) as r:
+                    resp_data = json.loads(r.read().decode("utf-8"))
+                    if resp_data.get("status"):
+                        results["whatsapp"] = True
+                        results["recipients"].append(f"WhatsApp ({phone_dest})")
+            except Exception as e:
+                print(f"[WARN] Gagal kirim reminder ke WhatsApp: {e}")
+
+        return results
 
 if __name__ == "__main__":
     engine = AgenticLeadEngine()
