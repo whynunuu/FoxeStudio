@@ -13,10 +13,47 @@ import os
 import json
 import time
 import datetime
+import urllib.request
+import urllib.error
 from typing import Dict, List, Any, Optional
 
 STATE_FILE = "foxe_full_state.json"
 VAULT_FILE = "leads_vault.json"
+SECRETS_FILE = "foxe_secrets.json"
+
+_local_secrets = {}
+if os.path.exists(SECRETS_FILE):
+    try:
+        with open(SECRETS_FILE, "r", encoding="utf-8") as _sf:
+            _local_secrets = json.load(_sf)
+    except Exception:
+        pass
+
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") or _local_secrets.get("GEMINI_API_KEY", "")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-flash-lite-latest")
+FONNTE_TOKEN = os.environ.get("FONNTE_TOKEN") or _local_secrets.get("FONNTE_TOKEN", "")
+
+
+FOXE_PAYMENT_INFO = {
+    "bank": "BCA",
+    "account_number": "0462897055",
+    "account_name": "Dicky Ferry A",
+    "min_dp": "100K (Rp 100.000)",
+    "form_template": (
+        "Untuk booking jadwal, mohon cantumkan format dibawah ya ka :\n\n"
+        "- *Nama*        : \n"
+        "- *Tanggal*     : \n"
+        "- *Pukul*       : \n"
+        "- *Paket*       : \n"
+        "- *Tema*        : \n"
+        "- *Jumlah Orang*: \n\n"
+        "Untuk minimal *DP 100K* yaa kaa, \n"
+        "bisa Transfer ke Rek BCA\n"
+        "An. *Dicky Ferry A*\n"
+        "0462897055\n"
+        "Jika sudah transaksi, mohon kirimkan bukti transaksinya yaa kaa, Terima Kasih."
+    )
+}
 
 DEFAULT_LEADS = [
     {
@@ -29,9 +66,9 @@ DEFAULT_LEADS = [
         "created_at": "2026-10-01 08:30:00",
         "last_message_at": "2026-10-01 09:15:00",
         "last_customer_msg": "Kak aku ambil yang wisuda tgl 3 Okt jam 10 ya. Nama: Dinda Maharani, 4 orang, minta rek BCA nya kak",
-        "last_admin_msg": "Siap kak Dinda! Untuk BCA Foxe Studio di 122-098-771 a/n Foxe Studio. DP min 100rb ya kak, ditunggu konfirmasinya 🙏",
-        "summary": "Form booking wisuda sudah diisi, minta rekening 2.5 jam lalu tapi belum kirim bukti transfer DP.",
-        "ai_recommendation": "Kak Dindaa, mau ngabarin untuk sesi wisuda tgl 3 Okt jam 10 pagi ada yang nanyain slotnya juga nih kak. Biar aman jadwalnya nggak bentrok sama yang lain, mau langsung aku amankan slot fotografernya sekarang kak? Kalau udah transfer kabarin yaa biar langsung aku buatin tanda terimanya 🙏",
+        "last_admin_msg": "Siap kak Dinda! Untuk BCA Foxe Studio di 0462897055 a/n Dicky Ferry A. DP min 100K ya kak, ditunggu konfirmasinya 🙏",
+        "summary": "Form booking wisuda sudah diisi, minta rekening 2.5 jam lalu tapi belum kirim bukti transfer DP 100K.",
+        "ai_recommendation": "Kak Dindaa, mau ngabarin untuk sesi wisuda tgl 3 Okt jam 10 pagi ada yang nanyain slotnya juga nih kak. Biar aman jadwalnya nggak bentrok sama yang lain, mau langsung aku amankan slot fotografernya sekarang kak? Kalau udah transfer ke BCA 0462897055 a/n Dicky Ferry A kabarin yaa biar langsung aku buatin tanda terimanya 🙏",
         "estimated_value": 350000,
         "follow_up_count": 0
     },
@@ -226,15 +263,59 @@ class AgenticLeadEngine:
 
     def generate_ai_draft(self, client_name: str, tier: str, summary: str, context: str) -> str:
         """
-        Generator balasan manusiawi (Humanis, Anti-Slop, Santai khas Kru Studio Foto).
+        Generator balasan manusiawi berbasis LLM Google Gemini API.
+        Anti-Slop, Santai, Sopan khas Tim Studio Foto Lokal.
+        Fallback mulus ke template studio natural lokal jika offline atau limit.
         """
         cname = client_name.split()[0] if client_name else "Kak"
 
+        # 1. Coba Generate via Google Gemini API
+        if GEMINI_API_KEY:
+            try:
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
+                prompt = (
+                    f"Role: Anda adalah tim CS/Admin Foxe Studio (studio foto profesional lokal yang hangat dan ramah).\n"
+                    f"Tugas: Buatkan 1 pesan balasan WhatsApp santai, sopan, manusiawi, dan anti-slop (tanpa bahasa korporat kaku/robotik).\n"
+                    f"Konteks Klien:\n"
+                    f"- Nama Klien: {client_name}\n"
+                    f"- Kategori: {tier} LEAD ({'hampir bayar DP / minta rekening' if tier=='HOT' else ('tanya-tanya paket foto' if tier=='WARM' else 'tanya pricelist lalu hening')})\n"
+                    f"- Situasi: {summary}\n"
+                    f"- Pesan Terakhir: {context}\n"
+                    f"Konteks Resmi Foxe Studio:\n"
+                    f"- Rekening Resmi Studio: BCA 0462897055 a/n Dicky Ferry A\n"
+                    f"- Minimal DP: 100K (Rp 100.000)\n"
+                    f"- Format Booking: Nama, Tanggal, Pukul, Paket, Tema, Jumlah Orang\n"
+                    f"Aturan Penulisan:\n"
+                    f"1. Panggil nama santai: 'Kak {cname}'.\n"
+                    f"2. Maksimal 2-3 kalimat ringkas langsung ke tujuan.\n"
+                    f"3. Jika klien butuh rekening/DP, cantumkan BCA 0462897055 an Dicky Ferry A (DP min 100K).\n"
+                    f"4. Nada bersahabat, santai studio, tanpa menekan klien.\n"
+                    f"5. Output HANYA teks balasan yang siap kirim, tanpa tanda kutip atau penjelasan tambahan."
+                )
+                payload = {
+                    "contents": [{"parts": [{"text": prompt}]}]
+                }
+                req = urllib.request.Request(
+                    url,
+                    data=json.dumps(payload).encode("utf-8"),
+                    headers={"Content-Type": "application/json", "x-goog-api-key": GEMINI_API_KEY}
+                )
+                with urllib.request.urlopen(req, timeout=8) as resp:
+                    res = json.loads(resp.read().decode("utf-8"))
+                    text = res["candidates"][0]["content"]["parts"][0]["text"].strip()
+                    text = text.strip('"\'')
+                    if text:
+                        return text
+            except Exception as e:
+                pass
+
+        # 2. Fallback Natural Studio Template
         if tier == "HOT":
             return (
                 f"Kak {cname}aa, mau ngabarin santai nih barangkali slot fotonya mau langsung kita amankan sekarang? "
                 f"Takutnya bentrok sama yang antre di jadwal fotografer hari itu kak. "
-                f"Kabarin aja yaa kalau sudah sempet transfer DP-nya biar langsung aku bikinin tanda terima resminya 🙏"
+                f"Untuk DP min 100K bisa ke Rek BCA 0462897055 a/n Dicky Ferry A yaa. "
+                f"Kabarin aja kalau sudah transfer biar langsung aku bikinin tanda terima resminya 🙏"
             )
         elif tier == "WARM":
             return (

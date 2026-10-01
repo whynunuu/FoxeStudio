@@ -10,3 +10,7 @@ Thumbs.db
 .venv/
 test_*.py
 test_*.js
+.env
+*.env
+foxe_secrets.json
+
