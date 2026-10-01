@@ -1094,7 +1094,7 @@
             name: "Cek Pembayaran DP",
             type: "filter_if",
             position: { x: 620, y: 220 },
-            parameters: { field: "dp_masuk", operator: ">", value: "0" }
+            parameters: { field: "dp_masuk", operator: ">=", value: "50000" }
           },
           {
             id: "node_konfirmasi_wa",
@@ -1203,7 +1203,7 @@
             name: "Cek Pembayaran DP",
             type: "filter_if",
             position: { x: 360, y: 180 },
-            parameters: { field: "dp_masuk", operator: ">", value: "0" }
+            parameters: { field: "dp_masuk", operator: ">=", value: "50000" }
           },
           {
             id: "node_template_wa_old",
@@ -1477,9 +1477,11 @@
         let previewText = '';
         const p = node.parameters || {};
         if (node.type === 'webhook_trigger') previewText = `Webhook: /${p.webhook_token || 'chat-inbox'}`;
-        else if (node.type === 'sheet_sync') previewText = `Sheet: ${p.sheet_name || 'Log Order'}`;
-        else if (node.type === 'filter_if') previewText = `IF ${p.field || 'dp'} ${p.operator || '>'} ${p.value || '0'}`;
-        else if (node.type === 'ai_lead_scorer') previewText = `Klasifikasi: Hot · Warm · Cold`;
+        else if (node.type === 'filter_if') {
+          const valNum = Number(p.value);
+          const dispVal = (!isNaN(valNum) && valNum >= 1000) ? `Rp ${valNum.toLocaleString('id-ID')}` : (p.value || '0');
+          previewText = `IF ${p.field || 'dp_masuk'} ${p.operator || '>='} ${dispVal}`;
+        }
         else if (node.type === 'hot_lead' || node.type === 'warm_lead' || node.type === 'cold_lead') previewText = `SOP: ${p.urgency || 'Prioritas Lead'}`;
         else if (node.type === 'ai_agent_vps') previewText = `VPS Agent: ${p.target_group || 'Grup Admin'}`;
         else if (node.type === 'fonnte_whatsapp') previewText = `WA: ${p.target_phone || 'Client'}`;
@@ -1681,7 +1683,7 @@
           case 'sheet_sync':
             return { title: 'Catat Manual & Sync Sheet', category: 'Spreadsheet', icon: '📋', color: '#10b981', headerBg: 'rgba(16,185,129,0.25)', desc: 'Admin catat di Sheet & parser mencocokkan data.', defaultParams: { sheet_name: 'Log Order & Reservasi', sync_mode: 'auto_match' } };
           case 'filter_if':
-            return { title: 'Cek Pembayaran DP', category: 'Logic', icon: '⚖️', color: '#8b5cf6', headerBg: 'rgba(139,92,246,0.25)', desc: 'Evaluasi konversi DP (True = Lunas, False = Pecah Tier).', defaultParams: { field: 'dp_masuk', operator: '>', value: '0' } };
+            return { title: 'Cek Pembayaran DP', category: 'Logic', icon: '⚖️', color: '#8b5cf6', headerBg: 'rgba(139,92,246,0.25)', desc: 'Evaluasi konversi DP (True = Valid >= 50rb, False = Pecah Tier).', defaultParams: { field: 'dp_masuk', operator: '>=', value: '50000' } };
           case 'ai_lead_scorer':
             return { title: 'AI Lead Scoring (3-Tier)', category: 'AI Logic', icon: '🧠', color: '#a855f7', headerBg: 'rgba(168,85,247,0.25)', desc: 'Pisahkan calon klien: Hot, Warm, atau Cold.', defaultParams: { rules: 'Hot: Form terisi/hampir DP | Warm: Tanya lanjut paket & dibalas | Cold: Tanya pricelist lalu hening' } };
           case 'hot_lead':
