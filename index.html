@@ -1415,86 +1415,103 @@ const VIEWS=[
 ];
 
 function render(){
-  const R=compute();
-  if(view === "est" && estMonth === 10 && S.oktoberPipeline){
-    document.getElementById("tbPeriod").textContent = "Oktober 2026";
-    document.getElementById("tbCut").textContent = `Pipeline ${S.oktoberPipeline.totalBookings} Booking · Reguler & Wisuda UMP`;
-    const st=document.getElementById("tbStatus");
-    if(st){ st.textContent="Pipeline"; st.className="pill prog"; }
-  } else if(view === "ads"){
-    const aYr = R.c.bulan.split("-")[0];
-    const aMn = BULAN[+R.c.bulan.split("-")[1] - 1] || "";
-    document.getElementById("tbPeriod").textContent = `${aMn} ${aYr}`;
-    document.getElementById("tbCut").textContent = `Meta Ads Tracker & Kalender 2026/2027 · ${aMn} ${aYr}`;
-    const st=document.getElementById("tbStatus");
-    if(st){ st.textContent = (R.c.bulan === "2026-10" ? "Live Tracker" : "Arsip"); st.className = "pill " + (R.c.bulan === "2026-10" ? "prog" : "final"); }
-  } else {
-    document.getElementById("tbPeriod").textContent=BULAN[+R.c.bulan.split("-")[1]-1]+" "+R.c.bulan.split("-")[0];
-    document.getElementById("tbCut").textContent=`s.d. ${R.cutDay} ${BULAN[+R.c.bulan.split("-")[1]-1]} · ${R.hariBerjalan}/${R.dim} hari`;
-    const st=document.getElementById("tbStatus");
-    if(st){ st.textContent=R.c.status; st.className="pill "+(R.c.status==="Final"?"final":"prog"); }
-  }
-
-  const btnSwOkt = document.getElementById("btnSwitchOkt");
-  const btnSwSep = document.getElementById("btnSwitchSep");
-  if(btnSwOkt && btnSwSep) {
-    if(activeMonth === "2026-10") {
-      btnSwOkt.style.background = "var(--accent)";
-      btnSwOkt.style.color = "#ffffff";
-      btnSwOkt.style.borderColor = "var(--accent)";
-      btnSwOkt.style.fontWeight = "600";
-      btnSwSep.style.background = "transparent";
-      btnSwSep.style.color = "var(--muted)";
-      btnSwSep.style.borderColor = "var(--hairline)";
-      btnSwSep.style.fontWeight = "500";
+  try {
+    const R=compute();
+    if(view === "est" && estMonth === 10 && S.oktoberPipeline){
+      document.getElementById("tbPeriod").textContent = "Oktober 2026";
+      document.getElementById("tbCut").textContent = `Pipeline ${S.oktoberPipeline.totalBookings} Booking · Reguler & Wisuda UMP`;
+      const st=document.getElementById("tbStatus");
+      if(st){ st.textContent="Pipeline"; st.className="pill prog"; }
+    } else if(view === "ads"){
+      const aYr = R.c.bulan.split("-")[0];
+      const aMn = BULAN[+R.c.bulan.split("-")[1] - 1] || "";
+      document.getElementById("tbPeriod").textContent = `${aMn} ${aYr}`;
+      document.getElementById("tbCut").textContent = `Meta Ads Tracker & Kalender 2026/2027 · ${aMn} ${aYr}`;
+      const st=document.getElementById("tbStatus");
+      if(st){ st.textContent = (R.c.bulan === "2026-10" ? "Live Tracker" : "Arsip"); st.className = "pill " + (R.c.bulan === "2026-10" ? "prog" : "final"); }
     } else {
-      btnSwSep.style.background = "var(--accent)";
-      btnSwSep.style.color = "#ffffff";
-      btnSwSep.style.borderColor = "var(--accent)";
-      btnSwSep.style.fontWeight = "600";
-      btnSwOkt.style.background = "transparent";
-      btnSwOkt.style.color = "var(--muted)";
-      btnSwOkt.style.borderColor = "var(--hairline)";
-      btnSwOkt.style.fontWeight = "500";
+      document.getElementById("tbPeriod").textContent=BULAN[+R.c.bulan.split("-")[1]-1]+" "+R.c.bulan.split("-")[0];
+      document.getElementById("tbCut").textContent=`s.d. ${R.cutDay} ${BULAN[+R.c.bulan.split("-")[1]-1]} · ${R.hariBerjalan}/${R.dim} hari`;
+      const st=document.getElementById("tbStatus");
+      if(st){ st.textContent=R.c.status; st.className="pill "+(R.c.status==="Final"?"final":"prog"); }
+    }
+
+    const btnSwOkt = document.getElementById("btnSwitchOkt");
+    const btnSwSep = document.getElementById("btnSwitchSep");
+    if(btnSwOkt && btnSwSep) {
+      if(activeMonth === "2026-10") {
+        btnSwOkt.style.background = "var(--accent)";
+        btnSwOkt.style.color = "#ffffff";
+        btnSwOkt.style.borderColor = "var(--accent)";
+        btnSwOkt.style.fontWeight = "600";
+        btnSwSep.style.background = "transparent";
+        btnSwSep.style.color = "var(--muted)";
+        btnSwSep.style.borderColor = "var(--hairline)";
+        btnSwSep.style.fontWeight = "500";
+      } else {
+        btnSwSep.style.background = "var(--accent)";
+        btnSwSep.style.color = "#ffffff";
+        btnSwSep.style.borderColor = "var(--accent)";
+        btnSwSep.style.fontWeight = "600";
+        btnSwOkt.style.background = "transparent";
+        btnSwOkt.style.color = "var(--muted)";
+        btnSwOkt.style.borderColor = "var(--hairline)";
+        btnSwOkt.style.fontWeight = "500";
+      }
+    }
+
+    const up=document.getElementById("tbUpd"), ok=syncSukses(), akhir=syncUrut()[0];
+    if(up){
+      if(ok){ const w=wibParts(ok.mulai);
+        up.hidden=false;
+        up.textContent=`Diperbarui ${w.tgl.split(" ").slice(0,2).join(" ")} ${w.jam}`;
+        up.title=`Terakhir berhasil ${tgljam(ok.mulai)} — ${lalu(ok.mulai)}`;
+        up.className="pill "+(akhir&&akhir.status==="gagal"?"bad":"neutral");
+      } else up.hidden=true;
+    }
+
+    // nav
+    const nav=document.getElementById("nav"); const tabs=document.getElementById("tabsm");
+    const calLen=(S.marketingCalendar||[]).length;
+    const counts={trx:R.tx,biaya:R.ex.length,gaji:(R.rosterGaji||[]).length,shift:R.shiftTot,lead:R.ld.length,kpi:R.kpi.length,tahunan:"12 bln",ads:calLen?`${calLen} agenda`:null};
+    let html="",lastGrp="";
+    VIEWS.forEach(v=>{ if(v.grp!==lastGrp){html+=`<div class="grp">${v.grp}</div>`;lastGrp=v.grp}
+      html+=`<button data-v="${v.id}" aria-current="${view===v.id}">${v.label}${counts[v.id]!=null?`<span class="cnt">${counts[v.id]}</span>`:""}</button>`;});
+    nav.innerHTML=html;
+    if(tabs){
+      tabs.innerHTML=VIEWS.map(v=>`<button data-v="${v.id}" aria-current="${view===v.id}">${v.icon?`<span class="tab-icon">${v.icon}</span> `:""}${v.label}</button>`).join("");
+      const curTab=tabs.querySelector(`button[data-v="${view}"]`);
+      if(curTab){
+        setTimeout(()=>{ curTab.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}); },20);
+      }
+    }
+    [...nav.querySelectorAll("button"),...(tabs?tabs.querySelectorAll("button"):[])].forEach(b=>
+      b.onclick=()=>{
+        view=b.dataset.v;
+        render();
+        window.scrollTo({top:0,behavior:"smooth"});
+      });
+
+    const viewFn = ({
+      dash:vDash,tahunan:vTahunan,omzet:vOmzet,target:vTarget,trx:vTrx,biaya:vBiaya,
+      shift:vShift,lead:vLead,kpi:vKpi,gaji:vGaji,crew:vCrew,yoy:vYoy,ads:vAds,est:vEst,set:vSet})[view] || vTahunan;
+
+    document.getElementById("views").innerHTML=`<section class="view">${viewFn(R)}</section>`;
+    wire(R);
+  } catch (err) {
+    console.error("Fatal render error:", err);
+    const vw = document.getElementById("views");
+    if (vw) {
+      vw.innerHTML = `
+        <div class="card" style="margin:40px auto;max-width:600px;text-align:center;padding:32px 24px;">
+          <h3 style="color:var(--crit);margin-top:0;">⚠️ Terjadi Kendala Tampilan</h3>
+          <p style="color:var(--muted);font-size:13px;line-height:1.5;">Browser mendeteksi cache atau kegagalan parsing state lokal (${esc(err.message || "")}).</p>
+          <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;">
+            <button class="btn pri" onclick="localStorage.removeItem('foxe_studio_keuangan_state');location.reload(true)">🔄 Bersihkan Cache &amp; Muat Ulang</button>
+          </div>
+        </div>`;
     }
   }
-
-  const up=document.getElementById("tbUpd"), ok=syncSukses(), akhir=syncUrut()[0];
-  if(up){
-    if(ok){ const w=wibParts(ok.mulai);
-      up.hidden=false;
-      up.textContent=`Diperbarui ${w.tgl.split(" ").slice(0,2).join(" ")} ${w.jam}`;
-      up.title=`Terakhir berhasil ${tgljam(ok.mulai)} — ${lalu(ok.mulai)}`;
-      up.className="pill "+(akhir&&akhir.status==="gagal"?"bad":"neutral");
-    } else up.hidden=true;
-  }
-
-  // nav
-  const nav=document.getElementById("nav"); const tabs=document.getElementById("tabsm");
-  const calLen=(S.marketingCalendar||[]).length;
-  const counts={trx:R.tx,biaya:R.ex.length,gaji:(R.rosterGaji||[]).length,shift:R.shiftTot,lead:R.ld.length,kpi:R.kpi.length,tahunan:"12 bln",ads:calLen?`${calLen} agenda`:null};
-  let html="",lastGrp="";
-  VIEWS.forEach(v=>{ if(v.grp!==lastGrp){html+=`<div class="grp">${v.grp}</div>`;lastGrp=v.grp}
-    html+=`<button data-v="${v.id}" aria-current="${view===v.id}">${v.label}${counts[v.id]!=null?`<span class="cnt">${counts[v.id]}</span>`:""}</button>`;});
-  nav.innerHTML=html;
-  if(tabs){
-    tabs.innerHTML=VIEWS.map(v=>`<button data-v="${v.id}" aria-current="${view===v.id}">${v.icon?`<span class="tab-icon">${v.icon}</span> `:""}${v.label}</button>`).join("");
-    const curTab=tabs.querySelector(`button[data-v="${view}"]`);
-    if(curTab){
-      setTimeout(()=>{ curTab.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}); },20);
-    }
-  }
-  [...nav.querySelectorAll("button"),...(tabs?tabs.querySelectorAll("button"):[])].forEach(b=>
-    b.onclick=()=>{
-      view=b.dataset.v;
-      render();
-      window.scrollTo({top:0,behavior:"smooth"});
-    });
-
-  document.getElementById("views").innerHTML=`<section class="view">${({
-    dash:vDash,tahunan:vTahunan,omzet:vOmzet,target:vTarget,trx:vTrx,biaya:vBiaya,
-    shift:vShift,lead:vLead,kpi:vKpi,gaji:vGaji,crew:vCrew,yoy:vYoy,ads:vAds,est:vEst,set:vSet})[view](R)}</section>`;
-  wire(R);
 }
 
 function wibParts(iso){
