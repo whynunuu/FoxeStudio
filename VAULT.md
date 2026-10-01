@@ -77,3 +77,19 @@ Unrealized Omzet               Rp 104.625.000
 - Berisi 43 agenda momentum akademik lengkap dengan action pill, momentum acara, paket fokus, dan alasan strategis.
 - Meta Ads Tracker dilengkapi dual-switcher bulan berjalan (Oktober 2026 Live Tracker & September 2026 Arsip).
 
+---
+
+## 7. Aturan Mutlak Keselarasan Periode Bulan (Anti-Cross-Month Desync)
+- Seluruh modul data dan rendering web mengacu pada satu variabel rujukan: `activeMonth` / `R.c.bulan`.
+- Dilarang keras menggunakan variabel state bulan lokal independen yang tidak tersinkronisasi (seperti `adsMonth`) atau melakukan fallback paksa data bulan lain.
+- Jika user memilih **Oktober 2026**, seluruh section (termasuk Jadwal Ads & Realized Ads dari Neraca) **WAJIB membuka dan menampilkan data Oktober 2026**.
+- Jika user memilih **September 2026**, seluruh section **WAJIB membuka dan menampilkan data September 2026**.
+
+---
+
+## 8. Binding Multi-Sheet Neraca Oktober 2026
+- `parser_neraca.py` mengikat sheet `September 2026` dan sheet `Oktober 2026` dari `file_neraca.xlsx`.
+- State `neracaByMonth["2026-10"]` aktif dan siap menerima data mutasi debit/kredit finance secara real-time.
+- Error boundary `try...catch` aktif pada `render()` untuk menjamin stabilitas runtime.
+
+
