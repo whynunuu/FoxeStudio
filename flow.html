@@ -265,6 +265,99 @@
       background: #090d14; border: 1px solid var(--border-subtle); border-radius: 6px;
       padding: 10px; font-family: var(--font-mono); font-size: 11px; color: #38bdf8; word-break: break-all;
     }
+    /* LEADS LIBRARY & AI DRAFT STYLES */
+    .leads-view-container {
+      flex: 1; height: calc(100vh - 56px); overflow-y: auto; background: var(--bg-canvas);
+      padding: 24px 32px; display: flex; flex-direction: column; gap: 20px;
+    }
+    .leads-header {
+      display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px;
+    }
+    .leads-title { font-size: 20px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
+    .leads-sub { font-size: 13px; color: var(--text-secondary); margin-top: 4px; line-height: 1.5; max-width: 860px; }
+    
+    .leads-kpi-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px;
+    }
+    .kpi-card {
+      background: #141c28; border: 1px solid var(--border-subtle); border-radius: 10px;
+      padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; position: relative; overflow: hidden;
+    }
+    .kpi-card::before {
+      content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--border-subtle);
+    }
+    .kpi-card.hot::before { background: #ef4444; }
+    .kpi-card.warm::before { background: #f59e0b; }
+    .kpi-card.cold::before { background: #06b6d4; }
+    .kpi-card.closed::before { background: #10b981; }
+    .kpi-card.unconverted::before { background: #a855f7; }
+    
+    .kpi-card .k { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; }
+    .kpi-card .v { font-size: 22px; font-weight: 700; color: #fff; font-family: var(--font-mono); }
+    .kpi-card .sub { font-size: 11.5px; color: var(--text-secondary); }
+
+    .leaderboard-sec {
+      background: #111722; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 16px;
+    }
+    .leaderboard-title { font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+    .admin-cards-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+    .admin-perf-card {
+      background: #16202e; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px 14px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .admin-perf-head { display: flex; justify-content: space-between; align-items: center; }
+    .admin-name { font-weight: 700; font-size: 13px; color: #38bdf8; display: flex; align-items: center; gap: 6px; }
+    .admin-rate { font-size: 12px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: rgba(16,185,129,0.15); color: #34d399; }
+
+    .leads-toolbar {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+      background: #111722; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 10px 14px;
+    }
+    .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .ftab {
+      background: transparent; border: 1px solid transparent; color: var(--text-secondary);
+      font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 6px; cursor: pointer; transition: all 0.15s;
+    }
+    .ftab:hover { background: #1e2c3e; color: #fff; }
+    .ftab.active { background: #0284c7; color: #fff; border-color: #38bdf8; }
+
+    .leads-list { display: flex; flex-direction: column; gap: 12px; }
+    .lead-row-card {
+      background: #141c28; border: 1px solid var(--border-subtle); border-radius: 10px;
+      padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; transition: border-color 0.15s;
+    }
+    .lead-row-card:hover { border-color: #38bdf8; }
+    .lead-row-card.tier-hot { border-left: 4px solid #ef4444; }
+    .lead-row-card.tier-warm { border-left: 4px solid #f59e0b; }
+    .lead-row-card.tier-cold { border-left: 4px solid #06b6d4; }
+    .lead-row-card.tier-closed { border-left: 4px solid #10b981; }
+
+    .lead-row-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+    .lead-client-info { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .lead-name { font-size: 15px; font-weight: 700; color: #fff; }
+    .lead-phone { font-family: var(--font-mono); font-size: 12px; color: #38bdf8; text-decoration: none; }
+    .lead-phone:hover { text-decoration: underline; }
+    
+    .lead-pill { font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .pill-hot { background: rgba(239, 68, 68, 0.18); color: #f87171; border: 1px solid rgba(239,68,68,0.4); }
+    .pill-warm { background: rgba(245, 158, 11, 0.18); color: #fbbf24; border: 1px solid rgba(245,158,11,0.4); }
+    .pill-cold { background: rgba(6, 182, 212, 0.18); color: #22d3ee; border: 1px solid rgba(6,182,212,0.4); }
+    .pill-closed { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16,185,129,0.4); }
+
+    .lead-summary-box { font-size: 12.5px; color: var(--text-secondary); background: #0b0f17; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-subtle); }
+    
+    .chat-bubble-preview { display: flex; flex-direction: column; gap: 6px; font-size: 12px; }
+    .chat-bubble { max-width: 80%; padding: 7px 12px; border-radius: 8px; line-height: 1.4; }
+    .chat-bubble.customer { background: #1e293b; color: #e2e8f0; align-self: flex-start; border-bottom-left-radius: 2px; }
+    .chat-bubble.admin { background: #0284c7; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
+
+    .ai-draft-container {
+      background: linear-gradient(135deg, rgba(2,132,199,0.1), rgba(139,92,246,0.1));
+      border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .ai-draft-header { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.5px; }
+    .ai-draft-text { font-size: 13px; color: #f1f5f9; line-height: 1.5; font-style: italic; background: rgba(0,0,0,0.3); padding: 10px 12px; border-radius: 6px; border-left: 3px solid #38bdf8; }
+    .ai-draft-actions { display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
   </style>
 </head>
 <body>
@@ -289,9 +382,17 @@
         <span class="dot"></span>
         <span class="label">Otomasi Aktif</span>
       </div>
+
+      <div class="mode-switcher" style="display:inline-flex; background:rgba(255,255,255,0.06); border-radius:8px; padding:2px; border:1px solid var(--border-subtle); margin-left:8px;">
+        <button id="btnTabFlow" class="btn btn-sm btn-primary" style="margin:0; border-radius:6px; font-weight:600; font-size:11.5px;">⚡ Alur Node n8n</button>
+        <button id="btnTabLeads" class="btn btn-sm" style="margin:0; background:transparent; border-color:transparent; color:#94a3b8; border-radius:6px; font-weight:600; font-size:11.5px;">📚 Pustaka Leads &amp; AI Draft <span id="leadsUnconvertedBadge" style="background:#ef4444; color:#fff; font-size:9.5px; padding:1px 5px; border-radius:10px; margin-left:4px;">6</span></button>
+      </div>
     </div>
 
     <div class="topbar-right">
+      <button id="btnSimulateFonnte" class="btn btn-sm" style="background:rgba(37,211,102,0.15); border-color:#25d366; color:#4ade80; font-weight:600;" title="Simulasikan Chat WA Fonnte Masuk">
+        📲 Uji Webhook Fonnte
+      </button>
       <button id="btnOpenBookings" class="btn btn-sm" title="Muat klien riil dari database Foxe Studio">
         👥 Data Studio Live
       </button>
@@ -502,6 +603,97 @@
 
   </div>
 
+  <!-- PUSTAKA LEADS & AI DRAFT VIEW -->
+  <div id="leadsViewContainer" class="leads-view-container" style="display: none;">
+    <div class="leads-header">
+      <div class="leads-title-block">
+        <h2 class="leads-title">📚 Pustaka Leads Masuk WhatsApp &amp; AI Follow-Up Assistant</h2>
+        <p class="leads-subtitle">
+          Mencocokkan chat mentah WhatsApp via Webhook Fonnte dengan spreadsheet transaksi resmi studio, menampung leads unconverted (Hot, Warm, Cold), dan meracik rekomendasi balasan humanis tanpa template kaku robot (no slop).
+        </p>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+        <button id="btnSyncStateSheet" class="btn btn-sm" style="background:#1e293b; color:#38bdf8; border:1px solid #38bdf8;">
+          🔄 Sinkronkan Data Sheet
+        </button>
+        <button id="btnSimulateFonnte2" class="btn btn-primary btn-sm">
+          + Simulasi Chat Baru
+        </button>
+      </div>
+    </div>
+
+    <!-- KPI STATS GRID -->
+    <div class="leads-kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-lbl">Total Leads Masuk</div>
+        <div class="kpi-val" id="kpiTotalLeads">7</div>
+        <div class="kpi-sub">WhatsApp Fonnte Webhook</div>
+      </div>
+      <div class="kpi-card" style="border-left: 3px solid #ef4444;">
+        <div class="kpi-lbl" style="color:#f87171;">🔥 Hot Leads</div>
+        <div class="kpi-val" style="color:#f87171;" id="kpiHotLeads">2</div>
+        <div class="kpi-sub">Isi form / hampir DP</div>
+      </div>
+      <div class="kpi-card" style="border-left: 3px solid #f59e0b;">
+        <div class="kpi-lbl" style="color:#fbbf24;">⚡ Warm Leads</div>
+        <div class="kpi-val" style="color:#fbbf24;" id="kpiWarmLeads">2</div>
+        <div class="kpi-sub">Tanya lanjut paket</div>
+      </div>
+      <div class="kpi-card" style="border-left: 3px solid #06b6d4;">
+        <div class="kpi-lbl" style="color:#22d3ee;">❄️ Cold Leads</div>
+        <div class="kpi-val" style="color:#22d3ee;" id="kpiColdLeads">2</div>
+        <div class="kpi-sub">Tanya pricelist lalu hening</div>
+      </div>
+      <div class="kpi-card" style="border-left: 3px solid #10b981;">
+        <div class="kpi-lbl" style="color:#34d399;">✅ Closed DP</div>
+        <div class="kpi-val" style="color:#34d399;" id="kpiClosedLeads">1</div>
+        <div class="kpi-sub">Match terverifikasi di Sheet</div>
+      </div>
+      <div class="kpi-card" style="border-left: 3px solid #a855f7;">
+        <div class="kpi-lbl" style="color:#c084fc;">💰 Unconverted Pipeline</div>
+        <div class="kpi-val" style="color:#c084fc;" id="kpiUnconvertedVal">Rp 1.635.000</div>
+        <div class="kpi-sub">Potensi omzet tertahan di chat</div>
+      </div>
+    </div>
+
+    <!-- ADMIN PERFORMANCE LEADERBOARD -->
+    <div class="leaderboard-sec">
+      <div class="leaderboard-title">
+        <span>🏆 Performa Admin &amp; Konversi Chat Studio</span>
+        <span style="font-size:11px; font-weight:400; color:#94a3b8;">Evaluasi efisiensi follow-up dan closing rate per admin</span>
+      </div>
+      <div class="admin-perf-grid" id="adminPerfContainer">
+        <!-- Loaded dynamically -->
+      </div>
+    </div>
+
+    <!-- TOOLBAR & FILTERS -->
+    <div class="leads-toolbar">
+      <div class="filter-tabs" id="leadFilterTabs">
+        <button class="ftab active" data-filter="all">Semua Leads (<span id="cntAll">7</span>)</button>
+        <button class="ftab" data-filter="HOT" style="color:#f87171;">🔥 Hot (<span id="cntHot">2</span>)</button>
+        <button class="ftab" data-filter="WARM" style="color:#fbbf24;">⚡ Warm (<span id="cntWarm">2</span>)</button>
+        <button class="ftab" data-filter="COLD" style="color:#22d3ee;">❄️ Cold (<span id="cntCold">2</span>)</button>
+        <button class="ftab" data-filter="CLOSED" style="color:#34d399;">✅ Closed DP (<span id="cntClosed">1</span>)</button>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:8px;">
+        <input type="text" id="leadSearchInput" class="lead-search-box" placeholder="🔍 Cari nama klien, no HP, atau isi chat...">
+        <select id="leadAdminFilter" class="field-select" style="width:140px; padding:6px 10px; font-size:12px;">
+          <option value="ALL">Semua Admin</option>
+          <option value="AMEL">Admin AMEL</option>
+          <option value="INDAH">Admin INDAH</option>
+          <option value="ADIF">Admin ADIF</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- LEADS CARDS LIST -->
+    <div class="leads-list" id="leadsListContainer">
+      <!-- Loaded dynamically -->
+    </div>
+  </div>
+
   <!-- MODAL: WEBHOOK INFO -->
   <div class="modal-overlay" id="modalWebhook">
     <div class="modal-card">
@@ -581,6 +773,68 @@
       <div class="modal-footer">
         <button class="btn btn-close-modal">Batal</button>
         <button class="btn btn-primary" id="btnSaveSettings">Simpan Pengaturan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SIMULASI CHAT FONNTE MASUK -->
+  <div class="modal-overlay" id="modalFonnteSim">
+    <div class="modal-card" style="width: 580px;">
+      <div class="modal-header">
+        <h3 style="font-size:14px; font-weight:700; color:#fff;">📲 Simulasi Webhook Pesan Masuk (Fonnte WA)</h3>
+        <button class="btn btn-sm btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:12px; color:#94a3b8;">
+          Uji cara AI Lead Engine memproses pesan baru dari WhatsApp, mengklasifikasikan tier (Hot/Warm/Cold), mencocokkan status dengan spreadsheet, dan meracik rekomendasi balasan humanis studio.
+        </p>
+
+        <div class="field-group" style="margin-top:10px;">
+          <label class="field-label">Pilih Pola Pesan Masuk (Preset Cepat):</label>
+          <select id="simPresetSelect" class="field-select">
+            <option value="custom">-- Tulis Pesan Kustom --</option>
+            <option value="hot_form" selected>🔥 Hot: Sudah Isi Form Booking Wisuda (Minta Rekening)</option>
+            <option value="hot_lock">🔥 Hot: Minta Kunci Slot Foto Siang Ini</option>
+            <option value="warm_detail">⚡ Warm: Tanya Selisih Paket &amp; Tambahan Orang</option>
+            <option value="warm_family">⚡ Warm: Konsultasi Bawa Baju Ganti Sesi Keluarga</option>
+            <option value="cold_price">❄️ Cold: Tanya Pricelist Wisuda Saja</option>
+          </select>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px;">
+          <div class="field-group">
+            <label class="field-label">Nama Klien / Profil WA</label>
+            <input type="text" id="simClientName" class="field-input" placeholder="Misal: Cantika Dewi" value="Cantika Dewi">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Nomor WhatsApp (628...)</label>
+            <input type="text" id="simClientPhone" class="field-input" placeholder="6281234567xxx" value="6281299887711">
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px;">
+          <div class="field-group">
+            <label class="field-label">Admin yang Menangani</label>
+            <select id="simAdminSelect" class="field-select">
+              <option value="AMEL">AMEL</option>
+              <option value="INDAH">INDAH</option>
+              <option value="ADIF">ADIF</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Estimasi Nilai Paket (Rp)</label>
+            <input type="number" id="simEstValue" class="field-input" value="350000" step="50000">
+          </div>
+        </div>
+
+        <div class="field-group" style="margin-top:10px;">
+          <label class="field-label">Isi Pesan Chat Masuk</label>
+          <textarea id="simMessageText" class="field-textarea" style="min-height:80px;" placeholder="Tulis isi pesan chat dari klien...">Kak aku ambil yang wisuda tgl 3 Okt jam 13:00 ya. Nama: Cantika Dewi, 4 orang, minta rek BCA nya kak</textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-close-modal">Batal</button>
+        <button class="btn btn-primary" id="btnSubmitSimLead">🚀 Proses via AI Lead Engine</button>
       </div>
     </div>
   </div>
@@ -1869,6 +2123,618 @@
     function closeNodeInspector() {
       document.getElementById('sidebarInspector').style.display = 'none';
     }
+
+    // ==========================================
+    // AGENTIC AI LEADS ENGINE & DIRECTORY CONTROLLER
+    // ==========================================
+    let currentAppMode = 'flow';
+    let currentLeadFilter = 'all';
+    let currentLeadAdmin = 'ALL';
+    let currentLeadSearch = '';
+
+    let leadsData = [
+      {
+        id: "lead_101",
+        phone: "6281298421102",
+        display_name: "Dinda Maharani",
+        admin: "AMEL",
+        tier: "HOT",
+        status: "UNCONVERTED",
+        created_at: "2026-10-01 08:30:00",
+        last_message_at: "2026-10-01 09:15:00",
+        last_customer_msg: "Kak aku ambil yang wisuda tgl 3 Okt jam 10 ya. Nama: Dinda Maharani, 4 orang, minta rek BCA nya kak",
+        last_admin_msg: "Siap kak Dinda! Untuk BCA Foxe Studio di 122-098-771 a/n Foxe Studio. DP min 100rb ya kak, ditunggu konfirmasinya 🙏",
+        summary: "Form booking wisuda sudah diisi, minta rekening 2.5 jam lalu tapi belum kirim bukti transfer DP.",
+        ai_recommendation: "Kak Dindaa, mau ngabarin untuk sesi wisuda tgl 3 Okt jam 10 pagi ada yang nanyain slotnya juga nih kak. Biar aman jadwalnya nggak bentrok sama yang lain, mau langsung aku amankan slot fotografernya sekarang kak? Kalau udah transfer kabarin yaa biar langsung aku buatin tanda terimanya 🙏",
+        estimated_value: 350000,
+        follow_up_count: 0
+      },
+      {
+        id: "lead_102",
+        phone: "6285877124091",
+        display_name: "Farhan Maulana",
+        admin: "INDAH",
+        tier: "HOT",
+        status: "UNCONVERTED",
+        created_at: "2026-10-01 09:00:00",
+        last_message_at: "2026-10-01 10:05:00",
+        last_customer_msg: "Halo kak kalau tgl 4 Okt sesi jam 14:00 backdrop B wisuda masih kosong? Totalnya jadi 300rb ya kak?",
+        last_admin_msg: "Iya betul kak Farhan, tgl 4 Okt jam 14:00 backdrop B masih aman. Mau sekalian di-lock slotnya kak?",
+        last_customer_msg_2: "Bisa tolong di-lock dulu kak? Aku transfer siang ini.",
+        summary: "Minta lock slot tgl 4 Okt jam 14:00. Janji transfer siang ini tapi sudah lewat 2 jam belum ada kabar.",
+        ai_recommendation: "Halo kak Farhan! Slot backdrop B jam 14:00 untuk tgl 4 Okt masih aku tahanin yaa kak. Biar nggak ketimpa yang antre di jadwal tim fotografer, kabarin aja kalau sudah sempet transfer DP-nya kak Farhan, makasih yaa 🙏",
+        estimated_value: 300000,
+        follow_up_count: 0
+      },
+      {
+        id: "lead_103",
+        phone: "6285743218890",
+        display_name: "Rizky Pratama",
+        admin: "AMEL",
+        tier: "WARM",
+        status: "UNCONVERTED",
+        created_at: "2026-09-30 16:20:00",
+        last_message_at: "2026-09-30 17:10:00",
+        last_customer_msg: "Kak bedanya Graduation Reguler sama Large Group apa ya kalau kita berlima?",
+        last_admin_msg: "Kalau berlima bisa ambil Graduation Reguler tambah add-person kak, atau langsung Large Group durasi 30 menit jadi lebih puas ganti gaya dan fotonya lebih banyak kak.",
+        summary: "Konsultasi paket untuk 5 orang kemarin sore, admin sudah jelaskan perbedaannya tapi client belum memutuskan.",
+        ai_recommendation: "Halo kak Rizky! Kemarin sempat kepikiran mau foto santai atau banyak ganti pose sama temen-temennya ya kak? Buat berlima saran aku paling pas yang Large Group 30 menit kak, space studio lebih leluasa dan nggak buru-buru. Udah ada obrolan lagi sama temen-temennya kah kak buat nentuin harinya?",
+        estimated_value: 250000,
+        follow_up_count: 0
+      },
+      {
+        id: "lead_104",
+        phone: "6281322895501",
+        display_name: "Nabila Putri",
+        admin: "ADIF",
+        tier: "WARM",
+        status: "UNCONVERTED",
+        created_at: "2026-09-30 14:00:00",
+        last_message_at: "2026-09-30 15:30:00",
+        last_customer_msg: "Bisa bawa baju ganti berapa kali kak buat foto keluarga 6 orang di tgl 10 Okt?",
+        last_admin_msg: "Bisa bawa 2 outfit kak, ada ruang ganti privat di studio kita. Untuk tgl 10 Okt slot pagi jam 09.30 dan siang jam 13.00 masih ada yang kosong kak.",
+        summary: "Tanya sesi foto keluarga 6 orang tanggal 10 Oktober dan outfit ganti. Admin sudah beri pilihan jam tapi belum dibalas.",
+        ai_recommendation: "Hai kak Nabila, mau cek santai nih kak barangkali sudah diobrolin sama keluarga untuk sesi tgl 10 Okt? Buat keluarga 6 orang biasanya paling favorit sesi jam 09.30 pagi kak, pencahayaan studio masih seger dan anak-anak/orang tua belum capek. Mau disiapin slot paginya kak?",
+        estimated_value: 450000,
+        follow_up_count: 0
+      },
+      {
+        id: "lead_105",
+        phone: "6287833129904",
+        display_name: "Anisa Rahma",
+        admin: "INDAH",
+        tier: "COLD",
+        status: "UNCONVERTED",
+        created_at: "2026-09-28 11:00:00",
+        last_message_at: "2026-09-28 11:15:00",
+        last_customer_msg: "Pricelist wisuda dong kak",
+        last_admin_msg: "Halo kak Anisa! Ini pricelist paket wisuda Foxe Studio ya kak [PDF terkirim]. Ada promo free all soft files kalau booking minggu ini kak.",
+        summary: "Hanya meminta pricelist wisuda 3 hari lalu, admin kirim PDF, client hanya read tanpa respon lanjut.",
+        ai_recommendation: "Hai kak Anisa! Kemarin sempat liat-liat paket wisuda Foxe Studio yaa? Kebetulan minggu ini kita ada display backdrop wisuda terbaru dengan lighting lebih warm & elegant. Mau aku kirimin contoh preview hasil fotonya kak buat referensi gaya nanti?",
+        estimated_value: 200000,
+        follow_up_count: 0
+      },
+      {
+        id: "lead_106",
+        phone: "6289655410023",
+        display_name: "Dimas Bagus",
+        admin: "AMEL",
+        tier: "COLD",
+        status: "UNCONVERTED",
+        created_at: "2026-09-27 19:30:00",
+        last_message_at: "2026-09-27 19:40:00",
+        last_customer_msg: "Pricelist self photo studio kak",
+        last_admin_msg: "Halo kak Dimas! Untuk Self-Photo mulai 65rb per sesi sudah dapet cetak & soft files ya kak [Pricelist terkirim].",
+        summary: "Tanya pricelist self-photo 4 hari lalu, belum ada kelanjutan.",
+        ai_recommendation: "Halo kak Dimas! Mau ngabarin aja nih kak, buat self-photo studio kita baru nambah properti kacamata & props seru buat foto bareng bestie atau pasangan. Slot sore hari biasa masih banyak yang santai lho kak, mau coba mampir weekend ini?",
+        estimated_value: 85000,
+        follow_up_count: 0
+      },
+      {
+        id: "lead_107",
+        phone: "6281234567890",
+        display_name: "Hanifah (Live 1 Okt)",
+        admin: "AMEL",
+        tier: "CLOSED",
+        status: "CONVERTED",
+        created_at: "2026-10-01 07:15:00",
+        last_message_at: "2026-10-01 08:00:00",
+        last_customer_msg: "Kak ini bukti transfer DP 100rb atas nama Hanifah yaa buat sesi tgl 2 Okt",
+        last_admin_msg: "Alhamdulillah terverifikasi ya kak Hanifah! DP Rp 100.000 sudah masuk kasir, slot foto Graduation tgl 2 Okt sudah resmi terdaftar 🙏",
+        summary: "Berhasil closing DP Rp 100.000 via Transfer. Sudah terdaftar di Log Order Oktober.",
+        ai_recommendation: "Status: DEAL. Tidak memerlukan follow-up penawaran. Siapkan reminder H-1 sebelum sesi foto.",
+        estimated_value: 100000,
+        follow_up_count: 0
+      }
+    ];
+
+    function switchAppMode(mode) {
+      currentAppMode = mode;
+      const ws = document.querySelector('.workspace');
+      const lv = document.getElementById('leadsViewContainer');
+      const btnFlow = document.getElementById('btnTabFlow');
+      const btnLeads = document.getElementById('btnTabLeads');
+
+      if (mode === 'flow') {
+        if (ws) ws.style.display = 'flex';
+        if (lv) lv.style.display = 'none';
+        if (btnFlow) {
+          btnFlow.className = 'btn btn-sm btn-primary';
+          btnFlow.style.background = '#0284c7';
+          btnFlow.style.color = '#fff';
+        }
+        if (btnLeads) {
+          btnLeads.className = 'btn btn-sm';
+          btnLeads.style.background = 'transparent';
+          btnLeads.style.color = '#94a3b8';
+        }
+        if (window.canvas) window.canvas.fitView();
+      } else {
+        if (ws) ws.style.display = 'none';
+        if (lv) lv.style.display = 'block';
+        if (btnLeads) {
+          btnLeads.className = 'btn btn-sm btn-primary';
+          btnLeads.style.background = '#0284c7';
+          btnLeads.style.color = '#fff';
+        }
+        if (btnFlow) {
+          btnFlow.className = 'btn btn-sm';
+          btnFlow.style.background = 'transparent';
+          btnFlow.style.color = '#94a3b8';
+        }
+        renderLeads();
+      }
+    }
+
+    async function loadLeadsData() {
+      try {
+        const res = await fetch('leads_vault.json');
+        if (res.ok) {
+          const remote = await res.json();
+          if (Array.isArray(remote) && remote.length) {
+            leadsData = remote;
+          }
+        }
+      } catch (e) {
+        console.log('Using local leadsData state');
+      }
+      renderLeads();
+    }
+
+    function renderLeads() {
+      const total = leadsData.length;
+      const hot = leadsData.filter(l => l.tier === 'HOT').length;
+      const warm = leadsData.filter(l => l.tier === 'WARM').length;
+      const cold = leadsData.filter(l => l.tier === 'COLD').length;
+      const closed = leadsData.filter(l => l.tier === 'CLOSED' || l.status === 'CONVERTED').length;
+      const unconverted = leadsData.filter(l => l.status === 'UNCONVERTED');
+      const unconvertedVal = unconverted.reduce((sum, l) => sum + (Number(l.estimated_value) || 0), 0);
+
+      // KPI elements
+      const elTot = document.getElementById('kpiTotalLeads');
+      const elHot = document.getElementById('kpiHotLeads');
+      const elWarm = document.getElementById('kpiWarmLeads');
+      const elCold = document.getElementById('kpiColdLeads');
+      const elClosed = document.getElementById('kpiClosedLeads');
+      const elUnconv = document.getElementById('kpiUnconvertedVal');
+      const badgeUnconv = document.getElementById('leadsUnconvertedBadge');
+
+      if (elTot) elTot.textContent = total;
+      if (elHot) elHot.textContent = hot;
+      if (elWarm) elWarm.textContent = warm;
+      if (elCold) elCold.textContent = cold;
+      if (elClosed) elClosed.textContent = closed;
+      if (elUnconv) elUnconv.textContent = `Rp ${unconvertedVal.toLocaleString('id-ID')}`;
+      if (badgeUnconv) badgeUnconv.textContent = unconverted.length;
+
+      // Filter tabs count
+      const cAll = document.getElementById('cntAll');
+      const cHot = document.getElementById('cntHot');
+      const cWarm = document.getElementById('cntWarm');
+      const cCold = document.getElementById('cntCold');
+      const cClosed = document.getElementById('cntClosed');
+      if (cAll) cAll.textContent = total;
+      if (cHot) cHot.textContent = hot;
+      if (cWarm) cWarm.textContent = warm;
+      if (cCold) cCold.textContent = cold;
+      if (cClosed) cClosed.textContent = closed;
+
+      // Admin Leaderboard
+      renderAdminLeaderboard();
+
+      // Render Cards
+      renderLeadCards();
+    }
+
+    function renderAdminLeaderboard() {
+      const container = document.getElementById('adminPerfContainer');
+      if (!container) return;
+
+      const admins = ['AMEL', 'INDAH', 'ADIF'];
+      let html = '';
+
+      admins.forEach(adm => {
+        const assigned = leadsData.filter(l => l.admin === adm);
+        const closedCount = assigned.filter(l => l.status === 'CONVERTED' || l.tier === 'CLOSED').length;
+        const unconvertedLeads = assigned.filter(l => l.status === 'UNCONVERTED');
+        const hotCount = unconvertedLeads.filter(l => l.tier === 'HOT').length;
+        const unconvVal = unconvertedLeads.reduce((s, l) => s + (Number(l.estimated_value) || 0), 0);
+        const closingRate = assigned.length > 0 ? ((closedCount / assigned.length) * 100).toFixed(1) : "0.0";
+        
+        let speed = '6 - 12 mnt';
+        if (adm === 'AMEL') speed = '4 - 8 mnt (Cepat)';
+        else if (adm === 'INDAH') speed = '9 - 15 mnt';
+        else speed = '12 - 20 mnt';
+
+        html += `
+          <div class="admin-perf-card">
+            <div class="admin-perf-top">
+              <div class="admin-name">👩‍💼 Admin ${adm}</div>
+              <span class="pill ${closedCount > 0 ? 'final' : 'prog'}">${closingRate}% Closing</span>
+            </div>
+            <div class="admin-metric-row">
+              <span class="admin-metric-lbl">Total Leads Dipegang:</span>
+              <span class="admin-metric-val">${assigned.length} Leads</span>
+            </div>
+            <div class="admin-metric-row">
+              <span class="admin-metric-lbl">Berhasil Closing (DP):</span>
+              <span class="admin-metric-val" style="color:#34d399;">${closedCount} Client</span>
+            </div>
+            <div class="admin-metric-row">
+              <span class="admin-metric-lbl">Hot Leads Perlu Dikejar:</span>
+              <span class="admin-metric-val" style="color:#f87171;">${hotCount} Hot</span>
+            </div>
+            <div class="admin-metric-row">
+              <span class="admin-metric-lbl">Potensi Tertahan:</span>
+              <span class="admin-metric-val" style="color:#c084fc;">Rp ${unconvVal.toLocaleString('id-ID')}</span>
+            </div>
+            <div class="admin-metric-row">
+              <span class="admin-metric-lbl">Speed to Lead:</span>
+              <span class="admin-metric-val" style="color:#38bdf8;">${speed}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderLeadCards() {
+      const container = document.getElementById('leadsListContainer');
+      if (!container) return;
+
+      let filtered = leadsData.slice();
+
+      // Filter tier
+      if (currentLeadFilter !== 'all') {
+        if (currentLeadFilter === 'CLOSED') {
+          filtered = filtered.filter(l => l.tier === 'CLOSED' || l.status === 'CONVERTED');
+        } else {
+          filtered = filtered.filter(l => l.tier === currentLeadFilter);
+        }
+      }
+
+      // Filter admin
+      if (currentLeadAdmin !== 'ALL') {
+        filtered = filtered.filter(l => l.admin === currentLeadAdmin);
+      }
+
+      // Filter search
+      if (currentLeadSearch.trim()) {
+        const q = currentLeadSearch.toLowerCase().trim();
+        filtered = filtered.filter(l => 
+          (l.display_name && l.display_name.toLowerCase().includes(q)) ||
+          (l.phone && l.phone.includes(q)) ||
+          (l.summary && l.summary.toLowerCase().includes(q)) ||
+          (l.last_customer_msg && l.last_customer_msg.toLowerCase().includes(q)) ||
+          (l.ai_recommendation && l.ai_recommendation.toLowerCase().includes(q))
+        );
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:40px 20px; background:#141c28; border-radius:10px; border:1px solid var(--border-subtle); color:#94a3b8;">
+            <div style="font-size:28px; margin-bottom:8px;">🔍</div>
+            <div style="font-size:14px; font-weight:600; color:#fff;">Tidak ada leads yang sesuai filter</div>
+            <div style="font-size:12px; margin-top:4px;">Coba ubah kata kunci pencarian atau ganti filter tier di atas.</div>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      filtered.forEach(lead => {
+        const isClosed = lead.status === 'CONVERTED' || lead.tier === 'CLOSED';
+        const tierClass = lead.tier ? lead.tier.toLowerCase() : 'warm';
+        const pillClass = `pill-${tierClass}`;
+        const phoneClean = (lead.phone || '').replace(/[^0-9]/g, '');
+        const waLink = `https://wa.me/${phoneClean}?text=${encodeURIComponent(lead.ai_recommendation || '')}`;
+
+        html += `
+          <div class="lead-row-card tier-${tierClass}" id="card-${lead.id}">
+            <div class="lead-row-header">
+              <div class="lead-client-info">
+                <span class="lead-name">${lead.display_name}</span>
+                <a href="https://wa.me/${phoneClean}" target="_blank" class="lead-phone" title="Klik untuk chat WhatsApp">
+                  📱 +${phoneClean}
+                </a>
+                <span class="pill neutral" style="font-size:11px;">Admin ${lead.admin}</span>
+                <span class="lead-pill ${pillClass}">
+                  ${lead.tier === 'HOT' ? '🔥 HOT LEAD' : (lead.tier === 'WARM' ? '⚡ WARM LEAD' : (lead.tier === 'COLD' ? '❄️ COLD LEAD' : '✅ CLOSED DP'))}
+                </span>
+                <span class="pill ${isClosed ? 'final' : 'bad'}" style="font-size:10px;">
+                  ${isClosed ? 'TERKONVERSI' : 'BELUM DP'}
+                </span>
+              </div>
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="text-align:right;">
+                  <div style="font-size:13px; font-weight:700; color:#c084fc;">
+                    Rp ${(Number(lead.estimated_value) || 0).toLocaleString('id-ID')}
+                  </div>
+                  <div style="font-size:10px; color:#64748b; font-family:var(--font-mono);">
+                    ${lead.last_message_at || lead.created_at || 'Hari ini'}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RINGKASAN MASALAH / SITUASI -->
+            <div class="lead-summary-box">
+              <b>Konteks Lead:</b> ${lead.summary || 'Sedang dalam proses follow up oleh admin studio.'}
+            </div>
+
+            <!-- CHAT BUBBLE PREVIEW -->
+            <div class="chat-bubble-preview">
+              ${lead.last_customer_msg ? `
+                <div class="chat-bubble customer">
+                  <span style="font-size:10px; font-weight:700; color:#93c5fd; display:block; margin-bottom:2px;">💬 Pesan Klien:</span>
+                  ${escapeHtml(lead.last_customer_msg)}
+                </div>
+              ` : ''}
+              ${lead.last_admin_msg ? `
+                <div class="chat-bubble admin">
+                  <span style="font-size:10px; font-weight:700; color:#e0f2fe; display:block; margin-bottom:2px;">👩‍💼 Admin ${lead.admin}:</span>
+                  ${escapeHtml(lead.last_admin_msg)}
+                </div>
+              ` : ''}
+              ${lead.last_customer_msg_2 ? `
+                <div class="chat-bubble customer">
+                  <span style="font-size:10px; font-weight:700; color:#93c5fd; display:block; margin-bottom:2px;">💬 Pesan Klien Lanjutan:</span>
+                  ${escapeHtml(lead.last_customer_msg_2)}
+                </div>
+              ` : ''}
+            </div>
+
+            <!-- AI RECOMMENDATION DRAFT (HUMAN TONE - ANTI SLOP) -->
+            <div class="ai-draft-container">
+              <div class="ai-draft-header">
+                <span>🤖 Rekomendasi Balasan AI (Humanis Studio · No Slop)</span>
+                <span style="color:#94a3b8; font-weight:400; font-size:10px;">Draft Saja · Siap Dikirim Admin</span>
+              </div>
+              <div class="ai-draft-text" id="draft-text-${lead.id}">
+                "${escapeHtml(lead.ai_recommendation || 'Halo kak, ada yang bisa kami bantu kembali seputar paket foto Foxe Studio? 🙏')}"
+              </div>
+              <div class="ai-draft-actions">
+                <button class="btn btn-sm" onclick="copyDraftToClipboard('${lead.id}')" style="background:#1e293b; color:#38bdf8; border:1px solid rgba(56,189,248,0.4);" title="Salin draft pesan ke clipboard">
+                  📋 Salin Draft
+                </button>
+                <a href="${waLink}" target="_blank" class="btn btn-sm" style="background:#25d366; color:#000; font-weight:700; border:none; text-decoration:none;" title="Buka WhatsApp dengan draft ini">
+                  📲 Buka WA Web
+                </a>
+                ${!isClosed ? `
+                  <button class="btn btn-sm btn-primary" onclick="markLeadConverted('${lead.id}')" title="Tandai klien ini sudah bayar DP">
+                    ✓ Tandai DP Masuk
+                  </button>
+                ` : `
+                  <span style="font-size:11px; color:#34d399; font-weight:600;">✓ Selesai Terkonversi</span>
+                `}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    window.copyDraftToClipboard = function(leadId) {
+      const el = document.getElementById(`draft-text-${leadId}`);
+      if (!el) return;
+      const text = el.innerText.replace(/^"|"$/g, '').trim();
+      navigator.clipboard.writeText(text).then(() => {
+        alert('📋 Draft pesan berhasil disalin ke clipboard!\nAdmin dapat langsung menempelkan (paste) di WhatsApp Web.');
+      }).catch(err => {
+        prompt('Salin pesan di bawah ini:', text);
+      });
+    };
+
+    window.markLeadConverted = function(leadId) {
+      const lead = leadsData.find(l => l.id === leadId);
+      if (!lead) return;
+      lead.status = 'CONVERTED';
+      lead.tier = 'CLOSED';
+      lead.summary = `DP Rp 100.000 telah masuk & dikonfirmasi oleh Admin ${lead.admin}.`;
+      lead.ai_recommendation = 'Status: DEAL. Tidak memerlukan follow-up penawaran. Siapkan reminder H-1 sebelum sesi foto.';
+      renderLeads();
+      alert(`✅ Berhasil! Lead "${lead.display_name}" ditandai CLOSING (DP Diterima).\nData performa Admin ${lead.admin} telah diperbarui!`);
+    };
+
+    function setupLeadsEventListeners() {
+      // Topbar switch tabs
+      const btnTabFlow = document.getElementById('btnTabFlow');
+      const btnTabLeads = document.getElementById('btnTabLeads');
+      if (btnTabFlow) btnTabFlow.addEventListener('click', () => switchAppMode('flow'));
+      if (btnTabLeads) btnTabLeads.addEventListener('click', () => switchAppMode('leads'));
+
+      // Filter tabs in Leads View
+      const filterTabs = document.querySelectorAll('#leadFilterTabs .ftab');
+      filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          filterTabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          currentLeadFilter = tab.getAttribute('data-filter');
+          renderLeadCards();
+        });
+      });
+
+      // Search input
+      const searchInput = document.getElementById('leadSearchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentLeadSearch = e.target.value;
+          renderLeadCards();
+        });
+      }
+
+      // Admin filter
+      const adminFilter = document.getElementById('leadAdminFilter');
+      if (adminFilter) {
+        adminFilter.addEventListener('change', (e) => {
+          currentLeadAdmin = e.target.value;
+          renderLeadCards();
+        });
+      }
+
+      // Simulate Fonnte buttons
+      const btnSim1 = document.getElementById('btnSimulateFonnte');
+      const btnSim2 = document.getElementById('btnSimulateFonnte2');
+      const modalSim = document.getElementById('modalFonnteSim');
+      if (btnSim1 && modalSim) {
+        btnSim1.addEventListener('click', () => modalSim.classList.add('active'));
+      }
+      if (btnSim2 && modalSim) {
+        btnSim2.addEventListener('click', () => modalSim.classList.add('active'));
+      }
+
+      // Sync button
+      const btnSync = document.getElementById('btnSyncStateSheet');
+      if (btnSync) {
+        btnSync.addEventListener('click', async () => {
+          btnSync.textContent = '⏳ Menyinkronkan...';
+          await loadLeadsData();
+          setTimeout(() => {
+            btnSync.textContent = '✓ Sinkron Selesai';
+            setTimeout(() => { btnSync.textContent = '🔄 Sinkronkan Data Sheet'; }, 2000);
+          }, 600);
+        });
+      }
+
+      // Preset change on modal
+      const selPreset = document.getElementById('simPresetSelect');
+      if (selPreset) {
+        selPreset.addEventListener('change', (e) => {
+          const val = e.target.value;
+          const inpName = document.getElementById('simClientName');
+          const inpPhone = document.getElementById('simClientPhone');
+          const selAdm = document.getElementById('simAdminSelect');
+          const inpVal = document.getElementById('simEstValue');
+          const txtMsg = document.getElementById('simMessageText');
+
+          if (val === 'hot_form') {
+            inpName.value = 'Cantika Dewi';
+            inpPhone.value = '6281299887711';
+            selAdm.value = 'AMEL';
+            inpVal.value = '350000';
+            txtMsg.value = 'Kak aku ambil yang wisuda tgl 3 Okt jam 13:00 ya. Nama: Cantika Dewi, 4 orang, minta rek BCA nya kak';
+          } else if (val === 'hot_lock') {
+            inpName.value = 'Bagus Setiawan';
+            inpPhone.value = '6285712349900';
+            selAdm.value = 'INDAH';
+            inpVal.value = '300000';
+            txtMsg.value = 'Kak tolong di-lock dulu slot backdrop B tgl 4 Okt jam 11 siang, siang ini aku transfer DP nya.';
+          } else if (val === 'warm_detail') {
+            inpName.value = 'Rina Kusuma';
+            inpPhone.value = '6282119900881';
+            selAdm.value = 'ADIF';
+            inpVal.value = '400000';
+            txtMsg.value = 'Kak bedanya paket Reguler sama Wisuda Premium apa ya kalau bawa keluarga? Ada tambahan biaya orang nggak?';
+          } else if (val === 'warm_family') {
+            inpName.value = 'Pak Hendra';
+            inpPhone.value = '6281355443322';
+            selAdm.value = 'AMEL';
+            inpVal.value = '500000';
+            txtMsg.value = 'Halo kak, untuk foto keluarga 8 orang di tanggal 11 Oktober bisa bawa baju ganti dan ada ruang make up?';
+          } else if (val === 'cold_price') {
+            inpName.value = 'Fajar Tri';
+            inpPhone.value = '6281344556677';
+            selAdm.value = 'AMEL';
+            inpVal.value = '200000';
+            txtMsg.value = 'Pricelist wisuda dong kak';
+          }
+        });
+      }
+
+      // Submit simulation
+      const btnSubmitSim = document.getElementById('btnSubmitSimLead');
+      if (btnSubmitSim) {
+        btnSubmitSim.addEventListener('click', () => {
+          const name = document.getElementById('simClientName').value.trim() || 'Klien Baru';
+          const phone = document.getElementById('simClientPhone').value.trim() || '6281200000000';
+          const admin = document.getElementById('simAdminSelect').value;
+          const estVal = Number(document.getElementById('simEstValue').value) || 250000;
+          const msg = document.getElementById('simMessageText').value.trim();
+
+          // Evaluate Tier
+          const lower = msg.toLowerCase();
+          let tier = 'WARM';
+          let rec = '';
+          let summary = '';
+
+          if (lower.includes('rek') || lower.includes('transfer') || lower.includes('tf') || lower.includes('lock') || lower.includes('kunci') || lower.includes('nama:')) {
+            tier = 'HOT';
+            summary = `Calon klien sudah berniat booking dan meminta nomor rekening / lock slot. Wajib segera di-follow up dalam 1-2 jam.`;
+            rec = `Halo kak ${name}! Slot yang kemarin ditanyain masih aku tahanin yaa kak. Biar aman jadwal fotografernya nggak ketimpa yang lain, mau langsung aku amankan slotnya sekarang kak? Kalau sudah sempet transfer kabarin yaa biar langsung aku buatin tanda terimanya 🙏`;
+          } else if (lower.includes('pricelist') || lower.includes('harga') || lower.includes('pl ') || lower === 'pl') {
+            tier = 'COLD';
+            summary = `Calon klien menanyakan pricelist. Butuh pendekatan halus/nurturing tanpa menekan.`;
+            rec = `Hai kak ${name}! Kemarin sempat liat-liat paket foto Foxe Studio yaa? Kebetulan minggu ini kita ada display dekorasi backdrop terbaru yang lebih aesthetic. Mau aku kirimin contoh preview hasil fotonya kak buat referensi gaya nanti?`;
+          } else {
+            tier = 'WARM';
+            summary = `Calon klien sedang berkonsultasi seputar paket & fasilitas studio. Perlu edukasi paket yang paling pas.`;
+            rec = `Hai kak ${name}! Buat kebutuhan sesi fotonya, pilihan paket di Foxe Studio bisa disesuaikan lho kak biar lebih puas dan santai. Udah ada rencana mau foto di hari apa atau jam berapa kak biar sekalian aku cekin ketersediaan studionya?`;
+          }
+
+          const newLead = {
+            id: `lead_${Date.now()}`,
+            phone: phone,
+            display_name: name,
+            admin: admin,
+            tier: tier,
+            status: 'UNCONVERTED',
+            created_at: new Date().toISOString().replace('T', ' ').substring(0, 19),
+            last_message_at: new Date().toISOString().replace('T', ' ').substring(0, 19),
+            last_customer_msg: msg,
+            last_admin_msg: `Halo kak ${name}, terima kasih sudah menghubungi Foxe Studio! Segera kami cek yaa 🙏`,
+            summary: summary,
+            ai_recommendation: rec,
+            estimated_value: estVal,
+            follow_up_count: 0
+          };
+
+          leadsData.unshift(newLead);
+          if (modalSim) modalSim.classList.remove('active');
+
+          switchAppMode('leads');
+          alert(`🚀 Webhook Fonnte Berhasil Diterima!\n\nNama: ${name}\nTier Terdeteksi: [${tier} LEAD]\nAdmin: ${admin}\nAI Recommendation: Draft balasan humanis telah siap dibuatkan!`);
+        });
+      }
+    }
+
+    // Call loadLeadsData & setup on start
+    window.addEventListener('DOMContentLoaded', () => {
+      loadLeadsData();
+      setupLeadsEventListeners();
+    });
   </script>
 </body>
 </html>

@@ -563,9 +563,9 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
     </div>
     <nav class="nav" id="nav"></nav>
     <div style="padding:10px 14px 16px; margin-top:auto;">
-      <a href="flow.html" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:rgba(2,132,199,0.15);border:1px solid rgba(56,189,248,0.35);border-radius:8px;color:#38bdf8;text-decoration:none;font-size:12.5px;font-weight:600;transition:all .15s;">
-        <span style="display:flex;align-items:center;gap:6px;">⚡ <span>Foxe Flow</span></span>
-        <span style="font-size:9.5px;padding:1px 5px;background:#38bdf8;color:#000;font-weight:700;border-radius:4px;">n8n</span>
+      <a href="flow.html" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:rgba(2,132,199,0.15);border:1px solid rgba(56,189,248,0.35);border-radius:8px;color:#38bdf8;text-decoration:none;font-size:12px;font-weight:600;transition:all .15s;" title="Buka Foxe Flow &amp; Pustaka Leads AI">
+        <span style="display:flex;align-items:center;gap:6px;">⚡ <span>Foxe Flow &amp; AI Leads</span></span>
+        <span style="font-size:9.5px;padding:1px 5px;background:#38bdf8;color:#000;font-weight:700;border-radius:4px;">AI</span>
       </a>
     </div>
   </aside>
