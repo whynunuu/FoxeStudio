@@ -358,6 +358,64 @@
     .ai-draft-header { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.5px; }
     .ai-draft-text { font-size: 13px; color: #f1f5f9; line-height: 1.5; font-style: italic; background: rgba(0,0,0,0.3); padding: 10px 12px; border-radius: 6px; border-left: 3px solid #38bdf8; }
     .ai-draft-actions { display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
+
+    /* CALENDAR DASHBOARD STYLES */
+    .cal-view-container {
+      display: flex; flex-direction: column; gap: 20px;
+      padding: 24px 32px 80px; max-width: 1560px; margin: 0 auto; width: 100%;
+    }
+    .cal-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px; }
+    .cal-title { font-size: 20px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px; }
+    .cal-subtitle { font-size: 13px; color: var(--text-secondary); margin-top: 4px; max-width: 880px; line-height: 1.5; }
+    
+    .cal-kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    
+    .cal-weekdays {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; text-align: center;
+      font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;
+      padding-bottom: 4px;
+    }
+    .cal-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px;
+    }
+    @media (max-width: 1080px) {
+      .cal-grid, .cal-weekdays { grid-template-columns: repeat(2, 1fr); }
+      .cal-weekdays { display: none; }
+    }
+    @media (max-width: 640px) {
+      .cal-grid { grid-template-columns: 1fr; }
+    }
+    
+    .cal-day-card {
+      background: #141c28; border: 1px solid var(--border-subtle); border-radius: 10px;
+      padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; cursor: pointer;
+      transition: all 0.18s ease; position: relative; min-height: 140px;
+    }
+    .cal-day-card:hover {
+      border-color: #38bdf8; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.35); background: #172232;
+    }
+    .cal-day-card.today {
+      border: 2px solid #38bdf8; background: linear-gradient(180deg, rgba(2,132,199,0.12), #141c28);
+    }
+    .cal-day-card.empty {
+      background: transparent; border: 1px dashed rgba(255,255,255,0.05); cursor: default; pointer-events: none; min-height: 100px;
+    }
+    .cal-day-card.future {
+      opacity: 0.65; background: #0e141e;
+    }
+    
+    .day-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .day-num { font-size: 16px; font-weight: 700; color: #fff; font-family: var(--font-display); }
+    .day-badge { font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+    
+    .day-metrics { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; }
+    .day-metric-item { display: flex; justify-content: space-between; align-items: center; color: var(--text-secondary); }
+    .day-metric-item b { color: #f1f5f9; font-variant-numeric: tabular-nums; }
+    
+    .conv-bar {
+      width: 100%; height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-top: 4px;
+    }
+    .conv-fill { height: 100%; border-radius: 3px; transition: width 0.3s ease; }
   </style>
 </head>
 <body>
@@ -384,7 +442,8 @@
       </div>
 
       <div class="mode-switcher" style="display:inline-flex; background:rgba(255,255,255,0.06); border-radius:8px; padding:2px; border:1px solid var(--border-subtle); margin-left:8px;">
-        <button id="btnTabFlow" class="btn btn-sm btn-primary" style="margin:0; border-radius:6px; font-weight:600; font-size:11.5px;">⚡ Alur Node n8n</button>
+        <button id="btnTabCalendar" class="btn btn-sm btn-primary" style="margin:0; border-radius:6px; font-weight:600; font-size:11.5px; background:#0284c7; color:#fff;">📅 Kalender Harian</button>
+        <button id="btnTabFlow" class="btn btn-sm" style="margin:0; background:transparent; border-color:transparent; color:#94a3b8; border-radius:6px; font-weight:600; font-size:11.5px;">⚡ Alur Node n8n</button>
         <button id="btnTabLeads" class="btn btn-sm" style="margin:0; background:transparent; border-color:transparent; color:#94a3b8; border-radius:6px; font-weight:600; font-size:11.5px;">📚 Pustaka Leads &amp; AI Draft <span id="leadsUnconvertedBadge" style="background:#ef4444; color:#fff; font-size:9.5px; padding:1px 5px; border-radius:10px; margin-left:4px;">6</span></button>
       </div>
     </div>
@@ -418,7 +477,7 @@
   </header>
 
   <!-- WORKSPACE -->
-  <div class="workspace">
+  <div class="workspace" style="display: none;">
 
     <!-- LEFT PALETTE -->
     <aside class="sidebar-palette">
@@ -601,6 +660,69 @@
       </div>
     </section>
 
+  </div>
+
+  <!-- CALENDAR DASHBOARD VIEW (STATUS LEADS & KONVERSI HARIAN) -->
+  <div id="calendarViewContainer" class="cal-view-container">
+    <div class="cal-header">
+      <div>
+        <h2 class="cal-title">📅 Kalender Konversi Leads &amp; Evaluasi Harian Studio</h2>
+        <p class="cal-subtitle">
+          Status performa harian studio: memantau total leads yang masuk, jumlah booking yang berhasil DP (closing), nilai konversi (closing rate %), dan kas/omzet per tanggal.
+        </p>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+        <div class="mode-switcher" style="display:inline-flex; background:rgba(255,255,255,0.06); border-radius:8px; padding:2px; border:1px solid var(--border-subtle);">
+          <button id="btnCalMonthOkt" class="btn btn-sm btn-primary" style="margin:0; border-radius:6px; font-weight:600; font-size:11.5px;">📅 Oktober 2026 (Live)</button>
+          <button id="btnCalMonthSep" class="btn btn-sm" style="margin:0; background:transparent; border-color:transparent; color:#94a3b8; border-radius:6px; font-weight:600; font-size:11.5px;">📅 September 2026 (Rekap 30 Hari)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MONTHLY SUMMARY KPI CARDS -->
+    <div class="cal-kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-lbl">Total Leads Masuk</div>
+        <div class="kpi-val" id="calKpiTotalLeads">0</div>
+        <div class="kpi-sub" id="calKpiLeadsSub">Leads WhatsApp &amp; Inquiries</div>
+      </div>
+      <div class="kpi-card" style="border-left: 3px solid #10b981;">
+        <div class="kpi-lbl" style="color:#34d399;">Total Booking DP Masuk</div>
+        <div class="kpi-val" style="color:#34d399;" id="calKpiTotalDp">0</div>
+        <div class="kpi-sub">Klien Berhasil Closing</div>
+      </div>
+      <div class="kpi-card" style="border-left: 3px solid #38bdf8;">
+        <div class="kpi-lbl" style="color:#38bdf8;">Rata-Rata Konversi</div>
+        <div class="kpi-val" style="color:#38bdf8;" id="calKpiAvgConv">0.0%</div>
+        <div class="kpi-sub">Closing Rate Efisiensi Admin</div>
+      </div>
+      <div class="kpi-card" style="border-left: 3px solid #f59e0b;">
+        <div class="kpi-lbl" style="color:#fbbf24;">Total Kas &amp; Transfer Masuk</div>
+        <div class="kpi-val" style="color:#fbbf24;" id="calKpiTotalOmzet">Rp 0</div>
+        <div class="kpi-sub">Realisasi Uang Masuk Log Order</div>
+      </div>
+      <div class="kpi-card" style="border-left: 3px solid #a855f7;">
+        <div class="kpi-lbl" style="color:#c084fc;">Best Closing Day</div>
+        <div class="kpi-val" style="color:#c084fc; font-size:18px;" id="calKpiBestDay">—</div>
+        <div class="kpi-sub" id="calKpiBestDaySub">Puncak Konversi Tertinggi</div>
+      </div>
+    </div>
+
+    <!-- WEEKDAYS HEADER -->
+    <div class="cal-weekdays">
+      <div>Senin</div>
+      <div>Selasa</div>
+      <div>Rabu</div>
+      <div>Kamis</div>
+      <div>Jumat</div>
+      <div>Sabtu</div>
+      <div>Minggu</div>
+    </div>
+
+    <!-- CALENDAR GRID DAYS -->
+    <div class="cal-grid" id="calendarDaysGrid">
+      <!-- Generated dynamically -->
+    </div>
   </div>
 
   <!-- PUSTAKA LEADS & AI DRAFT VIEW -->
@@ -835,6 +957,40 @@
       <div class="modal-footer">
         <button class="btn btn-close-modal">Batal</button>
         <button class="btn btn-primary" id="btnSubmitSimLead">🚀 Proses via AI Lead Engine</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: DETAIL HARIAN TANGGAL -->
+  <div class="modal-overlay" id="modalDayDetail">
+    <div class="modal-card" style="width: 760px; max-width: 95vw;">
+      <div class="modal-header">
+        <h3 id="modalDayTitle" style="font-size:14px; font-weight:700; color:#fff;">📅 Rincian Status Tanggal</h3>
+        <button class="btn btn-sm btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="modalDayKpi" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:8px; margin-bottom:14px;">
+          <!-- Loaded dynamically -->
+        </div>
+
+        <div style="font-size:12px; font-weight:700; color:#38bdf8; margin-bottom:8px; text-transform:uppercase; display:flex; justify-content:space-between; align-items:center;">
+          <span>📋 Transaksi &amp; Booking di Log Order:</span>
+          <span id="modalDayOrdersCount" style="font-size:11px; color:#94a3b8; font-weight:400;">0 order</span>
+        </div>
+        <div id="modalDayOrdersList" style="display:flex; flex-direction:column; gap:6px; max-height:220px; overflow-y:auto; margin-bottom:16px;">
+          <!-- Orders loaded dynamically -->
+        </div>
+
+        <div style="font-size:12px; font-weight:700; color:#a855f7; margin-bottom:8px; text-transform:uppercase; display:flex; justify-content:space-between; align-items:center;">
+          <span>💬 Leads WhatsApp &amp; Inquiries Masuk:</span>
+          <span id="modalDayLeadsCount" style="font-size:11px; color:#94a3b8; font-weight:400;">0 leads</span>
+        </div>
+        <div id="modalDayLeadsList" style="display:flex; flex-direction:column; gap:6px; max-height:180px; overflow-y:auto;">
+          <!-- Leads loaded dynamically -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-close-modal">Tutup</button>
       </div>
     </div>
   </div>
@@ -1520,10 +1676,13 @@
       initEvents();
     });
 
+    let fullStudioState = null;
+
     async function loadStudioData() {
       try {
         const res = await fetch('foxe_full_state.json');
-        const state = await res.json();
+        fullStudioState = await res.json();
+        const state = fullStudioState;
         const orders = state.orders || [];
         const pipeline = state.pipeline_october || [];
 
@@ -1559,6 +1718,9 @@
             admin: "Admin Studio"
           });
         });
+        if (typeof renderCalendarDashboard === 'function') {
+          renderCalendarDashboard();
+        }
       } catch (e) {
         console.warn('foxe_full_state.json loaded fallback', e);
       }
@@ -2248,20 +2410,50 @@
       }
     ];
 
+    let currentCalMonth = '2026-10'; // Default view: Oktober 2026
+
     function switchAppMode(mode) {
       currentAppMode = mode;
       const ws = document.querySelector('.workspace');
       const lv = document.getElementById('leadsViewContainer');
+      const cv = document.getElementById('calendarViewContainer');
       const btnFlow = document.getElementById('btnTabFlow');
       const btnLeads = document.getElementById('btnTabLeads');
+      const btnCal = document.getElementById('btnTabCalendar');
 
-      if (mode === 'flow') {
+      if (mode === 'calendar') {
+        if (cv) cv.style.display = 'block';
+        if (ws) ws.style.display = 'none';
+        if (lv) lv.style.display = 'none';
+        if (btnCal) {
+          btnCal.className = 'btn btn-sm btn-primary';
+          btnCal.style.background = '#0284c7';
+          btnCal.style.color = '#fff';
+        }
+        if (btnFlow) {
+          btnFlow.className = 'btn btn-sm';
+          btnFlow.style.background = 'transparent';
+          btnFlow.style.color = '#94a3b8';
+        }
+        if (btnLeads) {
+          btnLeads.className = 'btn btn-sm';
+          btnLeads.style.background = 'transparent';
+          btnLeads.style.color = '#94a3b8';
+        }
+        renderCalendarDashboard();
+      } else if (mode === 'flow') {
         if (ws) ws.style.display = 'flex';
+        if (cv) cv.style.display = 'none';
         if (lv) lv.style.display = 'none';
         if (btnFlow) {
           btnFlow.className = 'btn btn-sm btn-primary';
           btnFlow.style.background = '#0284c7';
           btnFlow.style.color = '#fff';
+        }
+        if (btnCal) {
+          btnCal.className = 'btn btn-sm';
+          btnCal.style.background = 'transparent';
+          btnCal.style.color = '#94a3b8';
         }
         if (btnLeads) {
           btnLeads.className = 'btn btn-sm';
@@ -2270,12 +2462,18 @@
         }
         if (window.canvas) window.canvas.fitView();
       } else {
-        if (ws) ws.style.display = 'none';
         if (lv) lv.style.display = 'block';
+        if (ws) ws.style.display = 'none';
+        if (cv) cv.style.display = 'none';
         if (btnLeads) {
           btnLeads.className = 'btn btn-sm btn-primary';
           btnLeads.style.background = '#0284c7';
           btnLeads.style.color = '#fff';
+        }
+        if (btnCal) {
+          btnCal.className = 'btn btn-sm';
+          btnCal.style.background = 'transparent';
+          btnCal.style.color = '#94a3b8';
         }
         if (btnFlow) {
           btnFlow.className = 'btn btn-sm';
@@ -2284,6 +2482,384 @@
         }
         renderLeads();
       }
+    }
+
+    function renderCalendarDashboard() {
+      const grid = document.getElementById('calendarDaysGrid');
+      if (!grid) return;
+
+      const btnOkt = document.getElementById('btnCalMonthOkt');
+      const btnSep = document.getElementById('btnCalMonthSep');
+      if (currentCalMonth === '2026-10') {
+        if (btnOkt) { btnOkt.className = 'btn btn-sm btn-primary'; btnOkt.style.background = '#0284c7'; btnOkt.style.color = '#fff'; }
+        if (btnSep) { btnSep.className = 'btn btn-sm'; btnSep.style.background = 'transparent'; btnSep.style.color = '#94a3b8'; }
+      } else {
+        if (btnSep) { btnSep.className = 'btn btn-sm btn-primary'; btnSep.style.background = '#0284c7'; btnSep.style.color = '#fff'; }
+        if (btnOkt) { btnOkt.className = 'btn btn-sm'; btnOkt.style.background = 'transparent'; btnOkt.style.color = '#94a3b8'; }
+      }
+
+      const state = fullStudioState || {};
+      const isOkt = (currentCalMonth === '2026-10');
+      const numDays = isOkt ? 31 : 30;
+      const year = 2026;
+      const monthIdx = isOkt ? 9 : 8; // 0-indexed: Sept=8, Okt=9
+
+      // Offset for Monday-start (Sen=0, Sel=1, Rab=2, Kam=3, Jum=4, Sab=5, Min=6)
+      const firstDayDow = (new Date(year, monthIdx, 1).getDay() + 6) % 7;
+
+      const leadsArr = isOkt ? (state.oktoberLogOrder?.leads || []) : (state.leads || []);
+      const ordersArr = isOkt ? (state.oktoberLogOrder?.orders || []) : (state.orders || []);
+      const pipelineArr = isOkt ? (state.oktoberPipeline?.bookings || []) : [];
+
+      let totalMonthLeads = 0;
+      let totalMonthDp = 0;
+      let totalMonthOmzet = 0;
+      let bestDay = null;
+      let maxConv = -1;
+
+      grid.innerHTML = '';
+
+      // Blank padding days
+      for (let p = 0; p < firstDayDow; p++) {
+        const blank = document.createElement('div');
+        blank.className = 'cal-day-card blank';
+        grid.appendChild(blank);
+      }
+
+      // Day of week short names
+      const dows = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
+
+      for (let d = 1; d <= numDays; d++) {
+        const dateStr = `${currentCalMonth}-${String(d).padStart(2, '0')}`;
+        const dayDowIdx = (firstDayDow + (d - 1)) % 7;
+        const dayDowName = dows[dayDowIdx];
+        const isWeekend = (dayDowIdx === 5 || dayDowIdx === 6);
+
+        const dayLeadObj = leadsArr.find(l => l.tanggal === dateStr);
+        const dayOrders = ordersArr.filter(o => o.tanggal === dateStr);
+        const dayPipeline = pipelineArr.filter(b => b.tgl === dateStr);
+
+        let totalLeads = 0;
+        let totalDp = 0;
+        let convRate = 0;
+        let dayOmzet = 0;
+        let isToday = false;
+        let isFuture = false;
+
+        if (isOkt) {
+          if (d === 1) {
+            isToday = true;
+            // Oct 1st Live: merge real-time leadsData & log order
+            const sheetLeads = Number(dayLeadObj?.leads || 0);
+            totalLeads = Math.max(sheetLeads, leadsData.length);
+            const liveConvertedCount = leadsData.filter(l => l.status === 'CONVERTED' || l.tier === 'CLOSED').length;
+            totalDp = Math.max(Number(dayLeadObj?.dp || 0), dayOrders.length, liveConvertedCount);
+            convRate = totalLeads > 0 ? (totalDp / totalLeads * 100) : 0;
+            dayOmzet = dayOrders.reduce((sum, o) => sum + ((Number(o.cash) || 0) + (Number(o.transfer) || 0)), 0);
+            if (dayOmzet === 0 && totalDp > 0) dayOmzet = 100000;
+          } else {
+            isFuture = true;
+            totalLeads = 0;
+            totalDp = 0;
+            convRate = 0;
+            dayOmzet = 0;
+          }
+        } else {
+          // September historical
+          totalLeads = Number(dayLeadObj?.leads || 0);
+          totalDp = Number(dayLeadObj?.dp || 0);
+          if (totalDp === 0 && dayOrders.length > 0) totalDp = dayOrders.length;
+          if (totalLeads < totalDp) totalLeads = totalDp;
+          convRate = totalLeads > 0 ? (totalDp / totalLeads * 100) : 0;
+          dayOmzet = dayOrders.reduce((sum, o) => sum + ((Number(o.cash) || 0) + (Number(o.transfer) || 0)), 0);
+        }
+
+        totalMonthLeads += totalLeads;
+        totalMonthDp += totalDp;
+        totalMonthOmzet += dayOmzet;
+
+        if (!isFuture && totalLeads > 0 && convRate > maxConv) {
+          maxConv = convRate;
+          bestDay = { day: d, dp: totalDp, leads: totalLeads, conv: convRate, dateStr };
+        }
+
+        // Render card
+        const card = document.createElement('div');
+        let cardClass = 'cal-day-card';
+        if (isToday) cardClass += ' today';
+        if (isFuture) cardClass += ' future';
+        if (isWeekend) cardClass += ' weekend';
+        card.className = cardClass;
+        card.setAttribute('title', `Klik untuk melihat rincian tanggal ${dateStr}`);
+        card.onclick = () => openDayDetailModal(dateStr);
+
+        let badgeHtml = '';
+        if (isToday) {
+          badgeHtml = '<span class="pill crit" style="font-size:9.5px;">Live Hari Ini</span>';
+        } else if (isFuture) {
+          if (dayPipeline.length > 0) {
+            badgeHtml = `<span class="pill prog" style="font-size:9.5px;">${dayPipeline.length} Booking</span>`;
+          } else {
+            badgeHtml = '<span class="pill neutral" style="font-size:9.5px;">Mendatang</span>';
+          }
+        } else {
+          if (totalDp >= 15) {
+            badgeHtml = `<span class="pill final" style="font-size:9.5px;">🔥 ${totalDp} DP Peak</span>`;
+          } else if (totalDp > 0) {
+            badgeHtml = `<span class="pill final" style="font-size:9.5px;">✓ ${totalDp} DP</span>`;
+          } else {
+            badgeHtml = '<span class="pill neutral" style="font-size:9.5px;">0 DP</span>';
+          }
+        }
+
+        let convFillColor = '#334155';
+        if (convRate >= 30) convFillColor = '#10b981';
+        else if (convRate >= 18) convFillColor = '#0284c7';
+        else if (convRate > 0) convFillColor = '#f59e0b';
+
+        let bottomNote = '';
+        if (!isFuture) {
+          bottomNote = `<div style="font-size:10.5px; font-weight:700; color:#fbbf24;">💰 Rp ${dayOmzet.toLocaleString('id-ID')}</div>`;
+        } else if (dayPipeline.length > 0) {
+          const potVal = dayPipeline.reduce((s, b) => s + (Number(b.harga) || 0), 0);
+          bottomNote = `<div style="font-size:10px; color:#38bdf8;">📋 Potensi Rp ${(potVal / 1000000).toFixed(1)} jt</div>`;
+        } else {
+          bottomNote = `<div style="font-size:10px; color:#64748b;">Belum ada jadwal</div>`;
+        }
+
+        card.innerHTML = `
+          <div class="cal-day-top">
+            <div style="display:flex; align-items:baseline; gap:5px;">
+              <span class="cal-day-num">${String(d).padStart(2, '0')}</span>
+              <span class="cal-day-dow">${dayDowName}</span>
+            </div>
+            ${badgeHtml}
+          </div>
+          <div class="cal-day-metrics">
+            <div class="cal-sub-col">
+              <span class="sub-lbl">Leads</span>
+              <span class="sub-val" style="color:#e2e8f0;">${isFuture ? '—' : totalLeads}</span>
+            </div>
+            <div class="cal-sub-col">
+              <span class="sub-lbl">DP In</span>
+              <span class="sub-val" style="color:${totalDp > 0 ? '#34d399' : '#94a3b8'};">${isFuture ? '—' : totalDp}</span>
+            </div>
+            <div class="cal-sub-col">
+              <span class="sub-lbl">Closing</span>
+              <span class="sub-val" style="color:${convRate >= 25 ? '#34d399' : (convRate > 0 ? '#38bdf8' : '#64748b')};">${isFuture ? '—' : convRate.toFixed(1) + '%'}</span>
+            </div>
+          </div>
+          <div class="conv-bar" title="Closing Rate: ${convRate.toFixed(1)}%">
+            <div class="conv-fill" style="width: ${Math.min(convRate, 100)}%; background: ${convFillColor};"></div>
+          </div>
+          <div class="cal-day-footer">
+            ${bottomNote}
+          </div>
+        `;
+
+        grid.appendChild(card);
+      }
+
+      // Update KPI Header Cards
+      const elTotLeads = document.getElementById('calKpiTotalLeads');
+      const elTotDp = document.getElementById('calKpiTotalDp');
+      const elAvgConv = document.getElementById('calKpiAvgConv');
+      const elTotOmzet = document.getElementById('calKpiTotalOmzet');
+      const elBestDay = document.getElementById('calKpiBestDay');
+      const elBestSub = document.getElementById('calKpiBestDaySub');
+
+      const avgClosingRate = totalMonthLeads > 0 ? ((totalMonthDp / totalMonthLeads) * 100).toFixed(1) : "0.0";
+
+      if (elTotLeads) elTotLeads.textContent = totalMonthLeads;
+      if (elTotDp) elTotDp.textContent = `${totalMonthDp} Closing`;
+      if (elAvgConv) elAvgConv.textContent = `${avgClosingRate}%`;
+      if (elTotOmzet) elTotOmzet.textContent = `Rp ${totalMonthOmzet.toLocaleString('id-ID')}`;
+
+      if (bestDay && elBestDay) {
+        elBestDay.textContent = `${String(bestDay.day).padStart(2, '0')} ${isOkt ? 'Okt' : 'Sep'}`;
+        if (elBestSub) elBestSub.textContent = `${bestDay.dp} DP · Konversi ${bestDay.conv.toFixed(1)}%`;
+      } else if (elBestDay) {
+        elBestDay.textContent = '—';
+        if (elBestSub) elBestSub.textContent = 'Belum Ada Transaksi';
+      }
+    }
+
+    function openDayDetailModal(dateStr) {
+      const modal = document.getElementById('modalDayDetail');
+      if (!modal) return;
+
+      const titleEl = document.getElementById('modalDayTitle');
+      const kpiEl = document.getElementById('modalDayKpi');
+      const ordCountEl = document.getElementById('modalDayOrdersCount');
+      const ordListEl = document.getElementById('modalDayOrdersList');
+      const leadCountEl = document.getElementById('modalDayLeadsCount');
+      const leadListEl = document.getElementById('modalDayLeadsList');
+
+      const state = fullStudioState || {};
+      const isOkt = dateStr.startsWith('2026-10');
+      const leadsArr = isOkt ? (state.oktoberLogOrder?.leads || []) : (state.leads || []);
+      const ordersArr = isOkt ? (state.oktoberLogOrder?.orders || []) : (state.orders || []);
+      const pipelineArr = isOkt ? (state.oktoberPipeline?.bookings || []) : [];
+
+      const dayLeadObj = leadsArr.find(l => l.tanggal === dateStr);
+      const dayOrders = ordersArr.filter(o => o.tanggal === dateStr);
+      const dayPipeline = pipelineArr.filter(b => b.tgl === dateStr);
+
+      const dParts = dateStr.split('-');
+      const dNum = parseInt(dParts[2], 10);
+      const mNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+      const dateReadable = `${dNum} ${mNames[parseInt(dParts[1], 10) - 1]} ${dParts[0]}`;
+
+      if (titleEl) titleEl.innerHTML = `📅 Rincian Status Tanggal: <span style="color:#38bdf8;">${dateReadable}</span>`;
+
+      // Metrics calculation
+      let totalLeads = 0;
+      let totalDp = 0;
+      let convRate = 0;
+      let dayOmzet = 0;
+
+      if (dateStr === '2026-10-01') {
+        totalLeads = Math.max(Number(dayLeadObj?.leads || 0), leadsData.length);
+        const liveConv = leadsData.filter(l => l.status === 'CONVERTED' || l.tier === 'CLOSED').length;
+        totalDp = Math.max(Number(dayLeadObj?.dp || 0), dayOrders.length, liveConv);
+        convRate = totalLeads > 0 ? (totalDp / totalLeads * 100) : 0;
+        dayOmzet = dayOrders.reduce((s, o) => s + ((Number(o.cash) || 0) + (Number(o.transfer) || 0)), 0);
+        if (dayOmzet === 0 && totalDp > 0) dayOmzet = 100000;
+      } else if (!isOkt) {
+        totalLeads = Number(dayLeadObj?.leads || 0);
+        totalDp = Number(dayLeadObj?.dp || 0);
+        if (totalDp === 0 && dayOrders.length > 0) totalDp = dayOrders.length;
+        if (totalLeads < totalDp) totalLeads = totalDp;
+        convRate = totalLeads > 0 ? (totalDp / totalLeads * 100) : 0;
+        dayOmzet = dayOrders.reduce((s, o) => s + ((Number(o.cash) || 0) + (Number(o.transfer) || 0)), 0);
+      }
+
+      if (kpiEl) {
+        kpiEl.innerHTML = `
+          <div class="kpi-card" style="padding:10px;">
+            <div class="kpi-lbl">Total Leads Masuk</div>
+            <div class="kpi-val" style="font-size:19px;">${totalLeads}</div>
+            <div class="kpi-sub">WhatsApp &amp; Inquiries</div>
+          </div>
+          <div class="kpi-card" style="padding:10px; border-left:3px solid #10b981;">
+            <div class="kpi-lbl" style="color:#34d399;">Booking DP Masuk</div>
+            <div class="kpi-val" style="font-size:19px; color:#34d399;">${totalDp}</div>
+            <div class="kpi-sub">Closing Konversi</div>
+          </div>
+          <div class="kpi-card" style="padding:10px; border-left:3px solid #38bdf8;">
+            <div class="kpi-lbl" style="color:#38bdf8;">Closing Rate</div>
+            <div class="kpi-val" style="font-size:19px; color:#38bdf8;">${convRate.toFixed(1)}%</div>
+            <div class="kpi-sub">Efisiensi Admin</div>
+          </div>
+          <div class="kpi-card" style="padding:10px; border-left:3px solid #f59e0b;">
+            <div class="kpi-lbl" style="color:#fbbf24;">Kas &amp; Transfer Masuk</div>
+            <div class="kpi-val" style="font-size:19px; color:#fbbf24;">Rp ${dayOmzet.toLocaleString('id-ID')}</div>
+            <div class="kpi-sub">Realisasi Log Order</div>
+          </div>
+        `;
+      }
+
+      // Orders list
+      if (ordCountEl) ordCountEl.textContent = `${dayOrders.length} order resmi${dayPipeline.length > 0 ? ` · ${dayPipeline.length} booking pipeline` : ''}`;
+      if (ordListEl) {
+        if (dayOrders.length > 0) {
+          ordListEl.innerHTML = dayOrders.map(o => `
+            <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:9px 12px; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-weight:600; color:#fff; font-size:12px;">
+                  👤 ${escapeHtml(o.client || 'Pelanggan')} 
+                  <span style="font-size:11px; color:#38bdf8; font-weight:400; margin-left:4px;">(${escapeHtml(o.paket || 'Paket Studio')})</span>
+                </div>
+                <div style="font-size:10px; color:#94a3b8; margin-top:2px;">
+                  Admin: <b style="color:#cbd5e1;">${escapeHtml(o.admin || 'Admin')}</b> · Sesi: ${escapeHtml(o.tanggalFoto || o.tanggal || '—')}
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-weight:700; color:#34d399; font-size:12.5px;">
+                  Rp ${((Number(o.cash) || 0) + (Number(o.transfer) || 0)).toLocaleString('id-ID')}
+                </div>
+                <span class="pill final" style="font-size:9px; padding:1px 6px;">${(Number(o.transfer) || 0) > 0 ? 'Transfer DP' : 'Cash'}</span>
+              </div>
+            </div>
+          `).join('');
+        } else if (dayPipeline.length > 0) {
+          const totPot = dayPipeline.reduce((s, b) => s + (Number(b.harga) || 0), 0);
+          ordListEl.innerHTML = `
+            <div style="background:rgba(14,165,233,0.1); border:1px solid rgba(14,165,233,0.3); border-radius:6px; padding:10px; margin-bottom:6px;">
+              <div style="font-weight:600; color:#38bdf8; font-size:12px;">📌 ${dayPipeline.length} Booking Terdaftar di Schedule</div>
+              <div style="font-size:11px; color:#94a3b8; margin-top:2px;">Total Potensi Omzet: <b>Rp ${totPot.toLocaleString('id-ID')}</b></div>
+            </div>
+            ${dayPipeline.slice(0, 15).map(b => `
+              <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:8px 12px; display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <div style="font-weight:600; color:#fff; font-size:12px;">
+                    🎓 ${escapeHtml(b.nama || 'Client')} 
+                    <span style="font-size:10px; color:#a855f7;">(${escapeHtml(b.paket || 'Wisuda UMP')})</span>
+                  </div>
+                  <div style="font-size:10px; color:#94a3b8;">Jam ${escapeHtml(b.waktu || '—')} · ${escapeHtml(b.studio || 'Studio')}</div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-weight:700; color:#fbbf24; font-size:12px;">Rp ${(Number(b.harga) || 0).toLocaleString('id-ID')}</div>
+                  <span class="pill prog" style="font-size:9px;">Terkunci di Schedule</span>
+                </div>
+              </div>
+            `).join('')}
+            ${dayPipeline.length > 15 ? `<div style="text-align:center; font-size:10.5px; color:#94a3b8; padding:4px;">...dan ${dayPipeline.length - 15} booking lainnya</div>` : ''}
+          `;
+        } else {
+          ordListEl.innerHTML = `<div style="padding:14px; text-align:center; color:#64748b; font-size:12px;">Tidak ada transaksi Log Order tercatat pada tanggal ini.</div>`;
+        }
+      }
+
+      // Leads list
+      if (leadCountEl) leadCountEl.textContent = dateStr === '2026-10-01' ? `${leadsData.length} leads aktif` : `${totalLeads} leads tercatat`;
+      if (leadListEl) {
+        if (dateStr === '2026-10-01') {
+          leadListEl.innerHTML = leadsData.map(l => {
+            let tClass = 'pill-warm';
+            if (l.tier === 'HOT') tClass = 'pill-hot';
+            else if (l.tier === 'COLD') tClass = 'pill-cold';
+            else if (l.tier === 'CLOSED') tClass = 'pill-closed';
+
+            return `
+              <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:9px 12px; display:flex; justify-content:space-between; align-items:center;">
+                <div style="flex:1; padding-right:12px;">
+                  <div style="font-weight:600; color:#fff; font-size:12px; display:flex; align-items:center; gap:6px;">
+                    <span>${escapeHtml(l.display_name)}</span>
+                    <span class="pill ${tClass}" style="font-size:9px; padding:1px 6px;">${l.tier}</span>
+                    <span style="font-size:10px; color:#94a3b8;">(Admin: ${l.admin})</span>
+                  </div>
+                  <div style="font-size:10.5px; color:#cbd5e1; margin-top:3px; font-style:italic;">
+                    "${escapeHtml(l.last_customer_msg || l.summary || '')}"
+                  </div>
+                </div>
+                <div style="text-align:right;">
+                  <span class="pill ${l.status === 'CONVERTED' ? 'final' : 'prog'}" style="font-size:9.5px;">
+                    ${l.status === 'CONVERTED' ? '✓ Closing DP' : 'Belum Konversi'}
+                  </span>
+                  <div style="margin-top:4px;">
+                    <button class="btn btn-sm" style="font-size:9.5px; padding:2px 7px; background:rgba(2,132,199,0.2); border-color:#0284c7; color:#38bdf8;" onclick="document.getElementById('modalDayDetail').classList.remove('active'); switchAppMode('leads');">
+                      Buka Draft AI
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('');
+        } else if (totalLeads > 0) {
+          leadListEl.innerHTML = `
+            <div style="padding:12px; background:#1e293b; border-radius:6px; border:1px solid #334155; color:#cbd5e1; font-size:11.5px; line-height:1.6;">
+              📊 <b>Ringkasan Leads Resmi Studio:</b><br>
+              Tercatat <b>${totalLeads} calon leads masuk</b> via pesan WhatsApp/inquiry pada tanggal ini.<br>
+              Dari traffic tersebut, <b>${totalDp} klien berhasil konversi DP</b> dengan closing rate <b>${convRate.toFixed(1)}%</b>.
+            </div>
+          `;
+        } else {
+          leadListEl.innerHTML = `<div style="padding:14px; text-align:center; color:#64748b; font-size:12px;">Tidak ada riwayat leads WhatsApp tercatat pada tanggal ini.</div>`;
+        }
+      }
+
+      modal.classList.add('active');
     }
 
     async function loadLeadsData() {
@@ -2571,10 +3147,18 @@
 
     function setupLeadsEventListeners() {
       // Topbar switch tabs
+      const btnTabCal = document.getElementById('btnTabCalendar');
       const btnTabFlow = document.getElementById('btnTabFlow');
       const btnTabLeads = document.getElementById('btnTabLeads');
+      if (btnTabCal) btnTabCal.addEventListener('click', () => switchAppMode('calendar'));
       if (btnTabFlow) btnTabFlow.addEventListener('click', () => switchAppMode('flow'));
       if (btnTabLeads) btnTabLeads.addEventListener('click', () => switchAppMode('leads'));
+
+      // Month toggles in Calendar View
+      const btnCalOkt = document.getElementById('btnCalMonthOkt');
+      const btnCalSep = document.getElementById('btnCalMonthSep');
+      if (btnCalOkt) btnCalOkt.addEventListener('click', () => { currentCalMonth = '2026-10'; renderCalendarDashboard(); });
+      if (btnCalSep) btnCalSep.addEventListener('click', () => { currentCalMonth = '2026-09'; renderCalendarDashboard(); });
 
       // Filter tabs in Leads View
       const filterTabs = document.querySelectorAll('#leadFilterTabs .ftab');
@@ -2730,10 +3314,12 @@
       }
     }
 
-    // Call loadLeadsData & setup on start
-    window.addEventListener('DOMContentLoaded', () => {
-      loadLeadsData();
+    // Call loadLeadsData, loadStudioData & setup on start
+    window.addEventListener('DOMContentLoaded', async () => {
+      await loadLeadsData();
+      await loadStudioData();
       setupLeadsEventListeners();
+      switchAppMode('calendar');
     });
   </script>
 </body>
