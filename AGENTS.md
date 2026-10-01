@@ -106,3 +106,14 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
 - Section Marketing dilengkapi **Kalender Marketing & Boosting 2026/2027 (Agustus 2026 s.d. Juli 2027)** berisi 43 agenda momentum akademik dan seasonal kampus/sekolah (berdasarkan basis data 2.164 transaksi Semester 1 2026).
 - Tabel dilengkapi filter kategori interaktif (*Semua*, *Event Day*, *Boost / Hard Push*, *H-7 Conversion*, *Awareness*) dan pencarian instan agenda/paket/kampus.
 
+### 10. Aturan Mutlak Keselarasan Periode Bulan (Anti-Cross-Month Desync / Anti-Silang Bulan):
+- **Konsistensi Bulan Tunggal (Single Source of Truth Bulan Aktif)**:
+  - Bulan yang sedang aktif (`activeMonth` / `R.c.bulan`) **WAJIB MENJADI RUJUKAN TUNGGAL** untuk SELURUH section dashboard (Dashboard Utama, Neraca COGS/OPEX, Gaji Kru, Log Transaksi, Jadwal Ads, Rekap Shift, Estimasi Omzet, dll.).
+  - **Prinsip Bebas Silang Bulan**:
+    * Jika user memilih **Oktober 2026**, seluruh section (termasuk Jadwal Ads & Realized Ads dari Neraca) **WAJIB membuka dan menampilkan data Oktober 2026**.
+    * Jika user memilih **September 2026**, seluruh section **WAJIB membuka dan menampilkan data September 2026**.
+    * Begitu pula untuk bulan lainnya (Januari = Januari, Februari = Februari, dst.).
+  - **DILARANG KERAS** menggunakan variabel state bulan lokal independen yang tidak tersinkronisasi (seperti `adsMonth`), ataupun melakukan fallback paksa data bulan lain jika data bulan yang dipilih belum ada (jika belum ada rencana, tampilkan status kosong / placeholder yang jujur).
+  - Toggling periode pada sub-section (seperti tombol switch periode di Jadwal Ads atau Estimasi) harus otomatis memperbarui `activeMonth` dan merender ulang seluruh antarmuka secara harmonis.
+
+

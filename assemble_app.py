@@ -748,7 +748,7 @@ function saveLocal() {
 }
 
 let activeMonth = "2026-10";
-let db=null,downloads=null,room=null,view="tahunan",estMonth=10,adsMonth=10,adsFilter="ALL",adsQ="";
+let db=null,downloads=null,room=null,view="tahunan",estMonth=10,adsFilter="ALL",adsQ="";
 
 function nkey(s){
   return String(s||"").normalize("NFKD").replace(/[̀-ͯ]/g,"")
@@ -1430,11 +1430,13 @@ function render(){
     document.getElementById("tbCut").textContent = `Pipeline ${S.oktoberPipeline.totalBookings} Booking · Reguler & Wisuda UMP`;
     const st=document.getElementById("tbStatus");
     if(st){ st.textContent="Pipeline"; st.className="pill prog"; }
-  } else if(view === "ads" && adsMonth === 10){
-    document.getElementById("tbPeriod").textContent = "Oktober 2026";
-    document.getElementById("tbCut").textContent = "Meta Ads Tracker & Kalender 2026/2027";
+  } else if(view === "ads"){
+    const aYr = R.c.bulan.split("-")[0];
+    const aMn = BULAN[+R.c.bulan.split("-")[1] - 1] || "";
+    document.getElementById("tbPeriod").textContent = `${aMn} ${aYr}`;
+    document.getElementById("tbCut").textContent = `Meta Ads Tracker & Kalender 2026/2027 · ${aMn} ${aYr}`;
     const st=document.getElementById("tbStatus");
-    if(st){ st.textContent="Live Tracker"; st.className="pill prog"; }
+    if(st){ st.textContent = (R.c.bulan === "2026-10" ? "Live Tracker" : "Arsip"); st.className = "pill " + (R.c.bulan === "2026-10" ? "prog" : "final"); }
   } else {
     document.getElementById("tbPeriod").textContent=BULAN[+R.c.bulan.split("-")[1]-1]+" "+R.c.bulan.split("-")[0];
     document.getElementById("tbCut").textContent=`s.d. ${R.cutDay} ${BULAN[+R.c.bulan.split("-")[1]-1]} · ${R.hariBerjalan}/${R.dim} hari`;
@@ -2715,9 +2717,11 @@ function chartYoY(R,H,yr){
 }
 
 function vAds(R){
-  const selBulan = adsMonth === 10 ? "2026-10" : "2026-09";
-  const A = (S.adsByMonth && S.adsByMonth[selBulan]) || (S.ads && S.ads.bulan === selBulan ? S.ads : (selBulan === "2026-10" ? S.ads : null));
-  const mn = adsMonth === 10 ? "Oktober" : "September", yr = "2026";
+  const selBulan = R.c.bulan;
+  const [yr, mNumStr] = (selBulan || "2026-10").split("-");
+  const mNum = parseInt(mNumStr, 10);
+  const mn = BULAN[mNum - 1] || `Bulan ${mNumStr}`;
+  const A = (S.adsByMonth && S.adsByMonth[selBulan]) || (S.ads && S.ads.bulan === selBulan ? S.ads : null);
   const now = new Date(), todayIso = iso(now);
 
   // Marketing Calendar 2026/2027 (43 Agenda Strategis)
@@ -2987,8 +2991,8 @@ function vAds(R){
       <p>Rencana pelepasan budget iklan berbayar, playbook tim, serta roadmap kalender marketing terintegrasi 2026/2027.</p>
     </div>
     <div style="display:flex;gap:6px;background:var(--surface2);padding:4px;border-radius:8px">
-      <button class="btn btn-sm ${adsMonth===10?'btn-pri':'btn-sub'}" onclick="adsMonth=10;render()">📅 Oktober 2026 (Live Tracker)</button>
-      <button class="btn btn-sm ${adsMonth===9?'btn-pri':'btn-sub'}" onclick="adsMonth=9;render()">📅 September 2026 (Arsip)</button>
+      <button class="btn btn-sm ${selBulan==='2026-10'?'btn-pri':'btn-sub'}" onclick="activeMonth='2026-10';estMonth=10;render()">📅 Oktober 2026 (Live Tracker)</button>
+      <button class="btn btn-sm ${selBulan==='2026-09'?'btn-pri':'btn-sub'}" onclick="activeMonth='2026-09';estMonth=9;render()">📅 September 2026 (Arsip)</button>
     </div>
   </div>
 

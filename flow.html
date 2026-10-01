@@ -736,24 +736,24 @@
         <div class="kpi-sub" id="calKpiLeadsSub">Leads WhatsApp &amp; Inquiries</div>
       </div>
       <div class="kpi-card" style="border-left: 3px solid #10b981;">
-        <div class="kpi-lbl" style="color:#34d399;">Total Booking Closing</div>
+        <div class="kpi-lbl" style="color:#34d399;">Total DP Masuk</div>
         <div class="kpi-val" style="color:#34d399;" id="calKpiTotalDp">0</div>
-        <div class="kpi-sub">Klien DP &amp; Pelunasan</div>
+        <div class="kpi-sub" id="calKpiDpSub">Booking Terkunci (DP Only)</div>
       </div>
       <div class="kpi-card" style="border-left: 3px solid #38bdf8;">
-        <div class="kpi-lbl" style="color:#38bdf8;">Rata-Rata Konversi</div>
+        <div class="kpi-lbl" style="color:#38bdf8;">Konversi DP (Closing Rate)</div>
         <div class="kpi-val" style="color:#38bdf8;" id="calKpiAvgConv">0.0%</div>
-        <div class="kpi-sub">Closing Rate Efisiensi Admin</div>
+        <div class="kpi-sub">Efisiensi Admin (DP / Leads)</div>
       </div>
       <div class="kpi-card" style="border-left: 3px solid #f59e0b;">
-        <div class="kpi-lbl" style="color:#fbbf24;">Total Kas &amp; Transfer Masuk</div>
+        <div class="kpi-lbl" style="color:#fbbf24;">Realisasi Uang Masuk</div>
         <div class="kpi-val" style="color:#fbbf24;" id="calKpiTotalOmzet">Rp 0</div>
-        <div class="kpi-sub">Realisasi Uang Masuk Log Order</div>
+        <div class="kpi-sub" id="calKpiOmzetSub">Total Kas &amp; Bank Log Order</div>
       </div>
       <div class="kpi-card" style="border-left: 3px solid #a855f7;">
-        <div class="kpi-lbl" style="color:#c084fc;">Best Closing Day</div>
+        <div class="kpi-lbl" style="color:#c084fc;">Best DP Closing Day</div>
         <div class="kpi-val" style="color:#c084fc; font-size:18px;" id="calKpiBestDay">—</div>
-        <div class="kpi-sub" id="calKpiBestDaySub">Puncak Konversi Tertinggi</div>
+        <div class="kpi-sub" id="calKpiBestDaySub">Puncak Konversi DP Tertinggi</div>
       </div>
     </div>
 
@@ -2572,6 +2572,20 @@
       }
     }
 
+    function isDpOrder(o) {
+      if (!o) return false;
+      const p = String(o.pembayaran || '').trim().toUpperCase();
+      if (p.includes('DP')) return true;
+      if (p.includes('LUNAS') || p.includes('PELUNASAN')) return false;
+      // Fallback jika keterangan kosong: jika tanggal foto berbeda dari tanggal booking, ini DP reservasi
+      if (o.tanggalFoto && o.tanggal) {
+        const tf = String(o.tanggalFoto).trim().toLowerCase();
+        const tb = String(o.tanggal).trim().toLowerCase();
+        if (tf !== tb && !tf.includes(tb)) return true;
+      }
+      return false;
+    }
+
     function renderCalendarDashboard() {
       const grid = document.getElementById('calendarDaysGrid');
       if (!grid) return;
@@ -2634,16 +2648,18 @@
         let isToday = false;
         let isFuture = false;
 
+        const dpOrders = dayOrders.filter(o => isDpOrder(o));
+        dayOmzet = dayOrders.reduce((sum, o) => sum + ((Number(o.cash) || 0) + (Number(o.transfer) || 0)), 0);
+
         if (isOkt) {
           if (d === 1) {
             isToday = true;
-            // Oct 1st Live: merge real-time leadsData & log order
+            // Oct 1st Live: merge real-time leadsData & log order DP
             const sheetLeads = Number(dayLeadObj?.leads || 0);
             totalLeads = Math.max(sheetLeads, leadsData.length);
-            const liveConvertedCount = leadsData.filter(l => l.status === 'CONVERTED' || l.tier === 'CLOSED').length;
-            totalDp = Math.max(Number(dayLeadObj?.dp || 0), dayOrders.length, liveConvertedCount);
+            totalDp = dpOrders.length;
+            if (Number(dayLeadObj?.dp || 0) > totalDp) totalDp = Number(dayLeadObj.dp);
             convRate = totalLeads > 0 ? (totalDp / totalLeads * 100) : 0;
-            dayOmzet = dayOrders.reduce((sum, o) => sum + ((Number(o.cash) || 0) + (Number(o.transfer) || 0)), 0);
             if (dayOmzet === 0 && totalDp > 0) dayOmzet = 100000;
           } else {
             isFuture = true;
@@ -2653,13 +2669,12 @@
             dayOmzet = 0;
           }
         } else {
-          // September historical
+          // September historical: totalDp murni dari pencatatan DP resmi
           totalLeads = Number(dayLeadObj?.leads || 0);
           totalDp = Number(dayLeadObj?.dp || 0);
-          if (totalDp === 0 && dayOrders.length > 0) totalDp = dayOrders.length;
-          if (totalLeads < totalDp) totalLeads = totalDp;
+          if (totalDp === 0 && dpOrders.length > 0) totalDp = dpOrders.length;
+          else if (totalDp === 0 && dayOrders.length > 0) totalDp = dayOrders.length;
           convRate = totalLeads > 0 ? (totalDp / totalLeads * 100) : 0;
-          dayOmzet = dayOrders.reduce((sum, o) => sum + ((Number(o.cash) || 0) + (Number(o.transfer) || 0)), 0);
         }
 
         totalMonthLeads += totalLeads;
@@ -2683,7 +2698,7 @@
 
         let badgeHtml = '';
         if (isToday) {
-          badgeHtml = '<span class="pill crit" style="font-size:9.5px;">Live Hari Ini</span>';
+          badgeHtml = `<span class="pill crit" style="font-size:9.5px;">Live: ${totalDp} DP</span>`;
         } else if (isFuture) {
           if (dayPipeline.length > 0) {
             badgeHtml = `<span class="pill prog" style="font-size:9.5px;">${dayPipeline.length} Booking</span>`;
@@ -2729,15 +2744,15 @@
               <span class="sub-val" style="color:#e2e8f0;">${isFuture ? '—' : totalLeads}</span>
             </div>
             <div class="cal-sub-col">
-              <span class="sub-lbl">DP In</span>
-              <span class="sub-val" style="color:${totalDp > 0 ? '#34d399' : '#94a3b8'};">${isFuture ? '—' : totalDp}</span>
+              <span class="sub-lbl">DP Masuk</span>
+              <span class="sub-val" style="color:${totalDp > 0 ? '#34d399' : '#94a3b8'};">${isFuture ? '—' : `${totalDp} DP`}</span>
             </div>
             <div class="cal-sub-col">
-              <span class="sub-lbl">Closing</span>
+              <span class="sub-lbl">Konv DP</span>
               <span class="sub-val" style="color:${convRate >= 25 ? '#34d399' : (convRate > 0 ? '#38bdf8' : '#64748b')};">${isFuture ? '—' : convRate.toFixed(1) + '%'}</span>
             </div>
           </div>
-          <div class="conv-bar" title="Closing Rate: ${convRate.toFixed(1)}%">
+          <div class="conv-bar" title="Konversi DP: ${convRate.toFixed(1)}%">
             <div class="conv-fill" style="width: ${Math.min(convRate, 100)}%; background: ${convFillColor};"></div>
           </div>
           <div class="cal-day-footer">
@@ -2759,7 +2774,7 @@
       const avgClosingRate = totalMonthLeads > 0 ? ((totalMonthDp / totalMonthLeads) * 100).toFixed(1) : "0.0";
 
       if (elTotLeads) elTotLeads.textContent = totalMonthLeads;
-      if (elTotDp) elTotDp.textContent = `${totalMonthDp} Closing`;
+      if (elTotDp) elTotDp.textContent = `${totalMonthDp} DP`;
       if (elAvgConv) elAvgConv.textContent = `${avgClosingRate}%`;
       if (elTotOmzet) elTotOmzet.textContent = `Rp ${totalMonthOmzet.toLocaleString('id-ID')}`;
 
@@ -2801,6 +2816,11 @@
       if (titleEl) titleEl.innerHTML = `📅 Rincian Status Tanggal: <span style="color:#38bdf8;">${dateReadable}</span>`;
 
       // Metrics calculation
+      const dpOrders = dayOrders.filter(o => isDpOrder(o));
+      const lunasOrders = dayOrders.filter(o => !isDpOrder(o));
+      const dpNominal = dpOrders.reduce((s, o) => s + ((Number(o.cash) || 0) + (Number(o.transfer) || 0)), 0);
+      const lunasNominal = lunasOrders.reduce((s, o) => s + ((Number(o.cash) || 0) + (Number(o.transfer) || 0)), 0);
+
       let totalLeads = 0;
       let totalDp = 0;
       let convRate = 0;
@@ -2808,16 +2828,16 @@
 
       if (dateStr === '2026-10-01') {
         totalLeads = Math.max(Number(dayLeadObj?.leads || 0), leadsData.length);
-        const liveConv = leadsData.filter(l => l.status === 'CONVERTED' || l.tier === 'CLOSED').length;
-        totalDp = Math.max(Number(dayLeadObj?.dp || 0), dayOrders.length, liveConv);
+        totalDp = dpOrders.length;
+        if (Number(dayLeadObj?.dp || 0) > totalDp) totalDp = Number(dayLeadObj.dp);
         convRate = totalLeads > 0 ? (totalDp / totalLeads * 100) : 0;
         dayOmzet = dayOrders.reduce((s, o) => s + ((Number(o.cash) || 0) + (Number(o.transfer) || 0)), 0);
         if (dayOmzet === 0 && totalDp > 0) dayOmzet = 100000;
       } else if (!isOkt) {
         totalLeads = Number(dayLeadObj?.leads || 0);
         totalDp = Number(dayLeadObj?.dp || 0);
-        if (totalDp === 0 && dayOrders.length > 0) totalDp = dayOrders.length;
-        if (totalLeads < totalDp) totalLeads = totalDp;
+        if (totalDp === 0 && dpOrders.length > 0) totalDp = dpOrders.length;
+        else if (totalDp === 0 && dayOrders.length > 0) totalDp = dayOrders.length;
         convRate = totalLeads > 0 ? (totalDp / totalLeads * 100) : 0;
         dayOmzet = dayOrders.reduce((s, o) => s + ((Number(o.cash) || 0) + (Number(o.transfer) || 0)), 0);
       }
@@ -2827,53 +2847,72 @@
           <div class="kpi-card" style="padding:10px;">
             <div class="kpi-lbl">Total Leads Masuk</div>
             <div class="kpi-val" style="font-size:19px;">${totalLeads}</div>
-            <div class="kpi-sub">WhatsApp &amp; Inquiries</div>
+            <div class="kpi-sub">WhatsApp &amp; CRM Leads</div>
           </div>
           <div class="kpi-card" style="padding:10px; border-left:3px solid #10b981;">
-            <div class="kpi-lbl" style="color:#34d399;">Booking Closing</div>
-            <div class="kpi-val" style="font-size:19px; color:#34d399;">${totalDp}</div>
-            <div class="kpi-sub">Klien DP &amp; Pelunasan</div>
+            <div class="kpi-lbl" style="color:#34d399;">Booking DP Masuk</div>
+            <div class="kpi-val" style="font-size:19px; color:#34d399;">${totalDp} DP</div>
+            <div class="kpi-sub">Rp ${dpNominal.toLocaleString('id-ID')} DP terkunci</div>
           </div>
           <div class="kpi-card" style="padding:10px; border-left:3px solid #38bdf8;">
-            <div class="kpi-lbl" style="color:#38bdf8;">Closing Rate</div>
+            <div class="kpi-lbl" style="color:#38bdf8;">Konversi DP (Closing Rate)</div>
             <div class="kpi-val" style="font-size:19px; color:#38bdf8;">${convRate.toFixed(1)}%</div>
-            <div class="kpi-sub">Efisiensi Admin</div>
+            <div class="kpi-sub">${totalDp} DP dari ${totalLeads} Leads</div>
           </div>
           <div class="kpi-card" style="padding:10px; border-left:3px solid #f59e0b;">
-            <div class="kpi-lbl" style="color:#fbbf24;">Kas &amp; Transfer Masuk</div>
+            <div class="kpi-lbl" style="color:#fbbf24;">Total Realisasi Masuk</div>
             <div class="kpi-val" style="font-size:19px; color:#fbbf24;">Rp ${dayOmzet.toLocaleString('id-ID')}</div>
-            <div class="kpi-sub">Realisasi Log Order</div>
+            <div class="kpi-sub">DP: Rp ${dpNominal.toLocaleString('id-ID')} · Lunas: Rp ${lunasNominal.toLocaleString('id-ID')}</div>
           </div>
         `;
       }
 
       // Orders list
-      if (ordCountEl) ordCountEl.textContent = `${dayOrders.length} order resmi${dayPipeline.length > 0 ? ` · ${dayPipeline.length} booking pipeline` : ''}`;
+      if (ordCountEl) {
+        const orderSummaryParts = [];
+        if (dpOrders.length > 0) orderSummaryParts.push(`<b style="color:#34d399;">${dpOrders.length} Booking DP</b>`);
+        if (lunasOrders.length > 0) orderSummaryParts.push(`<b style="color:#38bdf8;">${lunasOrders.length} Pelunasan Hari H</b>`);
+        const summaryText = orderSummaryParts.length > 0 ? orderSummaryParts.join(' & ') : `${dayOrders.length} transaksi`;
+        ordCountEl.innerHTML = `${dayOrders.length} transaksi (${summaryText})${dayPipeline.length > 0 ? ` · ${dayPipeline.length} booking pipeline` : ''}`;
+      }
       if (ordListEl) {
         if (dayOrders.length > 0) {
-          ordListEl.innerHTML = dayOrders.map(o => `
-            <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:9px 12px; display:flex; justify-content:space-between; align-items:center;">
+          ordListEl.innerHTML = dayOrders.map(o => {
+            const isDp = isDpOrder(o);
+            const nominal = (Number(o.cash) || 0) + (Number(o.transfer) || 0);
+            const badgeBg = isDp ? 'rgba(16,185,129,0.15)' : 'rgba(2,132,199,0.15)';
+            const badgeBorder = isDp ? 'rgba(16,185,129,0.3)' : 'rgba(2,132,199,0.3)';
+            const badgeColor = isDp ? '#34d399' : '#38bdf8';
+            const badgeText = isDp ? '✓ Transfer DP' : (String(o.pembayaran || '').toUpperCase().includes('LUNAS') ? '💎 Lunas' : 'Cash/Pelunasan');
+            const typeLabel = isDp 
+              ? '<span style="font-size:10px; color:#34d399; font-weight:600; margin-left:6px; background:rgba(16,185,129,0.12); padding:1px 6px; border-radius:3px;">[Booking DP]</span>' 
+              : '<span style="font-size:10px; color:#38bdf8; font-weight:600; margin-left:6px; background:rgba(2,132,199,0.12); padding:1px 6px; border-radius:3px;">[Pelunasan Hari H]</span>';
+
+            return `
+            <div style="background:#1e293b; border:1px solid ${isDp ? '#059669' : '#334155'}; border-radius:6px; padding:9px 12px; display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
               <div>
-                <div style="font-weight:600; color:#fff; font-size:12px;">
+                <div style="font-weight:600; color:#fff; font-size:12px; display:flex; align-items:center;">
                   👤 ${escapeHtml(o.client || 'Pelanggan')} 
                   <span style="font-size:11px; color:#38bdf8; font-weight:400; margin-left:4px;">(${escapeHtml(o.paket || 'Paket Studio')})</span>
+                  ${typeLabel}
                 </div>
                 <div style="font-size:10px; color:#94a3b8; margin-top:2px;">
                   Admin: <b style="color:#cbd5e1;">${escapeHtml(o.admin || 'Admin')}</b>
                   ${o.fotografer ? ` · FG: <b style="color:#cbd5e1;">${escapeHtml(o.fotografer)}</b>` : ''} 
-                  · Sesi: ${escapeHtml(o.tanggalFoto || o.tanggal || '—')}
+                  · Jadwal Sesi: <b style="color:#e2e8f0;">${escapeHtml(o.tanggalFoto || o.tanggal || '—')}</b>
                 </div>
               </div>
               <div style="text-align:right;">
-                <div style="font-weight:700; color:#34d399; font-size:12.5px;">
-                  Rp ${((Number(o.cash) || 0) + (Number(o.transfer) || 0)).toLocaleString('id-ID')}
+                <div style="font-weight:700; color:${isDp ? '#34d399' : '#38bdf8'}; font-size:12.5px;">
+                  Rp ${nominal.toLocaleString('id-ID')}
                 </div>
-                <span class="pill final" style="font-size:9px; padding:1px 6px;">
-                  ${escapeHtml(o.pembayaran || ((Number(o.transfer) || 0) > 0 ? 'Transfer DP' : 'Cash'))}
+                <span class="pill" style="font-size:9px; padding:2px 7px; background:${badgeBg}; color:${badgeColor}; border:1px solid ${badgeBorder}; border-radius:4px;">
+                  ${badgeText}
                 </span>
               </div>
             </div>
-          `).join('');
+            `;
+          }).join('');
         } else if (dayPipeline.length > 0) {
           const totPot = dayPipeline.reduce((s, b) => s + (Number(b.harga) || 0), 0);
           ordListEl.innerHTML = `
