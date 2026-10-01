@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foxe Flow — Visual Admin Studio Automation</title>
+  <link rel="stylesheet" href="/static/css/flow.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">
+        <div class="brand-icon">🦊</div>
+        <span>Foxe Flow</span>
+        <span class="brand-badge">n8n Engine</span>
+      </div>
+
+      <div class="wf-select-wrapper">
+        <select id="selWorkflow" class="wf-select" title="Pilih Alur Kerja"></select>
+      </div>
+
+      <div id="toggleActive" class="active-toggle" title="Klik untuk mengaktifkan/menonaktifkan otomasi">
+        <span class="dot"></span>
+        <span class="label">Otomasi Aktif</span>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <button id="btnOpenBookings" class="btn btn-sm" title="Pilih data pelanggan dari database studio Foxe">
+        👥 Data Studio
+      </button>
+      <button id="btnOpenWebhook" class="btn btn-sm" title="Lihat endpoint Webhook publik untuk alur ini">
+        📋 Webhook URL
+      </button>
+      <button id="btnOpenSettings" class="btn btn-sm" title="Konfigurasi API Fonnte & Telegram">
+        ⚙️ Gateway
+      </button>
+      <button id="btnSaveWf" class="btn btn-sm" title="Simpan perubahan kanvas ke backend">
+        💾 Simpan
+      </button>
+      <button id="btnTestWf" class="btn btn-primary" title="Uji eksekusi alur kerja sekarang">
+        ▶ Jalankan Tes
+      </button>
+      <button id="btnToggleLogs" class="btn btn-sm" style="margin-left: 4px;" title="Tampilkan riwayat log eksekusi">
+        📜 Logs
+      </button>
+    </div>
+  </header>
+
+  <!-- WORKSPACE -->
+  <div class="workspace">
+
+    <!-- LEFT PALETTE -->
+    <aside class="sidebar-palette">
+      <div class="palette-header">
+        <span>Koleksi Node</span>
+        <span style="font-size: 10px; color: var(--accent-cyan);">+ Klik ke Kanvas</span>
+      </div>
+      <div class="palette-content">
+
+        <!-- TRIGGERS -->
+        <div>
+          <div class="node-group-title">🚀 Pemicu (Triggers)</div>
+          <div class="palette-item" data-type="webhook_trigger">
+            <div class="icon" style="background: #0284c7;">⚡</div>
+            <div class="info">
+              <div class="name">Webhook In</div>
+              <div class="desc">Terima HTTP Webhook</div>
+            </div>
+          </div>
+          <div class="palette-item" data-type="foxe_booking_trigger">
+            <div class="icon" style="background: #ea580c;">🦊</div>
+            <div class="info">
+              <div class="name">Foxe Studio Live</div>
+              <div class="desc">Data booking studio</div>
+            </div>
+          </div>
+          <div class="palette-item" data-type="manual_trigger">
+            <div class="icon" style="background: #3b82f6;">▶</div>
+            <div class="info">
+              <div class="name">Manual Test</div>
+              <div class="desc">Trigger uji coba</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LOGIC -->
+        <div>
+          <div class="node-group-title">⚖️ Logika & Alur</div>
+          <div class="palette-item" data-type="filter_if">
+            <div class="icon" style="background: #8b5cf6;">🔀</div>
+            <div class="info">
+              <div class="name">Filter (IF / Else)</div>
+              <div class="desc">Cek kondisi DP / status</div>
+            </div>
+          </div>
+          <div class="palette-item" data-type="delay">
+            <div class="icon" style="background: #64748b;">⏳</div>
+            <div class="info">
+              <div class="name">Delay / Jeda</div>
+              <div class="desc">Tunda sekian detik</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRANSFORM -->
+        <div>
+          <div class="node-group-title">📝 Format & Template</div>
+          <div class="palette-item" data-type="set_transform">
+            <div class="icon" style="background: #f59e0b;">✍️</div>
+            <div class="info">
+              <div class="name">Template WhatsApp</div>
+              <div class="desc">Format teks & rupiah</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div>
+          <div class="node-group-title">💬 Aksi Keluar (Actions)</div>
+          <div class="palette-item" data-type="fonnte_whatsapp">
+            <div class="icon" style="background: #25d366;">📱</div>
+            <div class="info">
+              <div class="name">WhatsApp Fonnte</div>
+              <div class="desc">Kirim WA otomatis</div>
+            </div>
+          </div>
+          <div class="palette-item" data-type="telegram_bot">
+            <div class="icon" style="background: #0088cc;">📢</div>
+            <div class="info">
+              <div class="name">Telegram Studio</div>
+              <div class="desc">Alert admin Foxe</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- CENTER CANVAS -->
+    <main class="canvas-container" id="canvasContainer">
+      <div class="canvas-viewport" id="canvasViewport">
+        <svg class="wires-svg" id="wiresSvg"></svg>
+        <!-- Nodes are dynamically appended here -->
+      </div>
+
+      <!-- FLOATING CONTROLS -->
+      <div class="canvas-controls">
+        <button id="btnZoomIn" class="btn btn-sm btn-icon" title="Perbesar (Zoom In)">➕</button>
+        <button id="btnZoomOut" class="btn btn-sm btn-icon" title="Perkecil (Zoom Out)">➖</button>
+        <button id="btnZoomReset" class="btn btn-sm btn-icon" title="Pusatkan Tampilan (Fit)">⛶</button>
+        <span id="lblZoom" style="font-size:11px; font-weight:600; color:#94a3b8; padding:0 6px;">100%</span>
+      </div>
+    </main>
+
+    <!-- RIGHT INSPECTOR -->
+    <aside class="sidebar-inspector" id="sidebarInspector" style="display: none;">
+      <div class="inspector-header">
+        <h3 id="inspTitle">Pengaturan Node</h3>
+        <button class="btn btn-sm btn-icon" onclick="closeNodeInspector()" title="Tutup Panel">✕</button>
+      </div>
+      <div class="inspector-content">
+        <div class="field-group">
+          <label class="field-label">Label Nama Node</label>
+          <input type="text" id="inspNodeName" class="field-input">
+        </div>
+
+        <!-- Dynamic Form for Node Type -->
+        <div id="inspDynamicFields"></div>
+
+        <div style="display:flex; gap:8px; margin-top:12px;">
+          <button id="btnSaveNodeParams" class="btn btn-primary" style="flex:1;">Terapkan</button>
+          <button id="btnDeleteNode" class="btn" style="color:#ef4444;" title="Hapus Node">🗑️</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- BOTTOM EXECUTION DRAWER -->
+    <section class="exec-drawer collapsed" id="execDrawer">
+      <div class="exec-drawer-header" id="btnToggleDrawerHeader">
+        <div class="exec-drawer-title">
+          <span>⚡ Riwayat Eksekusi & Status Pengiriman</span>
+        </div>
+        <span style="font-size:11px; color:#94a3b8;">Klik untuk lipat / buka ▲▼</span>
+      </div>
+      <div class="exec-drawer-body">
+        <div class="exec-timeline" id="execTimeline">
+          <div style="padding:10px; color:#94a3b8">Klik "▶ Jalankan Tes" untuk mensimulasikan alur kerja ini.</div>
+        </div>
+        <pre class="exec-data-preview" id="execPreview">// Payload & respon eksekusi akan tampil di sini</pre>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- MODAL: WEBHOOK URL -->
+  <div class="modal-overlay" id="modalWebhook">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size:14px; font-weight:700; color:#fff;">📋 Webhook Endpoint Publik</h3>
+        <button class="btn btn-sm btn-icon btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:12px; color:#94a3b8;">
+          Tempel URL ini pada Google Forms, formulir website, atau CRM studio. Setiap ada data yang dikirimkan ke URL ini, Foxe Flow akan langsung memicu pengiriman pesan WhatsApp.
+        </p>
+        <div class="field-group">
+          <label class="field-label">URL Webhook</label>
+          <div class="code-block" id="txtWebhookUrl">http://localhost:8765/api/webhook/...</div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Contoh Request (cURL)</label>
+          <pre class="code-block" id="codeCurl" style="white-space:pre-wrap; max-height:160px; overflow-y:auto;"></pre>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-close-modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: LIVE BOOKINGS PICKER -->
+  <div class="modal-overlay" id="modalBookings">
+    <div class="modal-card" style="width: 620px;">
+      <div class="modal-header">
+        <h3 style="font-size:14px; font-weight:700; color:#fff;">👥 Pilih Data Booking Riil Foxe Studio</h3>
+        <button class="btn btn-sm btn-icon btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:12px; color:#94a3b8;">
+          Pilih salah satu klien di bawah untuk menguji template pesan WhatsApp dan alur otomasi menggunakan data transaksi nyata:
+        </p>
+        <div id="listLiveBookings" style="display:flex; flex-direction:column; gap:6px; max-height:340px; overflow-y:auto;">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-close-modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SETTINGS GATEWAY -->
+  <div class="modal-overlay" id="modalSettings">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size:14px; font-weight:700; color:#fff;">⚙️ Konfigurasi Gateway Pesan</h3>
+        <button class="btn btn-sm btn-icon btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="field-group">
+          <label class="field-label">Fonnte API Token (WhatsApp)</label>
+          <input type="text" id="cfgFonnteToken" class="field-input" placeholder="Masukkan token akun Fonnte Anda">
+          <div style="font-size:10px; color:#64748b;">Dapatkan token di <a href="https://fonnte.com" target="_blank" style="color:#38bdf8;">fonnte.com</a>. Jika dibiarkan kosong, sistem otomatis berjalan dalam Mode Simulasi yang aman tanpa kuota.</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Telegram Bot Token (Admin Alert)</label>
+          <input type="text" id="cfgTgToken" class="field-input">
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Telegram Chat ID Admin</label>
+          <input type="text" id="cfgTgChatId" class="field-input">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-close-modal">Batal</button>
+        <button class="btn btn-primary" id="btnSaveSettings">Simpan Pengaturan</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/canvas.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

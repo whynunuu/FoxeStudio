@@ -1,0 +1,150 @@
+[
+  {
+    "id": "wf_konfirmasi_dp",
+    "name": "Konfirmasi Booking & DP Masuk (WhatsApp Fonnte)",
+    "description": "Otomatis kirim rincian booking & bukti DP lunas ke WhatsApp pelanggan serta alert Telegram ke admin studio saat booking masuk via Webhook.",
+    "is_active": true,
+    "webhook_token": "foxe-booking-hook",
+    "nodes": [
+      {
+        "id": "node_trigger",
+        "name": "Webhook Booking Masuk",
+        "type": "webhook_trigger",
+        "position": { "x": 80, "y": 200 },
+        "parameters": {
+          "webhook_token": "foxe-booking-hook",
+          "description": "Endpoint URL: /api/webhook/foxe-booking-hook"
+        }
+      },
+      {
+        "id": "node_filter_dp",
+        "name": "Cek Pembayaran DP",
+        "type": "filter_if",
+        "position": { "x": 380, "y": 200 },
+        "parameters": {
+          "field": "dp_masuk",
+          "operator": ">",
+          "value": "0"
+        }
+      },
+      {
+        "id": "node_template_wa",
+        "name": "Format Template WhatsApp",
+        "type": "set_transform",
+        "position": { "x": 680, "y": 140 },
+        "parameters": {
+          "message_template": "Halo Kak *{{client_name}}*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: {{paket}}\n📅 *Tanggal Foto*: {{tanggal_foto}}\n⏰ *Jam*: {{jam_foto}}\n📍 *Spot / Studio*: {{backdrop}}\n\n💳 *Rincian Pembayaran*:\n- Total Biaya Paket : Rp {{rupiah(total_paket)}}\n- DP Diterima : Rp {{rupiah(dp_masuk)}} (TERKUNCI / VALID)\n- Sisa Pelunasan : Rp {{rupiah(sisa_bayar)}} (dibayarkan saat hari-H foto)\n\n⚠️ *Catatan Penting*:\nMohon hadir 15 menit sebelum sesi dimulai ya Kak agar persiapan rias & kostum dapat berlangsung tepat waktu.\n\nJika ada pertanyaan atau perubahan jadwal, silakan balas pesan ini.\nSampai jumpa di Foxe Studio! 📸🦊"
+        }
+      },
+      {
+        "id": "node_fonnte",
+        "name": "Kirim WhatsApp Fonnte",
+        "type": "fonnte_whatsapp",
+        "position": { "x": 1020, "y": 140 },
+        "parameters": {
+          "token": "FONNTE_TOKEN_ANDA",
+          "target_phone": "{{phone}}",
+          "message": "{{rendered_message}}",
+          "is_simulation": true,
+          "file_url": ""
+        }
+      },
+      {
+        "id": "node_telegram_admin",
+        "name": "Notif Telegram Admin Foxe",
+        "type": "telegram_bot",
+        "position": { "x": 1020, "y": 320 },
+        "parameters": {
+          "token": "8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s",
+          "chat_id": "1608969830",
+          "message": "🔔 <b>BOOKING MASUK & DP TERKONFIRMASI!</b>\n\n👤 Client: <b>{{client_name}}</b>\n📸 Paket: {{paket}}\n📅 Tanggal: {{tanggal_foto}} ({{jam_foto}})\n💰 DP: Rp {{rupiah(dp_masuk)}} (Sisa: Rp {{rupiah(sisa_bayar)}})\n📞 WA: {{phone}}\n\n<i>Pesan konfirmasi otomatis telah dikirim via Fonnte.</i>"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn_1",
+        "source": "node_trigger",
+        "sourceHandle": "output",
+        "target": "node_filter_dp",
+        "targetHandle": "input"
+      },
+      {
+        "id": "conn_2",
+        "source": "node_filter_dp",
+        "sourceHandle": "true",
+        "target": "node_template_wa",
+        "targetHandle": "input"
+      },
+      {
+        "id": "conn_3",
+        "source": "node_template_wa",
+        "sourceHandle": "output",
+        "target": "node_fonnte",
+        "targetHandle": "input"
+      },
+      {
+        "id": "conn_4",
+        "source": "node_template_wa",
+        "sourceHandle": "output",
+        "target": "node_telegram_admin",
+        "targetHandle": "input"
+      }
+    ]
+  },
+  {
+    "id": "wf_reminder_h1",
+    "name": "Reminder H-1 Sesi Foto Studio",
+    "description": "Pengingat otomatis kepada klien H-1 sebelum jadwal foto agar tidak terlambat dan membawa perlengkapan studio.",
+    "is_active": true,
+    "webhook_token": "foxe-reminder-h1",
+    "nodes": [
+      {
+        "id": "node_trig_remind",
+        "name": "Foxe Schedule Live",
+        "type": "foxe_booking_trigger",
+        "position": { "x": 80, "y": 200 },
+        "parameters": {
+          "trigger_type": "h1_reminder"
+        }
+      },
+      {
+        "id": "node_tpl_remind",
+        "name": "Format Pesan Reminder",
+        "type": "set_transform",
+        "position": { "x": 420, "y": 200 },
+        "parameters": {
+          "message_template": "Hai Kak *{{client_name}}*! 👋\nPengingat manis dari *Foxe Studio* bahwa sesi pemotretan Kakak dijadwalkan BESOK:\n\n📅 *Hari / Tanggal*: {{tanggal_foto}}\n⏰ *Waktu*: {{jam_foto}}\n📸 *Paket*: {{paket}}\n📍 *Lokasi*: Foxe Studio (Purwokerto)\n\n📌 *Checklist Besok*:\n1. Hadir 15 menit lebih awal.\n2. Siapkan pakaian, toga/seragam, dan properti pribadi yang ingin dipakai.\n3. Sisa pelunasan (Rp {{rupiah(sisa_bayar)}}) dapat diselesaikan di kasir studio via QRIS/Transfer/Cash.\n\nSampai jumpa besok ya Kak! Semoga sesinya seru dan berkesan! ✨"
+        }
+      },
+      {
+        "id": "node_wa_remind",
+        "name": "Kirim Reminder Fonnte",
+        "type": "fonnte_whatsapp",
+        "position": { "x": 760, "y": 200 },
+        "parameters": {
+          "token": "FONNTE_TOKEN_ANDA",
+          "target_phone": "{{phone}}",
+          "message": "{{rendered_message}}",
+          "is_simulation": true
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn_r1",
+        "source": "node_trig_remind",
+        "sourceHandle": "output",
+        "target": "node_tpl_remind",
+        "targetHandle": "input"
+      },
+      {
+        "id": "conn_r2",
+        "source": "node_tpl_remind",
+        "sourceHandle": "output",
+        "target": "node_wa_remind",
+        "targetHandle": "input"
+      }
+    ]
+  }
+]

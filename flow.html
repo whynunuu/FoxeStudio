@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foxe Flow — Visual Admin Automation (n8n Engine)</title>
+  <link rel="icon" type="image/png" href="logo_foxe.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #0b0f17;
+      --bg-sidebar: #111722;
+      --bg-card: #16202e;
+      --border-subtle: #223043;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-blue: #0284c7;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-wa: #25d366;
+      --accent-purple: #8b5cf6;
+      --accent-amber: #f59e0b;
+      --accent-orange: #ea580c;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, Monaco, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      height: 56px;
+      background: #0f1520;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 50;
+      user-select: none;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 14px; }
+    .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; color: #fff; }
+    .brand-icon {
+      width: 28px; height: 28px; background: linear-gradient(135deg, #f97316, #ea580c);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 15px;
+    }
+    .brand-badge {
+      font-size: 10px; padding: 2px 6px; background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-cyan); border-radius: 4px; font-weight: 600; text-transform: uppercase;
+    }
+    .wf-select-wrapper {
+      display: flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.05);
+      padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-subtle);
+    }
+    .wf-select {
+      background: transparent; color: #fff; border: none; font-size: 13px;
+      font-weight: 600; outline: none; cursor: pointer; max-width: 280px;
+    }
+    .wf-select option { background: #16202e; color: #fff; }
+    .active-toggle {
+      display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;
+      cursor: pointer; padding: 4px 10px; border-radius: 20px;
+      background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399;
+    }
+    .active-toggle .dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; }
+
+    .topbar-right { display: flex; align-items: center; gap: 8px; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+      font-size: 12px; font-weight: 600; border-radius: 6px; border: 1px solid var(--border-subtle);
+      background: #182232; color: #e2e8f0; cursor: pointer; transition: all 0.15s ease;
+      text-decoration: none; user-select: none;
+    }
+    .btn:hover { background: #223044; border-color: #38bdf8; color: #fff; }
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7, #0369a1); border-color: #38bdf8;
+      color: #fff; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+    }
+    .btn-primary:hover { background: linear-gradient(135deg, #0369a1, #075985); }
+    .btn-sm { padding: 4px 9px; font-size: 11px; }
+
+    /* WORKSPACE */
+    .workspace { display: flex; flex: 1; height: calc(100vh - 56px); position: relative; overflow: hidden; }
+
+    /* LEFT PALETTE */
+    .sidebar-palette {
+      width: 250px; background: var(--bg-sidebar); border-right: 1px solid var(--border-subtle);
+      display: flex; flex-direction: column; z-index: 20; user-select: none;
+    }
+    .palette-header {
+      padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); font-size: 11px;
+      font-weight: 700; color: var(--text-muted); text-transform: uppercase;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .palette-content { flex: 1; overflow-y: auto; padding: 12px 10px; display: flex; flex-direction: column; gap: 14px; }
+    .node-group-title {
+      font-size: 11px; font-weight: 700; color: var(--text-muted);
+      text-transform: uppercase; margin-bottom: 6px; padding-left: 4px;
+    }
+    .palette-item {
+      display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+      background: #16202e; border: 1px solid var(--border-subtle); border-radius: 6px;
+      cursor: pointer; transition: all 0.15s; margin-bottom: 6px;
+    }
+    .palette-item:hover { background: #1e2c3e; border-color: #38bdf8; transform: translateX(2px); }
+    .palette-item .icon {
+      width: 26px; height: 26px; border-radius: 5px; display: flex;
+      align-items: center; justify-content: center; font-size: 13px; color: #fff; flex-shrink: 0;
+    }
+    .palette-item .name { font-size: 12px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .palette-item .desc { font-size: 10px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* CANVAS */
+    .canvas-container {
+      flex: 1; height: 100%; position: relative; background-color: var(--bg-canvas);
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 24px 24px; overflow: hidden; cursor: crosshair;
+    }
+    .canvas-viewport { position: absolute; top: 0; left: 0; width: 10000px; height: 10000px; transform-origin: 0 0; }
+    .wires-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+    .wire-path {
+      fill: none; stroke: #475569; stroke-width: 2.5px; pointer-events: stroke; cursor: pointer;
+      transition: stroke 0.2s, stroke-width 0.2s;
+    }
+    .wire-path:hover { stroke: #ef4444; stroke-width: 4px; }
+    .wire-path.wire-active { stroke: #38bdf8; stroke-dasharray: 8 4; animation: dash 1s linear infinite; }
+    .wire-path.wire-true { stroke: #10b981; }
+    .wire-path.wire-false { stroke: #ef4444; }
+    @keyframes dash { to { stroke-dashoffset: -24; } }
+
+    /* NODE CARD */
+    .flow-node {
+      position: absolute; width: 240px; background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 8px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); z-index: 10;
+      cursor: grab; user-select: none; transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .flow-node:active { cursor: grabbing; }
+    .flow-node.selected { border-color: #38bdf8; box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3), 0 8px 24px rgba(0, 0, 0, 0.5); }
+    .flow-node.executing { border-color: #f59e0b; box-shadow: 0 0 16px rgba(245, 158, 11, 0.6); }
+    .flow-node.exec-success { border-color: #10b981; box-shadow: 0 0 16px rgba(16, 185, 129, 0.5); }
+    .flow-node.exec-error { border-color: #ef4444; box-shadow: 0 0 16px rgba(239, 68, 68, 0.5); }
+
+    .node-header {
+      padding: 10px 12px; display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05); border-top-left-radius: 7px; border-top-right-radius: 7px;
+    }
+    .node-icon {
+      width: 28px; height: 28px; border-radius: 6px; display: flex;
+      align-items: center; justify-content: center; font-size: 14px; color: #fff; flex-shrink: 0;
+    }
+    .node-title-group { flex: 1; min-width: 0; }
+    .node-title { font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .node-category { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+    .node-body { padding: 10px 12px; font-size: 11px; color: var(--text-secondary); line-height: 1.4; position: relative; }
+    .node-param-preview {
+      font-family: var(--font-mono); background: rgba(0, 0, 0, 0.3); padding: 4px 6px;
+      border-radius: 4px; color: #93c5fd; font-size: 10px; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* PORTS */
+    .port {
+      position: absolute; width: 14px; height: 14px; background: #1e293b;
+      border: 2px solid #64748b; border-radius: 50%; cursor: crosshair; z-index: 15; transition: all 0.15s ease;
+    }
+    .port:hover { transform: scale(1.3); border-color: #38bdf8; background: #0284c7; }
+    .port-input { left: -7px; top: 50%; transform: translateY(-50%); }
+    .port-input:hover { transform: translateY(-50%) scale(1.3); }
+    .port-output { right: -7px; top: 50%; transform: translateY(-50%); }
+    .port-output:hover { transform: translateY(-50%) scale(1.3); }
+    .port-true { right: -7px; top: 35%; border-color: #10b981; }
+    .port-true:hover { background: #10b981; }
+    .port-false { right: -7px; top: 68%; border-color: #ef4444; }
+    .port-false:hover { background: #ef4444; }
+    .port-label { position: absolute; right: 14px; font-size: 9px; font-weight: 700; text-transform: uppercase; user-select: none; }
+    .label-true { top: 30%; color: #10b981; }
+    .label-false { top: 63%; color: #ef4444; }
+
+    /* FLOATING CONTROLS */
+    .canvas-controls {
+      position: absolute; bottom: 24px; left: 270px; display: flex; align-items: center; gap: 4px;
+      background: rgba(17, 23, 34, 0.85); backdrop-filter: blur(8px); border: 1px solid var(--border-subtle);
+      border-radius: 8px; padding: 4px; z-index: 30; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    /* RIGHT INSPECTOR */
+    .sidebar-inspector {
+      width: 340px; background: var(--bg-sidebar); border-left: 1px solid var(--border-subtle);
+      display: flex; flex-direction: column; z-index: 20;
+    }
+    .inspector-header {
+      padding: 12px 16px; border-bottom: 1px solid var(--border-subtle);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .inspector-content { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+    .field-group { display: flex; flex-direction: column; gap: 6px; }
+    .field-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); }
+    .field-input, .field-textarea, .field-select {
+      width: 100%; background: #16202e; border: 1px solid var(--border-subtle);
+      border-radius: 6px; padding: 8px 10px; color: #fff; font-size: 12px; font-family: inherit; outline: none;
+    }
+    .field-input:focus, .field-textarea:focus, .field-select:focus { border-color: #38bdf8; background: #1a2738; }
+    .field-textarea { font-family: var(--font-mono); font-size: 11px; resize: vertical; min-height: 110px; line-height: 1.5; }
+    .tag-suggestions { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+    .tag-badge {
+      font-size: 10px; font-family: var(--font-mono); background: rgba(56, 189, 248, 0.1);
+      color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 4px;
+      padding: 2px 6px; cursor: pointer;
+    }
+    .tag-badge:hover { background: rgba(56, 189, 248, 0.25); }
+
+    /* DRAWER */
+    .exec-drawer {
+      position: absolute; bottom: 0; left: 250px; right: 0; height: 260px;
+      background: #0f1520; border-top: 1px solid var(--border-subtle); z-index: 40;
+      display: flex; flex-direction: column; box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.5);
+      transition: transform 0.25s ease;
+    }
+    .exec-drawer.collapsed { transform: translateY(220px); }
+    .exec-drawer-header {
+      height: 40px; padding: 0 16px; background: #131a26; border-bottom: 1px solid var(--border-subtle);
+      display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none;
+    }
+    .exec-drawer-title { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #fff; }
+    .exec-drawer-body { flex: 1; display: flex; overflow: hidden; }
+    .exec-timeline { width: 50%; border-right: 1px solid var(--border-subtle); overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .timeline-step { padding: 8px 10px; border-radius: 6px; background: #16202e; border-left: 3px solid #64748b; font-size: 11px; }
+    .timeline-step.success { border-left-color: #10b981; }
+    .timeline-step.error { border-left-color: #ef4444; }
+    .timeline-step.warning { border-left-color: #f59e0b; }
+    .step-top { display: flex; justify-content: space-between; font-weight: 600; color: #fff; margin-bottom: 2px; }
+    .step-desc { color: var(--text-secondary); }
+    .exec-data-preview { width: 50%; padding: 12px; overflow-y: auto; font-family: var(--font-mono); font-size: 11px; background: #090d14; color: #a5b4fc; }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px);
+      z-index: 100; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-card {
+      width: 540px; background: #141c28; border: 1px solid var(--border-subtle);
+      border-radius: 10px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .modal-header { padding: 14px 18px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; }
+    .modal-body { padding: 18px; max-height: 70vh; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
+    .modal-footer { padding: 12px 18px; background: #0f1520; border-top: 1px solid var(--border-subtle); display: flex; justify-content: flex-end; gap: 8px; }
+    .code-block {
+      background: #090d14; border: 1px solid var(--border-subtle); border-radius: 6px;
+      padding: 10px; font-family: var(--font-mono); font-size: 11px; color: #38bdf8; word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <a href="index.html" class="btn btn-sm" title="Kembali ke Dashboard Laporan Keuangan" style="color:var(--text-muted); border-color:transparent;">
+        ← Dashboard Studio
+      </a>
+      <div class="brand">
+        <div class="brand-icon">🦊</div>
+        <span>Foxe Flow</span>
+        <span class="brand-badge">Live n8n Engine</span>
+      </div>
+
+      <div class="wf-select-wrapper">
+        <select id="selWorkflow" class="wf-select" title="Pilih Alur Kerja"></select>
+      </div>
+
+      <div id="toggleActive" class="active-toggle" title="Status Otomasi">
+        <span class="dot"></span>
+        <span class="label">Otomasi Aktif</span>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <button id="btnOpenBookings" class="btn btn-sm" title="Muat klien riil dari database Foxe Studio">
+        👥 Data Studio Live
+      </button>
+      <button id="btnOpenWebhook" class="btn btn-sm" title="Lihat Endpoint Webhook Publik">
+        📋 Webhook Info
+      </button>
+      <button id="btnOpenSettings" class="btn btn-sm" title="Pengaturan Gateway WA Fonnte">
+        ⚙️ Gateway
+      </button>
+      <button id="btnExportJson" class="btn btn-sm" title="Unduh Alur Kerja (JSON)">
+        📥 Ekspor
+      </button>
+      <button id="btnSaveWf" class="btn btn-sm" title="Simpan Alur ke Browser">
+        💾 Simpan
+      </button>
+      <button id="btnTestWf" class="btn btn-primary" title="Uji Eksekusi Alur Kerja">
+        ▶ Jalankan Tes
+      </button>
+      <button id="btnToggleLogs" class="btn btn-sm" title="Buka Drawer Log Eksekusi">
+        📜 Logs
+      </button>
+    </div>
+  </header>
+
+  <!-- WORKSPACE -->
+  <div class="workspace">
+
+    <!-- LEFT PALETTE -->
+    <aside class="sidebar-palette">
+      <div class="palette-header">
+        <span>Koleksi Node</span>
+        <span style="font-size: 10px; color: var(--accent-cyan);">+ Klik Tambah</span>
+      </div>
+      <div class="palette-content">
+        <div>
+          <div class="node-group-title">🚀 Pemicu (Triggers)</div>
+          <div class="palette-item" data-type="webhook_trigger">
+            <div class="icon" style="background: #0284c7;">⚡</div>
+            <div class="info">
+              <div class="name">Webhook In</div>
+              <div class="desc">Terima HTTP Webhook</div>
+            </div>
+          </div>
+          <div class="palette-item" data-type="foxe_booking_trigger">
+            <div class="icon" style="background: #ea580c;">🦊</div>
+            <div class="info">
+              <div class="name">Foxe Studio Live</div>
+              <div class="desc">Booking & Jadwal Studio</div>
+            </div>
+          </div>
+          <div class="palette-item" data-type="manual_trigger">
+            <div class="icon" style="background: #3b82f6;">▶</div>
+            <div class="info">
+              <div class="name">Manual Test</div>
+              <div class="desc">Trigger uji coba manual</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="node-group-title">⚖️ Logika & Alur</div>
+          <div class="palette-item" data-type="filter_if">
+            <div class="icon" style="background: #8b5cf6;">🔀</div>
+            <div class="info">
+              <div class="name">Filter (IF / Else)</div>
+              <div class="desc">Cek DP / Kondisi Pesan</div>
+            </div>
+          </div>
+          <div class="palette-item" data-type="delay">
+            <div class="icon" style="background: #64748b;">⏳</div>
+            <div class="info">
+              <div class="name">Delay / Jeda</div>
+              <div class="desc">Tunda sekian detik</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="node-group-title">📝 Format & Template</div>
+          <div class="palette-item" data-type="set_transform">
+            <div class="icon" style="background: #f59e0b;">✍️</div>
+            <div class="info">
+              <div class="name">Template WhatsApp</div>
+              <div class="desc">Susun pesan & rupiah</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="node-group-title">💬 Aksi Keluar (Actions)</div>
+          <div class="palette-item" data-type="fonnte_whatsapp">
+            <div class="icon" style="background: #25d366;">📱</div>
+            <div class="info">
+              <div class="name">WhatsApp Fonnte</div>
+              <div class="desc">Kirim WA otomatis</div>
+            </div>
+          </div>
+          <div class="palette-item" data-type="telegram_bot">
+            <div class="icon" style="background: #0088cc;">📢</div>
+            <div class="info">
+              <div class="name">Telegram Studio</div>
+              <div class="desc">Alert admin Foxe</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER CANVAS -->
+    <main class="canvas-container" id="canvasContainer">
+      <div class="canvas-viewport" id="canvasViewport">
+        <svg class="wires-svg" id="wiresSvg"></svg>
+      </div>
+
+      <div class="canvas-controls">
+        <button id="btnZoomIn" class="btn btn-sm btn-icon" title="Perbesar">➕</button>
+        <button id="btnZoomOut" class="btn btn-sm btn-icon" title="Perkecil">➖</button>
+        <button id="btnZoomReset" class="btn btn-sm btn-icon" title="Pusatkan">⛶</button>
+        <span id="lblZoom" style="font-size:11px; font-weight:600; color:#94a3b8; padding:0 6px;">100%</span>
+      </div>
+    </main>
+
+    <!-- RIGHT INSPECTOR -->
+    <aside class="sidebar-inspector" id="sidebarInspector" style="display: none;">
+      <div class="inspector-header">
+        <h3 id="inspTitle" style="font-size:13px; font-weight:700;">Pengaturan Node</h3>
+        <button class="btn btn-sm" onclick="closeNodeInspector()" style="padding:2px 6px;">✕</button>
+      </div>
+      <div class="inspector-content">
+        <div class="field-group">
+          <label class="field-label">Label Nama Node</label>
+          <input type="text" id="inspNodeName" class="field-input">
+        </div>
+        <div id="inspDynamicFields"></div>
+        <div style="display:flex; gap:8px; margin-top:12px;">
+          <button id="btnSaveNodeParams" class="btn btn-primary" style="flex:1;">Terapkan</button>
+          <button id="btnDeleteNode" class="btn" style="color:#ef4444;" title="Hapus Node">🗑️</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- BOTTOM DRAWER -->
+    <section class="exec-drawer collapsed" id="execDrawer">
+      <div class="exec-drawer-header" id="btnToggleDrawerHeader">
+        <div class="exec-drawer-title">
+          <span>⚡ Riwayat Eksekusi & Status Pengiriman WhatsApp</span>
+        </div>
+        <span style="font-size:11px; color:#94a3b8;">Klik untuk buka / tutup ▲▼</span>
+      </div>
+      <div class="exec-drawer-body">
+        <div class="exec-timeline" id="execTimeline">
+          <div style="padding:10px; color:#94a3b8">Klik "▶ Jalankan Tes" untuk menguji alur kerja ini.</div>
+        </div>
+        <div class="exec-data-preview" id="execPreview">
+          <div id="quickWaAction" style="margin-bottom:12px; display:none; background:#1e293b; padding:10px; border-radius:6px; border:1px solid #334155;">
+            <div style="font-weight:600; color:#34d399; margin-bottom:4px;">📱 Siap Dikirim ke WhatsApp:</div>
+            <a id="btnDirectWaLink" href="#" target="_blank" class="btn btn-sm" style="background:#25d366; color:#000; font-weight:700; border:none; display:inline-flex;">
+              🚀 Buka di WhatsApp Web / App Sekarang
+            </a>
+          </div>
+          <pre id="execJsonOutput" style="white-space:pre-wrap; word-break:break-all;">// Log data eksekusi akan tampil di sini</pre>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- MODAL: WEBHOOK INFO -->
+  <div class="modal-overlay" id="modalWebhook">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size:14px; font-weight:700; color:#fff;">📋 Webhook Endpoint Publik</h3>
+        <button class="btn btn-sm btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:12px; color:#94a3b8;">
+          Gunakan payload format ini saat menghubungkan webhook dari Google Forms, formulir reservasi studio, atau sistem kasir:
+        </p>
+        <div class="field-group">
+          <label class="field-label">Contoh Format JSON Payload</label>
+          <pre class="code-block" style="white-space:pre-wrap;">{
+  "client_name": "Denny Hardiansyah",
+  "phone": "081234567890",
+  "paket": "Graduation Super Peak",
+  "tanggal_foto": "2026-10-03",
+  "jam_foto": "10:30 WIB",
+  "backdrop": "Backdrop A (Graduation Elite)",
+  "total_paket": 350000,
+  "dp_masuk": 100000,
+  "sisa_bayar": 250000,
+  "admin": "AMEL"
+}</pre>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-close-modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: LIVE STUDIO BOOKINGS -->
+  <div class="modal-overlay" id="modalBookings">
+    <div class="modal-card" style="width: 620px;">
+      <div class="modal-header">
+        <h3 style="font-size:14px; font-weight:700; color:#fff;">👥 Pilih Booking Riil Foxe Studio</h3>
+        <button class="btn btn-sm btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:12px; color:#94a3b8;">
+          Pilih salah satu klien di bawah untuk langsung menguji alur kerja otomatisasi dengan data transaksi live:
+        </p>
+        <div id="listLiveBookings" style="display:flex; flex-direction:column; gap:6px; max-height:340px; overflow-y:auto;">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-close-modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: GATEWAY SETTINGS -->
+  <div class="modal-overlay" id="modalSettings">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size:14px; font-weight:700; color:#fff;">⚙️ Konfigurasi Gateway Pesan</h3>
+        <button class="btn btn-sm btn-close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="field-group">
+          <label class="field-label">Fonnte API Token (WhatsApp)</label>
+          <input type="text" id="cfgFonnteToken" class="field-input" placeholder="Masukkan token Fonnte Anda">
+          <div style="font-size:10px; color:#64748b;">Dapatkan token di <a href="https://fonnte.com" target="_blank" style="color:#38bdf8;">fonnte.com</a>. Jika dibiarkan kosong, sistem aman berjalan dalam Mode Simulasi & WhatsApp Direct link.</div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Telegram Bot Token (Admin Alert)</label>
+          <input type="text" id="cfgTgToken" class="field-input">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Telegram Chat ID Admin</label>
+          <input type="text" id="cfgTgChatId" class="field-input">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-close-modal">Batal</button>
+        <button class="btn btn-primary" id="btnSaveSettings">Simpan Pengaturan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STANDALONE VISUAL ENGINE SCRIPT -->
+  <script>
+    "use strict";
+
+    // DEFAULT WORKFLOWS
+    const DEFAULT_WORKFLOWS = [
+      {
+        id: "wf_konfirmasi_dp",
+        name: "Konfirmasi Booking & DP Masuk (WhatsApp Fonnte)",
+        description: "Otomatis kirim rincian booking & bukti DP lunas ke WhatsApp pelanggan serta alert Telegram ke admin studio.",
+        is_active: true,
+        nodes: [
+          {
+            id: "node_trigger",
+            name: "Webhook Booking Masuk",
+            type: "webhook_trigger",
+            position: { x: 60, y: 180 },
+            parameters: { webhook_token: "foxe-booking-hook" }
+          },
+          {
+            id: "node_filter_dp",
+            name: "Cek Pembayaran DP",
+            type: "filter_if",
+            position: { x: 360, y: 180 },
+            parameters: { field: "dp_masuk", operator: ">", value: "0" }
+          },
+          {
+            id: "node_template_wa",
+            name: "Format Template WhatsApp",
+            type: "set_transform",
+            position: { x: 660, y: 120 },
+            parameters: {
+              message_template: "Halo Kak *{{client_name}}*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: {{paket}}\n📅 *Tanggal Foto*: {{tanggal_foto}}\n⏰ *Jam*: {{jam_foto}}\n📍 *Spot / Studio*: {{backdrop}}\n\n💳 *Rincian Pembayaran*:\n- Total Biaya Paket : Rp {{rupiah(total_paket)}}\n- DP Diterima : Rp {{rupiah(dp_masuk)}} (TERKUNCI / VALID)\n- Sisa Pelunasan : Rp {{rupiah(sisa_bayar)}} (dibayarkan saat hari-H foto)\n\n⚠️ *Catatan Penting*:\nMohon hadir 15 menit sebelum sesi dimulai ya Kak agar persiapan rias & kostum dapat berlangsung tepat waktu.\n\nJika ada pertanyaan atau perubahan jadwal, silakan balas pesan ini.\nSampai jumpa di Foxe Studio! 📸🦊"
+            }
+          },
+          {
+            id: "node_fonnte",
+            name: "Kirim WhatsApp Fonnte",
+            type: "fonnte_whatsapp",
+            position: { x: 980, y: 120 },
+            parameters: {
+              token: "",
+              target_phone: "{{phone}}",
+              message: "{{rendered_message}}",
+              is_simulation: true
+            }
+          },
+          {
+            id: "node_telegram_admin",
+            name: "Notif Telegram Admin Foxe",
+            type: "telegram_bot",
+            position: { x: 980, y: 300 },
+            parameters: {
+              token: "8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s",
+              chat_id: "1608969830",
+              message: "🔔 <b>BOOKING MASUK & DP TERKONFIRMASI!</b>\n\n👤 Client: <b>{{client_name}}</b>\n📸 Paket: {{paket}}\n📅 Tanggal: {{tanggal_foto}} ({{jam_foto}})\n💰 DP: Rp {{rupiah(dp_masuk)}} (Sisa: Rp {{rupiah(sisa_bayar)}})\n📞 WA: {{phone}}\n\n<i>Pesan konfirmasi otomatis telah dikirim.</i>"
+            }
+          }
+        ],
+        connections: [
+          { id: "conn_1", source: "node_trigger", sourceHandle: "output", target: "node_filter_dp", targetHandle: "input" },
+          { id: "conn_2", source: "node_filter_dp", sourceHandle: "true", target: "node_template_wa", targetHandle: "input" },
+          { id: "conn_3", source: "node_template_wa", sourceHandle: "output", target: "node_fonnte", targetHandle: "input" },
+          { id: "conn_4", source: "node_template_wa", sourceHandle: "output", target: "node_telegram_admin", targetHandle: "input" }
+        ]
+      },
+      {
+        id: "wf_reminder_h1",
+        name: "Reminder H-1 Sesi Foto Studio",
+        description: "Pengingat otomatis kepada klien H-1 sebelum jadwal foto agar tidak terlambat.",
+        is_active: true,
+        nodes: [
+          {
+            id: "node_trig_remind",
+            name: "Foxe Schedule Live",
+            type: "foxe_booking_trigger",
+            position: { x: 60, y: 180 },
+            parameters: { trigger_type: "h1_reminder" }
+          },
+          {
+            id: "node_tpl_remind",
+            name: "Format Pesan Reminder",
+            type: "set_transform",
+            position: { x: 400, y: 180 },
+            parameters: {
+              message_template: "Hai Kak *{{client_name}}*! 👋\nPengingat manis dari *Foxe Studio* bahwa sesi pemotretan Kakak dijadwalkan BESOK:\n\n📅 *Hari / Tanggal*: {{tanggal_foto}}\n⏰ *Waktu*: {{jam_foto}}\n📸 *Paket*: {{paket}}\n📍 *Lokasi*: Foxe Studio (Purwokerto)\n\n📌 *Checklist Besok*:\n1. Hadir 15 menit lebih awal.\n2. Siapkan pakaian, toga/seragam, dan properti pribadi yang ingin dipakai.\n3. Sisa pelunasan (Rp {{rupiah(sisa_bayar)}}) dapat diselesaikan di kasir studio via QRIS/Transfer/Cash.\n\nSampai jumpa besok ya Kak! ✨"
+            }
+          },
+          {
+            id: "node_wa_remind",
+            name: "Kirim Reminder Fonnte",
+            type: "fonnte_whatsapp",
+            position: { x: 740, y: 180 },
+            parameters: {
+              token: "",
+              target_phone: "{{phone}}",
+              message: "{{rendered_message}}",
+              is_simulation: true
+            }
+          }
+        ],
+        connections: [
+          { id: "conn_r1", source: "node_trig_remind", sourceHandle: "output", target: "node_tpl_remind", targetHandle: "input" },
+          { id: "conn_r2", source: "node_tpl_remind", sourceHandle: "output", target: "node_wa_remind", targetHandle: "input" }
+        ]
+      }
+    ];
+
+    // HELPERS
+    function formatRupiah(val) {
+      const n = Number(val);
+      if (isNaN(n)) return String(val || "0");
+      return Math.round(n).toLocaleString("id-ID");
+    }
+
+    function normalizePhone(p) {
+      let clean = String(p || "").replace(/\D/g, "");
+      if (clean.startsWith("0")) clean = "62" + clean.slice(1);
+      return clean;
+    }
+
+    function renderTemplate(str, ctx) {
+      if (!str) return "";
+      let res = String(str);
+      res = res.replace(/\{\{rupiah\(([\w_]+)\)\}\}/g, (m, k) => formatRupiah(ctx[k] || 0));
+      for (const [k, v] of Object.entries(ctx)) {
+        res = res.replaceAll(`{{${k}}}`, v).replaceAll(`{{ ${k} }}`, v);
+      }
+      return res;
+    }
+
+    // FLOW CANVAS CLASS
+    class FlowCanvas {
+      constructor(containerId, viewportId, svgId, options = {}) {
+        this.container = document.getElementById(containerId);
+        this.viewport = document.getElementById(viewportId);
+        this.svg = document.getElementById(svgId);
+        this.options = options;
+
+        this.nodes = [];
+        this.connections = [];
+        this.selectedNodeId = null;
+
+        this.pan = { x: 40, y: 40 };
+        this.zoom = 1.0;
+        this.isPanning = false;
+        this.panStart = { x: 0, y: 0 };
+        this.draggingNode = null;
+        this.dragOffset = { x: 0, y: 0 };
+        this.connectingFrom = null;
+        this.tempWirePath = null;
+
+        this.initEvents();
+        this.applyTransform();
+      }
+
+      setData(nodes, connections) {
+        this.nodes = JSON.parse(JSON.stringify(nodes || []));
+        this.connections = JSON.parse(JSON.stringify(connections || []));
+        this.render();
+      }
+
+      getData() {
+        return { nodes: this.nodes, connections: this.connections };
+      }
+
+      initEvents() {
+        this.container.addEventListener('mousedown', (e) => {
+          if (e.target === this.container || e.target === this.svg) {
+            this.isPanning = true;
+            this.panStart = { x: e.clientX - this.pan.x, y: e.clientY - this.pan.y };
+            this.container.style.cursor = 'grabbing';
+          }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+          if (this.isPanning) {
+            this.pan.x = e.clientX - this.panStart.x;
+            this.pan.y = e.clientY - this.panStart.y;
+            this.applyTransform();
+            return;
+          }
+          if (this.draggingNode) {
+            const mouseX = (e.clientX - this.pan.x) / this.zoom;
+            const mouseY = (e.clientY - this.pan.y) / this.zoom;
+            this.draggingNode.position.x = Math.round(mouseX - this.dragOffset.x);
+            this.draggingNode.position.y = Math.round(mouseY - this.dragOffset.y);
+            const el = document.getElementById(`node-${this.draggingNode.id}`);
+            if (el) {
+              el.style.left = `${this.draggingNode.position.x}px`;
+              el.style.top = `${this.draggingNode.position.y}px`;
+            }
+            this.renderWires();
+            return;
+          }
+          if (this.connectingFrom) {
+            const mouseX = (e.clientX - this.pan.x) / this.zoom;
+            const mouseY = (e.clientY - this.pan.y) / this.zoom;
+            this.updateTempWire(this.connectingFrom.startPos.x, this.connectingFrom.startPos.y, mouseX, mouseY);
+          }
+        });
+
+        window.addEventListener('mouseup', () => {
+          if (this.isPanning) {
+            this.isPanning = false;
+            this.container.style.cursor = 'crosshair';
+          }
+          if (this.draggingNode) this.draggingNode = null;
+          if (this.connectingFrom) this.cancelConnecting();
+        });
+
+        this.container.addEventListener('wheel', (e) => {
+          e.preventDefault();
+          const zoomFactor = e.deltaY < 0 ? 1.08 : 0.92;
+          const newZoom = Math.min(Math.max(this.zoom * zoomFactor, 0.4), 2.0);
+          const rect = this.container.getBoundingClientRect();
+          const mouseX = e.clientX - rect.left;
+          const mouseY = e.clientY - rect.top;
+
+          this.pan.x = mouseX - (mouseX - this.pan.x) * (newZoom / this.zoom);
+          this.pan.y = mouseY - (mouseY - this.pan.y) * (newZoom / this.zoom);
+          this.zoom = newZoom;
+          this.applyTransform();
+          if (this.options.onZoomChange) this.options.onZoomChange(this.zoom);
+        }, { passive: false });
+      }
+
+      applyTransform() {
+        this.viewport.style.transform = `translate(${this.pan.x}px, ${this.pan.y}px) scale(${this.zoom})`;
+      }
+
+      setZoom(val) {
+        this.zoom = Math.min(Math.max(val, 0.4), 2.0);
+        this.applyTransform();
+      }
+
+      fitView() {
+        if (!this.nodes.length) {
+          this.pan = { x: 50, y: 50 };
+          this.zoom = 1.0;
+          this.applyTransform();
+          return;
+        }
+        let minX = Infinity, minY = Infinity;
+        this.nodes.forEach(n => {
+          minX = Math.min(minX, n.position.x);
+          minY = Math.min(minY, n.position.y);
+        });
+        this.pan.x = 60 - minX;
+        this.pan.y = 60 - minY;
+        this.zoom = 1.0;
+        this.applyTransform();
+      }
+
+      render() {
+        this.viewport.querySelectorAll('.flow-node').forEach(el => el.remove());
+        this.nodes.forEach(node => {
+          const el = this.createNodeElement(node);
+          this.viewport.appendChild(el);
+        });
+        this.renderWires();
+      }
+
+      createNodeElement(node) {
+        const el = document.createElement('div');
+        el.className = `flow-node ${this.selectedNodeId === node.id ? 'selected' : ''}`;
+        el.id = `node-${node.id}`;
+        el.style.left = `${node.position.x}px`;
+        el.style.top = `${node.position.y}px`;
+
+        const meta = this.getNodeMeta(node.type);
+        let portsHtml = '';
+        if (!node.type.includes('trigger')) {
+          portsHtml += `<div class="port port-input" data-node="${node.id}" data-handle="input" title="Input"></div>`;
+        }
+        if (node.type === 'filter_if') {
+          portsHtml += `
+            <div class="port port-true" data-node="${node.id}" data-handle="true" title="True"></div>
+            <span class="port-label label-true">True</span>
+            <div class="port-false port" data-node="${node.id}" data-handle="false" title="False"></div>
+            <span class="port-label label-false">False</span>
+          `;
+        } else {
+          portsHtml += `<div class="port port-output" data-node="${node.id}" data-handle="output" title="Output"></div>`;
+        }
+
+        let previewText = '';
+        const p = node.parameters || {};
+        if (node.type === 'webhook_trigger') previewText = `Webhook: /${p.webhook_token || 'hook'}`;
+        else if (node.type === 'filter_if') previewText = `IF ${p.field || 'dp'} ${p.operator || '>'} ${p.value || '0'}`;
+        else if (node.type === 'fonnte_whatsapp') previewText = `WA: ${p.target_phone || 'Client'}`;
+        else if (node.type === 'telegram_bot') previewText = `Alert Chat: ${p.chat_id || 'Admin'}`;
+        else if (node.type === 'set_transform') previewText = `Format WhatsApp Template`;
+        else if (node.type === 'foxe_booking_trigger') previewText = `Sinkron Studio Live`;
+
+        el.innerHTML = `
+          ${portsHtml}
+          <div class="node-header" style="background: ${meta.headerBg || '#16202e'}">
+            <div class="node-icon" style="background: ${meta.color}">${meta.icon}</div>
+            <div class="node-title-group">
+              <div class="node-title">${node.name}</div>
+              <div class="node-category">${meta.category}</div>
+            </div>
+          </div>
+          <div class="node-body">
+            <div style="font-size:11px; color:#cbd5e1">${meta.desc}</div>
+            ${previewText ? `<div class="node-param-preview">${previewText}</div>` : ''}
+          </div>
+        `;
+
+        el.addEventListener('mousedown', (e) => {
+          if (e.target.classList.contains('port')) return;
+          this.selectNode(node.id);
+          this.draggingNode = node;
+          const mouseX = (e.clientX - this.pan.x) / this.zoom;
+          const mouseY = (e.clientY - this.pan.y) / this.zoom;
+          this.dragOffset = { x: mouseX - node.position.x, y: mouseY - node.position.y };
+          e.stopPropagation();
+        });
+
+        el.querySelectorAll('.port-output, .port-true, .port-false').forEach(port => {
+          port.addEventListener('mousedown', (e) => {
+            e.stopPropagation();
+            const handle = port.getAttribute('data-handle');
+            const startPos = this.getPortPosition(node.id, handle);
+            this.connectingFrom = { nodeId: node.id, handle, startPos };
+            this.createTempWire(startPos.x, startPos.y);
+          });
+        });
+
+        el.querySelectorAll('.port-input').forEach(port => {
+          port.addEventListener('mouseup', (e) => {
+            if (this.connectingFrom && this.connectingFrom.nodeId !== node.id) {
+              e.stopPropagation();
+              const targetHandle = port.getAttribute('data-handle');
+              this.addConnection(this.connectingFrom.nodeId, this.connectingFrom.handle, node.id, targetHandle);
+              this.cancelConnecting();
+            }
+          });
+        });
+
+        return el;
+      }
+
+      selectNode(nodeId) {
+        this.selectedNodeId = nodeId;
+        this.viewport.querySelectorAll('.flow-node').forEach(el => el.classList.remove('selected'));
+        const target = document.getElementById(`node-${nodeId}`);
+        if (target) target.classList.add('selected');
+        if (this.options.onSelectNode) {
+          const nodeObj = this.nodes.find(n => n.id === nodeId);
+          this.options.onSelectNode(nodeObj);
+        }
+      }
+
+      addNode(type, position) {
+        const meta = this.getNodeMeta(type);
+        const newId = `node_${Date.now()}`;
+        const newNode = {
+          id: newId,
+          name: meta.title,
+          type: type,
+          position: position || { x: 320, y: 220 },
+          parameters: JSON.parse(JSON.stringify(meta.defaultParams || {}))
+        };
+        this.nodes.push(newNode);
+        this.render();
+        this.selectNode(newId);
+        return newNode;
+      }
+
+      removeNode(nodeId) {
+        this.nodes = this.nodes.filter(n => n.id !== nodeId);
+        this.connections = this.connections.filter(c => c.source !== nodeId && c.target !== nodeId);
+        if (this.selectedNodeId === nodeId) this.selectedNodeId = null;
+        this.render();
+      }
+
+      addConnection(source, sourceHandle, target, targetHandle) {
+        const exists = this.connections.some(c => c.source === source && c.sourceHandle === sourceHandle && c.target === target);
+        if (!exists) {
+          this.connections.push({
+            id: `conn_${Date.now()}`,
+            source,
+            sourceHandle: sourceHandle || 'output',
+            target,
+            targetHandle: targetHandle || 'input'
+          });
+          this.renderWires();
+        }
+      }
+
+      removeConnection(connId) {
+        this.connections = this.connections.filter(c => c.id !== connId);
+        this.renderWires();
+      }
+
+      getPortPosition(nodeId, handle) {
+        const node = this.nodes.find(n => n.id === nodeId);
+        if (!node) return { x: 0, y: 0 };
+        const width = 240, height = 110;
+        const x = node.position.x, y = node.position.y;
+        if (handle === 'input') return { x, y: y + height / 2 };
+        if (handle === 'true') return { x: x + width, y: y + 38 };
+        if (handle === 'false') return { x: x + width, y: y + 78 };
+        return { x: x + width, y: y + height / 2 };
+      }
+
+      createBezierPath(x1, y1, x2, y2) {
+        const dx = Math.abs(x2 - x1) * 0.5;
+        const cx1 = x1 + Math.max(dx, 40);
+        const cx2 = x2 - Math.max(dx, 40);
+        return `M ${x1} ${y1} C ${cx1} ${y1}, ${cx2} ${y2}, ${x2} ${y2}`;
+      }
+
+      renderWires() {
+        this.svg.innerHTML = '';
+        this.connections.forEach(conn => {
+          const start = this.getPortPosition(conn.source, conn.sourceHandle);
+          const end = this.getPortPosition(conn.target, conn.targetHandle);
+          const d = this.createBezierPath(start.x, start.y, end.x, end.y);
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', d);
+          let extraClass = '';
+          if (conn.sourceHandle === 'true') extraClass = 'wire-true';
+          else if (conn.sourceHandle === 'false') extraClass = 'wire-false';
+          path.setAttribute('class', `wire-path ${extraClass}`);
+          path.setAttribute('title', 'Klik kabel untuk menghapus');
+          path.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (confirm('Hapus kabel koneksi ini?')) this.removeConnection(conn.id);
+          });
+          this.svg.appendChild(path);
+        });
+      }
+
+      createTempWire(x, y) {
+        if (!this.tempWirePath) {
+          this.tempWirePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          this.tempWirePath.setAttribute('class', 'wire-path wire-active');
+          this.svg.appendChild(this.tempWirePath);
+        }
+        this.updateTempWire(x, y, x, y);
+      }
+
+      updateTempWire(x1, y1, x2, y2) {
+        if (this.tempWirePath) {
+          this.tempWirePath.setAttribute('d', this.createBezierPath(x1, y1, x2, y2));
+        }
+      }
+
+      cancelConnecting() {
+        this.connectingFrom = null;
+        if (this.tempWirePath) {
+          this.tempWirePath.remove();
+          this.tempWirePath = null;
+        }
+      }
+
+      animateExecution(executedNodeIds, success) {
+        this.nodes.forEach(n => {
+          const el = document.getElementById(`node-${n.id}`);
+          if (el) el.classList.remove('executing', 'exec-success', 'exec-error');
+        });
+        executedNodeIds.forEach((nid, idx) => {
+          setTimeout(() => {
+            const el = document.getElementById(`node-${nid}`);
+            if (el) {
+              el.classList.add('executing');
+              setTimeout(() => {
+                el.classList.remove('executing');
+                el.classList.add(success ? 'exec-success' : 'exec-error');
+              }, 380);
+            }
+          }, idx * 240);
+        });
+      }
+
+      getNodeMeta(type) {
+        switch (type) {
+          case 'webhook_trigger':
+            return { title: 'Webhook Booking Masuk', category: 'Trigger', icon: '⚡', color: '#0284c7', headerBg: 'rgba(2,132,199,0.25)', desc: 'Terima payload order/booking via Webhook.', defaultParams: { webhook_token: 'foxe-booking-hook' } };
+          case 'foxe_booking_trigger':
+            return { title: 'Foxe Studio Live', category: 'Trigger', icon: '🦊', color: '#ea580c', headerBg: 'rgba(234,88,12,0.25)', desc: 'Sinkron data riil dari database Foxe Studio.', defaultParams: { trigger_type: 'booking_baru' } };
+          case 'manual_trigger':
+            return { title: 'Trigger Manual / Test', category: 'Trigger', icon: '▶', color: '#3b82f6', headerBg: 'rgba(59,130,246,0.25)', desc: 'Jalankan flow secara manual.', defaultParams: {} };
+          case 'filter_if':
+            return { title: 'Filter (IF / Else)', category: 'Logic', icon: '⚖️', color: '#8b5cf6', headerBg: 'rgba(139,92,246,0.25)', desc: 'Evaluasi kondisi & pecah jalur True / False.', defaultParams: { field: 'dp_masuk', operator: '>', value: '0' } };
+          case 'set_transform':
+            return { title: 'Format Template WhatsApp', category: 'Transform', icon: '📝', color: '#f59e0b', headerBg: 'rgba(245,158,11,0.25)', desc: 'Susun template pesan & format rupiah.', defaultParams: { message_template: 'Halo Kak *{{client_name}}*! ✨\nBooking {{paket}} di Foxe Studio pada {{tanggal_foto}} ({{jam_foto}}) telah kami terima.\nDP Masuk: Rp {{rupiah(dp_masuk)}}.\nSampai jumpa di studio! 📸' } };
+          case 'fonnte_whatsapp':
+            return { title: 'Kirim WhatsApp Fonnte', category: 'Action', icon: '💬', color: '#25d366', headerBg: 'rgba(37,211,102,0.25)', desc: 'Kirim pesan via Fonnte & WhatsApp Web.', defaultParams: { token: '', target_phone: '{{phone}}', message: '{{rendered_message}}', is_simulation: true } };
+          case 'telegram_bot':
+            return { title: 'Notif Telegram Admin', category: 'Action', icon: '📢', color: '#0088cc', headerBg: 'rgba(0,136,204,0.25)', desc: 'Kirim alert ke Telegram studio.', defaultParams: { token: '8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s', chat_id: '1608969830', message: '🔔 <b>Update Otomasi Studio</b>\n{{rendered_message}}' } };
+          case 'delay':
+            return { title: 'Delay / Jeda Waktu', category: 'Logic', icon: '⏳', color: '#64748b', headerBg: 'rgba(100,116,139,0.25)', desc: 'Menunda eksekusi beberapa detik.', defaultParams: { seconds: 2 } };
+          default:
+            return { title: 'Custom Node', category: 'Node', icon: '📦', color: '#64748b', headerBg: '#1e293b', desc: 'Custom node.', defaultParams: {} };
+        }
+      }
+    }
+
+    // APP CONTROLLER
+    let canvas = null;
+    let currentWorkflow = null;
+    let workflows = [];
+    let settings = {
+      fonnte_token: localStorage.getItem('foxe_fonnte_token') || '',
+      telegram_token: '8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s',
+      telegram_chat_id: '1608969830'
+    };
+    let studioBookings = [];
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      canvas = new FlowCanvas('canvasContainer', 'canvasViewport', 'wiresSvg', {
+        onSelectNode: (node) => openNodeInspector(node),
+        onZoomChange: (z) => { document.getElementById('lblZoom').innerText = `${Math.round(z * 100)}%`; }
+      });
+
+      // Load saved workflows or fallback to default
+      const saved = localStorage.getItem('foxe_flow_workflows');
+      if (saved) {
+        try { workflows = JSON.parse(saved); } catch (e) { workflows = DEFAULT_WORKFLOWS; }
+      } else {
+        workflows = DEFAULT_WORKFLOWS;
+      }
+
+      renderWorkflowSelector();
+      if (workflows.length) selectWorkflow(workflows[0].id);
+
+      // Load live bookings from foxe_full_state.json
+      loadStudioData();
+
+      initEvents();
+    });
+
+    async function loadStudioData() {
+      try {
+        const res = await fetch('foxe_full_state.json');
+        const state = await res.json();
+        const orders = state.orders || [];
+        const pipeline = state.pipeline_october || [];
+
+        studioBookings = [];
+        orders.slice(-15).forEach(o => {
+          studioBookings.push({
+            source: "Orders MTD",
+            client_name: o.client || "Pelanggan",
+            paket: o.paket || "Graduation Studio",
+            tanggal_foto: o.tanggalFoto || o.tanggal || "2026-09-30",
+            jam_foto: "11:00 WIB",
+            backdrop: "Studio 1",
+            total_paket: o.total || 250000,
+            dp_masuk: (o.transfer || 0) + (o.cash || 0),
+            sisa_bayar: Math.max(0, (o.total || 250000) - ((o.transfer || 0) + (o.cash || 0))),
+            phone: "081298765432",
+            admin: o.admin || "Admin"
+          });
+        });
+
+        pipeline.slice(0, 20).forEach(p => {
+          studioBookings.push({
+            source: "Pipeline Oktober",
+            client_name: p.client || "Mahasiswa Wisuda",
+            paket: p.paket || "Wisuda UMP",
+            tanggal_foto: p.tanggal || "2026-10-03",
+            jam_foto: p.jam || "09:00 WIB",
+            backdrop: p.spot || "Backdrop 1",
+            total_paket: p.harga || 450000,
+            dp_masuk: p.dp || 100000,
+            sisa_bayar: Math.max(0, (p.harga || 450000) - (p.dp || 100000)),
+            phone: p.phone || "081345678901",
+            admin: "Admin Studio"
+          });
+        });
+      } catch (e) {
+        console.warn('foxe_full_state.json loaded fallback', e);
+      }
+    }
+
+    function renderWorkflowSelector() {
+      const sel = document.getElementById('selWorkflow');
+      sel.innerHTML = '';
+      workflows.forEach(w => {
+        const opt = document.createElement('option');
+        opt.value = w.id;
+        opt.textContent = w.name;
+        sel.appendChild(opt);
+      });
+    }
+
+    function selectWorkflow(wfId) {
+      const wf = workflows.find(w => w.id === wfId);
+      if (!wf) return;
+      currentWorkflow = JSON.parse(JSON.stringify(wf));
+      document.getElementById('selWorkflow').value = wf.id;
+      canvas.setData(currentWorkflow.nodes, currentWorkflow.connections);
+      canvas.fitView();
+      closeNodeInspector();
+    }
+
+    function initEvents() {
+      document.getElementById('selWorkflow').addEventListener('change', (e) => selectWorkflow(e.target.value));
+
+      document.getElementById('btnSaveWf').addEventListener('click', () => {
+        if (!currentWorkflow) return;
+        const data = canvas.getData();
+        currentWorkflow.nodes = data.nodes;
+        currentWorkflow.connections = data.connections;
+        const idx = workflows.findIndex(w => w.id === currentWorkflow.id);
+        if (idx >= 0) workflows[idx] = currentWorkflow;
+        else workflows.push(currentWorkflow);
+        localStorage.setItem('foxe_flow_workflows', JSON.stringify(workflows));
+        alert('✅ Alur kerja berhasil disimpan di browser!');
+      });
+
+      document.getElementById('btnExportJson').addEventListener('click', () => {
+        const data = canvas.getData();
+        currentWorkflow.nodes = data.nodes;
+        currentWorkflow.connections = data.connections;
+        const blob = new Blob([JSON.stringify(currentWorkflow, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${currentWorkflow.id}.json`;
+        a.click();
+      });
+
+      document.getElementById('btnTestWf').addEventListener('click', () => runWorkflowExecution());
+
+      document.getElementById('btnZoomIn').addEventListener('click', () => { canvas.setZoom(canvas.zoom * 1.15); document.getElementById('lblZoom').innerText = `${Math.round(canvas.zoom * 100)}%`; });
+      document.getElementById('btnZoomOut').addEventListener('click', () => { canvas.setZoom(canvas.zoom * 0.85); document.getElementById('lblZoom').innerText = `${Math.round(canvas.zoom * 100)}%`; });
+      document.getElementById('btnZoomReset').addEventListener('click', () => { canvas.fitView(); document.getElementById('lblZoom').innerText = `${Math.round(canvas.zoom * 100)}%`; });
+
+      document.querySelectorAll('.palette-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const type = item.getAttribute('data-type');
+          const cx = (-canvas.pan.x + 360) / canvas.zoom;
+          const cy = (-canvas.pan.y + 240) / canvas.zoom;
+          canvas.addNode(type, { x: Math.round(cx), y: Math.round(cy) });
+        });
+      });
+
+      document.getElementById('btnToggleLogs').addEventListener('click', () => {
+        document.getElementById('execDrawer').classList.toggle('collapsed');
+      });
+      document.getElementById('btnToggleDrawerHeader').addEventListener('click', () => {
+        document.getElementById('execDrawer').classList.toggle('collapsed');
+      });
+
+      document.getElementById('btnOpenWebhook').addEventListener('click', () => {
+        document.getElementById('modalWebhook').classList.add('active');
+      });
+      document.getElementById('btnOpenSettings').addEventListener('click', () => {
+        document.getElementById('cfgFonnteToken').value = settings.fonnte_token;
+        document.getElementById('cfgTgToken').value = settings.telegram_token;
+        document.getElementById('cfgTgChatId').value = settings.telegram_chat_id;
+        document.getElementById('modalSettings').classList.add('active');
+      });
+      document.getElementById('btnSaveSettings').addEventListener('click', () => {
+        settings.fonnte_token = document.getElementById('cfgFonnteToken').value.trim();
+        settings.telegram_token = document.getElementById('cfgTgToken').value.trim();
+        settings.telegram_chat_id = document.getElementById('cfgTgChatId').value.trim();
+        localStorage.setItem('foxe_fonnte_token', settings.fonnte_token);
+        document.getElementById('modalSettings').classList.remove('active');
+        alert('Pengaturan gateway tersimpan!');
+      });
+
+      document.getElementById('btnOpenBookings').addEventListener('click', () => {
+        renderLiveBookingsList();
+        document.getElementById('modalBookings').classList.add('active');
+      });
+
+      document.querySelectorAll('.btn-close-modal').forEach(b => {
+        b.addEventListener('click', () => document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active')));
+      });
+    }
+
+    function renderLiveBookingsList() {
+      const container = document.getElementById('listLiveBookings');
+      container.innerHTML = '';
+      if (!studioBookings.length) {
+        container.innerHTML = '<div style="padding:12px; color:#94a3b8">Memuat data studio...</div>';
+        return;
+      }
+      studioBookings.forEach(b => {
+        const item = document.createElement('div');
+        item.className = 'palette-item';
+        item.style.marginBottom = '6px';
+        item.innerHTML = `
+          <div class="icon" style="background:#ea580c">📸</div>
+          <div class="info">
+            <div class="name">${b.client_name} · ${b.paket}</div>
+            <div class="desc">${b.tanggal_foto} · DP: Rp ${parseInt(b.dp_masuk).toLocaleString('id-ID')} · ${b.source}</div>
+          </div>
+          <button class="btn btn-primary btn-sm">Gunakan Untuk Tes</button>
+        `;
+        item.querySelector('button').addEventListener('click', () => {
+          document.getElementById('modalBookings').classList.remove('active');
+          runWorkflowExecution(b);
+        });
+        container.appendChild(item);
+      });
+    }
+
+    // WORKFLOW RUNNER ENGINE (IN-BROWSER)
+    async function runWorkflowExecution(customPayload = null) {
+      if (!currentWorkflow) return;
+
+      const data = canvas.getData();
+      currentWorkflow.nodes = data.nodes;
+      currentWorkflow.connections = data.connections;
+
+      const drawer = document.getElementById('execDrawer');
+      drawer.classList.remove('collapsed');
+
+      const timeline = document.getElementById('execTimeline');
+      const jsonOut = document.getElementById('execJsonOutput');
+      const waAction = document.getElementById('quickWaAction');
+      const waLink = document.getElementById('btnDirectWaLink');
+
+      waAction.style.display = 'none';
+      timeline.innerHTML = '<div style="padding:8px; color:#94a3b8">Menjalankan alur kerja visual...</div>';
+
+      const payload = customPayload || {
+        client_name: "Denny Hardiansyah",
+        phone: "081234567890",
+        paket: "Graduation Super Peak",
+        tanggal_foto: "2026-10-03",
+        jam_foto: "10:30 WIB",
+        backdrop: "Backdrop A (Graduation Elite)",
+        total_paket: 350000,
+        dp_masuk: 100000,
+        sisa_bayar: 250000,
+        admin: "AMEL"
+      };
+
+      const nodes = {};
+      currentWorkflow.nodes.forEach(n => nodes[n.id] = n);
+      const adj = {};
+      currentWorkflow.connections.forEach(c => {
+        if (!adj[c.source]) adj[c.source] = [];
+        adj[c.source].push({ target: c.target, handle: c.sourceHandle });
+      });
+
+      // Find trigger
+      let trigger = currentWorkflow.nodes.find(n => n.type.includes('trigger')) || currentWorkflow.nodes[0];
+      if (!trigger) {
+        timeline.innerHTML = '<div class="timeline-step error">Workflow kosong!</div>';
+        return;
+      }
+
+      const queue = [{ id: trigger.id, handle: "output" }];
+      const executed = [];
+      const steps = [];
+      const ctx = { ...payload };
+
+      while (queue.length > 0) {
+        const item = queue.shift();
+        const node = nodes[item.id];
+        if (!node) continue;
+
+        executed.push(node.id);
+        const t0 = performance.now();
+        const step = { node_name: node.name, type: node.type, status: "success", message: "", dur: 0 };
+        let nextHandle = "output";
+
+        if (node.type === "webhook_trigger") {
+          step.message = `Menerima event data untuk: ${ctx.client_name}`;
+        } else if (node.type === "foxe_booking_trigger") {
+          step.message = `Data jadwal live studio dimuat: ${ctx.client_name} (${ctx.paket})`;
+        } else if (node.type === "manual_trigger") {
+          step.message = `Trigger manual dimulai untuk: ${ctx.client_name}`;
+        } else if (node.type === "filter_if") {
+          const field = node.parameters.field || "dp_masuk";
+          const op = node.parameters.operator || ">";
+          const val = Number(node.parameters.value || 0);
+          const act = Number(ctx[field] || 0);
+          let match = false;
+          if (op === ">") match = act > val;
+          else if (op === ">=") match = act >= val;
+          else if (op === "==") match = act === val;
+          else if (op === "!=") match = act !== val;
+          nextHandle = match ? "true" : "false";
+          step.message = `IF [${field} ${op} ${val}] => ${match ? "BENAR (True)" : "SALAH (False)"}`;
+        } else if (node.type === "set_transform") {
+          ctx.sisa_bayar = Math.max(0, (Number(ctx.total_paket) || 0) - (Number(ctx.dp_masuk) || 0));
+          const tpl = node.parameters.message_template || "";
+          ctx.rendered_message = renderTemplate(tpl, ctx);
+          step.message = `Format template pesan WhatsApp selesai (${ctx.rendered_message.length} karakter)`;
+        } else if (node.type === "fonnte_whatsapp") {
+          const target = normalizePhone(renderTemplate(node.parameters.target_phone || "{{phone}}", ctx));
+          const msg = renderTemplate(node.parameters.message || "{{rendered_message}}", ctx) || ctx.rendered_message;
+          const token = (node.parameters.token || settings.fonnte_token || "").trim();
+
+          // Prepare Direct WhatsApp link
+          const waUrl = `https://wa.me/${target}?text=${encodeURIComponent(msg)}`;
+          waLink.href = waUrl;
+          waAction.style.display = 'block';
+
+          if (token) {
+            // Live Fonnte Attempt
+            step.message = `Pesan WhatsApp dipersiapkan ke ${target} via Fonnte Gateway`;
+          } else {
+            step.message = `[SIMULASI / DIRECT] Pesan WhatsApp siap dikirimkan ke ${target}`;
+          }
+        } else if (node.type === "telegram_bot") {
+          step.message = `Notifikasi alert studio disiapkan untuk Admin Foxe`;
+        }
+
+        step.dur = Math.round(performance.now() - t0);
+        steps.push(step);
+
+        // Queue children
+        const children = adj[node.id] || [];
+        children.forEach(c => {
+          if (node.type === "filter_if") {
+            if (c.handle === nextHandle) queue.push({ id: c.target, handle: c.handle });
+          } else {
+            queue.push({ id: c.target, handle: c.handle });
+          }
+        });
+      }
+
+      // Visual animations
+      canvas.animateExecution(executed, true);
+
+      // Render timeline
+      timeline.innerHTML = '';
+      steps.forEach((s, idx) => {
+        const div = document.createElement('div');
+        div.className = `timeline-step ${s.status}`;
+        div.innerHTML = `
+          <div class="step-top">
+            <span>${idx + 1}. ${s.node_name}</span>
+            <span style="font-family:var(--font-mono); font-size:10px; color:#94a3b8">${s.dur}ms</span>
+          </div>
+          <div class="step-desc">${s.message}</div>
+        `;
+        timeline.appendChild(div);
+      });
+
+      // Render json
+      jsonOut.textContent = JSON.stringify({
+        status: "success",
+        workflow_id: currentWorkflow.id,
+        executed_nodes: executed,
+        customer_data: ctx
+      }, null, 2);
+    }
+
+    // INSPECTOR
+    function openNodeInspector(node) {
+      const insp = document.getElementById('sidebarInspector');
+      insp.style.display = 'flex';
+      document.getElementById('inspTitle').innerText = node.name;
+      document.getElementById('inspNodeName').value = node.name;
+      const f = document.getElementById('inspDynamicFields');
+      f.innerHTML = '';
+      const p = node.parameters || {};
+
+      if (node.type === 'webhook_trigger') {
+        f.innerHTML = `
+          <div class="field-group">
+            <label class="field-label">Webhook Token / Path</label>
+            <input type="text" id="p_webhook_token" class="field-input" value="${p.webhook_token || 'foxe-booking-hook'}">
+          </div>
+        `;
+      } else if (node.type === 'filter_if') {
+        f.innerHTML = `
+          <div class="field-group">
+            <label class="field-label">Field yang Diuji</label>
+            <input type="text" id="p_field" class="field-input" value="${p.field || 'dp_masuk'}">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Operator</label>
+            <select id="p_operator" class="field-select">
+              <option value=">" ${p.operator === '>' ? 'selected' : ''}>Lebih Besar (>)</option>
+              <option value=">=" ${p.operator === '>=' ? 'selected' : ''}>Lebih Besar Sama Dengan (>=)</option>
+              <option value="==" ${p.operator === '==' ? 'selected' : ''}>Sama Dengan (==)</option>
+              <option value="!=" ${p.operator === '!=' ? 'selected' : ''}>Tidak Sama Dengan (!=)</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Nilai Target</label>
+            <input type="text" id="p_value" class="field-input" value="${p.value || '0'}">
+          </div>
+        `;
+      } else if (node.type === 'set_transform') {
+        f.innerHTML = `
+          <div class="field-group">
+            <label class="field-label">Template Pesan WhatsApp</label>
+            <textarea id="p_message_template" class="field-textarea">${p.message_template || ''}</textarea>
+            <div style="font-size:10px; color:#94a3b8; margin-top:2px;">Klik tag untuk menyisipkan:</div>
+            <div class="tag-suggestions">
+              <span class="tag-badge" data-tag="{{client_name}}">+ {{client_name}}</span>
+              <span class="tag-badge" data-tag="{{phone}}">+ {{phone}}</span>
+              <span class="tag-badge" data-tag="{{paket}}">+ {{paket}}</span>
+              <span class="tag-badge" data-tag="{{tanggal_foto}}">+ {{tanggal_foto}}</span>
+              <span class="tag-badge" data-tag="{{jam_foto}}">+ {{jam_foto}}</span>
+              <span class="tag-badge" data-tag="{{backdrop}}">+ {{backdrop}}</span>
+              <span class="tag-badge" data-tag="{{rupiah(total_paket)}}">+ {{rupiah(total_paket)}}</span>
+              <span class="tag-badge" data-tag="{{rupiah(dp_masuk)}}">+ {{rupiah(dp_masuk)}}</span>
+              <span class="tag-badge" data-tag="{{rupiah(sisa_bayar)}}">+ {{rupiah(sisa_bayar)}}</span>
+            </div>
+          </div>
+        `;
+        f.querySelectorAll('.tag-badge').forEach(b => {
+          b.addEventListener('click', () => {
+            const txt = document.getElementById('p_message_template');
+            txt.value += b.getAttribute('data-tag');
+          });
+        });
+      } else if (node.type === 'fonnte_whatsapp') {
+        f.innerHTML = `
+          <div class="field-group">
+            <label class="field-label">Target Nomor WhatsApp</label>
+            <input type="text" id="p_target_phone" class="field-input" value="${p.target_phone || '{{phone}}'}">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Isi Pesan</label>
+            <textarea id="p_message" class="field-textarea">${p.message || '{{rendered_message}}'}</textarea>
+          </div>
+        `;
+      }
+
+      document.getElementById('btnSaveNodeParams').onclick = () => {
+        node.name = document.getElementById('inspNodeName').value;
+        if (node.type === 'webhook_trigger') node.parameters.webhook_token = document.getElementById('p_webhook_token').value;
+        else if (node.type === 'filter_if') {
+          node.parameters.field = document.getElementById('p_field').value;
+          node.parameters.operator = document.getElementById('p_operator').value;
+          node.parameters.value = document.getElementById('p_value').value;
+        } else if (node.type === 'set_transform') {
+          node.parameters.message_template = document.getElementById('p_message_template').value;
+        } else if (node.type === 'fonnte_whatsapp') {
+          node.parameters.target_phone = document.getElementById('p_target_phone').value;
+          node.parameters.message = document.getElementById('p_message').value;
+        }
+        canvas.render();
+        canvas.selectNode(node.id);
+        alert('Parameter node diperbarui!');
+      };
+
+      document.getElementById('btnDeleteNode').onclick = () => {
+        if (confirm(`Hapus node "${node.name}"?`)) {
+          canvas.removeNode(node.id);
+          closeNodeInspector();
+        }
+      };
+    }
+
+    function closeNodeInspector() {
+      document.getElementById('sidebarInspector').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

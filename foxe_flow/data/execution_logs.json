@@ -1,0 +1,396 @@
+[
+  {
+    "id": "exec_1790824744093",
+    "workflow_id": "wf_konfirmasi_dp",
+    "workflow_name": "Konfirmasi Booking & DP Masuk (WhatsApp Fonnte)",
+    "timestamp": "2026-10-01 10:19:04",
+    "status": "completed",
+    "trigger_source": "webhook",
+    "steps": [
+      {
+        "node_id": "node_trigger",
+        "node_name": "Webhook Booking Masuk",
+        "node_type": "webhook_trigger",
+        "status": "success",
+        "message": "Payload webhook diterima (10 field)",
+        "data_snapshot": {
+          "client_name": "Nabila Syifa",
+          "phone": "085712345678",
+          "paket": "Wisuda UMP",
+          "tanggal_foto": "2026-10-04",
+          "jam_foto": "09:00 WIB",
+          "backdrop": "Backdrop 2",
+          "total_paket": 450000,
+          "dp_masuk": 100000,
+          "sisa_bayar": 350000,
+          "admin": "Admin Wisuda"
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_filter_dp",
+        "node_name": "Cek Pembayaran DP",
+        "node_type": "filter_if",
+        "status": "success",
+        "message": "IF Condition [dp_masuk > 0] => TRUE (Lanjut ke cabang: true)",
+        "data_snapshot": {
+          "evaluated_value": 100000,
+          "result": true,
+          "branch": "true"
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_template_wa",
+        "node_name": "Format Template WhatsApp",
+        "node_type": "set_transform",
+        "status": "success",
+        "message": "Variabel berhasil diproses. Pesan WhatsApp di-render (644 karakter)",
+        "data_snapshot": {
+          "rendered_message": "Halo Kak *Nabila Syifa*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: Wisuda UMP\n📅 *Tanggal Foto*: 2026-10-04\n⏰..."
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_fonnte",
+        "node_name": "Kirim WhatsApp Fonnte",
+        "node_type": "fonnte_whatsapp",
+        "status": "success",
+        "message": "[SIMULASI / MOCK] Pesan WhatsApp berhasil disimulasikan ke 6285712345678",
+        "data_snapshot": {
+          "mode": "Simulasi (Mock Send - Aman Tanpa Token)",
+          "target": "6285712345678",
+          "pesan_terkirim": "Halo Kak *Nabila Syifa*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: Wisuda UMP\n📅 *Tanggal Foto*: 2026-10-04\n⏰ *Jam*: 09:00 WIB\n📍 *Spot / Studio*: Backdrop 2\n\n💳 *Rincian Pembayaran*:\n- Total Biaya Paket : Rp 450.000\n- DP Diterima : Rp 100.000 (TERKUNCI / VALID)\n- Sisa Pelunasan : Rp 350.000 (dibayarkan saat hari-H foto)\n\n⚠️ *Catatan Penting*:\nMohon hadir 15 menit sebelum sesi dimulai ya Kak agar persiapan rias & kostum dapat berlangsung tepat waktu.\n\nJika ada pertanyaan atau perubahan jadwal, silakan balas pesan ini.\nSampai jumpa di Foxe Studio! 📸🦊",
+          "fonnte_status": "Simulated 200 OK"
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_telegram_admin",
+        "node_name": "Notif Telegram Admin Foxe",
+        "node_type": "telegram_bot",
+        "status": "success",
+        "message": "Notifikasi Telegram terkirim ke Admin (chat_id: 1608969830)",
+        "data_snapshot": {
+          "status": 200,
+          "text": "🔔 <b>BOOKING MASUK & DP TERKONFIRMASI!</b>\n\n👤 Client: <b>Nabila Syifa</b>\n📸 Paket: Wisuda UMP\n📅 Tanggal: 2026-10-04 (09:00 WIB)\n💰 DP: Rp 100.000 (Sisa"
+        },
+        "duration_ms": 865
+      }
+    ],
+    "executed_nodes": [
+      "node_trigger",
+      "node_filter_dp",
+      "node_template_wa",
+      "node_fonnte",
+      "node_telegram_admin"
+    ],
+    "final_data": {
+      "client_name": "Nabila Syifa",
+      "phone": "085712345678",
+      "paket": "Wisuda UMP",
+      "tanggal_foto": "2026-10-04",
+      "jam_foto": "09:00 WIB",
+      "backdrop": "Backdrop 2",
+      "total_paket": 450000,
+      "dp_masuk": 100000,
+      "sisa_bayar": 350000.0,
+      "admin": "Admin Wisuda",
+      "rendered_message": "Halo Kak *Nabila Syifa*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: Wisuda UMP\n📅 *Tanggal Foto*: 2026-10-04\n⏰ *Jam*: 09:00 WIB\n📍 *Spot / Studio*: Backdrop 2\n\n💳 *Rincian Pembayaran*:\n- Total Biaya Paket : Rp 450.000\n- DP Diterima : Rp 100.000 (TERKUNCI / VALID)\n- Sisa Pelunasan : Rp 350.000 (dibayarkan saat hari-H foto)\n\n⚠️ *Catatan Penting*:\nMohon hadir 15 menit sebelum sesi dimulai ya Kak agar persiapan rias & kostum dapat berlangsung tepat waktu.\n\nJika ada pertanyaan atau perubahan jadwal, silakan balas pesan ini.\nSampai jumpa di Foxe Studio! 📸🦊"
+    }
+  },
+  {
+    "id": "exec_1790824732671",
+    "workflow_id": "wf_konfirmasi_dp",
+    "workflow_name": "Konfirmasi Booking & DP Masuk (WhatsApp Fonnte)",
+    "timestamp": "2026-10-01 10:18:52",
+    "status": "completed",
+    "trigger_source": "manual",
+    "steps": [
+      {
+        "node_id": "node_trigger",
+        "node_name": "Webhook Booking Masuk",
+        "node_type": "webhook_trigger",
+        "status": "success",
+        "message": "Payload webhook diterima (10 field)",
+        "data_snapshot": {
+          "client_name": "Denny Hardiansyah",
+          "phone": "081234567890",
+          "paket": "Graduation Super Peak",
+          "tanggal_foto": "2026-10-03",
+          "jam_foto": "10:30 WIB",
+          "backdrop": "Backdrop A",
+          "total_paket": 350000,
+          "dp_masuk": 100000,
+          "sisa_bayar": 250000,
+          "admin": "AMEL"
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_filter_dp",
+        "node_name": "Cek Pembayaran DP",
+        "node_type": "filter_if",
+        "status": "success",
+        "message": "IF Condition [dp_masuk > 0] => TRUE (Lanjut ke cabang: true)",
+        "data_snapshot": {
+          "evaluated_value": 100000,
+          "result": true,
+          "branch": "true"
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_template_wa",
+        "node_name": "Format Template WhatsApp",
+        "node_type": "set_transform",
+        "status": "success",
+        "message": "Variabel berhasil diproses. Pesan WhatsApp di-render (660 karakter)",
+        "data_snapshot": {
+          "rendered_message": "Halo Kak *Denny Hardiansyah*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: Graduation Super Peak\n📅 *Tanggal Fot..."
+        },
+        "duration_ms": 2
+      },
+      {
+        "node_id": "node_fonnte",
+        "node_name": "Kirim WhatsApp Fonnte",
+        "node_type": "fonnte_whatsapp",
+        "status": "success",
+        "message": "[SIMULASI / MOCK] Pesan WhatsApp berhasil disimulasikan ke 6281234567890",
+        "data_snapshot": {
+          "mode": "Simulasi (Mock Send - Aman Tanpa Token)",
+          "target": "6281234567890",
+          "pesan_terkirim": "Halo Kak *Denny Hardiansyah*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: Graduation Super Peak\n📅 *Tanggal Foto*: 2026-10-03\n⏰ *Jam*: 10:30 WIB\n📍 *Spot / Studio*: Backdrop A\n\n💳 *Rincian Pembayaran*:\n- Total Biaya Paket : Rp 350.000\n- DP Diterima : Rp 100.000 (TERKUNCI / VALID)\n- Sisa Pelunasan : Rp 250.000 (dibayarkan saat hari-H foto)\n\n⚠️ *Catatan Penting*:\nMohon hadir 15 menit sebelum sesi dimulai ya Kak agar persiapan rias & kostum dapat berlangsung tepat waktu.\n\nJika ada pertanyaan atau perubahan jadwal, silakan balas pesan ini.\nSampai jumpa di Foxe Studio! 📸🦊",
+          "fonnte_status": "Simulated 200 OK"
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_telegram_admin",
+        "node_name": "Notif Telegram Admin Foxe",
+        "node_type": "telegram_bot",
+        "status": "success",
+        "message": "Notifikasi Telegram terkirim ke Admin (chat_id: 1608969830)",
+        "data_snapshot": {
+          "status": 200,
+          "text": "🔔 <b>BOOKING MASUK & DP TERKONFIRMASI!</b>\n\n👤 Client: <b>Denny Hardiansyah</b>\n📸 Paket: Graduation Super Peak\n📅 Tanggal: 2026-10-03 (10:30 WIB)\n💰 DP: "
+        },
+        "duration_ms": 1639
+      }
+    ],
+    "executed_nodes": [
+      "node_trigger",
+      "node_filter_dp",
+      "node_template_wa",
+      "node_fonnte",
+      "node_telegram_admin"
+    ],
+    "final_data": {
+      "client_name": "Denny Hardiansyah",
+      "phone": "081234567890",
+      "paket": "Graduation Super Peak",
+      "tanggal_foto": "2026-10-03",
+      "jam_foto": "10:30 WIB",
+      "backdrop": "Backdrop A",
+      "total_paket": 350000,
+      "dp_masuk": 100000,
+      "sisa_bayar": 250000.0,
+      "admin": "AMEL",
+      "rendered_message": "Halo Kak *Denny Hardiansyah*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: Graduation Super Peak\n📅 *Tanggal Foto*: 2026-10-03\n⏰ *Jam*: 10:30 WIB\n📍 *Spot / Studio*: Backdrop A\n\n💳 *Rincian Pembayaran*:\n- Total Biaya Paket : Rp 350.000\n- DP Diterima : Rp 100.000 (TERKUNCI / VALID)\n- Sisa Pelunasan : Rp 250.000 (dibayarkan saat hari-H foto)\n\n⚠️ *Catatan Penting*:\nMohon hadir 15 menit sebelum sesi dimulai ya Kak agar persiapan rias & kostum dapat berlangsung tepat waktu.\n\nJika ada pertanyaan atau perubahan jadwal, silakan balas pesan ini.\nSampai jumpa di Foxe Studio! 📸🦊"
+    }
+  },
+  {
+    "id": "exec_1790824714610",
+    "workflow_id": "wf_konfirmasi_dp",
+    "workflow_name": "Konfirmasi Booking & DP Masuk (WhatsApp Fonnte)",
+    "timestamp": "2026-10-01 10:18:34",
+    "status": "failed",
+    "trigger_source": "manual",
+    "steps": [
+      {
+        "node_id": "node_trigger",
+        "node_name": "Webhook Booking Masuk",
+        "node_type": "webhook_trigger",
+        "status": "success",
+        "message": "Payload webhook diterima (10 field)",
+        "data_snapshot": {
+          "client_name": "Denny Hardiansyah",
+          "phone": "081234567890",
+          "paket": "Graduation Super Peak",
+          "tanggal_foto": "2026-10-03",
+          "jam_foto": "10:30 WIB",
+          "backdrop": "Backdrop A",
+          "total_paket": 350000,
+          "dp_masuk": 100000,
+          "sisa_bayar": 250000,
+          "admin": "AMEL"
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_filter_dp",
+        "node_name": "Cek Pembayaran DP",
+        "node_type": "filter_if",
+        "status": "success",
+        "message": "IF Condition [dp_masuk > 0] => TRUE (Lanjut ke cabang: true)",
+        "data_snapshot": {
+          "evaluated_value": 100000,
+          "result": true,
+          "branch": "true"
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_template_wa",
+        "node_name": "Format Template WhatsApp",
+        "node_type": "set_transform",
+        "status": "success",
+        "message": "Variabel berhasil diproses. Pesan WhatsApp di-render (660 karakter)",
+        "data_snapshot": {
+          "rendered_message": "Halo Kak *Denny Hardiansyah*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: Graduation Super Peak\n📅 *Tanggal Fot..."
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_fonnte",
+        "node_name": "Kirim WhatsApp Fonnte",
+        "node_type": "fonnte_whatsapp",
+        "status": "success",
+        "message": "[SIMULASI / MOCK] Pesan WhatsApp berhasil disimulasikan ke 6281234567890",
+        "data_snapshot": {
+          "mode": "Simulasi (Mock Send - Aman Tanpa Token)",
+          "target": "6281234567890",
+          "pesan_terkirim": "Halo Kak *Denny Hardiansyah*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: Graduation Super Peak\n📅 *Tanggal Foto*: 2026-10-03\n⏰ *Jam*: 10:30 WIB\n📍 *Spot / Studio*: Backdrop A\n\n💳 *Rincian Pembayaran*:\n- Total Biaya Paket : Rp 350.000\n- DP Diterima : Rp 100.000 (TERKUNCI / VALID)\n- Sisa Pelunasan : Rp 250.000 (dibayarkan saat hari-H foto)\n\n⚠️ *Catatan Penting*:\nMohon hadir 15 menit sebelum sesi dimulai ya Kak agar persiapan rias & kostum dapat berlangsung tepat waktu.\n\nJika ada pertanyaan atau perubahan jadwal, silakan balas pesan ini.\nSampai jumpa di Foxe Studio! 📸🦊",
+          "fonnte_status": "Simulated 200 OK"
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_telegram_admin",
+        "node_name": "Notif Telegram Admin Foxe",
+        "node_type": "telegram_bot",
+        "status": "error",
+        "message": "Error pada langkah ini: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s/sendMessage (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1082)')))",
+        "data_snapshot": {},
+        "duration_ms": 564
+      }
+    ],
+    "executed_nodes": [
+      "node_trigger",
+      "node_filter_dp",
+      "node_template_wa",
+      "node_fonnte",
+      "node_telegram_admin"
+    ],
+    "final_data": {
+      "client_name": "Denny Hardiansyah",
+      "phone": "081234567890",
+      "paket": "Graduation Super Peak",
+      "tanggal_foto": "2026-10-03",
+      "jam_foto": "10:30 WIB",
+      "backdrop": "Backdrop A",
+      "total_paket": 350000,
+      "dp_masuk": 100000,
+      "sisa_bayar": 250000.0,
+      "admin": "AMEL",
+      "rendered_message": "Halo Kak *Denny Hardiansyah*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: Graduation Super Peak\n📅 *Tanggal Foto*: 2026-10-03\n⏰ *Jam*: 10:30 WIB\n📍 *Spot / Studio*: Backdrop A\n\n💳 *Rincian Pembayaran*:\n- Total Biaya Paket : Rp 350.000\n- DP Diterima : Rp 100.000 (TERKUNCI / VALID)\n- Sisa Pelunasan : Rp 250.000 (dibayarkan saat hari-H foto)\n\n⚠️ *Catatan Penting*:\nMohon hadir 15 menit sebelum sesi dimulai ya Kak agar persiapan rias & kostum dapat berlangsung tepat waktu.\n\nJika ada pertanyaan atau perubahan jadwal, silakan balas pesan ini.\nSampai jumpa di Foxe Studio! 📸🦊"
+    }
+  },
+  {
+    "id": "exec_1790824674915",
+    "workflow_id": "wf_konfirmasi_dp",
+    "workflow_name": "Konfirmasi Booking & DP Masuk (WhatsApp Fonnte)",
+    "timestamp": "2026-10-01 10:17:54",
+    "status": "failed",
+    "trigger_source": "manual",
+    "steps": [
+      {
+        "node_id": "node_trigger",
+        "node_name": "Webhook Booking Masuk",
+        "node_type": "webhook_trigger",
+        "status": "success",
+        "message": "Payload webhook diterima (10 field)",
+        "data_snapshot": {
+          "client_name": "Denny Hardiansyah",
+          "phone": "081234567890",
+          "paket": "Graduation Super Peak",
+          "tanggal_foto": "2026-10-03",
+          "jam_foto": "10:30 WIB",
+          "backdrop": "Backdrop A",
+          "total_paket": 350000,
+          "dp_masuk": 100000,
+          "sisa_bayar": 250000,
+          "admin": "AMEL"
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_filter_dp",
+        "node_name": "Cek Pembayaran DP",
+        "node_type": "filter_if",
+        "status": "success",
+        "message": "IF Condition [dp_masuk > 0] => TRUE (Lanjut ke cabang: true)",
+        "data_snapshot": {
+          "evaluated_value": 100000,
+          "result": true,
+          "branch": "true"
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_template_wa",
+        "node_name": "Format Template WhatsApp",
+        "node_type": "set_transform",
+        "status": "success",
+        "message": "Variabel berhasil diproses. Pesan WhatsApp di-render (660 karakter)",
+        "data_snapshot": {
+          "rendered_message": "Halo Kak *Denny Hardiansyah*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: Graduation Super Peak\n📅 *Tanggal Fot..."
+        },
+        "duration_ms": 1
+      },
+      {
+        "node_id": "node_fonnte",
+        "node_name": "Kirim WhatsApp Fonnte",
+        "node_type": "fonnte_whatsapp",
+        "status": "success",
+        "message": "[SIMULASI / MOCK] Pesan WhatsApp berhasil disimulasikan ke 6281234567890",
+        "data_snapshot": {
+          "mode": "Simulasi (Mock Send - Aman Tanpa Token)",
+          "target": "6281234567890",
+          "pesan_terkirim": "Halo Kak *Denny Hardiansyah*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: Graduation Super Peak\n📅 *Tanggal Foto*: 2026-10-03\n⏰ *Jam*: 10:30 WIB\n📍 *Spot / Studio*: Backdrop A\n\n💳 *Rincian Pembayaran*:\n- Total Biaya Paket : Rp 350.000\n- DP Diterima : Rp 100.000 (TERKUNCI / VALID)\n- Sisa Pelunasan : Rp 250.000 (dibayarkan saat hari-H foto)\n\n⚠️ *Catatan Penting*:\nMohon hadir 15 menit sebelum sesi dimulai ya Kak agar persiapan rias & kostum dapat berlangsung tepat waktu.\n\nJika ada pertanyaan atau perubahan jadwal, silakan balas pesan ini.\nSampai jumpa di Foxe Studio! 📸🦊",
+          "fonnte_status": "Simulated 200 OK"
+        },
+        "duration_ms": 0
+      },
+      {
+        "node_id": "node_telegram_admin",
+        "node_name": "Notif Telegram Admin Foxe",
+        "node_type": "telegram_bot",
+        "status": "error",
+        "message": "Error pada langkah ini: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s/sendMessage (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1082)')))",
+        "data_snapshot": {},
+        "duration_ms": 541
+      }
+    ],
+    "executed_nodes": [
+      "node_trigger",
+      "node_filter_dp",
+      "node_template_wa",
+      "node_fonnte",
+      "node_telegram_admin"
+    ],
+    "final_data": {
+      "client_name": "Denny Hardiansyah",
+      "phone": "081234567890",
+      "paket": "Graduation Super Peak",
+      "tanggal_foto": "2026-10-03",
+      "jam_foto": "10:30 WIB",
+      "backdrop": "Backdrop A",
+      "total_paket": 350000,
+      "dp_masuk": 100000,
+      "sisa_bayar": 250000.0,
+      "admin": "AMEL",
+      "rendered_message": "Halo Kak *Denny Hardiansyah*! ✨\nTerima kasih banyak sudah reservasi sesi foto di *Foxe Studio*.\n\nBerikut adalah rincian reservasi & konfirmasi DP Kakak:\n📋 *Paket*: Graduation Super Peak\n📅 *Tanggal Foto*: 2026-10-03\n⏰ *Jam*: 10:30 WIB\n📍 *Spot / Studio*: Backdrop A\n\n💳 *Rincian Pembayaran*:\n- Total Biaya Paket : Rp 350.000\n- DP Diterima : Rp 100.000 (TERKUNCI / VALID)\n- Sisa Pelunasan : Rp 250.000 (dibayarkan saat hari-H foto)\n\n⚠️ *Catatan Penting*:\nMohon hadir 15 menit sebelum sesi dimulai ya Kak agar persiapan rias & kostum dapat berlangsung tepat waktu.\n\nJika ada pertanyaan atau perubahan jadwal, silakan balas pesan ini.\nSampai jumpa di Foxe Studio! 📸🦊"
+    }
+  }
+]
