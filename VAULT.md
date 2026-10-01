@@ -60,3 +60,20 @@ Unrealized Omzet               Rp 104.625.000
   - Autentikasi murni berbasis tab browser (`sessionStorage`). Setiap tab/browser ditutup, pengguna wajib memasukkan ulang PIN `363636`.
   - Dilengkapi header meta `Cache-Control: no-cache, no-store, must-revalidate` untuk mencegah browser menahan cache usang.
 - **URL Live**: 👉 **https://whynunuu.github.io/FoxeStudio/**
+
+---
+
+## 5. Kewajiban Pengiriman Review Pekerjaan Terstruktur
+- Setiap kali Agent selesai bekerja (baik via trigger `ayo kerja`, modifikasi fitur, maupun perbaikan data), Agent **WAJIB menyertakan Review Pekerjaan Terstruktur** di responnya:
+  1. Rincian pekerjaan & komponen yang selesai dituntaskan.
+  2. Daftar file script & data yang diperbarui.
+  3. Status sinkronisasi sistem (GitHub, Telegram, Obsidian).
+  4. Metrik operasional penting studio & highlight yang butuh perhatian owner.
+
+---
+
+## 6. Kalender Marketing & Meta Ads Tracker 2026/2027
+- Terintegrasi dengan artefak resmi PDF & Excel Marketing Boosting Calendar (Agustus 2026 s.d. Juli 2027).
+- Berisi 43 agenda momentum akademik lengkap dengan action pill, momentum acara, paket fokus, dan alasan strategis.
+- Meta Ads Tracker dilengkapi dual-switcher bulan berjalan (Oktober 2026 Live Tracker & September 2026 Arsip).
+

@@ -244,7 +244,9 @@ def run_integration():
 
         state["baseline"] = state.get("baseline", {"label": "September 2025", "omzet": 88000000, "net": 35000000})
         state["history"] = state.get("history", [])
-        state["ads"] = state.get("ads", [])
+        state["ads"] = state.get("ads", {})
+        state["adsByMonth"] = state.get("adsByMonth", {})
+        state["marketingCalendar"] = state.get("marketingCalendar", [])
         state["schedule"] = {
             "bulan": "2026-09",
             "sumber": "Schedule September 2026 (Google Drive)",

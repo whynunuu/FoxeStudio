@@ -92,3 +92,17 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
   * (baris kosong)
   * `Unrealized Omzet   : Rp .....` (Estimasi omzet akhir bulan = Omzet Realized MTD + Total Pelunasan)
 - Format harus sejajar rata kanan 44 karakter presisi mengikuti lebar struk kasir.
+
+### 8. Kewajiban Mutlak Mengirimkan Review Pekerjaan Terstruktur:
+- **Setiap kali Agent selesai bekerja** (baik melalui trigger kata kunci `'ayo kerja'`, permintaan update fitur, perbaikan bug, atau sinkronisasi data), Agent **WAJIB MENYERTAKAN REVIEW PEKERJAAN TERSTRUKTUR** di akhir responnya.
+- **Format Review Pekerjaan Wajib Mencakup:**
+  1. **Rincian Pekerjaan Selesai**: Poin-poin spesifik apa saja yang baru saja dituntaskan atau diubah.
+  2. **File & Komponen yang Diperbarui**: Daftar file script, JSON state, visual HTML, atau dokumen Obsidian yang mengalami perubahan.
+  3. **Status Integrasi & Deploy**: Konfirmasi git commit & push ke GitHub Pages, serta status pengiriman Telegram.
+  4. **Metrik & Highlight Operasional Terkini**: Ringkasan data penting (omzet, order, pipeline, ads, schedule besok) agar owner dapat memantau studio secara transparan dan jelas.
+
+### 9. Integrasi Kalender Marketing & Meta Ads Tracker 2026/2027:
+- Meta Ads Tracker mendukung pergantian multi-bulan dinamis: **Oktober 2026 (Live Tracker)** dan **September 2026 (Arsip)**.
+- Section Marketing dilengkapi **Kalender Marketing & Boosting 2026/2027 (Agustus 2026 s.d. Juli 2027)** berisi 43 agenda momentum akademik dan seasonal kampus/sekolah (berdasarkan basis data 2.164 transaksi Semester 1 2026).
+- Tabel dilengkapi filter kategori interaktif (*Semua*, *Event Day*, *Boost / Hard Push*, *H-7 Conversion*, *Awareness*) dan pencarian instan agenda/paket/kampus.
+

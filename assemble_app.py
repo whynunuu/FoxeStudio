@@ -743,7 +743,7 @@ function saveLocal() {
   }
 }
 
-let db=null,downloads=null,room=null,view="tahunan",estMonth=10;
+let db=null,downloads=null,room=null,view="tahunan",estMonth=10,adsMonth=10,adsFilter="ALL",adsQ="";
 
 function nkey(s){
   return String(s||"").normalize("NFKD").replace(/[̀-ͯ]/g,"")
@@ -1375,6 +1375,11 @@ function render(){
     document.getElementById("tbCut").textContent = `Pipeline ${S.oktoberPipeline.totalBookings} Booking · Reguler & Wisuda UMP`;
     const st=document.getElementById("tbStatus");
     if(st){ st.textContent="Pipeline"; st.className="pill prog"; }
+  } else if(view === "ads" && adsMonth === 10){
+    document.getElementById("tbPeriod").textContent = "Oktober 2026";
+    document.getElementById("tbCut").textContent = "Meta Ads Tracker & Kalender 2026/2027";
+    const st=document.getElementById("tbStatus");
+    if(st){ st.textContent="Live Tracker"; st.className="pill prog"; }
   } else {
     document.getElementById("tbPeriod").textContent=BULAN[+R.c.bulan.split("-")[1]-1]+" "+R.c.bulan.split("-")[0];
     document.getElementById("tbCut").textContent=`s.d. ${R.cutDay} ${BULAN[+R.c.bulan.split("-")[1]-1]} · ${R.hariBerjalan}/${R.dim} hari`;
@@ -1394,7 +1399,8 @@ function render(){
 
   // nav
   const nav=document.getElementById("nav"); const tabs=document.getElementById("tabsm");
-  const counts={trx:R.tx,biaya:R.ex.length,gaji:(R.rosterGaji||[]).length,shift:R.shiftTot,lead:R.ld.length,kpi:R.kpi.length,tahunan:"12 bln"};
+  const calLen=(S.marketingCalendar||[]).length;
+  const counts={trx:R.tx,biaya:R.ex.length,gaji:(R.rosterGaji||[]).length,shift:R.shiftTot,lead:R.ld.length,kpi:R.kpi.length,tahunan:"12 bln",ads:calLen?`${calLen} agenda`:null};
   let html="",lastGrp="";
   VIEWS.forEach(v=>{ if(v.grp!==lastGrp){html+=`<div class="grp">${v.grp}</div>`;lastGrp=v.grp}
     html+=`<button data-v="${v.id}" aria-current="${view===v.id}">${v.label}${counts[v.id]!=null?`<span class="cnt">${counts[v.id]}</span>`:""}</button>`;});
@@ -2606,83 +2612,218 @@ function chartYoY(R,H,yr){
 }
 
 function vAds(R){
-  const A=S.ads&&S.ads.bulan===R.c.bulan?S.ads:null;
-  const mn=BULAN[+R.c.bulan.split("-")[1]-1], yr=R.c.bulan.split("-")[0];
-  if(!A) return `
-  <div class="vhead"><div><div class="eyebrow">Marketing</div><h2>Jadwal Ads</h2></div>
-    <p>Rencana ads untuk bulan berjalan.</p></div>
-  <div class="card"><div class="empty">Belum ada rencana ads untuk ${mn} ${yr}.<br>
-    <span class="tiny">Sistem hanya menampilkan bulan yang sedang berjalan.</span></div></div>`;
+  const selBulan = adsMonth === 10 ? "2026-10" : "2026-09";
+  const A = (S.adsByMonth && S.adsByMonth[selBulan]) || (S.ads && S.ads.bulan === selBulan ? S.ads : (selBulan === "2026-10" ? S.ads : null));
+  const mn = adsMonth === 10 ? "Oktober" : "September", yr = "2026";
+  const now = new Date(), todayIso = iso(now);
 
-  const now=new Date(), todayIso=iso(now);
-  const terpakai=A.schedule.filter(s=>s.tanggal<=todayIso).reduce((t,s)=>t+dnum(s.term),0);
-  const sisa=dnum(A.termPlan)-terpakai;
-  const ceiling=dnum(A.budgetCeiling), plan=dnum(A.termPlan)*dnum(A.termSize);
+  // Marketing Calendar 2026/2027 (43 Agenda Strategis)
+  const fullCal = S.marketingCalendar || [];
+  let filteredCal = [...fullCal];
+  if(adsFilter && adsFilter !== 'ALL'){
+    filteredCal = filteredCal.filter(item => (item.action || '').toUpperCase() === adsFilter);
+  }
+  if(adsQ && adsQ.trim()){
+    const q = adsQ.toLowerCase().trim();
+    filteredCal = filteredCal.filter(item => 
+      (item.momentum || '').toLowerCase().includes(q) ||
+      (item.paket || '').toLowerCase().includes(q) ||
+      (item.alasan || '').toLowerCase().includes(q) ||
+      (item.bulan || '').toLowerCase().includes(q) ||
+      (item.action || '').toLowerCase().includes(q)
+    );
+  }
 
-  const status=s=>{
-    const akhir=s.akhir||s.tanggal2||s.tanggal;
-    if(todayIso>akhir)return {t:"Sudah lewat",c:"neutral"};
-    if(todayIso>=s.tanggal)return {t:"Sedang berjalan",c:"prog"};
-    return {t:"Akan datang",c:"final"};
+  const countEvent = fullCal.filter(x => (x.action || '').toUpperCase() === 'EVENT').length;
+  const countBoost = fullCal.filter(x => (x.action || '').toUpperCase() === 'BOOST').length;
+  const countH7 = fullCal.filter(x => (x.action || '').toUpperCase() === 'H-7').length;
+  const countAware = fullCal.filter(x => (x.action || '').toUpperCase() === 'AWARENESS').length;
+
+  // Monthly Tracker calculations
+  let trackerHtml = "";
+  if(A && A.schedule){
+    const terpakai = A.schedule.filter(s => s.tanggal <= todayIso).reduce((t, s) => t + dnum(s.term), 0);
+    const sisa = dnum(A.termPlan) - terpakai;
+    const ceiling = dnum(A.budgetCeiling), plan = dnum(A.termPlan) * dnum(A.termSize);
+
+    const status = s => {
+      const akhir = s.akhir || s.tanggal2 || s.tanggal;
+      if(todayIso > akhir) return {t: "Sudah lewat", c: "neutral"};
+      if(todayIso >= s.tanggal) return {t: "Sedang berjalan", c: "prog"};
+      return {t: "Akan datang", c: "final"};
+    };
+    const sisaJadwal = A.schedule.filter(s => todayIso <= (s.akhir || s.tanggal2 || s.tanggal));
+
+    trackerHtml = `
+      <div class="note ok" style="margin-bottom:14px">
+        <b>Budget bulan ini bukan untuk bulan ini.</b>
+        Menurut rencanamu sendiri, ads ${mn} dipakai membangun demand <b>${esc(A.adsUntukDemand)}</b> —
+        ${esc(A.momentum)}. Jadi ukuran keberhasilannya bukan omzet ${mn}, melainkan lead dan DP yang masuk untuk bulan depan.
+      </div>
+
+      <div class="stats" style="margin-bottom:14px">
+        <div class="stat"><span class="k">Ceiling ${mn}</span><span class="v sm">${rp(ceiling)}</span>
+          <span class="m">rencana ${rp(plan)} · reserve ${rp(ceiling - plan)}</span></div>
+        <div class="stat"><span class="k">Term terpakai</span><span class="v sm">${terpakai} / ${A.termPlan}</span>
+          <span class="m">${rp(terpakai * dnum(A.termSize))} dari ${rp(plan)}</span>
+          <div class="bar"><i style="width:${(terpakai / dnum(A.termPlan) * 100).toFixed(0)}%"></i></div></div>
+        <div class="stat"><span class="k">Sisa term</span><span class="v sm">${sisa}</span>
+          <span class="m">${rp(sisa * dnum(A.termSize))} belum dilepas</span></div>
+        <div class="stat"><span class="k">Seasonality</span><span class="v sm">${esc(A.seasonality)}</span>
+          <span class="m">1 term = ${rp(A.termSize)}</span></div>
+      </div>
+
+      ${sisaJadwal.length ? `
+      <div class="card" style="margin-bottom:14px">
+        <h3>Yang belum dikerjakan <span class="eyebrow">${sisaJadwal.length} jadwal tersisa</span></h3>
+        <div class="grid" style="gap:9px">
+        ${sisaJadwal.map(s => {
+          const st = status(s);
+          return `<div style="display:flex;gap:11px;align-items:flex-start;padding:10px 12px;background:var(--surface2);border-radius:7px;border-left:2px solid var(--${st.c === "prog" ? "warn" : "accent"})">
+            <div style="min-width:96px"><div style="font-weight:600;font-size:13.5px">${esc(s.label)}</div>
+              <span class="pill ${st.c}" style="margin-top:3px">${st.t}</span></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-weight:600;font-size:13px">${s.action ? esc(s.action) : '<span style="color:var(--warn)">Action belum ditentukan</span>'}</div>
+              <div class="tiny muted">${dnum(s.term)} term · ${rp(dnum(s.term) * dnum(A.termSize))}${s.paket ? " · Paket: <b>" + esc(s.paket) + "</b>" : ""}${s.catatan ? " · " + esc(s.catatan) : ""}</div>
+            </div></div>`;
+        }).join("")}
+        </div>
+      </div>` : `<div class="note" style="margin-bottom:14px">Seluruh jadwal ads ${mn} sudah lewat.</div>`}
+
+      <div class="tw" style="margin-bottom:14px">
+        <table>
+          <thead>
+            <tr><th>Periode</th><th>Action</th><th class="n">Term</th><th class="n">Budget</th><th>Status</th><th>Paket &amp; Catatan</th></tr>
+          </thead>
+          <tbody>
+            ${A.schedule.map(s => {
+              const st = status(s);
+              return `<tr>
+                <td class="mono">${esc(s.label)}</td>
+                <td><b>${s.action ? esc(s.action) : '<span class="pill bad">belum diisi</span>'}</b></td>
+                <td class="n">${dnum(s.term)}</td>
+                <td class="n">${rp(dnum(s.term) * dnum(A.termSize))}</td>
+                <td><span class="pill ${st.c}">${st.t}</span></td>
+                <td class="tiny">${s.paket ? `<span class="pill neutral" style="margin-right:4px">${esc(s.paket)}</span>` : ""}${s.catatan ? esc(s.catatan) : (s.turunan ? "angka turunan" : "")}</td>
+              </tr>`;
+            }).join("")}
+            <tr class="total">
+              <td colspan="2">Total rencana</td>
+              <td class="n">${A.termPlan}</td>
+              <td class="n">${rp(plan)}</td>
+              <td colspan="2" class="tiny">ceiling ${rp(ceiling)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <h3>Langkah Tiap Jenis Action (Playbook Ads ${mn})</h3>
+        <div class="two">
+        ${A.playbook.map(p => `
+          <div style="background:var(--surface2);border-radius:8px;padding:13px 15px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:3px">
+              <b style="font-size:13.5px">${esc(p.action)}</b>
+              <span class="eyebrow">${esc(p.kapan)}</span>
+            </div>
+            <ol style="margin:9px 0 0;padding-left:17px;font-size:12.5px;line-height:1.65;color:var(--ink2)">
+              ${p.langkah.map(l => `<li>${esc(l)}</li>`).join("")}
+            </ol>
+            <p class="tiny muted" style="margin-top:9px"><b>Ukur:</b> ${esc(p.ukur)}</p>
+          </div>`).join("")}
+        </div>
+      </div>
+    `;
+  } else {
+    trackerHtml = `
+      <div class="card" style="margin-bottom:14px">
+        <div class="empty">Belum ada rencana ads bulanan terpisah untuk ${mn} ${yr}.<br>
+        <span class="tiny">Silakan rujuk ke Kalender Marketing &amp; Boosting 2026/2027 di bawah.</span></div>
+      </div>`;
+  }
+
+  // Format action badge color
+  const actBadge = act => {
+    const a = (act || '').toUpperCase();
+    if(a === 'EVENT') return '<span class="pill crit" style="background:#5c2b8c;color:#fff;border:none">🟣 EVENT DAY</span>';
+    if(a === 'BOOST') return '<span class="pill prog">🟠 BOOST / PUSH</span>';
+    if(a === 'H-7') return '<span class="pill bad">🔴 H-7 CONVERT</span>';
+    if(a === 'AWARENESS') return '<span class="pill neutral" style="background:#f1c21b;color:#161616;font-weight:600">🟡 AWARENESS</span>';
+    return `<span class="pill neutral">${esc(act)}</span>`;
   };
-  const sisaJadwal=A.schedule.filter(s=>todayIso<=(s.akhir||s.tanggal2||s.tanggal));
 
   return `
-  <div class="vhead"><div><div class="eyebrow">Marketing · ${mn} ${yr}</div><h2>Jadwal Ads</h2></div>
-    <p>Rencana pelepasan budget dan langkah yang harus dijalankan tim. Hanya bulan berjalan yang ditampilkan.</p></div>
-
-  <div class="note ok" style="margin-bottom:14px"><b>Budget bulan ini bukan untuk bulan ini.</b>
-    Menurut rencanamu sendiri, ads ${mn} dipakai membangun demand <b>${esc(A.adsUntukDemand)}</b> —
-    ${esc(A.momentum)}. Jadi ukuran keberhasilannya bukan omzet ${mn}, melainkan lead dan DP yang masuk untuk bulan depan.</div>
-
-  <div class="stats" style="margin-bottom:14px">
-    <div class="stat"><span class="k">Ceiling bulan ini</span><span class="v sm">${rp(ceiling)}</span>
-      <span class="m">rencana ${rp(plan)} · reserve ${rp(ceiling-plan)}</span></div>
-    <div class="stat"><span class="k">Term terpakai</span><span class="v sm">${terpakai} / ${A.termPlan}</span>
-      <span class="m">${rp(terpakai*dnum(A.termSize))} dari ${rp(plan)}</span>
-      <div class="bar"><i style="width:${(terpakai/dnum(A.termPlan)*100).toFixed(0)}%"></i></div></div>
-    <div class="stat"><span class="k">Sisa term</span><span class="v sm">${sisa}</span>
-      <span class="m">${rp(sisa*dnum(A.termSize))} belum dilepas</span></div>
-    <div class="stat"><span class="k">Seasonality</span><span class="v sm">${esc(A.seasonality)}</span>
-      <span class="m">1 term = ${rp(A.termSize)}</span></div>
+  <div class="vhead" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:14px">
+    <div>
+      <div class="eyebrow">Marketing · Meta Ads Tracker &amp; Kalender Akademik 2026/2027</div>
+      <h2>Jadwal &amp; Anggaran Meta Ads — ${mn} ${yr}</h2>
+      <p>Rencana pelepasan budget iklan berbayar, playbook tim, serta roadmap kalender marketing terintegrasi 2026/2027.</p>
+    </div>
+    <div style="display:flex;gap:6px;background:var(--surface2);padding:4px;border-radius:8px">
+      <button class="btn btn-sm ${adsMonth===10?'btn-pri':'btn-sub'}" onclick="adsMonth=10;render()">📅 Oktober 2026 (Live Tracker)</button>
+      <button class="btn btn-sm ${adsMonth===9?'btn-pri':'btn-sub'}" onclick="adsMonth=9;render()">📅 September 2026 (Arsip)</button>
+    </div>
   </div>
 
-  ${sisaJadwal.length?`<div class="card" style="margin-bottom:14px">
-    <h3>Yang belum dikerjakan <span class="eyebrow">${sisaJadwal.length} jadwal tersisa</span></h3>
-    <div class="grid" style="gap:9px">
-    ${sisaJadwal.map(s=>{const st=status(s);
-      return `<div style="display:flex;gap:11px;align-items:flex-start;padding:10px 12px;background:var(--surface2);border-radius:7px;border-left:2px solid var(--${st.c==="prog"?"warn":"accent"})">
-        <div style="min-width:96px"><div style="font-weight:600;font-size:13.5px">${esc(s.label)}</div>
-          <span class="pill ${st.c}" style="margin-top:3px">${st.t}</span></div>
-        <div style="flex:1;min-width:0">
-          <div style="font-weight:600;font-size:13px">${s.action?esc(s.action):'<span style="color:var(--warn)">Action belum ditentukan</span>'}</div>
-          <div class="tiny muted">${dnum(s.term)} term · ${rp(dnum(s.term)*dnum(A.termSize))}${
-            s.catatan?" · "+esc(s.catatan):""}</div>
-        </div></div>`}).join("")}
-    </div></div>`:`<div class="note" style="margin-bottom:14px">Seluruh jadwal ads ${mn} sudah lewat.</div>`}
+  ${trackerHtml}
 
-  <div class="tw" style="margin-bottom:14px"><table><thead><tr><th>Tanggal</th><th>Action</th>
-    <th class="n">Term</th><th class="n">Budget</th><th>Status</th><th>Catatan</th></tr></thead><tbody>
-    ${A.schedule.map(s=>{const st=status(s);
-      return `<tr><td class="mono">${esc(s.label)}</td>
-      <td>${s.action?esc(s.action):'<span class="pill bad">belum diisi</span>'}</td>
-      <td class="n">${dnum(s.term)}</td><td class="n">${rp(dnum(s.term)*dnum(A.termSize))}</td>
-      <td><span class="pill ${st.c}">${st.t}</span></td>
-      <td class="tiny muted">${s.turunan?"angka turunan":""}</td></tr>`}).join("")}
-    <tr class="total"><td colspan="2">Total rencana</td><td class="n">${A.termPlan}</td>
-      <td class="n">${rp(plan)}</td><td colspan="2" class="tiny">ceiling ${rp(ceiling)}</td></tr>
-  </tbody></table></div>
+  <!-- KALENDER MARKETING & BOOSTING 2026/2027 ROADMAP -->
+  <div class="card" style="margin-top:20px;border-top:3px solid var(--accent)">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:14px">
+      <div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <h3 style="margin:0">📅 Kalender Marketing &amp; Boosting 2026/2027</h3>
+          <span class="pill crit">${fullCal.length} Agenda Terdaftar</span>
+        </div>
+        <p class="tiny muted" style="margin-top:4px">
+          Roadmap momentum akademik, wisuda kampus, &amp; seasonality sekolah (Agustus 2026 s.d. Juli 2027). Basis data 2.164 transaksi Semester 1 2026.
+        </p>
+      </div>
+      <div>
+        <input type="text" placeholder="🔍 Cari agenda, kampus, paket..." value="${esc(adsQ||'')}" oninput="adsQ=this.value;render()" style="padding:7px 12px;font-size:12.5px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);color:var(--ink);min-width:240px">
+      </div>
+    </div>
 
-  <div class="card" style="margin-bottom:14px"><h3>Langkah tiap jenis action</h3>
-    <div class="two">
-    ${A.playbook.map(p=>`<div style="background:var(--surface2);border-radius:8px;padding:13px 15px">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:3px">
-        <b style="font-size:13.5px">${esc(p.action)}</b>
-        <span class="eyebrow">${esc(p.kapan)}</span></div>
-      <ol style="margin:9px 0 0;padding-left:17px;font-size:12.5px;line-height:1.65;color:var(--ink2)">
-        ${p.langkah.map(l=>`<li>${esc(l)}</li>`).join("")}</ol>
-      <p class="tiny muted" style="margin-top:9px"><b>Ukur:</b> ${esc(p.ukur)}</p>
-    </div>`).join("")}
+    <!-- Filter Buttons -->
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+      <button class="btn btn-sm ${adsFilter==='ALL'?'btn-pri':'btn-sub'}" onclick="adsFilter='ALL';render()">Semua (${fullCal.length})</button>
+      <button class="btn btn-sm ${adsFilter==='EVENT'?'btn-pri':'btn-sub'}" onclick="adsFilter='EVENT';render()">🟣 Event Day (${countEvent})</button>
+      <button class="btn btn-sm ${adsFilter==='BOOST'?'btn-pri':'btn-sub'}" onclick="adsFilter='BOOST';render()">🟠 Boost / Hard Push (${countBoost})</button>
+      <button class="btn btn-sm ${adsFilter==='H-7'?'btn-pri':'btn-sub'}" onclick="adsFilter='H-7';render()">🔴 H-7 / Conversion (${countH7})</button>
+      <button class="btn btn-sm ${adsFilter==='AWARENESS'?'btn-pri':'btn-sub'}" onclick="adsFilter='AWARENESS';render()">🟡 Awareness / Teaser (${countAware})</button>
+    </div>
+
+    <div class="tw" style="max-height:560px;overflow-y:auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Bulan</th>
+            <th>Tipe Action</th>
+            <th>Momentum / Agenda</th>
+            <th>Paket Fokus</th>
+            <th>Alasan Strategis &amp; Taktis</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${filteredCal.length ? filteredCal.map(item => {
+            const isOct = item.tanggal && item.tanggal.startsWith("2026-10");
+            const isPast = item.tanggal && item.tanggal < todayIso;
+            const isToday = item.tanggal && item.tanggal === todayIso;
+            const rowStyle = isToday ? 'background:rgba(14,165,233,0.08);font-weight:600' : (isOct ? 'background:rgba(16,185,129,0.04)' : '');
+            return `<tr style="${rowStyle}">
+              <td class="mono" style="white-space:nowrap">${esc(item.tanggal)}</td>
+              <td style="white-space:nowrap">${esc(item.bulan)}</td>
+              <td>${actBadge(item.action)}</td>
+              <td><b>${esc(item.momentum)}</b></td>
+              <td><span class="pill neutral" style="font-size:11.5px">${esc(item.paket)}</span></td>
+              <td class="tiny" style="max-width:320px;line-height:1.45">${esc(item.alasan)}</td>
+              <td><span class="pill ${isPast ? 'neutral' : (isToday ? 'crit' : 'final')}">${isToday ? 'HARI INI' : (isPast ? 'Selesai' : 'Planned')}</span></td>
+            </tr>`;
+          }).join("") : `<tr><td colspan="7" class="empty">Tidak ada agenda marketing yang cocok dengan filter "${esc(adsQ||adsFilter)}".</td></tr>`}
+        </tbody>
+      </table>
     </div>
   </div>`;
 }
