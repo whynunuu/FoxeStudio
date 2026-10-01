@@ -2171,8 +2171,17 @@ function vBiaya(R){
       <tr class="total"><td>Total ${j}</td><td class="n">${rp(tot)}</td><td class="n">${R.omzet?pct(tot/R.omzet):""}</td></tr>
     </tbody></table></div>`};
   return `
-  <div class="vhead"><div><div class="eyebrow">Buku Neraca Keuangan · ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}</div><h2>Neraca (COGS &amp; OPEX)</h2></div>
-    <p>Laporan terpadu neraca Foxe Studio: klasifikasi otomatis COGS (beban produksi langsung) &amp; OPEX (operasional studio), mutasi kas &amp; bank harian, serta estimasi laba rugi.</p></div>
+  <div class="vhead" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:14px">
+    <div>
+      <div class="eyebrow">Buku Neraca Keuangan · ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}</div>
+      <h2>Neraca (COGS &amp; OPEX) — ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}</h2>
+      <p>Laporan terpadu neraca Foxe Studio: klasifikasi otomatis COGS (beban produksi langsung) &amp; OPEX (operasional studio), mutasi kas &amp; bank harian, serta estimasi laba rugi.</p>
+    </div>
+    <div style="display:flex;gap:6px;background:var(--surface2);padding:4px;border-radius:8px">
+      <button class="btn btn-sm ${R.c.bulan==='2026-10'?'btn-pri':'btn-sub'}" onclick="activeMonth='2026-10';render()">📅 Oktober 2026 (Live Neraca)</button>
+      <button class="btn btn-sm ${R.c.bulan==='2026-09'?'btn-pri':'btn-sub'}" onclick="activeMonth='2026-09';render()">📅 September 2026 (Final)</button>
+    </div>
+  </div>
 
   <div class="stats" style="margin-bottom:14px">
     <div class="stat"><span class="k">Total COGS</span><span class="v sm">${rp(R.cogs)}</span><span class="m">${R.omzet?pct(R.cogs/R.omzet):""} dari omzet</span></div>
@@ -2272,8 +2281,10 @@ function vBiaya(R){
             <td class="n">${balFmt}</td>
             <td>${badgeMasuk}</td>
             <td>${ketKeluar}</td>
-          </tr>`;
-        }).join("") : `<tr><td colspan="6"><div class="empty">Belum ada data detail neraca.</div></td></tr>`}
+        }).join("") : `<tr><td colspan="6"><div class="empty" style="padding:22px 0">
+          Belum ada pencatatan mutasi di Buku Detail Neraca ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}.<br>
+          <span class="tiny muted">Sheet '${BULAN[+R.c.bulan.split("-")[1]-1]} 2026' di File Neraca telah terikat aktif. Begitu tim finance mengisi mutasi debit/kredit, data akan otomatis terurai live saat cron harian sinkronisasi berjalan.</span>
+        </div></td></tr>`}
       </tbody>
       <tfoot>
         <tr class="total">
@@ -3466,11 +3477,15 @@ function vGaji(R){
   return `
   <div class="vhead" style="justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px">
     <div>
-      <div class="eyebrow">Payroll &amp; Penggajian Karyawan</div>
-      <h2>Gaji Karyawan</h2>
+      <div class="eyebrow">Payroll &amp; Penggajian Karyawan · ${mn} ${yr}</div>
+      <h2>Gaji Karyawan — ${mn} ${yr}</h2>
       <p>Data pos gaji terhubung dengan File Neraca. Nilai shift, tarif, bonus, dan potongan kasbon <b>dapat diedit langsung</b>. Di bagian bawah langsung tersedia slip gaji resmi siap cetak.</p>
     </div>
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <div style="display:flex;gap:4px;background:var(--surface2);padding:3px;border-radius:7px">
+        <button class="btn sm ${R.c.bulan==='2026-10'?'pri':''}" onclick="activeMonth='2026-10';render()">📅 Okt 2026</button>
+        <button class="btn sm ${R.c.bulan==='2026-09'?'pri':''}" onclick="activeMonth='2026-09';render()">📅 Sep 2026</button>
+      </div>
       <span class="pill prog" id="payrollEditBadge" style="font-size:11.5px">✏️ Mode Edit Aktif</span>
       <button class="btn sm pri" id="btnSavePayroll">💾 Simpan Perubahan</button>
       <button class="btn sm" id="btnResetPayroll" title="Kembalikan ke data acuan default neraca">🔄 Reset ke Neraca</button>

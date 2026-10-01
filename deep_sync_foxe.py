@@ -293,7 +293,7 @@ def run_integration():
 
         # STEP 11: Tutup sync -> status 'sukses'
         current_sync["status"] = "sukses"
-        current_sync["ringkas"] = f"Integrasi berhasil: {len(res_f1['orders'])} order Sep, {len(res_f1_okt['orders'])} order Okt, {len(res_f2_bookings)} jadwal, {len(res_neraca)} pos pengeluaran Neraca, {okt_pipeline['totalBookings']} pipeline Okt."
+        current_sync["ringkas"] = f"Integrasi berhasil: {len(res_f1['orders'])} order Sep, {len(res_f1_okt['orders'])} order Okt, {len(res_f2_bookings)} jadwal, {neraca_count} pos pengeluaran Neraca, {okt_pipeline['totalBookings']} pipeline Okt."
 
         print("\n[5/5] Menyimpan state dan merender artefak...")
         with open("foxe_full_state.json", "w", encoding="utf-8") as f:
