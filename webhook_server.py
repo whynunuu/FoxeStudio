@@ -96,7 +96,7 @@ async def receive_fonnte_webhook(request: Request, background_tasks: BackgroundT
         "client_name": name,
         "phone": sender,
         "tier": result.get("tier"),
-        "lead_status": result.get("status"),
+        "lead_status": result.get("lead_status") or result.get("lead", {}).get("status"),
         "ai_recommendation": result.get("ai_recommendation")
     }
 

@@ -30,7 +30,7 @@ if os.path.exists(SECRETS_FILE):
         pass
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") or _local_secrets.get("GEMINI_API_KEY", "")
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-flash-lite-latest")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-flash-latest")
 FONNTE_TOKEN = os.environ.get("FONNTE_TOKEN") or _local_secrets.get("FONNTE_TOKEN", "")
 
 
@@ -386,7 +386,14 @@ class AgenticLeadEngine:
             lead = new_lead
 
         self._save_vault(self.leads)
-        return {"status": "success", "lead": lead, "matched": bool(match_result)}
+        return {
+            "status": "success",
+            "tier": lead.get("tier"),
+            "lead_status": lead.get("status"),
+            "ai_recommendation": lead.get("ai_recommendation"),
+            "lead": lead,
+            "matched": bool(match_result)
+        }
 
     def get_admin_metrics(self) -> Dict[str, Any]:
         """
@@ -417,6 +424,31 @@ class AgenticLeadEngine:
             data["closing_rate"] = round((data["converted"] / tot * 100), 1) if tot > 0 else 0.0
 
         return metrics
+
+    def get_leads_summary(self) -> Dict[str, Any]:
+        """
+        Mengambil summary leads dan performa admin untuk disinkronkan ke dashboard.
+        """
+        metrics = self.get_admin_metrics()
+        total = len(self.leads)
+        converted = sum(1 for l in self.leads if l.get("status") == "CONVERTED")
+        hot = sum(1 for l in self.leads if l.get("tier") == "HOT" and l.get("status") != "CONVERTED")
+        warm = sum(1 for l in self.leads if l.get("tier") == "WARM" and l.get("status") != "CONVERTED")
+        cold = sum(1 for l in self.leads if l.get("tier") == "COLD" and l.get("status") != "CONVERTED")
+        unconverted_val = sum(l.get("estimated_value", 0) for l in self.leads if l.get("status") != "CONVERTED")
+
+        return {
+            "status": "success",
+            "total_leads": total,
+            "converted_count": converted,
+            "closing_rate": round((converted / total * 100), 1) if total > 0 else 0.0,
+            "hot_count": hot,
+            "warm_count": warm,
+            "cold_count": cold,
+            "unconverted_potential_value": unconverted_val,
+            "admin_metrics": metrics,
+            "leads": self.leads
+        }
 
 if __name__ == "__main__":
     engine = AgenticLeadEngine()
