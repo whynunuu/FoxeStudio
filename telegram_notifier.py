@@ -15,6 +15,7 @@ import urllib.parse
 import sys
 import datetime
 import re
+from collections import defaultdict, Counter
 
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
@@ -53,7 +54,6 @@ def detect_chat_id(token=None):
         with urllib.request.urlopen(req, timeout=10) as res:
             data = json.loads(res.read().decode("utf-8"))
             if data.get("ok") and data.get("result"):
-                # Ambil update terbaru yang ada message / chat
                 for item in reversed(data["result"]):
                     msg = item.get("message") or item.get("my_chat_member") or item.get("channel_post")
                     if msg and "chat" in msg:
@@ -101,10 +101,46 @@ def send_telegram_message(text, chat_id=None, parse_mode="HTML"):
         print(f"[ERROR] Gagal kirim pesan Telegram: {e}")
         return False
 
-def build_summary_message(state):
-    from collections import defaultdict
+def build_summary_message(state, bulan=None):
+    BULAN_NAMA = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
     cfg = state.get("config", {})
-    cutoff = cfg.get("cutoff", "2026-09-20")
+    ok_lo = state.get("oktoberLogOrder", {})
+    ok_pip = state.get("oktoberPipeline", {})
+
+    # Auto-detect bulan jika tidak ditentukan secara eksplisit
+    if not bulan:
+        if ok_lo and ok_lo.get("orders"):
+            bulan = "2026-10"
+        elif cfg.get("cutoff", "").startswith("2026-10"):
+            bulan = "2026-10"
+        elif datetime.datetime.now().month == 10:
+            bulan = "2026-10"
+        else:
+            bulan = "2026-09"
+
+    is_oktober = (bulan == "2026-10")
+
+    if is_oktober:
+        cutoff = ok_lo.get("cutoff", "2026-10-01")
+        total_days = 31
+        month_label = "OKTOBER 2026"
+        month_short = "Okt"
+        orders = ok_lo.get("orders", [])
+        shifts = ok_lo.get("shifts", [])
+        leads_list = ok_lo.get("leads", [])
+        expenses = [e for e in state.get("expenses", []) if e.get("tanggal", "").startswith("2026-10")]
+        bookings_source = ok_pip.get("bookings", [])
+    else:
+        cutoff = cfg.get("cutoff", "2026-09-30")
+        total_days = 30
+        month_label = "SEPTEMBER 2026"
+        month_short = "Sept"
+        orders = [o for o in state.get("orders", []) if o.get("tanggal", "").startswith("2026-09")]
+        shifts = [s for s in state.get("shifts", []) if s.get("tanggal", "").startswith("2026-09")]
+        leads_list = [l for l in state.get("leads", []) if l.get("tanggal", "").startswith("2026-09")]
+        expenses = state.get("expenses", [])
+        bookings_source = state.get("schedule", {}).get("bookings", [])
+
     try:
         cutoff_dt = datetime.datetime.strptime(cutoff, "%Y-%m-%d")
     except Exception:
@@ -113,17 +149,19 @@ def build_summary_message(state):
 
     tomorrow_dt = cutoff_dt + datetime.timedelta(days=1)
     tomorrow_str = tomorrow_dt.strftime("%Y-%m-%d")
-    tomorrow_display = tomorrow_dt.strftime("%d %b %Y").upper()
+    tomorrow_display = f"{tomorrow_dt.day:02d} {BULAN_NAMA[tomorrow_dt.month-1][:3].upper()} {tomorrow_dt.year}"
 
     cash_by_date = defaultdict(float)
     tf_by_date = defaultdict(float)
     tot_by_date = defaultdict(float)
-    for o in state.get("orders", []):
-        cash_by_date[o.get("tanggal")] += o.get("cash", 0)
-        tf_by_date[o.get("tanggal")] += o.get("transfer", 0)
-        tot_by_date[o.get("tanggal")] += o.get("grandTotal", o.get("total", 0))
+    for o in orders:
+        tgl = o.get("tanggal")
+        if tgl:
+            cash_by_date[tgl] += o.get("cash", 0)
+            tf_by_date[tgl] += o.get("transfer", 0)
+            tot_by_date[tgl] += o.get("grandTotal", o.get("total", 0))
 
-    leads_map = {l.get("tanggal"): l for l in state.get("leads", [])}
+    leads_map = {l.get("tanggal"): l for l in leads_list}
 
     def fmt_k(v):
         if v <= 0:
@@ -132,13 +170,13 @@ def build_summary_message(state):
 
     table_lines = []
     table_lines.append("============================================")
-    table_lines.append("        SUMMARY FOXE STUDIO (HARIAN)        ")
+    table_lines.append(f"     SUMMARY FOXE STUDIO — {month_label:<14}")
     table_lines.append("============================================")
     table_lines.append("Tgl     Cash  Transfer   Total  Leads   Rate")
     table_lines.append("--------------------------------------------")
 
-    for d in range(1, 31):
-        tgl = f"2026-09-{d:02d}"
+    for d in range(1, total_days + 1):
+        tgl = f"{bulan}-{d:02d}"
         if d <= cutoff_day:
             c = cash_by_date.get(tgl, 0)
             t = tf_by_date.get(tgl, 0)
@@ -147,6 +185,9 @@ def build_summary_message(state):
             if ld and ld.get("leads") and ld["leads"] > 0:
                 l_str = str(int(ld["leads"]))
                 r_str = f"{int(round(ld.get('dp', 0) / ld['leads'] * 100))}%"
+            elif ld and ld.get("dp") and ld["dp"] > 0:
+                l_str = "-"
+                r_str = f"{int(ld['dp'])} DP"
             else:
                 l_str = "-"
                 r_str = "-"
@@ -170,33 +211,19 @@ def build_summary_message(state):
     table_lines.append(f"{'TOTAL TRANSFER':<24} {rp(total_tf):>19}")
     table_lines.append(f"{'GRAND TOTAL OMZET':<24} {rp(grand_total):>19}")
 
-    exps = state.get("expenses", [])
-    if exps:
-        cogs_tot = sum(e.get("nilai", 0) for e in exps if e.get("jenis") == "COGS")
-        opex_tot = sum(e.get("nilai", 0) for e in exps if e.get("jenis") == "OPEX")
-        nett_profit = grand_total - cogs_tot - opex_tot
-        table_lines.append("--------------------------------------------")
-        table_lines.append(f"{'TOTAL COGS (Produksi)':<24} {rp(cogs_tot):>19}")
-        table_lines.append(f"{'TOTAL OPEX (Studio)':<24} {rp(opex_tot):>19}")
-        table_lines.append(f"{'ESTIMASI NETT PROFIT':<24} {rp(nett_profit):>19}")
+    cogs_tot = sum(e.get("nilai", 0) for e in expenses if e.get("jenis") == "COGS")
+    opex_tot = sum(e.get("nilai", 0) for e in expenses if e.get("jenis") == "OPEX")
+    nett_profit = grand_total - cogs_tot - opex_tot
+    table_lines.append("--------------------------------------------")
+    table_lines.append(f"{'TOTAL COGS (Produksi)':<24} {rp(cogs_tot):>19}")
+    table_lines.append(f"{'TOTAL OPEX (Studio)':<24} {rp(opex_tot):>19}")
+    table_lines.append(f"{'ESTIMASI NETT PROFIT':<24} {rp(nett_profit):>19}")
 
-    # Estimate Omzet Sampai Akhir Bulan dari Jadwal Booking Terdaftar
-    future_bookings = [
-        b for b in state.get("schedule", {}).get("bookings", [])
-        if b.get("tgl") and b.get("tgl") > cutoff and b.get("tgl").startswith(cutoff[:7])
-    ]
-    if future_bookings:
-        unrealized_cash_in = sum(b.get("harga", 0) for b in future_bookings)
-        total_dp_future = 0.0
-        for b in future_bookings:
-            hp = str(b.get("noHp", "")).lower()
-            m = re.search(r'dp\s*(\d+)', hp)
-            if m:
-                total_dp_future += float(m.group(1)) * 1000
-            elif "lunas" in hp:
-                total_dp_future += float(b.get("harga", 0))
-
-        sisa_pelunasan = max(0.0, unrealized_cash_in - total_dp_future)
+    # Section Estimate Omzet Sampai Akhir Bulan (Unrealized Cash In & Omzet)
+    if is_oktober:
+        unrealized_cash_in = float(ok_pip.get("potentialOmzet", 0))
+        total_dp_future = float(ok_pip.get("totalDp", 0))
+        sisa_pelunasan = float(ok_pip.get("estimateCashIn", 0))
         unrealized_omzet = grand_total + sisa_pelunasan
 
         table_lines.append("--------------------------------------------")
@@ -205,24 +232,55 @@ def build_summary_message(state):
         table_lines.append(f"{'Total':<24} {rp(sisa_pelunasan):>19}")
         table_lines.append("")
         table_lines.append(f"{'Unrealized Omzet':<24} {rp(unrealized_omzet):>19}")
+    else:
+        future_bookings = [
+            b for b in bookings_source
+            if b.get("tgl") and b.get("tgl") > cutoff and b.get("tgl").startswith(cutoff[:7])
+        ]
+        if future_bookings:
+            unrealized_cash_in = sum(b.get("harga", 0) for b in future_bookings)
+            total_dp_future = 0.0
+            for b in future_bookings:
+                hp = str(b.get("noHp", "")).lower()
+                m = re.search(r'dp\s*(\d+)', hp)
+                if m:
+                    total_dp_future += float(m.group(1)) * 1000
+                elif "lunas" in hp:
+                    total_dp_future += float(b.get("harga", 0))
+
+            sisa_pelunasan = max(0.0, unrealized_cash_in - total_dp_future)
+            unrealized_omzet = grand_total + sisa_pelunasan
+
+            table_lines.append("--------------------------------------------")
+            table_lines.append(f"{'Unrealized Cash In':<24} {rp(unrealized_cash_in):>19}")
+            table_lines.append(f"{'DP (-)':<24} {rp(total_dp_future):>19}")
+            table_lines.append(f"{'Total':<24} {rp(sisa_pelunasan):>19}")
+            table_lines.append("")
+            table_lines.append(f"{'Unrealized Omzet':<24} {rp(unrealized_omzet):>19}")
 
     table_lines.append("============================================")
-
     table_block = "\n".join(table_lines)
 
     # Leads s.d. cutoff
-    total_leads = sum(l.get("leads", 0) for l in state.get("leads", []) if int(l.get("tanggal", "2026-09-01").split("-")[2]) <= cutoff_day)
-    total_dp = sum(l.get("dp", 0) for l in state.get("leads", []) if int(l.get("tanggal", "2026-09-01").split("-")[2]) <= cutoff_day)
-    conv_rate = (total_dp / total_leads * 100) if total_leads > 0 else 0
-
-    # Roster Shift aktual s.d. cutoff (akumulasi total shift dari Log Order)
-    from collections import Counter
-    shift_counts = Counter()
-    for sh in state.get("shifts", []):
+    total_leads = 0.0
+    total_dp = 0.0
+    for l in leads_list:
         try:
-            sh_day = int(sh.get("tanggal", "2026-09-01").split("-")[2])
+            ld_day = int(str(l.get("tanggal", f"{bulan}-01")).split("-")[2])
+            if ld_day <= cutoff_day:
+                total_leads += float(l.get("leads", 0) or 0)
+                total_dp += float(l.get("dp", 0) or 0)
+        except Exception:
+            pass
+    conv_rate = (total_dp / total_leads * 100) if total_leads > 0 else (100.0 if total_dp > 0 else 0.0)
+
+    # Roster Shift aktual s.d. cutoff
+    shift_counts = Counter()
+    for sh in shifts:
+        try:
+            sh_day = int(str(sh.get("tanggal", f"{bulan}-01")).split("-")[2])
             if sh_day <= cutoff_day:
-                shift_counts[sh.get("nama")] += 1
+                shift_counts[str(sh.get("nama", "")).strip().upper()] += int(sh.get("slot", 1) or 1)
         except Exception:
             pass
 
@@ -242,7 +300,7 @@ def build_summary_message(state):
 
     # Jadwal Foto Besok
     tomorrow_bookings = [
-        b for b in state.get("schedule", {}).get("bookings", [])
+        b for b in bookings_source
         if b.get("tgl") == tomorrow_str
     ]
 
@@ -254,15 +312,16 @@ def build_summary_message(state):
             nohp = str(b.get("noHp", "")).lower()
             if "lunas" in nohp:
                 status = "Lunas"
-            elif "dp" in nohp:
-                status = "DP"
+            elif "dp" in nohp or float(b.get("dp", 0) or 0) > 0:
+                dp_val = float(b.get("dp", 0) or 0)
+                status = f"DP {int(dp_val/1000)}k" if dp_val > 0 else "DP"
             else:
                 status = "Confirmed"
             
             adm_code = str(b.get("admin", "")).strip().upper()
             adm_name = {"IN": "INDAH", "AM": "AMEL", "AD": "ADDEL"}.get(adm_code, adm_code) if adm_code else "-"
             waktu = b.get("waktu", "")
-            studio = b.get("studio", "")
+            studio = b.get("studio", "") or b.get("studioNama", "")
             extra_info = f" | {waktu} @ {studio}" if waktu and studio else ""
             booking_lines.append(f"{idx}. <b>{nama}</b> | {paket} (Status: {status} | Admin: {adm_name}{extra_info})")
     else:
@@ -271,33 +330,48 @@ def build_summary_message(state):
     booking_block = "\n".join(booking_lines)
     total_klien_besok = len(tomorrow_bookings)
 
-    now_str = datetime.datetime.now().strftime("%d %B %Y, %H:%M WIB")
+    # Super Peak Wisuda UMP Alert (jika Oktober)
+    super_peak_block = ""
+    if is_oktober:
+        w_d1 = [b for b in bookings_source if b.get("tgl") == "2026-10-03"]
+        w_d2 = [b for b in bookings_source if b.get("tgl") == "2026-10-04"]
+        super_peak_block = (
+            f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            f"🎓 <b>SUPER PEAK WISUDA UMP (3-4 OKT 2026):</b>\n"
+            f"• <b>Jumat, 03 Okt</b> : <b>{len(w_d1)} Sesi Foto</b> (5 Backdrop Wisuda)\n"
+            f"• <b>Sabtu, 04 Okt</b> : <b>{len(w_d2)} Sesi Foto</b> (5 Backdrop Wisuda)\n"
+            f"• <b>Total Gelombang</b> : <b>{len(w_d1) + len(w_d2)} Sesi Terdaftar</b> (Potensi Kas: Rp 48,65 jt)\n"
+            f"• <b>Kesiapan Roster</b> : Siaga 5 Fotografer & Asisten per hari.\n"
+        )
+
+    now = datetime.datetime.now()
+    now_str = f"{now.day:02d} {BULAN_NAMA[now.month-1]} {now.year}, {now.strftime('%H:%M')} WIB"
 
     full_msg = (
         f"<pre>{table_block}</pre>\n\n"
-        f"🎯 <b>LEADS (s.d. {cutoff_day} Sept):</b>\n"
+        f"🎯 <b>LEADS (s.d. {cutoff_day} {month_short}):</b>\n"
         f"• Leads   : <b>{int(total_leads)}</b>\n"
         f"• DP      : <b>{int(total_dp)}</b>\n"
-        f"• Rate    : <b>{conv_rate:.2f}%</b>\n\n"
-        f"👥 <b>ROSTER SHIFT (aktual s.d. {cutoff_day} Sept):</b>\n"
+        f"• Transaksi: <b>{len(orders)}</b>\n\n"
+        f"👥 <b>ROSTER SHIFT (aktual s.d. {cutoff_day} {month_short}):</b>\n"
         f"{shift_block}\n\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📅 <b>JADWAL FOTO BESOK ({tomorrow_display})</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"{booking_block}\n\n"
-        f"Total Jadwal Besok: <b>{total_klien_besok} Klien</b>\n"
+        f"Total Jadwal Besok: <b>{total_klien_besok} Klien</b>\n\n"
+        f"{super_peak_block}"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"📌 <i>Sumber: Foxe Studio — Schedule dan Log Order.xlsm</i>\n"
+        f"📌 <i>Sumber: Foxe Studio — Schedule & Log Order {month_label.title()}.xlsm</i>\n"
         f"🕒 <i>Last Updated: {now_str}</i>\n"
         f"👉 <a href=\"https://whynunuu.github.io/FoxeStudio/\"><b>Buka Dashboard Live Foxe Studio</b></a>"
     )
     return full_msg
 
 if __name__ == "__main__":
-    print("Testing Telegram Notifier with new format...")
+    print("Testing Telegram Notifier with new multi-month format...")
     if os.path.exists("foxe_full_state.json"):
         with open("foxe_full_state.json", "r", encoding="utf-8") as f:
             st = json.load(f)
         msg = build_summary_message(st)
         send_telegram_message(msg)
-
