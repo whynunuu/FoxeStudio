@@ -331,8 +331,8 @@
           <div class="palette-item" data-type="webhook_trigger">
             <div class="icon" style="background: #0284c7;">⚡</div>
             <div class="info">
-              <div class="name">Webhook In</div>
-              <div class="desc">Terima HTTP Webhook</div>
+              <div class="name">Chat Masuk (Webhook)</div>
+              <div class="desc">Terima pesan WhatsApp / IG</div>
             </div>
           </div>
           <div class="palette-item" data-type="foxe_booking_trigger">
@@ -352,41 +352,84 @@
         </div>
 
         <div>
-          <div class="node-group-title">⚖️ Logika & Alur</div>
-          <div class="palette-item" data-type="filter_if">
-            <div class="icon" style="background: #8b5cf6;">🔀</div>
+          <div class="node-group-title">📊 Google Sheet & Parser</div>
+          <div class="palette-item" data-type="sheet_sync">
+            <div class="icon" style="background: #10b981;">📋</div>
             <div class="info">
-              <div class="name">Filter (IF / Else)</div>
-              <div class="desc">Cek DP / Kondisi Pesan</div>
-            </div>
-          </div>
-          <div class="palette-item" data-type="delay">
-            <div class="icon" style="background: #64748b;">⏳</div>
-            <div class="info">
-              <div class="name">Delay / Jeda</div>
-              <div class="desc">Tunda sekian detik</div>
+              <div class="name">Catat Manual & Sync Sheet</div>
+              <div class="desc">Admin input & parser cocok</div>
             </div>
           </div>
         </div>
 
         <div>
-          <div class="node-group-title">📝 Format & Template</div>
+          <div class="node-group-title">⚖️ Logika & AI Scoring</div>
+          <div class="palette-item" data-type="filter_if">
+            <div class="icon" style="background: #8b5cf6;">🔀</div>
+            <div class="info">
+              <div class="name">Cek DP (Konversi)</div>
+              <div class="desc">IF DP > 0 ? True / False</div>
+            </div>
+          </div>
+          <div class="palette-item" data-type="ai_lead_scorer">
+            <div class="icon" style="background: #a855f7;">🧠</div>
+            <div class="info">
+              <div class="name">AI Lead Scoring (3-Tier)</div>
+              <div class="desc">Pecah ke Hot, Warm, Cold</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="node-group-title">🏷️ Lead Tiers (Belum DP)</div>
+          <div class="palette-item" data-type="hot_lead">
+            <div class="icon" style="background: #ef4444;">🔥</div>
+            <div class="info">
+              <div class="name">Hot Lead Action</div>
+              <div class="desc">Form kirim / hampir transfer</div>
+            </div>
+          </div>
+          <div class="palette-item" data-type="warm_lead">
+            <div class="icon" style="background: #f59e0b;">⚡</div>
+            <div class="info">
+              <div class="name">Warm Lead Action</div>
+              <div class="desc">Tanya paket & dibalas</div>
+            </div>
+          </div>
+          <div class="palette-item" data-type="cold_lead">
+            <div class="icon" style="background: #06b6d4;">❄️</div>
+            <div class="info">
+              <div class="name">Cold Lead Action</div>
+              <div class="desc">Pricelist lost / menghilang</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="node-group-title">🤖 AI Agent VPS</div>
+          <div class="palette-item" data-type="ai_agent_vps">
+            <div class="icon" style="background: #0ea5e9;">🤖</div>
+            <div class="info">
+              <div class="name">AI Agent VPS (Reminder)</div>
+              <div class="desc">Summary trafik & grup WA/TG</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="node-group-title">💬 Aksi Konfirmasi (DP Masuk)</div>
           <div class="palette-item" data-type="set_transform">
             <div class="icon" style="background: #f59e0b;">✍️</div>
             <div class="info">
               <div class="name">Template WhatsApp</div>
-              <div class="desc">Susun pesan & rupiah</div>
+              <div class="desc">Format invoice booking</div>
             </div>
           </div>
-        </div>
-
-        <div>
-          <div class="node-group-title">💬 Aksi Keluar (Actions)</div>
           <div class="palette-item" data-type="fonnte_whatsapp">
             <div class="icon" style="background: #25d366;">📱</div>
             <div class="info">
               <div class="name">WhatsApp Fonnte</div>
-              <div class="desc">Kirim WA otomatis</div>
+              <div class="desc">Kirim WA resmi</div>
             </div>
           </div>
           <div class="palette-item" data-type="telegram_bot">
@@ -549,6 +592,122 @@
     // DEFAULT WORKFLOWS
     const DEFAULT_WORKFLOWS = [
       {
+        id: "wf_ai_lead_n8n",
+        name: "Alur Otomasi Admin & AI Lead Scoring (n8n Engine)",
+        description: "Chat Masuk Webhook ➔ Catat Manual & Sheet Sync ➔ Cek Konversi DP ➔ [True: WA Konfirmasi] / [False: AI Lead Scoring Hot/Warm/Cold ➔ AI Agent VPS Summary & Group Reminder].",
+        is_active: true,
+        nodes: [
+          {
+            id: "node_webhook",
+            name: "Chat Masuk (Webhook)",
+            type: "webhook_trigger",
+            position: { x: 40, y: 220 },
+            parameters: { webhook_token: "foxe-chat-inbox" }
+          },
+          {
+            id: "node_sheet_sync",
+            name: "Catat Manual & Sync Sheet",
+            type: "sheet_sync",
+            position: { x: 330, y: 220 },
+            parameters: { sheet_name: "Log Order & Reservasi", sync_mode: "auto_match" }
+          },
+          {
+            id: "node_filter_dp",
+            name: "Cek Pembayaran DP",
+            type: "filter_if",
+            position: { x: 620, y: 220 },
+            parameters: { field: "dp_masuk", operator: ">", value: "0" }
+          },
+          {
+            id: "node_konfirmasi_wa",
+            name: "Format Konfirmasi DP",
+            type: "set_transform",
+            position: { x: 920, y: 90 },
+            parameters: {
+              message_template: "Halo Kak *{{client_name}}*! ✨\nBooking {{paket}} di Foxe Studio pada {{tanggal_foto}} ({{jam_foto}}) telah kami konfirmasi.\nDP Diterima: Rp {{rupiah(dp_masuk)}} (TERKUNCI / VALID).\nSisa Pelunasan: Rp {{rupiah(sisa_bayar)}} saat hari-H foto.\nSampai jumpa di studio! 📸🦊"
+            }
+          },
+          {
+            id: "node_fonnte_wa",
+            name: "Kirim WhatsApp Fonnte",
+            type: "fonnte_whatsapp",
+            position: { x: 1220, y: 90 },
+            parameters: {
+              token: "",
+              target_phone: "{{phone}}",
+              message: "{{rendered_message}}",
+              is_simulation: true
+            }
+          },
+          {
+            id: "node_ai_leads",
+            name: "AI Lead Scoring (3-Tier)",
+            type: "ai_lead_scorer",
+            position: { x: 920, y: 340 },
+            parameters: {
+              rules: "Hot: Form terisi/hampir DP | Warm: Tanya lanjut paket & dibalas | Cold: Tanya pricelist lalu hening"
+            }
+          },
+          {
+            id: "node_hot_lead",
+            name: "🔥 Hot Lead (Hampir DP)",
+            type: "hot_lead",
+            position: { x: 1220, y: 220 },
+            parameters: {
+              tier: "Hot",
+              urgency: "Sangat Tinggi (1-2 Jam)",
+              sop_action: "Sudah kirim form booking tapi belum transfer DP. Hubungi via WA: 'Halo Kak {{client_name}}, slot jam {{jam_foto}} tanggal {{tanggal_foto}} kami amankan 1 jam lagi yaa, mau dilanjutkan transfer DP-nya sekarang?'"
+            }
+          },
+          {
+            id: "node_warm_lead",
+            name: "⚡ Warm Lead (Tanya Lanjut)",
+            type: "warm_lead",
+            position: { x: 1220, y: 360 },
+            parameters: {
+              tier: "Warm",
+              urgency: "Sedang (Hari Ini)",
+              sop_action: "Sudah tanya-tanya paket & admin sudah jawab. Konsultasi lanjut: Kirim portofolio foto paket & tanyakan preferensi spot backdrop favorit."
+            }
+          },
+          {
+            id: "node_cold_lead",
+            name: "❄️ Cold Lead (Pricelist Lost)",
+            type: "cold_lead",
+            position: { x: 1220, y: 500 },
+            parameters: {
+              tier: "Cold",
+              urgency: "Rendah (Berkala / H-7)",
+              sop_action: "Hanya tanya pricelist lalu menghilang. Simpan kontak & jadwalkan broadcast nurturing berkala atau promo momentum akademik wisuda."
+            }
+          },
+          {
+            id: "node_ai_agent_vps",
+            name: "🤖 AI Agent VPS (Reminder Grup)",
+            type: "ai_agent_vps",
+            position: { x: 1540, y: 360 },
+            parameters: {
+              target_group: "Grup Telegram / WA Admin Foxe Studio",
+              cron_schedule: "Setiap jam 09:00, 14:00, & 20:00 WIB",
+              task: "Summary trafik chat harian & kirim checklist calon client yang wajib difollow-up admin."
+            }
+          }
+        ],
+        connections: [
+          { id: "c1", source: "node_webhook", sourceHandle: "output", target: "node_sheet_sync", targetHandle: "input" },
+          { id: "c2", source: "node_sheet_sync", sourceHandle: "output", target: "node_filter_dp", targetHandle: "input" },
+          { id: "c3", source: "node_filter_dp", sourceHandle: "true", target: "node_konfirmasi_wa", targetHandle: "input" },
+          { id: "c4", source: "node_konfirmasi_wa", sourceHandle: "output", target: "node_fonnte_wa", targetHandle: "input" },
+          { id: "c5", source: "node_filter_dp", sourceHandle: "false", target: "node_ai_leads", targetHandle: "input" },
+          { id: "c6", source: "node_ai_leads", sourceHandle: "hot", target: "node_hot_lead", targetHandle: "input" },
+          { id: "c7", source: "node_ai_leads", sourceHandle: "warm", target: "node_warm_lead", targetHandle: "input" },
+          { id: "c8", source: "node_ai_leads", sourceHandle: "cold", target: "node_cold_lead", targetHandle: "input" },
+          { id: "c9", source: "node_hot_lead", sourceHandle: "output", target: "node_ai_agent_vps", targetHandle: "input" },
+          { id: "c10", source: "node_warm_lead", sourceHandle: "output", target: "node_ai_agent_vps", targetHandle: "input" },
+          { id: "c11", source: "node_cold_lead", sourceHandle: "output", target: "node_ai_agent_vps", targetHandle: "input" }
+        ]
+      },
+      {
         id: "wf_konfirmasi_dp",
         name: "Konfirmasi Booking & DP Masuk (WhatsApp Fonnte)",
         description: "Otomatis kirim rincian booking & bukti DP lunas ke WhatsApp pelanggan serta alert Telegram ke admin studio.",
@@ -562,14 +721,14 @@
             parameters: { webhook_token: "foxe-booking-hook" }
           },
           {
-            id: "node_filter_dp",
+            id: "node_filter_dp_old",
             name: "Cek Pembayaran DP",
             type: "filter_if",
             position: { x: 360, y: 180 },
             parameters: { field: "dp_masuk", operator: ">", value: "0" }
           },
           {
-            id: "node_template_wa",
+            id: "node_template_wa_old",
             name: "Format Template WhatsApp",
             type: "set_transform",
             position: { x: 660, y: 120 },
@@ -578,7 +737,7 @@
             }
           },
           {
-            id: "node_fonnte",
+            id: "node_fonnte_old",
             name: "Kirim WhatsApp Fonnte",
             type: "fonnte_whatsapp",
             position: { x: 980, y: 120 },
@@ -590,7 +749,7 @@
             }
           },
           {
-            id: "node_telegram_admin",
+            id: "node_telegram_admin_old",
             name: "Notif Telegram Admin Foxe",
             type: "telegram_bot",
             position: { x: 980, y: 300 },
@@ -602,10 +761,10 @@
           }
         ],
         connections: [
-          { id: "conn_1", source: "node_trigger", sourceHandle: "output", target: "node_filter_dp", targetHandle: "input" },
-          { id: "conn_2", source: "node_filter_dp", sourceHandle: "true", target: "node_template_wa", targetHandle: "input" },
-          { id: "conn_3", source: "node_template_wa", sourceHandle: "output", target: "node_fonnte", targetHandle: "input" },
-          { id: "conn_4", source: "node_template_wa", sourceHandle: "output", target: "node_telegram_admin", targetHandle: "input" }
+          { id: "conn_1", source: "node_trigger", sourceHandle: "output", target: "node_filter_dp_old", targetHandle: "input" },
+          { id: "conn_2", source: "node_filter_dp_old", sourceHandle: "true", target: "node_template_wa_old", targetHandle: "input" },
+          { id: "conn_3", source: "node_template_wa_old", sourceHandle: "output", target: "node_fonnte_old", targetHandle: "input" },
+          { id: "conn_4", source: "node_template_wa_old", sourceHandle: "output", target: "node_telegram_admin_old", targetHandle: "input" }
         ]
       },
       {
@@ -819,10 +978,19 @@
         }
         if (node.type === 'filter_if') {
           portsHtml += `
-            <div class="port port-true" data-node="${node.id}" data-handle="true" title="True"></div>
+            <div class="port port-true" data-node="${node.id}" data-handle="true" title="DP Terkonfirmasi (True)"></div>
             <span class="port-label label-true">True</span>
-            <div class="port-false port" data-node="${node.id}" data-handle="false" title="False"></div>
+            <div class="port-false port" data-node="${node.id}" data-handle="false" title="Belum DP (False)"></div>
             <span class="port-label label-false">False</span>
+          `;
+        } else if (node.type === 'ai_lead_scorer') {
+          portsHtml += `
+            <div class="port port-output" style="top:26%;border-color:#ef4444;" data-node="${node.id}" data-handle="hot" title="Hot Lead"></div>
+            <span class="port-label" style="top:22%;color:#ef4444;">Hot</span>
+            <div class="port port-output" style="top:52%;border-color:#f59e0b;" data-node="${node.id}" data-handle="warm" title="Warm Lead"></div>
+            <span class="port-label" style="top:48%;color:#f59e0b;">Warm</span>
+            <div class="port port-output" style="top:78%;border-color:#06b6d4;" data-node="${node.id}" data-handle="cold" title="Cold Lead"></div>
+            <span class="port-label" style="top:74%;color:#06b6d4;">Cold</span>
           `;
         } else {
           portsHtml += `<div class="port port-output" data-node="${node.id}" data-handle="output" title="Output"></div>`;
@@ -830,8 +998,12 @@
 
         let previewText = '';
         const p = node.parameters || {};
-        if (node.type === 'webhook_trigger') previewText = `Webhook: /${p.webhook_token || 'hook'}`;
+        if (node.type === 'webhook_trigger') previewText = `Webhook: /${p.webhook_token || 'chat-inbox'}`;
+        else if (node.type === 'sheet_sync') previewText = `Sheet: ${p.sheet_name || 'Log Order'}`;
         else if (node.type === 'filter_if') previewText = `IF ${p.field || 'dp'} ${p.operator || '>'} ${p.value || '0'}`;
+        else if (node.type === 'ai_lead_scorer') previewText = `Klasifikasi: Hot · Warm · Cold`;
+        else if (node.type === 'hot_lead' || node.type === 'warm_lead' || node.type === 'cold_lead') previewText = `SOP: ${p.urgency || 'Prioritas Lead'}`;
+        else if (node.type === 'ai_agent_vps') previewText = `VPS Agent: ${p.target_group || 'Grup Admin'}`;
         else if (node.type === 'fonnte_whatsapp') previewText = `WA: ${p.target_phone || 'Client'}`;
         else if (node.type === 'telegram_bot') previewText = `Alert Chat: ${p.chat_id || 'Admin'}`;
         else if (node.type === 'set_transform') previewText = `Format WhatsApp Template`;
@@ -945,8 +1117,11 @@
         const width = 240, height = 110;
         const x = node.position.x, y = node.position.y;
         if (handle === 'input') return { x, y: y + height / 2 };
-        if (handle === 'true') return { x: x + width, y: y + 38 };
-        if (handle === 'false') return { x: x + width, y: y + 78 };
+        if (handle === 'true') return { x: x + width, y: y + 36 };
+        if (handle === 'false') return { x: x + width, y: y + 76 };
+        if (handle === 'hot') return { x: x + width, y: y + 28 };
+        if (handle === 'warm') return { x: x + width, y: y + 58 };
+        if (handle === 'cold') return { x: x + width, y: y + 88 };
         return { x: x + width, y: y + height / 2 };
       }
 
@@ -967,7 +1142,8 @@
           path.setAttribute('d', d);
           let extraClass = '';
           if (conn.sourceHandle === 'true') extraClass = 'wire-true';
-          else if (conn.sourceHandle === 'false') extraClass = 'wire-false';
+          else if (conn.sourceHandle === 'false' || conn.sourceHandle === 'hot') extraClass = 'wire-false';
+          else if (conn.sourceHandle === 'warm') extraClass = 'wire-active';
           path.setAttribute('class', `wire-path ${extraClass}`);
           path.setAttribute('title', 'Klik kabel untuk menghapus');
           path.addEventListener('click', (e) => {
@@ -1023,15 +1199,27 @@
       getNodeMeta(type) {
         switch (type) {
           case 'webhook_trigger':
-            return { title: 'Webhook Booking Masuk', category: 'Trigger', icon: '⚡', color: '#0284c7', headerBg: 'rgba(2,132,199,0.25)', desc: 'Terima payload order/booking via Webhook.', defaultParams: { webhook_token: 'foxe-booking-hook' } };
+            return { title: 'Chat Masuk (Webhook)', category: 'Trigger', icon: '⚡', color: '#0284c7', headerBg: 'rgba(2,132,199,0.25)', desc: 'Terima pesan chat WhatsApp/IG via Webhook.', defaultParams: { webhook_token: 'foxe-chat-inbox' } };
+          case 'sheet_sync':
+            return { title: 'Catat Manual & Sync Sheet', category: 'Spreadsheet', icon: '📋', color: '#10b981', headerBg: 'rgba(16,185,129,0.25)', desc: 'Admin catat di Sheet & parser mencocokkan data.', defaultParams: { sheet_name: 'Log Order & Reservasi', sync_mode: 'auto_match' } };
+          case 'filter_if':
+            return { title: 'Cek Pembayaran DP', category: 'Logic', icon: '⚖️', color: '#8b5cf6', headerBg: 'rgba(139,92,246,0.25)', desc: 'Evaluasi konversi DP (True = Lunas, False = Pecah Tier).', defaultParams: { field: 'dp_masuk', operator: '>', value: '0' } };
+          case 'ai_lead_scorer':
+            return { title: 'AI Lead Scoring (3-Tier)', category: 'AI Logic', icon: '🧠', color: '#a855f7', headerBg: 'rgba(168,85,247,0.25)', desc: 'Pisahkan calon klien: Hot, Warm, atau Cold.', defaultParams: { rules: 'Hot: Form terisi/hampir DP | Warm: Tanya lanjut paket & dibalas | Cold: Tanya pricelist lalu hening' } };
+          case 'hot_lead':
+            return { title: '🔥 Hot Lead (Hampir DP)', category: 'Lead Tier', icon: '🔥', color: '#ef4444', headerBg: 'rgba(239,68,68,0.25)', desc: 'Sudah isi form / hampir DP. Prioritas: Lock slot 1-2 jam.', defaultParams: { tier: 'Hot', urgency: 'Sangat Tinggi (1-2 Jam)', sop_action: 'Lock slot segera & follow up konfirmasi DP via WA.' } };
+          case 'warm_lead':
+            return { title: '⚡ Warm Lead (Tanya Lanjut)', category: 'Lead Tier', icon: '⚡', color: '#f59e0b', headerBg: 'rgba(245,158,11,0.25)', desc: 'Tanya lanjut paket & dibalas. Prioritas: Konsultasi paket.', defaultParams: { tier: 'Warm', urgency: 'Sedang (Hari Ini)', sop_action: 'Kirim portofolio foto paket & tanyakan preferensi spot.' } };
+          case 'cold_lead':
+            return { title: '❄️ Cold Lead (Pricelist Lost)', category: 'Lead Tier', icon: '❄️', color: '#06b6d4', headerBg: 'rgba(6,182,212,0.25)', desc: 'Hanya tanya pricelist lalu hilang. Prioritas: Nurturing berkala.', defaultParams: { tier: 'Cold', urgency: 'Rendah (Berkala)', sop_action: 'Simpan kontak & jadwalkan broadcast nurturing promo wisuda.' } };
+          case 'ai_agent_vps':
+            return { title: '🤖 AI Agent VPS (Reminder Grup)', category: 'AI Agent', icon: '🤖', color: '#0ea5e9', headerBg: 'rgba(14,165,233,0.25)', desc: 'Baca trafik chat & kirim checklist reminder follow-up ke grup admin.', defaultParams: { target_group: 'Grup Telegram / WA Admin Foxe', cron_schedule: '09:00, 14:00, & 20:00 WIB', task: 'Summary trafik chat & reminder checklist follow-up admin.' } };
           case 'foxe_booking_trigger':
             return { title: 'Foxe Studio Live', category: 'Trigger', icon: '🦊', color: '#ea580c', headerBg: 'rgba(234,88,12,0.25)', desc: 'Sinkron data riil dari database Foxe Studio.', defaultParams: { trigger_type: 'booking_baru' } };
           case 'manual_trigger':
             return { title: 'Trigger Manual / Test', category: 'Trigger', icon: '▶', color: '#3b82f6', headerBg: 'rgba(59,130,246,0.25)', desc: 'Jalankan flow secara manual.', defaultParams: {} };
-          case 'filter_if':
-            return { title: 'Filter (IF / Else)', category: 'Logic', icon: '⚖️', color: '#8b5cf6', headerBg: 'rgba(139,92,246,0.25)', desc: 'Evaluasi kondisi & pecah jalur True / False.', defaultParams: { field: 'dp_masuk', operator: '>', value: '0' } };
           case 'set_transform':
-            return { title: 'Format Template WhatsApp', category: 'Transform', icon: '📝', color: '#f59e0b', headerBg: 'rgba(245,158,11,0.25)', desc: 'Susun template pesan & format rupiah.', defaultParams: { message_template: 'Halo Kak *{{client_name}}*! ✨\nBooking {{paket}} di Foxe Studio pada {{tanggal_foto}} ({{jam_foto}}) telah kami terima.\nDP Masuk: Rp {{rupiah(dp_masuk)}}.\nSampai jumpa di studio! 📸' } };
+            return { title: 'Format Template WhatsApp', category: 'Transform', icon: '📝', color: '#f59e0b', headerBg: 'rgba(245,158,11,0.25)', desc: 'Susun template pesan konfirmasi & rupiah.', defaultParams: { message_template: 'Halo Kak *{{client_name}}*! ✨\nBooking {{paket}} di Foxe Studio pada {{tanggal_foto}} ({{jam_foto}}) telah kami terima.\nDP Masuk: Rp {{rupiah(dp_masuk)}}.\nSampai jumpa di studio! 📸' } };
           case 'fonnte_whatsapp':
             return { title: 'Kirim WhatsApp Fonnte', category: 'Action', icon: '💬', color: '#25d366', headerBg: 'rgba(37,211,102,0.25)', desc: 'Kirim pesan via Fonnte & WhatsApp Web.', defaultParams: { token: '', target_phone: '{{phone}}', message: '{{rendered_message}}', is_simulation: true } };
           case 'telegram_bot':
@@ -1223,21 +1411,89 @@
     function renderLiveBookingsList() {
       const container = document.getElementById('listLiveBookings');
       container.innerHTML = '';
-      if (!studioBookings.length) {
-        container.innerHTML = '<div style="padding:12px; color:#94a3b8">Memuat data studio...</div>';
-        return;
-      }
-      studioBookings.forEach(b => {
+
+      // Test Scenarios Preset
+      const presets = [
+        {
+          source: "Preset Tes",
+          client_name: "Siti Nurhaliza (Calon Wisuda UMP)",
+          paket: "Graduation Super Peak",
+          tanggal_foto: "2026-10-03",
+          jam_foto: "10:30 WIB",
+          backdrop: "Backdrop A (Graduation Elite)",
+          total_paket: 350000,
+          dp_masuk: 0,
+          sisa_bayar: 350000,
+          phone: "081234567890",
+          admin: "AMEL",
+          lead_tier: "Hot",
+          badge: "🔥 HOT LEAD",
+          desc_status: "Sudah kirim form nama reservasi, menunggu transfer DP (Lock Slot 1-2 Jam)"
+        },
+        {
+          source: "Preset Tes",
+          client_name: "Budi Prasetyo (Mahasiswa UMP)",
+          paket: "Graduation Reguler / Studio",
+          tanggal_foto: "2026-10-04",
+          jam_foto: "14:00 WIB",
+          backdrop: "Backdrop B",
+          total_paket: 250000,
+          dp_masuk: 0,
+          sisa_bayar: 250000,
+          phone: "085678901234",
+          admin: "INDAH",
+          lead_tier: "Warm",
+          badge: "⚡ WARM LEAD",
+          desc_status: "Tanya detail paket wisuda & sudah dijawab admin. Perlu kirim portofolio spot."
+        },
+        {
+          source: "Preset Tes",
+          client_name: "Calon Klien Anonim (Instagram DM)",
+          paket: "Wisuda UMP",
+          tanggal_foto: "2026-10-03",
+          jam_foto: "—",
+          backdrop: "—",
+          total_paket: 250000,
+          dp_masuk: 0,
+          sisa_bayar: 250000,
+          phone: "089876543210",
+          admin: "AMEL",
+          lead_tier: "Cold",
+          badge: "❄️ COLD LEAD",
+          desc_status: "Hanya tanya pricelist lalu menghilang. Simpan untuk broadcast nurturing."
+        },
+        {
+          source: "Preset Tes",
+          client_name: "Denny Hardiansyah (DP Lunas)",
+          paket: "Graduation Super Peak",
+          tanggal_foto: "2026-10-03",
+          jam_foto: "10:30 WIB",
+          backdrop: "Backdrop A",
+          total_paket: 350000,
+          dp_masuk: 100000,
+          sisa_bayar: 250000,
+          phone: "081234567890",
+          admin: "AMEL",
+          lead_tier: "Closed",
+          badge: "✅ DP TERKONFIRMASI",
+          desc_status: "DP Rp 100.000 lunas masuk kasir. Siap kirim konfirmasi WhatsApp & alert admin."
+        }
+      ];
+
+      presets.forEach(b => {
         const item = document.createElement('div');
         item.className = 'palette-item';
         item.style.marginBottom = '6px';
+        item.style.borderLeft = b.lead_tier === 'Hot' ? '3px solid #ef4444' : (b.lead_tier === 'Warm' ? '3px solid #f59e0b' : (b.lead_tier === 'Cold' ? '3px solid #06b6d4' : '3px solid #10b981'));
         item.innerHTML = `
-          <div class="icon" style="background:#ea580c">📸</div>
-          <div class="info">
-            <div class="name">${b.client_name} · ${b.paket}</div>
-            <div class="desc">${b.tanggal_foto} · DP: Rp ${parseInt(b.dp_masuk).toLocaleString('id-ID')} · ${b.source}</div>
+          <div class="info" style="flex:1;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="name">${b.client_name}</span>
+              <span class="pill ${b.lead_tier === 'Hot' ? 'bad' : (b.lead_tier === 'Closed' ? 'final' : 'prog')}" style="font-size:10px;">${b.badge}</span>
+            </div>
+            <div class="desc" style="margin-top:2px; font-size:10.5px; color:#cbd5e1;">${b.desc_status}</div>
           </div>
-          <button class="btn btn-primary btn-sm">Gunakan Untuk Tes</button>
+          <button class="btn btn-primary btn-sm" style="flex-shrink:0;">Uji Alur</button>
         `;
         item.querySelector('button').addEventListener('click', () => {
           document.getElementById('modalBookings').classList.remove('active');
@@ -1245,6 +1501,36 @@
         });
         container.appendChild(item);
       });
+
+      if (studioBookings.length) {
+        const divHead = document.createElement('div');
+        divHead.style.padding = '8px 4px 4px';
+        divHead.style.fontSize = '11px';
+        divHead.style.fontWeight = '700';
+        divHead.style.color = '#94a3b8';
+        divHead.style.textTransform = 'uppercase';
+        divHead.textContent = 'Data Live Transaksi Foxe Studio:';
+        container.appendChild(divHead);
+
+        studioBookings.slice(0, 10).forEach(b => {
+          const item = document.createElement('div');
+          item.className = 'palette-item';
+          item.style.marginBottom = '4px';
+          item.innerHTML = `
+            <div class="icon" style="background:#ea580c">📸</div>
+            <div class="info" style="flex:1;">
+              <div class="name">${b.client_name} · ${b.paket}</div>
+              <div class="desc">${b.tanggal_foto} · DP: Rp ${parseInt(b.dp_masuk).toLocaleString('id-ID')} · ${b.source}</div>
+            </div>
+            <button class="btn btn-sm" style="flex-shrink:0;">Uji Data Ini</button>
+          `;
+          item.querySelector('button').addEventListener('click', () => {
+            document.getElementById('modalBookings').classList.remove('active');
+            runWorkflowExecution(b);
+          });
+          container.appendChild(item);
+        });
+      }
     }
 
     // WORKFLOW RUNNER ENGINE (IN-BROWSER)
@@ -1310,7 +1596,9 @@
         let nextHandle = "output";
 
         if (node.type === "webhook_trigger") {
-          step.message = `Menerima event data untuk: ${ctx.client_name}`;
+          step.message = `Menerima pesan chat baru: "${ctx.client_name}" (${ctx.phone || '08xxx'})`;
+        } else if (node.type === "sheet_sync") {
+          step.message = `Admin mencatat data ke Spreadsheet & parser mendeteksi status DP: Rp ${formatRupiah(ctx.dp_masuk)}`;
         } else if (node.type === "foxe_booking_trigger") {
           step.message = `Data jadwal live studio dimuat: ${ctx.client_name} (${ctx.paket})`;
         } else if (node.type === "manual_trigger") {
@@ -1326,7 +1614,33 @@
           else if (op === "==") match = act === val;
           else if (op === "!=") match = act !== val;
           nextHandle = match ? "true" : "false";
-          step.message = `IF [${field} ${op} ${val}] => ${match ? "BENAR (True)" : "SALAH (False)"}`;
+          step.message = `Cek DP [Rp ${formatRupiah(act)} ${op} Rp ${formatRupiah(val)}] => ${match ? "LUNAS / VALID (True ➔ Konfirmasi WA)" : "BELUM KONVERSI (False ➔ AI Lead Scoring)"}`;
+        } else if (node.type === "ai_lead_scorer") {
+          // Determine Lead Tier
+          let tier = "Cold";
+          if (ctx.lead_tier) {
+            tier = ctx.lead_tier;
+          } else if (ctx.hampir_dp || ctx.form_booking || (ctx.status_chat && ctx.status_chat.includes("form"))) {
+            tier = "Hot";
+          } else if (ctx.tanya_paket || (ctx.status_chat && ctx.status_chat.includes("tanya"))) {
+            tier = "Warm";
+          } else {
+            tier = "Hot"; // default test scenario for unconverted
+          }
+          ctx.assigned_tier = tier;
+          nextHandle = tier.toLowerCase();
+          const descTier = tier === "Hot" 
+            ? "Sudah kirim form nama booking / hampir DP (Lock Slot Segera 1-2 Jam)" 
+            : (tier === "Warm" ? "Sudah tanya-tanya lanjut paket & dibalas admin" : "Hanya tanya pricelist lalu menghilang");
+          step.message = `AI Lead Scorer menganalisis chat: Kategori [${tier.toUpperCase()} LEAD] — ${descTier}`;
+        } else if (node.type === "hot_lead") {
+          step.message = `🔥 [HOT LEAD ACTION]: ${node.parameters.sop_action || "Lock slot segera & follow up konfirmasi DP dalam 1-2 jam via WA."}`;
+        } else if (node.type === "warm_lead") {
+          step.message = `⚡ [WARM LEAD ACTION]: ${node.parameters.sop_action || "Kirim portofolio foto paket & tanyakan preferensi spot backdrop favorit."}`;
+        } else if (node.type === "cold_lead") {
+          step.message = `❄️ [COLD LEAD ACTION]: ${node.parameters.sop_action || "Simpan kontak untuk broadcast katalog promo wisuda UMP H-7."}`;
+        } else if (node.type === "ai_agent_vps") {
+          step.message = `🤖 [AI AGENT VPS]: Trafik harian dirangkum & reminder checklist follow-up dikirimkan ke grup Telegram / WA Admin!`;
         } else if (node.type === "set_transform") {
           ctx.sisa_bayar = Math.max(0, (Number(ctx.total_paket) || 0) - (Number(ctx.dp_masuk) || 0));
           const tpl = node.parameters.message_template || "";
@@ -1337,13 +1651,11 @@
           const msg = renderTemplate(node.parameters.message || "{{rendered_message}}", ctx) || ctx.rendered_message;
           const token = (node.parameters.token || settings.fonnte_token || "").trim();
 
-          // Prepare Direct WhatsApp link
           const waUrl = `https://wa.me/${target}?text=${encodeURIComponent(msg)}`;
           waLink.href = waUrl;
           waAction.style.display = 'block';
 
           if (token) {
-            // Live Fonnte Attempt
             step.message = `Pesan WhatsApp dipersiapkan ke ${target} via Fonnte Gateway`;
           } else {
             step.message = `[SIMULASI / DIRECT] Pesan WhatsApp siap dikirimkan ke ${target}`;
@@ -1358,7 +1670,7 @@
         // Queue children
         const children = adj[node.id] || [];
         children.forEach(c => {
-          if (node.type === "filter_if") {
+          if (node.type === "filter_if" || node.type === "ai_lead_scorer") {
             if (c.handle === nextHandle) queue.push({ id: c.target, handle: c.handle });
           } else {
             queue.push({ id: c.target, handle: c.handle });
@@ -1407,7 +1719,21 @@
         f.innerHTML = `
           <div class="field-group">
             <label class="field-label">Webhook Token / Path</label>
-            <input type="text" id="p_webhook_token" class="field-input" value="${p.webhook_token || 'foxe-booking-hook'}">
+            <input type="text" id="p_webhook_token" class="field-input" value="${p.webhook_token || 'foxe-chat-inbox'}">
+          </div>
+        `;
+      } else if (node.type === 'sheet_sync') {
+        f.innerHTML = `
+          <div class="field-group">
+            <label class="field-label">Target Google Sheet</label>
+            <input type="text" id="p_sheet_name" class="field-input" value="${p.sheet_name || 'Log Order & Reservasi'}">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Mode Sinkronisasi Parser</label>
+            <select id="p_sync_mode" class="field-select">
+              <option value="auto_match">Otomatis Cocokkan Tanggal & Nama (Auto-Match)</option>
+              <option value="strict">Strict Match (Nomor HP & ID Booking)</option>
+            </select>
           </div>
         `;
       } else if (node.type === 'filter_if') {
@@ -1428,6 +1754,40 @@
           <div class="field-group">
             <label class="field-label">Nilai Target</label>
             <input type="text" id="p_value" class="field-input" value="${p.value || '0'}">
+          </div>
+        `;
+      } else if (node.type === 'ai_lead_scorer') {
+        f.innerHTML = `
+          <div class="field-group">
+            <label class="field-label">Aturan Klasifikasi AI Agent</label>
+            <textarea id="p_rules" class="field-textarea" style="height:110px;">${p.rules || 'Hot: Sudah kirim form nama booking / hampir DP\nWarm: Sudah tanya-tanya lanjut paket & dibalas admin\nCold: Hanya tanya pricelist lalu menghilang'}</textarea>
+            <div style="font-size:10px; color:#94a3b8; margin-top:4px;">AI mengevaluasi interaksi chat masuk dan mengelompokkan ke 3 jalur terpisah.</div>
+          </div>
+        `;
+      } else if (node.type === 'hot_lead' || node.type === 'warm_lead' || node.type === 'cold_lead') {
+        f.innerHTML = `
+          <div class="field-group">
+            <label class="field-label">Tingkat Urgensi Follow Up</label>
+            <input type="text" id="p_urgency" class="field-input" value="${p.urgency || ''}">
+          </div>
+          <div class="field-group">
+            <label class="field-label">SOP & Script Follow Up</label>
+            <textarea id="p_sop_action" class="field-textarea" style="height:100px;">${p.sop_action || ''}</textarea>
+          </div>
+        `;
+      } else if (node.type === 'ai_agent_vps') {
+        f.innerHTML = `
+          <div class="field-group">
+            <label class="field-label">Target Grup Admin (Telegram/WA)</label>
+            <input type="text" id="p_target_group" class="field-input" value="${p.target_group || 'Grup Telegram Admin Foxe Studio'}">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Jadwal Cron Reminder VPS</label>
+            <input type="text" id="p_cron_schedule" class="field-input" value="${p.cron_schedule || '09:00, 14:00, & 20:00 WIB'}">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Tugas AI Agent</label>
+            <textarea id="p_task" class="field-textarea">${p.task || 'Membaca trafik chat harian, rekap summary konversi, dan kirim checklist follow-up harian ke grup admin.'}</textarea>
           </div>
         `;
       } else if (node.type === 'set_transform') {
@@ -1471,10 +1831,22 @@
       document.getElementById('btnSaveNodeParams').onclick = () => {
         node.name = document.getElementById('inspNodeName').value;
         if (node.type === 'webhook_trigger') node.parameters.webhook_token = document.getElementById('p_webhook_token').value;
-        else if (node.type === 'filter_if') {
+        else if (node.type === 'sheet_sync') {
+          node.parameters.sheet_name = document.getElementById('p_sheet_name').value;
+          node.parameters.sync_mode = document.getElementById('p_sync_mode').value;
+        } else if (node.type === 'filter_if') {
           node.parameters.field = document.getElementById('p_field').value;
           node.parameters.operator = document.getElementById('p_operator').value;
           node.parameters.value = document.getElementById('p_value').value;
+        } else if (node.type === 'ai_lead_scorer') {
+          node.parameters.rules = document.getElementById('p_rules').value;
+        } else if (node.type === 'hot_lead' || node.type === 'warm_lead' || node.type === 'cold_lead') {
+          node.parameters.urgency = document.getElementById('p_urgency').value;
+          node.parameters.sop_action = document.getElementById('p_sop_action').value;
+        } else if (node.type === 'ai_agent_vps') {
+          node.parameters.target_group = document.getElementById('p_target_group').value;
+          node.parameters.cron_schedule = document.getElementById('p_cron_schedule').value;
+          node.parameters.task = document.getElementById('p_task').value;
         } else if (node.type === 'set_transform') {
           node.parameters.message_template = document.getElementById('p_message_template').value;
         } else if (node.type === 'fonnte_whatsapp') {

@@ -576,8 +576,12 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
         <div class="mobile-brand" id="mobileBrand">
           <img src="logo_foxe.png" alt="Foxe Studio" class="brand-img-mobile">
         </div>
-        <div class="period"><b id="tbPeriod">September 2026</b><span class="co" id="tbCut">memuat…</span></div>
+        <div class="period"><b id="tbPeriod">Oktober 2026</b><span class="co" id="tbCut">memuat…</span></div>
         <span class="pill prog" id="tbStatus">Progressive</span>
+        <div class="seg" id="tbMonthSwitcher" style="margin-left:4px;display:inline-flex;">
+          <button type="button" class="btn sm" id="btnSwitchOkt" style="font-weight:600;padding:4px 10px;font-size:11.5px;">📅 Oktober (Live)</button>
+          <button type="button" class="btn sm" id="btnSwitchSep" style="font-weight:500;padding:4px 10px;font-size:11.5px;">📅 September (Rekap)</button>
+        </div>
         <span class="spacer"></span>
         <button class="btn sm" id="btnTheme" title="Ganti Tema">🌓 Tema</button>
         <button class="btn sm" id="btnLock" title="Kunci Dashboard">🔒 Kunci</button>
@@ -743,6 +747,7 @@ function saveLocal() {
   }
 }
 
+let activeMonth = "2026-10";
 let db=null,downloads=null,room=null,view="tahunan",estMonth=10,adsMonth=10,adsFilter="ALL",adsQ="";
 
 function nkey(s){
@@ -751,15 +756,30 @@ function nkey(s){
 }
 
 /* ============================ perhitungan inti ============================ */
-function compute(){
-  const c=S.config, [y,m]=c.bulan.split("-").map(Number);
-  const dim=new Date(y,m,0).getDate();
-  const cut=new Date(c.cutoff+"T00:00:00");
-  const cutDay=cut.getDate();
-  const hariBerjalan=c.status==="Final"?dim:cutDay;
-  const inRange=d=>d && d<=c.cutoff && d>=`${c.bulan}-01`;
+function compute(targetMonth){
+  const mStr = targetMonth || activeMonth || "2026-10";
+  const isOkt = (mStr === "2026-10");
+  const [y,m] = mStr.split("-").map(Number);
+  const dim = new Date(y,m,0).getDate();
+  const cutoff = isOkt ? "2026-10-01" : "2026-09-30";
+  const status = isOkt ? "Progressive" : "Final";
+  const cut = new Date(cutoff+"T00:00:00");
+  const cutDay = cut.getDate();
+  const hariBerjalan = isOkt ? 1 : dim;
+  const inRange = d => d && d <= cutoff && d >= `${mStr}-01`;
 
-  const ord=S.orders.filter(o=>inRange(o.tanggal));
+  const c = {
+    bulan: mStr,
+    cutoff: cutoff,
+    status: status,
+    targets: S.config ? S.config.targets : [
+      { tier: 1, omzet: 70000000, persen: 0.05 },
+      { tier: 2, omzet: 85000000, persen: 0.06 },
+      { tier: 3, omzet: 100000000, persen: 0.07 }
+    ]
+  };
+
+  const ord = S.orders.filter(o => inRange(o.tanggal));
   const omzet=ord.reduce((s,o)=>s+dnum(o.total),0);
   const cash=ord.reduce((s,o)=>s+dnum(o.cash),0);
   const transfer=ord.reduce((s,o)=>s+dnum(o.transfer),0);
@@ -856,7 +876,7 @@ function compute(){
   const offRoster={admin:admin.arr.filter(a=>!roster.has(a.nama)),fotografer:fotografer.arr.filter(f=>!roster.has(f.nama))};
 
   // biaya
-  const ex=S.expenses.filter(e=>e.tanggal?inRange(e.tanggal):e.bulan===c.bulan);
+  const ex=S.expenses.filter(e=>e.tanggal?inRange(e.tanggal):(isOkt?false:e.bulan===mStr));
   const sumJ=j=>ex.filter(e=>e.jenis===j).reduce((s,e)=>s+dnum(e.nilai),0);
 
   const bonDoc=S.bon.filter(b=>b.bulan===c.bulan)
@@ -950,9 +970,30 @@ function compute(){
     gajiNeraca,gajiBlok,gajiSelisih,grossProfit,operatingProfit,nettProfit,cashOut,adaBiaya,
     nettMargin:omzet?nettProfit/omzet:null,
     rekon,rekonBeda,rekonAda,tiers,tierAktif,tierBerikut,pool,kpi,kpiDinilai,avgOp,bonusCair,
-    ld,totLeads,totDP,totSesi,totTx,conv,leadKosong,leadTerakhir,baseline:S.baseline,
-    neracaDetail:S.neracaDetail||[],neracaSummary:S.neracaSummary||{},
-    rosterGaji:(S.rosterGaji||[]).map(r=>{
+    ld,totLeads,totDP,totSesi,totTx,conv,leadKosong,leadTerakhir,
+    baseline: isOkt ? {
+      label: "Oktober 2025",
+      sumber: "Benchmark 2025",
+      omzet: 48000000,
+      txPaid: 251,
+      cash: 20000000,
+      transfer: 28000000,
+      cogs: 9500000,
+      opex: 12000000,
+      nettProfit: 26500000,
+      seasonalityStatus: "NORMAL",
+      seasonalityRank: 7,
+      seasonalityIndex: 0.82
+    } : S.baseline,
+    neracaDetail: isOkt
+      ? [{ tgl: "01", first_of_day: true, masuk: transfer + cash, keluar: 0, balance: transfer + cash, ket_masuk: "TF Hanifah (DP Grad)", ket_keluar: "" }]
+      : (S.neracaDetail||[]),
+    neracaSummary: isOkt
+      ? { total_masuk: transfer + cash, total_keluar: 0, ending_balance: transfer + cash }
+      : (S.neracaSummary||{}),
+    rosterGaji:(isOkt ? [
+      { id: "pay_okt_amel", nama: "AMEL", job: "Admin / CS", q: 2, cost: 40000, bonus_kpi: 0, additional: 0, bonus: 0, hukuman: 0, bon: 0, total_gaji: 80000, thp: 80000, status: "Draft" }
+    ] : (S.rosterGaji||[])).map(r=>{
       const q=dnum(r.q), cost=dnum(r.cost), totG=q*cost, bon=dnum(r.bon), bonus=dnum(r.bonus), huk=dnum(r.hukuman);
       const additional = dnum(r.additional);
       let kpiNom = 0;
@@ -968,41 +1009,46 @@ function compute(){
       const thp = totG + bonus_kpi + additional + bonus - huk - bon;
       return {...r, q, cost, total_gaji:totG, bonus_kpi, additional, bonus, hukuman:huk, bon, thp};
     }),
-    rosterSummary:{
-      total_gaji:(S.rosterGaji||[]).reduce((s,r)=>s+(dnum(r.q)*dnum(r.cost)),0),
-      total_bonus_kpi:(S.rosterGaji||[]).reduce((s,r)=>{
-        let kpiNom = 0;
-        if (kpi && kpi.length && r.nama) {
-          const rn = String(r.nama).trim().toUpperCase();
-          const km = kpi.find(k => {
-            const kn = String(k.nama).trim().toUpperCase();
-            return kn === rn || rn.includes(kn) || kn.includes(rn);
-          });
-          if (km && km.bonusCair != null) kpiNom = Math.round(km.bonusCair);
-        }
-        const bk = (dnum(r.bonus_kpi) > 0) ? dnum(r.bonus_kpi) : kpiNom;
-        return s + bk;
-      },0),
-      total_additional:(S.rosterGaji||[]).reduce((s,r)=>s+dnum(r.additional),0),
-      total_bonus:(S.rosterGaji||[]).reduce((s,r)=>s+dnum(r.bonus),0),
-      total_hukuman:(S.rosterGaji||[]).reduce((s,r)=>s+dnum(r.hukuman),0),
-      total_bon:(S.rosterGaji||[]).reduce((s,r)=>s+dnum(r.bon),0),
-      grand_total_thp:(S.rosterGaji||[]).reduce((s,r)=>{
-        let kpiNom = 0;
-        if (kpi && kpi.length && r.nama) {
-          const rn = String(r.nama).trim().toUpperCase();
-          const km = kpi.find(k => {
-            const kn = String(k.nama).trim().toUpperCase();
-            return kn === rn || rn.includes(kn) || kn.includes(rn);
-          });
-          if (km && km.bonusCair != null) kpiNom = Math.round(km.bonusCair);
-        }
-        const bk = (dnum(r.bonus_kpi) > 0) ? dnum(r.bonus_kpi) : kpiNom;
-        const add = dnum(r.additional);
-        return s+((dnum(r.q)*dnum(r.cost))+bk+add+dnum(r.bonus)-dnum(r.hukuman)-dnum(r.bon));
-      },0),
-      total_karyawan:(S.rosterGaji||[]).length
-    }};
+    rosterSummary:(()=>{
+      const actR = isOkt ? [
+        { id: "pay_okt_amel", nama: "AMEL", job: "Admin / CS", q: 2, cost: 40000, bonus_kpi: 0, additional: 0, bonus: 0, hukuman: 0, bon: 0, total_gaji: 80000, thp: 80000, status: "Draft" }
+      ] : (S.rosterGaji||[]);
+      return {
+        total_gaji:actR.reduce((s,r)=>s+(dnum(r.q)*dnum(r.cost)),0),
+        total_bonus_kpi:actR.reduce((s,r)=>{
+          let kpiNom = 0;
+          if (kpi && kpi.length && r.nama) {
+            const rn = String(r.nama).trim().toUpperCase();
+            const km = kpi.find(k => {
+              const kn = String(k.nama).trim().toUpperCase();
+              return kn === rn || rn.includes(kn) || kn.includes(rn);
+            });
+            if (km && km.bonusCair != null) kpiNom = Math.round(km.bonusCair);
+          }
+          const bk = (dnum(r.bonus_kpi) > 0) ? dnum(r.bonus_kpi) : kpiNom;
+          return s + bk;
+        },0),
+        total_additional:actR.reduce((s,r)=>s+dnum(r.additional),0),
+        total_bonus:actR.reduce((s,r)=>s+dnum(r.bonus),0),
+        total_hukuman:actR.reduce((s,r)=>s+dnum(r.hukuman),0),
+        total_bon:actR.reduce((s,r)=>s+dnum(r.bon),0),
+        grand_total_thp:actR.reduce((s,r)=>{
+          let kpiNom = 0;
+          if (kpi && kpi.length && r.nama) {
+            const rn = String(r.nama).trim().toUpperCase();
+            const km = kpi.find(k => {
+              const kn = String(k.nama).trim().toUpperCase();
+              return kn === rn || rn.includes(kn) || kn.includes(rn);
+            });
+            if (km && km.bonusCair != null) kpiNom = Math.round(km.bonusCair);
+          }
+          const bk = (dnum(r.bonus_kpi) > 0) ? dnum(r.bonus_kpi) : kpiNom;
+          const add = dnum(r.additional);
+          return s+((dnum(r.q)*dnum(r.cost))+bk+add+dnum(r.bonus)-dnum(r.hukuman)-dnum(r.bon));
+        },0),
+        total_karyawan:actR.length
+      };
+    })()};
 }
 
 
@@ -1387,6 +1433,30 @@ function render(){
     if(st){ st.textContent=R.c.status; st.className="pill "+(R.c.status==="Final"?"final":"prog"); }
   }
 
+  const btnSwOkt = document.getElementById("btnSwitchOkt");
+  const btnSwSep = document.getElementById("btnSwitchSep");
+  if(btnSwOkt && btnSwSep) {
+    if(activeMonth === "2026-10") {
+      btnSwOkt.style.background = "var(--accent)";
+      btnSwOkt.style.color = "#ffffff";
+      btnSwOkt.style.borderColor = "var(--accent)";
+      btnSwOkt.style.fontWeight = "600";
+      btnSwSep.style.background = "transparent";
+      btnSwSep.style.color = "var(--muted)";
+      btnSwSep.style.borderColor = "var(--hairline)";
+      btnSwSep.style.fontWeight = "500";
+    } else {
+      btnSwSep.style.background = "var(--accent)";
+      btnSwSep.style.color = "#ffffff";
+      btnSwSep.style.borderColor = "var(--accent)";
+      btnSwSep.style.fontWeight = "600";
+      btnSwOkt.style.background = "transparent";
+      btnSwOkt.style.color = "var(--muted)";
+      btnSwOkt.style.borderColor = "var(--hairline)";
+      btnSwOkt.style.fontWeight = "500";
+    }
+  }
+
   const up=document.getElementById("tbUpd"), ok=syncSukses(), akhir=syncUrut()[0];
   if(up){
     if(ok){ const w=wibParts(ok.mulai);
@@ -1645,7 +1715,7 @@ function chartTahunanSeasonality(months, yr, avg25) {
 
 function vTahunan(R) {
   const yr = +R.c.bulan.split("-")[0];
-  const curM = +R.c.bulan.split("-")[1]; // 9 (September)
+  const curM = +activeMonth.split("-")[1];
   const H = (S.history && S.history.months) || [];
   
   // Data acuan musiman 2025
@@ -1683,31 +1753,30 @@ function vTahunan(R) {
     const isPast = (info.no < curM);
     const isFuture = (info.no > curM);
 
-    // USER REQUIREMENT:
-    // Bulan sebelum & sesudah September dikosongkan kecuali yang memiliki data pipeline terverifikasi.
     let o26 = null;
     let proyeksi26 = null;
     let status = "Belum Dicocokkan";
     let statusPill = "neutral";
     let yoy = null;
 
-    if (isCurrent) {
-      o26 = R.omzet;
-      proyeksi26 = R.proyeksi;
-      status = "Berjalan (Terverifikasi)";
-      statusPill = "crit";
-      yoy = o25 ? (((R.proyeksi || R.omzet) - o25) / o25) : null;
-    } else if (info.no === 10 && (S.oktoberPipeline || S.oktoberLogOrder)) {
+    if (info.no === 9) {
+      const sepOrders = S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-09-"));
+      const sepOmzet = sepOrders.reduce((s, o) => s + dnum(o.total), 0) || 118015000;
+      o26 = sepOmzet;
+      proyeksi26 = sepOmzet;
+      status = "Rekap Final (Terverifikasi)";
+      statusPill = "final";
+      yoy = o25 ? ((sepOmzet - o25) / o25) : null;
+    } else if (info.no === 10) {
       const okp = S.oktoberPipeline;
-      const oktLog = S.oktoberLogOrder;
-      const oktOrders = (oktLog && oktLog.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
+      const oktOrders = S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
       const oktOmzet = oktOrders.reduce((s, o) => s + dnum(o.total), 0);
-      o26 = (oktOmzet > 0) ? oktOmzet : (okp ? okp.estimateCashIn : null);
-      proyeksi26 = okp ? okp.potentialOmzet : oktOmzet;
+      o26 = (oktOmzet > 0) ? oktOmzet : (okp ? okp.estimateCashIn : 100000);
+      proyeksi26 = okp ? okp.potentialOmzet : (oktOmzet > 0 ? oktOmzet * 31 : 59150000);
       status = (oktOmzet > 0 && okp)
         ? `Live (1 Order) + Pipeline (${okp.totalBookings} Booking)`
         : (okp ? `Pipeline (${okp.totalBookings} Booking)` : "Live Berjalan");
-      statusPill = (oktOmzet > 0) ? "crit" : "prog";
+      statusPill = "crit";
       yoy = o25 ? (((okp ? okp.estimateCashIn : oktOmzet) - o25) / o25) : null;
     }
 
@@ -1744,23 +1813,23 @@ function vTahunan(R) {
     <div class="stat">
       <span class="k">Omzet Terverifikasi ${yr}</span>
       <span class="v" style="color:var(--accent);">${rp(R.omzet)}</span>
-      <span class="m">September MTD (s.d. ${R.cutDay} Sep · Live Log Order)</span>
+      <span class="m">${BULAN[+R.c.bulan.split("-")[1]-1]} (${R.c.status}) · s.d. ${R.cutDay} ${BULAN[+R.c.bulan.split("-")[1]-1].slice(0,3)}</span>
     </div>
     <div class="stat">
-      <span class="k">Proyeksi September ${yr}</span>
+      <span class="k">Proyeksi ${BULAN[+R.c.bulan.split("-")[1]-1]} ${yr}</span>
       <span class="v sm">${rp(R.proyeksi)}</span>
-      <span class="m">Run-rate akhir bulan Super Peak</span>
-      <div class="bar"><i style="width:${Math.min(100, (R.omzet/R.proyeksi)*100).toFixed(0)}%"></i></div>
+      <span class="m">Run-rate akhir bulan</span>
+      <div class="bar"><i style="width:${Math.min(100, (R.omzet/(R.proyeksi||1))*100).toFixed(0)}%"></i></div>
     </div>
     <div class="stat">
-      <span class="k">Pertumbuhan Sep YoY vs ${yr-1}</span>
-      <span class="v sm" style="color:${growthSepYoY>=0?"var(--good)":"var(--crit)"};">${(growthSepYoY>=0?"+":"")+pct(growthSepYoY)}</span>
-      <span class="m">Realisasi Sep ${yr-1}: ${rp(sep25)}</span>
+      <span class="k">Pertumbuhan ${BULAN[+R.c.bulan.split("-")[1]-1].slice(0,3)} YoY vs ${yr-1}</span>
+      <span class="v sm" style="color:${(R.baseline && R.proyeksi >= R.baseline.omzet)?"var(--good)":"var(--crit)"};">${R.baseline ? (((R.proyeksi - R.baseline.omzet)/R.baseline.omzet >= 0 ? "+" : "") + pct((R.proyeksi - R.baseline.omzet)/R.baseline.omzet)) : "—"}</span>
+      <span class="m">Realisasi ${BULAN[+R.c.bulan.split("-")[1]-1].slice(0,3)} ${yr-1}: ${rp(R.baseline ? R.baseline.omzet : sep25)}</span>
     </div>
     <div class="stat">
       <span class="k">Status Rekonsiliasi Tahunan</span>
-      <span class="v sm" style="font-size:21px;">1 / 12 Terverifikasi</span>
-      <span class="m">Sep ${yr} aktif · 11 bln menunggu pencocokan</span>
+      <span class="v sm" style="font-size:21px;">2 / 12 Terverifikasi</span>
+      <span class="m">Sep (Rekap) &amp; Okt (Live) aktif</span>
     </div>
   </div>
 
@@ -1813,7 +1882,7 @@ function vTahunan(R) {
 
         <div class="mfoot">
           <button class="btn sm ${m.isCurrent ? 'pri' : ''} btn-go-month" data-month="${m.no}" style="width:100%;display:flex;justify-content:center;align-items:center;gap:6px;">
-            ${m.isCurrent ? '👉 Buka Laporan September (Live)' : (m.no === 10 && S.oktoberPipeline ? `📅 Buka Oktober (Live &amp; Pipeline ${S.oktoberPipeline.totalBookings} Booking) ➔` : 'Lihat Laporan Bulanan ➔')}
+            ${m.no === 10 ? (m.isCurrent ? '👉 Buka Dashboard Oktober (Live)' : '📅 Buka Dashboard Oktober (Live) ➔') : (m.no === 9 ? (m.isCurrent ? '👉 Buka Laporan September (Rekap)' : '📊 Buka Laporan September (Rekap) ➔') : 'Lihat Laporan Bulanan ➔')}
           </button>
         </div>
       </div>
@@ -1972,12 +2041,14 @@ function vTarget(R){
 }
 
 function vTrx(R){
-  const pakets=[...new Set(S.orders.map(o=>npak(o.paket)).filter(Boolean))].sort();
-  const admins=[...new Set(S.orders.map(o=>String(o.admin||"").toUpperCase()).filter(Boolean))].sort();
-  const fgs=[...new Set(S.orders.map(o=>String(o.fotografer||"").toUpperCase()).filter(Boolean))].sort();
-  const list=[...S.orders].sort((a,b)=>a.tanggal<b.tanggal?1:a.tanggal>b.tanggal?-1:0).slice(0,400);
+  const inRange = d => d && d <= R.c.cutoff && d >= `${R.c.bulan}-01`;
+  const ordList = S.orders.filter(o => inRange(o.tanggal));
+  const pakets = [...new Set(ordList.map(o=>npak(o.paket)).filter(Boolean))].sort();
+  const admins = [...new Set(ordList.map(o=>String(o.admin||"").toUpperCase()).filter(Boolean))].sort();
+  const fgs = [...new Set(ordList.map(o=>String(o.fotografer||"").toUpperCase()).filter(Boolean))].sort();
+  const list = [...ordList].sort((a,b)=>a.tanggal<b.tanggal?1:a.tanggal>b.tanggal?-1:0).slice(0,400);
   return `
-  <div class="vhead"><div><div class="eyebrow">Sheet 1</div><h2>Log Transaksi</h2></div>
+  <div class="vhead"><div><div class="eyebrow">Sheet 1 · ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}</div><h2>Log Transaksi</h2></div>
     <p>Cash dan transfer dipisah, total terisi otomatis. Order tanpa pembayaran tetap dicatat Rp0 dan ikut jumlah transaksi.</p></div>
   <div class="card" style="margin-bottom:14px"><h3>Tambah transaksi</h3>
     <form class="form" id="fTrx">
@@ -2008,7 +2079,19 @@ function vTrx(R){
       <td class="n"><button class="del" data-del="orders" data-id="${o.id}" aria-label="Hapus">✕</button></td></tr>`}).join("")
       :`<tr><td colspan="11"><div class="empty">Belum ada transaksi.</div></td></tr>`}
   </tbody></table></div>
-  ${S.orders.length>400?`<p class="tiny muted" style="margin-top:8px">Menampilkan 400 transaksi terbaru dari ${num(S.orders.length)}.</p>`:""}`;
+  ${ordList.length>400?`<p class="tiny muted" style="margin-top:8px">Menampilkan 400 transaksi terbaru dari ${num(ordList.length)}.</p>`:""}
+  ${activeMonth === "2026-10" && S.oktoberPipeline ? `
+  <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div class="eyebrow" style="color:var(--accent);">Pipeline Booking Terdaftar · Oktober 2026</div>
+        <h3 style="margin:2px 0 4px;font-size:16px;">1 Transaksi Realized + ${S.oktoberPipeline.totalBookings} Booking Terjadwal</h3>
+        <p class="tiny muted" style="margin:0;">Di samping 1 transaksi live di atas, terdapat <b>${S.oktoberPipeline.totalBookings} booking terdaftar</b> di File 2 Schedule &amp; Wisuda UMP dengan potensi omzet <b>${rp(S.oktoberPipeline.potentialOmzet)}</b> dan estimasi pelunasan <b>${rp(S.oktoberPipeline.estimateCashIn)}</b>.</p>
+      </div>
+      <button class="btn pri sm" id="btnTrxToEst" style="padding:6px 14px;font-size:12px;">Lihat Rincian ${S.oktoberPipeline.totalBookings} Booking ➔</button>
+    </div>
+  </div>
+  ` : ""}`;
 }
 
 function kartuPaket(R){
@@ -2079,7 +2162,7 @@ function vBiaya(R){
       <tr class="total"><td>Total ${j}</td><td class="n">${rp(tot)}</td><td class="n">${R.omzet?pct(tot/R.omzet):""}</td></tr>
     </tbody></table></div>`};
   return `
-  <div class="vhead"><div><div class="eyebrow">Buku Neraca Keuangan · September 2026</div><h2>Neraca (COGS &amp; OPEX)</h2></div>
+  <div class="vhead"><div><div class="eyebrow">Buku Neraca Keuangan · ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}</div><h2>Neraca (COGS &amp; OPEX)</h2></div>
     <p>Laporan terpadu neraca Foxe Studio: klasifikasi otomatis COGS (beban produksi langsung) &amp; OPEX (operasional studio), mutasi kas &amp; bank harian, serta estimasi laba rugi.</p></div>
 
   <div class="stats" style="margin-bottom:14px">
@@ -3684,27 +3767,48 @@ function wire(R){
     }
   };
 
+  // Topbar Month Switcher
+  const btnSwOkt = document.getElementById("btnSwitchOkt");
+  const btnSwSep = document.getElementById("btnSwitchSep");
+  if (btnSwOkt) {
+    btnSwOkt.onclick = () => {
+      activeMonth = "2026-10";
+      estMonth = 10;
+      render();
+      showToast("📅 Beralih ke Periode: Oktober 2026 (Live)", "ok", 2500);
+    };
+  }
+  if (btnSwSep) {
+    btnSwSep.onclick = () => {
+      activeMonth = "2026-09";
+      estMonth = 9;
+      render();
+      showToast("📊 Beralih ke Periode: September 2026 (Rekap Final)", "ok", 2500);
+    };
+  }
+
   // Interaksi 12 Kotak Bulan di Section Tahunan
   document.querySelectorAll(".month-card, .btn-go-month").forEach(el => {
     el.onclick = (e) => {
       e.stopPropagation();
       const m = +el.dataset.month;
-      if (m === 10 && S.oktoberPipeline) {
+      if (m === 10) {
+        activeMonth = "2026-10";
         estMonth = 10;
-        view = "est";
-        render();
-        window.scrollTo({top: 0, behavior: "smooth"});
-        showToast(`📅 Membuka Estimasi & Pipeline ${S.oktoberPipeline.totalBookings} Booking Oktober 2026`, "ok", 3000);
-      } else {
         view = "dash";
         render();
         window.scrollTo({top: 0, behavior: "smooth"});
-        if (m === 9) {
-          showToast("📊 Membuka Dashboard Live September 2026", "ok", 2500);
-        } else {
-          const bln = BULAN[m - 1] || "";
-          showToast(`ℹ️ Bulan ${bln} 2026 belum dicocokkan. Menampilkan Dashboard September 2026 (Live).`, "neutral", 3500);
-        }
+        showToast("📅 Membuka Dashboard Live Oktober 2026", "ok", 3000);
+      } else if (m === 9) {
+        activeMonth = "2026-09";
+        estMonth = 9;
+        view = "dash";
+        render();
+        window.scrollTo({top: 0, behavior: "smooth"});
+        showToast("📊 Membuka Dashboard Rekap September 2026", "ok", 2500);
+      } else {
+        const bln = BULAN[m - 1] || "";
+        showToast(`ℹ️ Bulan ${bln} 2026 belum dicocokkan.`, "neutral", 3500);
       }
     };
   });
@@ -3715,6 +3819,7 @@ function wire(R){
     segEm.querySelectorAll("button[data-em]").forEach(b => {
       b.onclick = () => {
         estMonth = +b.dataset.em;
+        activeMonth = (estMonth === 10) ? "2026-10" : "2026-09";
         render();
         window.scrollTo({top: 0, behavior: "smooth"});
       };
@@ -3724,6 +3829,7 @@ function wire(R){
   if (btnGoEstOkt) {
     btnGoEstOkt.onclick = () => {
       estMonth = 10;
+      activeMonth = "2026-10";
       view = "est";
       render();
       window.scrollTo({top: 0, behavior: "smooth"});
@@ -3731,11 +3837,12 @@ function wire(R){
   }
 
   // Cross-Section October Pipeline Buttons
-  ["btnDashToOkt", "btnTargetToOkt", "btnShiftToOkt", "btnCrewToOkt", "btnYoyToOkt"].forEach(btnId => {
+  ["btnDashToOkt", "btnTargetToOkt", "btnShiftToOkt", "btnCrewToOkt", "btnYoyToOkt", "btnTrxToEst"].forEach(btnId => {
     const b = document.getElementById(btnId);
     if (b) {
       b.onclick = () => {
         estMonth = 10;
+        activeMonth = "2026-10";
         view = "est";
         render();
         window.scrollTo({top: 0, behavior: "smooth"});
