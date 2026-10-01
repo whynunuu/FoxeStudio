@@ -4,24 +4,25 @@
 Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "update data", "sinkronkan data"), Agent **HARUS LANGSUNG mengeksekusi pipeline kerja lengkap** secara mandiri dari awal hingga selesai tanpa perlu konfirmasi manual lagi:
 
 ### 1. Eksekusi Sinkronisasi Operasional Google Drive (`deep_sync_foxe.py`):
-- Unduh & parse data operasional dari sumber Google Drive resmi (File 3 / Rekap Global DI-SKIP):
-  * **File 1 (Log Order `.xlsm`)**: ID `1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ` (transaksi pembayaran, akumulasi total shift aktual kru, kas harian, funnel leads marketing & KPI harian).
-  * **File 2 (Schedule Sept `.xlsx`)**: ID `14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I` (jadwal booking Studio 1, 2, 3 dan deteksi jadwal foto besok H+1).
-  * **File Neraca (`.xlsx`)**: ID `1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM` (pengeluaran operasional & produksi dari section `Detail` sheet September 2026, diklasifikasikan ke COGS & OPEX via `parser_neraca.py`).
+- Unduh & parse data operasional dari 7 sumber Google Drive resmi (File 3 / Rekap Global DI-SKIP):
+  * **File 1 (Log Order Sept `.xlsm`)**: ID `1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ` (`file1.xlsm`).
+  * **File 1 (Log Order Okt `.xlsm`)**: ID `1xibgfKWJZWmcwh9lxR9Dt7IkHyMi7b75` (`file1_okt.xlsm`).
+  * **File 2 (Schedule Sept `.xlsx`)**: ID `14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I` (`file2.xlsx`).
+  * **File Neraca (`.xlsx`)**: ID `1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM` (`file_neraca.xlsx`).
   * **Schedule Reguler Oktober (`.xlsx`)**: ID `17QPAAhmPZqkomwajFhAw3JBmDyBFuklfNMqyVqlK484` (`file2_okt.xlsx`).
   * **Wisuda UMP Hari 1 / 3 Okt (`.xlsx`)**: ID `1sRILPoZD09Rm5aKn6tswNxvxOiRkSu4Z` (`file_wisuda_3okt.xlsx`).
   * **Wisuda UMP Hari 2 / 4 Okt (`.xlsx`)**: ID `1hDeuOh-6fnsP7vzWAl4HVwlYoEumu1hA` (`file_wisuda_4okt.xlsx`).
-- **Pipeline Oktober:** Otomatis parse & merge 163 booking terdaftar (29 Reguler + 134 Wisuda UMP: 70 hari 1 & 64 hari 2) menjadi estimasi pipeline (potensi paket Rp 58,88 jt, DP terkunci Rp 11,35 jt, estimasi pelunasan Rp 47,52 jt).
+- **Pipeline & Realisasi Live Oktober:** Otomatis parse & merge realisasi live 1 transaksi DP (Rp 100 rb) via AMEL (2 shift) + 164 booking terdaftar (Potensi omzet Rp 59,15 jt, estimasi pelunasan Rp 47,80 jt).
 - **Roster Shift:** Hitung akumulasi total shift slot aktual dari Log Order s.d. tanggal sekarang/cut-off.
 - **ATURAN MUTLAK BIAYA:** Pengeluaran COGS & OPEX murni diambil dari section `Detail` File Neraca (kolom P s.d. U). JANGAN mengambil pengeluaran dari File Log Order karena referensinya berbeda.
 - **SECTION TERPADU:** Section COGS dan OPEX digabung menjadi satu section resmi bernama **`Neraca (COGS & OPEX)`** yang dilengkapi **Buku Detail Neraca (Debit & Kredit)**.
-- Deteksi cut-off dinamis (mengikuti tanggal transaksi aktif terbaru, misal: 29 September 2026).
+- Deteksi cut-off dinamis (Sept: 30 Sep, Okt: 01 Okt).
 - Simpan state gabungan ke `foxe_full_state.json`.
 - Rakit ulang file visual `index.html` dan salin ke artefak `foxe_studio_keuangan.html`.
 
 ### 2. Auto-Commit & Deploy ke GitHub:
 - Otomatis commit dan push pembaruan data ke repository:
-  `git add foxe_full_state.json index.html assemble_app.py logo_foxe.png file1.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx parser_neraca.py parser_schedule.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
+  `git add foxe_full_state.json index.html assemble_app.py logo_foxe.png file1.xlsm file1_okt.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx parser_neraca.py parser_schedule.py parser_log_order.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
   `git commit -m "Auto-sync data update"`
   `git push origin main`
 - Remote URL: `https://github.com/whynunuu/FoxeStudio.git`

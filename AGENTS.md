@@ -3,17 +3,21 @@
 ## Trigger Kata Kunci: "ayo kerja"
 Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan data"), Agent **HARUS LANGSUNG mengeksekusi pipeline kerja lengkap** secara mandiri:
 1. Jalankan `python deep_sync_foxe.py`:
-   - Unduh File 1 Log Order, File 2 Schedule Sept, File Neraca, serta 3 File Jadwal Oktober:
+   - Unduh 7 File Operasional Resmi:
+     * File 1 Log Order Sept: ID `1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ` (`file1.xlsm`)
+     * File 1 Log Order Okt: ID `1xibgfKWJZWmcwh9lxR9Dt7IkHyMi7b75` (`file1_okt.xlsm`)
+     * File 2 Schedule Sept: ID `14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I` (`file2.xlsx`)
+     * File Neraca: ID `1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM` (`file_neraca.xlsx`)
      * Schedule Reguler Oktober: ID `17QPAAhmPZqkomwajFhAw3JBmDyBFuklfNMqyVqlK484` (`file2_okt.xlsx`)
      * Wisuda UMP Hari 1 (3 Okt): ID `1sRILPoZD09Rm5aKn6tswNxvxOiRkSu4Z` (`file_wisuda_3okt.xlsx`)
      * Wisuda UMP Hari 2 (4 Okt): ID `1hDeuOh-6fnsP7vzWAl4HVwlYoEumu1hA` (`file_wisuda_4okt.xlsx`)
-   - Hitung total shift aktual kru s.d. hari ini dari Log Order, deteksi cut-off dinamis.
+   - Hitung total shift aktual kru s.d. hari ini dari Log Order, deteksi cut-off dinamis (Sept: 30 Sep, Okt: 01 Okt).
    - Parse section `Detail` File Neraca (kolom P s.d. U) untuk klasifikasi COGS & OPEX serta Buku Detail Neraca (Debit/Kredit).
-   - Parse Pipeline Oktober: 163 booking terdaftar (29 Reguler + 134 Wisuda UMP: 70 hari 1 & 64 hari 2), hitung potensi omzet paket (Rp 58,88 jt), DP terkunci (Rp 11,35 jt), dan estimasi pelunasan (cash in hari-H foto: Rp 47,52 jt).
+   - Parse Log Order & Pipeline Oktober: Realisasi live 1 booking DP (Rp 100 rb) via AMEL (2 shift) + 164 booking terdaftar (Potensi omzet Rp 59,15 jt, estimasi pelunasan Rp 47,80 jt).
    - Simpan `foxe_full_state.json`, rakit `index.html`, dan kirim notifikasi Telegram via `@NunuFxBot`.
    - Di dalam struk laporan Telegram (blok monospace), sertakan kalkulasi **Estimate Omzet Sampai Akhir Bulan** (Unrealized Cash In, DP (-), Total, dan Unrealized Omzet) yang menyatu di dalam struk di bawah Estimasi Nett Profit.
 2. Jalankan git commit & push ke `origin main`:
-   `git add foxe_full_state.json index.html assemble_app.py logo_foxe.png file1.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx parser_neraca.py parser_schedule.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
+   `git add foxe_full_state.json index.html assemble_app.py logo_foxe.png file1.xlsm file1_okt.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx parser_neraca.py parser_schedule.py parser_log_order.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
    `git commit -m "Auto-sync data update"`
    `git push origin main`
 3. Tampilkan ringkasan metrik pembaruan hari ini dan tautan website live:

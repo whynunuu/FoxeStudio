@@ -28,10 +28,28 @@ def dnum(v):
     except:
         return 0.0
 
-def str_date(v):
+import re
+
+def str_date(v, default_year="2026"):
     if isinstance(v, (datetime.date, datetime.datetime)):
         return v.strftime("%Y-%m-%d")
     s = str(v or "").strip()
+    if not s:
+        return None
+    # match patterns like "6 okt", "6 oktober", "06 okt 2026"
+    m = re.match(r'^(\d{1,2})\s+([a-zA-Z]+)(?:\s+(\d{4}))?$', s)
+    if m:
+        day_num = int(m.group(1))
+        mon_str = m.group(2).lower()
+        yr = m.group(3) or default_year
+        month_map = {
+            "jan": 1, "januari": 1, "feb": 2, "februari": 2, "mar": 3, "maret": 3,
+            "apr": 4, "april": 4, "mei": 5, "jun": 6, "juni": 6, "jul": 7, "juli": 7,
+            "ags": 8, "agt": 8, "agustus": 8, "sep": 9, "september": 9,
+            "okt": 10, "oktober": 10, "nov": 11, "november": 11, "des": 12, "desember": 12
+        }
+        if mon_str in month_map:
+            return f"{yr}-{month_map[mon_str]:02d}-{day_num:02d}"
     return s[:10] if s else None
 
 def npak(p):
@@ -55,7 +73,7 @@ def parse_log_order(filepath="file1.xlsm", bulan="2026-09"):
     shift_idx = 1
     lead_idx = 1
     
-    for day in range(1, 31):
+    for day in range(1, 32):
         sname = str(day)
         if sname not in wb.sheetnames:
             continue
@@ -206,14 +224,14 @@ def parse_log_order(filepath="file1.xlsm", bulan="2026-09"):
             "referral": 0
         })
 
-    # Hitung tanggal aktif terakhir di September
+    # Hitung tanggal aktif terakhir di bulan berjalan
     active_days = set()
     for o in orders:
         if o["total"] > 0 and o["tanggal"].startswith(f"{bulan}-"):
             d = int(o["tanggal"].split("-")[2])
-            if d <= 30:
+            if d <= 31:
                 active_days.add(d)
-    latest_active_day = max(active_days) if active_days else 19
+    latest_active_day = max(active_days) if active_days else 1
     cutoff_str = f"{bulan}-{latest_active_day:02d}"
 
     return {

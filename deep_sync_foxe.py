@@ -31,6 +31,7 @@ from parser_schedule import parse_schedule, parse_october_pipeline
 from parser_neraca import parse_neraca
 
 LOG_ORDER_FILE_ID = "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ"
+LOG_ORDER_OKT_FILE_ID = "1xibgfKWJZWmcwh9lxR9Dt7IkHyMi7b75"
 SCHEDULE_SHEET_ID = "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I"
 NERACA_SHEET_ID = "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM"
 
@@ -51,22 +52,53 @@ def download_gdrive(file_id, dest_path):
             break
     if token:
         res = session.get(url, params={"id": file_id, "confirm": token}, stream=True)
-    with open(dest_path, "wb") as f:
-        for chunk in res.iter_content(chunk_size=65536):
-            if chunk:
-                f.write(chunk)
-    print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
+    try:
+        tmp_dest = dest_path + ".tmp"
+        with open(tmp_dest, "wb") as f:
+            for chunk in res.iter_content(chunk_size=65536):
+                if chunk:
+                    f.write(chunk)
+        if os.path.exists(dest_path):
+            try:
+                os.replace(tmp_dest, dest_path)
+            except PermissionError:
+                print(f"[WARN] {dest_path} sedang dibuka oleh aplikasi lain (Excel). Memakai salinan lokal.")
+                if os.path.exists(tmp_dest):
+                    try: os.remove(tmp_dest)
+                    except: pass
+                return
+        else:
+            os.rename(tmp_dest, dest_path)
+        print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
+    except PermissionError:
+        print(f"[WARN] {dest_path} sedang dibuka oleh aplikasi lain. Memakai salinan lokal.")
 
 def download_gsheet(sheet_id, dest_path):
     url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=xlsx"
-    res = requests.get(url, verify=False)
-    if res.status_code == 200 and len(res.content) > 1000:
-        with open(dest_path, "wb") as f:
-            f.write(res.content)
-        print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
-        return True
-    else:
-        print(f"[WARN] Tidak dapat mengunduh Google Sheet {sheet_id} (status {res.status_code}). Memakai salinan lokal.")
+    try:
+        res = requests.get(url, verify=False)
+        if res.status_code == 200 and len(res.content) > 1000:
+            tmp_dest = dest_path + ".tmp"
+            with open(tmp_dest, "wb") as f:
+                f.write(res.content)
+            if os.path.exists(dest_path):
+                try:
+                    os.replace(tmp_dest, dest_path)
+                except PermissionError:
+                    print(f"[WARN] {dest_path} sedang dibuka oleh aplikasi lain (Excel). Memakai salinan lokal.")
+                    if os.path.exists(tmp_dest):
+                        try: os.remove(tmp_dest)
+                        except: pass
+                    return True
+            else:
+                os.rename(tmp_dest, dest_path)
+            print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
+            return True
+        else:
+            print(f"[WARN] Tidak dapat mengunduh Google Sheet {sheet_id} (status {res.status_code}). Memakai salinan lokal.")
+            return False
+    except Exception as e:
+        print(f"[WARN] Gagal mengunduh {dest_path}: {e}. Memakai salinan lokal.")
         return False
 
 def run_integration():
@@ -103,16 +135,20 @@ def run_integration():
         # STEP 4: Unduh sumber operasional resmi (Log Order, Schedule, Wisuda, dan Neraca)
         print("\n[1/5] Mengunduh sumber operasional (Log Order, Schedule, Wisuda, dan Neraca)...")
         download_gdrive(LOG_ORDER_FILE_ID, "file1.xlsm")
+        download_gdrive(LOG_ORDER_OKT_FILE_ID, "file1_okt.xlsm")
         download_gsheet(SCHEDULE_SHEET_ID, "file2.xlsx")
         download_gsheet(NERACA_SHEET_ID, "file_neraca.xlsx")
         download_gsheet(SCHEDULE_OKT_SHEET_ID, "file2_okt.xlsx")
         download_gsheet(WISUDA_3OKT_FILE_ID, "file_wisuda_3okt.xlsx")
         download_gsheet(WISUDA_4OKT_FILE_ID, "file_wisuda_4okt.xlsx")
 
-        # STEP 5: Jalankan Parser File 1 (Log Order)
-        print("\n[2/5] Menjalankan parser_log_order.py (File 1)...")
+        # STEP 5: Jalankan Parser File 1 (Log Order September & Oktober)
+        print("\n[2/5] Menjalankan parser_log_order.py (File 1 September & Oktober)...")
         res_f1 = parse_log_order("file1.xlsm", bulan="2026-09")
-        print(f"[OK] File 1 terurai: {len(res_f1['orders'])} transaksi, {len(res_f1['shifts'])} shift, {len(res_f1['cashControl'])} kontrol kas, {len(res_f1['leads'])} data lead.")
+        print(f"[OK] File 1 Sept terurai: {len(res_f1['orders'])} transaksi, {len(res_f1['shifts'])} shift, {len(res_f1['cashControl'])} kontrol kas, {len(res_f1['leads'])} data lead.")
+        
+        res_f1_okt = parse_log_order("file1_okt.xlsm", bulan="2026-10")
+        print(f"[OK] File 1 Okt terurai: {len(res_f1_okt['orders'])} transaksi, {len(res_f1_okt['shifts'])} shift, cutoff {res_f1_okt['cutoff']}.")
 
         # STEP 6: Jalankan Parser File 2 (Schedule) & Merge Booking
         print("\n[3/5] Menjalankan parser_schedule.py (File 2)...")
@@ -166,10 +202,11 @@ def run_integration():
                 {"tier": 3, "omzet": 100000000, "persen": 0.07}
             ]
         state["config"] = cfg
-        state["orders"] = res_f1["orders"]
-        state["shifts"] = res_f1["shifts"]
-        state["cashControl"] = res_f1["cashControl"]
-        state["leads"] = res_f1["leads"] if res_f1["leads"] else state.get("leads", [])
+        state["oktoberLogOrder"] = res_f1_okt
+        state["orders"] = res_f1["orders"] + res_f1_okt["orders"]
+        state["shifts"] = res_f1["shifts"] + res_f1_okt["shifts"]
+        state["cashControl"] = res_f1["cashControl"] + res_f1_okt["cashControl"]
+        state["leads"] = res_f1["leads"] + [l for l in res_f1_okt["leads"] if l.get("transaksi") or l.get("dp") or l.get("leads")]
         state["kpi"] = res_f1["kpi"]
 
         # Injeksi otomatis Bonus KPI dari Sheet 9 ke Roster Gaji (Adif, Saka, Amel, Indah)
@@ -218,6 +255,7 @@ def run_integration():
         # Metadata Google Drive (File 1, File 2, dan File Neraca)
         state["gdrive"] = {
             "file1_id": LOG_ORDER_FILE_ID,
+            "file1_okt_id": LOG_ORDER_OKT_FILE_ID,
             "file2_id": SCHEDULE_SHEET_ID,
             "file_neraca_id": NERACA_SHEET_ID,
             "last_sync": now.astimezone(datetime.timezone.utc).isoformat()
@@ -225,7 +263,7 @@ def run_integration():
 
         # STEP 11: Tutup sync -> status 'sukses'
         current_sync["status"] = "sukses"
-        current_sync["ringkas"] = f"Integrasi berhasil: {len(res_f1['orders'])} order, {len(res_f2_bookings)} jadwal, {len(res_neraca)} pos pengeluaran Neraca."
+        current_sync["ringkas"] = f"Integrasi berhasil: {len(res_f1['orders'])} order Sep, {len(res_f1_okt['orders'])} order Okt, {len(res_f2_bookings)} jadwal, {len(res_neraca)} pos pengeluaran Neraca, {okt_pipeline['totalBookings']} pipeline Okt."
 
         print("\n[5/5] Menyimpan state dan merender artefak...")
         with open("foxe_full_state.json", "w", encoding="utf-8") as f:
@@ -238,11 +276,12 @@ def run_integration():
         print("[OK] index.html berhasil dirakit ulang!")
 
         # Salin ke direktori artifact conversation jika ada (lingkungan lokal Antigravity)
-        artifact_dir = r"C:\Users\ASUS\.gemini\antigravity\brain\cab0ebc5-5150-4303-bbe6-c97db01a1692"
-        if os.path.exists(artifact_dir):
-            artifact_target = os.path.join(artifact_dir, "foxe_studio_keuangan.html")
-            shutil.copy("index.html", artifact_target)
-            print(f"[OK] Artifact disalin ke: {artifact_target}")
+        for c_id in ["b33216a3-0a5f-4df8-aff3-aeef2408089b", "cab0ebc5-5150-4303-bbe6-c97db01a1692"]:
+            art_dir = os.path.join(r"C:\Users\ASUS\.gemini\antigravity\brain", c_id)
+            if os.path.exists(art_dir):
+                target_file = os.path.join(art_dir, "foxe_studio_keuangan.html")
+                shutil.copy("index.html", target_file)
+                print(f"[OK] Artifact disalin ke: {target_file}")
 
         # Kirim notifikasi otomatis ke Telegram (jika bot & chat sudah terhubung)
         try:
