@@ -405,10 +405,26 @@
     .ai-draft-text { font-size: 13px; color: #f1f5f9; line-height: 1.5; font-style: italic; background: rgba(0,0,0,0.3); padding: 10px 12px; border-radius: 6px; border-left: 3px solid #38bdf8; }
     .ai-draft-actions { display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
 
-    /* CALENDAR DASHBOARD STYLES */
     .cal-view-container {
+      flex: 1;
+      height: calc(100vh - 56px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       display: flex; flex-direction: column; gap: 20px;
-      padding: 24px 32px 80px; max-width: 1560px; margin: 0 auto; width: 100%;
+      padding: 24px 32px 140px; max-width: 1560px; margin: 0 auto; width: 100%;
+    }
+    .cal-view-container::-webkit-scrollbar {
+      width: 8px;
+    }
+    .cal-view-container::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .cal-view-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+    .cal-view-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.25);
     }
     .cal-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px; }
     .cal-title { font-size: 20px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px; }
@@ -443,7 +459,7 @@
     .cal-day-card.today {
       border: 2px solid #38bdf8; background: linear-gradient(180deg, rgba(2,132,199,0.12), #141c28);
     }
-    .cal-day-card.empty {
+    .cal-day-card.empty, .cal-day-card.blank {
       background: transparent; border: 1px dashed rgba(255,255,255,0.05); cursor: default; pointer-events: none; min-height: 100px;
     }
     .cal-day-card.future {
@@ -2510,7 +2526,7 @@
       const btnCal = document.getElementById('btnTabCalendar');
 
       if (mode === 'calendar') {
-        if (cv) cv.style.display = 'block';
+        if (cv) cv.style.display = 'flex';
         if (ws) ws.style.display = 'none';
         if (lv) lv.style.display = 'none';
         if (btnCal) {
@@ -2761,6 +2777,18 @@
         `;
 
         grid.appendChild(card);
+      }
+
+      // Trailing padding days to complete the week (Minggu)
+      const totalCells = firstDayDow + numDays;
+      const remainder = totalCells % 7;
+      if (remainder !== 0) {
+        const trailingCount = 7 - remainder;
+        for (let t = 0; t < trailingCount; t++) {
+          const blank = document.createElement('div');
+          blank.className = 'cal-day-card blank';
+          grid.appendChild(blank);
+        }
       }
 
       // Update KPI Header Cards
