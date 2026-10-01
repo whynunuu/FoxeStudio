@@ -101,29 +101,72 @@
     .sidebar-palette {
       width: 250px; background: var(--bg-sidebar); border-right: 1px solid var(--border-subtle);
       display: flex; flex-direction: column; z-index: 20; user-select: none;
+      transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative; flex-shrink: 0;
     }
     .palette-header {
-      padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); font-size: 11px;
+      padding: 12px 14px; border-bottom: 1px solid var(--border-subtle); font-size: 11px;
       font-weight: 700; color: var(--text-muted); text-transform: uppercase;
       display: flex; justify-content: space-between; align-items: center;
+      transition: all 0.2s;
     }
     .palette-content { flex: 1; overflow-y: auto; padding: 12px 10px; display: flex; flex-direction: column; gap: 14px; }
     .node-group-title {
       font-size: 11px; font-weight: 700; color: var(--text-muted);
       text-transform: uppercase; margin-bottom: 6px; padding-left: 4px;
+      transition: opacity 0.15s;
     }
     .palette-item {
       display: flex; align-items: center; gap: 10px; padding: 8px 10px;
       background: #16202e; border: 1px solid var(--border-subtle); border-radius: 6px;
       cursor: pointer; transition: all 0.15s; margin-bottom: 6px;
+      position: relative;
     }
     .palette-item:hover { background: #1e2c3e; border-color: #38bdf8; transform: translateX(2px); }
     .palette-item .icon {
       width: 26px; height: 26px; border-radius: 5px; display: flex;
       align-items: center; justify-content: center; font-size: 13px; color: #fff; flex-shrink: 0;
+      transition: all 0.2s;
     }
     .palette-item .name { font-size: 12px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .palette-item .desc { font-size: 10px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* COLLAPSED PALETTE STATE */
+    .sidebar-palette.collapsed {
+      width: 54px;
+    }
+    .sidebar-palette.collapsed .palette-header {
+      padding: 10px 4px;
+      justify-content: center;
+    }
+    .sidebar-palette.collapsed .palette-header-title,
+    .sidebar-palette.collapsed .palette-header-add,
+    .sidebar-palette.collapsed .node-group-title,
+    .sidebar-palette.collapsed .palette-item .info {
+      display: none !important;
+    }
+    .sidebar-palette.collapsed .palette-content {
+      padding: 10px 4px;
+      gap: 6px;
+      align-items: center;
+    }
+    .sidebar-palette.collapsed .palette-item {
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      justify-content: center;
+      margin: 0 auto 5px auto;
+    }
+    .sidebar-palette.collapsed .palette-item:hover {
+      transform: scale(1.1);
+      border-color: #38bdf8;
+    }
+    .sidebar-palette.collapsed .palette-item .icon {
+      width: 28px;
+      height: 28px;
+      font-size: 15px;
+      border-radius: 6px;
+    }
 
     /* CANVAS */
     .canvas-container {
@@ -192,7 +235,7 @@
 
     /* FLOATING CONTROLS */
     .canvas-controls {
-      position: absolute; bottom: 24px; left: 270px; display: flex; align-items: center; gap: 4px;
+      position: absolute; bottom: 24px; left: 20px; display: flex; align-items: center; gap: 4px;
       background: rgba(17, 23, 34, 0.85); backdrop-filter: blur(8px); border: 1px solid var(--border-subtle);
       border-radius: 8px; padding: 4px; z-index: 30; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
@@ -228,7 +271,10 @@
       position: absolute; bottom: 0; left: 250px; right: 0; height: 260px;
       background: #0f1520; border-top: 1px solid var(--border-subtle); z-index: 40;
       display: flex; flex-direction: column; box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.5);
-      transition: transform 0.25s ease;
+      transition: transform 0.25s ease, left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .workspace.palette-collapsed .exec-drawer {
+      left: 54px;
     }
     .exec-drawer.collapsed { transform: translateY(220px); }
     .exec-drawer-header {
@@ -480,29 +526,32 @@
   <div class="workspace" style="display: none;">
 
     <!-- LEFT PALETTE -->
-    <aside class="sidebar-palette">
+    <aside class="sidebar-palette" id="sidebarPalette">
       <div class="palette-header">
-        <span>Koleksi Node</span>
-        <span style="font-size: 10px; color: var(--accent-cyan);">+ Klik Tambah</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button id="btnTogglePalette" class="btn btn-sm btn-icon" style="padding:2px 6px; font-size:11px; background:#1e293b; border:1px solid #334155; color:#94a3b8; cursor:pointer;" title="Minimize Sidebar">◀</button>
+          <span class="palette-header-title">Koleksi Node</span>
+        </div>
+        <span class="palette-header-add" style="font-size: 10px; color: var(--accent-cyan);">+ Klik Tambah</span>
       </div>
       <div class="palette-content">
         <div>
           <div class="node-group-title">🚀 Pemicu (Triggers)</div>
-          <div class="palette-item" data-type="webhook_trigger">
+          <div class="palette-item" data-type="webhook_trigger" title="⚡ Chat Masuk (Webhook)">
             <div class="icon" style="background: #0284c7;">⚡</div>
             <div class="info">
               <div class="name">Chat Masuk (Webhook)</div>
               <div class="desc">Terima pesan WhatsApp / IG</div>
             </div>
           </div>
-          <div class="palette-item" data-type="foxe_booking_trigger">
+          <div class="palette-item" data-type="foxe_booking_trigger" title="🦊 Foxe Studio Live">
             <div class="icon" style="background: #ea580c;">🦊</div>
             <div class="info">
               <div class="name">Foxe Studio Live</div>
               <div class="desc">Booking & Jadwal Studio</div>
             </div>
           </div>
-          <div class="palette-item" data-type="manual_trigger">
+          <div class="palette-item" data-type="manual_trigger" title="▶ Manual Test">
             <div class="icon" style="background: #3b82f6;">▶</div>
             <div class="info">
               <div class="name">Manual Test</div>
@@ -513,7 +562,7 @@
 
         <div>
           <div class="node-group-title">📊 Google Sheet & Parser</div>
-          <div class="palette-item" data-type="sheet_sync">
+          <div class="palette-item" data-type="sheet_sync" title="📋 Catat Manual & Sync Sheet">
             <div class="icon" style="background: #10b981;">📋</div>
             <div class="info">
               <div class="name">Catat Manual & Sync Sheet</div>
@@ -524,14 +573,14 @@
 
         <div>
           <div class="node-group-title">⚖️ Logika & AI Scoring</div>
-          <div class="palette-item" data-type="filter_if">
+          <div class="palette-item" data-type="filter_if" title="🔀 Cek DP (Konversi)">
             <div class="icon" style="background: #8b5cf6;">🔀</div>
             <div class="info">
               <div class="name">Cek DP (Konversi)</div>
               <div class="desc">IF DP > 0 ? True / False</div>
             </div>
           </div>
-          <div class="palette-item" data-type="ai_lead_scorer">
+          <div class="palette-item" data-type="ai_lead_scorer" title="🧠 AI Lead Scoring (3-Tier)">
             <div class="icon" style="background: #a855f7;">🧠</div>
             <div class="info">
               <div class="name">AI Lead Scoring (3-Tier)</div>
@@ -542,21 +591,21 @@
 
         <div>
           <div class="node-group-title">🏷️ Lead Tiers (Belum DP)</div>
-          <div class="palette-item" data-type="hot_lead">
+          <div class="palette-item" data-type="hot_lead" title="🔥 Hot Lead Action">
             <div class="icon" style="background: #ef4444;">🔥</div>
             <div class="info">
               <div class="name">Hot Lead Action</div>
               <div class="desc">Form kirim / hampir transfer</div>
             </div>
           </div>
-          <div class="palette-item" data-type="warm_lead">
+          <div class="palette-item" data-type="warm_lead" title="⚡ Warm Lead Action">
             <div class="icon" style="background: #f59e0b;">⚡</div>
             <div class="info">
               <div class="name">Warm Lead Action</div>
               <div class="desc">Tanya paket & dibalas</div>
             </div>
           </div>
-          <div class="palette-item" data-type="cold_lead">
+          <div class="palette-item" data-type="cold_lead" title="❄️ Cold Lead Action">
             <div class="icon" style="background: #06b6d4;">❄️</div>
             <div class="info">
               <div class="name">Cold Lead Action</div>
@@ -567,7 +616,7 @@
 
         <div>
           <div class="node-group-title">🤖 AI Agent VPS</div>
-          <div class="palette-item" data-type="ai_agent_vps">
+          <div class="palette-item" data-type="ai_agent_vps" title="🤖 AI Agent VPS (Reminder)">
             <div class="icon" style="background: #0ea5e9;">🤖</div>
             <div class="info">
               <div class="name">AI Agent VPS (Reminder)</div>
@@ -578,21 +627,21 @@
 
         <div>
           <div class="node-group-title">💬 Aksi Konfirmasi (DP Masuk)</div>
-          <div class="palette-item" data-type="set_transform">
+          <div class="palette-item" data-type="set_transform" title="✍️ Template WhatsApp">
             <div class="icon" style="background: #f59e0b;">✍️</div>
             <div class="info">
               <div class="name">Template WhatsApp</div>
               <div class="desc">Format invoice booking</div>
             </div>
           </div>
-          <div class="palette-item" data-type="fonnte_whatsapp">
+          <div class="palette-item" data-type="fonnte_whatsapp" title="📱 WhatsApp Fonnte">
             <div class="icon" style="background: #25d366;">📱</div>
             <div class="info">
               <div class="name">WhatsApp Fonnte</div>
               <div class="desc">Kirim WA resmi</div>
             </div>
           </div>
-          <div class="palette-item" data-type="telegram_bot">
+          <div class="palette-item" data-type="telegram_bot" title="📢 Telegram Studio">
             <div class="icon" style="background: #0088cc;">📢</div>
             <div class="info">
               <div class="name">Telegram Studio</div>
@@ -1677,6 +1726,7 @@
       loadStudioData();
 
       initEvents();
+      restorePaletteState();
     });
 
     let fullStudioState = null;
@@ -1822,9 +1872,44 @@
         document.getElementById('modalBookings').classList.add('active');
       });
 
+      const btnToggle = document.getElementById('btnTogglePalette');
+      if (btnToggle) btnToggle.addEventListener('click', togglePaletteSidebar);
+
       document.querySelectorAll('.btn-close-modal').forEach(b => {
         b.addEventListener('click', () => document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active')));
       });
+    }
+
+    function togglePaletteSidebar() {
+      const palette = document.getElementById('sidebarPalette');
+      const ws = document.querySelector('.workspace');
+      const btn = document.getElementById('btnTogglePalette');
+      if (!palette) return;
+      const isCollapsed = palette.classList.toggle('collapsed');
+      if (ws) ws.classList.toggle('palette-collapsed', isCollapsed);
+      if (btn) {
+        btn.textContent = isCollapsed ? '▶' : '◀';
+        btn.title = isCollapsed ? 'Perluas Sidebar Koleksi Node' : 'Minimize Sidebar';
+      }
+      localStorage.setItem('foxe_palette_collapsed', isCollapsed ? '1' : '0');
+      if (canvas && typeof canvas.renderWires === 'function') {
+        setTimeout(() => canvas.renderWires(), 260);
+      }
+    }
+
+    function restorePaletteState() {
+      const isCollapsed = localStorage.getItem('foxe_palette_collapsed') === '1';
+      if (isCollapsed) {
+        const palette = document.getElementById('sidebarPalette');
+        const ws = document.querySelector('.workspace');
+        const btn = document.getElementById('btnTogglePalette');
+        if (palette) palette.classList.add('collapsed');
+        if (ws) ws.classList.add('palette-collapsed');
+        if (btn) {
+          btn.textContent = '▶';
+          btn.title = 'Perluas Sidebar Koleksi Node';
+        }
+      }
     }
 
     function renderLiveBookingsList() {
