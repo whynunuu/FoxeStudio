@@ -7,6 +7,8 @@ scratch_*.txt
 .DS_Store
 Thumbs.db
 *_latest.*
+*_live.*
+*_temp.*
 .venv/
 test_*.py
 test_*.js

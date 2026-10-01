@@ -53,7 +53,8 @@ def download_gdrive(file_id, dest_path):
     if token:
         res = session.get(url, params={"id": file_id, "confirm": token}, stream=True)
     try:
-        tmp_dest = dest_path + ".tmp"
+        base, ext = os.path.splitext(dest_path)
+        tmp_dest = f"{base}_temp{ext}"
         with open(tmp_dest, "wb") as f:
             for chunk in res.iter_content(chunk_size=65536):
                 if chunk:
@@ -61,45 +62,46 @@ def download_gdrive(file_id, dest_path):
         if os.path.exists(dest_path):
             try:
                 os.replace(tmp_dest, dest_path)
+                print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
+                return dest_path
             except PermissionError:
-                print(f"[WARN] {dest_path} sedang dibuka oleh aplikasi lain (Excel). Memakai salinan lokal.")
-                if os.path.exists(tmp_dest):
-                    try: os.remove(tmp_dest)
-                    except: pass
-                return
+                print(f"[WARN] {dest_path} sedang dibuka oleh Excel. Memakai hasil unduh live terbaru: {tmp_dest} ({os.path.getsize(tmp_dest)} bytes)")
+                return tmp_dest
         else:
             os.rename(tmp_dest, dest_path)
-        print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
-    except PermissionError:
-        print(f"[WARN] {dest_path} sedang dibuka oleh aplikasi lain. Memakai salinan lokal.")
+            print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
+            return dest_path
+    except Exception as e:
+        print(f"[WARN] Gagal mengunduh {dest_path}: {e}. Memakai salinan lokal.")
+        return dest_path
 
 def download_gsheet(sheet_id, dest_path):
     url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=xlsx"
     try:
         res = requests.get(url, verify=False)
         if res.status_code == 200 and len(res.content) > 1000:
-            tmp_dest = dest_path + ".tmp"
+            base, ext = os.path.splitext(dest_path)
+            tmp_dest = f"{base}_temp{ext}"
             with open(tmp_dest, "wb") as f:
                 f.write(res.content)
             if os.path.exists(dest_path):
                 try:
                     os.replace(tmp_dest, dest_path)
+                    print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
+                    return dest_path
                 except PermissionError:
-                    print(f"[WARN] {dest_path} sedang dibuka oleh aplikasi lain (Excel). Memakai salinan lokal.")
-                    if os.path.exists(tmp_dest):
-                        try: os.remove(tmp_dest)
-                        except: pass
-                    return True
+                    print(f"[WARN] {dest_path} sedang dibuka oleh Excel. Memakai hasil unduh live terbaru: {tmp_dest} ({os.path.getsize(tmp_dest)} bytes)")
+                    return tmp_dest
             else:
                 os.rename(tmp_dest, dest_path)
-            print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
-            return True
+                print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
+                return dest_path
         else:
             print(f"[WARN] Tidak dapat mengunduh Google Sheet {sheet_id} (status {res.status_code}). Memakai salinan lokal.")
-            return False
+            return dest_path
     except Exception as e:
         print(f"[WARN] Gagal mengunduh {dest_path}: {e}. Memakai salinan lokal.")
-        return False
+        return dest_path
 
 def run_integration():
     print("==================================================")
@@ -134,55 +136,81 @@ def run_integration():
     try:
         # STEP 4: Unduh sumber operasional resmi (Log Order, Schedule, Wisuda, dan Neraca)
         print("\n[1/5] Mengunduh sumber operasional (Log Order, Schedule, Wisuda, dan Neraca)...")
-        download_gdrive(LOG_ORDER_FILE_ID, "file1.xlsm")
-        download_gdrive(LOG_ORDER_OKT_FILE_ID, "file1_okt.xlsm")
-        download_gsheet(SCHEDULE_SHEET_ID, "file2.xlsx")
-        download_gsheet(NERACA_SHEET_ID, "file_neraca.xlsx")
-        download_gsheet(SCHEDULE_OKT_SHEET_ID, "file2_okt.xlsx")
-        download_gsheet(WISUDA_3OKT_FILE_ID, "file_wisuda_3okt.xlsx")
-        download_gsheet(WISUDA_4OKT_FILE_ID, "file_wisuda_4okt.xlsx")
+        p_f1 = download_gdrive(LOG_ORDER_FILE_ID, "file1.xlsm") or "file1.xlsm"
+        p_f1_okt = download_gdrive(LOG_ORDER_OKT_FILE_ID, "file1_okt.xlsm") or "file1_okt.xlsm"
+        p_f2 = download_gsheet(SCHEDULE_SHEET_ID, "file2.xlsx") or "file2.xlsx"
+        p_neraca = download_gsheet(NERACA_SHEET_ID, "file_neraca.xlsx") or "file_neraca.xlsx"
+        p_f2_okt = download_gsheet(SCHEDULE_OKT_SHEET_ID, "file2_okt.xlsx") or "file2_okt.xlsx"
+        p_w3 = download_gsheet(WISUDA_3OKT_FILE_ID, "file_wisuda_3okt.xlsx") or "file_wisuda_3okt.xlsx"
+        p_w4 = download_gsheet(WISUDA_4OKT_FILE_ID, "file_wisuda_4okt.xlsx") or "file_wisuda_4okt.xlsx"
 
         # STEP 5: Jalankan Parser File 1 (Log Order September & Oktober)
         print("\n[2/5] Menjalankan parser_log_order.py (File 1 September & Oktober)...")
-        res_f1 = parse_log_order("file1.xlsm", bulan="2026-09")
+        res_f1 = parse_log_order(p_f1, bulan="2026-09")
         print(f"[OK] File 1 Sept terurai: {len(res_f1['orders'])} transaksi, {len(res_f1['shifts'])} shift, {len(res_f1['cashControl'])} kontrol kas, {len(res_f1['leads'])} data lead.")
         
-        res_f1_okt = parse_log_order("file1_okt.xlsm", bulan="2026-10")
+        res_f1_okt = parse_log_order(p_f1_okt, bulan="2026-10")
         print(f"[OK] File 1 Okt terurai: {len(res_f1_okt['orders'])} transaksi, {len(res_f1_okt['shifts'])} shift, cutoff {res_f1_okt['cutoff']}.")
 
         # STEP 6: Jalankan Parser File 2 (Schedule) & Merge Booking
         print("\n[3/5] Menjalankan parser_schedule.py (File 2)...")
         existing_bk = (state.get("schedule") or {}).get("bookings", [])
-        res_f2_bookings = parse_schedule("file2.xlsx", bulan="2026-09", existing_bookings=existing_bk)
+        res_f2_bookings = parse_schedule(p_f2, bulan="2026-09", existing_bookings=existing_bk)
         print(f"[OK] File 2 terurai: {len(res_f2_bookings)} jadwal booking studio.")
 
         # STEP 7: Jalankan Parser File Neraca (COGS, OPEX, Log Debit Kredit & Gaji Karyawan)
-        print("\n[4/5] Menjalankan parser_neraca.py (File Neraca)...")
-        actual_shift_counts = {}
+        print("\n[4/5] Menjalankan parser_neraca.py (File Neraca September & Oktober)...")
+        actual_shifts_sep = {}
         for s in res_f1.get("shifts", []):
             nm = str(s.get("nama") or "").upper().strip()
             if nm:
-                actual_shift_counts[nm] = actual_shift_counts.get(nm, 0) + s.get("slot", 1)
+                actual_shifts_sep[nm] = actual_shifts_sep.get(nm, 0) + s.get("slot", 1)
 
-        res_neraca = parse_neraca("file_neraca.xlsx", sheet_name="September 2026", actual_shifts=actual_shift_counts)
-        if isinstance(res_neraca, dict):
-            state["expenses"] = res_neraca.get("expenses", [])
-            state["neracaDetail"] = res_neraca.get("detail", [])
-            state["neracaSummary"] = res_neraca.get("summary", {})
-            state["rosterGaji"] = res_neraca.get("rosterGaji", [])
-            state["rosterSummary"] = res_neraca.get("rosterSummary", {})
-            neraca_count = len(state["expenses"])
-            detail_count = len(state["neracaDetail"])
-            gaji_count = len(state["rosterGaji"])
-        else:
-            state["expenses"] = res_neraca
-            neraca_count = len(res_neraca)
-            detail_count = 0
-            gaji_count = 0
+        actual_shifts_okt = {}
+        for s in res_f1_okt.get("shifts", []):
+            nm = str(s.get("nama") or "").upper().strip()
+            if nm:
+                actual_shifts_okt[nm] = actual_shifts_okt.get(nm, 0) + s.get("slot", 1)
+
+        res_neraca_sep = parse_neraca(p_neraca, sheet_name="September 2026", actual_shifts=actual_shifts_sep)
+
+        # Parse Oktober 2026 jika sheet ada di spreadsheet
+        import openpyxl
+        wb_nrc = openpyxl.load_workbook(p_neraca, read_only=True)
+        res_neraca_okt = None
+        if "Oktober 2026" in wb_nrc.sheetnames:
+            res_neraca_okt = parse_neraca(p_neraca, sheet_name="Oktober 2026", actual_shifts=actual_shifts_okt)
+            print(f"[OK] Sheet Oktober 2026 berhasil diikat: {len(res_neraca_okt['expenses'])} pos biaya, {len(res_neraca_okt['detail'])} mutasi detail, {len(res_neraca_okt['rosterGaji'])} karyawan roster.")
+        wb_nrc.close()
+
+        # Gabungkan struktur Neraca multi-bulan
+        state["neracaByMonth"] = {
+            "2026-09": res_neraca_sep,
+            "2026-10": res_neraca_okt if res_neraca_okt else {"expenses": [], "detail": [], "summary": {}, "rosterGaji": [], "rosterSummary": {}}
+        }
+
+        all_expenses = list(res_neraca_sep.get("expenses", []))
+        if res_neraca_okt:
+            all_expenses.extend(res_neraca_okt.get("expenses", []))
+        state["expenses"] = all_expenses
+
+        state["rosterGajiByMonth"] = {
+            "2026-09": res_neraca_sep.get("rosterGaji", []),
+            "2026-10": res_neraca_okt.get("rosterGaji", []) if res_neraca_okt else []
+        }
+
+        # Simpan default untuk kompatibilitas
+        state["neracaDetail"] = res_neraca_sep.get("detail", [])
+        state["neracaSummary"] = res_neraca_sep.get("summary", {})
+        state["rosterGaji"] = res_neraca_sep.get("rosterGaji", [])
+        state["rosterSummary"] = res_neraca_sep.get("rosterSummary", {})
+        neraca_count = len(state["expenses"])
+        detail_count = len(state["neracaDetail"]) + (len(res_neraca_okt["detail"]) if res_neraca_okt else 0)
+        gaji_count = len(state["rosterGaji"])
 
         # STEP 7.5: Jalankan Parser Schedule Pipeline Oktober 2026 (Reguler + Wisuda 3 & 4 Okt)
         print("\n[5/5] Menjalankan parse_october_pipeline()...")
-        okt_pipeline = parse_october_pipeline("file2_okt.xlsx", "file_wisuda_3okt.xlsx", "file_wisuda_4okt.xlsx")
+        okt_pipeline = parse_october_pipeline(p_f2_okt, p_w3, p_w4)
         state["oktoberPipeline"] = okt_pipeline
         print(f"[OK] Pipeline Oktober terurai: {okt_pipeline['totalBookings']} booking terdaftar (Potensi: Rp {okt_pipeline['potentialOmzet']:,.0f}, Estimasi Pelunasan: Rp {okt_pipeline['estimateCashIn']:,.0f}).")
 

@@ -985,34 +985,43 @@ function compute(targetMonth){
       seasonalityRank: 7,
       seasonalityIndex: 0.82
     } : S.baseline,
-    neracaDetail: isOkt
-      ? [{ tgl: "01", first_of_day: true, masuk: transfer + cash, keluar: 0, balance: transfer + cash, ket_masuk: "TF Hanifah (DP Grad)", ket_keluar: "" }]
-      : (S.neracaDetail||[]),
-    neracaSummary: isOkt
-      ? { total_masuk: transfer + cash, total_keluar: 0, ending_balance: transfer + cash }
-      : (S.neracaSummary||{}),
-    rosterGaji:(isOkt ? [
-      { id: "pay_okt_amel", nama: "AMEL", job: "Admin / CS", q: 2, cost: 40000, bonus_kpi: 0, additional: 0, bonus: 0, hukuman: 0, bon: 0, total_gaji: 80000, thp: 80000, status: "Draft" }
-    ] : (S.rosterGaji||[])).map(r=>{
-      const q=dnum(r.q), cost=dnum(r.cost), totG=q*cost, bon=dnum(r.bon), bonus=dnum(r.bonus), huk=dnum(r.hukuman);
-      const additional = dnum(r.additional);
-      let kpiNom = 0;
-      if (kpi && kpi.length && r.nama) {
-        const rn = String(r.nama).trim().toUpperCase();
-        const km = kpi.find(k => {
-          const kn = String(k.nama).trim().toUpperCase();
-          return kn === rn || rn.includes(kn) || kn.includes(rn);
-        });
-        if (km && km.bonusCair != null) kpiNom = Math.round(km.bonusCair);
+    neracaDetail: (()=>{
+      if (S.neracaByMonth && S.neracaByMonth[mStr] && S.neracaByMonth[mStr].detail) {
+        return S.neracaByMonth[mStr].detail;
       }
-      const bonus_kpi = (dnum(r.bonus_kpi) > 0) ? dnum(r.bonus_kpi) : kpiNom;
-      const thp = totG + bonus_kpi + additional + bonus - huk - bon;
-      return {...r, q, cost, total_gaji:totG, bonus_kpi, additional, bonus, hukuman:huk, bon, thp};
-    }),
-    rosterSummary:(()=>{
-      const actR = isOkt ? [
-        { id: "pay_okt_amel", nama: "AMEL", job: "Admin / CS", q: 2, cost: 40000, bonus_kpi: 0, additional: 0, bonus: 0, hukuman: 0, bon: 0, total_gaji: 80000, thp: 80000, status: "Draft" }
-      ] : (S.rosterGaji||[]);
+      return isOkt ? [] : (S.neracaDetail || []);
+    })(),
+    neracaSummary: (()=>{
+      if (S.neracaByMonth && S.neracaByMonth[mStr] && S.neracaByMonth[mStr].summary && Object.keys(S.neracaByMonth[mStr].summary).length) {
+        return S.neracaByMonth[mStr].summary;
+      }
+      return isOkt ? { total_masuk: 0, total_keluar: 0, ending_balance: 0, total_rows: 0 } : (S.neracaSummary || {});
+    })(),
+    rosterGaji: (()=>{
+      const monthRoster = (S.neracaByMonth && S.neracaByMonth[mStr] && S.neracaByMonth[mStr].rosterGaji && S.neracaByMonth[mStr].rosterGaji.length)
+        ? S.neracaByMonth[mStr].rosterGaji
+        : (isOkt ? ((S.rosterGajiByMonth && S.rosterGajiByMonth["2026-10"]) || []) : (S.rosterGaji || []));
+      return monthRoster.map(r=>{
+        const q=dnum(r.q), cost=dnum(r.cost), totG=q*cost, bon=dnum(r.bon), bonus=dnum(r.bonus), huk=dnum(r.hukuman);
+        const additional = dnum(r.additional);
+        let kpiNom = 0;
+        if (kpi && kpi.length && r.nama) {
+          const rn = String(r.nama).trim().toUpperCase();
+          const km = kpi.find(k => {
+            const kn = String(k.nama).trim().toUpperCase();
+            return kn === rn || rn.includes(kn) || kn.includes(rn);
+          });
+          if (km && km.bonusCair != null) kpiNom = Math.round(km.bonusCair);
+        }
+        const bonus_kpi = (dnum(r.bonus_kpi) > 0) ? dnum(r.bonus_kpi) : kpiNom;
+        const thp = totG + bonus_kpi + additional + bonus - huk - bon;
+        return {...r, q, cost, total_gaji:totG, bonus_kpi, additional, bonus, hukuman:huk, bon, thp};
+      });
+    })(),
+    rosterSummary: (()=>{
+      const actR = (S.neracaByMonth && S.neracaByMonth[mStr] && S.neracaByMonth[mStr].rosterGaji && S.neracaByMonth[mStr].rosterGaji.length)
+        ? S.neracaByMonth[mStr].rosterGaji
+        : (isOkt ? ((S.rosterGajiByMonth && S.rosterGajiByMonth["2026-10"]) || []) : (S.rosterGaji || []));
       return {
         total_gaji:actR.reduce((s,r)=>s+(dnum(r.q)*dnum(r.cost)),0),
         total_bonus_kpi:actR.reduce((s,r)=>{

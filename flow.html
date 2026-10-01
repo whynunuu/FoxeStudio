@@ -736,9 +736,9 @@
         <div class="kpi-sub" id="calKpiLeadsSub">Leads WhatsApp &amp; Inquiries</div>
       </div>
       <div class="kpi-card" style="border-left: 3px solid #10b981;">
-        <div class="kpi-lbl" style="color:#34d399;">Total Booking DP Masuk</div>
+        <div class="kpi-lbl" style="color:#34d399;">Total Booking Closing</div>
         <div class="kpi-val" style="color:#34d399;" id="calKpiTotalDp">0</div>
-        <div class="kpi-sub">Klien Berhasil Closing</div>
+        <div class="kpi-sub">Klien DP &amp; Pelunasan</div>
       </div>
       <div class="kpi-card" style="border-left: 3px solid #38bdf8;">
         <div class="kpi-lbl" style="color:#38bdf8;">Rata-Rata Konversi</div>
@@ -2830,9 +2830,9 @@
             <div class="kpi-sub">WhatsApp &amp; Inquiries</div>
           </div>
           <div class="kpi-card" style="padding:10px; border-left:3px solid #10b981;">
-            <div class="kpi-lbl" style="color:#34d399;">Booking DP Masuk</div>
+            <div class="kpi-lbl" style="color:#34d399;">Booking Closing</div>
             <div class="kpi-val" style="font-size:19px; color:#34d399;">${totalDp}</div>
-            <div class="kpi-sub">Closing Konversi</div>
+            <div class="kpi-sub">Klien DP &amp; Pelunasan</div>
           </div>
           <div class="kpi-card" style="padding:10px; border-left:3px solid #38bdf8;">
             <div class="kpi-lbl" style="color:#38bdf8;">Closing Rate</div>
@@ -2859,14 +2859,18 @@
                   <span style="font-size:11px; color:#38bdf8; font-weight:400; margin-left:4px;">(${escapeHtml(o.paket || 'Paket Studio')})</span>
                 </div>
                 <div style="font-size:10px; color:#94a3b8; margin-top:2px;">
-                  Admin: <b style="color:#cbd5e1;">${escapeHtml(o.admin || 'Admin')}</b> · Sesi: ${escapeHtml(o.tanggalFoto || o.tanggal || '—')}
+                  Admin: <b style="color:#cbd5e1;">${escapeHtml(o.admin || 'Admin')}</b>
+                  ${o.fotografer ? ` · FG: <b style="color:#cbd5e1;">${escapeHtml(o.fotografer)}</b>` : ''} 
+                  · Sesi: ${escapeHtml(o.tanggalFoto || o.tanggal || '—')}
                 </div>
               </div>
               <div style="text-align:right;">
                 <div style="font-weight:700; color:#34d399; font-size:12.5px;">
                   Rp ${((Number(o.cash) || 0) + (Number(o.transfer) || 0)).toLocaleString('id-ID')}
                 </div>
-                <span class="pill final" style="font-size:9px; padding:1px 6px;">${(Number(o.transfer) || 0) > 0 ? 'Transfer DP' : 'Cash'}</span>
+                <span class="pill final" style="font-size:9px; padding:1px 6px;">
+                  ${escapeHtml(o.pembayaran || ((Number(o.transfer) || 0) > 0 ? 'Transfer DP' : 'Cash'))}
+                </span>
               </div>
             </div>
           `).join('');

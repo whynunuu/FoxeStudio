@@ -103,6 +103,7 @@ def parse_log_order(filepath="file1.xlsm", bulan="2026-09"):
                         tgl_foto = str_date(r[5])
                     cash = dnum(r[6]) if len(r) > 6 else 0.0
                     transfer = dnum(r[7]) if len(r) > 7 else 0.0
+                    pembayaran = str(r[8] or "").strip() if len(r) > 8 and r[8] else ""
                     admin = str(r[11] or "").strip().upper() if len(r) > 11 and r[11] else ""
                     fotografer = str(r[12] or "").strip().upper() if len(r) > 12 and r[12] else ""
                     
@@ -121,6 +122,7 @@ def parse_log_order(filepath="file1.xlsm", bulan="2026-09"):
                         "cash": cash,
                         "transfer": transfer,
                         "total": cash + transfer,
+                        "pembayaran": pembayaran,
                         "admin": admin if admin != "BELUM DIISI" else "",
                         "fotografer": fotografer if fotografer != "BELUM DIISI" else ""
                     })

@@ -31,6 +31,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -43,6 +44,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -55,6 +57,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -67,6 +70,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -79,6 +83,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -91,6 +96,7 @@
       "cash": 330000.0,
       "transfer": 0.0,
       "total": 330000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -103,6 +109,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -115,6 +122,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -127,6 +135,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -139,6 +148,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -151,6 +161,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -163,6 +174,7 @@
       "cash": 0.0,
       "transfer": 320000.0,
       "total": 320000.0,
+      "pembayaran": "Lunas",
       "admin": "",
       "fotografer": "SAKA"
     },
@@ -175,6 +187,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -187,6 +200,7 @@
       "cash": 0.0,
       "transfer": 400000.0,
       "total": 400000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -199,6 +213,7 @@
       "cash": 0.0,
       "transfer": 370000.0,
       "total": 370000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -211,6 +226,7 @@
       "cash": 290000.0,
       "transfer": 0.0,
       "total": 290000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "VERO"
     },
@@ -223,6 +239,7 @@
       "cash": 0.0,
       "transfer": 270000.0,
       "total": 270000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -235,6 +252,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "VERO"
     },
@@ -247,6 +265,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "VERO"
     },
@@ -259,6 +278,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -271,6 +291,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -283,6 +304,7 @@
       "cash": 20000.0,
       "transfer": 0.0,
       "total": 20000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -295,6 +317,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "VERO"
     },
@@ -307,6 +330,7 @@
       "cash": 80000.0,
       "transfer": 0.0,
       "total": 80000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -319,6 +343,7 @@
       "cash": 0.0,
       "transfer": 150000.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -331,6 +356,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -343,6 +369,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -355,6 +382,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -367,6 +395,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -379,6 +408,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "VERO"
     },
@@ -391,6 +421,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -403,6 +434,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -415,6 +447,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -427,6 +460,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -439,6 +473,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -451,6 +486,7 @@
       "cash": 310000.0,
       "transfer": 0.0,
       "total": 310000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -463,6 +499,7 @@
       "cash": 0.0,
       "transfer": 350000.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -475,6 +512,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -487,6 +525,7 @@
       "cash": 0.0,
       "transfer": 300000.0,
       "total": 300000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -499,6 +538,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -511,6 +551,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -523,6 +564,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -535,6 +577,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -547,6 +590,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -559,6 +603,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -571,6 +616,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -583,6 +629,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -595,6 +642,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -607,6 +655,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -619,6 +668,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -631,6 +681,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -643,6 +694,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -655,6 +707,7 @@
       "cash": 0.0,
       "transfer": 370000.0,
       "total": 370000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -667,6 +720,7 @@
       "cash": 0.0,
       "transfer": 290000.0,
       "total": 290000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -679,6 +733,7 @@
       "cash": 0.0,
       "transfer": 280000.0,
       "total": 280000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -691,6 +746,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -703,6 +759,7 @@
       "cash": 0.0,
       "transfer": 410000.0,
       "total": 410000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -715,6 +772,7 @@
       "cash": 0.0,
       "transfer": 440000.0,
       "total": 440000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -727,6 +785,7 @@
       "cash": 310000.0,
       "transfer": 0.0,
       "total": 310000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -739,6 +798,7 @@
       "cash": 290000.0,
       "transfer": 0.0,
       "total": 290000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -751,6 +811,7 @@
       "cash": 0.0,
       "transfer": 290000.0,
       "total": 290000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -763,6 +824,7 @@
       "cash": 0.0,
       "transfer": 370000.0,
       "total": 370000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -775,6 +837,7 @@
       "cash": 310000.0,
       "transfer": 0.0,
       "total": 310000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -787,6 +850,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -799,6 +863,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -811,6 +876,7 @@
       "cash": 0.0,
       "transfer": 270000.0,
       "total": 270000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -823,6 +889,7 @@
       "cash": 270000.0,
       "transfer": 0.0,
       "total": 270000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -835,6 +902,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -847,6 +915,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -859,6 +928,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -871,6 +941,7 @@
       "cash": 330000.0,
       "transfer": 0.0,
       "total": 330000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -883,6 +954,7 @@
       "cash": 0.0,
       "transfer": 400000.0,
       "total": 400000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -895,6 +967,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -907,6 +980,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -919,6 +993,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -931,6 +1006,7 @@
       "cash": 270000.0,
       "transfer": 0.0,
       "total": 270000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -943,6 +1019,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -955,6 +1032,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -967,6 +1045,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "ABROR"
     },
@@ -979,6 +1058,7 @@
       "cash": 290000.0,
       "transfer": 0.0,
       "total": 290000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -991,6 +1071,7 @@
       "cash": 310000.0,
       "transfer": 0.0,
       "total": 310000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -1003,6 +1084,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -1015,6 +1097,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -1027,6 +1110,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1039,6 +1123,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1051,6 +1136,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1063,6 +1149,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1075,6 +1162,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1087,6 +1175,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1099,6 +1188,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1111,6 +1201,7 @@
       "cash": 0.0,
       "transfer": 200000.0,
       "total": 200000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -1123,6 +1214,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1135,6 +1227,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1147,6 +1240,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1159,6 +1253,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1171,6 +1266,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1183,6 +1279,7 @@
       "cash": 0.0,
       "transfer": 2400000.0,
       "total": 2400000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -1195,6 +1292,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1207,6 +1305,7 @@
       "cash": 0.0,
       "transfer": 200000.0,
       "total": 200000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -1219,6 +1318,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1231,6 +1331,7 @@
       "cash": 0.0,
       "transfer": 350000.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1243,6 +1344,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1255,6 +1357,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1267,6 +1370,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1279,6 +1383,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1291,6 +1396,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1303,6 +1409,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1315,6 +1422,7 @@
       "cash": 0.0,
       "transfer": 350000.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1327,6 +1435,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1339,6 +1448,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1351,6 +1461,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1363,6 +1474,7 @@
       "cash": 0.0,
       "transfer": 200000.0,
       "total": 200000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1375,6 +1487,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1387,6 +1500,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -1399,6 +1513,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1411,6 +1526,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1423,6 +1539,7 @@
       "cash": 0.0,
       "transfer": 300000.0,
       "total": 300000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -1435,6 +1552,7 @@
       "cash": 100000.0,
       "transfer": 0.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -1447,6 +1565,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1459,6 +1578,7 @@
       "cash": 0.0,
       "transfer": 750000.0,
       "total": 750000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -1471,6 +1591,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1483,6 +1604,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1495,6 +1617,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1507,6 +1630,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1519,6 +1643,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1531,6 +1656,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1543,6 +1669,7 @@
       "cash": 0.0,
       "transfer": 125000.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1555,6 +1682,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1567,6 +1695,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1579,6 +1708,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1591,6 +1721,7 @@
       "cash": 200000.0,
       "transfer": 0.0,
       "total": 200000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -1603,6 +1734,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1615,6 +1747,7 @@
       "cash": 0.0,
       "transfer": 125000.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -1627,6 +1760,7 @@
       "cash": 0.0,
       "transfer": 275000.0,
       "total": 275000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1639,6 +1773,7 @@
       "cash": 0.0,
       "transfer": 150000.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -1651,6 +1786,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -1663,6 +1799,7 @@
       "cash": 100000.0,
       "transfer": 0.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -1675,6 +1812,7 @@
       "cash": 0.0,
       "transfer": 425000.0,
       "total": 425000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1687,6 +1825,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1699,6 +1838,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1711,6 +1851,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1723,6 +1864,7 @@
       "cash": 0.0,
       "transfer": 150000.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -1735,6 +1877,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1747,6 +1890,7 @@
       "cash": 200000.0,
       "transfer": 0.0,
       "total": 200000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -1759,6 +1903,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1771,6 +1916,7 @@
       "cash": 0.0,
       "transfer": 75000.0,
       "total": 75000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -1783,6 +1929,7 @@
       "cash": 0.0,
       "transfer": 270000.0,
       "total": 270000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -1795,6 +1942,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1807,6 +1955,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -1819,6 +1968,7 @@
       "cash": 780000.0,
       "transfer": 70000.0,
       "total": 850000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -1831,6 +1981,7 @@
       "cash": 50000.0,
       "transfer": 0.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -1843,6 +1994,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -1855,6 +2007,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -1867,6 +2020,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1879,6 +2033,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1891,6 +2046,7 @@
       "cash": 0.0,
       "transfer": 200000.0,
       "total": 200000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -1903,6 +2059,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1915,6 +2072,7 @@
       "cash": 50000.0,
       "transfer": 0.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -1927,6 +2085,7 @@
       "cash": 75000.0,
       "transfer": 0.0,
       "total": 75000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -1939,6 +2098,7 @@
       "cash": 0.0,
       "transfer": 200000.0,
       "total": 200000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -1951,6 +2111,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -1963,6 +2124,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -1975,6 +2137,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1987,6 +2150,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -1999,6 +2163,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2011,6 +2176,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2023,6 +2189,7 @@
       "cash": 50000.0,
       "transfer": 50000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -2035,6 +2202,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2047,6 +2215,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2059,6 +2228,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2071,6 +2241,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2083,6 +2254,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2095,6 +2267,7 @@
       "cash": 0.0,
       "transfer": 525000.0,
       "total": 525000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -2107,6 +2280,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -2119,6 +2293,7 @@
       "cash": 0.0,
       "transfer": 200000.0,
       "total": 200000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -2131,6 +2306,7 @@
       "cash": 0.0,
       "transfer": 150000.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -2143,6 +2319,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2155,6 +2332,7 @@
       "cash": 0.0,
       "transfer": 400000.0,
       "total": 400000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -2167,6 +2345,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2179,6 +2358,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2191,6 +2371,7 @@
       "cash": 0.0,
       "transfer": 350000.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -2203,6 +2384,7 @@
       "cash": 125000.0,
       "transfer": 0.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -2215,6 +2397,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2227,6 +2410,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -2239,6 +2423,7 @@
       "cash": 0.0,
       "transfer": 25000.0,
       "total": 25000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2251,6 +2436,7 @@
       "cash": 455000.0,
       "transfer": 0.0,
       "total": 455000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -2263,6 +2449,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -2275,6 +2462,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -2287,6 +2475,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -2299,6 +2488,7 @@
       "cash": 0.0,
       "transfer": 75000.0,
       "total": 75000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -2311,6 +2501,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -2323,6 +2514,7 @@
       "cash": 0.0,
       "transfer": 125000.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -2335,6 +2527,7 @@
       "cash": 0.0,
       "transfer": 350000.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -2347,6 +2540,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -2359,6 +2553,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -2371,6 +2566,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -2383,6 +2579,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -2395,6 +2592,7 @@
       "cash": 0.0,
       "transfer": 400000.0,
       "total": 400000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -2407,6 +2605,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -2419,6 +2618,7 @@
       "cash": 0.0,
       "transfer": 350000.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2431,6 +2631,7 @@
       "cash": 0.0,
       "transfer": 310000.0,
       "total": 310000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -2443,6 +2644,7 @@
       "cash": 0.0,
       "transfer": 500000.0,
       "total": 500000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -2455,6 +2657,7 @@
       "cash": 0.0,
       "transfer": 310000.0,
       "total": 310000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -2467,6 +2670,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -2479,6 +2683,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -2491,6 +2696,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ABROR"
     },
@@ -2503,6 +2709,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -2515,6 +2722,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -2527,6 +2735,7 @@
       "cash": 290000.0,
       "transfer": 0.0,
       "total": 290000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ABROR"
     },
@@ -2539,6 +2748,7 @@
       "cash": 220000.0,
       "transfer": 0.0,
       "total": 220000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -2551,6 +2761,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ABROR"
     },
@@ -2563,6 +2774,7 @@
       "cash": 0.0,
       "transfer": 330000.0,
       "total": 330000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -2575,6 +2787,7 @@
       "cash": 0.0,
       "transfer": 350000.0,
       "total": 350000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ABROR"
     },
@@ -2587,6 +2800,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -2599,6 +2813,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -2611,6 +2826,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -2623,6 +2839,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -2635,6 +2852,7 @@
       "cash": 0.0,
       "transfer": 270000.0,
       "total": 270000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ABROR"
     },
@@ -2647,6 +2865,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -2659,6 +2878,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -2671,6 +2891,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -2683,6 +2904,7 @@
       "cash": 0.0,
       "transfer": 490000.0,
       "total": 490000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -2695,6 +2917,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -2707,6 +2930,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2719,6 +2943,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2731,6 +2956,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2743,6 +2969,7 @@
       "cash": 0.0,
       "transfer": 175000.0,
       "total": 175000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -2755,6 +2982,7 @@
       "cash": 0.0,
       "transfer": 400000.0,
       "total": 400000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -2767,6 +2995,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2779,6 +3008,7 @@
       "cash": 0.0,
       "transfer": 270000.0,
       "total": 270000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -2791,6 +3021,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2803,6 +3034,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2815,6 +3047,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -2827,6 +3060,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -2839,6 +3073,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -2851,6 +3086,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2863,6 +3099,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -2875,6 +3112,7 @@
       "cash": 400000.0,
       "transfer": 0.0,
       "total": 400000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -2887,6 +3125,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -2899,6 +3138,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -2911,6 +3151,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -2923,6 +3164,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -2935,6 +3177,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -2947,6 +3190,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -2959,6 +3203,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -2971,6 +3216,7 @@
       "cash": 0.0,
       "transfer": 330000.0,
       "total": 330000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -2983,6 +3229,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -2995,6 +3242,7 @@
       "cash": 0.0,
       "transfer": 330000.0,
       "total": 330000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -3007,6 +3255,7 @@
       "cash": 0.0,
       "transfer": 400000.0,
       "total": 400000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -3019,6 +3268,7 @@
       "cash": 0.0,
       "transfer": 280000.0,
       "total": 280000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -3031,6 +3281,7 @@
       "cash": 390000.0,
       "transfer": 0.0,
       "total": 390000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -3043,6 +3294,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -3055,6 +3307,7 @@
       "cash": 270000.0,
       "transfer": 0.0,
       "total": 270000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -3067,6 +3320,7 @@
       "cash": 270000.0,
       "transfer": 0.0,
       "total": 270000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "FAHME"
     },
@@ -3079,6 +3333,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3091,6 +3346,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3103,6 +3359,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -3115,6 +3372,7 @@
       "cash": 400000.0,
       "transfer": 0.0,
       "total": 400000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -3127,6 +3385,7 @@
       "cash": 440000.0,
       "transfer": 0.0,
       "total": 440000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "VERO"
     },
@@ -3139,6 +3398,7 @@
       "cash": 0.0,
       "transfer": 200000.0,
       "total": 200000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "VERO"
     },
@@ -3151,6 +3411,7 @@
       "cash": 0.0,
       "transfer": 500000.0,
       "total": 500000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -3163,6 +3424,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -3175,6 +3437,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -3187,6 +3450,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "VERO"
     },
@@ -3199,6 +3463,7 @@
       "cash": 290000.0,
       "transfer": 0.0,
       "total": 290000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -3211,6 +3476,7 @@
       "cash": 0.0,
       "transfer": 290000.0,
       "total": 290000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -3223,6 +3489,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "VERO"
     },
@@ -3235,6 +3502,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -3247,6 +3515,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -3259,6 +3528,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -3271,6 +3541,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -3283,6 +3554,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "VERO"
     },
@@ -3295,6 +3567,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -3307,6 +3580,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -3319,6 +3593,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -3331,6 +3606,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -3343,6 +3619,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ABROR"
     },
@@ -3355,6 +3632,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "FAHME"
     },
@@ -3367,6 +3645,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -3379,6 +3658,7 @@
       "cash": 0.0,
       "transfer": 270000.0,
       "total": 270000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "ADIF"
     },
@@ -3391,6 +3671,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "ADDEL",
       "fotografer": "SAKA"
     },
@@ -3403,6 +3684,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "",
       "fotografer": "FAHME"
     },
@@ -3415,6 +3697,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "",
       "admin": "",
       "fotografer": "SAKA"
     },
@@ -3427,6 +3710,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "",
       "admin": "",
       "fotografer": "FAHME"
     },
@@ -3439,6 +3723,7 @@
       "cash": 0.0,
       "transfer": 500000.0,
       "total": 500000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3451,6 +3736,7 @@
       "cash": 350000.0,
       "transfer": 0.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -3463,6 +3749,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3475,6 +3762,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -3487,6 +3775,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -3499,6 +3788,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3511,6 +3801,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3523,6 +3814,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -3535,6 +3827,7 @@
       "cash": 430000.0,
       "transfer": 0.0,
       "total": 430000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ABROR"
     },
@@ -3547,6 +3840,7 @@
       "cash": 0.0,
       "transfer": 400000.0,
       "total": 400000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -3559,6 +3853,7 @@
       "cash": 0.0,
       "transfer": 290000.0,
       "total": 290000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -3571,6 +3866,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3583,6 +3879,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3595,6 +3892,7 @@
       "cash": 0.0,
       "transfer": 25000.0,
       "total": 25000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3607,6 +3905,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -3619,6 +3918,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3631,6 +3931,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -3643,6 +3944,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -3655,6 +3957,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3667,6 +3970,7 @@
       "cash": 0.0,
       "transfer": 70000.0,
       "total": 70000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3679,6 +3983,7 @@
       "cash": 0.0,
       "transfer": 290000.0,
       "total": 290000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -3691,6 +3996,7 @@
       "cash": 0.0,
       "transfer": 125000.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3703,6 +4009,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3715,6 +4022,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3727,6 +4035,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3739,6 +4048,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3751,6 +4061,7 @@
       "cash": 0.0,
       "transfer": 60000.0,
       "total": 60000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -3763,6 +4074,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -3775,6 +4087,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -3787,6 +4100,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -3799,6 +4113,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -3811,6 +4126,7 @@
       "cash": 0.0,
       "transfer": 1125000.0,
       "total": 1125000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -3823,6 +4139,7 @@
       "cash": 175000.0,
       "transfer": 0.0,
       "total": 175000.0,
+      "pembayaran": "Lunas",
       "admin": "",
       "fotografer": ""
     },
@@ -3835,6 +4152,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -3847,6 +4165,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -3859,6 +4178,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3871,6 +4191,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3883,6 +4204,7 @@
       "cash": 0.0,
       "transfer": 150000.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -3895,6 +4217,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3907,6 +4230,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3919,6 +4243,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3931,6 +4256,7 @@
       "cash": 350000.0,
       "transfer": 0.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -3943,6 +4269,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3955,6 +4282,7 @@
       "cash": 0.0,
       "transfer": 1125000.0,
       "total": 1125000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -3967,6 +4295,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -3979,6 +4308,7 @@
       "cash": 0.0,
       "transfer": 125000.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -3991,6 +4321,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4003,6 +4334,7 @@
       "cash": 300000.0,
       "transfer": 300000.0,
       "total": 600000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -4015,6 +4347,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4027,6 +4360,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4039,6 +4373,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4051,6 +4386,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4063,6 +4399,7 @@
       "cash": 0.0,
       "transfer": 30000.0,
       "total": 30000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4075,6 +4412,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4087,6 +4425,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -4099,6 +4438,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4111,6 +4451,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4123,6 +4464,7 @@
       "cash": 0.0,
       "transfer": 400000.0,
       "total": 400000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4135,6 +4477,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4147,6 +4490,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -4159,6 +4503,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4171,6 +4516,7 @@
       "cash": 125000.0,
       "transfer": 0.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -4183,6 +4529,7 @@
       "cash": 0.0,
       "transfer": 75000.0,
       "total": 75000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -4195,6 +4542,7 @@
       "cash": 0.0,
       "transfer": 125000.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -4207,6 +4555,7 @@
       "cash": 625000.0,
       "transfer": 0.0,
       "total": 625000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -4219,6 +4568,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4231,6 +4581,7 @@
       "cash": 0.0,
       "transfer": 270000.0,
       "total": 270000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4243,6 +4594,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4255,6 +4607,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4267,6 +4620,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -4279,6 +4633,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4291,6 +4646,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4303,6 +4659,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -4315,6 +4672,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4327,6 +4685,7 @@
       "cash": 50000.0,
       "transfer": 0.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4339,6 +4698,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4351,6 +4711,7 @@
       "cash": 0.0,
       "transfer": 200000.0,
       "total": 200000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -4363,6 +4724,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -4375,6 +4737,7 @@
       "cash": 530000.0,
       "transfer": 0.0,
       "total": 530000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -4387,6 +4750,7 @@
       "cash": 75000.0,
       "transfer": 0.0,
       "total": 75000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -4399,6 +4763,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4411,6 +4776,7 @@
       "cash": 175000.0,
       "transfer": 0.0,
       "total": 175000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -4423,6 +4789,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4435,6 +4802,7 @@
       "cash": 0.0,
       "transfer": 550000.0,
       "total": 550000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -4447,6 +4815,7 @@
       "cash": 175000.0,
       "transfer": 0.0,
       "total": 175000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -4459,6 +4828,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4471,6 +4841,7 @@
       "cash": 0.0,
       "transfer": 200000.0,
       "total": 200000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4483,6 +4854,7 @@
       "cash": 0.0,
       "transfer": 150000.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -4495,6 +4867,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4507,6 +4880,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4519,6 +4893,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -4531,6 +4906,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4543,6 +4919,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4555,6 +4932,7 @@
       "cash": 350000.0,
       "transfer": 0.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -4567,6 +4945,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4579,6 +4958,7 @@
       "cash": 0.0,
       "transfer": 75000.0,
       "total": 75000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -4591,6 +4971,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -4603,6 +4984,7 @@
       "cash": 65000.0,
       "transfer": 0.0,
       "total": 65000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -4615,6 +4997,7 @@
       "cash": 0.0,
       "transfer": 20000.0,
       "total": 20000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4627,6 +5010,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4639,6 +5023,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4651,6 +5036,7 @@
       "cash": 1050000.0,
       "transfer": 0.0,
       "total": 1050000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -4663,6 +5049,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -4675,6 +5062,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4687,6 +5075,7 @@
       "cash": 825000.0,
       "transfer": 0.0,
       "total": 825000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -4699,6 +5088,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4711,6 +5101,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4723,6 +5114,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4735,6 +5127,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4747,6 +5140,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4759,6 +5153,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4771,6 +5166,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4783,6 +5179,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4795,6 +5192,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4807,6 +5205,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4819,6 +5218,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4831,6 +5231,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4843,6 +5244,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -4855,6 +5257,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -4867,6 +5270,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4879,6 +5283,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4891,6 +5296,7 @@
       "cash": 0.0,
       "transfer": 525000.0,
       "total": 525000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -4903,6 +5309,7 @@
       "cash": 475000.0,
       "transfer": 0.0,
       "total": 475000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -4915,6 +5322,7 @@
       "cash": 0.0,
       "transfer": 150000.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -4927,6 +5335,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4939,6 +5348,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -4951,6 +5361,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4963,6 +5374,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4975,6 +5387,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4987,6 +5400,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -4999,6 +5413,7 @@
       "cash": 300000.0,
       "transfer": 0.0,
       "total": 300000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -5011,6 +5426,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5023,6 +5439,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5035,6 +5452,7 @@
       "cash": 0.0,
       "transfer": 20000.0,
       "total": 20000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5047,6 +5465,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5059,6 +5478,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5071,6 +5491,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5083,6 +5504,7 @@
       "cash": 0.0,
       "transfer": 20000.0,
       "total": 20000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5095,6 +5517,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5107,6 +5530,7 @@
       "cash": 225000.0,
       "transfer": 0.0,
       "total": 225000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -5119,6 +5543,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5131,6 +5556,7 @@
       "cash": 0.0,
       "transfer": 75000.0,
       "total": 75000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -5143,6 +5569,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5155,6 +5582,7 @@
       "cash": 125000.0,
       "transfer": 0.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -5167,6 +5595,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5179,6 +5608,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5191,6 +5621,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5203,6 +5634,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5215,6 +5647,7 @@
       "cash": 0.0,
       "transfer": 275000.0,
       "total": 275000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -5227,6 +5660,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5239,6 +5673,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5251,6 +5686,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5263,6 +5699,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5275,6 +5712,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5287,6 +5725,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5299,6 +5738,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5311,6 +5751,7 @@
       "cash": 0.0,
       "transfer": 150000.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -5323,6 +5764,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5335,6 +5777,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -5347,6 +5790,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5359,6 +5803,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5371,6 +5816,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5383,6 +5829,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5395,6 +5842,7 @@
       "cash": 0.0,
       "transfer": 750000.0,
       "total": 750000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -5407,6 +5855,7 @@
       "cash": 0.0,
       "transfer": 125000.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -5419,6 +5868,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5431,6 +5881,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -5443,6 +5894,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5455,6 +5907,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5467,6 +5920,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5479,6 +5933,7 @@
       "cash": 100000.0,
       "transfer": 0.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -5491,6 +5946,7 @@
       "cash": 0.0,
       "transfer": 175000.0,
       "total": 175000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -5503,6 +5959,7 @@
       "cash": 0.0,
       "transfer": 75000.0,
       "total": 75000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -5515,6 +5972,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5527,6 +5985,7 @@
       "cash": 150000.0,
       "transfer": 0.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -5539,6 +5998,7 @@
       "cash": 150000.0,
       "transfer": 0.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -5551,6 +6011,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5563,6 +6024,7 @@
       "cash": 75000.0,
       "transfer": 0.0,
       "total": 75000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -5575,6 +6037,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5587,6 +6050,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -5599,6 +6063,7 @@
       "cash": 410000.0,
       "transfer": 0.0,
       "total": 410000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -5611,6 +6076,7 @@
       "cash": 0.0,
       "transfer": 400000.0,
       "total": 400000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -5623,6 +6089,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -5635,6 +6102,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5647,6 +6115,7 @@
       "cash": 0.0,
       "transfer": 270000.0,
       "total": 270000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -5659,6 +6128,7 @@
       "cash": 400000.0,
       "transfer": 0.0,
       "total": 400000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -5671,6 +6141,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5683,6 +6154,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -5695,6 +6167,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -5707,6 +6180,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -5719,6 +6193,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5731,6 +6206,7 @@
       "cash": 150000.0,
       "transfer": 0.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -5743,6 +6219,7 @@
       "cash": 0.0,
       "transfer": 375000.0,
       "total": 375000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -5755,6 +6232,7 @@
       "cash": 375000.0,
       "transfer": 170000.0,
       "total": 545000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -5767,6 +6245,7 @@
       "cash": 0.0,
       "transfer": 430000.0,
       "total": 430000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -5779,6 +6258,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5791,6 +6271,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5803,6 +6284,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5815,6 +6297,7 @@
       "cash": 725000.0,
       "transfer": 0.0,
       "total": 725000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -5827,6 +6310,7 @@
       "cash": 0.0,
       "transfer": 20000.0,
       "total": 20000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5839,6 +6323,7 @@
       "cash": 0.0,
       "transfer": 80000.0,
       "total": 80000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5851,6 +6336,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -5863,6 +6349,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5875,6 +6362,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -5887,6 +6375,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5899,6 +6388,7 @@
       "cash": 100000.0,
       "transfer": 0.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -5911,6 +6401,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5923,6 +6414,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5935,6 +6427,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -5947,6 +6440,7 @@
       "cash": 0.0,
       "transfer": 150000.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -5959,6 +6453,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -5971,6 +6466,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -5983,6 +6479,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -5995,6 +6492,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6007,6 +6505,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -6019,6 +6518,7 @@
       "cash": 0.0,
       "transfer": 125000.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -6031,6 +6531,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6043,6 +6544,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6055,6 +6557,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6067,6 +6570,7 @@
       "cash": 175000.0,
       "transfer": 0.0,
       "total": 175000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -6079,6 +6583,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6091,6 +6596,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6103,6 +6609,7 @@
       "cash": 290000.0,
       "transfer": 0.0,
       "total": 290000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -6115,6 +6622,7 @@
       "cash": 25000.0,
       "transfer": 150000.0,
       "total": 175000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -6127,6 +6635,7 @@
       "cash": 0.0,
       "transfer": 330000.0,
       "total": 330000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6139,6 +6648,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6151,6 +6661,7 @@
       "cash": 0.0,
       "transfer": 125000.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6163,6 +6674,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6175,6 +6687,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6187,6 +6700,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6199,6 +6713,7 @@
       "cash": 310000.0,
       "transfer": 0.0,
       "total": 310000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -6211,6 +6726,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6223,6 +6739,7 @@
       "cash": 0.0,
       "transfer": 270000.0,
       "total": 270000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6235,6 +6752,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -6247,6 +6765,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6259,6 +6778,7 @@
       "cash": 310000.0,
       "transfer": 0.0,
       "total": 310000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -6271,6 +6791,7 @@
       "cash": 540000.0,
       "transfer": 0.0,
       "total": 540000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6283,6 +6804,7 @@
       "cash": 0.0,
       "transfer": 290000.0,
       "total": 290000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6295,6 +6817,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -6307,6 +6830,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -6319,6 +6843,7 @@
       "cash": 0.0,
       "transfer": 270000.0,
       "total": 270000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -6331,6 +6856,7 @@
       "cash": 270000.0,
       "transfer": 0.0,
       "total": 270000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -6343,6 +6869,7 @@
       "cash": 290000.0,
       "transfer": 0.0,
       "total": 290000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -6355,6 +6882,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -6367,6 +6895,7 @@
       "cash": 0.0,
       "transfer": 275000.0,
       "total": 275000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -6379,6 +6908,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6391,6 +6921,7 @@
       "cash": 270000.0,
       "transfer": 0.0,
       "total": 270000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -6403,6 +6934,7 @@
       "cash": 0.0,
       "transfer": 500000.0,
       "total": 500000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -6415,6 +6947,7 @@
       "cash": 0.0,
       "transfer": 420000.0,
       "total": 420000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -6427,6 +6960,7 @@
       "cash": 0.0,
       "transfer": 150000.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -6439,6 +6973,7 @@
       "cash": 350000.0,
       "transfer": 0.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -6451,6 +6986,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6463,6 +6999,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6475,6 +7012,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6487,6 +7025,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6499,6 +7038,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6511,6 +7051,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6523,6 +7064,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6535,6 +7077,7 @@
       "cash": 0.0,
       "transfer": 300000.0,
       "total": 300000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6547,6 +7090,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6559,6 +7103,7 @@
       "cash": 0.0,
       "transfer": 800000.0,
       "total": 800000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6571,6 +7116,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6583,6 +7129,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6595,6 +7142,7 @@
       "cash": 325000.0,
       "transfer": 0.0,
       "total": 325000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6607,6 +7155,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6619,6 +7168,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6631,6 +7181,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6643,6 +7194,7 @@
       "cash": 100000.0,
       "transfer": 0.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6655,6 +7207,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6667,6 +7220,7 @@
       "cash": 0.0,
       "transfer": 350000.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6679,6 +7233,7 @@
       "cash": 150000.0,
       "transfer": 0.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6691,6 +7246,7 @@
       "cash": 0.0,
       "transfer": 200000.0,
       "total": 200000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6703,6 +7259,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6715,6 +7272,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6727,6 +7285,7 @@
       "cash": 0.0,
       "transfer": 225000.0,
       "total": 225000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6739,6 +7298,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -6751,6 +7311,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "ADIFFFFFFFFFF",
       "fotografer": "ADIF"
     },
@@ -6763,6 +7324,7 @@
       "cash": 150000.0,
       "transfer": 0.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -6775,6 +7337,7 @@
       "cash": 0.0,
       "transfer": 150000.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -6787,6 +7350,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -6799,6 +7363,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6811,6 +7376,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6823,6 +7389,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -6835,6 +7402,7 @@
       "cash": 0.0,
       "transfer": 200000.0,
       "total": 200000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -6847,6 +7415,7 @@
       "cash": 0.0,
       "transfer": 20000.0,
       "total": 20000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6859,6 +7428,7 @@
       "cash": 0.0,
       "transfer": 375000.0,
       "total": 375000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6871,6 +7441,7 @@
       "cash": 0.0,
       "transfer": 150000.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6883,6 +7454,7 @@
       "cash": 0.0,
       "transfer": 0.0,
       "total": 0.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6895,6 +7467,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6907,6 +7480,7 @@
       "cash": 0.0,
       "transfer": 670000.0,
       "total": 670000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6919,6 +7493,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -6931,6 +7506,7 @@
       "cash": 0.0,
       "transfer": 390000.0,
       "total": 390000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -6943,6 +7519,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6955,6 +7532,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6967,6 +7545,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -6979,6 +7558,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -6991,6 +7571,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -7003,6 +7584,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -7015,6 +7597,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -7027,6 +7610,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -7039,6 +7623,7 @@
       "cash": 0.0,
       "transfer": 125000.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -7051,6 +7636,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -7063,6 +7649,7 @@
       "cash": 0.0,
       "transfer": 175000.0,
       "total": 175000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -7075,6 +7662,7 @@
       "cash": 375000.0,
       "transfer": 0.0,
       "total": 375000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -7087,6 +7675,7 @@
       "cash": 0.0,
       "transfer": 350000.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -7099,6 +7688,7 @@
       "cash": 350000.0,
       "transfer": 0.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -7111,6 +7701,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -7123,6 +7714,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -7135,6 +7727,7 @@
       "cash": 0.0,
       "transfer": 350000.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -7147,6 +7740,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7159,6 +7753,7 @@
       "cash": 0.0,
       "transfer": 20000.0,
       "total": 20000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7171,6 +7766,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7183,6 +7779,7 @@
       "cash": 0.0,
       "transfer": 150000.0,
       "total": 150000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
     },
@@ -7195,6 +7792,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7207,6 +7805,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -7219,6 +7818,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -7231,6 +7831,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -7243,6 +7844,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7255,6 +7857,7 @@
       "cash": 0.0,
       "transfer": 10000.0,
       "total": 10000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7267,6 +7870,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -7279,6 +7883,7 @@
       "cash": 0.0,
       "transfer": 50000.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -7291,6 +7896,7 @@
       "cash": 0.0,
       "transfer": 475000.0,
       "total": 475000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
     },
@@ -7303,6 +7909,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -7315,6 +7922,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -7327,6 +7935,7 @@
       "cash": 50000.0,
       "transfer": 0.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -7339,6 +7948,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7351,6 +7961,7 @@
       "cash": 0.0,
       "transfer": 250000.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -7363,6 +7974,7 @@
       "cash": 0.0,
       "transfer": 400000.0,
       "total": 400000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -7375,6 +7987,7 @@
       "cash": 0.0,
       "transfer": 75000.0,
       "total": 75000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -7387,6 +8000,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7399,6 +8013,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7411,6 +8026,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7423,6 +8039,7 @@
       "cash": 0.0,
       "transfer": 20000.0,
       "total": 20000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7435,6 +8052,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7447,6 +8065,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7459,6 +8078,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7471,6 +8091,7 @@
       "cash": 0.0,
       "transfer": 900000.0,
       "total": 900000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -7483,6 +8104,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7495,6 +8117,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7507,6 +8130,7 @@
       "cash": 0.0,
       "transfer": 20000.0,
       "total": 20000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7519,6 +8143,7 @@
       "cash": 0.0,
       "transfer": 350000.0,
       "total": 350000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7531,6 +8156,7 @@
       "cash": 0.0,
       "transfer": 200000.0,
       "total": 200000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7543,6 +8169,7 @@
       "cash": 250000.0,
       "transfer": 0.0,
       "total": 250000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -7555,6 +8182,7 @@
       "cash": 370000.0,
       "transfer": 0.0,
       "total": 370000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -7567,6 +8195,7 @@
       "cash": 50000.0,
       "transfer": 0.0,
       "total": 50000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
     },
@@ -7579,6 +8208,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7591,6 +8221,7 @@
       "cash": 0.0,
       "transfer": 20000.0,
       "total": 20000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7603,6 +8234,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
     },
@@ -7615,6 +8247,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -7627,6 +8260,7 @@
       "cash": 125000.0,
       "transfer": 0.0,
       "total": 125000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
     },
@@ -7639,6 +8273,7 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     },
@@ -7651,8 +8286,22 @@
       "cash": 0.0,
       "transfer": 200000.0,
       "total": 200000.0,
+      "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
+    },
+    {
+      "id": "or_5",
+      "tanggal": "2026-10-01",
+      "client": "Uji",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-03",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -9580,9 +10229,9 @@
       "id": "ld_1",
       "tanggal": "2026-10-01",
       "leads": 0.0,
-      "dp": 2.0,
+      "dp": 3.0,
       "sesiFoto": 2.0,
-      "transaksi": 4.0
+      "transaksi": 5.0
     },
     {
       "id": "ld_7",
@@ -13023,10 +13672,34 @@
   ],
   "sync": [
     {
-      "id": "sy_20261001-0812",
-      "mulai": "2026-10-01T08:12:15.096637+00:00",
+      "id": "sy_20261001-1521",
+      "mulai": "2026-10-01T08:21:40.101876+00:00",
       "status": "sukses",
-      "ringkas": "Integrasi berhasil: 632 order Sep, 4 order Okt, 194 jadwal, 5 pos pengeluaran Neraca, 168 pipeline Okt."
+      "ringkas": "Integrasi berhasil: 632 order Sep, 5 order Okt, 194 jadwal, 5 pos pengeluaran Neraca, 169 pipeline Okt."
+    },
+    {
+      "id": "sy_20261001-1520",
+      "mulai": "2026-10-01T08:20:42.276889+00:00",
+      "status": "gagal",
+      "ringkas": "Gagal di tengah proses: openpyxl does not support .tmp file format, please check you can open it with Excel first. Supported formats are: .xlsx,.xlsm,.xltx,.xltm"
+    },
+    {
+      "id": "sy_20261001-1519",
+      "mulai": "2026-10-01T08:19:30.201945+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 3 order Okt, 194 jadwal, 5 pos pengeluaran Neraca, 168 pipeline Okt."
+    },
+    {
+      "id": "sy_20261001-1515",
+      "mulai": "2026-10-01T08:15:47.666275+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 4 order Okt, 194 jadwal, 5 pos pengeluaran Neraca, 169 pipeline Okt."
+    },
+    {
+      "id": "sy_20261001-1513",
+      "mulai": "2026-10-01T08:13:25.014553+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 3 order Okt, 194 jadwal, 5 pos pengeluaran Neraca, 168 pipeline Okt."
     },
     {
       "id": "sy_20261001-1510",
@@ -13502,7 +14175,7 @@
     "file1_okt_id": "1xibgfKWJZWmcwh9lxR9Dt7IkHyMi7b75",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-10-01T08:12:15.096637+00:00"
+    "last_sync": "2026-10-01T08:21:40.101876+00:00"
   },
   "neracaDetail": [
     {
@@ -13859,17 +14532,6 @@
     },
     {
       "id": "det_nrc_33",
-      "tgl": 11,
-      "tanggal_iso": "2026-09-11",
-      "first_of_day": false,
-      "masuk": 0.0,
-      "keluar": 0.0,
-      "balance": 53641500.0,
-      "ket_masuk": "",
-      "ket_keluar": ""
-    },
-    {
-      "id": "det_nrc_34",
       "tgl": 12,
       "tanggal_iso": "2026-09-12",
       "first_of_day": true,
@@ -13880,7 +14542,7 @@
       "ket_keluar": "Listrik"
     },
     {
-      "id": "det_nrc_35",
+      "id": "det_nrc_34",
       "tgl": 12,
       "tanggal_iso": "2026-09-12",
       "first_of_day": false,
@@ -13891,18 +14553,7 @@
       "ket_keluar": "Ads"
     },
     {
-      "id": "det_nrc_36",
-      "tgl": 12,
-      "tanggal_iso": "2026-09-12",
-      "first_of_day": false,
-      "masuk": 0.0,
-      "keluar": 0.0,
-      "balance": 55391500.0,
-      "ket_masuk": "",
-      "ket_keluar": ""
-    },
-    {
-      "id": "det_nrc_37",
+      "id": "det_nrc_35",
       "tgl": 13,
       "tanggal_iso": "2026-09-13",
       "first_of_day": true,
@@ -13913,7 +14564,7 @@
       "ket_keluar": "Cetakan"
     },
     {
-      "id": "det_nrc_38",
+      "id": "det_nrc_36",
       "tgl": 13,
       "tanggal_iso": "2026-09-13",
       "first_of_day": false,
@@ -13924,18 +14575,7 @@
       "ket_keluar": ""
     },
     {
-      "id": "det_nrc_39",
-      "tgl": 13,
-      "tanggal_iso": "2026-09-13",
-      "first_of_day": false,
-      "masuk": 0.0,
-      "keluar": 0.0,
-      "balance": 55559500.0,
-      "ket_masuk": "",
-      "ket_keluar": ""
-    },
-    {
-      "id": "det_nrc_40",
+      "id": "det_nrc_37",
       "tgl": 14,
       "tanggal_iso": "2026-09-14",
       "first_of_day": true,
@@ -13946,7 +14586,7 @@
       "ket_keluar": "Ads"
     },
     {
-      "id": "det_nrc_41",
+      "id": "det_nrc_38",
       "tgl": 14,
       "tanggal_iso": "2026-09-14",
       "first_of_day": false,
@@ -13957,18 +14597,7 @@
       "ket_keluar": ""
     },
     {
-      "id": "det_nrc_42",
-      "tgl": 14,
-      "tanggal_iso": "2026-09-14",
-      "first_of_day": false,
-      "masuk": 0.0,
-      "keluar": 0.0,
-      "balance": 58344500.0,
-      "ket_masuk": "",
-      "ket_keluar": ""
-    },
-    {
-      "id": "det_nrc_43",
+      "id": "det_nrc_39",
       "tgl": 15,
       "tanggal_iso": "2026-09-15",
       "first_of_day": true,
@@ -13979,7 +14608,7 @@
       "ket_keluar": "Ruslan"
     },
     {
-      "id": "det_nrc_44",
+      "id": "det_nrc_40",
       "tgl": 15,
       "tanggal_iso": "2026-09-15",
       "first_of_day": false,
@@ -13990,7 +14619,7 @@
       "ket_keluar": "Abror Fg Freelance"
     },
     {
-      "id": "det_nrc_45",
+      "id": "det_nrc_41",
       "tgl": 15,
       "tanggal_iso": "2026-09-15",
       "first_of_day": false,
@@ -14001,7 +14630,7 @@
       "ket_keluar": "Vero Fg Freelance"
     },
     {
-      "id": "det_nrc_46",
+      "id": "det_nrc_42",
       "tgl": 16,
       "tanggal_iso": "2026-09-16",
       "first_of_day": true,
@@ -14012,7 +14641,7 @@
       "ket_keluar": "Dop Paralon"
     },
     {
-      "id": "det_nrc_47",
+      "id": "det_nrc_43",
       "tgl": 16,
       "tanggal_iso": "2026-09-16",
       "first_of_day": false,
@@ -14023,7 +14652,7 @@
       "ket_keluar": "Galon"
     },
     {
-      "id": "det_nrc_48",
+      "id": "det_nrc_44",
       "tgl": 16,
       "tanggal_iso": "2026-09-16",
       "first_of_day": false,
@@ -14034,7 +14663,7 @@
       "ket_keluar": "Frame"
     },
     {
-      "id": "det_nrc_49",
+      "id": "det_nrc_45",
       "tgl": 17,
       "tanggal_iso": "2026-09-17",
       "first_of_day": true,
@@ -14045,7 +14674,7 @@
       "ket_keluar": "Cat Limbo"
     },
     {
-      "id": "det_nrc_50",
+      "id": "det_nrc_46",
       "tgl": 17,
       "tanggal_iso": "2026-09-17",
       "first_of_day": false,
@@ -14056,7 +14685,7 @@
       "ket_keluar": "Cetakan"
     },
     {
-      "id": "det_nrc_51",
+      "id": "det_nrc_47",
       "tgl": 18,
       "tanggal_iso": "2026-09-18",
       "first_of_day": true,
@@ -14067,7 +14696,7 @@
       "ket_keluar": "Listrik"
     },
     {
-      "id": "det_nrc_52",
+      "id": "det_nrc_48",
       "tgl": 18,
       "tanggal_iso": "2026-09-18",
       "first_of_day": false,
@@ -14078,18 +14707,7 @@
       "ket_keluar": "Cat Limbo"
     },
     {
-      "id": "det_nrc_53",
-      "tgl": 18,
-      "tanggal_iso": "2026-09-18",
-      "first_of_day": false,
-      "masuk": 0.0,
-      "keluar": 0.0,
-      "balance": 62212000.0,
-      "ket_masuk": "",
-      "ket_keluar": ""
-    },
-    {
-      "id": "det_nrc_54",
+      "id": "det_nrc_49",
       "tgl": 19,
       "tanggal_iso": "2026-09-19",
       "first_of_day": true,
@@ -14100,7 +14718,7 @@
       "ket_keluar": "Cetakan"
     },
     {
-      "id": "det_nrc_55",
+      "id": "det_nrc_50",
       "tgl": 19,
       "tanggal_iso": "2026-09-19",
       "first_of_day": false,
@@ -14115,14 +14733,14 @@
     "total_masuk": 91165000.0,
     "total_keluar": 26794000.0,
     "ending_balance": 64371000.0,
-    "total_rows": 55
+    "total_rows": 50
   },
   "oktoberPipeline": {
     "bulan": "2026-10",
-    "totalBookings": 168,
-    "potentialOmzet": 60550000.0,
-    "totalDp": 11650000.0,
-    "estimateCashIn": 48900000.0,
+    "totalBookings": 169,
+    "potentialOmzet": 60900000.0,
+    "totalDp": 11750000.0,
+    "estimateCashIn": 49150000.0,
     "breakdown": {
       "reguler": {
         "sesi": 33,
@@ -14130,9 +14748,9 @@
         "dp": 2800000.0
       },
       "wisudaDay1": {
-        "sesi": 71,
-        "nilai": 26050000.0,
-        "dp": 4400000.0
+        "sesi": 72,
+        "nilai": 26400000.0,
+        "dp": 4500000.0
       },
       "wisudaDay2": {
         "sesi": 64,
@@ -15955,25 +16573,25 @@
         "id": "sc_wisuda_2026-10-03_65",
         "tgl": "2026-10-03",
         "waktu": "18:40",
-        "studio": "Wisuda (CONCRETE)",
-        "studioNama": "Spot CONCRETE",
-        "spot": "CONCRETE",
-        "nama": "CLOSED",
+        "studio": "Wisuda (WOODEN)",
+        "studioNama": "Spot WOODEN",
+        "spot": "WOODEN",
+        "nama": "Uji",
         "paket": "Graduation",
         "paketRaw": "Graduation",
         "jmlOrang": 1,
         "harga": 350000.0,
-        "dp": 0.0,
-        "sisaPelunasan": 350000.0,
-        "admin": "",
-        "noHp": "",
+        "dp": 100000.0,
+        "sisaPelunasan": 250000.0,
+        "admin": "AL",
+        "noHp": "dp 100",
         "manual": false,
         "kategori": "Wisuda UMP"
       },
       {
         "id": "sc_wisuda_2026-10-03_66",
         "tgl": "2026-10-03",
-        "waktu": "19:00",
+        "waktu": "18:40",
         "studio": "Wisuda (CONCRETE)",
         "studioNama": "Spot CONCRETE",
         "spot": "CONCRETE",
@@ -15992,7 +16610,7 @@
       {
         "id": "sc_wisuda_2026-10-03_67",
         "tgl": "2026-10-03",
-        "waktu": "19:20",
+        "waktu": "19:00",
         "studio": "Wisuda (CONCRETE)",
         "studioNama": "Spot CONCRETE",
         "spot": "CONCRETE",
@@ -16011,7 +16629,7 @@
       {
         "id": "sc_wisuda_2026-10-03_68",
         "tgl": "2026-10-03",
-        "waktu": "19:40",
+        "waktu": "19:20",
         "studio": "Wisuda (CONCRETE)",
         "studioNama": "Spot CONCRETE",
         "spot": "CONCRETE",
@@ -16030,7 +16648,7 @@
       {
         "id": "sc_wisuda_2026-10-03_69",
         "tgl": "2026-10-03",
-        "waktu": "20:00",
+        "waktu": "19:40",
         "studio": "Wisuda (CONCRETE)",
         "studioNama": "Spot CONCRETE",
         "spot": "CONCRETE",
@@ -16049,7 +16667,7 @@
       {
         "id": "sc_wisuda_2026-10-03_70",
         "tgl": "2026-10-03",
-        "waktu": "20:20",
+        "waktu": "20:00",
         "studio": "Wisuda (CONCRETE)",
         "studioNama": "Spot CONCRETE",
         "spot": "CONCRETE",
@@ -16068,6 +16686,25 @@
       {
         "id": "sc_wisuda_2026-10-03_71",
         "tgl": "2026-10-03",
+        "waktu": "20:20",
+        "studio": "Wisuda (CONCRETE)",
+        "studioNama": "Spot CONCRETE",
+        "spot": "CONCRETE",
+        "nama": "CLOSED",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "dp": 0.0,
+        "sisaPelunasan": 350000.0,
+        "admin": "",
+        "noHp": "",
+        "manual": false,
+        "kategori": "Wisuda UMP"
+      },
+      {
+        "id": "sc_wisuda_2026-10-03_72",
+        "tgl": "2026-10-03",
         "waktu": "20:40",
         "studio": "Wisuda (CONCRETE)",
         "studioNama": "Spot CONCRETE",
@@ -16085,7 +16722,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_72",
+        "id": "sc_wisuda_2026-10-04_73",
         "tgl": "2026-10-04",
         "waktu": "10:00",
         "studio": "Wisuda (CONCRETE)",
@@ -16104,7 +16741,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_73",
+        "id": "sc_wisuda_2026-10-04_74",
         "tgl": "2026-10-04",
         "waktu": "10:30",
         "studio": "Wisuda (CONCRETE)",
@@ -16123,7 +16760,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_74",
+        "id": "sc_wisuda_2026-10-04_75",
         "tgl": "2026-10-04",
         "waktu": "12:30",
         "studio": "Wisuda (LIMBO)",
@@ -16142,7 +16779,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_75",
+        "id": "sc_wisuda_2026-10-04_76",
         "tgl": "2026-10-04",
         "waktu": "12:30",
         "studio": "Wisuda (CONCRETE)",
@@ -16161,7 +16798,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_76",
+        "id": "sc_wisuda_2026-10-04_77",
         "tgl": "2026-10-04",
         "waktu": "12:30",
         "studio": "Wisuda (DIPAN)",
@@ -16180,7 +16817,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_77",
+        "id": "sc_wisuda_2026-10-04_78",
         "tgl": "2026-10-04",
         "waktu": "12:30",
         "studio": "Wisuda (CALMBLUE)",
@@ -16199,7 +16836,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_78",
+        "id": "sc_wisuda_2026-10-04_79",
         "tgl": "2026-10-04",
         "waktu": "13:00",
         "studio": "Wisuda (LIMBO)",
@@ -16218,7 +16855,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_79",
+        "id": "sc_wisuda_2026-10-04_80",
         "tgl": "2026-10-04",
         "waktu": "13:00",
         "studio": "Wisuda (CONCRETE)",
@@ -16237,7 +16874,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_80",
+        "id": "sc_wisuda_2026-10-04_81",
         "tgl": "2026-10-04",
         "waktu": "13:00",
         "studio": "Wisuda (DIPAN)",
@@ -16256,7 +16893,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_81",
+        "id": "sc_wisuda_2026-10-04_82",
         "tgl": "2026-10-04",
         "waktu": "13:00",
         "studio": "Wisuda (CALMBLUE)",
@@ -16275,7 +16912,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_82",
+        "id": "sc_wisuda_2026-10-04_83",
         "tgl": "2026-10-04",
         "waktu": "13:20",
         "studio": "Wisuda (LIMBO)",
@@ -16294,7 +16931,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_83",
+        "id": "sc_wisuda_2026-10-04_84",
         "tgl": "2026-10-04",
         "waktu": "13:20",
         "studio": "Wisuda (WOODEN)",
@@ -16313,7 +16950,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_84",
+        "id": "sc_wisuda_2026-10-04_85",
         "tgl": "2026-10-04",
         "waktu": "13:20",
         "studio": "Wisuda (CONCRETE)",
@@ -16332,7 +16969,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_85",
+        "id": "sc_wisuda_2026-10-04_86",
         "tgl": "2026-10-04",
         "waktu": "13:20",
         "studio": "Wisuda (DIPAN)",
@@ -16351,7 +16988,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_86",
+        "id": "sc_wisuda_2026-10-04_87",
         "tgl": "2026-10-04",
         "waktu": "13:20",
         "studio": "Wisuda (CALMBLUE)",
@@ -16370,7 +17007,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_87",
+        "id": "sc_wisuda_2026-10-04_88",
         "tgl": "2026-10-04",
         "waktu": "13:40",
         "studio": "Wisuda (LIMBO)",
@@ -16389,7 +17026,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_88",
+        "id": "sc_wisuda_2026-10-04_89",
         "tgl": "2026-10-04",
         "waktu": "13:40",
         "studio": "Wisuda (CONCRETE)",
@@ -16408,7 +17045,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_89",
+        "id": "sc_wisuda_2026-10-04_90",
         "tgl": "2026-10-04",
         "waktu": "13:40",
         "studio": "Wisuda (DIPAN)",
@@ -16427,7 +17064,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_90",
+        "id": "sc_wisuda_2026-10-04_91",
         "tgl": "2026-10-04",
         "waktu": "13:40",
         "studio": "Wisuda (CALMBLUE)",
@@ -16446,7 +17083,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_91",
+        "id": "sc_wisuda_2026-10-04_92",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda (LIMBO)",
@@ -16465,7 +17102,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_92",
+        "id": "sc_wisuda_2026-10-04_93",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda (CONCRETE)",
@@ -16484,7 +17121,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_93",
+        "id": "sc_wisuda_2026-10-04_94",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda (DIPAN)",
@@ -16503,7 +17140,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_94",
+        "id": "sc_wisuda_2026-10-04_95",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda (CALMBLUE)",
@@ -16522,7 +17159,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_95",
+        "id": "sc_wisuda_2026-10-04_96",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda (LIMBO)",
@@ -16541,7 +17178,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_96",
+        "id": "sc_wisuda_2026-10-04_97",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda (WOODEN)",
@@ -16560,7 +17197,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_97",
+        "id": "sc_wisuda_2026-10-04_98",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda (CONCRETE)",
@@ -16579,7 +17216,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_98",
+        "id": "sc_wisuda_2026-10-04_99",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda (DIPAN)",
@@ -16598,7 +17235,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_99",
+        "id": "sc_wisuda_2026-10-04_100",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda (WOODEN)",
@@ -16617,7 +17254,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_100",
+        "id": "sc_wisuda_2026-10-04_101",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda (CONCRETE)",
@@ -16636,7 +17273,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_101",
+        "id": "sc_wisuda_2026-10-04_102",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda (DIPAN)",
@@ -16655,7 +17292,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_102",
+        "id": "sc_wisuda_2026-10-04_103",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda (CALMBLUE)",
@@ -16674,7 +17311,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_103",
+        "id": "sc_wisuda_2026-10-04_104",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda (WOODEN)",
@@ -16693,7 +17330,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_104",
+        "id": "sc_wisuda_2026-10-04_105",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda (CONCRETE)",
@@ -16712,7 +17349,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_105",
+        "id": "sc_wisuda_2026-10-04_106",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda (DIPAN)",
@@ -16731,7 +17368,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_106",
+        "id": "sc_wisuda_2026-10-04_107",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda (CALMBLUE)",
@@ -16750,7 +17387,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_107",
+        "id": "sc_wisuda_2026-10-04_108",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda (LIMBO)",
@@ -16769,7 +17406,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_108",
+        "id": "sc_wisuda_2026-10-04_109",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda (WOODEN)",
@@ -16788,7 +17425,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_109",
+        "id": "sc_wisuda_2026-10-04_110",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda (CONCRETE)",
@@ -16807,7 +17444,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_110",
+        "id": "sc_wisuda_2026-10-04_111",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda (CALMBLUE)",
@@ -16826,7 +17463,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_111",
+        "id": "sc_wisuda_2026-10-04_112",
         "tgl": "2026-10-04",
         "waktu": "15:40",
         "studio": "Wisuda (LIMBO)",
@@ -16845,7 +17482,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_112",
+        "id": "sc_wisuda_2026-10-04_113",
         "tgl": "2026-10-04",
         "waktu": "15:40",
         "studio": "Wisuda (WOODEN)",
@@ -16864,7 +17501,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_113",
+        "id": "sc_wisuda_2026-10-04_114",
         "tgl": "2026-10-04",
         "waktu": "15:40",
         "studio": "Wisuda (CONCRETE)",
@@ -16883,7 +17520,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_114",
+        "id": "sc_wisuda_2026-10-04_115",
         "tgl": "2026-10-04",
         "waktu": "15:40",
         "studio": "Wisuda (CALMBLUE)",
@@ -16902,7 +17539,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_115",
+        "id": "sc_wisuda_2026-10-04_116",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda (LIMBO)",
@@ -16921,7 +17558,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_116",
+        "id": "sc_wisuda_2026-10-04_117",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda (CONCRETE)",
@@ -16940,7 +17577,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_117",
+        "id": "sc_wisuda_2026-10-04_118",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda (DIPAN)",
@@ -16959,7 +17596,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_118",
+        "id": "sc_wisuda_2026-10-04_119",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda (CALMBLUE)",
@@ -16978,7 +17615,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_119",
+        "id": "sc_wisuda_2026-10-04_120",
         "tgl": "2026-10-04",
         "waktu": "16:20",
         "studio": "Wisuda (LIMBO)",
@@ -16997,7 +17634,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_120",
+        "id": "sc_wisuda_2026-10-04_121",
         "tgl": "2026-10-04",
         "waktu": "16:20",
         "studio": "Wisuda (WOODEN)",
@@ -17016,7 +17653,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_121",
+        "id": "sc_wisuda_2026-10-04_122",
         "tgl": "2026-10-04",
         "waktu": "16:20",
         "studio": "Wisuda (CONCRETE)",
@@ -17035,7 +17672,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_122",
+        "id": "sc_wisuda_2026-10-04_123",
         "tgl": "2026-10-04",
         "waktu": "16:40",
         "studio": "Wisuda (LIMBO)",
@@ -17054,7 +17691,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_123",
+        "id": "sc_wisuda_2026-10-04_124",
         "tgl": "2026-10-04",
         "waktu": "16:40",
         "studio": "Wisuda (CONCRETE)",
@@ -17073,7 +17710,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_124",
+        "id": "sc_wisuda_2026-10-04_125",
         "tgl": "2026-10-04",
         "waktu": "17:00",
         "studio": "Wisuda (CONCRETE)",
@@ -17092,7 +17729,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_125",
+        "id": "sc_wisuda_2026-10-04_126",
         "tgl": "2026-10-04",
         "waktu": "17:20",
         "studio": "Wisuda (CONCRETE)",
@@ -17111,7 +17748,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_126",
+        "id": "sc_wisuda_2026-10-04_127",
         "tgl": "2026-10-04",
         "waktu": "17:40",
         "studio": "Wisuda (CONCRETE)",
@@ -17130,7 +17767,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_127",
+        "id": "sc_wisuda_2026-10-04_128",
         "tgl": "2026-10-04",
         "waktu": "18:00",
         "studio": "Wisuda (CONCRETE)",
@@ -17149,7 +17786,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_128",
+        "id": "sc_wisuda_2026-10-04_129",
         "tgl": "2026-10-04",
         "waktu": "18:20",
         "studio": "Wisuda (CONCRETE)",
@@ -17168,7 +17805,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_129",
+        "id": "sc_wisuda_2026-10-04_130",
         "tgl": "2026-10-04",
         "waktu": "18:40",
         "studio": "Wisuda (CONCRETE)",
@@ -17187,7 +17824,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_130",
+        "id": "sc_wisuda_2026-10-04_131",
         "tgl": "2026-10-04",
         "waktu": "19:00",
         "studio": "Wisuda (CONCRETE)",
@@ -17206,7 +17843,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_131",
+        "id": "sc_wisuda_2026-10-04_132",
         "tgl": "2026-10-04",
         "waktu": "19:20",
         "studio": "Wisuda (CONCRETE)",
@@ -17225,7 +17862,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_132",
+        "id": "sc_wisuda_2026-10-04_133",
         "tgl": "2026-10-04",
         "waktu": "19:40",
         "studio": "Wisuda (CONCRETE)",
@@ -17244,7 +17881,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_133",
+        "id": "sc_wisuda_2026-10-04_134",
         "tgl": "2026-10-04",
         "waktu": "20:00",
         "studio": "Wisuda (CONCRETE)",
@@ -17263,7 +17900,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_134",
+        "id": "sc_wisuda_2026-10-04_135",
         "tgl": "2026-10-04",
         "waktu": "20:20",
         "studio": "Wisuda (CONCRETE)",
@@ -17282,7 +17919,7 @@
         "kategori": "Wisuda UMP"
       },
       {
-        "id": "sc_wisuda_2026-10-04_135",
+        "id": "sc_wisuda_2026-10-04_136",
         "tgl": "2026-10-04",
         "waktu": "20:40",
         "studio": "Wisuda (CONCRETE)",
@@ -17553,6 +18190,7 @@
         "cash": 0.0,
         "transfer": 100000.0,
         "total": 100000.0,
+        "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
       },
@@ -17565,6 +18203,7 @@
         "cash": 125000.0,
         "transfer": 0.0,
         "total": 125000.0,
+        "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": "ADIF"
       },
@@ -17577,6 +18216,7 @@
         "cash": 0.0,
         "transfer": 100000.0,
         "total": 100000.0,
+        "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
       },
@@ -17589,8 +18229,22 @@
         "cash": 0.0,
         "transfer": 200000.0,
         "total": 200000.0,
+        "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": "ADIF"
+      },
+      {
+        "id": "or_5",
+        "tanggal": "2026-10-01",
+        "client": "Uji",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-03",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -17781,9 +18435,9 @@
         "id": "ld_1",
         "tanggal": "2026-10-01",
         "leads": 0.0,
-        "dp": 2.0,
+        "dp": 3.0,
         "sesiFoto": 2.0,
-        "transaksi": 4.0
+        "transaksi": 5.0
       },
       {
         "id": "ld_2",
