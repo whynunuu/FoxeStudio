@@ -8818,15 +8818,24 @@
     },
     {
       "id": "ex_nrc_55",
+      "tanggal": "2026-09-25",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Admin Rekening",
+      "nilai": 14000.0
+    },
+    {
+      "id": "ex_nrc_56",
       "tanggal": "2026-09-26",
       "bulan": "2026-09",
       "jenis": "OPEX",
       "kategori": "OPEX Lainnya",
-      "deskripsi": "Lakban",
-      "nilai": 65000.0
+      "deskripsi": "Lakban & Stiky Notes",
+      "nilai": 72000.0
     },
     {
-      "id": "ex_nrc_56",
+      "id": "ex_nrc_57",
       "tanggal": "2026-09-26",
       "bulan": "2026-09",
       "jenis": "OPEX",
@@ -8835,7 +8844,7 @@
       "nilai": 403000.0
     },
     {
-      "id": "ex_nrc_57",
+      "id": "ex_nrc_58",
       "tanggal": "2026-09-27",
       "bulan": "2026-09",
       "jenis": "COGS",
@@ -8844,7 +8853,7 @@
       "nilai": 3099000.0
     },
     {
-      "id": "ex_nrc_58",
+      "id": "ex_nrc_59",
       "tanggal": "2026-09-27",
       "bulan": "2026-09",
       "jenis": "OPEX",
@@ -8853,7 +8862,7 @@
       "nilai": 112000.0
     },
     {
-      "id": "ex_nrc_59",
+      "id": "ex_nrc_60",
       "tanggal": "2026-09-28",
       "bulan": "2026-09",
       "jenis": "COGS",
@@ -8862,7 +8871,7 @@
       "nilai": 950000.0
     },
     {
-      "id": "ex_nrc_60",
+      "id": "ex_nrc_61",
       "tanggal": "2026-09-28",
       "bulan": "2026-09",
       "jenis": "COGS",
@@ -8871,31 +8880,67 @@
       "nilai": 1809000.0
     },
     {
-      "id": "ex_nrc_61",
-      "tanggal": "2026-09-28",
+      "id": "ex_nrc_62",
+      "tanggal": "2026-09-29",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Serv Ac",
+      "nilai": 600000.0
+    },
+    {
+      "id": "ex_nrc_63",
+      "tanggal": "2026-09-30",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "PDAM",
+      "nilai": 506630.0
+    },
+    {
+      "id": "ex_nrc_64",
+      "tanggal": "2026-09-30",
+      "bulan": "2026-09",
+      "jenis": "COGS",
+      "kategori": "Outsource / Freelancer Produksi",
+      "deskripsi": "Ruslan",
+      "nilai": 560000.0
+    },
+    {
+      "id": "ex_nrc_65",
+      "tanggal": "2026-09-30",
       "bulan": "2026-09",
       "jenis": "NON-P&L",
       "kategori": "Prive / Owner Draw",
       "deskripsi": "Bon",
-      "nilai": 2314000.0
+      "nilai": 3314000.0
     },
     {
-      "id": "ex_nrc_62",
-      "tanggal": "2026-09-28",
+      "id": "ex_nrc_66",
+      "tanggal": "2026-09-30",
+      "bulan": "2026-09",
+      "jenis": "OPEX",
+      "kategori": "Gaji Admin & Fotografer",
+      "deskripsi": "Gaji Karyawan",
+      "nilai": 12901307.0
+    },
+    {
+      "id": "ex_nrc_67",
+      "tanggal": "2026-09-30",
       "bulan": "2026-09",
       "jenis": "OPEX",
       "kategori": "Pajak & Perizinan",
       "deskripsi": "Pajak",
-      "nilai": 575775.0
+      "nilai": 590075.0
     },
     {
-      "id": "ex_nrc_63",
-      "tanggal": "2026-09-28",
+      "id": "ex_nrc_68",
+      "tanggal": "2026-09-30",
       "bulan": "2026-09",
       "jenis": "Biaya Lainnya",
       "kategori": "Biaya Lainnya",
       "deskripsi": "Amal",
-      "nilai": 1727325.0
+      "nilai": 1770225.0
     }
   ],
   "cashControl": [
@@ -9297,35 +9342,35 @@
       "id": "kp_1",
       "nama": "ADIF",
       "role": "Fotografer 1",
-      "hariDinilai": 27,
+      "hariDinilai": 28,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 4.96,
       "client": 5.0,
-      "produktivitas": 4.81,
+      "produktivitas": 4.82,
       "referral": 0
     },
     {
       "id": "kp_2",
       "nama": "AMEL",
       "role": "Admin 2",
-      "hariDinilai": 28,
+      "hariDinilai": 29,
       "disiplin": 4.93,
-      "akurasi": 4.96,
+      "akurasi": 4.97,
       "sop": 4.86,
       "client": 5.0,
-      "produktivitas": 4.57,
+      "produktivitas": 4.59,
       "referral": 0
     },
     {
       "id": "kp_3",
       "nama": "INDAH",
       "role": "Admin 1",
-      "hariDinilai": 28,
+      "hariDinilai": 31,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
-      "client": 4.96,
+      "client": 4.97,
       "produktivitas": 5.0,
       "referral": 0
     },
@@ -9333,12 +9378,12 @@
       "id": "kp_4",
       "nama": "SAKA",
       "role": "Fotografer 2",
-      "hariDinilai": 29,
-      "disiplin": 4.93,
+      "hariDinilai": 32,
+      "disiplin": 4.94,
       "akurasi": 4.97,
       "sop": 5.0,
       "client": 5.0,
-      "produktivitas": 4.86,
+      "produktivitas": 4.88,
       "referral": 0
     }
   ],
@@ -12701,6 +12746,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261001-0212",
+      "mulai": "2026-10-01T02:12:34.348533+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order, 194 jadwal, 5 pos pengeluaran Neraca."
+    },
+    {
       "id": "sy_20260930-1417",
       "mulai": "2026-09-30T14:17:13.082229+00:00",
       "status": "sukses",
@@ -13113,7 +13164,7 @@
     "file1_id": "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-09-30T14:17:13.082229+00:00"
+    "last_sync": "2026-10-01T02:12:34.348533+00:00"
   },
   "neracaDetail": [
     {
@@ -13517,9 +13568,9 @@
       "tgl": 13,
       "tanggal_iso": "2026-09-13",
       "first_of_day": true,
-      "masuk": 2350000.0,
+      "masuk": 2450000.0,
       "keluar": 3537000.0,
-      "balance": 54204500.0,
+      "balance": 54304500.0,
       "ket_masuk": "Transfer",
       "ket_keluar": "Cetakan"
     },
@@ -13530,7 +13581,7 @@
       "first_of_day": false,
       "masuk": 1255000.0,
       "keluar": 0.0,
-      "balance": 55459500.0,
+      "balance": 55559500.0,
       "ket_masuk": "",
       "ket_keluar": ""
     },
@@ -13541,7 +13592,7 @@
       "first_of_day": false,
       "masuk": 0.0,
       "keluar": 0.0,
-      "balance": 55459500.0,
+      "balance": 55559500.0,
       "ket_masuk": "",
       "ket_keluar": ""
     },
@@ -13552,7 +13603,7 @@
       "first_of_day": true,
       "masuk": 995000.0,
       "keluar": 500000.0,
-      "balance": 55954500.0,
+      "balance": 56054500.0,
       "ket_masuk": "Transfer",
       "ket_keluar": "Ads"
     },
@@ -13563,7 +13614,7 @@
       "first_of_day": false,
       "masuk": 2290000.0,
       "keluar": 0.0,
-      "balance": 58244500.0,
+      "balance": 58344500.0,
       "ket_masuk": "",
       "ket_keluar": ""
     },
@@ -13574,7 +13625,7 @@
       "first_of_day": false,
       "masuk": 0.0,
       "keluar": 0.0,
-      "balance": 58244500.0,
+      "balance": 58344500.0,
       "ket_masuk": "",
       "ket_keluar": ""
     },
@@ -13585,7 +13636,7 @@
       "first_of_day": true,
       "masuk": 2425000.0,
       "keluar": 560000.0,
-      "balance": 60109500.0,
+      "balance": 60209500.0,
       "ket_masuk": "Transfer",
       "ket_keluar": "Ruslan"
     },
@@ -13596,7 +13647,7 @@
       "first_of_day": false,
       "masuk": 475000.0,
       "keluar": 250000.0,
-      "balance": 60334500.0,
+      "balance": 60434500.0,
       "ket_masuk": "Transfer",
       "ket_keluar": "Abror Fg Freelance"
     },
@@ -13607,7 +13658,7 @@
       "first_of_day": false,
       "masuk": 0.0,
       "keluar": 150000.0,
-      "balance": 60184500.0,
+      "balance": 60284500.0,
       "ket_masuk": "Transfer",
       "ket_keluar": "Vero Fg Freelance"
     },
@@ -13618,7 +13669,7 @@
       "first_of_day": true,
       "masuk": 1315000.0,
       "keluar": 112000.0,
-      "balance": 61387500.0,
+      "balance": 61487500.0,
       "ket_masuk": "Transfer",
       "ket_keluar": "Dop Paralon"
     },
@@ -13629,7 +13680,7 @@
       "first_of_day": false,
       "masuk": 650000.0,
       "keluar": 16000.0,
-      "balance": 62021500.0,
+      "balance": 62121500.0,
       "ket_masuk": "Cash",
       "ket_keluar": "Galon"
     },
@@ -13640,7 +13691,7 @@
       "first_of_day": false,
       "masuk": 0.0,
       "keluar": 950000.0,
-      "balance": 61071500.0,
+      "balance": 61171500.0,
       "ket_masuk": "Transfer",
       "ket_keluar": "Frame"
     },
@@ -13651,7 +13702,7 @@
       "first_of_day": true,
       "masuk": 1675000.0,
       "keluar": 154000.0,
-      "balance": 62592500.0,
+      "balance": 62692500.0,
       "ket_masuk": "Transfer",
       "ket_keluar": "Cat Limbo"
     },
@@ -13662,7 +13713,7 @@
       "first_of_day": false,
       "masuk": 0.0,
       "keluar": 2342500.0,
-      "balance": 60250000.0,
+      "balance": 60350000.0,
       "ket_masuk": "Transfer",
       "ket_keluar": "Cetakan"
     },
@@ -13673,7 +13724,7 @@
       "first_of_day": true,
       "masuk": 2125000.0,
       "keluar": 503000.0,
-      "balance": 61872000.0,
+      "balance": 61972000.0,
       "ket_masuk": "Transfer",
       "ket_keluar": "Listrik"
     },
@@ -13684,7 +13735,7 @@
       "first_of_day": false,
       "masuk": 400000.0,
       "keluar": 160000.0,
-      "balance": 62112000.0,
+      "balance": 62212000.0,
       "ket_masuk": "Transfer",
       "ket_keluar": "Cat Limbo"
     },
@@ -13695,7 +13746,7 @@
       "first_of_day": false,
       "masuk": 0.0,
       "keluar": 0.0,
-      "balance": 62112000.0,
+      "balance": 62212000.0,
       "ket_masuk": "",
       "ket_keluar": ""
     },
@@ -13706,7 +13757,7 @@
       "first_of_day": true,
       "masuk": 2395000.0,
       "keluar": 2626000.0,
-      "balance": 61881000.0,
+      "balance": 61981000.0,
       "ket_masuk": "Transfer",
       "ket_keluar": "Cetakan"
     },
@@ -13717,15 +13768,15 @@
       "first_of_day": false,
       "masuk": 2410000.0,
       "keluar": 20000.0,
-      "balance": 64271000.0,
+      "balance": 64371000.0,
       "ket_masuk": "Cash",
       "ket_keluar": "Batrei"
     }
   ],
   "neracaSummary": {
-    "total_masuk": 91065000.0,
+    "total_masuk": 91165000.0,
     "total_keluar": 26794000.0,
-    "ending_balance": 64271000.0,
+    "ending_balance": 64371000.0,
     "total_rows": 55
   },
   "oktoberPipeline": {
@@ -16865,17 +16916,17 @@
       "nama": "Adif",
       "job": "Fotografer",
       "q": 28.0,
-      "q_raw": 0.0,
+      "q_raw": 28.0,
       "actual_shift": 28,
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1120000.0,
-      "bonus_kpi": 346981.0,
+      "bonus_kpi": 347112.0,
       "additional": 0.0,
-      "bonus": 0.0,
+      "bonus": 346981.0,
       "hukuman": 0.0,
-      "bon": 0.0,
-      "thp": 1466981.0,
+      "bon": 700000.0,
+      "thp": 1114093.0,
       "status": "Draft"
     },
     {
@@ -16884,17 +16935,17 @@
       "nama": "Saka",
       "job": "Fotografer",
       "q": 32.0,
-      "q_raw": 0.0,
+      "q_raw": 32.0,
       "actual_shift": 32,
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1280000.0,
-      "bonus_kpi": 346544.0,
+      "bonus_kpi": 346981.0,
       "additional": 0.0,
-      "bonus": 0.0,
+      "bonus": 346544.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1626544.0,
+      "thp": 1973525.0,
       "status": "Draft"
     },
     {
@@ -16903,17 +16954,17 @@
       "nama": "Amel",
       "job": "Admin",
       "q": 29.0,
-      "q_raw": 0.0,
+      "q_raw": 29.0,
       "actual_shift": 29,
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1160000.0,
-      "bonus_kpi": 340769.0,
+      "bonus_kpi": 341162.0,
       "additional": 0.0,
-      "bonus": 0.0,
+      "bonus": 340769.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1500769.0,
+      "thp": 1841931.0,
       "status": "Draft"
     },
     {
@@ -16922,17 +16973,17 @@
       "nama": "Indah",
       "job": "Admin",
       "q": 31.0,
-      "q_raw": 0.0,
+      "q_raw": 31.0,
       "actual_shift": 31,
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1240000.0,
-      "bonus_kpi": 349475.0,
+      "bonus_kpi": 349606.0,
       "additional": 0.0,
-      "bonus": 0.0,
+      "bonus": 349475.0,
       "hukuman": 0.0,
-      "bon": 0.0,
-      "thp": 1589475.0,
+      "bon": 250000.0,
+      "thp": 1689081.0,
       "status": "Draft"
     },
     {
@@ -16941,17 +16992,17 @@
       "nama": "Fadel",
       "job": "Manager",
       "q": 1.0,
-      "q_raw": 0.0,
+      "q_raw": 1.0,
       "actual_shift": 0,
       "cost": 1850000.0,
       "is_fixed": true,
       "total_gaji": 1850000.0,
       "bonus_kpi": 0.0,
       "additional": 0.0,
-      "bonus": 0.0,
+      "bonus": 340769.0,
       "hukuman": 0.0,
-      "bon": 0.0,
-      "thp": 1850000.0,
+      "bon": 1544000.0,
+      "thp": 646769.0,
       "status": "Draft"
     },
     {
@@ -16960,17 +17011,17 @@
       "nama": "Fame",
       "job": "Editor",
       "q": 1.0,
-      "q_raw": 0.0,
+      "q_raw": 1.0,
       "actual_shift": 0,
       "cost": 1300000.0,
       "is_fixed": true,
       "total_gaji": 1300000.0,
       "bonus_kpi": 0.0,
       "additional": 0.0,
-      "bonus": 0.0,
+      "bonus": 340769.0,
       "hukuman": 0.0,
-      "bon": 0.0,
-      "thp": 1300000.0,
+      "bon": 820000.0,
+      "thp": 820769.0,
       "status": "Draft"
     },
     {
@@ -16979,7 +17030,7 @@
       "nama": "Pentil",
       "job": "Marketing",
       "q": 1.0,
-      "q_raw": 0.0,
+      "q_raw": 1.0,
       "actual_shift": 0,
       "cost": 1000000.0,
       "is_fixed": true,
@@ -16998,7 +17049,7 @@
       "nama": "FOXE TO FOLX",
       "job": "Khusus",
       "q": 1.0,
-      "q_raw": 0.0,
+      "q_raw": 1.0,
       "actual_shift": 0,
       "cost": 4000000.0,
       "is_fixed": true,
@@ -17035,18 +17086,18 @@
       "row_idx": 25,
       "nama": "Fame/Vero",
       "job": "BackUp",
-      "q": 0.0,
-      "q_raw": 0.0,
+      "q": 8.0,
+      "q_raw": 8.0,
       "actual_shift": 0,
       "cost": 40000.0,
       "is_fixed": false,
-      "total_gaji": 0.0,
+      "total_gaji": 320000.0,
       "bonus_kpi": 0.0,
       "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 0.0,
+      "thp": 320000.0,
       "status": "Draft"
     },
     {
@@ -17054,18 +17105,18 @@
       "row_idx": 26,
       "nama": "Fadel",
       "job": "BackUp",
-      "q": 0.0,
-      "q_raw": 0.0,
+      "q": 4.0,
+      "q_raw": 4.0,
       "actual_shift": 0,
       "cost": 40000.0,
       "is_fixed": false,
-      "total_gaji": 0.0,
+      "total_gaji": 160000.0,
       "bonus_kpi": 0.0,
       "additional": 0.0,
       "bonus": 0.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 0.0,
+      "thp": 160000.0,
       "status": "Draft"
     },
     {
@@ -17089,13 +17140,13 @@
     }
   ],
   "rosterSummary": {
-    "total_gaji": 12950000.0,
-    "total_bonus_kpi": 1383769.0,
+    "total_gaji": 13430000.0,
+    "total_bonus_kpi": 1384861.0,
     "total_additional": 0.0,
-    "total_bonus": 0.0,
+    "total_bonus": 2065307.0,
     "total_hukuman": 0.0,
-    "total_bon": 0.0,
-    "grand_total_thp": 14333769.0,
+    "total_bon": 3314000.0,
+    "grand_total_thp": 13566168.0,
     "total_karyawan": 12
   }
 }
