@@ -95,6 +95,22 @@ def parse_neraca(filepath="file_neraca.xlsx", sheet_name="September 2026", actua
     tot_keluar = 0.0
     last_balance = 0.0
 
+    # Tentukan bulan ISO dari sheet_name secara dinamis
+    bulan_iso = "2026-09"
+    sn_lower = str(sheet_name).lower()
+    bulan_map = {
+        "januari": "01", "februari": "02", "maret": "03", "april": "04",
+        "mei": "05", "juni": "06", "juli": "07", "agustus": "08",
+        "september": "09", "oktober": "10", "november": "11", "desember": "12"
+    }
+    for b_name, b_num in bulan_map.items():
+        if b_name in sn_lower:
+            import re
+            m_yr = re.search(r'20\d{2}', sn_lower)
+            yr_str = m_yr.group(0) if m_yr else "2026"
+            bulan_iso = f"{yr_str}-{b_num}"
+            break
+
     # Section Detail terletak pada kolom:
     # Col 16 (P): Tgl
     # Col 17 (Q): Saldo Masuk
@@ -196,10 +212,11 @@ def parse_neraca(filepath="file_neraca.xlsx", sheet_name="September 2026", actua
             if nominal_balance > 0:
                 last_balance = nominal_balance
                 
+            tgl_iso_row = f"{bulan_iso}-{current_tgl:02d}"
             detail.append({
                 "id": f"det_nrc_{det_idx}",
                 "tgl": current_tgl,
-                "tanggal_iso": f"2026-09-{current_tgl:02d}",
+                "tanggal_iso": tgl_iso_row,
                 "first_of_day": first_of_day,
                 "masuk": nominal_masuk,
                 "keluar": nominal_keluar,
@@ -215,11 +232,11 @@ def parse_neraca(filepath="file_neraca.xlsx", sheet_name="September 2026", actua
             
         if nominal_keluar > 0 and desc_keluar and current_tgl is not None:
             jenis, kategori = classify_expense(desc_keluar)
-            tgl_iso = f"2026-09-{current_tgl:02d}"
+            tgl_iso = f"{bulan_iso}-{current_tgl:02d}"
             expenses.append({
                 "id": f"ex_nrc_{idx}",
                 "tanggal": tgl_iso,
-                "bulan": "2026-09",
+                "bulan": bulan_iso,
                 "jenis": jenis,
                 "kategori": kategori,
                 "deskripsi": desc_keluar,

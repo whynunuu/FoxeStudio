@@ -2722,6 +2722,15 @@ function vAds(R){
   const countH7 = fullCal.filter(x => (x.action || '').toUpperCase() === 'H-7').length;
   const countAware = fullCal.filter(x => (x.action || '').toUpperCase() === 'AWARENESS').length;
 
+  // Realized Ads dari Buku Neraca (Realtime)
+  const realizedAds = (S.expenses || []).filter(e => {
+    const isThisMonth = e.tanggal && e.tanggal.startsWith(selBulan);
+    const isAds = (e.kategori === 'Marketing / Ads / KOL') || 
+                  /ads|iklan|meta|facebook|instagram|tiktok|kol|boost/i.test(e.deskripsi || '');
+    return isThisMonth && isAds;
+  }).sort((a,b) => (a.tanggal || '').localeCompare(b.tanggal || ''));
+  const totRealizedAds = realizedAds.reduce((sum, e) => sum + dnum(e.nilai), 0);
+
   // Monthly Tracker calculations
   let trackerHtml = "";
   if(A && A.schedule){
@@ -2747,6 +2756,8 @@ function vAds(R){
       <div class="stats" style="margin-bottom:14px">
         <div class="stat"><span class="k">Ceiling ${mn}</span><span class="v sm">${rp(ceiling)}</span>
           <span class="m">rencana ${rp(plan)} · reserve ${rp(ceiling - plan)}</span></div>
+        <div class="stat"><span class="k">Realized (Neraca)</span><span class="v sm" style="color:${totRealizedAds > ceiling ? 'var(--crit)' : 'var(--accent)'}">${rp(totRealizedAds)}</span>
+          <span class="m">${realizedAds.length} transaksi di Neraca · ${totRealizedAds > 0 && ceiling > 0 ? ((totRealizedAds / ceiling) * 100).toFixed(0) + '% ceiling' : '0%'}</span></div>
         <div class="stat"><span class="k">Term terpakai</span><span class="v sm">${terpakai} / ${A.termPlan}</span>
           <span class="m">${rp(terpakai * dnum(A.termSize))} dari ${rp(plan)}</span>
           <div class="bar"><i style="width:${(terpakai / dnum(A.termPlan) * 100).toFixed(0)}%"></i></div></div>
@@ -2754,6 +2765,60 @@ function vAds(R){
           <span class="m">${rp(sisa * dnum(A.termSize))} belum dilepas</span></div>
         <div class="stat"><span class="k">Seasonality</span><span class="v sm">${esc(A.seasonality)}</span>
           <span class="m">1 term = ${rp(A.termSize)}</span></div>
+      </div>
+
+      <!-- REALIZED ADS TABLE (DATA REALTIME NERACA) -->
+      <div class="card" style="margin-bottom:14px;border-top:3px solid var(--accent)">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+          <div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <h3 style="margin:0">Realized</h3>
+              <span class="pill crit">${realizedAds.length} Transaksi di Neraca</span>
+            </div>
+            <p class="tiny muted" style="margin-top:3px">
+              Data real-time pengeluaran iklan Meta Ads yang telah dicatat dan terverifikasi di Buku Neraca (${mn} ${yr}).
+            </p>
+          </div>
+          <div style="text-align:right">
+            <span class="tiny muted">Total Realized:</span>
+            <div style="font-family:var(--ff-display);font-size:22px;font-weight:700;color:var(--ink)">${rp(totRealizedAds)}</div>
+          </div>
+        </div>
+
+        ${realizedAds.length ? `
+        <div class="tw">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:130px">Tanggal</th>
+                <th>Keterangan / Deskripsi</th>
+                <th>Kategori Neraca</th>
+                <th class="n" style="width:150px">Nominal Realized</th>
+                <th style="width:140px">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${realizedAds.map(e => `
+                <tr>
+                  <td class="mono">${esc(e.tanggal)}</td>
+                  <td><b>${esc(e.deskripsi)}</b></td>
+                  <td><span class="pill neutral" style="font-size:11.5px">${esc(e.kategori || 'Marketing / Ads / KOL')}</span></td>
+                  <td class="n mono" style="font-weight:600;font-size:13px;color:var(--ink)">${rp(e.nilai)}</td>
+                  <td><span class="pill crit">Terverifikasi (Neraca)</span></td>
+                </tr>
+              `).join("")}
+              <tr class="total">
+                <td colspan="3">Total Realized ${mn} ${yr}</td>
+                <td class="n mono" style="font-size:14px;color:var(--accent)">${rp(totRealizedAds)}</td>
+                <td class="tiny">${totRealizedAds > ceiling ? `<span class="pill bad">Over +${rp(totRealizedAds - ceiling)}</span>` : `<span class="pill good">Sisa ${rp(ceiling - totRealizedAds)}</span>`}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>` : `
+        <div class="empty" style="padding:18px 0">
+          Belum ada transaksi ads yang tercatat di Neraca untuk ${mn} ${yr}.<br>
+          <span class="tiny muted">Data real-time akan otomatis tersinkronisasi begitu dicatat di Buku Neraca.</span>
+        </div>`}
       </div>
 
       ${sisaJadwal.length ? `
@@ -2819,6 +2884,65 @@ function vAds(R){
     `;
   } else {
     trackerHtml = `
+      <div class="stats" style="margin-bottom:14px">
+        <div class="stat"><span class="k">Realized (Neraca)</span><span class="v sm" style="color:var(--accent)">${rp(totRealizedAds)}</span>
+          <span class="m">${realizedAds.length} pengeluaran riil tercatat</span></div>
+      </div>
+
+      <!-- REALIZED ADS TABLE (DATA REALTIME NERACA) -->
+      <div class="card" style="margin-bottom:14px;border-top:3px solid var(--accent)">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+          <div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <h3 style="margin:0">Realized</h3>
+              <span class="pill crit">${realizedAds.length} Transaksi di Neraca</span>
+            </div>
+            <p class="tiny muted" style="margin-top:3px">
+              Data real-time pengeluaran iklan Meta Ads yang telah dicatat dan terverifikasi di Buku Neraca (${mn} ${yr}).
+            </p>
+          </div>
+          <div style="text-align:right">
+            <span class="tiny muted">Total Realized:</span>
+            <div style="font-family:var(--ff-display);font-size:22px;font-weight:700;color:var(--ink)">${rp(totRealizedAds)}</div>
+          </div>
+        </div>
+
+        ${realizedAds.length ? `
+        <div class="tw">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:130px">Tanggal</th>
+                <th>Keterangan / Deskripsi</th>
+                <th>Kategori Neraca</th>
+                <th class="n" style="width:150px">Nominal Realized</th>
+                <th style="width:140px">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${realizedAds.map(e => `
+                <tr>
+                  <td class="mono">${esc(e.tanggal)}</td>
+                  <td><b>${esc(e.deskripsi)}</b></td>
+                  <td><span class="pill neutral" style="font-size:11.5px">${esc(e.kategori || 'Marketing / Ads / KOL')}</span></td>
+                  <td class="n mono" style="font-weight:600;font-size:13px;color:var(--ink)">${rp(e.nilai)}</td>
+                  <td><span class="pill crit">Terverifikasi (Neraca)</span></td>
+                </tr>
+              `).join("")}
+              <tr class="total">
+                <td colspan="3">Total Realized ${mn} ${yr}</td>
+                <td class="n mono" style="font-size:14px;color:var(--accent)">${rp(totRealizedAds)}</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>` : `
+        <div class="empty" style="padding:18px 0">
+          Belum ada transaksi ads yang tercatat di Neraca untuk ${mn} ${yr}.<br>
+          <span class="tiny muted">Data real-time akan otomatis tersinkronisasi begitu dicatat di Buku Neraca.</span>
+        </div>`}
+      </div>
+
       <div class="card" style="margin-bottom:14px">
         <div class="empty">Belum ada rencana ads bulanan terpisah untuk ${mn} ${yr}.<br>
         <span class="tiny">Silakan rujuk ke Kalender Marketing &amp; Boosting 2026/2027 di bawah.</span></div>
