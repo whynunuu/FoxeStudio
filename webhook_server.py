@@ -146,7 +146,12 @@ def trigger_sync_state_endpoint():
     return sync_state_from_remote()
 
 @app.post("/webhook")
+@app.post("/webhook/fonnte")
 @app.post("/api/webhook")
+@app.get("/webhook")
+def webhook_test_get():
+    return {"status": "ready", "message": "Foxe Webhook endpoint is active and listening for POST requests from Fonnte"}
+
 async def receive_fonnte_webhook(request: Request, background_tasks: BackgroundTasks):
     """
     Endpoint penangkap webhook dari Fonnte WhatsApp Gateway.
