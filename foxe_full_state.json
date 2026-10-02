@@ -8406,6 +8406,19 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
+    },
+    {
+      "id": "or_14",
+      "tanggal": "2026-10-02",
+      "client": "Fajar Alfani",
+      "paket": "Graduation Premium",
+      "tanggalFoto": "2026-10-17",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -10354,6 +10367,14 @@
       "dp": 4.0,
       "sesiFoto": 9.0,
       "transaksi": 13.0
+    },
+    {
+      "id": "ld_2",
+      "tanggal": "2026-10-02",
+      "leads": 0.0,
+      "dp": 1.0,
+      "sesiFoto": 0.0,
+      "transaksi": 1.0
     },
     {
       "id": "ld_7",
@@ -13794,6 +13815,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261002-0212",
+      "mulai": "2026-10-02T02:12:29.090155+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 14 order Okt, 194 jadwal, 70 pos pengeluaran Neraca, 173 pipeline Okt."
+    },
+    {
       "id": "sy_20261001-1416",
       "mulai": "2026-10-01T14:16:57.029531+00:00",
       "status": "sukses",
@@ -14339,7 +14366,7 @@
     "file1_okt_id": "1xibgfKWJZWmcwh9lxR9Dt7IkHyMi7b75",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-10-01T14:16:57.029531+00:00"
+    "last_sync": "2026-10-02T02:12:29.090155+00:00"
   },
   "neracaDetail": [
     {
@@ -14903,13 +14930,13 @@
     "bulan": "2026-10",
     "totalBookings": 173,
     "potentialOmzet": 61700000.0,
-    "totalDp": 11950000.0,
-    "estimateCashIn": 49750000.0,
+    "totalDp": 12050000.0,
+    "estimateCashIn": 49650000.0,
     "breakdown": {
       "reguler": {
         "sesi": 36,
         "nilai": 12000000.0,
-        "dp": 3000000.0
+        "dp": 3100000.0
       },
       "wisudaDay1": {
         "sesi": 73,
@@ -15439,10 +15466,10 @@
         "jmlOrang": 1,
         "harga": 350000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100 concrete",
         "manual": false,
-        "dp": 0.0,
-        "sisaPelunasan": 350000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 250000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -18586,6 +18613,19 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": "ADIF"
+      },
+      {
+        "id": "or_14",
+        "tanggal": "2026-10-02",
+        "client": "Fajar Alfani",
+        "paket": "Graduation Premium",
+        "tanggalFoto": "2026-10-17",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -18784,9 +18824,9 @@
         "id": "ld_2",
         "tanggal": "2026-10-02",
         "leads": 0.0,
-        "dp": 0.0,
+        "dp": 1.0,
         "sesiFoto": 0.0,
-        "transaksi": 0.0
+        "transaksi": 1.0
       },
       {
         "id": "ld_3",
@@ -19087,8 +19127,8 @@
         "produktivitas": []
       }
     },
-    "cutoff": "2026-10-01",
-    "hariBerjalan": 1
+    "cutoff": "2026-10-02",
+    "hariBerjalan": 2
   },
   "adsByMonth": {
     "2026-09": {
