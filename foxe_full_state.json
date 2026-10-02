@@ -13879,6 +13879,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261002-0814",
+      "mulai": "2026-10-02T08:14:49.748920+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 18 order Okt, 194 jadwal, 70 pos pengeluaran Neraca, 174 pipeline Okt."
+    },
+    {
       "id": "sy_20261002-0653",
       "mulai": "2026-10-02T06:53:21.222057+00:00",
       "status": "sukses",
@@ -14460,7 +14466,7 @@
     "file1_okt_id": "1xibgfKWJZWmcwh9lxR9Dt7IkHyMi7b75",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-10-02T06:53:21.222057+00:00"
+    "last_sync": "2026-10-02T08:14:49.748920+00:00"
   },
   "neracaDetail": [
     {
@@ -15024,13 +15030,13 @@
     "bulan": "2026-10",
     "totalBookings": 174,
     "potentialOmzet": 62100000.0,
-    "totalDp": 12250000.0,
-    "estimateCashIn": 49850000.0,
+    "totalDp": 12350000.0,
+    "estimateCashIn": 49750000.0,
     "breakdown": {
       "reguler": {
         "sesi": 37,
         "nilai": 12400000.0,
-        "dp": 3200000.0
+        "dp": 3300000.0
       },
       "wisudaDay1": {
         "sesi": 73,
@@ -15236,10 +15242,10 @@
         "jmlOrang": 11,
         "harga": 275000.0,
         "admin": "IN",
-        "noHp": "",
+        "noHp": "dp 100 limbo",
         "manual": false,
-        "dp": 0.0,
-        "sisaPelunasan": 275000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 175000.0,
         "kategori": "Studio Reguler"
       },
       {
