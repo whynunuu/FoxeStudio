@@ -342,58 +342,260 @@
     .kpi-card .v { font-size: 22px; font-weight: 700; color: #fff; font-family: var(--font-mono); }
     .kpi-card .sub { font-size: 11.5px; color: var(--text-secondary); }
 
-    .leaderboard-sec {
-      background: #111722; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 16px;
+    /* CLICKABLE KPI CARDS */
+    .kpi-card.clickable-kpi {
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
     }
-    .leaderboard-title { font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
-    .admin-cards-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
-    .admin-perf-card {
-      background: #16202e; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px 14px;
-      display: flex; flex-direction: column; gap: 8px;
+    .kpi-card.clickable-kpi:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+      border-color: rgba(56, 189, 248, 0.6) !important;
     }
-    .admin-perf-head { display: flex; justify-content: space-between; align-items: center; }
-    .admin-name { font-weight: 700; font-size: 13px; color: #38bdf8; display: flex; align-items: center; gap: 6px; }
-    .admin-rate { font-size: 12px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: rgba(16,185,129,0.15); color: #34d399; }
+    .kpi-card.clickable-kpi.active-kpi {
+      background: #172438 !important;
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4), 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .kpi-card-active-indicator {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      display: none;
+    }
+    .kpi-card.active-kpi .kpi-card-active-indicator {
+      display: inline-block;
+    }
 
-    .leads-toolbar {
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-      background: #111722; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 10px 14px;
+    /* 2. TURUNAN LEADS SECTION */
+    .turunan-leads-section {
+      background: #111722;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
-    .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
-    .ftab {
-      background: transparent; border: 1px solid transparent; color: var(--text-secondary);
-      font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 6px; cursor: pointer; transition: all 0.15s;
+    .turunan-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 12px;
     }
-    .ftab:hover { background: #1e2c3e; color: #fff; }
-    .ftab.active { background: #0284c7; color: #fff; border-color: #38bdf8; }
+    .turunan-title-box { display: flex; flex-direction: column; gap: 4px; }
+    .turunan-title { font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
+    .turunan-subtitle { font-size: 11.5px; color: #94a3b8; }
+    .turunan-items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 10px;
+    }
+    .turunan-item-card {
+      background: #16202e;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 12px 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.18s ease;
+      position: relative;
+    }
+    .turunan-item-card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    }
+    .turunan-item-card.active-lead-item {
+      background: #17273d !important;
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 0 2px rgba(56,189,248,0.35);
+    }
+    .turunan-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .turunan-item-name {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: #fff;
+    }
+    .turunan-item-phone {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #38bdf8;
+    }
+    .turunan-item-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+    .turunan-item-btn {
+      margin-top: 4px;
+      font-size: 11px;
+      padding: 4px 8px;
+      width: 100%;
+      text-align: center;
+      background: #1e293b;
+      border: 1px solid rgba(56,189,248,0.3);
+      color: #38bdf8;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .turunan-item-btn:hover {
+      background: #0284c7;
+      color: #fff;
+    }
 
-    .leads-list { display: flex; flex-direction: column; gap: 12px; }
-    .lead-row-card {
-      background: #141c28; border: 1px solid var(--border-subtle); border-radius: 10px;
-      padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; transition: border-color 0.15s;
+    /* 3. CHAT WORKSPACE SECTION */
+    .chat-workspace-section {
+      background: #111722;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
-    .lead-row-card:hover { border-color: #38bdf8; }
-    .lead-row-card.tier-hot { border-left: 4px solid #ef4444; }
-    .lead-row-card.tier-warm { border-left: 4px solid #f59e0b; }
-    .lead-row-card.tier-cold { border-left: 4px solid #06b6d4; }
-    .lead-row-card.tier-closed { border-left: 4px solid #10b981; }
+    .chat-workspace-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: #16202e;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+    .chat-workspace-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 900px) {
+      .chat-workspace-grid { grid-template-columns: 1fr; }
+    }
+    .chat-conversation-pane {
+      background: #0d121a;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 220px;
+      max-height: 360px;
+      overflow-y: auto;
+    }
+    .ai-workspace-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
-    .lead-row-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
-    .lead-client-info { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .lead-name { font-size: 15px; font-weight: 700; color: #fff; }
-    .lead-phone { font-family: var(--font-mono); font-size: 12px; color: #38bdf8; text-decoration: none; }
-    .lead-phone:hover { text-decoration: underline; }
-    
+    /* 4. PERFORMANCE LEADERBOARD (MINIMALIST DI PALING BAWAH) */
+    .leaderboard-sec.minimalist-perf {
+      background: #0f1520;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-top: 4px;
+    }
+    .leaderboard-sec.minimalist-perf .leaderboard-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .minimalist-perf .admin-cards-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+    .minimalist-perf .admin-perf-card {
+      background: #141c28;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 7px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .minimalist-perf .admin-perf-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .minimalist-perf .admin-name {
+      font-weight: 700;
+      font-size: 12.5px;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .perf-progress-bar {
+      height: 4px;
+      background: #1e293b;
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 2px 0 4px 0;
+    }
+    .perf-progress-fill {
+      height: 100%;
+      background: #34d399;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    .perf-metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 8px;
+      font-size: 11px;
+    }
+    .perf-metric-item {
+      display: flex;
+      justify-content: space-between;
+      color: #94a3b8;
+    }
+    .perf-metric-item b {
+      color: #e2e8f0;
+    }
+
     .lead-pill { font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
     .pill-hot { background: rgba(239, 68, 68, 0.18); color: #f87171; border: 1px solid rgba(239,68,68,0.4); }
     .pill-warm { background: rgba(245, 158, 11, 0.18); color: #fbbf24; border: 1px solid rgba(245,158,11,0.4); }
     .pill-cold { background: rgba(6, 182, 212, 0.18); color: #22d3ee; border: 1px solid rgba(6,182,212,0.4); }
     .pill-closed { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16,185,129,0.4); }
 
-    .lead-summary-box { font-size: 12.5px; color: var(--text-secondary); background: #0b0f17; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-subtle); }
+    .lead-summary-box { font-size: 12px; color: var(--text-secondary); background: #0b0f17; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-subtle); }
     
     .chat-bubble-preview { display: flex; flex-direction: column; gap: 6px; font-size: 12px; }
-    .chat-bubble { max-width: 80%; padding: 7px 12px; border-radius: 8px; line-height: 1.4; }
+    .chat-bubble { max-width: 85%; padding: 7px 12px; border-radius: 8px; line-height: 1.4; }
     .chat-bubble.customer { background: #1e293b; color: #e2e8f0; align-self: flex-start; border-bottom-left-radius: 2px; }
     .chat-bubble.admin { background: #0284c7; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
 
@@ -402,8 +604,8 @@
       border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
     }
     .ai-draft-header { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.5px; }
-    .ai-draft-text { font-size: 13px; color: #f1f5f9; line-height: 1.5; font-style: italic; background: rgba(0,0,0,0.3); padding: 10px 12px; border-radius: 6px; border-left: 3px solid #38bdf8; }
-    .ai-draft-actions { display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
+    .ai-draft-text { font-size: 12.5px; color: #f1f5f9; line-height: 1.5; font-style: italic; background: rgba(0,0,0,0.3); padding: 10px 12px; border-radius: 6px; border-left: 3px solid #38bdf8; }
+    .ai-draft-actions { display: flex; justify-content: flex-end; align-items: center; gap: 8px; flex-wrap: wrap; }
 
     .cal-view-container {
       flex: 1;
@@ -812,75 +1014,85 @@
       </div>
     </div>
 
-    <!-- KPI STATS GRID -->
+    <!-- 1. DASHBOARD STATUS (INTERACTIVE KPI CARDS) -->
     <div class="leads-kpi-grid">
-      <div class="kpi-card">
+      <div class="kpi-card clickable-kpi active-kpi" id="kpiCardTotal" data-filter="all" title="Klik untuk lihat Semua Leads">
+        <span class="kpi-card-active-indicator">● Aktif</span>
         <div class="kpi-lbl">Total Leads Masuk</div>
         <div class="kpi-val" id="kpiTotalLeads">7</div>
         <div class="kpi-sub">WhatsApp Fonnte Webhook</div>
       </div>
-      <div class="kpi-card" style="border-left: 3px solid #ef4444;">
+      <div class="kpi-card clickable-kpi" id="kpiCardHot" data-filter="HOT" style="border-left: 3px solid #ef4444;" title="Klik untuk lihat Hot Leads">
+        <span class="kpi-card-active-indicator">● Aktif</span>
         <div class="kpi-lbl" style="color:#f87171;">🔥 Hot Leads</div>
         <div class="kpi-val" style="color:#f87171;" id="kpiHotLeads">2</div>
         <div class="kpi-sub">Isi form / hampir DP</div>
       </div>
-      <div class="kpi-card" style="border-left: 3px solid #f59e0b;">
+      <div class="kpi-card clickable-kpi" id="kpiCardWarm" data-filter="WARM" style="border-left: 3px solid #f59e0b;" title="Klik untuk lihat Warm Leads">
+        <span class="kpi-card-active-indicator">● Aktif</span>
         <div class="kpi-lbl" style="color:#fbbf24;">⚡ Warm Leads</div>
         <div class="kpi-val" style="color:#fbbf24;" id="kpiWarmLeads">2</div>
         <div class="kpi-sub">Tanya lanjut paket</div>
       </div>
-      <div class="kpi-card" style="border-left: 3px solid #06b6d4;">
+      <div class="kpi-card clickable-kpi" id="kpiCardCold" data-filter="COLD" style="border-left: 3px solid #06b6d4;" title="Klik untuk lihat Cold Leads">
+        <span class="kpi-card-active-indicator">● Aktif</span>
         <div class="kpi-lbl" style="color:#22d3ee;">❄️ Cold Leads</div>
         <div class="kpi-val" style="color:#22d3ee;" id="kpiColdLeads">2</div>
         <div class="kpi-sub">Tanya pricelist lalu hening</div>
       </div>
-      <div class="kpi-card" style="border-left: 3px solid #10b981;">
+      <div class="kpi-card clickable-kpi" id="kpiCardClosed" data-filter="CLOSED" style="border-left: 3px solid #10b981;" title="Klik untuk lihat Closed DP">
+        <span class="kpi-card-active-indicator">● Aktif</span>
         <div class="kpi-lbl" style="color:#34d399;">✅ Closed DP</div>
         <div class="kpi-val" style="color:#34d399;" id="kpiClosedLeads">1</div>
         <div class="kpi-sub">Match terverifikasi di Sheet</div>
       </div>
-      <div class="kpi-card" style="border-left: 3px solid #a855f7;">
+      <div class="kpi-card clickable-kpi" id="kpiCardUnconv" data-filter="UNCONVERTED" style="border-left: 3px solid #a855f7;" title="Klik untuk lihat Unconverted Pipeline">
+        <span class="kpi-card-active-indicator">● Aktif</span>
         <div class="kpi-lbl" style="color:#c084fc;">💰 Unconverted Pipeline</div>
         <div class="kpi-val" style="color:#c084fc;" id="kpiUnconvertedVal">Rp 1.635.000</div>
         <div class="kpi-sub">Potensi omzet tertahan di chat</div>
       </div>
     </div>
 
-    <!-- ADMIN PERFORMANCE LEADERBOARD -->
-    <div class="leaderboard-sec">
-      <div class="leaderboard-title">
-        <span>🏆 Performa Admin &amp; Konversi Chat Studio</span>
-        <span style="font-size:11px; font-weight:400; color:#94a3b8;">Evaluasi efisiensi follow-up dan closing rate per admin</span>
+    <!-- 2. TURUNAN KLIK DASHBOARD STATUS (DAFTAR LEADS KELOMPOK TERPILIH) -->
+    <div class="turunan-leads-section" id="turunanLeadsSection">
+      <div class="turunan-header">
+        <div class="turunan-title-box">
+          <div class="turunan-title" id="turunanTitle">📋 Daftar Semua Leads (<span id="turunanCount">7</span>)</div>
+          <div class="turunan-subtitle" id="turunanSubtitle">Menampilkan seluruh data prospek masuk dari WhatsApp Fonnte Webhook. Klik klien untuk membuka chat.</div>
+        </div>
+        <div class="turunan-toolbar-right" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          <input type="text" id="leadSearchInput" class="lead-search-box" placeholder="🔍 Cari nama klien, no HP, atau isi chat...">
+          <select id="leadAdminFilter" class="field-select" style="width:130px; padding:6px 10px; font-size:12px;">
+            <option value="ALL">Semua Admin</option>
+            <option value="AMEL">Admin AMEL</option>
+            <option value="INDAH">Admin INDAH</option>
+            <option value="ADIF">Admin ADIF</option>
+          </select>
+        </div>
       </div>
-      <div class="admin-perf-grid" id="adminPerfContainer">
+      <div class="turunan-items-grid" id="turunanListContainer">
         <!-- Loaded dynamically -->
       </div>
     </div>
 
-    <!-- TOOLBAR & FILTERS -->
-    <div class="leads-toolbar">
-      <div class="filter-tabs" id="leadFilterTabs">
-        <button class="ftab active" data-filter="all">Semua Leads (<span id="cntAll">7</span>)</button>
-        <button class="ftab" data-filter="HOT" style="color:#f87171;">🔥 Hot (<span id="cntHot">2</span>)</button>
-        <button class="ftab" data-filter="WARM" style="color:#fbbf24;">⚡ Warm (<span id="cntWarm">2</span>)</button>
-        <button class="ftab" data-filter="COLD" style="color:#22d3ee;">❄️ Cold (<span id="cntCold">2</span>)</button>
-        <button class="ftab" data-filter="CLOSED" style="color:#34d399;">✅ Closed DP (<span id="cntClosed">1</span>)</button>
-      </div>
-
-      <div style="display:flex; align-items:center; gap:8px;">
-        <input type="text" id="leadSearchInput" class="lead-search-box" placeholder="🔍 Cari nama klien, no HP, atau isi chat...">
-        <select id="leadAdminFilter" class="field-select" style="width:140px; padding:6px 10px; font-size:12px;">
-          <option value="ALL">Semua Admin</option>
-          <option value="AMEL">Admin AMEL</option>
-          <option value="INDAH">Admin INDAH</option>
-          <option value="ADIF">Admin ADIF</option>
-        </select>
-      </div>
+    <!-- 3. CHAT INTERFACE & AI DRAFT WORKSPACE -->
+    <div class="chat-workspace-section" id="chatWorkspaceSection">
+      <!-- Loaded dynamically based on selected lead -->
     </div>
 
-    <!-- LEADS CARDS LIST -->
-    <div class="leads-list" id="leadsListContainer">
-      <!-- Loaded dynamically -->
+    <!-- 4. PERFORMANCE ADMIN & KONVERSI CHAT (MINIMALIS & DI PALING BAWAH) -->
+    <div class="leaderboard-sec minimalist-perf" id="leaderboardSec">
+      <div class="leaderboard-title">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span>🏆 Performa Admin &amp; Konversi Chat Studio</span>
+          <span style="font-size:11px; font-weight:400; color:#94a3b8;">· Speed to Lead &amp; Closing Rate</span>
+        </div>
+        <button id="btnTogglePerf" class="btn btn-sm" style="background:#1e293b; color:#94a3b8; font-size:11px; padding:3px 8px; cursor:pointer;">➖ Ciutkan</button>
+      </div>
+      <div class="admin-cards-row" id="adminPerfContainer">
+        <!-- Loaded dynamically -->
+      </div>
     </div>
   </div>
 
@@ -3073,6 +3285,8 @@
       renderLeads();
     }
 
+    let selectedLeadId = null;
+
     function renderLeads() {
       const total = leadsData.length;
       const hot = leadsData.filter(l => l.tier === 'HOT').length;
@@ -3099,23 +3313,268 @@
       if (elUnconv) elUnconv.textContent = `Rp ${unconvertedVal.toLocaleString('id-ID')}`;
       if (badgeUnconv) badgeUnconv.textContent = unconverted.length;
 
-      // Filter tabs count
-      const cAll = document.getElementById('cntAll');
-      const cHot = document.getElementById('cntHot');
-      const cWarm = document.getElementById('cntWarm');
-      const cCold = document.getElementById('cntCold');
-      const cClosed = document.getElementById('cntClosed');
-      if (cAll) cAll.textContent = total;
-      if (cHot) cHot.textContent = hot;
-      if (cWarm) cWarm.textContent = warm;
-      if (cCold) cCold.textContent = cold;
-      if (cClosed) cClosed.textContent = closed;
+      // Update active state on clickable KPI cards
+      document.querySelectorAll('.clickable-kpi').forEach(c => {
+        c.classList.toggle('active-kpi', c.getAttribute('data-filter') === currentLeadFilter);
+      });
 
-      // Admin Leaderboard
+      // Render Turunan & Chat Workspace
+      renderTurunanAndChat();
+
+      // Render Minimalist Performance Leaderboard at bottom
       renderAdminLeaderboard();
+    }
 
-      // Render Cards
-      renderLeadCards();
+    function setLeadFilter(filter) {
+      currentLeadFilter = filter;
+      document.querySelectorAll('.clickable-kpi').forEach(c => {
+        c.classList.toggle('active-kpi', c.getAttribute('data-filter') === filter);
+      });
+      renderTurunanAndChat();
+    }
+
+    function selectLead(id, scrollToChat = false) {
+      selectedLeadId = id;
+      renderTurunanAndChat();
+      if (scrollToChat) {
+        const chatSec = document.getElementById('chatWorkspaceSection');
+        if (chatSec) {
+          chatSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    function renderTurunanAndChat() {
+      const container = document.getElementById('turunanListContainer');
+      const titleEl = document.getElementById('turunanTitle');
+      const subtitleEl = document.getElementById('turunanSubtitle');
+      if (!container) return;
+
+      let filtered = leadsData.slice();
+
+      // Filter category
+      let labelGroup = '📋 Semua Leads';
+      let descGroup = 'Menampilkan seluruh data prospek masuk dari WhatsApp Fonnte Webhook.';
+
+      if (currentLeadFilter === 'HOT') {
+        filtered = filtered.filter(l => l.tier === 'HOT');
+        labelGroup = '🔥 Hot Leads (Isi Form / Hampir DP)';
+        descGroup = 'Calon klien sudah isi formulir / hampir transfer DP. Prioritas respon cepat 1-2 jam.';
+      } else if (currentLeadFilter === 'WARM') {
+        filtered = filtered.filter(l => l.tier === 'WARM');
+        labelGroup = '⚡ Warm Leads (Tanya Lanjut Paket)';
+        descGroup = 'Klien sudah tanya paket & berkonsultasi. Kirimkan portofolio & tanyakan preferensi spot.';
+      } else if (currentLeadFilter === 'COLD') {
+        filtered = filtered.filter(l => l.tier === 'COLD');
+        labelGroup = '❄️ Cold Leads (Pricelist Lost)';
+        descGroup = 'Hanya tanya pricelist lalu hening. Siapkan nurturing berkala atau promo momentum wisuda.';
+      } else if (currentLeadFilter === 'CLOSED') {
+        filtered = filtered.filter(l => l.tier === 'CLOSED' || l.status === 'CONVERTED');
+        labelGroup = '✅ Closed DP (Match Terverifikasi)';
+        descGroup = 'Pembayaran DP Rp 100.000 sudah terverifikasi masuk rekening & jadwal booking terkunci.';
+      } else if (currentLeadFilter === 'UNCONVERTED') {
+        filtered = filtered.filter(l => l.status === 'UNCONVERTED');
+        labelGroup = '💰 Unconverted Pipeline (Tertahan di Chat)';
+        descGroup = 'Seluruh prospek yang belum transfer DP dengan akumulasi potensi nilai booking.';
+      }
+
+      // Filter admin
+      if (currentLeadAdmin !== 'ALL') {
+        filtered = filtered.filter(l => l.admin === currentLeadAdmin);
+      }
+
+      // Filter search
+      if (currentLeadSearch.trim()) {
+        const q = currentLeadSearch.toLowerCase().trim();
+        filtered = filtered.filter(l => 
+          (l.display_name && l.display_name.toLowerCase().includes(q)) ||
+          (l.phone && l.phone.includes(q)) ||
+          (l.summary && l.summary.toLowerCase().includes(q)) ||
+          (l.last_customer_msg && l.last_customer_msg.toLowerCase().includes(q)) ||
+          (l.ai_recommendation && l.ai_recommendation.toLowerCase().includes(q))
+        );
+      }
+
+      if (titleEl) titleEl.innerHTML = `${labelGroup} (<span id="turunanCount">${filtered.length}</span>)`;
+      if (subtitleEl) subtitleEl.textContent = descGroup;
+
+      // Auto-select first lead if current selected not in list
+      if (!filtered.some(l => l.id === selectedLeadId)) {
+        selectedLeadId = filtered.length > 0 ? filtered[0].id : null;
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align:center; padding:32px 20px; background:#141c28; border-radius:8px; border:1px solid var(--border-subtle); color:#94a3b8;">
+            <div style="font-size:24px; margin-bottom:6px;">🔍</div>
+            <div style="font-size:13.5px; font-weight:600; color:#fff;">Tidak ada calon klien di kelompok ini</div>
+            <div style="font-size:11.5px; margin-top:2px;">Coba pilih kartu KPI lain di atas atau ubah filter pencarian.</div>
+          </div>
+        `;
+      } else {
+        let html = '';
+        filtered.forEach(lead => {
+          const isSelected = lead.id === selectedLeadId;
+          const isClosed = lead.status === 'CONVERTED' || lead.tier === 'CLOSED';
+          const tierClass = lead.tier ? lead.tier.toLowerCase() : 'warm';
+          const pillClass = `pill-${tierClass}`;
+          const phoneClean = (lead.phone || '').replace(/[^0-9]/g, '');
+
+          html += `
+            <div class="turunan-item-card tier-${tierClass} ${isSelected ? 'active-lead-item' : ''}" onclick="selectLead('${lead.id}')">
+              <div class="turunan-item-top">
+                <div>
+                  <div class="turunan-item-name">${escapeHtml(lead.display_name)}</div>
+                  <div class="turunan-item-phone">📱 +${phoneClean}</div>
+                </div>
+                <div style="text-align:right;">
+                  <span class="lead-pill ${pillClass}">
+                    ${lead.tier === 'HOT' ? '🔥 HOT' : (lead.tier === 'WARM' ? '⚡ WARM' : (lead.tier === 'COLD' ? '❄️ COLD' : '✅ CLOSED'))}
+                  </span>
+                </div>
+              </div>
+
+              <div class="turunan-item-meta">
+                <span>👩‍💼 Admin ${lead.admin}</span>
+                <b style="color:#c084fc;">Rp ${(Number(lead.estimated_value) || 0).toLocaleString('id-ID')}</b>
+              </div>
+
+              <div style="font-size:11px; color:#cbd5e1; line-height:1.3; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; background:rgba(0,0,0,0.25); padding:5px 8px; border-radius:4px;">
+                💬 "${escapeHtml(lead.last_customer_msg || lead.summary || 'Proses follow up')}"
+              </div>
+
+              <button class="turunan-item-btn" onclick="event.stopPropagation(); selectLead('${lead.id}', true);">
+                ${isSelected ? '✓ Chat Sedang Dibuka' : '💬 Buka Chat & AI Draft'}
+              </button>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+      }
+
+      // Render Chat Workspace for the selected lead
+      renderChatWorkspace();
+    }
+
+    function renderChatWorkspace() {
+      const container = document.getElementById('chatWorkspaceSection');
+      if (!container) return;
+
+      const lead = leadsData.find(l => l.id === selectedLeadId);
+      if (!lead) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:36px 20px; color:#94a3b8; background:#141c28; border-radius:8px;">
+            <div style="font-size:28px; margin-bottom:8px;">💬</div>
+            <div style="font-size:14px; font-weight:700; color:#fff;">Belum Ada Klien Dipilih</div>
+            <div style="font-size:12px; margin-top:4px;">Klik salah satu kartu calon klien pada daftar di atas untuk membuka riwayat chat dan draf balasan AI.</div>
+          </div>
+        `;
+        return;
+      }
+
+      const isClosed = lead.status === 'CONVERTED' || lead.tier === 'CLOSED';
+      const tierClass = lead.tier ? lead.tier.toLowerCase() : 'warm';
+      const pillClass = `pill-${tierClass}`;
+      const phoneClean = (lead.phone || '').replace(/[^0-9]/g, '');
+      const waLink = `https://wa.me/${phoneClean}?text=${encodeURIComponent(lead.ai_recommendation || '')}`;
+
+      container.innerHTML = `
+        <div class="chat-workspace-header">
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <div style="font-size:15px; font-weight:700; color:#fff;">
+              💬 Ruang Chat: <span style="color:#38bdf8;">${escapeHtml(lead.display_name)}</span>
+            </div>
+            <a href="https://wa.me/${phoneClean}" target="_blank" class="lead-phone" style="font-size:12px;">
+              📱 +${phoneClean}
+            </a>
+            <span class="pill neutral" style="font-size:11px;">Admin ${lead.admin}</span>
+            <span class="lead-pill ${pillClass}">
+              ${lead.tier === 'HOT' ? '🔥 HOT LEAD' : (lead.tier === 'WARM' ? '⚡ WARM LEAD' : (lead.tier === 'COLD' ? '❄️ COLD LEAD' : '✅ CLOSED DP'))}
+            </span>
+            <span class="pill ${isClosed ? 'final' : 'bad'}" style="font-size:10px;">
+              ${isClosed ? 'TERKONVERSI' : 'BELUM DP'}
+            </span>
+          </div>
+
+          <div style="text-align:right;">
+            <span style="font-size:11px; color:#94a3b8;">Potensi Omzet:</span>
+            <span style="font-size:14px; font-weight:700; color:#c084fc; margin-left:4px;">
+              Rp ${(Number(lead.estimated_value) || 0).toLocaleString('id-ID')}
+            </span>
+          </div>
+        </div>
+
+        <div class="chat-workspace-grid">
+          <!-- SISI KIRI: RIWAYAT CHAT LENGKAP -->
+          <div>
+            <div style="font-size:11.5px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; display:flex; justify-content:space-between;">
+              <span>💬 Riwayat Percakapan WhatsApp</span>
+              <span style="color:#64748b; font-weight:400;">${lead.last_message_at || lead.created_at || 'Hari ini'}</span>
+            </div>
+            <div class="chat-conversation-pane">
+              ${lead.last_customer_msg ? `
+                <div class="chat-bubble customer">
+                  <span style="font-size:10px; font-weight:700; color:#93c5fd; display:block; margin-bottom:2px;">💬 ${escapeHtml(lead.display_name)}:</span>
+                  ${escapeHtml(lead.last_customer_msg)}
+                </div>
+              ` : ''}
+              ${lead.last_admin_msg ? `
+                <div class="chat-bubble admin">
+                  <span style="font-size:10px; font-weight:700; color:#e0f2fe; display:block; margin-bottom:2px;">👩‍💼 Admin ${lead.admin}:</span>
+                  ${escapeHtml(lead.last_admin_msg)}
+                </div>
+              ` : ''}
+              ${lead.last_customer_msg_2 ? `
+                <div class="chat-bubble customer">
+                  <span style="font-size:10px; font-weight:700; color:#93c5fd; display:block; margin-bottom:2px;">💬 ${escapeHtml(lead.display_name)} (Lanjutan):</span>
+                  ${escapeHtml(lead.last_customer_msg_2)}
+                </div>
+              ` : ''}
+              ${!lead.last_customer_msg && !lead.last_admin_msg ? `
+                <div style="color:#64748b; font-size:12px; text-align:center; padding:30px;">Belum ada riwayat balon chat untuk klien ini.</div>
+              ` : ''}
+            </div>
+          </div>
+
+          <!-- SISI KANAN: AI RECOMMENDATION DRAFT & OPERASIONAL -->
+          <div class="ai-workspace-pane">
+            <div style="font-size:11.5px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:0.5px;">
+              <span>🤖 Rekomendasi Balasan AI (Human Tone Studio)</span>
+            </div>
+
+            <!-- SITUASI / KONTEKS LEAD -->
+            <div class="lead-summary-box">
+              <b>Konteks Lead:</b> ${escapeHtml(lead.summary || 'Sedang dalam proses follow-up intensif.')}
+            </div>
+
+            <!-- AI RECOMMENDATION BOX -->
+            <div class="ai-draft-container">
+              <div class="ai-draft-header">
+                <span>Draf Rekomendasi Siap Kirim</span>
+                <span style="color:#94a3b8; font-weight:400; font-size:10px;">Bebas Halusinasi · No Slop</span>
+              </div>
+              <div class="ai-draft-text" id="draft-text-${lead.id}">
+                "${escapeHtml(lead.ai_recommendation || 'Halo kak, ada yang bisa kami bantu kembali seputar paket foto di Foxe Studio? 🙏')}"
+              </div>
+              <div class="ai-draft-actions">
+                <button class="btn btn-sm" onclick="copyDraftToClipboard('${lead.id}')" style="background:#1e293b; color:#38bdf8; border:1px solid rgba(56,189,248,0.4);" title="Salin draf ke clipboard">
+                  📋 Salin Draft
+                </button>
+                <a href="${waLink}" target="_blank" class="btn btn-sm" style="background:#25d366; color:#000; font-weight:700; border:none; text-decoration:none;" title="Buka WhatsApp Web">
+                  📲 Buka WA Web
+                </a>
+                ${!isClosed ? `
+                  <button class="btn btn-sm btn-primary" onclick="markLeadConverted('${lead.id}')" title="Tandai pembayaran DP telah masuk">
+                    ✓ Tandai DP Masuk (Rp 100 rb)
+                  </button>
+                ` : `
+                  <span style="font-size:11px; color:#34d399; font-weight:600; padding:4px 8px; background:rgba(16,185,129,0.15); border-radius:4px;">✓ Selesai Terkonversi</span>
+                `}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
     function renderAdminLeaderboard() {
@@ -3140,168 +3599,20 @@
 
         html += `
           <div class="admin-perf-card">
-            <div class="admin-perf-top">
+            <div class="admin-perf-head">
               <div class="admin-name">👩‍💼 Admin ${adm}</div>
-              <span class="pill ${closedCount > 0 ? 'final' : 'prog'}">${closingRate}% Closing</span>
+              <span class="pill ${closedCount > 0 ? 'final' : 'prog'}" style="font-size:11px;">${closingRate}% Closing</span>
             </div>
-            <div class="admin-metric-row">
-              <span class="admin-metric-lbl">Total Leads Dipegang:</span>
-              <span class="admin-metric-val">${assigned.length} Leads</span>
+            <div class="perf-progress-bar">
+              <div class="perf-progress-fill" style="width: ${Math.min(100, Math.max(6, closingRate))}%"></div>
             </div>
-            <div class="admin-metric-row">
-              <span class="admin-metric-lbl">Berhasil Closing (DP):</span>
-              <span class="admin-metric-val" style="color:#34d399;">${closedCount} Client</span>
+            <div class="perf-metrics-grid">
+              <div class="perf-metric-item"><span>Leads:</span> <b>${assigned.length}</b></div>
+              <div class="perf-metric-item"><span>Closing (DP):</span> <b style="color:#34d399;">${closedCount}</b></div>
+              <div class="perf-metric-item"><span>Hot Leads:</span> <b style="color:#f87171;">${hotCount}</b></div>
+              <div class="perf-metric-item"><span>Tertahan:</span> <b style="color:#c084fc;">Rp ${unconvVal.toLocaleString('id-ID')}</b></div>
             </div>
-            <div class="admin-metric-row">
-              <span class="admin-metric-lbl">Hot Leads Perlu Dikejar:</span>
-              <span class="admin-metric-val" style="color:#f87171;">${hotCount} Hot</span>
-            </div>
-            <div class="admin-metric-row">
-              <span class="admin-metric-lbl">Potensi Tertahan:</span>
-              <span class="admin-metric-val" style="color:#c084fc;">Rp ${unconvVal.toLocaleString('id-ID')}</span>
-            </div>
-            <div class="admin-metric-row">
-              <span class="admin-metric-lbl">Speed to Lead:</span>
-              <span class="admin-metric-val" style="color:#38bdf8;">${speed}</span>
-            </div>
-          </div>
-        `;
-      });
-
-      container.innerHTML = html;
-    }
-
-    function renderLeadCards() {
-      const container = document.getElementById('leadsListContainer');
-      if (!container) return;
-
-      let filtered = leadsData.slice();
-
-      // Filter tier
-      if (currentLeadFilter !== 'all') {
-        if (currentLeadFilter === 'CLOSED') {
-          filtered = filtered.filter(l => l.tier === 'CLOSED' || l.status === 'CONVERTED');
-        } else {
-          filtered = filtered.filter(l => l.tier === currentLeadFilter);
-        }
-      }
-
-      // Filter admin
-      if (currentLeadAdmin !== 'ALL') {
-        filtered = filtered.filter(l => l.admin === currentLeadAdmin);
-      }
-
-      // Filter search
-      if (currentLeadSearch.trim()) {
-        const q = currentLeadSearch.toLowerCase().trim();
-        filtered = filtered.filter(l => 
-          (l.display_name && l.display_name.toLowerCase().includes(q)) ||
-          (l.phone && l.phone.includes(q)) ||
-          (l.summary && l.summary.toLowerCase().includes(q)) ||
-          (l.last_customer_msg && l.last_customer_msg.toLowerCase().includes(q)) ||
-          (l.ai_recommendation && l.ai_recommendation.toLowerCase().includes(q))
-        );
-      }
-
-      if (filtered.length === 0) {
-        container.innerHTML = `
-          <div style="text-align:center; padding:40px 20px; background:#141c28; border-radius:10px; border:1px solid var(--border-subtle); color:#94a3b8;">
-            <div style="font-size:28px; margin-bottom:8px;">🔍</div>
-            <div style="font-size:14px; font-weight:600; color:#fff;">Tidak ada leads yang sesuai filter</div>
-            <div style="font-size:12px; margin-top:4px;">Coba ubah kata kunci pencarian atau ganti filter tier di atas.</div>
-          </div>
-        `;
-        return;
-      }
-
-      let html = '';
-      filtered.forEach(lead => {
-        const isClosed = lead.status === 'CONVERTED' || lead.tier === 'CLOSED';
-        const tierClass = lead.tier ? lead.tier.toLowerCase() : 'warm';
-        const pillClass = `pill-${tierClass}`;
-        const phoneClean = (lead.phone || '').replace(/[^0-9]/g, '');
-        const waLink = `https://wa.me/${phoneClean}?text=${encodeURIComponent(lead.ai_recommendation || '')}`;
-
-        html += `
-          <div class="lead-row-card tier-${tierClass}" id="card-${lead.id}">
-            <div class="lead-row-header">
-              <div class="lead-client-info">
-                <span class="lead-name">${lead.display_name}</span>
-                <a href="https://wa.me/${phoneClean}" target="_blank" class="lead-phone" title="Klik untuk chat WhatsApp">
-                  📱 +${phoneClean}
-                </a>
-                <span class="pill neutral" style="font-size:11px;">Admin ${lead.admin}</span>
-                <span class="lead-pill ${pillClass}">
-                  ${lead.tier === 'HOT' ? '🔥 HOT LEAD' : (lead.tier === 'WARM' ? '⚡ WARM LEAD' : (lead.tier === 'COLD' ? '❄️ COLD LEAD' : '✅ CLOSED DP'))}
-                </span>
-                <span class="pill ${isClosed ? 'final' : 'bad'}" style="font-size:10px;">
-                  ${isClosed ? 'TERKONVERSI' : 'BELUM DP'}
-                </span>
-              </div>
-              <div style="display:flex; align-items:center; gap:12px;">
-                <div style="text-align:right;">
-                  <div style="font-size:13px; font-weight:700; color:#c084fc;">
-                    Rp ${(Number(lead.estimated_value) || 0).toLocaleString('id-ID')}
-                  </div>
-                  <div style="font-size:10px; color:#64748b; font-family:var(--font-mono);">
-                    ${lead.last_message_at || lead.created_at || 'Hari ini'}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- RINGKASAN MASALAH / SITUASI -->
-            <div class="lead-summary-box">
-              <b>Konteks Lead:</b> ${lead.summary || 'Sedang dalam proses follow up oleh admin studio.'}
-            </div>
-
-            <!-- CHAT BUBBLE PREVIEW -->
-            <div class="chat-bubble-preview">
-              ${lead.last_customer_msg ? `
-                <div class="chat-bubble customer">
-                  <span style="font-size:10px; font-weight:700; color:#93c5fd; display:block; margin-bottom:2px;">💬 Pesan Klien:</span>
-                  ${escapeHtml(lead.last_customer_msg)}
-                </div>
-              ` : ''}
-              ${lead.last_admin_msg ? `
-                <div class="chat-bubble admin">
-                  <span style="font-size:10px; font-weight:700; color:#e0f2fe; display:block; margin-bottom:2px;">👩‍💼 Admin ${lead.admin}:</span>
-                  ${escapeHtml(lead.last_admin_msg)}
-                </div>
-              ` : ''}
-              ${lead.last_customer_msg_2 ? `
-                <div class="chat-bubble customer">
-                  <span style="font-size:10px; font-weight:700; color:#93c5fd; display:block; margin-bottom:2px;">💬 Pesan Klien Lanjutan:</span>
-                  ${escapeHtml(lead.last_customer_msg_2)}
-                </div>
-              ` : ''}
-            </div>
-
-            <!-- AI RECOMMENDATION DRAFT (HUMAN TONE - ANTI SLOP) -->
-            <div class="ai-draft-container">
-              <div class="ai-draft-header">
-                <span>🤖 Rekomendasi Balasan AI (Humanis Studio · No Slop)</span>
-                <span style="color:#94a3b8; font-weight:400; font-size:10px;">Draft Saja · Siap Dikirim Admin</span>
-              </div>
-              <div class="ai-draft-text" id="draft-text-${lead.id}">
-                "${escapeHtml(lead.ai_recommendation || 'Halo kak, ada yang bisa kami bantu kembali seputar paket foto Foxe Studio? 🙏')}"
-              </div>
-              <div class="ai-draft-actions">
-                <button class="btn btn-sm" onclick="copyDraftToClipboard('${lead.id}')" style="background:#1e293b; color:#38bdf8; border:1px solid rgba(56,189,248,0.4);" title="Salin draft pesan ke clipboard">
-                  📋 Salin Draft
-                </button>
-                <a href="${waLink}" target="_blank" class="btn btn-sm" style="background:#25d366; color:#000; font-weight:700; border:none; text-decoration:none;" title="Buka WhatsApp dengan draft ini">
-                  📲 Buka WA Web
-                </a>
-                ${!isClosed ? `
-                  <button class="btn btn-sm btn-primary" onclick="markLeadConverted('${lead.id}')" title="Tandai klien ini sudah bayar DP">
-                    ✓ Tandai DP Masuk
-                  </button>
-                ` : `
-                  <span style="font-size:11px; color:#34d399; font-weight:600;">✓ Selesai Terkonversi</span>
-                `}
-              </div>
-            </div>
+            <div style="font-size:10.5px; color:#38bdf8; margin-top:2px;">⚡ Speed: ${speed}</div>
           </div>
         `;
       });
@@ -3318,6 +3629,9 @@
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
     }
+
+    window.selectLead = selectLead;
+    window.setLeadFilter = setLeadFilter;
 
     window.copyDraftToClipboard = function(leadId) {
       const el = document.getElementById(`draft-text-${leadId}`);
@@ -3356,23 +3670,33 @@
       if (btnCalOkt) btnCalOkt.addEventListener('click', () => { currentCalMonth = '2026-10'; renderCalendarDashboard(); });
       if (btnCalSep) btnCalSep.addEventListener('click', () => { currentCalMonth = '2026-09'; renderCalendarDashboard(); });
 
-      // Filter tabs in Leads View
-      const filterTabs = document.querySelectorAll('#leadFilterTabs .ftab');
-      filterTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          filterTabs.forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          currentLeadFilter = tab.getAttribute('data-filter');
-          renderLeadCards();
+      // Clickable KPI status cards (Foto 1)
+      const kpiCards = document.querySelectorAll('.clickable-kpi');
+      kpiCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const filter = card.getAttribute('data-filter') || 'all';
+          setLeadFilter(filter);
         });
       });
+
+      // Toggle Performance Leaderboard (Foto 2)
+      const btnTogglePerf = document.getElementById('btnTogglePerf');
+      const perfRow = document.getElementById('adminPerfContainer');
+      if (btnTogglePerf && perfRow) {
+        let isPerfCollapsed = false;
+        btnTogglePerf.addEventListener('click', () => {
+          isPerfCollapsed = !isPerfCollapsed;
+          perfRow.style.display = isPerfCollapsed ? 'none' : 'grid';
+          btnTogglePerf.textContent = isPerfCollapsed ? '➕ Perluas' : '➖ Ciutkan';
+        });
+      }
 
       // Search input
       const searchInput = document.getElementById('leadSearchInput');
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
           currentLeadSearch = e.target.value;
-          renderLeadCards();
+          renderTurunanAndChat();
         });
       }
 
@@ -3381,7 +3705,7 @@
       if (adminFilter) {
         adminFilter.addEventListener('change', (e) => {
           currentLeadAdmin = e.target.value;
-          renderLeadCards();
+          renderTurunanAndChat();
         });
       }
 
