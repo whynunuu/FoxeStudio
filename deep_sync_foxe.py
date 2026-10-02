@@ -318,13 +318,16 @@ def run_integration():
                 shutil.copy("index.html", target_file)
                 print(f"[OK] Artifact disalin ke: {target_file}")
 
-        # Kirim notifikasi otomatis ke Telegram (jika bot & chat sudah terhubung)
-        try:
-            from telegram_notifier import send_telegram_message, build_summary_message
-            tg_msg = build_summary_message(state)
-            send_telegram_message(tg_msg)
-        except Exception as tg_err:
-            print(f"[WARN] Gagal kirim notifikasi Telegram: {tg_err}")
+        # Kirim notifikasi otomatis ke Telegram (jika bot & chat sudah terhubung dan bukan mode silent)
+        if "--no-tg" not in sys.argv and "--silent" not in sys.argv:
+            try:
+                from telegram_notifier import send_telegram_message, build_summary_message
+                tg_msg = build_summary_message(state)
+                send_telegram_message(tg_msg)
+            except Exception as tg_err:
+                print(f"[WARN] Gagal kirim notifikasi Telegram: {tg_err}")
+        else:
+            print("[INFO] Notifikasi Telegram dilewati (mode silent).")
 
         print("\n==================================================")
         print("   INTEGRASI GOOGLE DRIVE BERHASIL LENGKAP!       ")

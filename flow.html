@@ -1743,6 +1743,15 @@
       // Load live bookings from foxe_full_state.json
       loadStudioData();
 
+      // Auto-Sync Background Polling (Jadwal & Leads Selalu Up-to-Date 24/7)
+      setInterval(() => {
+        if (!document.hidden) loadStudioData();
+      }, 60000);
+
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) loadStudioData();
+      });
+
       initEvents();
       restorePaletteState();
     });
@@ -1751,7 +1760,7 @@
 
     async function loadStudioData() {
       try {
-        const res = await fetch('foxe_full_state.json');
+        const res = await fetch('foxe_full_state.json?t=' + Date.now(), { cache: 'no-store' });
         fullStudioState = await res.json();
         const state = fullStudioState;
         const orders = state.orders || [];

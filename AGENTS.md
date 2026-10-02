@@ -82,7 +82,7 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
 - Topbar aplikasi web dilengkapi tombol **`🔄 Update`** yang bekerja dalam dua mode:
   1. **Fast Refresh**: Memeriksa `foxe_full_state.json` terbaru di GitHub repository tanpa membebani kuota API.
   2. **Cloud Sync**: Memanggil GitHub API `workflow_dispatch` untuk memicu `.github/workflows/daily_sync.yml`. Sinkronisasi langsung berjalan di server cloud GitHub Actions tanpa perlu perangkat/laptop owner menyala.
-- **Jadwal Cron Otomatis Cloud**: Workflow berjalan otomatis setiap hari pada pukul **09:00 WIB** (pagi studio buka) dan **21:00 WIB** (malam rekap closing).
+- **Jadwal Cron Otomatis Cloud**: Workflow berjalan otomatis setiap 3 jam selama jam operasional studio pada pukul **09:00, 12:00, 15:00, 18:00, dan 21:00 WIB** (`0 2,5,8,11,14 * * *` UTC). Dilengkapi silent background auto-polling setiap 60 detik di web client dan state sync 15 menit di Railway 24/7.
 
 ### 7. Format Laporan Telegram (Estimate Omzet Akhir Bulan):
 - Di dalam struk ringkasan harian Telegram (blok `<pre>`), tepat di bawah `ESTIMASI NETT PROFIT` dan sebelum garis penutup `============================================`, wajib menyertakan section **Estimate Omzet Sampai Akhir Bulan** yang menyatu di dalam struk:

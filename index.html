@@ -4967,6 +4967,15 @@ function wireSyncEvents() {
 /* ============================ start ============================ */
 wireSyncEvents();
 render();
+
+// Auto-Sync Background Polling (Jadwal & Data Selalu Up-to-Date 24/7)
+setInterval(() => {
+  if (!document.hidden) fastRefresh(true);
+}, 60000);
+
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) fastRefresh(true);
+});
 </script>
 
 </body>

@@ -2,10 +2,9 @@ name: Foxe Studio - Cloud Auto-Sync & Telegram Broadcast
 
 on:
   schedule:
-    # 02:00 UTC = 09:00 WIB (Studio Buka / Pagi)
-    - cron: '0 2 * * *'
-    # 14:00 UTC = 21:00 WIB (Studio Closing / Rekap Malam)
-    - cron: '0 14 * * *'
+    # Auto-Sync Cloud Setiap 3 Jam di Jam Operasional Studio (09:00, 12:00, 15:00, 18:00, 21:00 WIB)
+    # Konversi UTC: 02:00, 05:00, 08:00, 11:00, 14:00 UTC (WIB = UTC + 7)
+    - cron: '0 2,5,8,11,14 * * *'
   push:
     branches:
       - main

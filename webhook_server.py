@@ -16,7 +16,8 @@ from typing import Optional
 from fastapi import FastAPI, Request, BackgroundTasks
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from agentic_lead_engine import AgenticLeadEngine, FOXE_PAYMENT_INFO, FONNTE_TOKEN
+import urllib.request
+from agentic_lead_engine import AgenticLeadEngine, FOXE_PAYMENT_INFO, FONNTE_TOKEN, STATE_FILE
 
 WIB = timezone(timedelta(hours=7))
 REMINDER_HOURS = [9, 12, 15, 18, 21] # Jam operasional Foxe Studio (09:00 - 21:00 WIB, interval 3 jam)
@@ -25,7 +26,7 @@ last_reminder_hour = -1
 app = FastAPI(
     title="Foxe Studio AI Lead Webhook & Follow-Up Reminder",
     description="Webhook listener, 3-hour Follow-up Reminder & AI Lead Assistant for Foxe Studio WhatsApp",
-    version="1.1.0"
+    version="1.2.0"
 )
 
 app.add_middleware(
@@ -38,6 +39,38 @@ app.add_middleware(
 
 # Inisialisasi engine
 engine = AgenticLeadEngine()
+
+def sync_state_from_remote():
+    """Mengambil foxe_full_state.json terkini dari GitHub Pages agar data studio selalu up-to-date."""
+    url = f"https://whynunuu.github.io/FoxeStudio/foxe_full_state.json?t={int(time.time())}"
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "FoxeRailway/1.0"})
+        with urllib.request.urlopen(req, timeout=15) as res:
+            if res.status == 200:
+                raw_data = json.loads(res.read().decode("utf-8"))
+                with open(STATE_FILE, "w", encoding="utf-8") as f:
+                    json.dump(raw_data, f, ensure_ascii=False, indent=2)
+                engine.state = raw_data
+                orders_count = len(raw_data.get("orders", []))
+                sched_count = len(raw_data.get("schedule", []))
+                print(f"[STATE SYNC] Berhasil sinkronisasi jadwal dari GitHub Pages ({orders_count} orders, {sched_count} bookings).")
+                return {"status": "success", "orders": orders_count, "schedules": sched_count}
+    except Exception as e:
+        print(f"[STATE SYNC WARN] Gagal sinkronisasi dari GitHub Pages: {e}")
+        return {"status": "error", "message": str(e)}
+
+async def state_sync_loop():
+    """
+    Background Task Scheduler di Railway:
+    Sinkronisasi berkala jadwal & transaksi dari GitHub Pages setiap 15 menit.
+    """
+    print("[SCHEDULER] Auto-Sync State Jadwal Aktif (Interval 15 Menit)")
+    while True:
+        try:
+            sync_state_from_remote()
+        except Exception as e:
+            print(f"[STATE LOOP ERROR] {e}")
+        await asyncio.sleep(900) # 15 menit
 
 async def reminder_scheduler_loop():
     """
@@ -67,6 +100,7 @@ async def reminder_scheduler_loop():
 
 @app.on_event("startup")
 async def on_startup():
+    asyncio.create_task(state_sync_loop())
     asyncio.create_task(reminder_scheduler_loop())
 
 @app.get("/")
@@ -102,6 +136,14 @@ def trigger_reminder_endpoint(hour: Optional[str] = None):
     hour_label = hour or f"{now_wib.strftime('%H:%M')} WIB"
     result = engine.send_followup_reminder(current_hour_str=hour_label)
     return result
+
+@app.get("/api/sync-state")
+@app.post("/api/sync-state")
+def trigger_sync_state_endpoint():
+    """
+    Endpoint manual/remote untuk memaksa sinkronisasi state terbaru dari GitHub Pages.
+    """
+    return sync_state_from_remote()
 
 @app.post("/webhook")
 @app.post("/api/webhook")

@@ -15,16 +15,23 @@ Dokumentasi ini menghubungkan workspace Foxe Agent dengan **Obsidian Vault** pri
 
 ---
 
-## 2. Rincian Konfigurasi Cron & Otomasi
+## 2. Rincian Konfigurasi Cron & Otomasi 24/7 (Jadwal Selalu Up-to-Date)
 
 ### A. Cloud Cron Serverless (GitHub Actions)
 - **File Workflow**: `.github/workflows/daily_sync.yml`
-- **Jadwal 1 (Pagi Buka Studio)**: `0 2 * * *` UTC = **09:00 WIB**
-- **Jadwal 2 (Malam Closing Studio)**: `0 14 * * *` UTC = **21:00 WIB**
+- **Jadwal Operasional Studio (Interval 3 Jam)**: `0 2,5,8,11,14 * * *` (UTC) = **09:00, 12:00, 15:00, 18:00, 21:00 WIB**.
 - **Kredensial**: Menggunakan GitHub Secrets `TELEGRAM_BOT_TOKEN` dan `TELEGRAM_CHAT_ID`.
 - **Aksi Otomatis**: Mengunduh 7 file resmi Google Drive (termasuk Log Order Oktober file1_okt.xlsm), mengeksekusi semua parser, merakit ulang dashboard, mengunggah pembaruan ke GitHub Pages, dan mengirim notifikasi closing ke Telegram via `@NunuFxBot`.
 
-### B. Local Task Scheduler (Windows)
+### B. Client-Side Silent Polling (Web & Flow Builder)
+- Memeriksa data terbaru secara silent setiap 60 detik (`setInterval`) dan event `visibilitychange` saat tab kembali aktif.
+- Menjamin tampilan jadwal booking studio di web (`index.html` dan `flow.html`) selalu mutakhir tanpa perlu reload manual.
+
+### C. Railway 24/7 Scheduler & Webhook Receiver (`webhook_server.py`)
+- Background task `state_sync_loop()` menyinkronkan data jadwal dari GitHub Pages setiap 15 menit.
+- Background task `reminder_scheduler_loop()` mengirimkan daftar Hot & Warm Leads yang perlu di-follow up admin setiap 3 jam (09:00, 12:00, 15:00, 18:00, 21:00 WIB) ke WhatsApp dan Telegram.
+
+### D. Local Task Scheduler (Windows)
 - **Script Pendaftaran**: `Pasang_Jadwal_Windows_Task.bat`
 - **Nama Task**: `FoxeStudioDailySync`
 - **Jadwal**: Setiap hari pukul 09:00 WIB via `schtasks`.
