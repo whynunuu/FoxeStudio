@@ -311,7 +311,7 @@ def run_integration():
         print("[OK] index.html berhasil dirakit ulang!")
 
         # Salin ke direktori artifact conversation jika ada (lingkungan lokal Antigravity)
-        for c_id in ["b33216a3-0a5f-4df8-aff3-aeef2408089b", "cab0ebc5-5150-4303-bbe6-c97db01a1692"]:
+        for c_id in ["a202e1d1-7772-49fd-ab2a-7c3772959edd", "b33216a3-0a5f-4df8-aff3-aeef2408089b", "cab0ebc5-5150-4303-bbe6-c97db01a1692"]:
             art_dir = os.path.join(r"C:\Users\ASUS\.gemini\antigravity\brain", c_id)
             if os.path.exists(art_dir):
                 target_file = os.path.join(art_dir, "foxe_studio_keuangan.html")

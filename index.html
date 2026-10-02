@@ -343,7 +343,6 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
   .period .co{display:none}
   .period{gap:6px}
   .topbar .btn.sm{padding:4px 8px;font-size:11.5px}
-  #btnReset{display:none}
   #btnExport{padding:4px 8px;font-size:11.5px}
 
   /* Stats 2-column native mobile app widget style */
@@ -580,10 +579,9 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
         <span class="pill neutral" id="tbUpd" hidden></span>
         <span class="pill final" id="tbSync">aktif</span>
         <div class="btn-group" id="btnGroupUpdate">
-          <button class="btn sm" id="btnUpdateData" style="display:inline-flex;align-items:center;gap:5px;font-weight:600;border-color:var(--accent);color:var(--accent);background:var(--surface);" title="Perbarui data terbaru ke website">🔄 Update</button>
+          <button class="btn sm" id="btnUpdateData" style="display:inline-flex;align-items:center;gap:5px;font-weight:600;border-color:var(--accent);color:var(--accent);background:var(--surface);" title="Klik untuk Refresh / Perbarui data terbaru ke website">🔄 Update</button>
           <button class="btn sm" id="btnSyncSettings" style="padding:4px 7px;border-left:0;border-color:var(--accent);color:var(--accent);background:var(--surface);" title="Pilihan &amp; Pengaturan Sinkronisasi">▾</button>
         </div>
-        <button class="btn sm" id="btnReset" title="Kembalikan ke data awal file">Reset Data</button>
         <button class="btn pri" id="btnExport">Export Excel</button>
       </div>
       <div class="tabsm-container">
@@ -752,11 +750,12 @@ function compute(targetMonth){
   const isOkt = (mStr === "2026-10");
   const [y,m] = mStr.split("-").map(Number);
   const dim = new Date(y,m,0).getDate();
-  const cutoff = isOkt ? "2026-10-01" : "2026-09-30";
+  const oktCut = (S.oktoberLogOrder && S.oktoberLogOrder.cutoff) ? S.oktoberLogOrder.cutoff : "2026-10-02";
+  const cutoff = isOkt ? oktCut : ((S.config && S.config.cutoff) ? S.config.cutoff : "2026-09-30");
   const status = isOkt ? "Progressive" : "Final";
   const cut = new Date(cutoff+"T00:00:00");
   const cutDay = cut.getDate();
-  const hariBerjalan = isOkt ? 1 : dim;
+  const hariBerjalan = isOkt ? cutDay : dim;
   const inRange = d => d && d <= cutoff && d >= `${mStr}-01`;
 
   const c = {
@@ -3918,16 +3917,6 @@ function wire(R){
     localStorage.setItem("foxe_studio_theme", next);
   };
 
-  // Reset button
-  const br=document.getElementById("btnReset");
-  if(br) br.onclick=()=>{
-    if(confirm("Kembalikan seluruh data ke nilai awal dari Google Drive / Excel? Perubahan manual lokal akan direset.")) {
-      localStorage.removeItem("foxe_studio_keuangan_state");
-      S=JSON.parse(JSON.stringify(INITIAL_STATE));
-      render();
-    }
-  };
-
   // Topbar Month Switcher
   const btnSwOkt = document.getElementById("btnSwitchOkt");
   const btnSwSep = document.getElementById("btnSwitchSep");
@@ -4744,7 +4733,10 @@ async function fastRefresh(silent = false) {
   if (btn) { btn.innerHTML = "⏳ Refresh..."; btn.disabled = true; }
 
   try {
-    const res = await fetch("foxe_full_state.json?t=" + Date.now(), { cache: "no-store" });
+    const fetchUrl = (window.location.protocol === "file:")
+      ? "https://raw.githubusercontent.com/whynunuu/FoxeStudio/main/foxe_full_state.json?t=" + Date.now()
+      : "foxe_full_state.json?t=" + Date.now();
+    const res = await fetch(fetchUrl, { cache: "no-store" });
     if (!res.ok) throw new Error("Gagal mengambil data dari server (HTTP " + res.status + ")");
     const latest = await res.json();
     
@@ -4903,7 +4895,7 @@ function wireSyncEvents() {
       if (token && autoSync) {
         triggerGoogleDriveSync();
       } else {
-        openSyncModal();
+        fastRefresh();
       }
     };
   }
