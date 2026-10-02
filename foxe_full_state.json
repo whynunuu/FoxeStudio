@@ -8445,6 +8445,32 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_17",
+      "tanggal": "2026-10-02",
+      "client": "Utia",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-03",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_18",
+      "tanggal": "2026-10-02",
+      "client": "Bilqis",
+      "paket": "Photofox",
+      "tanggalFoto": "2026-10-02",
+      "cash": 0.0,
+      "transfer": 125000.0,
+      "total": 125000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -10410,9 +10436,9 @@
       "id": "ld_2",
       "tanggal": "2026-10-02",
       "leads": 0.0,
-      "dp": 2.0,
-      "sesiFoto": 1.0,
-      "transaksi": 3.0
+      "dp": 3.0,
+      "sesiFoto": 2.0,
+      "transaksi": 5.0
     },
     {
       "id": "ld_7",
@@ -13853,6 +13879,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261002-0653",
+      "mulai": "2026-10-02T06:53:21.222057+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 18 order Okt, 194 jadwal, 70 pos pengeluaran Neraca, 174 pipeline Okt."
+    },
+    {
       "id": "sy_20261002-0634",
       "mulai": "2026-10-02T06:34:12.931643+00:00",
       "status": "sukses",
@@ -14428,7 +14460,7 @@
     "file1_okt_id": "1xibgfKWJZWmcwh9lxR9Dt7IkHyMi7b75",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-10-02T06:34:12.931643+00:00"
+    "last_sync": "2026-10-02T06:53:21.222057+00:00"
   },
   "neracaDetail": [
     {
@@ -14992,8 +15024,8 @@
     "bulan": "2026-10",
     "totalBookings": 174,
     "potentialOmzet": 62100000.0,
-    "totalDp": 12150000.0,
-    "estimateCashIn": 49950000.0,
+    "totalDp": 12250000.0,
+    "estimateCashIn": 49850000.0,
     "breakdown": {
       "reguler": {
         "sesi": 37,
@@ -15003,7 +15035,7 @@
       "wisudaDay1": {
         "sesi": 73,
         "nilai": 26750000.0,
-        "dp": 4500000.0
+        "dp": 4600000.0
       },
       "wisudaDay2": {
         "sesi": 64,
@@ -16825,15 +16857,15 @@
         "studio": "Wisuda (LIMBO)",
         "studioNama": "Spot LIMBO",
         "spot": "LIMBO",
-        "nama": "dinan",
+        "nama": "Utia",
         "paket": "Graduation",
         "paketRaw": "Graduation",
         "jmlOrang": 1,
         "harga": 350000.0,
-        "dp": 0.0,
-        "sisaPelunasan": 350000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 250000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100",
         "manual": false,
         "kategori": "Wisuda UMP"
       },
@@ -18732,6 +18764,32 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_17",
+        "tanggal": "2026-10-02",
+        "client": "Utia",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-03",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_18",
+        "tanggal": "2026-10-02",
+        "client": "Bilqis",
+        "paket": "Photofox",
+        "tanggalFoto": "2026-10-02",
+        "cash": 0.0,
+        "transfer": 125000.0,
+        "total": 125000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
       }
     ],
     "shifts": [
@@ -18942,9 +19000,9 @@
         "id": "ld_2",
         "tanggal": "2026-10-02",
         "leads": 0.0,
-        "dp": 2.0,
-        "sesiFoto": 1.0,
-        "transaksi": 3.0
+        "dp": 3.0,
+        "sesiFoto": 2.0,
+        "transaksi": 5.0
       },
       {
         "id": "ld_3",
