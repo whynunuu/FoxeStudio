@@ -306,7 +306,8 @@ def build_summary_message(state, bulan=None):
 
     booking_lines = []
     if tomorrow_bookings:
-        for idx, b in enumerate(tomorrow_bookings, 1):
+        limit_b = 12
+        for idx, b in enumerate(tomorrow_bookings[:limit_b], 1):
             nama = b.get("nama", "Klien")
             paket = b.get("paket") or b.get("paketRaw") or "Sesi Foto"
             nohp = str(b.get("noHp", "")).lower()
@@ -323,7 +324,9 @@ def build_summary_message(state, bulan=None):
             waktu = b.get("waktu", "")
             studio = b.get("studio", "") or b.get("studioNama", "")
             extra_info = f" | {waktu} @ {studio}" if waktu and studio else ""
-            booking_lines.append(f"{idx}. <b>{nama}</b> | {paket} (Status: {status} | Admin: {adm_name}{extra_info})")
+            booking_lines.append(f"{idx}. <b>{nama}</b> | {paket} ({status} | Adm: {adm_name}{extra_info})")
+        if len(tomorrow_bookings) > limit_b:
+            booking_lines.append(f"<i>... dan {len(tomorrow_bookings) - limit_b} sesi foto lainnya (cek dashboard web).</i>")
     else:
         booking_lines.append("<i>Belum ada jadwal booking terdaftar untuk besok.</i>")
 

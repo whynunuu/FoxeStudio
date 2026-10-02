@@ -15,6 +15,7 @@ Dan merakit hasilnya ke:
 import os
 import sys
 import json
+import time
 import datetime
 import requests
 import urllib3
@@ -40,37 +41,56 @@ SCHEDULE_OKT_SHEET_ID = "17QPAAhmPZqkomwajFhAw3JBmDyBFuklfNMqyVqlK484"
 WISUDA_3OKT_FILE_ID = "1sRILPoZD09Rm5aKn6tswNxvxOiRkSu4Z"
 WISUDA_4OKT_FILE_ID = "1hDeuOh-6fnsP7vzWAl4HVwlYoEumu1hA"
 
+def safe_save_content(dest_path, content_bytes):
+    if not content_bytes or len(content_bytes) < 1000:
+        print(f"[WARN] Konten unduhan untuk {dest_path} tidak valid. Memakai salinan lokal.")
+        return dest_path
+
+    base, ext = os.path.splitext(dest_path)
+    
+    # 1. Coba tulis langsung ke dest_path
+    try:
+        with open(dest_path, "wb") as f:
+            f.write(content_bytes)
+        print(f"[OK] Berhasil mengunduh & memperbarui {dest_path} ({len(content_bytes)} bytes)")
+        return dest_path
+    except PermissionError:
+        pass
+
+    # 2. Jika dest_path sedang dibuka Excel, coba tulis ke live file
+    candidates = [
+        f"{base}_live{ext}",
+        f"{base}_temp{ext}",
+        f"{base}_dl_{int(time.time())}{ext}"
+    ]
+    for c in candidates:
+        try:
+            with open(c, "wb") as f:
+                f.write(content_bytes)
+            print(f"[WARN] {dest_path} sedang dibuka oleh Excel. Memakai hasil unduh live terbaru: {c} ({len(content_bytes)} bytes)")
+            return c
+        except PermissionError:
+            continue
+
+    print(f"[WARN] Semua target penulisan {dest_path} terkunci. Memakai salinan lokal.")
+    return dest_path
+
 def download_gdrive(file_id, dest_path):
     session = requests.Session()
     session.verify = False
     url = "https://drive.google.com/uc?export=download"
-    res = session.get(url, params={"id": file_id, "confirm": "t"}, stream=True)
-    token = None
-    for k, v in res.cookies.items():
-        if k.startswith('download_warning'):
-            token = v
-            break
-    if token:
-        res = session.get(url, params={"id": file_id, "confirm": token}, stream=True)
     try:
-        base, ext = os.path.splitext(dest_path)
-        tmp_dest = f"{base}_temp{ext}"
-        with open(tmp_dest, "wb") as f:
-            for chunk in res.iter_content(chunk_size=65536):
-                if chunk:
-                    f.write(chunk)
-        if os.path.exists(dest_path):
-            try:
-                os.replace(tmp_dest, dest_path)
-                print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
-                return dest_path
-            except PermissionError:
-                print(f"[WARN] {dest_path} sedang dibuka oleh Excel. Memakai hasil unduh live terbaru: {tmp_dest} ({os.path.getsize(tmp_dest)} bytes)")
-                return tmp_dest
-        else:
-            os.rename(tmp_dest, dest_path)
-            print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
-            return dest_path
+        res = session.get(url, params={"id": file_id, "confirm": "t"}, stream=True)
+        token = None
+        for k, v in res.cookies.items():
+            if k.startswith('download_warning'):
+                token = v
+                break
+        if token:
+            res = session.get(url, params={"id": file_id, "confirm": token}, stream=True)
+        
+        content = res.content
+        return safe_save_content(dest_path, content)
     except Exception as e:
         print(f"[WARN] Gagal mengunduh {dest_path}: {e}. Memakai salinan lokal.")
         return dest_path
@@ -80,22 +100,7 @@ def download_gsheet(sheet_id, dest_path):
     try:
         res = requests.get(url, verify=False)
         if res.status_code == 200 and len(res.content) > 1000:
-            base, ext = os.path.splitext(dest_path)
-            tmp_dest = f"{base}_temp{ext}"
-            with open(tmp_dest, "wb") as f:
-                f.write(res.content)
-            if os.path.exists(dest_path):
-                try:
-                    os.replace(tmp_dest, dest_path)
-                    print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
-                    return dest_path
-                except PermissionError:
-                    print(f"[WARN] {dest_path} sedang dibuka oleh Excel. Memakai hasil unduh live terbaru: {tmp_dest} ({os.path.getsize(tmp_dest)} bytes)")
-                    return tmp_dest
-            else:
-                os.rename(tmp_dest, dest_path)
-                print(f"[OK] Berhasil mengunduh {dest_path} ({os.path.getsize(dest_path)} bytes)")
-                return dest_path
+            return safe_save_content(dest_path, res.content)
         else:
             print(f"[WARN] Tidak dapat mengunduh Google Sheet {sheet_id} (status {res.status_code}). Memakai salinan lokal.")
             return dest_path
