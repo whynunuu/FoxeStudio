@@ -8488,7 +8488,7 @@
     {
       "id": "or_20",
       "tanggal": "2026-10-02",
-      "client": "Rizqi",
+      "client": "Rizka",
       "paket": "Large Group",
       "tanggalFoto": "2026-10-02",
       "cash": 75000.0,
@@ -8520,7 +8520,46 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
-      "pembayaran": "DP",
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_23",
+      "tanggal": "2026-10-02",
+      "client": "Caca",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-02",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_24",
+      "tanggal": "2026-10-02",
+      "client": "Sali",
+      "paket": "All File",
+      "tanggalFoto": "2026-10-02",
+      "cash": 0.0,
+      "transfer": 50000.0,
+      "total": 50000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_25",
+      "tanggal": "2026-10-02",
+      "client": "Salli",
+      "paket": "Add Edit",
+      "tanggalFoto": "2026-10-02",
+      "cash": 0.0,
+      "transfer": 40000.0,
+      "total": 40000.0,
+      "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
     }
@@ -10517,10 +10556,10 @@
     {
       "id": "ld_2",
       "tanggal": "2026-10-02",
-      "leads": 0.0,
-      "dp": 5.0,
-      "sesiFoto": 4.0,
-      "transaksi": 9.0
+      "leads": 39.0,
+      "dp": 4.0,
+      "sesiFoto": 8.0,
+      "transaksi": 12.0
     },
     {
       "id": "ld_7",
@@ -13961,6 +14000,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261002-1414",
+      "mulai": "2026-10-02T14:14:50.647481+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 25 order Okt, 194 jadwal, 72 pos pengeluaran Neraca, 176 pipeline Okt."
+    },
+    {
       "id": "sy_20261002-1151",
       "mulai": "2026-10-02T11:51:53.264347+00:00",
       "status": "sukses",
@@ -14572,7 +14617,7 @@
     "file1_okt_id": "1xibgfKWJZWmcwh9lxR9Dt7IkHyMi7b75",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-10-02T11:51:53.264347+00:00"
+    "last_sync": "2026-10-02T14:14:50.647481+00:00"
   },
   "neracaDetail": [
     {
@@ -15366,7 +15411,7 @@
         "jmlOrang": 1,
         "harga": 100000.0,
         "admin": "IN",
-        "noHp": "dp 100",
+        "noHp": "lunas",
         "manual": false,
         "dp": 100000.0,
         "sisaPelunasan": 0.0,
@@ -18955,7 +19000,7 @@
       {
         "id": "or_20",
         "tanggal": "2026-10-02",
-        "client": "Rizqi",
+        "client": "Rizka",
         "paket": "Large Group",
         "tanggalFoto": "2026-10-02",
         "cash": 75000.0,
@@ -18987,7 +19032,46 @@
         "cash": 0.0,
         "transfer": 100000.0,
         "total": 100000.0,
-        "pembayaran": "DP",
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_23",
+        "tanggal": "2026-10-02",
+        "client": "Caca",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-02",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_24",
+        "tanggal": "2026-10-02",
+        "client": "Sali",
+        "paket": "All File",
+        "tanggalFoto": "2026-10-02",
+        "cash": 0.0,
+        "transfer": 50000.0,
+        "total": 50000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_25",
+        "tanggal": "2026-10-02",
+        "client": "Salli",
+        "paket": "Add Edit",
+        "tanggalFoto": "2026-10-02",
+        "cash": 0.0,
+        "transfer": 40000.0,
+        "total": 40000.0,
+        "pembayaran": "Lunas",
         "admin": "INDAH",
         "fotografer": ""
       }
@@ -19211,10 +19295,10 @@
       {
         "id": "ld_2",
         "tanggal": "2026-10-02",
-        "leads": 0.0,
-        "dp": 5.0,
-        "sesiFoto": 4.0,
-        "transaksi": 9.0
+        "leads": 39.0,
+        "dp": 4.0,
+        "sesiFoto": 8.0,
+        "transaksi": 12.0
       },
       {
         "id": "ld_3",
@@ -19478,24 +19562,24 @@
         "id": "kp_3",
         "nama": "INDAH",
         "role": "Admin 1",
-        "hariDinilai": 15,
+        "hariDinilai": 1,
         "disiplin": 5.0,
-        "akurasi": 4.9,
-        "sop": 4.9,
-        "client": 4.9,
-        "produktivitas": 4.9,
+        "akurasi": 5.0,
+        "sop": 5.0,
+        "client": 5.0,
+        "produktivitas": 5.0,
         "referral": 0
       },
       {
         "id": "kp_4",
         "nama": "SAKA",
         "role": "Fotografer 2",
-        "hariDinilai": 15,
+        "hariDinilai": 1,
         "disiplin": 5.0,
-        "akurasi": 4.9,
-        "sop": 4.9,
-        "client": 4.9,
-        "produktivitas": 4.9,
+        "akurasi": 5.0,
+        "sop": 5.0,
+        "client": 5.0,
+        "produktivitas": 5.0,
         "referral": 0
       }
     ],
@@ -19535,18 +19619,38 @@
         ]
       },
       "INDAH": {
-        "disiplin": [],
-        "akurasi": [],
-        "sop": [],
-        "client": [],
-        "produktivitas": []
+        "disiplin": [
+          5.0
+        ],
+        "akurasi": [
+          5.0
+        ],
+        "sop": [
+          5.0
+        ],
+        "client": [
+          5.0
+        ],
+        "produktivitas": [
+          5.0
+        ]
       },
       "SAKA": {
-        "disiplin": [],
-        "akurasi": [],
-        "sop": [],
-        "client": [],
-        "produktivitas": []
+        "disiplin": [
+          5.0
+        ],
+        "akurasi": [
+          5.0
+        ],
+        "sop": [
+          5.0
+        ],
+        "client": [
+          5.0
+        ],
+        "produktivitas": [
+          5.0
+        ]
       }
     },
     "cutoff": "2026-10-02",
