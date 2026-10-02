@@ -8471,6 +8471,45 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
+    },
+    {
+      "id": "or_19",
+      "tanggal": "2026-10-02",
+      "client": "Luthfi",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-10",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_20",
+      "tanggal": "2026-10-02",
+      "client": "Rizqi",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-02",
+      "cash": 75000.0,
+      "transfer": 0.0,
+      "total": 75000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_21",
+      "tanggal": "2026-10-02",
+      "client": "Iqis",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-02",
+      "cash": 0.0,
+      "transfer": 275000.0,
+      "total": 275000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
     }
   ],
   "shifts": [
@@ -9227,7 +9266,19 @@
     {
       "id": "sh_6",
       "tanggal": "2026-10-02",
+      "nama": "INDAH",
+      "slot": 1
+    },
+    {
+      "id": "sh_7",
+      "tanggal": "2026-10-02",
       "nama": "ADIF",
+      "slot": 1
+    },
+    {
+      "id": "sh_8",
+      "tanggal": "2026-10-02",
+      "nama": "SAKA",
       "slot": 1
     }
   ],
@@ -9861,6 +9912,24 @@
       "kategori": "OPEX Lainnya",
       "deskripsi": "Reveral Indah",
       "nilai": 175000.0
+    },
+    {
+      "id": "ex_nrc_3",
+      "tanggal": "2026-10-01",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 503000.0
+    },
+    {
+      "id": "ex_nrc_4",
+      "tanggal": "2026-10-02",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 750000.0
     }
   ],
   "cashControl": [
@@ -10027,7 +10096,7 @@
     {
       "id": "cc_2026-10-02",
       "tanggal": "2026-10-02",
-      "nilai": 0.0
+      "nilai": 75000.0
     },
     {
       "id": "cc_2026-10-03",
@@ -10436,9 +10505,9 @@
       "id": "ld_2",
       "tanggal": "2026-10-02",
       "leads": 0.0,
-      "dp": 3.0,
-      "sesiFoto": 2.0,
-      "transaksi": 5.0
+      "dp": 4.0,
+      "sesiFoto": 4.0,
+      "transaksi": 8.0
     },
     {
       "id": "ld_7",
@@ -13879,6 +13948,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261002-1024",
+      "mulai": "2026-10-02T10:24:56.659065+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 21 order Okt, 194 jadwal, 72 pos pengeluaran Neraca, 175 pipeline Okt."
+    },
+    {
       "id": "sy_20261002-0814",
       "mulai": "2026-10-02T08:14:49.748920+00:00",
       "status": "sukses",
@@ -14466,7 +14541,7 @@
     "file1_okt_id": "1xibgfKWJZWmcwh9lxR9Dt7IkHyMi7b75",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-10-02T08:14:49.748920+00:00"
+    "last_sync": "2026-10-02T10:24:56.659065+00:00"
   },
   "neracaDetail": [
     {
@@ -15028,15 +15103,15 @@
   },
   "oktoberPipeline": {
     "bulan": "2026-10",
-    "totalBookings": 174,
-    "potentialOmzet": 62100000.0,
-    "totalDp": 12350000.0,
-    "estimateCashIn": 49750000.0,
+    "totalBookings": 175,
+    "potentialOmzet": 62275000.0,
+    "totalDp": 12450000.0,
+    "estimateCashIn": 49825000.0,
     "breakdown": {
       "reguler": {
-        "sesi": 37,
-        "nilai": 12400000.0,
-        "dp": 3300000.0
+        "sesi": 38,
+        "nilai": 12575000.0,
+        "dp": 3400000.0
       },
       "wisudaDay1": {
         "sesi": 73,
@@ -15201,15 +15276,15 @@
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "rizka",
-        "paket": "Photofox",
-        "paketRaw": "Photofox",
-        "jmlOrang": 1,
-        "harga": 200000.0,
+        "paket": "Large Group",
+        "paketRaw": "LG 7",
+        "jmlOrang": 7,
+        "harga": 175000.0,
         "admin": "IN",
         "noHp": "dp 100 limbo",
         "manual": false,
         "dp": 100000.0,
-        "sisaPelunasan": 100000.0,
+        "sisaPelunasan": 75000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -15484,6 +15559,24 @@
       },
       {
         "id": "sc_bk_25",
+        "tgl": "2026-10-10",
+        "waktu": "15:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Luthfi",
+        "paket": "Large Group",
+        "paketRaw": "LG 8",
+        "jmlOrang": 8,
+        "harga": 200000.0,
+        "admin": "IN",
+        "noHp": "dp 100 limbo",
+        "manual": false,
+        "dp": 100000.0,
+        "sisaPelunasan": 100000.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_26",
         "tgl": "2026-10-11",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -15501,7 +15594,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_26",
+        "id": "sc_bk_27",
         "tgl": "2026-10-11",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -15519,7 +15612,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_27",
+        "id": "sc_bk_28",
         "tgl": "2026-10-17",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -15537,7 +15630,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_28",
+        "id": "sc_bk_29",
         "tgl": "2026-10-17",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -15555,7 +15648,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_29",
+        "id": "sc_bk_30",
         "tgl": "2026-10-17",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -15573,7 +15666,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_30",
+        "id": "sc_bk_31",
         "tgl": "2026-10-17",
         "waktu": "14:40",
         "studio": "Studio 1",
@@ -15591,7 +15684,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_31",
+        "id": "sc_bk_32",
         "tgl": "2026-10-17",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -15609,7 +15702,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_32",
+        "id": "sc_bk_33",
         "tgl": "2026-10-22",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -15627,7 +15720,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_33",
+        "id": "sc_bk_34",
         "tgl": "2026-10-22",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -15645,7 +15738,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_34",
+        "id": "sc_bk_35",
         "tgl": "2026-10-22",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -15663,7 +15756,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_35",
+        "id": "sc_bk_36",
         "tgl": "2026-10-22",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -15681,7 +15774,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_36",
+        "id": "sc_bk_37",
         "tgl": "2026-10-22",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -15699,7 +15792,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_37",
+        "id": "sc_bk_38",
         "tgl": "2026-10-22",
         "waktu": "15:40",
         "studio": "Studio 1",
@@ -18796,6 +18889,45 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": "ADIF"
+      },
+      {
+        "id": "or_19",
+        "tanggal": "2026-10-02",
+        "client": "Luthfi",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-10",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_20",
+        "tanggal": "2026-10-02",
+        "client": "Rizqi",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-02",
+        "cash": 75000.0,
+        "transfer": 0.0,
+        "total": 75000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_21",
+        "tanggal": "2026-10-02",
+        "client": "Iqis",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-02",
+        "cash": 0.0,
+        "transfer": 275000.0,
+        "total": 275000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
       }
     ],
     "shifts": [
@@ -18832,7 +18964,19 @@
       {
         "id": "sh_6",
         "tanggal": "2026-10-02",
+        "nama": "INDAH",
+        "slot": 1
+      },
+      {
+        "id": "sh_7",
+        "tanggal": "2026-10-02",
         "nama": "ADIF",
+        "slot": 1
+      },
+      {
+        "id": "sh_8",
+        "tanggal": "2026-10-02",
+        "nama": "SAKA",
         "slot": 1
       }
     ],
@@ -18845,7 +18989,7 @@
       {
         "id": "cc_2026-10-02",
         "tanggal": "2026-10-02",
-        "nilai": 0.0
+        "nilai": 75000.0
       },
       {
         "id": "cc_2026-10-03",
@@ -19006,9 +19150,9 @@
         "id": "ld_2",
         "tanggal": "2026-10-02",
         "leads": 0.0,
-        "dp": 3.0,
-        "sesiFoto": 2.0,
-        "transaksi": 5.0
+        "dp": 4.0,
+        "sesiFoto": 4.0,
+        "transaksi": 8.0
       },
       {
         "id": "ld_3",
@@ -19327,6 +19471,20 @@
         "produktivitas": [
           5.0
         ]
+      },
+      "INDAH": {
+        "disiplin": [],
+        "akurasi": [],
+        "sop": [],
+        "client": [],
+        "produktivitas": []
+      },
+      "SAKA": {
+        "disiplin": [],
+        "akurasi": [],
+        "sop": [],
+        "client": [],
+        "produktivitas": []
       }
     },
     "cutoff": "2026-10-02",
@@ -21330,6 +21488,24 @@
           "kategori": "OPEX Lainnya",
           "deskripsi": "Reveral Indah",
           "nilai": 175000.0
+        },
+        {
+          "id": "ex_nrc_3",
+          "tanggal": "2026-10-01",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "Listrik & Air",
+          "deskripsi": "Listrik",
+          "nilai": 503000.0
+        },
+        {
+          "id": "ex_nrc_4",
+          "tanggal": "2026-10-02",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "Listrik & Air",
+          "deskripsi": "Listrik",
+          "nilai": 750000.0
         }
       ],
       "detail": [
@@ -21354,13 +21530,35 @@
           "balance": -675000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Reveral Indah"
+        },
+        {
+          "id": "det_nrc_3",
+          "tgl": 1,
+          "tanggal_iso": "2026-10-01",
+          "first_of_day": false,
+          "masuk": 0.0,
+          "keluar": 503000.0,
+          "balance": -1178000.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Listrik"
+        },
+        {
+          "id": "det_nrc_4",
+          "tgl": 2,
+          "tanggal_iso": "2026-10-02",
+          "first_of_day": true,
+          "masuk": 0.0,
+          "keluar": 750000.0,
+          "balance": -1928000.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Listrik"
         }
       ],
       "summary": {
         "total_masuk": 0.0,
-        "total_keluar": 675000.0,
+        "total_keluar": 1928000.0,
         "ending_balance": 0.0,
-        "total_rows": 2
+        "total_rows": 4
       },
       "rosterGaji": [
         {
@@ -21387,18 +21585,18 @@
           "row_idx": 12,
           "nama": "Saka",
           "job": "Fotografer",
-          "q": 0.0,
+          "q": 1.0,
           "q_raw": 0.0,
-          "actual_shift": 0,
+          "actual_shift": 1,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 0.0,
+          "total_gaji": 40000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 0.0,
+          "thp": 40000.0,
           "status": "Draft"
         },
         {
@@ -21425,18 +21623,18 @@
           "row_idx": 16,
           "nama": "Indah",
           "job": "Admin",
-          "q": 0.0,
+          "q": 1.0,
           "q_raw": 0.0,
-          "actual_shift": 0,
+          "actual_shift": 1,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 0.0,
+          "total_gaji": 40000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 0.0,
+          "thp": 40000.0,
           "status": "Draft"
         },
         {
@@ -21593,13 +21791,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 8390000.0,
+        "total_gaji": 8470000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 8390000.0,
+        "grand_total_thp": 8470000.0,
         "total_karyawan": 12
       }
     }
@@ -21860,18 +22058,18 @@
         "row_idx": 12,
         "nama": "Saka",
         "job": "Fotografer",
-        "q": 0.0,
+        "q": 1.0,
         "q_raw": 0.0,
-        "actual_shift": 0,
+        "actual_shift": 1,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 0.0,
+        "total_gaji": 40000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 0.0,
+        "thp": 40000.0,
         "status": "Draft"
       },
       {
@@ -21898,18 +22096,18 @@
         "row_idx": 16,
         "nama": "Indah",
         "job": "Admin",
-        "q": 0.0,
+        "q": 1.0,
         "q_raw": 0.0,
-        "actual_shift": 0,
+        "actual_shift": 1,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 0.0,
+        "total_gaji": 40000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 0.0,
+        "thp": 40000.0,
         "status": "Draft"
       },
       {
