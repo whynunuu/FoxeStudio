@@ -99,4 +99,16 @@ Unrealized Omzet               Rp 104.625.000
 - State `neracaByMonth["2026-10"]` aktif dan siap menerima data mutasi debit/kredit finance secara real-time.
 - Error boundary `try...catch` aktif pada `render()` untuk menjamin stabilitas runtime.
 
+---
 
+## 9. Standarisasi Aturan Kode Warna Sel KHUSUS File Schedule
+- **Lingkup Eksklusif**: Aturan warna ini **HANYA DAN KHUSUS BERLAKU UNTUK FILE SCHEDULE** (`file2.xlsx`, `file2_okt.xlsx`, `file_wisuda_3okt.xlsx`, `file_wisuda_4okt.xlsx`). File Log Order dan Neraca tetap independen.
+- **5 Standar Kode Warna Schedule**:
+  1. ⚪ **Putih / No Fill** (`FFFFFFFF` / `00000000`): **Slot Kosong** (Available untuk booking baru).
+  2. 🟢 **Hijau** (`FF00FF00`): **Slot Terisi (Confirmed Booking)**. Booking sah terjadwal, masuk penuh ke dalam potensi pipeline dan estimasi pelunasan (*cash-in*).
+  3. 🔵 **Biru / Cyan** (`FF00FFFF`): **Selesai / Sedang Sesi / Hadir (Live Case)**. Klien sudah datang di studio, sesi berlangsung atau sudah selesai, dan uang direalisasikan di kasir.
+  4. 🟠 **Orange** (`FFFF9900`): **Kendala Jadwal (Reschedule / Telat / Tidak Datang / CLOSED)**. Slot bertuliskan `CLOSED` atau pesanan yang reschedule/batal otomatis disaring dari estimasi sisa uang masuk agar tidak terjadi over-estimasi atau *double-count*.
+  5. 🔴 **Merah** (`FFFF0000` / `FFF4CCCC`): **Full Slot / Batas Order**. Kuota ditutup atau penanda batas jam operasional, otomatis dikecualikan dari perhitungan booking klien.
+- **Logika Perhitungan Warna Orange**:
+  - Slot Orange menandakan sesi tidak berlanjut pada slot tersebut, sehingga **estimasi pelunasan (*cash-in*) otomatis Rp 0** agar tidak terjadi over-estimasi.
+  - Jika reschedule ke tanggal baru, sesi akan dicatat di slot baru untuk mencegah *double counting*.
