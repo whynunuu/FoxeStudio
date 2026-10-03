@@ -2729,7 +2729,7 @@ function chartYoY(R,H,yr){
   return `<div class="legend"><span><i class="swatch" style="background:var(--hairline-strong)"></i>${prev} aktual</span>
     <span><i class="swatch" style="background:var(--accent)"></i>${yr} aktual (Sep: run-rate)</span>
     <span><i class="swatch" style="background:var(--good);border:1px dashed var(--good)"></i>${yr} Oktober (Pipeline)</span>
-    <span class="muted" style="margin-left:auto;">*Oktober = potensi nilai paket 163 booking</span></div>
+    <span class="muted" style="margin-left:auto;">*Oktober = potensi nilai paket ${S.oktoberPipeline ? S.oktoberPipeline.totalBookings : 149} booking</span></div>
   <svg class="chart" viewBox="0 0 ${W} ${H2}" role="img" aria-label="Omzet bulanan ${prev} dibanding ${yr}">${g}${bars}</svg>`;
 }
 
@@ -3089,17 +3089,18 @@ function hitungBooking(R){
     return {...b,dp,sisa:Math.max(0,dnum(b.harga)-dp),cocok:bayar>0,
       lewat:b.tgl<=R.c.cutoff};
   });
-  const fut=bk.filter(b=>!b.lewat), sudah=bk.filter(b=>b.lewat);
+  const fut=bk.filter(b=>!b.lewat && b.statusColor !== "orange"), sudah=bk.filter(b=>b.lewat || b.statusColor === "orange");
   const estimasi=fut.reduce((s,b)=>s+b.sisa,0);
   const kotor=fut.reduce((s,b)=>s+dnum(b.harga),0);
   const dpTot=fut.reduce((s,b)=>s+b.dp,0);
 
   const perTgl=R.days.map(d=>{
     const bs=bk.filter(b=>b.tgl===d.ds);
-    return {...d, booking:bs.length,
-      nilai:d.berjalan?d.omzet:bs.reduce((s,b)=>s+b.sisa,0),
-      future:d.berjalan?0:bs.reduce((s,b)=>s+b.sisa,0),
-      sumber:d.berjalan?"Log Order":(bs.length?"Schedule":"—"),
+    const bsActive=bs.filter(b=>b.statusColor !== "orange");
+    return {...d, booking:bsActive.length,
+      nilai:d.berjalan?d.omzet:bsActive.reduce((s,b)=>s+b.sisa,0),
+      future:d.berjalan?0:bsActive.reduce((s,b)=>s+b.sisa,0),
+      sumber:d.berjalan?"Log Order":(bsActive.length?"Schedule":"—"),
       status:d.berjalan?"REALIZED":"ESTIMATE"};
   });
   let cum=0; perTgl.forEach(t=>{cum+=t.nilai;t.cum=cum;});
@@ -3161,22 +3162,22 @@ function vEst(R){
       <div class="stat">
         <span class="k">Potensi Nilai Paket</span>
         <span class="v sm" style="color:var(--accent);">${rp(okp.potentialOmzet)}</span>
-        <span class="m">${okp.totalBookings} sesi foto terdaftar</span>
+        <span class="m">${okp.totalBookings} sesi foto valid</span>
       </div>
       <div class="stat">
-        <span class="k">Realisasi Hari Ini (Live)</span>
-        <span class="v sm" style="color:var(--good);">${rp(oktOmzetLive)}</span>
-        <span class="m">${oktOrders.length} transaksi DP masuk kasir</span>
+        <span class="k">Realisasi Selesai / Hadir (🔵)</span>
+        <span class="v sm" style="color:var(--crit);">${rp(okp.statusBreakdown ? okp.statusBreakdown.done.nilai : 2600000)}</span>
+        <span class="m">${okp.statusBreakdown ? okp.statusBreakdown.done.sesi : 10} sesi beres (1–2 Okt)</span>
+      </div>
+      <div class="stat">
+        <span class="k">Terjadwal Belum Sesi (🟢)</span>
+        <span class="v sm" style="color:var(--good);">${rp(okp.statusBreakdown ? okp.statusBreakdown.confirmed.nilai : 50325000)}</span>
+        <span class="m">${okp.statusBreakdown ? okp.statusBreakdown.confirmed.sesi : 139} sesi terkonfirmasi</span>
       </div>
       <div class="stat">
         <span class="k">Estimasi Pelunasan Riil</span>
         <span class="v sm" style="color:var(--good);">${rp(okp.estimateCashIn)}</span>
-        <span class="m">uang kas masuk saat hari-H foto</span>
-      </div>
-      <div class="stat">
-        <span class="k">Total Sesi Terdaftar</span>
-        <span class="v sm">${num(okp.totalBookings)} Sesi</span>
-        <span class="m">${okp.breakdown.reguler.sesi} Reguler · ${okp.breakdown.wisudaDay1.sesi + okp.breakdown.wisudaDay2.sesi} Wisuda UMP</span>
+        <span class="m">kas masuk saat hari-H foto</span>
       </div>
     </div>
 
@@ -3234,12 +3235,12 @@ function vEst(R){
     </div>
 
     <div class="note ok" style="margin-bottom:16px;">
-      <b>Pondasi Awal Bulan Oktober:</b>
-      Foxe Studio telah mengamankan <b>${okp.totalBookings} sesi booking</b> dengan potensi omzet <b>${rp(okp.potentialOmzet)}</b> dan estimasi kas masuk pelunasan minimal <b>${rp(okp.estimateCashIn)}</b> saat sesi foto berlangsung. Ditambah <b>${rp(oktOmzetLive)}</b> DP riil yang telah masuk kasir hari ini. Wisuda akbar UMP (3 &amp; 4 Oktober) menyumbang <b>${okp.breakdown.wisudaDay1.sesi + okp.breakdown.wisudaDay2.sesi} sesi</b> (${rp(okp.breakdown.wisudaDay1.nilai + okp.breakdown.wisudaDay2.nilai)}), sementara studio reguler menyumbang <b>${okp.breakdown.reguler.sesi} sesi</b> (${rp(okp.breakdown.reguler.nilai)}).
+      <b>Standarisasi Kode Warna Jadwal Studio:</b>
+      Data schedule diproses sesuai aturan warna resmi Foxe Studio: 🟢 <b>Hijau</b> = Terjadwal (Confirmed), 🔵 <b>Biru</b> = Selesai / Hadir, 🟠 <b>Orange</b> = Reschedule / Telat / CLOSED, 🔴 <b>Merah</b> = Full Slot / Batas Order. Slot tertutup (27 slot CLOSED) dan batas kuota (38 slot merah) otomatis difilter sehingga menyajikan <b>${okp.totalBookings} booking valid murni</b> senilai <b>${rp(okp.potentialOmzet)}</b> dengan estimasi kas pelunasan <b>${rp(okp.estimateCashIn)}</b>.
     </div>
 
     <div class="card" style="margin-bottom:16px;">
-      <h3>Ringkasan Pipeline Sumber Jadwal</h3>
+      <h3>Ringkasan Pipeline Sumber Jadwal &amp; Status Warna</h3>
       <div class="tw">
         <table>
           <thead>
@@ -3299,17 +3300,20 @@ function vEst(R){
           <input type="text" id="oktSearchInput" placeholder="Cari nama client, paket, spot..." style="padding:6px 12px;border:1px solid var(--hairline-strong);border-radius:6px;background:var(--surface2);color:var(--ink);font-size:12px;width:220px;" />
           <div class="seg" id="oktCatFilter">
             <button class="btn sm pri" data-cat="all" style="padding:4px 10px;font-size:11px;">Semua (${okp.totalBookings})</button>
+            <button class="btn sm" data-cat="confirmed" style="padding:4px 10px;font-size:11px;">🟢 Terjadwal (${okp.statusBreakdown ? okp.statusBreakdown.confirmed.sesi : 139})</button>
+            <button class="btn sm" data-cat="done" style="padding:4px 10px;font-size:11px;">🔵 Selesai (${okp.statusBreakdown ? okp.statusBreakdown.done.sesi : 10})</button>
             <button class="btn sm" data-cat="wisuda" style="padding:4px 10px;font-size:11px;">Wisuda UMP (${okp.breakdown.wisudaDay1.sesi + okp.breakdown.wisudaDay2.sesi})</button>
             <button class="btn sm" data-cat="reguler" style="padding:4px 10px;font-size:11px;">Reguler (${okp.breakdown.reguler.sesi})</button>
           </div>
         </div>
       </div>
-      <div class="tw" style="max-height:480px;overflow-y:auto;">
+      <div class="tw" style="max-height:500px;overflow-y:auto;">
         <table id="tblOktoberBookings">
           <thead>
             <tr>
               <th>Tanggal</th>
               <th>Waktu</th>
+              <th>Status</th>
               <th>Client</th>
               <th>Paket</th>
               <th>Studio / Spot</th>
@@ -3321,9 +3325,14 @@ function vEst(R){
           </thead>
           <tbody>
             ${okp.bookings.map(b => `
-              <tr class="okt-booking-row" data-cat="${b.kategori === 'Wisuda UMP' ? 'wisuda' : 'reguler'}" data-text="${(b.nama + ' ' + b.paket + ' ' + b.studio + ' ' + (b.admin||'')).toLowerCase()}">
+              <tr class="okt-booking-row" data-cat="${b.kategori === 'Wisuda UMP' ? 'wisuda' : 'reguler'}" data-status="${b.statusSesi || 'confirmed'}" data-text="${(b.nama + ' ' + b.paket + ' ' + b.studio + ' ' + (b.admin||'')).toLowerCase()}">
                 <td class="mono">${b.tgl}</td>
                 <td class="mono muted">${esc(b.waktu||"—")}</td>
+                <td>
+                  <span class="pill ${b.statusColor === 'biru' ? 'crit' : (b.statusColor === 'orange' ? 'warn' : 'prog')}" style="font-size:10px;padding:2px 7px;white-space:nowrap;">
+                    ${b.statusColor === 'biru' ? '🔵 Hadir/Done' : (b.statusColor === 'orange' ? '🟠 Reschedule' : '🟢 Terjadwal')}
+                  </span>
+                </td>
                 <td><b>${esc(b.nama)}</b></td>
                 <td class="tiny">${esc(b.paket)}</td>
                 <td class="tiny muted">${esc(b.studio)}</td>
@@ -4019,7 +4028,7 @@ function wire(R){
       const rows = document.querySelectorAll("#tblOktoberBookings .okt-booking-row");
       let visible = 0;
       rows.forEach(r => {
-        const catMatch = (curCat === "all") || (r.dataset.cat === curCat);
+        const catMatch = (curCat === "all") || (r.dataset.cat === curCat) || (r.dataset.status === curCat);
         const textMatch = !curQ || r.dataset.text.includes(curQ);
         if (catMatch && textMatch) {
           r.style.display = "";

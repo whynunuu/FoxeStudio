@@ -116,4 +116,12 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
   - **DILARANG KERAS** menggunakan variabel state bulan lokal independen yang tidak tersinkronisasi (seperti `adsMonth`), ataupun melakukan fallback paksa data bulan lain jika data bulan yang dipilih belum ada (jika belum ada rencana, tampilkan status kosong / placeholder yang jujur).
   - Toggling periode pada sub-section (seperti tombol switch periode di Jadwal Ads atau Estimasi) harus otomatis memperbarui `activeMonth` dan merender ulang seluruh antarmuka secara harmonis.
 
-
+### 10. Standarisasi Aturan Kode Warna Sel KHUSUS File Schedule (Anti-Ghost Slot):
+- **Lingkup Eksklusif**: Kode warna ini **HANYA DAN KHUSUS BERLAKU UNTUK FILE SCHEDULE** (`file2.xlsx`, `file2_okt.xlsx`, `file_wisuda_3okt.xlsx`, `file_wisuda_4okt.xlsx`, dan jadwal studio/event lainnya). File operasional lain (Log Order `file1.xlsm` & Neraca `file_neraca.xlsx`) tetap independen mengikuti kolom kasir dan section detail masing-masing.
+- **Standarisasi 5 Kode Warna Schedule**:
+  1. ⚪ **Putih / No Fill** (`FFFFFFFF` / `00000000`): **Slot Kosong** (Available untuk booking baru).
+  2. 🟢 **Hijau** (`FF00FF00`): **Slot Terisi (Confirmed Booking)**. Booking sah terjadwal, masuk penuh ke dalam potensi pipeline dan estimasi pelunasan (*cash-in*).
+  3. 🔵 **Biru / Cyan** (`FF00FFFF`): **Selesai / Sedang Sesi / Hadir (Live Case)**. Klien sudah datang di studio, sesi berlangsung atau sudah selesai, dan uang direalisasikan di kasir.
+  4. 🟠 **Orange** (`FFFF9900`): **Kendala Jadwal (Reschedule / Telat / Tidak Datang / CLOSED)**. Slot bertuliskan `CLOSED` atau pesanan yang reschedule/batal otomatis disaring dari estimasi sisa uang masuk agar tidak terjadi over-estimasi atau *double-count*.
+  5. 🔴 **Merah** (`FFFF0000` / `FFF4CCCC`): **Full Slot / Batas Order**. Kuota ditutup atau penanda batas jam operasional, otomatis dikecualikan dari perhitungan booking klien.
+- **Integrasi Visual Dashboard**: Menampilkan badge status sesi (🔵 *Selesai/Hadir*, 🟢 *Terjadwal*, 🟠 *Reschedule*) dan tombol filter status cepat pada tabel daftar booking.

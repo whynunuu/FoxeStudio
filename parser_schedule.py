@@ -56,6 +56,34 @@ def npak(p):
         return "Pas Foto"
     return s
 
+def extract_schedule_color(cell):
+    """
+    Ekstraksi status warna sel KHUSUS File SCHEDULE:
+    - PUTIH  : Kosong (No fill / 00000000 / FFFFFFFF)
+    - HIJAU  : Isi / Confirmed Booking (FF00FF00 dsb)
+    - BIRU   : Selesai / Sedang Sesi / Hadir (FF00FFFF / Cyan / Biru)
+    - ORANGE : Reschedule / Telat / Tidak Datang / CLOSED (FFFF9900 dsb)
+    - MERAH  : Full Slot / Batas Order (FFFF0000 dsb)
+    """
+    if not cell or not cell.fill or not cell.fill.start_color:
+        return "PUTIH"
+    sc = cell.fill.start_color
+    rgb = getattr(sc, 'rgb', None)
+    if not rgb:
+        return "PUTIH"
+    rgb_str = str(rgb).upper()
+    if rgb_str in ['00000000', 'FFFFFFFF', 'NONE']:
+        return "PUTIH"
+    if rgb_str in ['FF00FF00', 'FF00FF7F', 'FF90EE90', 'FF00E676', 'FF93C47D']:
+        return "HIJAU"
+    if rgb_str in ['FF00FFFF', 'FF9FC5E8', 'FF4A86E8', 'FF6D9EEB', 'FF00B0F0', 'FF00B0FF', 'FF29B6F6', 'FF03A9F4']:
+        return "BIRU"
+    if rgb_str in ['FFFF9900', 'FFE69138', 'FFF9CB9C', 'FFFFB74D', 'FFFFA726', 'FFFF9800', 'FFFB8C00']:
+        return "ORANGE"
+    if rgb_str in ['FFFF0000', 'FFCC0000', 'FFE06666', 'FFF4CCCC', 'FFEF5350', 'FFE53935']:
+        return "MERAH"
+    return "PUTIH"
+
 def parse_schedule(filepath="file2.xlsx", bulan="2026-09", existing_bookings=None):
     wb = openpyxl.load_workbook(filepath, data_only=True)
     
@@ -79,11 +107,23 @@ def parse_schedule(filepath="file2.xlsx", bulan="2026-09", existing_bookings=Non
         studios = [(1, "Studio 1"), (7, "Studio 2"), (13, "Studio 3")]
         for c_start, studio_name in studios:
             for r in range(3, ws.max_row + 1):
-                nama_val = ws.cell(r, c_start + 2).value
+                c_nama_cell = ws.cell(r, c_start + 2)
+                nama_val = c_nama_cell.value
                 if not nama_val:
                     continue
                 nama = str(nama_val).strip()
                 if not nama or nama.lower() in ["nama", "none", "-"]:
+                    continue
+                
+                # Deteksi warna sel schedule
+                col = extract_schedule_color(c_nama_cell)
+                if col == "PUTIH":
+                    col = extract_schedule_color(ws.cell(r, c_start + 1))
+                if col == "PUTIH":
+                    col = extract_schedule_color(ws.cell(r, c_start))
+                
+                # Filter 1: Merah = batas order/full slot (bukan order klien)
+                if col == "MERAH":
                     continue
                 
                 waktu = str_time(ws.cell(r, c_start + 1).value)
@@ -91,12 +131,30 @@ def parse_schedule(filepath="file2.xlsx", bulan="2026-09", existing_bookings=Non
                 admin = str(ws.cell(r, c_start + 4).value or "").strip().upper()
                 hp = str(ws.cell(r, c_start + 5).value or "").strip()
                 
+                # Filter 2: Orange bertuliskan CLOSED/batal
+                if col == "ORANGE" and (nama.lower() in ["closed", "tutup", "cancel", "batal"] or "closed" in paket_raw.lower()):
+                    continue
+                
                 # Cek manual override
                 m_key = f"{tgl_str}|{nama.lower()}|{waktu}"
                 if m_key in manual_map:
                     bookings.append(manual_map[m_key])
                     continue
                 
+                # Status Sesi berdasarkan Kode Warna Schedule
+                if col == "BIRU":
+                    status_sesi = "done"
+                    status_label = "Selesai / Hadir"
+                    status_badge = "crit"
+                elif col == "ORANGE":
+                    status_sesi = "reschedule"
+                    status_label = "Reschedule / Kendala"
+                    status_badge = "warn"
+                else:
+                    status_sesi = "confirmed"
+                    status_label = "Terjadwal"
+                    status_badge = "prog"
+
                 # Hitung harga paket
                 paket_std = npak(paket_raw)
                 harga = 0.0
@@ -135,7 +193,14 @@ def parse_schedule(filepath="file2.xlsx", bulan="2026-09", existing_bookings=Non
                     "harga": harga,
                     "admin": admin,
                     "noHp": hp,
-                    "manual": False
+                    "manual": False,
+                    "color": col,
+                    "statusColor": col.lower(),
+                    "statusSesi": status_sesi,
+                    "statusLabel": status_label,
+                    "statusBadge": status_badge,
+                    "isDone": col == "BIRU",
+                    "isReschedule": col == "ORANGE"
                 })
                 b_idx += 1
 
@@ -158,19 +223,49 @@ def parse_wisuda_schedule(filepath, tgl_str, start_id=1):
     for r in range(11, ws.max_row + 1):
         for s_idx, s_name in enumerate(spots):
             base_c = s_idx * 6 + 1
-            waktu_val = ws.cell(r, base_c + 1).value
-            nama_val = ws.cell(r, base_c + 2).value
+            c_nama_cell = ws.cell(r, base_c + 2)
+            nama_val = c_nama_cell.value
             if not nama_val:
                 continue
             nama = str(nama_val).strip()
             if not nama or nama.lower() in ["nama", "none", "-"]:
                 continue
             
+            # Deteksi warna sel schedule
+            col = extract_schedule_color(c_nama_cell)
+            if col == "PUTIH":
+                col = extract_schedule_color(ws.cell(r, base_c + 1))
+            if col == "PUTIH":
+                col = extract_schedule_color(ws.cell(r, base_c))
+            
+            # Filter 1: Merah = batas order/kuota
+            if col == "MERAH":
+                continue
+            
+            waktu_val = ws.cell(r, base_c + 1).value
             waktu = str_time(waktu_val)
             paket_raw = str(ws.cell(r, base_c + 3).value or "Graduation").strip()
             admin = str(ws.cell(r, base_c + 4).value or "").strip().upper()
             hp = str(ws.cell(r, base_c + 5).value or "").strip()
             
+            # Filter 2: Orange bertuliskan CLOSED
+            if col == "ORANGE" and (nama.lower() in ["closed", "tutup", "cancel", "batal"] or "closed" in paket_raw.lower()):
+                continue
+            
+            # Status Sesi berdasarkan Kode Warna Schedule
+            if col == "BIRU":
+                status_sesi = "done"
+                status_label = "Selesai / Hadir"
+                status_badge = "crit"
+            elif col == "ORANGE":
+                status_sesi = "reschedule"
+                status_label = "Reschedule / Kendala"
+                status_badge = "warn"
+            else:
+                status_sesi = "confirmed"
+                status_label = "Terjadwal"
+                status_badge = "prog"
+
             paket_std = npak(paket_raw)
             if "prem" in paket_raw.lower():
                 paket_std = "Graduation Premium"
@@ -207,7 +302,14 @@ def parse_wisuda_schedule(filepath, tgl_str, start_id=1):
                 "admin": admin,
                 "noHp": hp,
                 "manual": False,
-                "kategori": "Wisuda UMP"
+                "kategori": "Wisuda UMP",
+                "color": col,
+                "statusColor": col.lower(),
+                "statusSesi": status_sesi,
+                "statusLabel": status_label,
+                "statusBadge": status_badge,
+                "isDone": col == "BIRU",
+                "isReschedule": col == "ORANGE"
             })
             b_idx += 1
             
@@ -235,6 +337,27 @@ def parse_october_pipeline(file_default="file2_okt.xlsx", file_w1="file_wisuda_3
     total_dp = sum(b.get("dp", 0.0) for b in all_okt)
     estimate_cash_in = max(0.0, total_val - total_dp)
     
+    status_breakdown = {
+        "done": {
+            "sesi": len([b for b in all_okt if b.get("statusSesi") == "done"]),
+            "nilai": sum(b.get("harga", 0.0) for b in all_okt if b.get("statusSesi") == "done"),
+            "dp": sum(b.get("dp", 0.0) for b in all_okt if b.get("statusSesi") == "done"),
+            "cashIn": sum(b.get("sisaPelunasan", 0.0) for b in all_okt if b.get("statusSesi") == "done")
+        },
+        "confirmed": {
+            "sesi": len([b for b in all_okt if b.get("statusSesi") == "confirmed"]),
+            "nilai": sum(b.get("harga", 0.0) for b in all_okt if b.get("statusSesi") == "confirmed"),
+            "dp": sum(b.get("dp", 0.0) for b in all_okt if b.get("statusSesi") == "confirmed"),
+            "cashIn": sum(b.get("sisaPelunasan", 0.0) for b in all_okt if b.get("statusSesi") == "confirmed")
+        },
+        "reschedule": {
+            "sesi": len([b for b in all_okt if b.get("statusSesi") == "reschedule"]),
+            "nilai": sum(b.get("harga", 0.0) for b in all_okt if b.get("statusSesi") == "reschedule"),
+            "dp": sum(b.get("dp", 0.0) for b in all_okt if b.get("statusSesi") == "reschedule"),
+            "cashIn": sum(b.get("sisaPelunasan", 0.0) for b in all_okt if b.get("statusSesi") == "reschedule")
+        }
+    }
+    
     return {
         "bulan": "2026-10",
         "totalBookings": len(all_okt),
@@ -246,6 +369,7 @@ def parse_october_pipeline(file_default="file2_okt.xlsx", file_w1="file_wisuda_3
             "wisudaDay1": {"sesi": len(b_w1), "nilai": sum(b.get("harga",0) for b in b_w1), "dp": sum(b.get("dp",0) for b in b_w1)},
             "wisudaDay2": {"sesi": len(b_w2), "nilai": sum(b.get("harga",0) for b in b_w2), "dp": sum(b.get("dp",0) for b in b_w2)}
         },
+        "statusBreakdown": status_breakdown,
         "bookings": all_okt
     }
 
