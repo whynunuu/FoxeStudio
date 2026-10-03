@@ -3144,6 +3144,10 @@ function vEst(R){
     const oktOmzetLive = oktOrders.reduce((s, o) => s + dnum(o.total), 0);
     const oktCashLive = oktOrders.reduce((s, o) => s + dnum(o.cash), 0);
     const oktTransferLive = oktOrders.reduce((s, o) => s + dnum(o.transfer), 0);
+    const orangeBookings = okp.bookings.filter(b => b.statusColor === 'orange' || b.isReschedule);
+    const totOrangeNilai = orangeBookings.reduce((s, b) => s + (b.harga || 0), 0);
+    const totOrangeDp = orangeBookings.reduce((s, b) => s + (b.dp || 0), 0);
+    const totOrangeSisa = orangeBookings.reduce((s, b) => s + (b.sisaPelunasan || 0), 0);
 
     return `
     ${switcherHtml}
@@ -3347,6 +3351,183 @@ function vEst(R){
             `).join("")}
           </tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- KARTU 1: AUDIT & KOMPARASI KLUSTER WISUDA (UNSOED vs UMP) -->
+    <div class="card" style="margin-bottom:16px;border-left:3px solid var(--accent);background:color-mix(in srgb,var(--accent) 2%,var(--surface));">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+        <div>
+          <h3 style="margin:0;font-size:16px;display:flex;align-items:center;gap:8px;">
+            🎓 Audit &amp; Komparasi Kluster Wisuda: UNSOED vs UMP
+          </h3>
+          <span class="eyebrow">Evaluasi Tingkat Konversi, Ketepatan Waktu &amp; Titik Kritis Jam Sesi (13:00 – 14:20 WIB)</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <span class="pill info" style="font-size:11px;">UNSOED: 97,4% On-Time (Sept)</span>
+          <span class="pill warn" style="font-size:11px;">UMP: 88,9% Reschedule di 13:00–14:20 (Okt)</span>
+        </div>
+      </div>
+
+      <div class="two" style="gap:14px;margin-bottom:14px;">
+        <div style="background:var(--surface2);padding:14px;border-radius:8px;border:1px solid var(--hairline);">
+          <h4 style="margin:0 0 8px;font-size:13px;color:var(--ink);display:flex;align-items:center;gap:6px;">
+            🏛️ Kluster Wisuda UNSOED (September 2026)
+          </h4>
+          <div style="font-size:12px;line-height:1.6;color:var(--ink-secondary);">
+            <div>• <b>Total Realisasi Kasir:</b> 347 pesanan Graduation (Rp 69.345.000).</div>
+            <div>• <b>Konversi Leads:</b> 49,8% closing transaksi (607 closing / 1.218 leads) &amp; 21,7% DP booking.</div>
+            <div>• <b>Pola Waktu &amp; Disiplin:</b> Sebaran sesi merata dari pagi (09:30), siang, sore (15:00, 16:40), dan banyak mengambil H-1 / H+1 gladi.</div>
+            <div>• <b>Tingkat Kendala:</b> 0 kasus pembatalan/reschedule pada paket Graduation studio (97,4% terlaksana sukses).</div>
+          </div>
+        </div>
+
+        <div style="background:var(--surface2);padding:14px;border-radius:8px;border:1px solid var(--hairline);">
+          <h4 style="margin:0 0 8px;font-size:13px;color:var(--warn);display:flex;align-items:center;gap:6px;">
+            🏫 Kluster Wisuda UMP (Oktober 2026 - Hari 1 Live)
+          </h4>
+          <div style="font-size:12px;line-height:1.6;color:var(--ink-secondary);">
+            <div>• <b>Total Pipeline:</b> 113 booking terdaftar di 5 backdrop spot (Rp 39.550.000).</div>
+            <div>• <b>Pola Waktu &amp; Kendala:</b> Dari 62 booking Hari 1, <b>9 sesi mengalami kendala reschedule (14,5%)</b>.</div>
+            <div>• <b>Temuan Forensik Jam Sesi:</b> <b>8 dari 9 kasus (88,9%)</b> menumpuk tepat di jam <b>13:00 – 14:20 WIB</b>!</div>
+            <div>• <b>Faktor Utama:</b> Seremoni kampus bubar 11:30–12:30, macet total di Jl. Dukuhwaluh, ritual foto outdoor/makan siang keluarga, serta slot 20 menit tanpa jeda buffer.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:10px 14px;background:color-mix(in srgb,var(--warn) 8%,var(--surface2));border-radius:6px;border-left:3px solid var(--warn);font-size:12px;line-height:1.5;">
+        <b>💡 Rekomendasi Solusi Operasional Foxe Studio:</b><br/>
+        1. <b>SOP WA Traffic Alert (H-2 Jam / 11:00 WIB):</b> Kirim pesan broadcast otomatis mengingatkan wisudawan untuk berangkat 30-40 menit lebih awal mengingat kemacetan keluar kampus UMP.<br/>
+        2. <b>Buffer Time di Zona Bahaya (12:30 – 14:00):</b> Untuk wisuda berikutnya, sediakan jeda minimum 30 menit atau slot buffer agar keterlambatan 1 klien tidak merambat ke antrean berikutnya.<br/>
+        3. <b>Fast Spot-Switch:</b> Spot Concrete mengalami 5 dari 9 kendala. Tawarkan peralihan ke spot kosong (Limbo/Wooden) bila antrean Concrete mulai macet.
+      </div>
+    </div>
+
+    <!-- KARTU 2: PROGRAM RECOVERY LABEL ORANGE (DP AKTIF 30 HARI) -->
+    <div class="card" style="margin-bottom:16px;border-left:3px solid var(--warn);background:color-mix(in srgb,var(--warn) 3%,var(--surface));">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+        <div>
+          <h3 style="margin:0;font-size:16px;display:flex;align-items:center;gap:8px;">
+            🧡 Program Recovery Label Orange · Masa Berlaku DP 30 Hari
+          </h3>
+          <span class="eyebrow">Penyelamatan Deposit Klien &amp; Konversi Sisa Pelunasan Tertunda Rp 2.500.000</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <span class="pill crit" style="font-size:11px;">Masa Berlaku DP: 30 Hari (s.d. 03 Nov 2026)</span>
+          <span class="pill prog" style="font-size:11px;">Target Recovery: 60% – 70% (~Rp 1,75 Jt)</span>
+        </div>
+      </div>
+
+      <!-- KPI Box Orange Recovery -->
+      <div class="stats" style="margin-bottom:14px;">
+        <div class="stat">
+          <span class="k">Sesi Tertunda (🟠)</span>
+          <span class="v sm" style="color:var(--warn);">${orangeBookings.length} Sesi</span>
+          <span class="m">Hari 1 Wisuda UMP</span>
+        </div>
+        <div class="stat">
+          <span class="k">DP Mengambang Aktif</span>
+          <span class="v sm" style="color:var(--crit);">${rp(totOrangeDp)}</span>
+          <span class="m">Uang kas aman &amp; sah 30 hari</span>
+        </div>
+        <div class="stat">
+          <span class="k">Potensi Pelunasan Tertunda</span>
+          <span class="v sm" style="color:var(--good);">${rp(totOrangeSisa)}</span>
+          <span class="m">Sisa kas yang siap diselamatkan</span>
+        </div>
+        <div class="stat">
+          <span class="k">Target Cash-In Pemulihan</span>
+          <span class="v sm" style="color:var(--accent);">${rp(totOrangeSisa * 0.7)}</span>
+          <span class="m">Konversi 70% di hari kerja (Zero CAC)</span>
+        </div>
+      </div>
+
+      <!-- 3 Jalur Penyelamatan -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:16px;">
+        <div style="background:var(--surface2);padding:12px;border-radius:6px;border:1px solid var(--hairline);">
+          <div style="font-weight:700;font-size:12.5px;color:var(--ink);margin-bottom:4px;">🚀 Jalur A: Fast Re-Schedule (H+1 s.d. H+3)</div>
+          <div style="font-size:11.5px;color:var(--ink-secondary);line-height:1.5;">
+            Untuk wisudawan yang toganya belum dikembalikan dan keluarga masih menginap di Purwokerto. Arahkan foto di hari <b>Minggu (4 Okt) santai atau Senin pagi</b> tanpa beban tergesa-gesa.
+          </div>
+        </div>
+        <div style="background:var(--surface2);padding:12px;border-radius:6px;border:1px solid var(--hairline);">
+          <div style="font-weight:700;font-size:12.5px;color:var(--ink);margin-bottom:4px;">✨ Jalur B: Transformasi Paket Kasual (Weekday)</div>
+          <div style="font-size:11.5px;color:var(--ink-secondary);line-height:1.5;">
+            Bila toga sudah dikembalikan, alihkan DP Rp 100 rb untuk sesi <b>Family Portrait kasual, Couple, Photofox teman kost, atau Personal CV/LinkedIn</b> di hari kerja (Selasa–Kamis) untuk mengisi slot studio yang sepi.
+          </div>
+        </div>
+        <div style="background:var(--surface2);padding:12px;border-radius:6px;border:1px solid var(--hairline);">
+          <div style="font-weight:700;font-size:12.5px;color:var(--ink);margin-bottom:4px;">🎁 Jalur C: Transferable Credit (Hibah Teman)</div>
+          <div style="font-size:11.5px;color:var(--ink-secondary);line-height:1.5;">
+            Bila klien terpaksa langsung pulang kampung ke luar kota, izinkan DP tersebut <b>dipindahtangankan (dihibahkan)</b> ke adik tingkat atau teman sekampus yang masih di Purwokerto agar tidak hangus sia-sia.
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabel 9 Klien Orange yang Siap Di-Follow Up -->
+      <div style="margin-bottom:14px;">
+        <h4 style="margin:0 0 8px;font-size:13px;display:flex;align-items:center;gap:6px;">
+          📋 Daftar ${orangeBookings.length} Klien Label Orange Siap Follow-Up CRM:
+        </h4>
+        <div class="tw">
+          <table>
+            <thead>
+              <tr>
+                <th>Waktu Asli</th>
+                <th>Spot</th>
+                <th>Nama Client</th>
+                <th>Paket</th>
+                <th class="n">Nilai Paket</th>
+                <th class="n">DP Terbayar</th>
+                <th class="n">Sisa Pelunasan</th>
+                <th>Masa Berlaku DP</th>
+                <th>Rekomendasi Jalur</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${orangeBookings.map(b => `
+                <tr>
+                  <td class="mono">${b.tgl.slice(5)} · ${b.waktu||'13:00'}</td>
+                  <td><span class="pill neutral" style="font-size:10px;">${esc(b.studioNama || b.studio)}</span></td>
+                  <td><b>${esc(b.nama)}</b></td>
+                  <td>${esc(b.paket)}</td>
+                  <td class="n">${rp(b.harga)}</td>
+                  <td class="n" style="color:var(--crit);font-weight:600;">${rp(b.dp || 100000)}</td>
+                  <td class="n" style="color:var(--good);font-weight:700;">${rp(b.sisaPelunasan || (b.harga - (b.dp||100000)))}</td>
+                  <td class="mono" style="color:var(--warn);font-size:11px;">03 Nov 2026 (30 hari)</td>
+                  <td><span class="pill prog" style="font-size:10px;">${b.waktu <= '13:20' ? 'Jalur A: Re-Book H+1' : 'Jalur B: Weekday Casual'}</span></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SOP CRM WhatsApp Script -->
+      <div style="background:var(--surface2);padding:14px;border-radius:8px;border:1px solid var(--hairline);">
+        <h4 style="margin:0 0 10px;font-size:13px;display:flex;align-items:center;gap:6px;color:var(--ink);">
+          💬 Skrip SOP WhatsApp CRM (3-Touchpoint Follow Up Admin):
+        </h4>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;">
+          <div style="background:var(--surface);padding:10px;border-radius:6px;border:1px solid var(--hairline);">
+            <span class="pill crit" style="font-size:10px;margin-bottom:6px;display:inline-block;">Touchpoint 1: H+1 (Malam Ini / Besok Pagi)</span>
+            <div style="font-size:11px;line-height:1.5;color:var(--ink-secondary);font-style:italic;">
+              "Halo Kak [Nama], selamat atas wisudanya kemarin! 🎓 Kami memahami sekali kemarin sangat padat dan macet. Jangan khawatir ya kak, slot kemarin berstatus *Reschedule*, dan uang DP Kakak Rp 100.000 <b>TETAP AMAN &amp; BERLAKU 30 HARI</b> (s.d. 3 Nov 2026). Kakak bisa istirahat dulu, nanti bila sudah siap atur jadwal sesi pengganti, kabari kami ya!"
+            </div>
+          </div>
+          <div style="background:var(--surface);padding:10px;border-radius:6px;border:1px solid var(--hairline);">
+            <span class="pill info" style="font-size:10px;margin-bottom:6px;display:inline-block;">Touchpoint 2: H+7 (Insentif Weekday)</span>
+            <div style="font-size:11px;line-height:1.5;color:var(--ink-secondary);font-style:italic;">
+              "Halo Kak [Nama]! Mau info, Foxe punya slot tenang di hari kerja (Selasa–Kamis). Khusus jadwal ulang wisuda kemarin, jika ambil sesi weekday kami berikan <b>Bonus Free 1 Cetak 10R / Tambahan Edit</b> lho kak. Mau dibantu amankan slot santainya minggu ini?"
+            </div>
+          </div>
+          <div style="background:var(--surface);padding:10px;border-radius:6px;border:1px solid var(--hairline);">
+            <span class="pill warn" style="font-size:10px;margin-bottom:6px;display:inline-block;">Touchpoint 3: H+21 (Peringatan Ramah &amp; Hibah)</span>
+            <div style="font-size:11px;line-height:1.5;color:var(--ink-secondary);font-style:italic;">
+              "Halo Kak [Nama], sekadar info kredit DP Kakak masih aktif 9 hari lagi ya (s.d. 3 Nov). Jika Kakak sudah di luar kota, DP ini bisa dialihkan ke sesi Couple/Keluarga atau dihibahkan ke teman lho kak. Sayang bila hangus, yuk kabari admin ya!"
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     `;
