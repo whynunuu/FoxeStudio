@@ -3157,8 +3157,11 @@ function vEst(R){
     const totConfPelunasan = confirmedBookings.reduce((s, b) => s + (b.sisaPelunasan || 0), 0);
 
     const totOrangeNilai = orangeBookings.reduce((s, b) => s + (b.harga || 0), 0);
-    const totOrangeDp = orangeBookings.reduce((s, b) => s + (b.dp || 0), 0);
-    const totOrangeSisa = orangeBookings.reduce((s, b) => s + (b.sisaPelunasan || 0), 0);
+    const totOrangeDp = orangeBookings.reduce((s, b) => s + ((b.dp != null && b.dp > 0) ? b.dp : 100000), 0);
+    const totOrangeSisa = orangeBookings.reduce((s, b) => {
+      const bDp = (b.dp != null && b.dp > 0) ? b.dp : 100000;
+      return s + Math.max(0, (b.harga || 0) - bDp);
+    }, 0);
 
     return `
     ${switcherHtml}
@@ -3499,11 +3502,11 @@ function vEst(R){
           <h3 style="margin:0;font-size:16px;display:flex;align-items:center;gap:8px;">
             🧡 Program Recovery Label Orange · Masa Berlaku DP 30 Hari
           </h3>
-          <span class="eyebrow">Penyelamatan Deposit Klien &amp; Konversi Sisa Pelunasan Tertunda Rp 2.500.000</span>
+          <span class="eyebrow">Penyelamatan Deposit Klien &amp; Konversi Sisa Pelunasan Tertunda ${rp(totOrangeSisa)}</span>
         </div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
           <span class="pill crit" style="font-size:11px;">Masa Berlaku DP: 30 Hari (s.d. 03 Nov 2026)</span>
-          <span class="pill prog" style="font-size:11px;">Target Recovery: 60% – 70% (~Rp 1,75 Jt)</span>
+          <span class="pill prog" style="font-size:11px;">Target Recovery: 60% – 70% (~${rp(totOrangeSisa * 0.7)})</span>
         </div>
       </div>
 
@@ -3553,14 +3556,51 @@ function vEst(R){
         </div>
       </div>
 
-      <!-- Tabel 9 Klien Orange yang Siap Di-Follow Up -->
+      <!-- Tabel Klien Orange yang Siap Di-Follow Up dengan Summary Lock Row -->
       <div style="margin-bottom:14px;">
-        <h4 style="margin:0 0 8px;font-size:13px;display:flex;align-items:center;gap:6px;">
-          📋 Daftar ${orangeBookings.length} Klien Label Orange Siap Follow-Up CRM:
-        </h4>
-        <div class="tw">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+          <h4 style="margin:0;font-size:13.5px;display:flex;align-items:center;gap:6px;">
+            📋 Daftar ${orangeBookings.length} Klien Label Orange Siap Follow-Up CRM:
+          </h4>
+          <span class="pill crit" style="font-size:10.5px;font-weight:600;">
+            🛡️ Kredit DP 100% Aktif 30 Hari (s.d. 03 Nov 2026)
+          </span>
+        </div>
+
+        <!-- 🔒 SUMMARY LOCK ROW BAR (DI ATAS TABEL) -->
+        <div class="summary-lock-bar" style="margin-bottom:10px;padding:12px 16px;background:color-mix(in srgb,var(--warn) 14%,var(--surface2));border:1px solid color-mix(in srgb,var(--warn) 45%,var(--hairline));border-radius:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span class="pill warn" style="font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:4px;padding:3px 9px;">
+              🔒 SUMMARY LOCK ROW
+            </span>
+            <span style="font-size:13px;font-weight:700;color:var(--ink);">
+              Total ${orangeBookings.length} Sesi Terkendala (Label Orange)
+            </span>
+            <span class="pill prog" style="font-size:10px;">
+              ${orangeBookings.filter(b=>b.waktu<='13:20').length} Sesi Re-Book H+1 · ${orangeBookings.filter(b=>b.waktu>'13:20').length} Sesi Weekday
+            </span>
+          </div>
+          <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
+            <div style="text-align:right;">
+              <div style="font-size:10px;text-transform:uppercase;color:var(--muted);font-weight:600;letter-spacing:0.5px;">Total Nilai Paket</div>
+              <div style="font-size:14.5px;font-weight:800;color:var(--ink);">${rp(totOrangeNilai)}</div>
+            </div>
+            <div style="width:1px;height:26px;background:var(--hairline-strong);"></div>
+            <div style="text-align:right;">
+              <div style="font-size:10px;text-transform:uppercase;color:var(--crit);font-weight:600;letter-spacing:0.5px;">DP Terkunci (Kas Aman)</div>
+              <div style="font-size:14.5px;font-weight:800;color:var(--crit);">${rp(totOrangeDp)}</div>
+            </div>
+            <div style="width:1px;height:26px;background:var(--hairline-strong);"></div>
+            <div style="text-align:right;">
+              <div style="font-size:10px;text-transform:uppercase;color:var(--good);font-weight:600;letter-spacing:0.5px;">Target Sisa Pelunasan</div>
+              <div style="font-size:14.5px;font-weight:800;color:var(--good);">${rp(totOrangeSisa)}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tw" style="max-height:480px;overflow-y:auto;border:1px solid var(--hairline);border-radius:6px;">
           <table>
-            <thead>
+            <thead style="position:sticky;top:0;z-index:4;background:var(--surface);">
               <tr>
                 <th>Waktu Asli</th>
                 <th>Spot</th>
@@ -3572,22 +3612,48 @@ function vEst(R){
                 <th>Masa Berlaku DP</th>
                 <th>Rekomendasi Jalur</th>
               </tr>
+              <!-- 🔒 STICKY TOP SUMMARY LOCK ROW DALAM TABEL -->
+              <tr class="summary-lock-row" style="background:color-mix(in srgb,var(--warn) 20%,var(--surface));border-bottom:2px solid var(--warn);font-weight:700;">
+                <td colspan="4" style="font-size:11.5px;font-weight:800;color:var(--warn);text-transform:uppercase;letter-spacing:0.5px;padding:8px 10px;">
+                  🔒 TOTAL SUMMARY LOCK ROW (${orangeBookings.length} KLIEN TERKUNCI)
+                </td>
+                <td class="n" style="font-size:13px;font-weight:800;color:var(--ink);padding:8px 10px;">${rp(totOrangeNilai)}</td>
+                <td class="n" style="font-size:13px;font-weight:800;color:var(--crit);padding:8px 10px;">${rp(totOrangeDp)}</td>
+                <td class="n" style="font-size:13px;font-weight:800;color:var(--good);padding:8px 10px;">${rp(totOrangeSisa)}</td>
+                <td style="font-size:11px;font-weight:700;color:var(--warn);padding:8px 10px;">30 Hari Sah</td>
+                <td style="padding:8px 10px;"><span class="pill warn" style="font-size:10px;font-weight:700;">100% Siap Follow-Up</span></td>
+              </tr>
             </thead>
             <tbody>
-              ${orangeBookings.map(b => `
+              ${orangeBookings.map(b => {
+                const bDp = (b.dp != null && b.dp > 0) ? b.dp : 100000;
+                const bSisa = Math.max(0, (b.harga || 0) - bDp);
+                return `
                 <tr>
                   <td class="mono">${b.tgl.slice(5)} · ${b.waktu||'13:00'}</td>
                   <td><span class="pill neutral" style="font-size:10px;">${esc(b.studioNama || b.studio)}</span></td>
                   <td><b>${esc(b.nama)}</b></td>
                   <td>${esc(b.paket)}</td>
                   <td class="n">${rp(b.harga)}</td>
-                  <td class="n" style="color:var(--crit);font-weight:600;">${rp(b.dp || 100000)}</td>
-                  <td class="n" style="color:var(--good);font-weight:700;">${rp(b.sisaPelunasan || (b.harga - (b.dp||100000)))}</td>
+                  <td class="n" style="color:var(--crit);font-weight:600;">${rp(bDp)}</td>
+                  <td class="n" style="color:var(--good);font-weight:700;">${rp(bSisa)}</td>
                   <td class="mono" style="color:var(--warn);font-size:11px;">03 Nov 2026 (30 hari)</td>
                   <td><span class="pill prog" style="font-size:10px;">${b.waktu <= '13:20' ? 'Jalur A: Re-Book H+1' : 'Jalur B: Weekday Casual'}</span></td>
                 </tr>
-              `).join('')}
+              `;}).join('')}
             </tbody>
+            <tfoot>
+              <tr class="total" style="font-weight:800;background:color-mix(in srgb,var(--warn) 14%,var(--surface));">
+                <td colspan="4" style="text-align:right;font-size:11px;text-transform:uppercase;color:var(--warn);font-weight:800;">
+                  TOTAL RECOVERY ACCUMULATION:
+                </td>
+                <td class="n" style="font-size:13px;color:var(--ink);">${rp(totOrangeNilai)}</td>
+                <td class="n" style="font-size:13px;color:var(--crit);">${rp(totOrangeDp)}</td>
+                <td class="n" style="font-size:13px;color:var(--good);">${rp(totOrangeSisa)}</td>
+                <td style="font-size:11px;color:var(--warn);font-weight:700;">30 Hari s.d. 03 Nov</td>
+                <td><span class="pill good" style="font-size:10px;font-weight:700;">Potensi Pulih: 100%</span></td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
