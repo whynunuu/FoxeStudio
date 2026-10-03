@@ -165,9 +165,11 @@ table{width:100%;border-collapse:collapse;font-size:13.5px}
 .tw::-webkit-scrollbar{height:6px;width:6px}
 .tw::-webkit-scrollbar-track{background:var(--surface)}
 .tw::-webkit-scrollbar-thumb{background:var(--hairline-strong);border-radius:3px}
-.tw.scrollable,.tw-scroll{max-height:480px;overflow-y:auto}
-.tw.scrollable thead,.tw-scroll thead{position:sticky;top:0;z-index:3;background:var(--surface2)}
-.tw.scrollable thead th,.tw-scroll thead th{position:sticky;top:0;z-index:3;background:var(--surface2);box-shadow:0 1px 0 var(--hairline)}
+.tw.scrollable,.tw-scroll,.tw[style*="overflow-y"]{max-height:480px;overflow-y:auto}
+.tw.scrollable thead,.tw-scroll thead,.tw[style*="overflow-y"] thead,thead.sticky-top{position:sticky;top:0;z-index:5;background:var(--surface2)}
+.tw.scrollable thead th,.tw-scroll thead th,.tw[style*="overflow-y"] thead th,thead.sticky-top th{position:sticky;top:0;z-index:5;background:var(--surface2);box-shadow:0 1px 0 var(--hairline)}
+.tw.scrollable tfoot,.tw-scroll tfoot,.tw[style*="overflow-y"] tfoot,tfoot.sticky-bottom{position:sticky;bottom:0;z-index:5;background:var(--surface2)}
+.tw.scrollable tfoot td,.tw.scrollable tfoot th,.tw-scroll tfoot td,.tw-scroll tfoot th,.tw[style*="overflow-y"] tfoot td,.tw[style*="overflow-y"] tfoot th,.tw.scrollable tr.total td,.tw-scroll tr.total td,.tw[style*="overflow-y"] tr.total td,tfoot.sticky-bottom td,tr.total.sticky-bottom td{position:sticky;bottom:0;z-index:5;background:var(--surface2)!important;border-top:2px solid var(--hairline-strong)!important;box-shadow:0 -3px 8px rgba(0,0,0,0.45)!important;font-weight:600;color:var(--ink)}
 th{text-align:left;font-family:var(--ff-body);font-size:11px;letter-spacing:1.2px;
   text-transform:uppercase;color:var(--muted-soft);font-weight:500;padding:11px 14px;
   border-bottom:1px solid var(--hairline);white-space:nowrap;background:var(--surface2);
@@ -1320,7 +1322,13 @@ function blokIndeksHari(R){
       <tr class="total"><td colspan="2">Rata-rata ${X.isi.length} hari terisi</td>
         <td class="n">${num(X.avgL)}</td><td class="n">1.00×</td>
         <td class="n">${num(X.avgS)}</td><td class="n">1.00×</td><td></td></tr>
-    </tbody></table></div>
+    </tbody>
+    <tfoot>
+      <tr class="total"><td colspan="2">Rata-rata ${X.isi.length} hari terisi</td>
+        <td class="n">${num(X.avgL)}</td><td class="n">1.00×</td>
+        <td class="n">${num(X.avgS)}</td><td class="n">1.00×</td><td></td></tr>
+    </tfoot>
+    </table></div>
   </div>`;
 }
 
@@ -2013,11 +2021,14 @@ function vOmzet(R){
         <td class="n" style="color:var(--accent-ink)">${rp(d.cum)}</td>
         <td class="n" style="color:${d.growth==null?"var(--muted)":d.growth>=0?"var(--good)":"var(--crit)"}">${d.growth==null?"—":(d.growth>=0?"+":"")+pct(d.growth)}</td>`
       :`<td class="n"></td><td class="n"></td><td class="n"></td><td class="n"></td><td class="n"></td><td class="n"></td>`}</tr>`).join("")}
+  </tbody>
+  <tfoot>
     <tr class="total"><td colspan="2">Total s.d. ${R.cutDay} ${BULAN[+R.c.bulan.split("-")[1]-1]}</td>
       <td class="n">${num(R.tx)}</td><td class="n">${rp(R.cash)}</td><td class="n">${rp(R.transfer)}</td>
       <td class="n">${rp(R.omzet)}</td><td class="n">${rp(R.omzet)}</td>
       <td class="n muted">rata-rata ${rp(R.avgTx)}/tx</td></tr>
-  </tbody></table></div>`;
+  </tfoot>
+  </table></div>`;
 }
 
 function vTarget(R){
@@ -2108,7 +2119,17 @@ function vTrx(R){
       <td>${esc(o.admin)||'<span class="muted">—</span>'}</td><td>${esc(o.fotografer)||'<span class="muted">—</span>'}</td>
       <td class="n"><button class="del" data-del="orders" data-id="${o.id}" aria-label="Hapus">✕</button></td></tr>`}).join("")
       :`<tr><td colspan="11"><div class="empty">Belum ada transaksi.</div></td></tr>`}
-  </tbody></table></div>
+  </tbody>
+  ${list.length ? `<tfoot>
+    <tr class="total">
+      <td colspan="4">Total Realisasi Log Order (${list.length} transaksi)</td>
+      <td class="n">${rp(list.reduce((s,o)=>s+dnum(o.cash),0))}</td>
+      <td class="n">${rp(list.reduce((s,o)=>s+dnum(o.transfer),0))}</td>
+      <td class="n" style="font-weight:700;">${rp(list.reduce((s,o)=>s+dnum(o.cash)+dnum(o.transfer),0))}</td>
+      <td colspan="4"></td>
+    </tr>
+  </tfoot>` : ''}
+  </table></div>
   ${ordList.length>400?`<p class="tiny muted" style="margin-top:8px">Menampilkan 400 transaksi terbaru dari ${num(ordList.length)}.</p>`:""}
   ${activeMonth === "2026-10" && S.oktoberPipeline ? `
   <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
@@ -2158,13 +2179,16 @@ function kartuPaket(R){
         <td class="n">${d.nDP||'<span class="muted">—</span>'}</td>
         <td class="n">${d.nPelunasan||'<span class="muted">—</span>'}</td>
         <td class="n muted">${d.nilaiDP?rp(d.nilaiDP):"—"}</td></tr>`).join("")}
+    </tbody>
+    <tfoot>
       <tr class="total"><td>Total</td><td class="n">${rp(R.omzet)}</td><td class="n">${num(R.txPaid)}</td>
         <td class="n">${rp(R.avgTx)}</td>
         <td class="n">${R.days.filter(d=>d.berjalan).reduce((s,d)=>s+d.nLunas,0)}</td>
         <td class="n">${R.days.filter(d=>d.berjalan).reduce((s,d)=>s+d.nDP,0)}</td>
         <td class="n">${R.days.filter(d=>d.berjalan).reduce((s,d)=>s+d.nPelunasan,0)}</td>
         <td class="n">${rp(R.days.filter(d=>d.berjalan).reduce((s,d)=>s+d.nilaiDP,0))}</td></tr>
-    </tbody></table></div>
+    </tfoot>
+    </table></div>
 
     <h4 class="eyebrow" style="margin:20px 0 7px">B · Per tanggal foto — nilai paket utuh</h4>
     <div class="tw"><table><thead><tr><th>Tgl foto</th><th class="n">Nilai paket</th><th class="n">Paket</th>
@@ -2175,10 +2199,13 @@ function kartuPaket(R){
         <td class="n">${rp(s.avg)}</td><td class="n">${s.pecah||'<span class="muted">—</span>'}</td>
         <td class="tiny ${s.lewat?"":"muted"}">${s.lewat?"sudah jalan":"belum jalan · baru DP"}</td></tr>`).join("")
         :`<tr><td colspan="6"><div class="empty">Belum ada paket.</div></td></tr>`}
+    </tbody>
+    <tfoot>
       <tr class="total"><td>Sudah jalan</td><td class="n">${rp(R.nilaiLewat)}</td>
         <td class="n">${num(R.paketTerlayani)}</td><td class="n">${rp(R.avgPaket)}</td>
         <td class="n">${num(R.paketPecah)}</td><td></td></tr>
-    </tbody></table></div>
+    </tfoot>
+    </table></div>
   </div>`;
 }
 
@@ -2189,8 +2216,11 @@ function vBiaya(R){
     return `<div class="tw"><table><thead><tr><th>Kategori ${j}</th><th class="n">Total</th><th class="n">% omzet</th></tr></thead><tbody>
       ${rows.map(r=>`<tr><td>${r.k}</td><td class="n">${r.v?rp(r.v):'<span class="muted">—</span>'}</td>
         <td class="n muted">${r.v&&R.omzet?pct(r.v/R.omzet):""}</td></tr>`).join("")}
+    </tbody>
+    <tfoot>
       <tr class="total"><td>Total ${j}</td><td class="n">${rp(tot)}</td><td class="n">${R.omzet?pct(tot/R.omzet):""}</td></tr>
-    </tbody></table></div>`};
+    </tfoot>
+    </table></div>`};
   return `
   <div class="vhead" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:14px">
     <div>
@@ -2242,7 +2272,15 @@ function vBiaya(R){
       <td>${sisa<=0?'<span class="pill final">Lunas</span>':`<span class="pill prog">Sisa termin${e.terminKe?` #${esc(e.terminKe)}`:''}</span>`}</td>
       <td class="n" style="text-align:center"><button class="del" data-del="expenses" data-id="${e.id}" aria-label="Hapus">✕</button></td></tr>`}).join("")
       :`<tr><td colspan="7"><div class="empty">Belum ada biaya tercatat.</div></td></tr>`}
-  </tbody></table></div>
+  </tbody>
+  ${R.ex.length ? `<tfoot>
+    <tr class="total">
+      <td colspan="4">Total Beban Neraca (${R.ex.length} transaksi)</td>
+      <td class="n" style="color:var(--crit);font-weight:700;">${rp(R.ex.reduce((s,e)=>s+dnum(e.nilai),0))}</td>
+      <td colspan="2"></td>
+    </tr>
+  </tfoot>` : ''}
+  </table></div>
 
   <!-- SECTION NERACA DEBIT KREDIT MENURUN SESUAI LOG TANGGAL -->
   <div class="vhead" style="margin-top:36px">
@@ -2355,10 +2393,13 @@ function vShift(R){
         ${orang.map(n=>{const v=(m&&m.get(n))||0;
           return `<td class="n${v?"":" muted"}"${v>1?' style="font-weight:700;color:var(--accent)"':""}>${v||"—"}</td>`}).join("")}
         <td class="n">${tot||"—"}</td></tr>`}).join("")}
+  </tbody>
+  <tfoot>
     <tr class="total"><td colspan="2">Total shift</td>
       ${orang.map(n=>`<td class="n">${num(R.shift.find(s=>s.nama===n).total)}</td>`).join("")}
       <td class="n">${num(R.shiftTot)}</td></tr>
-  </tbody></table></div>
+  </tfoot>
+  </table></div>
   ${S.oktoberPipeline ? `
   <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
@@ -2431,7 +2472,20 @@ function vLead(R){
         <td class="n">${lv?pct(dv/lv):'<span class="muted">—</span>'}</td><td class="n">${num(cum)}</td>
         <td>${!lv&&dv?'<span class="pill prog">provisional</span>':'<span class="pill final">lengkap</span>'}</td>
         <td class="n"><button class="del" data-del="leads" data-id="${l.id}" aria-label="Hapus">✕</button></td></tr>`}).join("")}
-  </tbody></table></div>`;
+  </tbody>
+  <tfoot>
+    <tr class="total">
+      <td colspan="2">Total Leads MTD</td>
+      <td class="n">${num(R.ld.reduce((s,x)=>s+dnum(x.leads),0))}</td>
+      <td class="n">${num(R.ld.reduce((s,x)=>s+dnum(x.dp),0))}</td>
+      <td class="n">${num(R.ld.reduce((s,x)=>s+dnum(x.sesiFoto),0))}</td>
+      <td class="n">${num(R.ld.reduce((s,x)=>s+dnum(x.transaksi),0))}</td>
+      <td class="n">${R.ld.reduce((s,x)=>s+dnum(x.leads),0)?pct(R.ld.reduce((s,x)=>s+dnum(x.dp),0)/R.ld.reduce((s,x)=>s+dnum(x.leads),0)):'—'}</td>
+      <td class="n">${num(R.ld.reduce((s,x)=>s+dnum(x.leads),0))}</td>
+      <td colspan="2"></td>
+    </tr>
+  </tfoot>
+  </table></div>`;
 }
 
 function vKpi(R){
@@ -2510,8 +2564,9 @@ function vKpi(R){
       <td class="n">${rp(k.bonusMax)}</td><td class="n">${rp(0)}</td>
       <td class="n"><button class="del" data-del="kpi" data-id="${k.id}" aria-label="Hapus">✕</button></td></tr>`).join("")
       :`<tr><td colspan="12"><div class="empty">Belum ada posisi KPI.</div></td></tr>`}
-    ${R.kpi.length?`<tr class="total"><td colspan="9">Total</td><td class="n">${rp(R.pool)}</td><td class="n">${rp(R.bonusCair)}</td><td></td></tr>`:""}
-  </tbody></table></div>
+  </tbody>
+  ${R.kpi.length?`<tfoot><tr class="total"><td colspan="9">Total</td><td class="n">${rp(R.pool)}</td><td class="n">${rp(R.bonusCair)}</td><td></td></tr></tfoot>`:""}
+  </table></div>
   <div class="note">Basic Point = rata-rata Disiplin. In Jobdesk = rata-rata (Akurasi + SOP + Client + Produktivitas) × 3. KPI Operasional = Basic + In Jobdesk. Bonus cair = pool × bobot posisi × (Total KPI ÷ 100).</div>`;
 }
 
@@ -2526,9 +2581,12 @@ function vCrew(R){
         <td class="n heat"><i style="background:var(--lead);width:${(p.tx/R.paket[0].tx*100).toFixed(1)}%"></i>${num(p.tx)}</td>
         <td class="n muted">${pct(p.tx/tot)}</td><td class="n">${rp(p.nilai)}</td>
         <td class="n muted">${rp(p.nilai/p.tx)}</td></tr>`}).join("")}
+    </tbody>
+    <tfoot>
       <tr class="total"><td></td><td>Total</td><td class="n">${num(R.paket.reduce((s,p)=>s+p.tx,0))}</td><td class="n"></td>
         <td class="n">${rp(R.paket.reduce((s,p)=>s+p.nilai,0))}</td><td class="n"></td></tr>
-    </tbody></table></div></div>
+    </tfoot>
+    </table></div></div>
   <div class="two" style="margin-bottom:14px">
     <div class="card"><h3>Order per admin</h3>
       ${barlist(R.admin.arr.map(a=>({k:a.nama+(R.roster.has(a.nama)?"":" ·"),v:a.n,sub:pct(a.porsi)})),"accent",num)}
@@ -3258,6 +3316,15 @@ function vEst(R){
               </tr>
             `).join("") : '<tr><td colspan="9" class="empty">Belum ada transaksi di Log Order Oktober.</td></tr>'}
           </tbody>
+          ${oktOrders.length ? `<tfoot>
+            <tr class="total">
+              <td colspan="4">Total Realisasi Live (${oktOrders.length} Order)</td>
+              <td class="n">${rp(oktOrders.reduce((s,o)=>s+dnum(o.cash),0))}</td>
+              <td class="n" style="color:var(--good);font-weight:600;">${rp(oktOrders.reduce((s,o)=>s+dnum(o.transfer),0))}</td>
+              <td class="n mono" style="font-weight:700;">${rp(oktOrders.reduce((s,o)=>s+dnum(o.total),0))}</td>
+              <td colspan="2"></td>
+            </tr>
+          </tfoot>` : ''}
         </table>
       </div>
       <div style="margin-top:10px;padding:8px 12px;background:var(--surface2);border-radius:6px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:12px;">
@@ -3367,9 +3434,9 @@ function vEst(R){
           </div>
         </div>
       </div>
-      <div class="tw" style="max-height:500px;overflow-y:auto;">
+      <div class="tw scrollable" style="max-height:500px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;">
         <table id="tblConfirmedBookings">
-          <thead>
+          <thead style="position:sticky;top:0;z-index:3;background:var(--surface2);">
             <tr>
               <th>Tanggal</th>
               <th>Waktu</th>
@@ -3399,6 +3466,14 @@ function vEst(R){
               </tr>
             `).join("")}
           </tbody>
+          <tfoot>
+            <tr class="total">
+              <td colspan="7">Total Sesi Terjadwal (${confirmedBookings.length} booking)</td>
+              <td class="n">${rp(totConfNilai)}</td>
+              <td class="n" style="color:var(--crit);">${rp(totConfDp)}</td>
+              <td class="n" style="color:var(--good);font-weight:700;">${rp(totConfPelunasan)}</td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
@@ -3422,9 +3497,9 @@ function vEst(R){
           </div>
         </div>
       </div>
-      <div class="tw" style="max-height:500px;overflow-y:auto;">
+      <div class="tw scrollable" style="max-height:500px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;">
         <table id="tblDoneBookings">
-          <thead>
+          <thead style="position:sticky;top:0;z-index:3;background:var(--surface2);">
             <tr>
               <th>Tanggal</th>
               <th>Waktu</th>
@@ -3454,6 +3529,14 @@ function vEst(R){
               </tr>
             `).join("")}
           </tbody>
+          <tfoot>
+            <tr class="total">
+              <td colspan="7">Total Sesi Selesai / Hadir (${doneBookings.length} booking)</td>
+              <td class="n">${rp(totDoneNilai)}</td>
+              <td class="n" style="color:var(--crit);">${rp(totDoneDp)}</td>
+              <td class="n" style="color:var(--good);font-weight:700;">${rp(totDonePelunasan)}</td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
@@ -3610,7 +3693,7 @@ function vEst(R){
           </div>
         </div>
 
-        <div class="tw" style="max-height:480px;overflow-y:auto;border:1px solid var(--hairline);border-radius:6px;">
+        <div class="tw scrollable" style="max-height:480px;overflow-y:auto;border:1px solid var(--hairline);border-radius:6px;">
           <table>
             <thead style="position:sticky;top:0;z-index:4;background:var(--surface);">
               <tr>
@@ -3773,6 +3856,15 @@ function vEst(R){
             </tr>
           `).join("") : '<tr><td colspan="10" class="empty">Tidak ada booking batal/reschedule (waste) di bulan ini.</td></tr>'}
         </tbody>
+        ${B.wasteBks.length ? `<tfoot>
+          <tr class="total">
+            <td colspan="6">Total Batal / Reschedule (${B.wasteBks.length} sesi)</td>
+            <td class="n">${rp(B.wasteTot)}</td>
+            <td class="n" style="color:var(--good);">${rp(B.wasteDp)}</td>
+            <td class="n" style="color:var(--crit);font-weight:700;">${rp(B.wasteLost)}</td>
+            <td></td>
+          </tr>
+        </tfoot>` : ''}
       </table>
     </div>
     <div class="note warn" style="margin-top:10px;font-size:12px;">
@@ -3829,7 +3921,17 @@ function vEst(R){
         <td class="n">${b.dp?rp(b.dp):'<span class="muted">—</span>'}</td>
         <td class="n"${b.sisa?'':' style="color:var(--muted)"'}>${rp(b.sisa)}</td>
         <td class="tiny muted">${esc(b.studioNama||String(b.studio))}${b.manual?' <span class="pill neutral" style="font-size:9px;padding:1px 5px">manual</span>':""}</td></tr>`).join("")}
-    </tbody></table></div>
+    </tbody>
+    ${B.fut.length ? `<tfoot>
+      <tr class="total">
+        <td colspan="4">Total Belum Masuk (${B.fut.length} sesi)</td>
+        <td class="n">${rp(B.fut.reduce((s,b)=>s+dnum(b.harga),0))}</td>
+        <td class="n">${rp(B.fut.reduce((s,b)=>s+dnum(b.dp),0))}</td>
+        <td class="n" style="font-weight:700;">${rp(B.fut.reduce((s,b)=>s+dnum(b.sisa),0))}</td>
+        <td></td>
+      </tr>
+    </tfoot>` : ''}
+    </table></div>
   </div>
 
   ${okp ? `
@@ -3969,6 +4071,8 @@ function vGaji(R){
       </thead>
       <tbody id="payrollTableBody">
         ${rowsHtml}
+      </tbody>
+      <tfoot>
         <tr class="total" id="payrollTableTotal">
           <td colspan="3"><b>Total Penggajian Studio (${mn} ${yr})</b></td>
           <td class="n mono" id="totQ">${list.reduce((s,r)=>s+dnum(r.q),0)}</td>
@@ -3982,7 +4086,7 @@ function vGaji(R){
           <td class="n mono" id="totTHPCol" style="font-weight:700;color:var(--accent);font-size:15px">${rp(sm.grand_total_thp)}</td>
           <td colspan="2"></td>
         </tr>
-      </tbody>
+      </tfoot>
     </table>
   </div>
 
@@ -4005,9 +4109,12 @@ function vGaji(R){
             <td class="n">${rs.length?rp(gj):'<span class="muted">tidak di kartu tarif</span>'}</td>
             <td class="n"${rs.length&&sisa<0?' style="color:var(--crit)"':""}>${
               rs.length?rp(sisa):'<span class="muted">—</span>'}</td></tr>`}).join("")}
+      </tbody>
+      <tfoot>
         <tr class="total"><td>Total Kasbon</td><td class="n mono" style="color:var(--crit)">${rp(R.kasbon)}</td>
           <td class="n mono">${rp(sm.total_gaji)}</td><td class="n mono" style="color:var(--accent)">${rp(sm.total_gaji-R.kasbon)}</td></tr>
-      </tbody></table></div>` : `<div class="empty">Belum ada kasbon bulan ini.</div>`}
+      </tfoot>
+      </table></div>` : `<div class="empty">Belum ada kasbon bulan ini.</div>`}
     </div>
 
     <div class="card">
@@ -4022,7 +4129,7 @@ function vGaji(R){
           <span class="m">prive, bukan biaya</span></div>
       </div>
       ${R.bonDoc.rows && R.bonDoc.rows.length ? `
-      <div class="tw" style="max-height:190px;overflow-y:auto"><table><thead><tr>
+      <div class="tw scrollable" style="max-height:190px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr>
         <th>Tgl</th><th>Nama</th><th>Keterangan</th><th class="n">Nilai</th>
       </tr></thead><tbody>
         ${R.bonDoc.rows.slice(0, 10).map(b => `<tr>
@@ -4031,7 +4138,14 @@ function vGaji(R){
           <td class="tiny muted">${esc(b.keterangan || b.grup)}</td>
           <td class="n mono" style="font-size:12px">${rp(b.nilai)}</td>
         </tr>`).join("")}
-      </tbody></table></div>` : ''}
+      </tbody>
+      <tfoot>
+        <tr class="total">
+          <td colspan="3">Total Pengeluaran Non-Foxe</td>
+          <td class="n mono" style="font-weight:700;">${rp(R.bonDoc.rows.reduce((s,b)=>s+dnum(b.nilai),0))}</td>
+        </tr>
+      </tfoot>
+      </table></div>` : ''}
     </div>
   </div>` : ''}
 
