@@ -155,7 +155,10 @@ def trigger_sync_state_endpoint():
     return sync_state_from_remote()
 
 @app.get("/webhook")
+@app.get("/webhook/whatsapp")
+@app.get("/webhook/fonnte")
 @app.get("/api/webhook")
+@app.get("/api/webhook/whatsapp")
 def webhook_test_get():
     return {"status": "ready", "message": "Foxe Webhook endpoint is active and listening for POST requests from Fonnte"}
 
@@ -212,8 +215,10 @@ def send_telegram_instant_lead(lead: dict, raw_msg: str):
         print(f"[WARN] Gagal kirim instant alert Telegram: {e}")
 
 @app.post("/webhook")
+@app.post("/webhook/whatsapp")
 @app.post("/webhook/fonnte")
 @app.post("/api/webhook")
+@app.post("/api/webhook/whatsapp")
 async def receive_fonnte_webhook(request: Request, background_tasks: BackgroundTasks):
     """
     Endpoint penangkap webhook dari Fonnte WhatsApp Gateway.
