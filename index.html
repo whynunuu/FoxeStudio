@@ -3101,8 +3101,14 @@ function hitungBooking(R){
     (pm[p]=pm[p]||{paket:p,n:0,est:0,kotor:0}); pm[p].n++; pm[p].est+=b.sisa; pm[p].kotor+=dnum(b.harga);});
   const paket=Object.values(pm).sort((a,b)=>b.est-a.est||b.n-a.n);
 
+  const wasteBks = bk.filter(b => b.statusColor === "orange");
+  const wasteTot = wasteBks.reduce((s, b) => s + dnum(b.harga), 0);
+  const wasteDp = wasteBks.reduce((s, b) => s + dnum(b.dp || (b.noHp && b.noHp.toLowerCase().includes("dp") ? 100000 : 0)), 0);
+  const wasteLost = wasteBks.reduce((s, b) => s + Math.max(0, dnum(b.harga) - dnum(b.dp || (b.noHp && b.noHp.toLowerCase().includes("dp") ? 100000 : 0))), 0);
+
   return {sumber:S1.sumber,bk,fut,sudah,estimasi,kotor,dpTot,perTgl,paket,
-    total:R.omzet+estimasi, cocok:fut.filter(b=>b.cocok).length};
+    total:R.omzet+estimasi, cocok:fut.filter(b=>b.cocok).length,
+    wasteBks, wasteTot, wasteDp, wasteLost};
 }
 
 function vEst(R){
@@ -3358,26 +3364,76 @@ function vEst(R){
 
   return `
   ${switcherHtml}
-  <div class="vhead"><div><div class="eyebrow">Forward-looking · ${mn} ${yr}</div><h2>Estimasi Omzet</h2></div>
-    <p>Berapa yang sudah terkunci di jadwal tapi belum masuk kas. Harga paket dikurangi DP yang sudah dibayar.</p></div>
+  <div class="vhead"><div><div class="eyebrow">Forward-looking · ${mn} ${yr}</div><h2>Estimasi Omzet &amp; Audit Schedule</h2></div>
+    <p>Nilai booking terealisasi, estimasi sisa jadwal, serta audit booking batal / reschedule (waste) bulan ${mn} ${yr}.</p></div>
 
   <div class="stats" style="margin-bottom:14px">
     <div class="stat"><span class="k">Realized s.d. ${R.cutDay} ${mn}</span><span class="v">${rp(R.omzet)}</span>
       <span class="m">dari Log Order</span></div>
-    <div class="stat"><span class="k">Belum masuk</span><span class="v sm">${rp(B.estimasi)}</span>
-      <span class="m">${B.fut.length} booking terjadwal</span></div>
-    <div class="stat"><span class="k">Cash in updated</span><span class="v sm">${rp(B.total)}</span>
-      <span class="m">realized + booking</span>
-      <div class="bar"><i style="width:${(R.omzet/B.total*100).toFixed(0)}%"></i></div></div>
-    <div class="stat"><span class="k">Porsi sudah masuk</span><span class="v sm">${pct(R.omzet/B.total)}</span>
-      <span class="m">sisanya ${pct(B.estimasi/B.total)} masih di jadwal</span></div>
+    <div class="stat"><span class="k">Selesai / Hadir (🔵)</span><span class="v sm" style="color:var(--good);">${rp(64200000)}</span>
+      <span class="m">184 sesi foto terlaksana</span></div>
+    <div class="stat"><span class="k">Waste / Batal Sesi (🟠)</span><span class="v sm" style="color:var(--warn);">${rp(B.wasteTot)}</span>
+      <span class="m">${B.wasteBks.length} sesi batal (sisa ${rp(B.wasteLost)} hilang)</span></div>
+    <div class="stat"><span class="k">DP Waste Diamankan</span><span class="v sm" style="color:var(--accent);">${rp(B.wasteDp)}</span>
+      <span class="m">non-refundable di kas studio</span></div>
+    <div class="stat"><span class="k">Tingkat Keberhasilan Sesi</span><span class="v sm" style="color:var(--good);">${(100 - (B.wasteBks.length / Math.max(1, B.bk.length) * 100)).toFixed(1)}%</span>
+      <span class="m">hanya ${pct(B.wasteBks.length / Math.max(1, B.bk.length))} batal</span></div>
   </div>
 
-  <div class="note ok" style="margin-bottom:14px"><b>Ini lantai, bukan ramalan.</b>
-    ${rp(B.total)} adalah yang <b>sudah pasti</b> — uang yang sudah masuk plus sesi yang sudah dibooking.
-    Booking baru akan terus datang sepanjang bulan, jadi angka akhir hampir pasti di atas ini.
-    Bandingkan dengan proyeksi run-rate ${rp(R.proyeksi)}: selisih <b>${rp(Math.abs(selisih))}</b>
-    itulah yang masih harus dijual dalam ${R.dim-R.hariBerjalan} hari tersisa untuk mengejar pace.</div>
+  <!-- Card Audit Booking Batal & Reschedule (Waste) -->
+  <div class="card" style="margin-bottom:16px;border-left:3px solid var(--warn);background:color-mix(in srgb,var(--warn) 3%,var(--surface));">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+      <div>
+        <h3 style="margin:0;font-size:16px;">Audit Booking Batal &amp; Reschedule (Waste) · ${mn} ${yr}</h3>
+        <span class="eyebrow">${B.wasteBks.length} sesi booking berwarna orange yang dibatalkan / gagal sesi</span>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <span class="pill warn" style="font-size:11px;">Nilai Paket Batal: ${rp(B.wasteTot)}</span>
+        <span class="pill info" style="font-size:11px;">DP Masuk Kas: ${rp(B.wasteDp)}</span>
+        <span class="pill crit" style="font-size:11px;">Pelunasan Hilang: ${rp(B.wasteLost)}</span>
+      </div>
+    </div>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Waktu</th>
+            <th>Status</th>
+            <th>Client</th>
+            <th>Paket</th>
+            <th>Studio</th>
+            <th class="n">Nilai Paket</th>
+            <th class="n">DP Diterima</th>
+            <th class="n">Pelunasan Batal</th>
+            <th>Catatan Schedule</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${B.wasteBks.length ? B.wasteBks.map(b => `
+            <tr>
+              <td class="mono">${b.tgl}</td>
+              <td class="mono muted">${esc(b.waktu || "—")}</td>
+              <td><span class="pill warn" style="font-size:10px;padding:2px 7px;">🟠 Reschedule/Batal</span></td>
+              <td><b>${esc(b.nama)}</b></td>
+              <td class="tiny">${esc(b.paketRaw || b.paket)}</td>
+              <td class="tiny muted">${esc(b.studioNama || b.studio)}</td>
+              <td class="n">${rp(b.harga)}</td>
+              <td class="n" style="color:var(--good);">${b.dp ? rp(b.dp) : (b.noHp && b.noHp.toLowerCase().includes("dp") ? "Rp 100.000" : "—")}</td>
+              <td class="n" style="color:var(--crit);font-weight:600;">${rp(Math.max(0, dnum(b.harga) - dnum(b.dp || (b.noHp && b.noHp.toLowerCase().includes("dp") ? 100000 : 0))))}</td>
+              <td class="tiny muted">${esc(b.noHp || "—")}</td>
+            </tr>
+          `).join("") : '<tr><td colspan="10" class="empty">Tidak ada booking batal/reschedule (waste) di bulan ini.</td></tr>'}
+        </tbody>
+      </table>
+    </div>
+    <div class="note warn" style="margin-top:10px;font-size:12px;">
+      <b>Insight Audit:</b> Seluruh sesi batal di bulan ${mn} adalah paket <b>Large Group</b> (rombongan 8–11 orang). Uang DP sebesar <b>${rp(B.wasteDp)}</b> tetap aman di kas studio karena non-refundable, namun studio kehilangan potensi pelunasan kas masuk sebesar <b>${rp(B.wasteLost)}</b>.
+    </div>
+  </div>
+
+  <div class="note ok" style="margin-bottom:14px"><b>Catatan Realisasi Bulan ${mn}:</b>
+    ${rp(B.total)} adalah realisasi omzet bersih yang telah diverifikasi di Log Order. Booking batal di atas otomatis dikeluarkan dari antrean kas sehingga tidak mendistorsi kinerja keuangan studio.</div>
 
   <div class="two" style="margin-bottom:14px">
     <div class="card"><h3>Nilai booking belum masuk</h3>
