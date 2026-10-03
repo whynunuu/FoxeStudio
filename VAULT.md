@@ -13,6 +13,7 @@ Dokumentasi ini menghubungkan workspace Foxe Agent dengan **Obsidian Vault** pri
 | **Arsitektur Keuangan** | `04 Projects/Foxe Studio - Arsitektur Keuangan & Log Sistem.md` | Standar mutlak COGS/OPEX dari section Detail Neraca, layout responsif 7 kolom, logo resmi, dan modul gaji karyawan. |
 | **Spesifikasi Parser** | `04 Projects/Foxe Studio - Parser Specs & Data Pipeline.md` | Dokumentasi teknis mendalam 4 parser produksi (`parser_neraca.py`, `parser_schedule.py`, `parser_log_order.py`, `deep_sync_foxe.py`). |
 | **Analisis Wisuda & Slot Orange** | `04 Projects/Foxe Studio - Analisis Wisuda & Recovery Slot Orange.md` | Analisis perbandingan performa cluster wisuda UNSOED vs UMP, evaluasi wasting deposit September vs Oktober, dan 5 rekomendasi penyelamatan booking label Orange. |
+| **Foxe Sentry Security** | `04 Projects/Foxe Studio - Sentry Security & Flow Reliability Agent.md` | Agen pengawas keandalan alur sistem: audit 5 checkpoint di jam malam (21:30 & 00:00 WIB), zero-guesswork eskalasi, format struk monospace 40 karakter di Telegram, dan auto-rollback. |
 
 ---
 
@@ -128,3 +129,22 @@ Unrealized Omzet               Rp 104.625.000
     * 🟠 **Kartu Pipeline Recovery CRM (10 Booking)**: Menampung slot kendala/reschedule berlabel orange dengan DP aman Rp 900.000 (masa berlaku 30 hari) dan potensi pelunasan tertunda Rp 2.900.000.
   - **Master Segment Switcher (`#segOktSplit`)**:
     `[ 📋 Tampilkan Keduanya (Pisah) ]`, `[ 🟢 Sesi Terjadwal (113) ]`, `[ 🔵 Sudah Foto / Selesai (31) ]`, `[ 🟠 Reschedule (10) ]`.
+
+---
+
+## 11. Foxe Sentry — Flow Security, Zero-Guesswork & Nightly Audit Protocol
+- **Dokumen Terkait**: `04 Projects/Foxe Studio - Sentry Security & Flow Reliability Agent.md` dan [`foxe_sentry.py`](file:///c:/Users/ASUS/OneDrive/Documents/Foxe%20Agent/foxe_sentry.py).
+- **Misi**: Menjamin kelancaran seluruh aliran data (GDrive ➔ Multi-Parser ➔ Reconcile Kasir ➔ JSON State ➔ Build Web) bebas dari *silent error*.
+- **Jadwal Nightly Cron (GitHub Actions)**:
+  - File: `.github/workflows/nightly_sentry.yml`
+  - Closing Studio: **21:30 WIB** (`30 14 * * *` UTC).
+  - Midnight Readiness: **00:00 WIB** (`0 17 * * *` UTC).
+- **Zero-Guesswork & Human-In-The-Loop Escalation**:
+  - Jika terjadi kegagalan teknis (file corrupt/hilang, skema rusak) **ATAU agen mengalami keraguan/kebingungan** (selisih kasir gantung, kru baru tak terdaftar, partisi tanggal bocor antar-bulan), agen **DILARANG BERASUMSI**, melainkan **WAJIB LANGSUNG ESKALASI KE OWNER VIA TELEGRAM (@NunuFxBot)** dan proses auto-push otomatis **DITAHAN**.
+- **Standar Desain Struk Monospace Telegram (Fit-In 40 Karakter)**:
+  - Seluruh laporan audit Sentry wajib dibungkus dalam blok `<pre>...</pre>` dengan batas lebar **presisi 40 kolom karakter**.
+  - Mengeliminasi problem *text-wrapping* / patah baris pada layar smartphone portrait.
+  - Mempertahankan keselarasan visual dengan struk closing kasir harian studio.
+- **Mekanisme Self-Healing & Rollback**:
+  - Snapshot terverifikasi sehat disimpan ke `foxe_full_state.json.bak`. Jika terjadi error fatal saat audit, state otomatis di-rollback ke snapshot tersebut untuk mencegah web crash.
+
