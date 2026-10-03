@@ -30,6 +30,10 @@
   /* permukaan gelap — dipakai untuk rail, bukan latar halaman */
   --rail:#181715; --rail2:#1f1e1b; --rail3:#252320;
   --on-rail:#faf9f5; --on-rail-soft:#a09d96; --rail-line:#2e2b27;
+  /* sidebar — mengikuti tema aktif (terang) */
+  --side:#f5f0e8; --side-hover:#e8e0d2; --side-line:#e2dacd;
+  --on-side:#141413; --on-side-soft:#6c6a64;
+  --side-w:230px; --side-w-min:68px;
   /* seri data */
   --cash:#1f7a68; --transfer:#0065b8; --lead:#96702a; --dp:#7d4a5f; --omzet:#3d3d3a;
   /* semantik */
@@ -52,6 +56,8 @@
   --on-accent:#ffffff;
   --rail:#100f0e; --rail2:#181715; --rail3:#22201d;
   --on-rail:#faf9f5; --on-rail-soft:#a09d96; --rail-line:#24221f;
+  --side:#100f0e; --side-hover:#22201d; --side-line:#24221f;
+  --on-side:#faf9f5; --on-side-soft:#a09d96;
   --cash:#3eb89b; --transfer:#0080c8; --lead:#e8a55a; --dp:#cf93a8; --omzet:#cfcbc3;
   --good:#5db872; --warn:#d4a017; --crit:#e07a68;
   --good-bg:#19271f; --warn-bg:#2a2414; --crit-bg:#2d1e1a;
@@ -74,25 +80,58 @@ a{color:var(--accent)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* ---------- shell ---------- */
-.app{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh;max-width:100%;width:100%;overflow-x:hidden}
-.rail{background:var(--rail);border-right:1px solid var(--rail-line);padding:22px 0 30px;
-  position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;gap:18px}
-.brand{padding:0 20px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.app{display:grid;grid-template-columns:var(--side-w) minmax(0,1fr);min-height:100vh;max-width:100%;width:100%;overflow-x:hidden;
+  transition:grid-template-columns .22s ease}
+.rail{background:var(--side);border-right:1px solid var(--side-line);padding:22px 0 30px;
+  position:sticky;top:0;height:100vh;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;gap:18px;
+  transition:background .2s,border-color .2s;scrollbar-width:thin;scrollbar-color:var(--side-line) transparent}
+.brand{padding:0 14px 0 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.brand-txt{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
 .brand .brand-img{height:28px;width:auto;max-width:160px;object-fit:contain;filter:brightness(1.15) drop-shadow(0 2px 8px rgba(0,85,184,0.35))}
+html:not([data-theme="dark"]) .brand .brand-img{filter:drop-shadow(0 1px 4px rgba(0,85,184,0.25))}
 .brand .sub{font-family:var(--ff-body);font-size:10px;font-weight:600;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--on-rail-soft);display:block;margin-top:0}
+  text-transform:uppercase;color:var(--on-side-soft);display:block;margin-top:0;white-space:nowrap}
+.rail-toggle{flex-shrink:0;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;
+  background:transparent;border:1px solid var(--side-line);border-radius:7px;color:var(--on-side-soft);
+  cursor:pointer;font-size:14px;line-height:1;padding:0;transition:background .12s,color .12s,transform .22s}
+.rail-toggle:hover{background:var(--side-hover);color:var(--on-side)}
 .nav{display:flex;flex-direction:column;gap:1px;padding:0 12px}
 .nav .grp{font-family:var(--ff-body);font-size:11px;font-weight:500;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--on-rail-soft);padding:16px 10px 6px}
+  text-transform:uppercase;color:var(--on-side-soft);padding:16px 10px 6px;white-space:nowrap}
 .nav button{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;
   text-align:left;background:none;border:0;padding:8px 12px;border-radius:8px;
-  color:var(--on-rail-soft);cursor:pointer;font-size:13.5px;font-weight:500;
+  color:var(--on-side-soft);cursor:pointer;font-size:13.5px;font-weight:500;
   transition:background .12s,color .12s}
-.nav button:hover{background:var(--rail3);color:var(--on-rail)}
+.nav button .nlw{display:flex;align-items:center;gap:10px;min-width:0}
+.nav button .ni{display:none;font-size:16px;line-height:1;width:20px;text-align:center}
+.nav button .nl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav button:hover{background:var(--side-hover);color:var(--on-side)}
 .nav button[aria-current="true"]{background:var(--accent);color:var(--on-accent);font-weight:600}
 .nav button[aria-current="true"] .cnt{color:rgba(255,255,255,0.85)}
-.nav .cnt{font-family:var(--ff-mono);font-size:11px;color:var(--on-rail-soft);
-  font-variant-numeric:tabular-nums}
+.nav .cnt{font-family:var(--ff-mono);font-size:11px;color:var(--on-side-soft);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.rail-foot{padding:10px 14px 16px;margin-top:auto}
+.flow-link{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:9px 12px;
+  background:color-mix(in srgb,var(--accent) 14%,transparent);border:1px solid color-mix(in srgb,var(--accent-ink) 40%,transparent);
+  border-radius:8px;color:var(--accent-ink);text-decoration:none;font-size:12px;font-weight:600;transition:all .15s;white-space:nowrap}
+.flow-link:hover{background:color-mix(in srgb,var(--accent) 22%,transparent)}
+.flow-link .fl-in{display:flex;align-items:center;gap:6px}
+.flow-link .fl-ai{font-size:9.5px;padding:1px 5px;background:var(--accent-ink);color:var(--canvas);font-weight:700;border-radius:4px}
+/* ---- sidebar minimize (ikon saja) ---- */
+.app.rail-min{grid-template-columns:var(--side-w-min) minmax(0,1fr)}
+.app.rail-min .brand{flex-direction:column;align-items:center;padding:0 8px;gap:12px}
+.app.rail-min .brand-txt{align-items:center}
+.app.rail-min .brand .brand-img{max-width:46px;height:auto}
+.app.rail-min .brand .sub{display:none}
+.app.rail-min .rail-toggle{transform:rotate(180deg)}
+.app.rail-min .nav{padding:0 10px}
+.app.rail-min .nav .grp{font-size:0;padding:0;height:1px;background:var(--side-line);margin:12px 6px}
+.app.rail-min .nav button{justify-content:center;padding:9px 0}
+.app.rail-min .nav button .ni{display:inline-block}
+.app.rail-min .nav button .nl,.app.rail-min .nav .cnt{display:none}
+.app.rail-min .rail-foot{padding:10px 10px 16px}
+.app.rail-min .flow-link{justify-content:center;padding:9px 0}
+.app.rail-min .flow-link .fl-txt,.app.rail-min .flow-link .fl-ai{display:none}
 .main{min-width:0;display:flex;flex-direction:column;background:var(--canvas);max-width:100%;width:100%;overflow-x:hidden}
 
 .app-header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--canvas) 92%,transparent);
@@ -313,7 +352,7 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
 
 @media (max-width:900px){
   html,body{overflow-x:hidden}
-  .app{grid-template-columns:1fr;overflow-x:hidden}
+  .app,.app.rail-min{grid-template-columns:1fr;overflow-x:hidden}
   .rail{display:none}
 
   /* Locked sticky app-header on mobile */
@@ -550,17 +589,20 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
   </div>
 </div>
 
-<div class="app">
-  <aside class="rail">
+<div class="app" id="appShell">
+  <aside class="rail" id="rail">
     <div class="brand">
-      <img src="logo_foxe.png" alt="Foxe Studio" class="brand-img">
-      <span class="sub">Laporan Keuangan</span>
+      <div class="brand-txt">
+        <img src="logo_foxe.png" alt="Foxe Studio" class="brand-img">
+        <span class="sub">Laporan Keuangan</span>
+      </div>
+      <button type="button" class="rail-toggle" id="btnRailToggle" title="Minimize sidebar (Ctrl+B)" aria-label="Minimize sidebar" aria-expanded="true">&#x00AB;</button>
     </div>
     <nav class="nav" id="nav"></nav>
-    <div style="padding:10px 14px 16px; margin-top:auto;">
-      <a href="flow.html" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:rgba(2,132,199,0.15);border:1px solid rgba(56,189,248,0.35);border-radius:8px;color:#38bdf8;text-decoration:none;font-size:12px;font-weight:600;transition:all .15s;" title="Buka Foxe Flow &amp; Pustaka Leads AI">
-        <span style="display:flex;align-items:center;gap:6px;">⚡ <span>Foxe Flow &amp; AI Leads</span></span>
-        <span style="font-size:9.5px;padding:1px 5px;background:#38bdf8;color:#000;font-weight:700;border-radius:4px;">AI</span>
+    <div class="rail-foot">
+      <a href="flow.html" class="flow-link" title="Buka Foxe Flow &amp; Pustaka Leads AI">
+        <span class="fl-in">⚡ <span class="fl-txt">Foxe Flow &amp; AI Leads</span></span>
+        <span class="fl-ai">AI</span>
       </a>
     </div>
   </aside>
@@ -1486,7 +1528,7 @@ function render(){
     const counts={trx:R.tx,biaya:R.ex.length,gaji:(R.rosterGaji||[]).length,shift:R.shiftTot,lead:R.ld.length,kpi:R.kpi.length,tahunan:"12 bln",ads:calLen?`${calLen} agenda`:null};
     let html="",lastGrp="";
     VIEWS.forEach(v=>{ if(v.grp!==lastGrp){html+=`<div class="grp">${v.grp}</div>`;lastGrp=v.grp}
-      html+=`<button data-v="${v.id}" aria-current="${view===v.id}">${v.label}${counts[v.id]!=null?`<span class="cnt">${counts[v.id]}</span>`:""}</button>`;});
+      html+=`<button data-v="${v.id}" aria-current="${view===v.id}" title="${v.label}"><span class="nlw"><span class="ni" aria-hidden="true">${v.icon||"•"}</span><span class="nl">${v.label}</span></span>${counts[v.id]!=null?`<span class="cnt">${counts[v.id]}</span>`:""}</button>`;});
     nav.innerHTML=html;
     if(tabs){
       tabs.innerHTML=VIEWS.map(v=>`<button data-v="${v.id}" aria-current="${view===v.id}">${v.icon?`<span class="tab-icon">${v.icon}</span> `:""}${v.label}</button>`).join("");
@@ -5010,6 +5052,33 @@ document.getElementById("btnExport").onclick=async e=>{
 // Initialize Theme
 const savedTheme = localStorage.getItem("foxe_studio_theme") || "dark";
 document.documentElement.setAttribute("data-theme", savedTheme);
+
+// Sidebar minimize (ikon saja) — status disimpan di localStorage
+(function(){
+  const shell=document.getElementById("appShell");
+  const btn=document.getElementById("btnRailToggle");
+  if(!shell||!btn) return;
+  const apply=min=>{
+    shell.classList.toggle("rail-min",min);
+    btn.setAttribute("aria-expanded",String(!min));
+    btn.title=min?"Perluas sidebar (Ctrl+B)":"Minimize sidebar (Ctrl+B)";
+    btn.setAttribute("aria-label",min?"Perluas sidebar":"Minimize sidebar");
+  };
+  apply(localStorage.getItem("foxe_studio_rail_min")==="1");
+  const toggle=()=>{
+    const min=!shell.classList.contains("rail-min");
+    apply(min);
+    localStorage.setItem("foxe_studio_rail_min",min?"1":"0");
+  };
+  btn.onclick=toggle;
+  document.addEventListener("keydown",e=>{
+    if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&!e.altKey&&(e.key==="b"||e.key==="B")){
+      const t=e.target, tag=(t&&t.tagName)||"";
+      if(tag==="INPUT"||tag==="TEXTAREA"||tag==="SELECT"||(t&&t.isContentEditable)) return;
+      e.preventDefault(); toggle();
+    }
+  });
+})();
 
 /* ============================ AUTHENTICATION SYSTEM (SOLUSI 1) ============================ */
 // Invalidate and force logout all previous sessions
