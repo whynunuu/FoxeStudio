@@ -17,7 +17,11 @@ from fastapi import FastAPI, Request, BackgroundTasks
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import urllib.request
-from agentic_lead_engine import AgenticLeadEngine, FOXE_PAYMENT_INFO, FONNTE_TOKEN, STATE_FILE
+import urllib.parse
+from agentic_lead_engine import (
+    AgenticLeadEngine, FOXE_PAYMENT_INFO, FONNTE_TOKEN, STATE_FILE,
+    TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+)
 
 WIB = timezone(timedelta(hours=7))
 REMINDER_HOURS = [9, 12, 15, 18, 21] # Jam operasional Foxe Studio (09:00 - 21:00 WIB, interval 3 jam)
@@ -155,6 +159,58 @@ def trigger_sync_state_endpoint():
 def webhook_test_get():
     return {"status": "ready", "message": "Foxe Webhook endpoint is active and listening for POST requests from Fonnte"}
 
+def send_telegram_instant_lead(lead: dict, raw_msg: str):
+    """
+    Mengirimkan alert real-time ke Telegram (@NunuFxBot) saat ada chat WhatsApp masuk:
+    - Nama & Nomor Client
+    - Klasifikasi Tier (Hot/Warm/Cold)
+    - Pesan asli
+    - Draft balasan AI siap copy-paste langsung
+    """
+    token = TELEGRAM_BOT_TOKEN
+    chat_id = TELEGRAM_CHAT_ID
+    if not token or not chat_id:
+        return
+
+    tier = lead.get("tier", "WARM")
+    badge = {
+        "HOT": "🔥 [HOT LEAD - MINTA REKENING / LOCK SLOT]",
+        "WARM": "⚡ [WARM LEAD - KONSULTASI PAKET]",
+        "COLD": "❄️ [COLD LEAD - TANYA UMUM/PRICELIST]",
+        "CLOSED": "✅ [DEAL - TERDAFTAR DI SPREADSHEET]"
+    }.get(tier, "📌 [PROSPEK BARU]")
+
+    name = lead.get("display_name", "Klien")
+    phone = lead.get("phone", "")
+    draft = lead.get("ai_recommendation", "")
+
+    text = (
+        f"🚨 <b>CHAT WHATSAPP MASUK (0851-5921-0021)</b>\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"👤 <b>Klien:</b> {name} (<code>{phone}</code>)\n"
+        f"🎯 <b>Klasifikasi:</b> {badge}\n"
+        f"💬 <b>Pesan Klien:</b>\n<i>\"{raw_msg}\"</i>\n\n"
+        f"🤖 <b>Rekomendasi Balasan AI (Siap Kirim):</b>\n"
+        f"<blockquote>{draft}</blockquote>\n\n"
+        f"👉 <a href=\"https://whynunuu.github.io/FoxeStudio/flow.html\"><b>Buka CRM & Kirim Balasan</b></a>"
+    )
+
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    payload = urllib.parse.urlencode({
+        "chat_id": chat_id,
+        "text": text,
+        "parse_mode": "HTML",
+        "disable_web_page_preview": True
+    }).encode("utf-8")
+
+    try:
+        req = urllib.request.Request(url, data=payload, headers={"User-Agent": "FoxeStudio/1.0"})
+        with urllib.request.urlopen(req, timeout=10) as r:
+            pass
+        print(f"[OK] Notifikasi prospek live terkirim ke Telegram ({name})")
+    except Exception as e:
+        print(f"[WARN] Gagal kirim instant alert Telegram: {e}")
+
 @app.post("/webhook")
 @app.post("/webhook/fonnte")
 @app.post("/api/webhook")
@@ -191,6 +247,10 @@ async def receive_fonnte_webhook(request: Request, background_tasks: BackgroundT
 
     # Proses pesan lewat engine AI
     result = engine.ingest_fonnte_message(payload)
+
+    # Kirim real-time alert ke Telegram jika pesan prospek valid
+    if result.get("status") == "success" and result.get("lead"):
+        background_tasks.add_task(send_telegram_instant_lead, result["lead"], message)
 
     print(f"[{datetime.datetime.now().strftime('%H:%M:%S')}] Webhook Masuk: {name} ({sender}) -> Tier: {result.get('tier')}")
     print(f"  AI Draft: {result.get('ai_recommendation')}")

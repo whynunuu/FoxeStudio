@@ -213,31 +213,54 @@ class AgenticLeadEngine:
     def match_with_spreadsheet(self, phone: str, name: str) -> Optional[Dict[str, Any]]:
         """
         Multi-Layer Matching:
-        1. Nomor HP cocok dengan phone di Log Order
-        2. Nama client cocok persis atau sebagian (fuzzy)
+        1. Nomor HP cocok persis (min 8 digit)
+        2. Nama client cocok persis atau multi-kata di bulan aktif / pipeline berjalan
         """
         clean_phone = "".join(filter(str.isdigit, phone))
         if clean_phone.startswith("0"):
             clean_phone = "62" + clean_phone[1:]
+        valid_phone = len(clean_phone) >= 9
 
-        orders = self.state.get("orders", [])
-        schedule = (self.state.get("schedule") or {}).get("bookings", [])
+        # Ambil transaksi bulan aktif (Oktober 2026) dan pipeline berjalan
+        active_orders = [o for o in self.state.get("orders", []) if str(o.get("tanggal", "")).startswith("2026-10")]
+        if not active_orders:
+            active_orders = self.state.get("orders", [])[-50:] # Fallback 50 transaksi terakhir
+        
         okt_pipe = (self.state.get("oktoberPipeline") or {}).get("allBookings", [])
+        schedule = (self.state.get("schedule") or {}).get("bookings", [])
 
-        # Layer 1: Check Orders (Sudah DP/Lunas)
-        for ord in orders:
-            ord_client = str(ord.get("client", "")).strip().lower()
+        norm_name = name.strip().lower()
+
+        def is_match_name(target: str) -> bool:
+            t = target.strip().lower()
+            if not t or not norm_name:
+                return False
+            if t == norm_name:
+                return True
+            w1 = set(norm_name.split())
+            w2 = set(t.split())
+            if len(w1) >= 2 and len(w2) >= 2 and len(w1.intersection(w2)) >= 2:
+                return True
+            return False
+
+        # Layer 1: Check Orders Aktif (Sudah DP/Lunas di Kasir)
+        for ord in active_orders:
+            ord_client = str(ord.get("client", "")).strip()
             ord_phone = str(ord.get("phone", "")).strip()
             clean_ord_phone = "".join(filter(str.isdigit, ord_phone))
-            if clean_ord_phone and clean_phone and clean_ord_phone == clean_phone:
+            if valid_phone and clean_ord_phone and clean_ord_phone == clean_phone:
                 return {"type": "order", "match": "phone", "data": ord}
-            if name and ord_client and (name.lower() in ord_client or ord_client in name.lower()):
+            if norm_name and ord_client and is_match_name(ord_client):
                 return {"type": "order", "match": "name", "data": ord}
 
-        # Layer 2: Check Schedule Pipeline
-        for bk in (schedule + okt_pipe):
-            bk_client = str(bk.get("client", "")).strip().lower()
-            if name and bk_client and (name.lower() in bk_client or bk_client in name.lower()):
+        # Layer 2: Check Schedule Pipeline (Sudah terjadwal)
+        for bk in (okt_pipe + schedule):
+            bk_client = str(bk.get("client") or bk.get("nama") or "").strip()
+            bk_phone = str(bk.get("noHp") or bk.get("phone") or "").strip()
+            clean_bk_phone = "".join(filter(str.isdigit, bk_phone))
+            if valid_phone and clean_bk_phone and clean_bk_phone == clean_phone:
+                return {"type": "pipeline", "match": "phone", "data": bk}
+            if norm_name and bk_client and is_match_name(bk_client):
                 return {"type": "pipeline", "match": "name", "data": bk}
 
         return None
@@ -349,6 +372,16 @@ class AgenticLeadEngine:
         msg = str(payload.get("message", "")).strip()
         ts = payload.get("timestamp") or int(time.time())
         t_str = datetime.datetime.fromtimestamp(ts).strftime("%Y-%m-%d %H:%M:%S")
+
+        # 1. Abaikan pesan dari grup WhatsApp
+        if "@g.us" in sender or "-" in sender:
+            return {"status": "ignored", "reason": "Pesan dari grup WhatsApp diabaikan"}
+
+        # 2. Abaikan pesan keluar dari nomor admin studio sendiri
+        clean_sender = "".join(filter(str.isdigit, sender))
+        clean_dev = "".join(filter(str.isdigit, str(payload.get("device", ""))))
+        if clean_sender in ("6285159210021", "085159210021") or (clean_dev and clean_sender == clean_dev):
+            return {"status": "ignored", "reason": "Pesan keluar dari admin studio"}
 
         # Cek apakah nomor sudah ada di database
         lead = next((l for l in self.leads if l["phone"] == sender), None)
