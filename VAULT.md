@@ -12,6 +12,7 @@ Dokumentasi ini menghubungkan workspace Foxe Agent dengan **Obsidian Vault** pri
 | **Workflow Foxe Studio** | `04 Projects/Workflow Foxe Studio.md` | Prosedur pelaporan studio foto, alur trigger otomatis `ayo kerja`, dan jadwal cloud cron. |
 | **Arsitektur Keuangan** | `04 Projects/Foxe Studio - Arsitektur Keuangan & Log Sistem.md` | Standar mutlak COGS/OPEX dari section Detail Neraca, layout responsif 7 kolom, logo resmi, dan modul gaji karyawan. |
 | **Spesifikasi Parser** | `04 Projects/Foxe Studio - Parser Specs & Data Pipeline.md` | Dokumentasi teknis mendalam 4 parser produksi (`parser_neraca.py`, `parser_schedule.py`, `parser_log_order.py`, `deep_sync_foxe.py`). |
+| **Analisis Wisuda & Slot Orange** | `04 Projects/Foxe Studio - Analisis Wisuda & Recovery Slot Orange.md` | Analisis perbandingan performa cluster wisuda UNSOED vs UMP, evaluasi wasting deposit September vs Oktober, dan 5 rekomendasi penyelamatan booking label Orange. |
 
 ---
 
@@ -114,3 +115,16 @@ Unrealized Omzet               Rp 104.625.000
   - Jika reschedule ke tanggal baru, sesi akan dicatat di slot baru untuk mencegah *double counting*.
   - **Ketentuan Masa Berlaku DP (30 Hari)**: Uang DP klien pada slot Orange **TETAP BERLAKU SELAMA 30 HARI** sejak tanggal sesi aslinya. Booking Orange dialihkan ke **Pipeline Recovery CRM** untuk di-follow up penjadwalan ulang (*re-booking*) sebelum 30 hari berakhir demi menyelamatkan potensi pelunasan yang tertunda.
 
+
+---
+
+## 10. Arsitektur Pemisahan Tabel Booking di Halaman Estimasi Omzet
+
+- **Pemisahan Sesi Booking (Oktober 2026)**:
+  - Antarmuka tidak lagi mencampur sesi terjadwal dengan sesi yang sudah selesai dalam satu tabel panjang.
+  - Dipisahkan menjadi **dua kartu tabel terpisah**:
+    * 🟢 **Kartu Sesi Terjadwal (113 Booking)**: Nilai paket Rp 40,95 jt, estimasi kas masuk Rp 30,55 jt. Dilengkapi filter & search box mandiri (`#confSearchInput`, `#confCatFilter`).
+    * 🔵 **Kartu Sesi Selesai (31 Booking)**: Nilai paket Rp 10,23 jt, pelunasan kasir masuk Rp 7,33 jt. Dilengkapi filter & search box mandiri (`#doneSearchInput`, `#doneCatFilter`).
+    * 🟠 **Kartu Pipeline Recovery CRM (10 Booking)**: Menampung slot kendala/reschedule berlabel orange dengan DP aman Rp 900.000 (masa berlaku 30 hari) dan potensi pelunasan tertunda Rp 2.900.000.
+  - **Master Segment Switcher (`#segOktSplit`)**:
+    `[ 📋 Tampilkan Keduanya (Pisah) ]`, `[ 🟢 Sesi Terjadwal (113) ]`, `[ 🔵 Sudah Foto / Selesai (31) ]`, `[ 🟠 Reschedule (10) ]`.

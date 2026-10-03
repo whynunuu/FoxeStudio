@@ -131,3 +131,10 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
   - Namun, data booking Orange wajib dialihkan ke **Pipeline Recovery CRM** agar admin aktif mem-follow up penjadwalan ulang (*re-book*) sebelum 30 hari berakhir, sehingga potensi pelunasan yang tertunda dapat terealisasi kembali.
 - **Integrasi Visual Dashboard**: Menampilkan badge status sesi (🔵 *Selesai/Hadir*, 🟢 *Terjadwal*, 🟠 *Reschedule*) dan tombol filter status cepat pada tabel daftar booking.
 
+### 11. Pemisahan Tampilan Booking di Dashboard (Terjadwal vs Sudah Selesai Hadir):
+- Di section Estimasi Omzet (Oktober 2026), daftar booking tidak lagi disatukan dalam 1 tabel panjang, melainkan dipisahkan menjadi dua kartu tabel mandiri dengan Master Segment Switcher (`#segOktSplit`):
+  * `[ 📋 Tampilkan Keduanya (Pisah) ]`
+  * `[ 🟢 Sesi Terjadwal (113) ]`
+  * `[ 🔵 Sudah Foto / Selesai (31) ]`
+  * `[ 🟠 Reschedule (10) ]`
+- Masing-masing tabel dilengkapi pencarian mandiri (`#confSearchInput`, `#doneSearchInput`) dan filter kategori mandiri (`#confCatFilter`, `#doneCatFilter`).
