@@ -1,0 +1,40 @@
+name: Foxe Sentry - Nightly Reliability & Security Audit
+
+on:
+  schedule:
+    # 21:30 WIB (Post-Closing Audit) = 14:30 UTC
+    - cron: '30 14 * * *'
+    # 00:00 WIB (Midnight Readiness Check) = 17:00 UTC
+    - cron: '0 17 * * *'
+  workflow_dispatch: # Pemicu manual dari web GitHub / HP kapan pun dibutuhkan
+
+concurrency:
+  group: 'foxe-sentry'
+  cancel-in-progress: false
+
+jobs:
+  sentry_audit:
+    name: Foxe Sentry Flow & Integrity Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Foxe Sentry Audit (Nightly Mode)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python foxe_sentry.py --nightly
