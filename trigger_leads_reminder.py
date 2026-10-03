@@ -47,6 +47,19 @@ try:
     except Exception as e:
         print(f"[WARN] Menggunakan data leads lokal: {e}")
 
+    # Cek apakah Railway sudah berhasil mengirim reminder untuk slot jam ini agar tidak duplikat
+    try:
+        req_status = urllib.request.Request("https://foxestudio.up.railway.app/api/reminder-status", headers={"User-Agent": "FoxeReminder/1.0"})
+        with urllib.request.urlopen(req_status, timeout=5) as r_stat:
+            if r_stat.status == 200:
+                stat_data = json.loads(r_stat.read().decode("utf-8"))
+                current_slot = f"{now_wib.strftime('%Y-%m-%d')}_{now_wib.hour:02d}"
+                if stat_data.get("last_reminder_slot") == current_slot:
+                    print(f"[INFO] Reminder untuk slot {hour_label} sudah dikirim oleh Railway. GitHub Actions melewati trigger agar tidak duplikat.")
+                    sys.exit(0)
+    except Exception as e:
+        print(f"[INFO] Pengecekan status Railway dilewati ({e}).")
+
     result = engine.send_followup_reminder(current_hour_str=hour_label)
     print("Hasil Pengiriman Reminder:", result)
     if result.get("telegram") or result.get("whatsapp"):

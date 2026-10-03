@@ -5,16 +5,6 @@ on:
     # Auto-Sync Cloud Setiap 3 Jam di Jam Operasional Studio (09:00, 12:00, 15:00, 18:00, 21:00 WIB)
     # Konversi UTC: 02:00, 05:00, 08:00, 11:00, 14:00 UTC (WIB = UTC + 7)
     - cron: '0 2,5,8,11,14 * * *'
-  push:
-    branches:
-      - main
-    paths:
-      - 'deep_sync_foxe.py'
-      - 'parser_*.py'
-      - 'assemble_app.py'
-      - 'telegram_notifier.py'
-      - 'requirements.txt'
-      - '.github/workflows/**'
   workflow_dispatch: # Tombol "Run workflow" manual dari web GitHub / HP
 
 permissions:

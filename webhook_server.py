@@ -25,7 +25,7 @@ from agentic_lead_engine import (
 
 WIB = timezone(timedelta(hours=7))
 REMINDER_HOURS = [10, 14, 20] # Jam pengiriman reminder Foxe Studio (10:00, 14:00, 20:00 WIB)
-last_reminder_hour = -1
+last_reminder_slot = ""
 
 app = FastAPI(
     title="Foxe Studio AI Lead Webhook & Follow-Up Reminder",
@@ -83,8 +83,9 @@ async def reminder_scheduler_loop():
     Background Task Scheduler 24/7 di Railway:
     Mengecek waktu lokal WIB setiap menit. Jika berada di jadwal reminder studio
     (10:00, 14:00, 20:00 WIB), kirim reminder follow-up ke WhatsApp & Telegram.
+    Hanya dikirim TEPAT SATU KALI per slot jam.
     """
-    global last_reminder_hour
+    global last_reminder_slot
     if not REMINDER_ENABLED:
         print("[SCHEDULER] Background Reminder Scheduler DINONAKTIFKAN.")
         return
@@ -93,15 +94,14 @@ async def reminder_scheduler_loop():
         try:
             now_wib = datetime.datetime.now(WIB)
             current_hour = now_wib.hour
+            current_slot = f"{now_wib.strftime('%Y-%m-%d')}_{current_hour:02d}"
 
-            if current_hour in REMINDER_HOURS and current_hour != last_reminder_hour:
+            if current_hour in REMINDER_HOURS and current_slot != last_reminder_slot:
                 hour_label = f"{current_hour:02d}:00 WIB"
-                print(f"[{now_wib.strftime('%H:%M:%S')} WIB] Mengeksekusi trigger reminder 3 jam ({hour_label})...")
-                last_reminder_hour = current_hour
+                print(f"[{now_wib.strftime('%H:%M:%S')} WIB] Mengeksekusi trigger reminder ({hour_label})...")
+                last_reminder_slot = current_slot
                 res = engine.send_followup_reminder(current_hour_str=hour_label)
                 print(f"[SCHEDULER SELESAI] Hasil: {res}")
-            elif current_hour not in REMINDER_HOURS:
-                last_reminder_hour = -1
         except Exception as e:
             print(f"[SCHEDULER ERROR] {e}")
 
@@ -145,6 +145,17 @@ def trigger_reminder_endpoint(hour: Optional[str] = None):
     hour_label = hour or f"{now_wib.strftime('%H:%M')} WIB"
     result = engine.send_followup_reminder(current_hour_str=hour_label)
     return result
+
+@app.get("/api/reminder-status")
+def reminder_status():
+    """Status scheduler reminder untuk verifikasi dan sinkronisasi dengan GitHub Actions."""
+    now_wib = datetime.datetime.now(WIB)
+    return {
+        "status": "active" if REMINDER_ENABLED else "disabled",
+        "schedule": ["10:00 WIB", "14:00 WIB", "20:00 WIB"],
+        "last_reminder_slot": last_reminder_slot,
+        "current_time_wib": now_wib.strftime("%Y-%m-%d %H:%M:%S WIB")
+    }
 
 @app.get("/api/sync-state")
 @app.post("/api/sync-state")
@@ -253,8 +264,10 @@ async def receive_fonnte_webhook(request: Request, background_tasks: BackgroundT
     # Proses pesan lewat engine AI
     result = engine.ingest_fonnte_message(payload)
 
-    # Kirim real-time alert ke Telegram jika pesan prospek valid
-    if result.get("status") == "success" and result.get("lead"):
+    # PERHATIAN: Alert instan per chat dinonaktifkan secara default agar Telegram tidak dibanjiri pesan.
+    # Seluruh notifikasi dikirimkan terpadu sesuai jadwal resmi (10:00, 14:00, 20:00 WIB).
+    ENABLE_INSTANT_ALERT = os.environ.get("ENABLE_INSTANT_TELEGRAM_ALERT", "false").lower() in ("true", "1", "yes")
+    if ENABLE_INSTANT_ALERT and result.get("status") == "success" and result.get("lead"):
         background_tasks.add_task(send_telegram_instant_lead, result["lead"], message)
 
     print(f"[{datetime.datetime.now().strftime('%H:%M:%S')}] Webhook Masuk: {name} ({sender}) -> Tier: {result.get('tier')}")
