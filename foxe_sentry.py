@@ -381,6 +381,59 @@ class FoxeSentry:
             })
 
     # =========================================================================
+    # STRUK RECEIPT GENERATOR: Mobile Fit-In Monospace View (40 Chars)
+    # =========================================================================
+    def build_receipt_view(self, title="FOXE SENTRY AUDIT SYSTEM", status_badge="100% HEALTHY & READY"):
+        w = 40
+        lines = []
+        lines.append("=" * w)
+        lines.append(f"{title:^{w}}")
+        lines.append("=" * w)
+        lines.append(f"{'WAKTU  : ' + self.timestamp:<{w}}")
+        lines.append(f"{'STATUS : ' + status_badge:<{w}}")
+        lines.append("-" * w)
+        lines.append(f"{'CHECKPOINT AUDIT':<32}{'STATUS':>8}")
+        lines.append("-" * w)
+
+        # Status per checkpoint secara dinamis
+        cp1_stat = "FAIL" if any(e["cp"].startswith("CP-1") for e in self.critical_errors) else "PASS"
+        cp2_stat = "FAIL" if any(e["cp"].startswith("CP-2") for e in self.critical_errors) else "PASS"
+        cp3_stat = "WARN" if any(a["cp"].startswith("CP-3") for a in self.confusions_anomalies) else "PASS"
+        cp4_stat = "WARN" if any(a["cp"].startswith("CP-4") for a in self.confusions_anomalies) else "PASS"
+        cp5_stat = "FAIL" if any(e["cp"].startswith("CP-5") for e in self.critical_errors) else "PASS"
+
+        items = [
+            ("01. Ingestion 7 File GDrive", cp1_stat),
+            ("02. Skema State JSON", cp2_stat),
+            ("03. Kasir September", cp3_stat),
+            ("04. Kasir Oktober", cp3_stat),
+            ("05. Neraca Detail Mutasi", cp3_stat),
+            ("06. Anti-Silang Bulan Partisi", cp4_stat),
+            ("07. Anti-Ghost Slot (DP 30h)", cp4_stat),
+            ("08. Web Frontend Build", cp5_stat),
+            ("09. Live Web Endpoint", cp5_stat),
+        ]
+
+        for name, st in items:
+            lines.append(f"{name:<32}{st:>8}")
+
+        lines.append("-" * w)
+        pass_count = sum(1 for _, st in items if st == "PASS")
+        warn_count = sum(1 for _, st in items if st == "WARN")
+        fail_count = sum(1 for _, st in items if st == "FAIL")
+
+        lines.append(f"{f'TOTAL  : {pass_count} PASS / {warn_count} WARN / {fail_count} FAIL':<{w}}")
+        if fail_count == 0 and warn_count == 0:
+            lines.append(f"{'HASIL  : SEMUA FLOW SEHAT & SIAP BESOK':<{w}}")
+        elif fail_count > 0:
+            lines.append(f"{'HASIL  : EMERGENCY STOP / AUTO-PUSH HOLD':<{w}}")
+        else:
+            lines.append(f"{'HASIL  : ANOMALI DETEKSI / BUTUH OWNER':<{w}}")
+        lines.append("=" * w)
+
+        return "\n".join(lines)
+
+    # =========================================================================
     # DISPATCHER: Eskalasi Laporan ke Telegram (@NunuFxBot)
     # =========================================================================
     def dispatch_incident_report(self):
@@ -393,11 +446,14 @@ class FoxeSentry:
 
         # SKENARIO A: TECHNICAL CRITICAL FAILURE
         if has_critical:
+            receipt = self.build_receipt_view(
+                title="FOXE SENTRY: CRITICAL ERROR",
+                status_badge="CRITICAL FAILURE DETECTED"
+            )
             text = (
-                "🚨 <b>[FOXE SENTRY: TECHNICAL FAILURE]</b> ❌\n"
-                f"<b>Waktu:</b> <code>{self.timestamp}</code>\n"
-                "<b>Status:</b> CRITICAL ERROR DETECTED ❌\n\n"
-                "<b>Rincian Masalah:</b>\n"
+                "🚨 <b>[FOXE SENTRY: TECHNICAL FAILURE]</b> ❌\n\n"
+                f"<pre>{receipt}</pre>\n\n"
+                "<b>Rincian Error Kritis:</b>\n"
             )
             for err in self.critical_errors:
                 text += f"❌ <b>[{err['cp']}]</b> {err['desc']}\n  👉 <i>Saran: {err['action']}</i>\n"
@@ -413,10 +469,13 @@ class FoxeSentry:
 
         # SKENARIO B: LOGIC ANOMALY / AGEN BINGUNG (HUMAN-IN-THE-LOOP)
         if has_anomalies:
+            receipt = self.build_receipt_view(
+                title="FOXE SENTRY: ANOMALY ALERT",
+                status_badge="ANOMALY DETECTED (ON HOLD)"
+            )
             text = (
-                "🤔 <b>[FOXE SENTRY: LOGIC ANOMALY / BINGUNG]</b> ⚠️\n"
-                f"<b>Waktu:</b> <code>{self.timestamp}</code>\n"
-                "<b>Kategori:</b> KETIDAKSESUAIAN LOGIKA KASIR / DATA AMBIGU ⚖️\n\n"
+                "🤔 <b>[FOXE SENTRY: LOGIC ANOMALY / BINGUNG]</b> ⚠️\n\n"
+                f"<pre>{receipt}</pre>\n\n"
                 "<b>Temuan Sentry:</b>\n"
             )
             for anom in self.confusions_anomalies:
@@ -433,23 +492,16 @@ class FoxeSentry:
 
         # SKENARIO C: ALL GREEN (NIGHTLY AUDIT PASSED)
         if self.mode in ["nightly", "verbose"]:
-            text = (
-                "🛡️ <b>[FOXE SENTRY: NIGHTLY AUDIT PASSED]</b> ✅\n"
-                f"<b>Waktu:</b> <code>{self.timestamp}</code>\n"
-                "<b>Status:</b> SEMUA FLOW SEHAT & SIAP OPERASIONAL BESOK ✨\n\n"
-                "<b>Checklist Keamanan:</b>\n"
+            receipt = self.build_receipt_view(
+                title="FOXE SENTRY AUDIT SYSTEM",
+                status_badge="100% HEALTHY & OPERATIONAL"
             )
-            for p in self.passed_checks:
-                # Ganti [OK] menjadi centang hijau ✅
-                clean_p = p.replace("[OK]", "").strip()
-                text += f"✅ {clean_p}\n"
-
-            if self.warnings:
-                text += "\n<b>Catatan Pengawasan:</b>\n"
-                for w in self.warnings:
-                    text += f"⚠️ {w['desc']}\n"
-
-            text += "\n<i>Semua sistem terjaga aman. Selamat beristirahat! 🌙</i>"
+            text = (
+                "🛡️ <b>[FOXE SENTRY: NIGHTLY AUDIT PASSED]</b> ✅\n\n"
+                f"<pre>{receipt}</pre>\n\n"
+                "✨ <i>Semua flow operasional aman terkendali. Selamat beristirahat! 🌙</i>\n"
+                "👉 <a href=\"https://whynunuu.github.io/FoxeStudio/\"><b>Buka Dashboard Live Foxe Studio</b></a>"
+            )
             send_telegram_message(text)
             self.log("ALERT", "Pesan konfirmasi All-Clear terkirim ke Telegram.")
 
