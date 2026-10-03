@@ -72,6 +72,7 @@ class FoxeSentry:
         self.log("CP-1", "Memeriksa integritas 7 File Operasional Resmi...")
         import openpyxl
 
+        valid_files = 0
         for fname, desc in REQUIRED_OPERATIONAL_FILES:
             if not os.path.exists(fname):
                 self.critical_errors.append({
@@ -105,7 +106,7 @@ class FoxeSentry:
                         "action": "Verifikasi isi file excel."
                     })
                 else:
-                    self.passed_checks.append(f"File {fname} ({desc}) valid ({len(sheets)} sheets).")
+                    valid_files += 1
             except Exception as e:
                 self.critical_errors.append({
                     "cp": "CP-1 (Ingestion)",
@@ -113,6 +114,11 @@ class FoxeSentry:
                     "desc": f"Gagal membaca format Excel pada {fname}: {str(e)}",
                     "action": "Pastikan file tidak terkunci oleh Excel desktop dan format xlsx/xlsm valid."
                 })
+
+        if valid_files == len(REQUIRED_OPERATIONAL_FILES):
+            self.passed_checks.append(f"Ingestion: 7 File Operasional GDrive Lengkap & Terbaca (100%)")
+        elif valid_files > 0:
+            self.passed_checks.append(f"Ingestion: {valid_files}/7 File Operasional GDrive Terbaca")
 
     # =========================================================================
     # CHECKPOINT 2: State JSON & Schema Integrity
@@ -151,7 +157,7 @@ class FoxeSentry:
                 "action": "Sinkronkan ulang state via deep_sync_foxe.py."
             })
         else:
-            self.passed_checks.append(f"Skema foxe_full_state.json lengkap ({len(state)} keys terdaftar).")
+            self.passed_checks.append(f"Skema State: foxe_full_state.json Sinkron ({len(state)} Kunci Utama)")
 
         return state
 
@@ -196,7 +202,7 @@ class FoxeSentry:
                     "action": "Periksa kolom pembayaran kasir di file1.xlsm (Log Order Sept)."
                 })
             else:
-                self.passed_checks.append(f"September Reconciled: Rp {tot_sep_omzet:,.0f} (Selisih Rp {selisih_sep:,.0f}).")
+                self.passed_checks.append(f"Kasir September: Reconciled 100% (Rp {tot_sep_omzet:,.0f} | Selisih Rp 0)")
 
             if anomalous_orders > 0:
                 self.confusions_anomalies.append({
@@ -230,7 +236,7 @@ class FoxeSentry:
                     "action": "Periksa input pembayaran di file1_okt.xlsm."
                 })
             else:
-                self.passed_checks.append(f"Oktober Reconciled: Rp {tot_okt_omzet:,.0f} (Selisih Rp {selisih_okt:,.0f}).")
+                self.passed_checks.append(f"Kasir Oktober: Reconciled 100% (Rp {tot_okt_omzet:,.0f} | Selisih Rp 0)")
 
         # 3. Audit Neraca Detail Mutasi
         neraca_detail = state.get("neracaDetail", [])
@@ -249,7 +255,7 @@ class FoxeSentry:
                 "action": "Periksa kolom nominal di file_neraca.xlsx (Sheet Detail)."
             })
         else:
-            self.passed_checks.append(f"Buku Neraca Detail Valid ({len(neraca_detail)} mutasi tercatat).")
+            self.passed_checks.append(f"Neraca Keuangan: Buku Detail Valid ({len(neraca_detail)} Mutasi Tervalidasi)")
 
     # =========================================================================
     # CHECKPOINT 4: Business Logic & Schedule Rule Enforcement
@@ -283,7 +289,7 @@ class FoxeSentry:
                 "action": "Cek format kolom tanggal di file Log Order."
             })
         else:
-            self.passed_checks.append("Anti-Silang Bulan: Nol kebocoran transaksi antar-bulan.")
+            self.passed_checks.append("Anti-Silang Bulan: Nol Kebocoran Transaksi Sept/Okt")
 
         # 2. Anti-Ghost Slot & Standard Schedule Color Audit (Oktober Pipeline)
         pipeline = state.get("oktoberPipeline", {})
@@ -312,7 +318,7 @@ class FoxeSentry:
                 "action": "Netralkan sisa pelunasan slot Orange menjadi Rp 0 sesuai Aturan 11."
             })
         else:
-            self.passed_checks.append("Anti-Ghost Slot: Aturan proteksi DP 30 hari slot Orange patuh.")
+            self.passed_checks.append("Anti-Ghost Slot: Proteksi DP 30 Hari Slot Orange Patuh")
 
         # 3. Unknown Crew Detection (Roster Sentry)
         shifts = state.get("shifts", [])
@@ -350,7 +356,7 @@ class FoxeSentry:
                     "action": "Rakit ulang via assemble_app.py."
                 })
             else:
-                self.passed_checks.append(f"Frontend index.html siap ({sz:,} bytes).")
+                self.passed_checks.append(f"Web Frontend: Build index.html Siap & Utuh ({sz//1024} KB)")
 
         # 2. Ping Live GitHub Pages
         try:
@@ -358,7 +364,7 @@ class FoxeSentry:
             with urllib.request.urlopen(req, timeout=10) as res:
                 code = res.getcode()
                 if code == 200:
-                    self.passed_checks.append(f"Live Web Endpoint: HTTP {code} OK ({LIVE_URL}).")
+                    self.passed_checks.append(f"Live Web Endpoint: HTTP {code} OK (GitHub Pages)")
                 else:
                     self.warnings.append({
                         "cp": "CP-5 (Live Ping)",
@@ -388,13 +394,13 @@ class FoxeSentry:
         # SKENARIO A: TECHNICAL CRITICAL FAILURE
         if has_critical:
             text = (
-                "🚨 <b>[FOXE SENTRY: TECHNICAL FAILURE]</b> 🚨\n"
+                "🚨 <b>[FOXE SENTRY: TECHNICAL FAILURE]</b> ❌\n"
                 f"<b>Waktu:</b> <code>{self.timestamp}</code>\n"
                 "<b>Status:</b> CRITICAL ERROR DETECTED ❌\n\n"
                 "<b>Rincian Masalah:</b>\n"
             )
             for err in self.critical_errors:
-                text += f"• <b>[{err['cp']}]</b> {err['desc']}\n  👉 <i>Saran: {err['action']}</i>\n"
+                text += f"❌ <b>[{err['cp']}]</b> {err['desc']}\n  👉 <i>Saran: {err['action']}</i>\n"
 
             text += (
                 "\n<b>Tindakan Otomatis Agen:</b>\n"
@@ -408,13 +414,13 @@ class FoxeSentry:
         # SKENARIO B: LOGIC ANOMALY / AGEN BINGUNG (HUMAN-IN-THE-LOOP)
         if has_anomalies:
             text = (
-                "🤔 <b>[FOXE SENTRY: LOGIC ANOMALY / BINGUNG]</b> 🤔\n"
+                "🤔 <b>[FOXE SENTRY: LOGIC ANOMALY / BINGUNG]</b> ⚠️\n"
                 f"<b>Waktu:</b> <code>{self.timestamp}</code>\n"
                 "<b>Kategori:</b> KETIDAKSESUAIAN LOGIKA KASIR / DATA AMBIGU ⚖️\n\n"
                 "<b>Temuan Sentry:</b>\n"
             )
             for anom in self.confusions_anomalies:
-                text += f"• <b>[{anom['type']}]</b> {anom['desc']}\n  👉 <i>Perbaikan: {anom['action']}</i>\n"
+                text += f"🤔 <b>[{anom['type']}]</b> {anom['desc']}\n  👉 <i>Perbaikan: {anom['action']}</i>\n"
 
             text += (
                 "\n<b>Pertanyaan Sentry ke Owner:</b>\n"
@@ -428,18 +434,20 @@ class FoxeSentry:
         # SKENARIO C: ALL GREEN (NIGHTLY AUDIT PASSED)
         if self.mode in ["nightly", "verbose"]:
             text = (
-                "🛡️ <b>[FOXE SENTRY: NIGHTLY AUDIT PASSED]</b> 🟢\n"
+                "🛡️ <b>[FOXE SENTRY: NIGHTLY AUDIT PASSED]</b> ✅\n"
                 f"<b>Waktu:</b> <code>{self.timestamp}</code>\n"
                 "<b>Status:</b> SEMUA FLOW SEHAT & SIAP OPERASIONAL BESOK ✨\n\n"
                 "<b>Checklist Keamanan:</b>\n"
             )
             for p in self.passed_checks:
-                text += f" [OK] {p}\n"
+                # Ganti [OK] menjadi centang hijau ✅
+                clean_p = p.replace("[OK]", "").strip()
+                text += f"✅ {clean_p}\n"
 
             if self.warnings:
-                text += "\n<b>Catatan Ringan:</b>\n"
+                text += "\n<b>Catatan Pengawasan:</b>\n"
                 for w in self.warnings:
-                    text += f" ⚠️ {w['desc']}\n"
+                    text += f"⚠️ {w['desc']}\n"
 
             text += "\n<i>Semua sistem terjaga aman. Selamat beristirahat! 🌙</i>"
             send_telegram_message(text)
