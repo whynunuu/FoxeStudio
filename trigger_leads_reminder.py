@@ -18,6 +18,16 @@ WIB = timezone(timedelta(hours=7))
 now_wib = datetime.datetime.now(WIB)
 hour_label = f"{now_wib.strftime('%H:%M')} WIB"
 
+import os
+
+# Status Reminder: Dinonaktifkan sementara sesuai instruksi owner
+REMINDER_ENABLED = os.environ.get("ENABLE_LEADS_REMINDER", "false").lower() in ("true", "1", "yes")
+
+if not REMINDER_ENABLED:
+    print(f"[{now_wib.strftime('%Y-%m-%d %H:%M:%S')} WIB] [INFO] Follow-Up Reminder dinonaktifkan sementara.")
+    print("Pengiriman pesan reminder ke Telegram & WhatsApp dilewati.")
+    sys.exit(0)
+
 print(f"[{now_wib.strftime('%Y-%m-%d %H:%M:%S')} WIB] Menjalankan Trigger Follow-Up Reminder Foxe Studio...")
 
 try:

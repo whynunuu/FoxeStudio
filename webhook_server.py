@@ -72,6 +72,8 @@ async def state_sync_loop():
             print(f"[STATE LOOP ERROR] {e}")
         await asyncio.sleep(900) # 15 menit
 
+REMINDER_ENABLED = os.environ.get("ENABLE_LEADS_REMINDER", "false").lower() in ("true", "1", "yes")
+
 async def reminder_scheduler_loop():
     """
     Background Task Scheduler 24/7 di Railway:
@@ -79,6 +81,9 @@ async def reminder_scheduler_loop():
     pada interval 3 jam (09:00, 12:00, 15:00, 18:00, 21:00 WIB), kirim reminder follow-up.
     """
     global last_reminder_hour
+    if not REMINDER_ENABLED:
+        print("[SCHEDULER] Background 3-Hour Reminder Scheduler DINONAKTIFKAN sementara.")
+        return
     print("[SCHEDULER] Background 3-Hour Reminder Scheduler Aktif (09:00 - 21:00 WIB)")
     while True:
         try:
