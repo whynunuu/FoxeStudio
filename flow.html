@@ -3271,6 +3271,22 @@
     }
 
     async function loadLeadsData() {
+      // 1. Coba ambil data live real-time dari Railway Backend API
+      try {
+        const liveRes = await fetch('https://foxestudio.up.railway.app/api/leads', { cache: 'no-store' });
+        if (liveRes.ok) {
+          const liveData = await liveRes.json();
+          if (liveData && Array.isArray(liveData.leads) && liveData.leads.length) {
+            leadsData = liveData.leads;
+            renderLeads();
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('Railway leads fetch fallback:', e);
+      }
+
+      // 2. Fallback ke leads_vault.json statis
       try {
         const res = await fetch('leads_vault.json');
         if (res.ok) {
