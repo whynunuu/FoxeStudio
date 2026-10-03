@@ -73,6 +73,9 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
 - **Wrapping Teks:** Jangan gunakan blanket `white-space: nowrap` pada semua `td`. Izinkan deskripsi membungkus alami (*wrap*), sementara angka `.n`, tanggal `.mono`, dan badge `.pill` tetap *nowrap*.
 - **Dropdown KPI Interaktif:** Input Nama dan Posisi pada form KPI menggunakan dropdown interaktif dengan opsi kru aktif dan input kustom.
 
+
+- **Standarisasi Kontainer Scrollable Tabel Panjang (`.tw.scrollable`):** Seluruh tabel data yang memuat entri panjang (Realisasi Live Log Order, Transaksi Bulanan, Buku Detail Neraca, Beban COGS/OPEX, Rekap Shift Harian, Funnel Leads, dan Sisa Jadwal) **WAJIB** dibungkus kontainer scrollable (`max-height: 460px – 520px; overflow-y: auto;`) dengan sticky table header (`thead` menempel di atas) agar seluruh halaman web tetap ringkas, tidak memanjang ke bawah, dan nyaman dijelajahi.
+
 ### 5. Kebijakan Fitur Terminal:
 - Fitur Terminal View (Bloomberg/trading terminal) **DILARANG & DIHAPUS PERMANEN** dari repositori Foxe Studio utama.
 - Topbar harus tetap bersih, resmi, dan menyertakan elemen `#tbUpd`, `#tbLive`, dan tombol update `#btnSyncWeb`.
@@ -138,3 +141,17 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
   * `[ 🔵 Sudah Foto / Selesai (31) ]`
   * `[ 🟠 Reschedule (10) ]`
 - Masing-masing tabel dilengkapi pencarian mandiri (`#confSearchInput`, `#doneSearchInput`) dan filter kategori mandiri (`#confCatFilter`, `#doneCatFilter`).
+
+### 13. Foxe Sentry — Flow Security, Zero-Guesswork & Nightly Audit Protocol:
+- **Tugas & Tanggung Jawab Utama**:
+  - Menjaga seluruh flow operasional (Google Drive, Multi-Parser, Reconcile Kasir, Business Rules, dan Web Deployment) berjalan 100% bebas error.
+  - Berjalan otomatis setiap malam via GitHub Actions (`.github/workflows/nightly_sentry.yml`) pada jadwal closing malam **21:30 WIB** (`30 14 * * *` UTC) dan dry-run tengah malam **00:00 WIB** (`0 17 * * *` UTC).
+- **Kebijakan Mutlak "Zero Guesswork & Eskalasi Human-in-the-Loop"**:
+  - Jika terjadi error teknis (file corrupt, sheet hilang, JSON rusak, web down), **ATAU jika agen mengalami keraguan / anomali logika kasir yang ambigu ("bingung")** seperti:
+    * Selisih angka kasir tak bertuan (Kas + Transfer ≠ Omzet),
+    * Entitas kru asing aktif yang belum terdaftar di master roster,
+    * Kebocoran tanggal transaksi antar-bulan (Cross-Month leak),
+    * Nilai nominal negatif atau NaN.
+  - **Agen DILARANG KERAS berasumsi atau menyembunyikan masalah**, melainkan **WAJIB LANGSUNG ESKALASI LAPOR KE OWNER VIA TELEGRAM (@NunuFxBot)** melalui pesan darurat terstruktur.
+  - Proses `git push` otomatis wajib **DITAHAN** saat terjadi insiden untuk menjaga stabilitas data live, dan snapshot sehat `foxe_full_state.json.bak` siap digunakan untuk recovery.
+

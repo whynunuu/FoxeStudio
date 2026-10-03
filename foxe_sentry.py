@@ -165,7 +165,8 @@ class FoxeSentry:
         self.log("CP-3", "Mengaudit rekonsiliasi kasir dan matematika keuangan...")
         
         # 1. Audit September Orders
-        sep_orders = state.get("orders", [])
+        all_orders = state.get("orders", [])
+        sep_orders = [o for o in all_orders if str(o.get("tanggal", "")).startswith("2026-09")]
         if sep_orders:
             tot_sep_omzet = 0
             tot_sep_cash = 0
@@ -259,21 +260,27 @@ class FoxeSentry:
 
         self.log("CP-4", "Mengaudit aturan bisnis, anti-silang bulan, dan anti-ghost slot...")
         
-        # 1. Anti-Cross-Month Desync Check
-        sep_orders = state.get("orders", [])
-        leaked_to_sep = 0
-        for o in sep_orders:
-            tgl = str(o.get("tanggal", ""))
-            # Jika ada tanggal berawalan 2026-10 di dalam order September
-            if "2026-10" in tgl or "/10/2026" in tgl:
-                leaked_to_sep += 1
+        # 1. Anti-Cross-Month Desync Check (Partisi Tanggal Bersih)
+        okt_lo = state.get("oktoberLogOrder", {})
+        okt_orders = okt_lo.get("orders", [])
+        non_okt_in_okt = [o for o in okt_orders if not str(o.get("tanggal", "")).startswith("2026-10")]
+        
+        all_orders = state.get("orders", [])
+        invalid_dates = [o for o in all_orders if not (str(o.get("tanggal", "")).startswith("2026-09") or str(o.get("tanggal", "")).startswith("2026-10"))]
 
-        if leaked_to_sep > 0:
+        if non_okt_in_okt:
             self.confusions_anomalies.append({
                 "cp": "CP-4 (Anti-Silang Bulan)",
                 "type": "CROSS-MONTH DATA LEAK",
-                "desc": f"Ditemukan {leaked_to_sep} transaksi bertanggal Oktober masuk ke tabel September!",
-                "action": "Pisahkan data transaksi Oktober ke file1_okt.xlsm."
+                "desc": f"Ditemukan {len(non_okt_in_okt)} transaksi non-Oktober tersusup ke tabel Log Order Oktober!",
+                "action": "Verifikasi tanggal di file1_okt.xlsm."
+            })
+        elif invalid_dates:
+            self.confusions_anomalies.append({
+                "cp": "CP-4 (Anti-Silang Bulan)",
+                "type": "INVALID DATE FORMAT",
+                "desc": f"Ditemukan {len(invalid_dates)} transaksi dengan format tanggal di luar Sept/Okt 2026.",
+                "action": "Cek format kolom tanggal di file Log Order."
             })
         else:
             self.passed_checks.append("Anti-Silang Bulan: Nol kebocoran transaksi antar-bulan.")
