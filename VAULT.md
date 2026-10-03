@@ -112,3 +112,5 @@ Unrealized Omzet               Rp 104.625.000
 - **Logika Perhitungan Warna Orange**:
   - Slot Orange menandakan sesi tidak berlanjut pada slot tersebut, sehingga **estimasi pelunasan (*cash-in*) otomatis Rp 0** agar tidak terjadi over-estimasi.
   - Jika reschedule ke tanggal baru, sesi akan dicatat di slot baru untuk mencegah *double counting*.
+  - **Ketentuan Masa Berlaku DP (30 Hari)**: Uang DP klien pada slot Orange **TETAP BERLAKU SELAMA 30 HARI** sejak tanggal sesi aslinya. Booking Orange dialihkan ke **Pipeline Recovery CRM** untuk di-follow up penjadwalan ulang (*re-booking*) sebelum 30 hari berakhir demi menyelamatkan potensi pelunasan yang tertunda.
+

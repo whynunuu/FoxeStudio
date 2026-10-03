@@ -124,4 +124,9 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
   3. 🔵 **Biru / Cyan** (`FF00FFFF`): **Selesai / Sedang Sesi / Hadir (Live Case)**. Klien sudah datang di studio, sesi berlangsung atau sudah selesai, dan uang direalisasikan di kasir.
   4. 🟠 **Orange** (`FFFF9900`): **Kendala Jadwal (Reschedule / Telat / Tidak Datang / CLOSED)**. Slot bertuliskan `CLOSED` atau pesanan yang reschedule/batal otomatis disaring dari estimasi sisa uang masuk agar tidak terjadi over-estimasi atau *double-count*.
   5. 🔴 **Merah** (`FFFF0000` / `FFF4CCCC`): **Full Slot / Batas Order**. Kuota ditutup atau penanda batas jam operasional, otomatis dikecualikan dari perhitungan booking klien.
+- **Ketentuan Khusus Masa Berlaku DP Label Orange (30 Hari)**:
+  - Uang DP klien pada slot bersandi **Orange (🟠)** **TETAP BERLAKU SELAMA 1 BULAN (30 HARI)** terhitung sejak tanggal sesi jadwal aslinya.
+  - Sisa pelunasan pada slot Orange sementara dinetralkan (`Rp 0`) dari proyeksi cash-in hari berjalan untuk menjaga integritas pembukuan kasir harian.
+  - Namun, data booking Orange wajib dialihkan ke **Pipeline Recovery CRM** agar admin aktif mem-follow up penjadwalan ulang (*re-book*) sebelum 30 hari berakhir, sehingga potensi pelunasan yang tertunda dapat terealisasi kembali.
 - **Integrasi Visual Dashboard**: Menampilkan badge status sesi (🔵 *Selesai/Hadir*, 🟢 *Terjadwal*, 🟠 *Reschedule*) dan tombol filter status cepat pada tabel daftar booking.
+
