@@ -4687,9 +4687,17 @@ function wire(R){
     h.onmouseleave=tipHide;});
 
   // ========== Event Handlers Payroll & Slip Gaji ==========
+  const PL = R.rosterGaji || [];
+  const PKEY = R.c.bulan;
+  const persistPay = () => {
+    if (S.config && PKEY === S.config.bulan) {
+      PL.forEach(p => { const o = (S.rosterGaji || []).find(x => x.id === p.id); if (o) Object.assign(o, p); });
+    }
+    localStorage.setItem('foxe_payroll_custom_' + PKEY, JSON.stringify(PL));
+  };
   const recalculatePayroll = () => {
     let totGaji = 0, totBonusKpi = 0, totAdditional = 0, totBonus = 0, totDenda = 0, totBon = 0, totTHP = 0, totQ = 0;
-    (S.rosterGaji || []).forEach(r => {
+    PL.forEach(r => {
       const rowEl = document.querySelector(`.payroll-row[data-id="${r.id}"]`);
       if (rowEl) {
         const q = parseFloat(rowEl.querySelector('.pi-q').value) || 0;
@@ -4761,13 +4769,13 @@ function wire(R){
     // Update inline slip if active
     const curSel = document.getElementById('selSlipKru');
     if (curSel && curSel.value) {
-      const activeR = (S.rosterGaji || []).find(x => x.id === curSel.value);
+      const activeR = PL.find(x => x.id === curSel.value);
       if (activeR) updateInlineSlip(activeR);
     }
     
     // Auto-save to localStorage
     try {
-      localStorage.setItem('foxe_payroll_custom_' + (S.config ? S.config.bulan : '2026-09'), JSON.stringify(S.rosterGaji));
+      persistPay();
       saveLocal();
     } catch (e) {}
   };
@@ -4779,11 +4787,11 @@ function wire(R){
   document.querySelectorAll('.payroll-status-select').forEach(sel => {
     sel.onchange = () => {
       const id = sel.dataset.id;
-      const r = (S.rosterGaji || []).find(x => x.id === id);
+      const r = PL.find(x => x.id === id);
       if (r) {
         r.status = sel.value;
         try {
-          localStorage.setItem('foxe_payroll_custom_' + (S.config ? S.config.bulan : '2026-09'), JSON.stringify(S.rosterGaji));
+          persistPay();
           saveLocal();
         } catch (e) {}
       }
@@ -4846,7 +4854,7 @@ function wire(R){
   document.querySelectorAll('.btn-del-payroll').forEach(btn => {
     btn.onclick = () => {
       const id = btn.dataset.id;
-      const r = (S.rosterGaji || []).find(x => x.id === id);
+      const r = PL.find(x => x.id === id);
       if (confirm(`Hapus ${r ? r.nama : 'kru ini'} dari daftar penggajian bulan ini?`)) {
         S.rosterGaji = (S.rosterGaji || []).filter(x => x.id !== id);
         recalculatePayroll();
@@ -4858,7 +4866,7 @@ function wire(R){
   // Update & Render Inline Slip Gaji
   const updateInlineSlip = (r) => {
     if (!r) return;
-    const mn = BULAN[+S.config.bulan.split("-")[1]-1] + " " + S.config.bulan.split("-")[0];
+    const mn = BULAN[+PKEY.split("-")[1]-1] + " " + PKEY.split("-")[0];
     const now = new Date();
     const tglStr = `${now.getDate()} ${BULAN[now.getMonth()]} ${now.getFullYear()}`;
     
@@ -4899,11 +4907,11 @@ function wire(R){
   const selKru = document.getElementById('selSlipKru');
   if (selKru) {
     const initId = selKru.value;
-    const initR = (S.rosterGaji || []).find(x => x.id === initId) || (S.rosterGaji || [])[0];
+    const initR = PL.find(x => x.id === initId) || PL[0];
     if (initR) updateInlineSlip(initR);
 
     selKru.onchange = () => {
-      const selectedR = (S.rosterGaji || []).find(x => x.id === selKru.value);
+      const selectedR = PL.find(x => x.id === selKru.value);
       if (selectedR) updateInlineSlip(selectedR);
     };
   }
@@ -4912,7 +4920,7 @@ function wire(R){
   document.querySelectorAll('.btn-cetak-slip').forEach(btn => {
     btn.onclick = () => {
       const id = btn.dataset.id;
-      const r = (S.rosterGaji || []).find(x => x.id === id);
+      const r = PL.find(x => x.id === id);
       if (!r) return;
       if (selKru) selKru.value = id;
       updateInlineSlip(r);
@@ -4924,9 +4932,9 @@ function wire(R){
   const printFn = () => window.print();
   const copyWaFn = () => {
     const curId = selKru ? selKru.value : null;
-    const r = (S.rosterGaji || []).find(x => x.id === curId) || (S.rosterGaji || [])[0];
+    const r = PL.find(x => x.id === curId) || PL[0];
     if (!r) return;
-    const mn = BULAN[+S.config.bulan.split("-")[1]-1] + " " + S.config.bulan.split("-")[0];
+    const mn = BULAN[+PKEY.split("-")[1]-1] + " " + PKEY.split("-")[0];
     const isShift = r.cost <= 100000;
     
     const earnRows = [
