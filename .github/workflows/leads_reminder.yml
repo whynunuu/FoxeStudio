@@ -1,10 +1,12 @@
-name: Foxe Studio 3-Hour Follow-Up Reminder
+name: Foxe Studio Follow-Up Reminder (10:00, 14:00, 20:00 WIB)
 
-# on:
-#   schedule:
-#     # Dinonaktifkan sementara sesuai permintaan user (03 Okt 2026)
-#     # - cron: '0 2,5,8,11,14 * * *'
 on:
+  schedule:
+    # Berjalan di jam 10:00, 14:00, 20:00 WIB (WIB = UTC+7):
+    # 03:00 UTC = 10:00 WIB (Pagi)
+    # 07:00 UTC = 14:00 WIB (Siang)
+    # 13:00 UTC = 20:00 WIB (Malam)
+    - cron: '0 3,7,13 * * *'
   workflow_dispatch:
 
 jobs:

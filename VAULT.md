@@ -29,7 +29,7 @@ Dokumentasi ini menghubungkan workspace Foxe Agent dengan **Obsidian Vault** pri
 
 ### C. Railway 24/7 Scheduler & Webhook Receiver (`webhook_server.py`)
 - Background task `state_sync_loop()` menyinkronkan data jadwal dari GitHub Pages setiap 15 menit.
-- Background task `reminder_scheduler_loop()` mengirimkan daftar Hot & Warm Leads yang perlu di-follow up admin setiap 3 jam (09:00, 12:00, 15:00, 18:00, 21:00 WIB) ke WhatsApp dan Telegram.
+- Background task `reminder_scheduler_loop()` dan GitHub Actions (`leads_reminder.yml`) mengirimkan daftar Hot & Warm Leads yang perlu di-follow up admin pada jadwal resmi: **10:00, 14:00, dan 20:00 WIB** ke WhatsApp dan Telegram.
 
 ### D. Local Task Scheduler (Windows)
 - **Script Pendaftaran**: `Pasang_Jadwal_Windows_Task.bat`

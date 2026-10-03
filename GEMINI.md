@@ -78,6 +78,7 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
   1. **Fast Refresh**: Memeriksa `foxe_full_state.json` terbaru di GitHub repository tanpa membebani kuota API.
   2. **Cloud Sync**: Memanggil GitHub API `workflow_dispatch` untuk memicu `.github/workflows/daily_sync.yml`. Sinkronisasi langsung berjalan di server cloud GitHub Actions tanpa perlu perangkat/laptop owner menyala.
 - **Jadwal Cron Otomatis Cloud**: Workflow berjalan otomatis setiap 3 jam selama jam operasional studio pada pukul **09:00, 12:00, 15:00, 18:00, dan 21:00 WIB** (`0 2,5,8,11,14 * * *` UTC). Dilengkapi silent background auto-polling setiap 60 detik di web client dan state sync 15 menit di Railway 24/7.
+- **Jadwal Follow-Up Reminder Leads**: Workflow `.github/workflows/leads_reminder.yml` dan Railway scheduler berjalan pada pukul **10:00, 14:00, dan 20:00 WIB** (`0 3,7,13 * * *` UTC) mengirimkan rekap calon klien Hot & Warm secara mandiri ke WhatsApp Admin dan Telegram (@NunuFxBot).
 
 ### 5. Larangan Fitur Terminal:
 - Fitur Terminal View (Bloomberg style/trading) dilarang dimasukkan ke repositori ini. Repositori Foxe Studio murni fokus pada aplikasi manajemen keuangan studio foto.

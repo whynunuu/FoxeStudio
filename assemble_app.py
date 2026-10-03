@@ -3153,7 +3153,18 @@ function vEst(R){
     const oktOmzetLive = oktOrders.reduce((s, o) => s + dnum(o.total), 0);
     const oktCashLive = oktOrders.reduce((s, o) => s + dnum(o.cash), 0);
     const oktTransferLive = oktOrders.reduce((s, o) => s + dnum(o.transfer), 0);
+    const doneBookings = okp.bookings.filter(b => b.statusColor === 'biru' || b.isDone);
     const orangeBookings = okp.bookings.filter(b => b.statusColor === 'orange' || b.isReschedule);
+    const confirmedBookings = okp.bookings.filter(b => b.statusColor !== 'biru' && b.statusColor !== 'orange' && !b.isReschedule && !b.isDone);
+
+    const totDoneNilai = doneBookings.reduce((s, b) => s + (b.harga || 0), 0);
+    const totDoneDp = doneBookings.reduce((s, b) => s + (b.dp || 0), 0);
+    const totDonePelunasan = doneBookings.reduce((s, b) => s + (b.sisaPelunasan || 0), 0);
+
+    const totConfNilai = confirmedBookings.reduce((s, b) => s + (b.harga || 0), 0);
+    const totConfDp = confirmedBookings.reduce((s, b) => s + (b.dp || 0), 0);
+    const totConfPelunasan = confirmedBookings.reduce((s, b) => s + (b.sisaPelunasan || 0), 0);
+
     const totOrangeNilai = orangeBookings.reduce((s, b) => s + (b.harga || 0), 0);
     const totOrangeDp = orangeBookings.reduce((s, b) => s + (b.dp || 0), 0);
     const totOrangeSisa = orangeBookings.reduce((s, b) => s + (b.sisaPelunasan || 0), 0);
@@ -3305,26 +3316,53 @@ function vEst(R){
       </div>
     </div>
 
-    <div class="card" style="margin-bottom:16px;">
+    <!-- MASTER TAB PEMISAHAN SESI -->
+    <div class="card" style="margin-bottom:16px;padding:12px 16px;background:var(--surface);">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div>
+          <span style="font-size:13.5px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;">
+            🗂️ Pemisahan Status Sesi Booking (Oktober 2026)
+          </span>
+          <span class="tiny muted">Pemisahan data sesi yang belum foto (terjadwal) vs sesi yang sudah selesai/hadir di studio</span>
+        </div>
+        <div class="seg" id="segOktSplit">
+          <button class="btn sm pri" data-tab="split_both" style="padding:6px 14px;font-size:12px;font-weight:600;">
+            📋 Tampilkan Keduanya (Pisah)
+          </button>
+          <button class="btn sm" data-tab="split_confirmed" style="padding:6px 14px;font-size:12px;font-weight:600;">
+            🟢 Sesi Terjadwal (${confirmedBookings.length})
+          </button>
+          <button class="btn sm" data-tab="split_done" style="padding:6px 14px;font-size:12px;font-weight:600;">
+            🔵 Sudah Foto / Selesai (${doneBookings.length})
+          </button>
+          <button class="btn sm" data-tab="split_orange" style="padding:6px 14px;font-size:12px;font-weight:600;">
+            🟠 Reschedule (${orangeBookings.length})
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- KARTU 1: 🟢 DAFTAR SESI TERJADWAL (BELUM FOTO) -->
+    <div class="card" id="cardConfirmedBookings" style="margin-bottom:16px;border-left:3px solid var(--good);">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px;">
         <div>
-          <h3 style="margin:0 0 4px;font-size:16px;">Daftar ${okp.totalBookings} Booking Terdaftar Oktober 2026</h3>
-          <span class="eyebrow" id="oktBookingCount">${okp.totalBookings} sesi foto terdaftar</span>
+          <h3 style="margin:0 0 4px;font-size:16px;display:flex;align-items:center;gap:8px;">
+            🟢 Daftar Sesi Terjadwal (Belum Sesi Foto)
+            <span class="pill prog" style="font-size:11px;">${confirmedBookings.length} Booking Menunggu Foto</span>
+          </h3>
+          <span class="eyebrow" id="confCount">Potensi Paket: ${rp(totConfNilai)} · DP Masuk: ${rp(totConfDp)} · Estimasi Pelunasan: ${rp(totConfPelunasan)}</span>
         </div>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-          <input type="text" id="oktSearchInput" placeholder="Cari nama client, paket, spot..." style="padding:6px 12px;border:1px solid var(--hairline-strong);border-radius:6px;background:var(--surface2);color:var(--ink);font-size:12px;width:220px;" />
-          <div class="seg" id="oktCatFilter">
-            <button class="btn sm pri" data-cat="all" style="padding:4px 10px;font-size:11px;">Semua (${okp.totalBookings})</button>
-            <button class="btn sm" data-cat="confirmed" style="padding:4px 10px;font-size:11px;">🟢 Terjadwal (${okp.statusBreakdown ? okp.statusBreakdown.confirmed.sesi : 118})</button>
-            <button class="btn sm" data-cat="done" style="padding:4px 10px;font-size:11px;">🔵 Selesai (${okp.statusBreakdown ? okp.statusBreakdown.done.sesi : 25})</button>
-            <button class="btn sm" data-cat="reschedule" style="padding:4px 10px;font-size:11px;">🟠 Reschedule (${okp.statusBreakdown ? okp.statusBreakdown.reschedule.sesi : 9})</button>
-            <button class="btn sm" data-cat="wisuda" style="padding:4px 10px;font-size:11px;">Wisuda UMP (${okp.breakdown.wisudaDay1.sesi + okp.breakdown.wisudaDay2.sesi})</button>
-            <button class="btn sm" data-cat="reguler" style="padding:4px 10px;font-size:11px;">Reguler (${okp.breakdown.reguler.sesi})</button>
+          <input type="text" id="confSearchInput" placeholder="Cari nama client, paket, spot..." style="padding:6px 12px;border:1px solid var(--hairline-strong);border-radius:6px;background:var(--surface2);color:var(--ink);font-size:12px;width:210px;" />
+          <div class="seg" id="confCatFilter">
+            <button class="btn sm pri" data-cat="all" style="padding:4px 10px;font-size:11px;">Semua (${confirmedBookings.length})</button>
+            <button class="btn sm" data-cat="wisuda" style="padding:4px 10px;font-size:11px;">Wisuda UMP (${confirmedBookings.filter(b=>b.kategori==='Wisuda UMP').length})</button>
+            <button class="btn sm" data-cat="reguler" style="padding:4px 10px;font-size:11px;">Reguler (${confirmedBookings.filter(b=>b.kategori!=='Wisuda UMP').length})</button>
           </div>
         </div>
       </div>
       <div class="tw" style="max-height:500px;overflow-y:auto;">
-        <table id="tblOktoberBookings">
+        <table id="tblConfirmedBookings">
           <thead>
             <tr>
               <th>Tanggal</th>
@@ -3336,19 +3374,70 @@ function vEst(R){
               <th>Admin</th>
               <th class="n">Harga Paket</th>
               <th class="n">DP Terdata</th>
-              <th class="n">Sisa Pelunasan</th>
+              <th class="n">Estimasi Pelunasan</th>
             </tr>
           </thead>
           <tbody>
-            ${okp.bookings.map(b => `
-              <tr class="okt-booking-row" data-cat="${b.kategori === 'Wisuda UMP' ? 'wisuda' : 'reguler'}" data-status="${b.statusSesi || 'confirmed'}" data-text="${(b.nama + ' ' + b.paket + ' ' + b.studio + ' ' + (b.admin||'')).toLowerCase()}">
+            ${confirmedBookings.map(b => `
+              <tr class="conf-row" data-cat="${b.kategori === 'Wisuda UMP' ? 'wisuda' : 'reguler'}" data-text="${(b.nama + ' ' + b.paket + ' ' + b.studio + ' ' + (b.admin||'')).toLowerCase()}">
                 <td class="mono">${b.tgl}</td>
                 <td class="mono muted">${esc(b.waktu||"—")}</td>
-                <td>
-                  <span class="pill ${b.statusColor === 'biru' ? 'crit' : (b.statusColor === 'orange' ? 'warn' : 'prog')}" style="font-size:10px;padding:2px 7px;white-space:nowrap;">
-                    ${b.statusColor === 'biru' ? '🔵 Hadir/Done' : (b.statusColor === 'orange' ? '🟠 Reschedule' : '🟢 Terjadwal')}
-                  </span>
-                </td>
+                <td><span class="pill prog" style="font-size:10px;padding:2px 7px;white-space:nowrap;">🟢 Terjadwal</span></td>
+                <td><b>${esc(b.nama)}</b></td>
+                <td class="tiny">${esc(b.paket)}</td>
+                <td class="tiny muted">${esc(b.studio)}</td>
+                <td>${esc(b.admin||"—")}</td>
+                <td class="n">${rp(b.harga)}</td>
+                <td class="n" style="color:var(--crit);">${b.dp ? rp(b.dp) : "—"}</td>
+                <td class="n" style="color:var(--good);font-weight:600;">${rp(b.sisaPelunasan)}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- KARTU 2: 🔵 DAFTAR SESI SELESAI (SUDAH FOTO & HADIR) -->
+    <div class="card" id="cardDoneBookings" style="margin-bottom:16px;border-left:3px solid var(--crit);">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px;">
+        <div>
+          <h3 style="margin:0 0 4px;font-size:16px;display:flex;align-items:center;gap:8px;">
+            🔵 Daftar Sesi Selesai (Sudah Foto &amp; Hadir)
+            <span class="pill crit" style="font-size:11px;">${doneBookings.length} Booking Terlaksana</span>
+          </h3>
+          <span class="eyebrow" id="doneCount">Realisasi Nilai: ${rp(totDoneNilai)} · DP Masuk: ${rp(totDoneDp)} · Kas Pelunasan: ${rp(totDonePelunasan)}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <input type="text" id="doneSearchInput" placeholder="Cari nama client, paket, spot..." style="padding:6px 12px;border:1px solid var(--hairline-strong);border-radius:6px;background:var(--surface2);color:var(--ink);font-size:12px;width:210px;" />
+          <div class="seg" id="doneCatFilter">
+            <button class="btn sm pri" data-cat="all" style="padding:4px 10px;font-size:11px;">Semua (${doneBookings.length})</button>
+            <button class="btn sm" data-cat="wisuda" style="padding:4px 10px;font-size:11px;">Wisuda UMP (${doneBookings.filter(b=>b.kategori==='Wisuda UMP').length})</button>
+            <button class="btn sm" data-cat="reguler" style="padding:4px 10px;font-size:11px;">Reguler (${doneBookings.filter(b=>b.kategori!=='Wisuda UMP').length})</button>
+          </div>
+        </div>
+      </div>
+      <div class="tw" style="max-height:500px;overflow-y:auto;">
+        <table id="tblDoneBookings">
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Waktu</th>
+              <th>Status</th>
+              <th>Client</th>
+              <th>Paket</th>
+              <th>Studio / Spot</th>
+              <th>Admin</th>
+              <th class="n">Harga Paket</th>
+              <th class="n">DP Terdata</th>
+              <th class="n">Pelunasan Lunas</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${doneBookings.map(b => `
+              <tr class="done-row" data-cat="${b.kategori === 'Wisuda UMP' ? 'wisuda' : 'reguler'}" data-text="${(b.nama + ' ' + b.paket + ' ' + b.studio + ' ' + (b.admin||'')).toLowerCase()}">
+                <td class="mono">${b.tgl}</td>
+                <td class="mono muted">${esc(b.waktu||"—")}</td>
+                <td><span class="pill crit" style="font-size:10px;padding:2px 7px;white-space:nowrap;">🔵 Hadir/Done</span></td>
                 <td><b>${esc(b.nama)}</b></td>
                 <td class="tiny">${esc(b.paket)}</td>
                 <td class="tiny muted">${esc(b.studio)}</td>
@@ -3413,7 +3502,7 @@ function vEst(R){
     </div>
 
     <!-- KARTU 2: PROGRAM RECOVERY LABEL ORANGE (DP AKTIF 30 HARI) -->
-    <div class="card" style="margin-bottom:16px;border-left:3px solid var(--warn);background:color-mix(in srgb,var(--warn) 3%,var(--surface));">
+    <div class="card" id="cardOrangeRecovery" style="margin-bottom:16px;border-left:3px solid var(--warn);background:color-mix(in srgb,var(--warn) 3%,var(--surface));">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
         <div>
           <h3 style="margin:0;font-size:16px;display:flex;align-items:center;gap:8px;">
@@ -4261,17 +4350,45 @@ function wire(R){
     }
   });
 
-  // Filter & Search Daftar Booking Oktober
-  const oktSearch = document.getElementById("oktSearchInput");
-  const oktCat = document.getElementById("oktCatFilter");
-  if (oktSearch || oktCat) {
-    let curCat = "all";
-    let curQ = "";
-    const filterOkt = () => {
-      const rows = document.querySelectorAll("#tblOktoberBookings .okt-booking-row");
+  // Tab Switcher Pemisahan Sesi (Terjadwal vs Selesai vs Kedua Tabel)
+  const segSplit = document.getElementById("segOktSplit");
+  const cardConf = document.getElementById("cardConfirmedBookings");
+  const cardDone = document.getElementById("cardDoneBookings");
+  const cardOrange = document.getElementById("cardOrangeRecovery");
+  if (segSplit) {
+    segSplit.querySelectorAll("button[data-tab]").forEach(btn => {
+      btn.onclick = () => {
+        segSplit.querySelectorAll("button").forEach(b => b.classList.remove("pri"));
+        btn.classList.add("pri");
+        const tab = btn.dataset.tab;
+        if (tab === "split_both") {
+          if (cardConf) cardConf.style.display = "";
+          if (cardDone) cardDone.style.display = "";
+        } else if (tab === "split_confirmed") {
+          if (cardConf) cardConf.style.display = "";
+          if (cardDone) cardDone.style.display = "none";
+        } else if (tab === "split_done") {
+          if (cardConf) cardConf.style.display = "none";
+          if (cardDone) cardDone.style.display = "";
+        } else if (tab === "split_orange") {
+          if (cardConf) cardConf.style.display = "";
+          if (cardDone) cardDone.style.display = "";
+          if (cardOrange) cardOrange.scrollIntoView({behavior: "smooth", block: "start"});
+        }
+      };
+    });
+  }
+
+  // Filter & Search Sesi Terjadwal (🟢)
+  const confSearch = document.getElementById("confSearchInput");
+  const confCat = document.getElementById("confCatFilter");
+  if (confSearch || confCat) {
+    let curCat = "all", curQ = "";
+    const filterConf = () => {
+      const rows = document.querySelectorAll("#tblConfirmedBookings .conf-row");
       let visible = 0;
       rows.forEach(r => {
-        const catMatch = (curCat === "all") || (r.dataset.cat === curCat) || (r.dataset.status === curCat);
+        const catMatch = (curCat === "all") || (r.dataset.cat === curCat);
         const textMatch = !curQ || r.dataset.text.includes(curQ);
         if (catMatch && textMatch) {
           r.style.display = "";
@@ -4280,23 +4397,61 @@ function wire(R){
           r.style.display = "none";
         }
       });
-      const cntEl = document.getElementById("oktBookingCount");
-      if (cntEl) cntEl.textContent = `${visible} sesi ditampilkan`;
+      const cntEl = document.getElementById("confCount");
+      if (cntEl) cntEl.textContent = `${visible} sesi terkonfirmasi ditampilkan`;
     };
-
-    if (oktSearch) {
-      oktSearch.oninput = (e) => {
+    if (confSearch) {
+      confSearch.oninput = (e) => {
         curQ = e.target.value.toLowerCase().trim();
-        filterOkt();
+        filterConf();
       };
     }
-    if (oktCat) {
-      oktCat.querySelectorAll("button[data-cat]").forEach(btn => {
+    if (confCat) {
+      confCat.querySelectorAll("button[data-cat]").forEach(btn => {
         btn.onclick = () => {
-          oktCat.querySelectorAll("button").forEach(b => b.classList.remove("pri"));
+          confCat.querySelectorAll("button").forEach(b => b.classList.remove("pri"));
           btn.classList.add("pri");
           curCat = btn.dataset.cat;
-          filterOkt();
+          filterConf();
+        };
+      });
+    }
+  }
+
+  // Filter & Search Sesi Selesai (🔵)
+  const doneSearch = document.getElementById("doneSearchInput");
+  const doneCat = document.getElementById("doneCatFilter");
+  if (doneSearch || doneCat) {
+    let curCat = "all", curQ = "";
+    const filterDone = () => {
+      const rows = document.querySelectorAll("#tblDoneBookings .done-row");
+      let visible = 0;
+      rows.forEach(r => {
+        const catMatch = (curCat === "all") || (r.dataset.cat === curCat);
+        const textMatch = !curQ || r.dataset.text.includes(curQ);
+        if (catMatch && textMatch) {
+          r.style.display = "";
+          visible++;
+        } else {
+          r.style.display = "none";
+        }
+      });
+      const cntEl = document.getElementById("doneCount");
+      if (cntEl) cntEl.textContent = `${visible} sesi selesai ditampilkan`;
+    };
+    if (doneSearch) {
+      doneSearch.oninput = (e) => {
+        curQ = e.target.value.toLowerCase().trim();
+        filterDone();
+      };
+    }
+    if (doneCat) {
+      doneCat.querySelectorAll("button[data-cat]").forEach(btn => {
+        btn.onclick = () => {
+          doneCat.querySelectorAll("button").forEach(b => b.classList.remove("pri"));
+          btn.classList.add("pri");
+          curCat = btn.dataset.cat;
+          filterDone();
         };
       });
     }

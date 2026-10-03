@@ -514,7 +514,7 @@ class AgenticLeadEngine:
 
         if hot_leads:
             lines.append("🔥 *[HOT LEADS - PRIORITAS AMANKAN SLOT]*")
-            for i, l in enumerate(hot_leads, 1):
+            for i, l in enumerate(hot_leads[:4], 1):
                 name = l.get("display_name", "Klien")
                 phone = l.get("phone", "")
                 adm = l.get("admin", "AMEL")
@@ -527,7 +527,7 @@ class AgenticLeadEngine:
 
         if warm_leads:
             lines.append("⚡ *[WARM LEADS - PERLU KONSULTASI]*")
-            for i, l in enumerate(warm_leads, 1):
+            for i, l in enumerate(warm_leads[:4], 1):
                 name = l.get("display_name", "Klien")
                 phone = l.get("phone", "")
                 adm = l.get("admin", "AMEL")

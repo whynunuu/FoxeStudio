@@ -24,7 +24,7 @@ from agentic_lead_engine import (
 )
 
 WIB = timezone(timedelta(hours=7))
-REMINDER_HOURS = [9, 12, 15, 18, 21] # Jam operasional Foxe Studio (09:00 - 21:00 WIB, interval 3 jam)
+REMINDER_HOURS = [10, 14, 20] # Jam pengiriman reminder Foxe Studio (10:00, 14:00, 20:00 WIB)
 last_reminder_hour = -1
 
 app = FastAPI(
@@ -76,19 +76,19 @@ async def state_sync_loop():
             print(f"[STATE LOOP ERROR] {e}")
         await asyncio.sleep(900) # 15 menit
 
-REMINDER_ENABLED = os.environ.get("ENABLE_LEADS_REMINDER", "false").lower() in ("true", "1", "yes")
+REMINDER_ENABLED = os.environ.get("ENABLE_LEADS_REMINDER", "true").lower() in ("true", "1", "yes")
 
 async def reminder_scheduler_loop():
     """
     Background Task Scheduler 24/7 di Railway:
-    Mengecek waktu lokal WIB setiap menit. Jika berada di jam operasional studio
-    pada interval 3 jam (09:00, 12:00, 15:00, 18:00, 21:00 WIB), kirim reminder follow-up.
+    Mengecek waktu lokal WIB setiap menit. Jika berada di jadwal reminder studio
+    (10:00, 14:00, 20:00 WIB), kirim reminder follow-up ke WhatsApp & Telegram.
     """
     global last_reminder_hour
     if not REMINDER_ENABLED:
-        print("[SCHEDULER] Background 3-Hour Reminder Scheduler DINONAKTIFKAN sementara.")
+        print("[SCHEDULER] Background Reminder Scheduler DINONAKTIFKAN.")
         return
-    print("[SCHEDULER] Background 3-Hour Reminder Scheduler Aktif (09:00 - 21:00 WIB)")
+    print("[SCHEDULER] Background Reminder Scheduler Aktif (10:00, 14:00, 20:00 WIB)")
     while True:
         try:
             now_wib = datetime.datetime.now(WIB)
@@ -122,7 +122,7 @@ def root():
         "whatsapp_device": "0851-5921-0021 (Foxe Admin)",
         "gemini_ai": "Connected",
         "operational_hours": "09:00 - 21:00 WIB",
-        "reminder_interval": "Setiap 3 Jam (09:00, 12:00, 15:00, 18:00, 21:00 WIB)",
+        "reminder_schedule": "Pukul 10:00, 14:00, dan 20:00 WIB (Kirim ke WhatsApp & Telegram)",
         "current_time_wib": now_wib.strftime("%Y-%m-%d %H:%M:%S WIB")
     }
 
