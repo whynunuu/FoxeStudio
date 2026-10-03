@@ -4480,7 +4480,7 @@ function wire(R){
     const cur=document.documentElement.getAttribute("data-theme")||"dark";
     const next=cur==="dark"?"light":"dark";
     document.documentElement.setAttribute("data-theme",next);
-    localStorage.setItem("foxe_studio_theme", next);
+    sessionStorage.setItem("foxe_studio_theme", next);
   };
 
   // Topbar Month Switcher
@@ -5049,8 +5049,10 @@ document.getElementById("btnExport").onclick=async e=>{
   try{await exportXlsx();b.textContent="Tersimpan";}catch(err){b.textContent="Gagal";}
   setTimeout(()=>{b.textContent=t;b.disabled=false},1800);};
 
-// Initialize Theme
-const savedTheme = localStorage.getItem("foxe_studio_theme") || "dark";
+// Initialize Theme — UI selalu dibuka dengan tema GELAP.
+// Tema terang hanya opsi via tombol 🌓 Tema (berlaku selama tab terbuka).
+try { localStorage.removeItem("foxe_studio_theme"); } catch(e) {}
+const savedTheme = sessionStorage.getItem("foxe_studio_theme") === "light" ? "light" : "dark";
 document.documentElement.setAttribute("data-theme", savedTheme);
 
 // Sidebar minimize (ikon saja) — status disimpan di localStorage
