@@ -9160,6 +9160,19 @@
       "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_72",
+      "tanggal": "2026-10-03",
+      "client": "arif",
+      "paket": "Couple B",
+      "tanggalFoto": "2026-10-03",
+      "cash": 0.0,
+      "transfer": 200000.0,
+      "total": 200000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -11215,8 +11228,8 @@
       "tanggal": "2026-10-03",
       "leads": 0.0,
       "dp": 1.0,
-      "sesiFoto": 9.0,
-      "transaksi": 10.0
+      "sesiFoto": 10.0,
+      "transaksi": 11.0
     },
     {
       "id": "ld_7",
@@ -15949,6 +15962,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261003-1318",
+      "mulai": "2026-10-03T13:18:40.006271+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 72 order Okt, 191 jadwal, 75 pos pengeluaran Neraca, 141 pipeline Okt."
+    },
+    {
       "id": "sy_20261003-1302",
       "mulai": "2026-10-03T13:02:56.361998+00:00",
       "status": "sukses",
@@ -16620,7 +16639,7 @@
     "file1_okt_id": "1xibgfKWJZWmcwh9lxR9Dt7IkHyMi7b75",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-10-03T13:02:56.361998+00:00"
+    "last_sync": "2026-10-03T13:18:40.006271+00:00"
   },
   "neracaDetail": [
     {
@@ -17182,10 +17201,10 @@
   },
   "oktoberPipeline": {
     "bulan": "2026-10",
-    "totalBookings": 142,
-    "potentialOmzet": 50375000.0,
-    "totalDp": 13050000.0,
-    "estimateCashIn": 37325000.0,
+    "totalBookings": 141,
+    "potentialOmzet": 50025000.0,
+    "totalDp": 12950000.0,
+    "estimateCashIn": 37075000.0,
     "breakdown": {
       "reguler": {
         "sesi": 41,
@@ -17193,9 +17212,9 @@
         "dp": 3600000.0
       },
       "wisudaDay1": {
-        "sesi": 49,
-        "nilai": 18500000.0,
-        "dp": 4800000.0
+        "sesi": 48,
+        "nilai": 18150000.0,
+        "dp": 4700000.0
       },
       "wisudaDay2": {
         "sesi": 52,
@@ -17205,16 +17224,16 @@
     },
     "statusBreakdown": {
       "done": {
-        "sesi": 54,
-        "nilai": 18875000.0,
+        "sesi": 55,
+        "nilai": 19225000.0,
         "dp": 5200000.0,
-        "cashIn": 13675000.0
+        "cashIn": 14025000.0
       },
       "confirmed": {
-        "sesi": 84,
-        "nilai": 30100000.0,
-        "dp": 7450000.0,
-        "cashIn": 22700000.0
+        "sesi": 82,
+        "nilai": 29400000.0,
+        "dp": 7350000.0,
+        "cashIn": 22100000.0
       },
       "reschedule": {
         "sesi": 4,
@@ -19449,32 +19468,6 @@
         "id": "sc_wisuda_2026-10-03_47",
         "tgl": "2026-10-03",
         "waktu": "18:20",
-        "studio": "Wisuda (LIMBO)",
-        "studioNama": "Spot LIMBO",
-        "spot": "LIMBO",
-        "nama": "Rani",
-        "paket": "Graduation",
-        "paketRaw": "Graduation",
-        "jmlOrang": 1,
-        "harga": 350000.0,
-        "dp": 100000.0,
-        "sisaPelunasan": 250000.0,
-        "admin": "IN",
-        "noHp": "dp 100",
-        "manual": false,
-        "kategori": "Wisuda UMP",
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
-        "isReschedule": false
-      },
-      {
-        "id": "sc_wisuda_2026-10-03_48",
-        "tgl": "2026-10-03",
-        "waktu": "18:20",
         "studio": "Wisuda (WOODEN)",
         "studioNama": "Spot WOODEN",
         "spot": "WOODEN",
@@ -19498,7 +19491,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-03_49",
+        "id": "sc_wisuda_2026-10-03_48",
         "tgl": "2026-10-03",
         "waktu": "20:00",
         "studio": "Wisuda (LIMBO)",
@@ -19515,16 +19508,16 @@
         "noHp": "",
         "manual": false,
         "kategori": "Wisuda UMP",
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_50",
+        "id": "sc_wisuda_2026-10-04_49",
         "tgl": "2026-10-04",
         "waktu": "09:30",
         "studio": "Wisuda (CALMBLUE)",
@@ -19550,7 +19543,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_51",
+        "id": "sc_wisuda_2026-10-04_50",
         "tgl": "2026-10-04",
         "waktu": "10:00",
         "studio": "Wisuda (CONCRETE)",
@@ -19576,7 +19569,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_52",
+        "id": "sc_wisuda_2026-10-04_51",
         "tgl": "2026-10-04",
         "waktu": "10:30",
         "studio": "Wisuda (CONCRETE)",
@@ -19602,7 +19595,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_53",
+        "id": "sc_wisuda_2026-10-04_52",
         "tgl": "2026-10-04",
         "waktu": "12:30",
         "studio": "Wisuda (LIMBO)",
@@ -19628,7 +19621,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_54",
+        "id": "sc_wisuda_2026-10-04_53",
         "tgl": "2026-10-04",
         "waktu": "12:30",
         "studio": "Wisuda (CONCRETE)",
@@ -19654,7 +19647,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_55",
+        "id": "sc_wisuda_2026-10-04_54",
         "tgl": "2026-10-04",
         "waktu": "12:30",
         "studio": "Wisuda (DIPAN)",
@@ -19680,7 +19673,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_56",
+        "id": "sc_wisuda_2026-10-04_55",
         "tgl": "2026-10-04",
         "waktu": "12:30",
         "studio": "Wisuda (CALMBLUE)",
@@ -19706,7 +19699,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_57",
+        "id": "sc_wisuda_2026-10-04_56",
         "tgl": "2026-10-04",
         "waktu": "13:00",
         "studio": "Wisuda (LIMBO)",
@@ -19732,7 +19725,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_58",
+        "id": "sc_wisuda_2026-10-04_57",
         "tgl": "2026-10-04",
         "waktu": "13:00",
         "studio": "Wisuda (CONCRETE)",
@@ -19758,7 +19751,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_59",
+        "id": "sc_wisuda_2026-10-04_58",
         "tgl": "2026-10-04",
         "waktu": "13:00",
         "studio": "Wisuda (DIPAN)",
@@ -19784,7 +19777,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_60",
+        "id": "sc_wisuda_2026-10-04_59",
         "tgl": "2026-10-04",
         "waktu": "13:00",
         "studio": "Wisuda (CALMBLUE)",
@@ -19810,7 +19803,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_61",
+        "id": "sc_wisuda_2026-10-04_60",
         "tgl": "2026-10-04",
         "waktu": "13:20",
         "studio": "Wisuda (LIMBO)",
@@ -19836,7 +19829,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_62",
+        "id": "sc_wisuda_2026-10-04_61",
         "tgl": "2026-10-04",
         "waktu": "13:20",
         "studio": "Wisuda (WOODEN)",
@@ -19862,7 +19855,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_63",
+        "id": "sc_wisuda_2026-10-04_62",
         "tgl": "2026-10-04",
         "waktu": "13:20",
         "studio": "Wisuda (CONCRETE)",
@@ -19888,7 +19881,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_64",
+        "id": "sc_wisuda_2026-10-04_63",
         "tgl": "2026-10-04",
         "waktu": "13:20",
         "studio": "Wisuda (DIPAN)",
@@ -19914,7 +19907,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_65",
+        "id": "sc_wisuda_2026-10-04_64",
         "tgl": "2026-10-04",
         "waktu": "13:20",
         "studio": "Wisuda (CALMBLUE)",
@@ -19940,7 +19933,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_66",
+        "id": "sc_wisuda_2026-10-04_65",
         "tgl": "2026-10-04",
         "waktu": "13:40",
         "studio": "Wisuda (LIMBO)",
@@ -19966,7 +19959,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_67",
+        "id": "sc_wisuda_2026-10-04_66",
         "tgl": "2026-10-04",
         "waktu": "13:40",
         "studio": "Wisuda (CONCRETE)",
@@ -19992,7 +19985,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_68",
+        "id": "sc_wisuda_2026-10-04_67",
         "tgl": "2026-10-04",
         "waktu": "13:40",
         "studio": "Wisuda (DIPAN)",
@@ -20018,7 +20011,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_69",
+        "id": "sc_wisuda_2026-10-04_68",
         "tgl": "2026-10-04",
         "waktu": "13:40",
         "studio": "Wisuda (CALMBLUE)",
@@ -20044,7 +20037,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_70",
+        "id": "sc_wisuda_2026-10-04_69",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda (LIMBO)",
@@ -20070,7 +20063,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_71",
+        "id": "sc_wisuda_2026-10-04_70",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda (CONCRETE)",
@@ -20096,7 +20089,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_72",
+        "id": "sc_wisuda_2026-10-04_71",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda (DIPAN)",
@@ -20122,7 +20115,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_73",
+        "id": "sc_wisuda_2026-10-04_72",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda (CALMBLUE)",
@@ -20148,7 +20141,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_74",
+        "id": "sc_wisuda_2026-10-04_73",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda (LIMBO)",
@@ -20174,7 +20167,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_75",
+        "id": "sc_wisuda_2026-10-04_74",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda (WOODEN)",
@@ -20200,7 +20193,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_76",
+        "id": "sc_wisuda_2026-10-04_75",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda (CONCRETE)",
@@ -20226,7 +20219,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_77",
+        "id": "sc_wisuda_2026-10-04_76",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda (DIPAN)",
@@ -20252,7 +20245,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_78",
+        "id": "sc_wisuda_2026-10-04_77",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda (WOODEN)",
@@ -20278,7 +20271,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_79",
+        "id": "sc_wisuda_2026-10-04_78",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda (CONCRETE)",
@@ -20304,7 +20297,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_80",
+        "id": "sc_wisuda_2026-10-04_79",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda (DIPAN)",
@@ -20330,7 +20323,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_81",
+        "id": "sc_wisuda_2026-10-04_80",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda (CALMBLUE)",
@@ -20356,7 +20349,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_82",
+        "id": "sc_wisuda_2026-10-04_81",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda (WOODEN)",
@@ -20382,7 +20375,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_83",
+        "id": "sc_wisuda_2026-10-04_82",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda (CONCRETE)",
@@ -20408,7 +20401,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_84",
+        "id": "sc_wisuda_2026-10-04_83",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda (DIPAN)",
@@ -20434,7 +20427,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_85",
+        "id": "sc_wisuda_2026-10-04_84",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda (CALMBLUE)",
@@ -20460,7 +20453,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_86",
+        "id": "sc_wisuda_2026-10-04_85",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda (LIMBO)",
@@ -20486,7 +20479,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_87",
+        "id": "sc_wisuda_2026-10-04_86",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda (WOODEN)",
@@ -20512,7 +20505,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_88",
+        "id": "sc_wisuda_2026-10-04_87",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda (CONCRETE)",
@@ -20538,7 +20531,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_89",
+        "id": "sc_wisuda_2026-10-04_88",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda (CALMBLUE)",
@@ -20564,7 +20557,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_90",
+        "id": "sc_wisuda_2026-10-04_89",
         "tgl": "2026-10-04",
         "waktu": "15:40",
         "studio": "Wisuda (LIMBO)",
@@ -20590,7 +20583,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_91",
+        "id": "sc_wisuda_2026-10-04_90",
         "tgl": "2026-10-04",
         "waktu": "15:40",
         "studio": "Wisuda (WOODEN)",
@@ -20616,7 +20609,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_92",
+        "id": "sc_wisuda_2026-10-04_91",
         "tgl": "2026-10-04",
         "waktu": "15:40",
         "studio": "Wisuda (CONCRETE)",
@@ -20642,7 +20635,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_93",
+        "id": "sc_wisuda_2026-10-04_92",
         "tgl": "2026-10-04",
         "waktu": "15:40",
         "studio": "Wisuda (CALMBLUE)",
@@ -20668,7 +20661,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_94",
+        "id": "sc_wisuda_2026-10-04_93",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda (LIMBO)",
@@ -20694,7 +20687,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_95",
+        "id": "sc_wisuda_2026-10-04_94",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda (CONCRETE)",
@@ -20720,7 +20713,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_96",
+        "id": "sc_wisuda_2026-10-04_95",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda (DIPAN)",
@@ -20746,7 +20739,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_97",
+        "id": "sc_wisuda_2026-10-04_96",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda (CALMBLUE)",
@@ -20772,7 +20765,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_98",
+        "id": "sc_wisuda_2026-10-04_97",
         "tgl": "2026-10-04",
         "waktu": "16:20",
         "studio": "Wisuda (LIMBO)",
@@ -20798,7 +20791,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_99",
+        "id": "sc_wisuda_2026-10-04_98",
         "tgl": "2026-10-04",
         "waktu": "16:20",
         "studio": "Wisuda (WOODEN)",
@@ -20824,7 +20817,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_100",
+        "id": "sc_wisuda_2026-10-04_99",
         "tgl": "2026-10-04",
         "waktu": "16:20",
         "studio": "Wisuda (CONCRETE)",
@@ -20850,7 +20843,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_101",
+        "id": "sc_wisuda_2026-10-04_100",
         "tgl": "2026-10-04",
         "waktu": "16:40",
         "studio": "Wisuda (LIMBO)",
@@ -22041,6 +22034,19 @@
         "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_72",
+        "tanggal": "2026-10-03",
+        "client": "arif",
+        "paket": "Couple B",
+        "tanggalFoto": "2026-10-03",
+        "cash": 0.0,
+        "transfer": 200000.0,
+        "total": 200000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
       }
     ],
     "shifts": [
@@ -22296,8 +22302,8 @@
         "tanggal": "2026-10-03",
         "leads": 0.0,
         "dp": 1.0,
-        "sesiFoto": 9.0,
-        "transaksi": 10.0
+        "sesiFoto": 10.0,
+        "transaksi": 11.0
       },
       {
         "id": "ld_4",
