@@ -162,9 +162,12 @@ a{color:var(--accent)}
 
 table{width:100%;border-collapse:collapse;font-size:13.5px}
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x pan-y;border:1px solid var(--hairline);border-radius:12px;background:var(--surface);width:100%;max-width:100%;min-width:0;scrollbar-width:thin;scrollbar-color:var(--hairline-strong) var(--surface)}
-.tw::-webkit-scrollbar{height:6px}
+.tw::-webkit-scrollbar{height:6px;width:6px}
 .tw::-webkit-scrollbar-track{background:var(--surface)}
 .tw::-webkit-scrollbar-thumb{background:var(--hairline-strong);border-radius:3px}
+.tw.scrollable,.tw-scroll{max-height:480px;overflow-y:auto}
+.tw.scrollable thead,.tw-scroll thead{position:sticky;top:0;z-index:3;background:var(--surface2)}
+.tw.scrollable thead th,.tw-scroll thead th{position:sticky;top:0;z-index:3;background:var(--surface2);box-shadow:0 1px 0 var(--hairline)}
 th{text-align:left;font-family:var(--ff-body);font-size:11px;letter-spacing:1.2px;
   text-transform:uppercase;color:var(--muted-soft);font-weight:500;padding:11px 14px;
   border-bottom:1px solid var(--hairline);white-space:nowrap;background:var(--surface2);
@@ -2001,7 +2004,7 @@ function vOmzet(R){
       ${t1?`<span class="bar"><i style="width:${Math.min(100,R.omzet/t1*100).toFixed(1)}%"></i></span>`:""}</div>
   </div>
   <div class="card" style="margin-bottom:14px">${chartGabung(R)}</div>
-  <div class="tw"><table><thead><tr><th>Tgl</th><th>Hari</th><th class="n">Transaksi</th>
+  <div class="tw scrollable" style="max-height:500px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr><th>Tgl</th><th>Hari</th><th class="n">Transaksi</th>
     <th class="n">Cash</th><th class="n">Transfer</th><th class="n">Omzet harian</th>
     <th class="n">Omzet progresif</th><th class="n">Growth vs hari lalu</th></tr></thead><tbody>
     ${R.days.map(d=>`<tr class="${d.berjalan?"":"future"}"><td class="mono">${d.d}</td><td>${d.hari}</td>
@@ -2094,7 +2097,7 @@ function vTrx(R){
     <datalist id="dlFg">${fgs.map(p=>`<option value="${esc(p)}">`).join("")}</datalist>
   </div>
   ${kartuPaket(R)}
-  <div class="tw"><table><thead><tr><th>Tgl setoran</th><th>Client</th><th>Paket</th><th>Tgl foto</th>
+  <div class="tw scrollable" style="max-height:520px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr><th>Tgl setoran</th><th>Client</th><th>Paket</th><th>Tgl foto</th>
     <th class="n">Cash</th><th class="n">Transfer</th><th class="n">Total</th><th>Metode</th><th>Admin</th><th>Fotografer</th><th></th></tr></thead><tbody>
     ${list.length?list.map(o=>{const c=dnum(o.cash),t=dnum(o.transfer);
       return `<tr><td class="mono">${esc(o.tanggal)}</td><td>${esc(o.client)}</td><td>${esc(npak(o.paket))||'<span class="muted">—</span>'}</td>
@@ -2226,7 +2229,7 @@ function vBiaya(R){
   </div>
   <div class="two" style="margin-bottom:14px">${grup("COGS",KAT_COGS)}${
       grup("OPEX",KAT_OPEX,R.kasbon?[{k:"Kasbon Karyawan",v:R.kasbon}]:null)}</div>
-  <div class="tw"><table><thead><tr><th>Tgl</th><th>Deskripsi</th><th>Jenis</th><th>Kategori</th>
+  <div class="tw scrollable" style="max-height:480px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr><th>Tgl</th><th>Deskripsi</th><th>Jenis</th><th>Kategori</th>
     <th class="n">Nilai</th><th>Status</th><th style="width:40px;text-align:center"></th></tr></thead><tbody>
     ${R.ex.length?[...R.ex].sort((a,b)=>(b.tanggal||"")<(a.tanggal||"")?-1:(b.tanggal||"")>(a.tanggal||"")?1:dnum(a.urutan)-dnum(b.urutan)).map(e=>{
       const n=dnum(e.nilai),b=dnum(e.nominalDibayar),sisa=n-b;
@@ -2266,9 +2269,9 @@ function vBiaya(R){
       <span class="m">Saldo Berjalan Terakhir</span>
     </div>
   </div>
-  <div class="tw">
+  <div class="tw scrollable" style="max-height:500px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;">
     <table>
-      <thead>
+      <thead style="position:sticky;top:0;z-index:3;background:var(--surface2);">
         <tr style="background:var(--surface2)">
           <th style="width:65px;text-align:center">Tgl</th>
           <th class="n" style="color:var(--cash)">Saldo Masuk</th>
@@ -2344,7 +2347,7 @@ function vShift(R){
         Menangani order tapi belum ada di slot shift: ${[...R.offRoster.admin,...R.offRoster.fotografer].map(x=>`<b>${esc(x.nama)}</b> (${x.n})`).join(", ")}. Tetap dihitung di analisis crew.</div>`:""}
     </div>
   </div>
-  <div class="tw"><table><thead><tr><th>Tanggal</th><th>Hari</th>${orang.map(n=>`<th class="n">${esc(n)}</th>`).join("")}<th class="n">Total</th></tr></thead><tbody>
+  <div class="tw scrollable" style="max-height:500px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr><th>Tanggal</th><th>Hari</th>${orang.map(n=>`<th class="n">${esc(n)}</th>`).join("")}<th class="n">Total</th></tr></thead><tbody>
     ${R.days.map(d=>{const m=byDate.get(d.ds);
       if(!d.berjalan)return `<tr class="future"><td class="mono">${d.d}</td><td>${d.hari}</td>${orang.map(()=>`<td class="n"></td>`).join("")}<td class="n"></td></tr>`;
       const tot=orang.reduce((s,n)=>s+((m&&m.get(n))||0),0);
@@ -2415,7 +2418,7 @@ function vLead(R){
     </div>
   </div>
   ${blokIndeksHari(R)}
-  <div class="tw"><table><thead><tr><th>Tanggal</th><th>Hari</th><th class="n">Leads</th><th class="n">DP</th>
+  <div class="tw scrollable" style="max-height:500px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr><th>Tanggal</th><th>Hari</th><th class="n">Leads</th><th class="n">DP</th>
     <th class="n">Sesi foto</th><th class="n">Transaksi</th><th class="n">Conversion</th><th class="n">Leads progresif</th><th>Status</th><th></th></tr></thead><tbody>
     ${R.days.map(d=>{const l=R.ld.find(x=>x.tanggal===d.ds);
       if(!d.berjalan)return `<tr class="future"><td class="mono">${d.d}</td><td>${d.hari}</td><td class="n"></td><td class="n"></td><td class="n"></td><td class="n"></td><td class="n"></td><td class="n"></td><td></td><td></td></tr>`;
@@ -2517,7 +2520,7 @@ function vCrew(R){
   <div class="vhead"><div><div class="eyebrow">Sheet 4</div><h2>Paket & Crew</h2></div>
     <p>Photo Fox dinormalisasi jadi Photofox. Nama yang menangani order tapi tidak ada di slot shift tetap dihitung, dan ditandai di catatan mutu data.</p></div>
   <div class="card" style="margin-bottom:14px"><h3>Urutan paket terlaris <span class="eyebrow">${num(R.paket.reduce((s,p)=>s+p.tx,0))} transaksi</span></h3>
-    <div class="tw"><table><thead><tr><th>#</th><th>Paket</th><th class="n">Transaksi</th><th class="n">Porsi</th><th class="n">Total nilai</th><th class="n">Rata-rata</th></tr></thead><tbody>
+    <div class="tw scrollable" style="max-height:450px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr><th>#</th><th>Paket</th><th class="n">Transaksi</th><th class="n">Porsi</th><th class="n">Total nilai</th><th class="n">Rata-rata</th></tr></thead><tbody>
       ${R.paket.map((p,i)=>{const tot=R.paket.reduce((s,x)=>s+x.tx,0);
         return `<tr><td class="mono muted">${i+1}</td><td>${esc(p.paket)}</td>
         <td class="n heat"><i style="background:var(--lead);width:${(p.tx/R.paket[0].tx*100).toFixed(1)}%"></i>${num(p.tx)}</td>
@@ -3211,7 +3214,7 @@ function vEst(R){
     </div>
 
     <!-- Card Realisasi Live Hari Ini -->
-    <div class="card" style="margin-bottom:16px;border-left:3px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
+    <div class="card" id="cardOktLiveLog" style="margin-bottom:16px;border-left:3px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
         <div>
           <h3 style="margin:0;font-size:16px;display:flex;align-items:center;gap:8px;">
@@ -3225,9 +3228,9 @@ function vEst(R){
           <span class="pill info" style="font-size:11px;">${oktShifts.length} Shift Kru (AMEL)</span>
         </div>
       </div>
-      <div class="tw">
+      <div class="tw scrollable" style="max-height:460px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;">
         <table>
-          <thead>
+          <thead style="position:sticky;top:0;z-index:3;background:var(--surface2);">
             <tr>
               <th>Tanggal</th>
               <th>Nama Client</th>
@@ -3738,9 +3741,9 @@ function vEst(R){
         <span class="pill crit" style="font-size:11px;">Pelunasan Hilang: ${rp(B.wasteLost)}</span>
       </div>
     </div>
-    <div class="tw">
+    <div class="tw scrollable" style="max-height:460px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;">
       <table>
-        <thead>
+        <thead style="position:sticky;top:0;z-index:3;background:var(--surface2);">
           <tr>
             <th>Tanggal</th>
             <th>Waktu</th>
@@ -3817,7 +3820,7 @@ function vEst(R){
   </tbody></table></div>
 
   <div class="card" style="margin-bottom:14px"><h3>Daftar booking belum masuk <span class="eyebrow">${B.fut.length} sesi</span></h3>
-    <div class="tw"><table><thead><tr><th>Tgl</th><th>Waktu</th><th>Client</th><th>Paket</th>
+    <div class="tw scrollable" style="max-height:480px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr><th>Tgl</th><th>Waktu</th><th>Client</th><th>Paket</th>
       <th class="n">Harga</th><th class="n">Sudah dibayar</th><th class="n">Sisa</th><th>Studio</th></tr></thead><tbody>
       ${B.fut.sort((a,b)=>a.tgl<b.tgl?-1:a.tgl>b.tgl?1:(a.waktu||"")<(b.waktu||"")?-1:1).map(b=>`
         <tr><td class="mono">${b.tgl.slice(8)}</td><td class="mono muted">${esc(b.waktu||"—")}</td>
@@ -3990,7 +3993,7 @@ function vGaji(R){
       <h3>Kasbon Karyawan <span class="pill neutral">${rp(R.kasbon)} masuk OPEX</span></h3>
       <p class="tiny muted" style="margin:-6px 0 12px">Uang yang diambil sebelum gajian. Dipotong dari take home pay akhir bulan.</p>
       ${Object.entries(R.bonOrang).filter(([,d])=>d.kasbon>0).length ? `
-      <div class="tw"><table><thead><tr><th>Nama</th><th class="n">Kasbon</th>
+      <div class="tw scrollable" style="max-height:480px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr><th>Nama</th><th class="n">Kasbon</th>
         <th class="n">Gaji Berjalan</th><th class="n">Sisa Kalau Digaji Sekarang</th>
         </tr></thead><tbody>
         ${Object.entries(R.bonOrang).filter(([,d])=>d.kasbon>0).map(([nm,d])=>{
