@@ -3175,6 +3175,11 @@ function vEst(R){
         <span class="m">${okp.statusBreakdown ? okp.statusBreakdown.confirmed.sesi : 139} sesi terkonfirmasi</span>
       </div>
       <div class="stat">
+        <span class="k">Reschedule / Kendala (🟠)</span>
+        <span class="v sm" style="color:var(--warn);">${rp(okp.statusBreakdown ? okp.statusBreakdown.reschedule.nilai : 3300000)}</span>
+        <span class="m">${okp.statusBreakdown ? okp.statusBreakdown.reschedule.sesi : 9} sesi tertunda/ganti jadwal</span>
+      </div>
+      <div class="stat">
         <span class="k">Estimasi Pelunasan Riil</span>
         <span class="v sm" style="color:var(--good);">${rp(okp.estimateCashIn)}</span>
         <span class="m">kas masuk saat hari-H foto</span>
@@ -3300,8 +3305,9 @@ function vEst(R){
           <input type="text" id="oktSearchInput" placeholder="Cari nama client, paket, spot..." style="padding:6px 12px;border:1px solid var(--hairline-strong);border-radius:6px;background:var(--surface2);color:var(--ink);font-size:12px;width:220px;" />
           <div class="seg" id="oktCatFilter">
             <button class="btn sm pri" data-cat="all" style="padding:4px 10px;font-size:11px;">Semua (${okp.totalBookings})</button>
-            <button class="btn sm" data-cat="confirmed" style="padding:4px 10px;font-size:11px;">🟢 Terjadwal (${okp.statusBreakdown ? okp.statusBreakdown.confirmed.sesi : 139})</button>
-            <button class="btn sm" data-cat="done" style="padding:4px 10px;font-size:11px;">🔵 Selesai (${okp.statusBreakdown ? okp.statusBreakdown.done.sesi : 10})</button>
+            <button class="btn sm" data-cat="confirmed" style="padding:4px 10px;font-size:11px;">🟢 Terjadwal (${okp.statusBreakdown ? okp.statusBreakdown.confirmed.sesi : 118})</button>
+            <button class="btn sm" data-cat="done" style="padding:4px 10px;font-size:11px;">🔵 Selesai (${okp.statusBreakdown ? okp.statusBreakdown.done.sesi : 25})</button>
+            <button class="btn sm" data-cat="reschedule" style="padding:4px 10px;font-size:11px;">🟠 Reschedule (${okp.statusBreakdown ? okp.statusBreakdown.reschedule.sesi : 9})</button>
             <button class="btn sm" data-cat="wisuda" style="padding:4px 10px;font-size:11px;">Wisuda UMP (${okp.breakdown.wisudaDay1.sesi + okp.breakdown.wisudaDay2.sesi})</button>
             <button class="btn sm" data-cat="reguler" style="padding:4px 10px;font-size:11px;">Reguler (${okp.breakdown.reguler.sesi})</button>
           </div>
