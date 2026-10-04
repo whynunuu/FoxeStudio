@@ -14,6 +14,7 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
    - Hitung total shift aktual kru s.d. hari ini dari Log Order, deteksi cut-off dinamis (Sept: 30 Sep, Okt: 01 Okt).
    - Parse section `Detail` File Neraca (kolom P s.d. U) untuk klasifikasi COGS & OPEX serta Buku Detail Neraca (Debit/Kredit).
    - Parse Log Order & Pipeline Oktober: Realisasi live 1 booking DP (Rp 100 rb) via AMEL (2 shift) + 164 booking terdaftar (Potensi omzet Rp 59,15 jt, estimasi pelunasan Rp 47,80 jt).
+   - **Optimasi Cepat Data Historis (Closed Books Jan–Ags)**: Menggunakan cache instan `historical_cache.json` (< 0.01 detik). Sinkronisasi harian/rutin DILARANG membaca ulang 16 file arsip dari awal, melainkan fokus 100% pada bulan aktif berjalan (September rekap final & Oktober live).
    - Simpan `foxe_full_state.json`, rakit `index.html`, dan kirim notifikasi Telegram via `@NunuFxBot`.
    - Di dalam struk laporan Telegram (blok monospace), sertakan kalkulasi **Estimate Omzet Sampai Akhir Bulan** (Unrealized Cash In, DP (-), Total, dan Unrealized Omzet) yang menyatu di dalam struk di bawah Estimasi Nett Profit.
 2. Jalankan git commit & push ke `origin main`:

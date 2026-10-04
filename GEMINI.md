@@ -17,6 +17,7 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
 - **ATURAN MUTLAK BIAYA:** Pengeluaran COGS & OPEX murni diambil dari section `Detail` File Neraca (kolom P s.d. U). JANGAN mengambil pengeluaran dari File Log Order karena referensinya berbeda.
 - **SECTION TERPADU:** Section COGS dan OPEX digabung menjadi satu section resmi bernama **`Neraca (COGS & OPEX)`** yang dilengkapi **Buku Detail Neraca (Debit & Kredit)**.
 - Deteksi cut-off dinamis (Sept: 30 Sep, Okt: 01 Okt).
+- **Optimasi Cepat Data Historis (Closed Books Jan–Ags)**: Menggunakan cache instan `historical_cache.json` (< 0.01 detik). Sinkronisasi harian/rutin DILARANG membaca ulang 16 file arsip dari awal, melainkan fokus 100% pada bulan aktif berjalan (September rekap final & Oktober live).
 - Simpan state gabungan ke `foxe_full_state.json`.
 - Rakit ulang file visual `index.html` dan salin ke artefak `foxe_studio_keuangan.html`.
 

@@ -10,10 +10,13 @@ Parser khusus untuk mengurai data operasional bulanan (Januari–Agustus 2026):
 """
 
 import os
+import json
 import openpyxl
 from parser_log_order import parse_log_order
 from parser_schedule import parse_schedule
 from parser_neraca import parse_neraca
+
+HISTORICAL_CACHE_FILE = "historical_cache.json"
 
 HISTORICAL_CONFIG = [
     {
@@ -114,7 +117,19 @@ HISTORICAL_CONFIG = [
     }
 ]
 
-def parse_historical_months(neraca_path="file_neraca.xlsx"):
+def parse_historical_months(neraca_path="file_neraca.xlsx", force_reparse=False):
+    # Optimasi Cepat: Gunakan cache jika data Jan–Ags sudah selesai direkap
+    if not force_reparse and os.path.exists(HISTORICAL_CACHE_FILE):
+        try:
+            with open(HISTORICAL_CACHE_FILE, "r", encoding="utf-8") as f:
+                cached = json.load(f)
+                if "historicalMonths" in cached and len(cached["historicalMonths"]) >= 8:
+                    print(f"[CACHE] Menggunakan cache data historis Jan–Ags (8 bulan selesai direkap) [Instan < 0.01s].")
+                    return cached
+        except Exception as e:
+            print(f"[WARN] Gagal membaca cache historis ({e}), menjalankan parse ulang.")
+
+    print("[INFO] Menjalankan screening penuh 16 file arsip historis Jan–Ags...")
     historical_months = {}
     neraca_by_month = {}
     roster_gaji_by_month = {}
@@ -216,11 +231,20 @@ def parse_historical_months(neraca_path="file_neraca.xlsx"):
 
         print(f"[OK] {cfg['label']}: Omzet Rp {tot_omzet:,.0f} | Orders {len(orders)} | YoY {yoy:+.2f}% | Nett Rp {nett_profit:,.0f}")
 
-    return {
+    res_payload = {
         "historicalMonths": historical_months,
         "neracaByMonth": neraca_by_month,
         "rosterGajiByMonth": roster_gaji_by_month
     }
+
+    try:
+        with open(HISTORICAL_CACHE_FILE, "w", encoding="utf-8") as f:
+            json.dump(res_payload, f, ensure_ascii=False, indent=2)
+        print(f"[OK] Cache data historis berhasil disimpan ke {HISTORICAL_CACHE_FILE}.")
+    except Exception as e:
+        print(f"[WARN] Gagal menyimpan cache historis: {e}")
+
+    return res_payload
 
 if __name__ == "__main__":
     res = parse_historical_months()
