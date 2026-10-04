@@ -1879,7 +1879,7 @@ function kartuPembaruan(R){
     ${belumTuntas&&ok?`<p class="tiny muted" style="margin:-6px 0 12px">Angka di halaman ini
       dari ${tgljam(ok.mulai)}.</p>`:""}
     <div class="upd">
-      ${list.slice(0,6).map((s,i)=>{
+      ${list.slice(0,3).map((s,i)=>{
         const [lbl,cls]=LBL[s.status]||["berhasil","ok"];
         const w=wibParts(s.mulai);
         return `<div class="urow${i===0?" now":""}${s.status==="gagal"?" bad":""}"
