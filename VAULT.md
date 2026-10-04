@@ -14,6 +14,7 @@ Dokumentasi ini menghubungkan workspace Foxe Agent dengan **Obsidian Vault** pri
 | **Spesifikasi Parser** | `04 Projects/Foxe Studio - Parser Specs & Data Pipeline.md` | Dokumentasi teknis mendalam 4 parser produksi (`parser_neraca.py`, `parser_schedule.py`, `parser_log_order.py`, `deep_sync_foxe.py`). |
 | **Analisis Wisuda & Slot Orange** | `04 Projects/Foxe Studio - Analisis Wisuda & Recovery Slot Orange.md` | Analisis perbandingan performa cluster wisuda UNSOED vs UMP, evaluasi wasting deposit September vs Oktober, dan 5 rekomendasi penyelamatan booking label Orange. |
 | **Foxe Sentry Security** | `04 Projects/Foxe Studio - Sentry Security & Flow Reliability Agent.md` | Agen pengawas keandalan alur sistem: audit 5 checkpoint di jam malam (21:30 & 00:00 WIB), zero-guesswork eskalasi, format struk monospace 40 karakter di Telegram, dan auto-rollback. |
+| **Rekap Historis 2026** | `04 Projects/Foxe Studio - Rekap Historis 2026 & Multi-Month Sync.md` | Integrasi data 8 bulan Januari–Agustus (3.218 order) via `parser_historical.py`, caching instan `historical_cache.json`, dan isolasi background sync. |
 
 ---
 
@@ -147,4 +148,44 @@ Unrealized Omzet               Rp 104.625.000
   - Mempertahankan keselarasan visual dengan struk closing kasir harian studio.
 - **Mekanisme Self-Healing & Rollback**:
   - Snapshot terverifikasi sehat disimpan ke `foxe_full_state.json.bak`. Jika terjadi error fatal saat audit, state otomatis di-rollback ke snapshot tersebut untuk mencegah web crash.
+
+---
+
+## 12. Protokol Background Sync Harian/Malam & Isolasi Bulan Aktif
+- **Fokus Murni Bulan Aktif**:
+  - Background process harian/malam (GitHub Actions `daily_sync.yml`, `nightly_sentry.yml`, maupun Railway scheduler) **HANYA DAN KHUSUS menyinkronkan data bulan aktif berjalan** (September rekap final & Oktober live kasir / pipeline booking).
+  - Closed-books Januari–Agustus dibaca instan (< 0.01 detik) via file cache lokal `historical_cache.json`.
+- **Zero-Scan Folder Google Drive Arsip**:
+  - Sistem **DILARANG dan TIDAK PERNAH** melakukan screening atau download ulang semua folder arsip lama di Google Drive.
+  - Akses Google Drive API dibatasi presisi ke **7 file operasional aktif**:
+    1. `file1.xlsm` (Log Order September)
+    2. `file1_okt.xlsm` (Log Order Oktober)
+    3. `file2.xlsx` (Schedule September)
+    4. `file2_okt.xlsx` (Schedule Reguler Oktober)
+    5. `file_wisuda_3okt.xlsx` (Wisuda UMP Hari 1 / 3 Okt)
+    6. `file_wisuda_4okt.xlsx` (Wisuda UMP Hari 2 / 4 Okt)
+    7. `file_neraca.xlsx` (File Neraca Keuangan)
+- **Performa Ringan & Cepat**: Durasi eksekusi sinkronisasi serverless berkisar antara **15 s.d. 25 detik**, hemat kuota API, dan bebas risiko merusak data masa lalu.
+
+---
+
+## 13. UI Security Modal Konfirmasi Universal & Standarisasi Format Rupiah
+- **Modal Dialog Konfirmasi Interaktif (`#confModal`)**:
+  - Mencegah kekeliruan input (*human error*) atau ketidaksengajaan klik tombol hapus di dashboard produksi live:
+    * **Edit Data / Penggantian Status**: Memunculkan dialog konfirmasi `"Kamu yakin untuk menginput/mengubah data ini? [Yes / No]"`.
+    * **Hapus Data (Tombol Silang `✕`)**: Memunculkan dialog konfirmasi `"Kamu yakin untuk menghapus data ini? [No / Yes]"`.
+  - Melindungi seluruh tabel: Transaksi Kasir (`#orderTbody`), Biaya Neraca COGS & OPEX (`#neracaTable`), Funnel Leads (`#leadsTbody`), KPI Kru (`#kpiTbody`), dan Roster Gaji Kru (`#payrollTable` & `.btn-del-payroll`).
+- **Standarisasi Format Mata Uang Rupiah**:
+  - Seluruh nominal kas, omzet, DP, pelunasan, dan beban neraca wajib ditampilkan dalam format baku Rupiah (`Rp X.XXX.XXX`) dengan pemisah ribuan titik tanpa desimal ganjil.
+
+---
+
+## 14. Spesifikasi Parser Data Historis (`parser_historical.py`)
+- **Modul Produksi**: `parser_historical.py` bertugas mengolah 16 file arsip operasional (8 File Log Order + 8 File Schedule) serta sheet bulanan di `file_neraca.xlsx` untuk periode Januari s.d. Agustus 2026.
+- **Hasil Rekonsiliasi Kasir vs Neraca (Varians 0,017%)**:
+  - Total Omzet Realized Jan–Ags: **Rp 623.973.450** (3.218 order)
+  - Total Omzet YTD (Jan–Sep 2026): **Rp 741.988.450** (3.739 order)
+  - Nett Profit YTD Bersih: **Rp 414.896.451** (Margin 55,9%)
+- **Mekanisme Caching**: Data olahan disimpan ke `historical_cache.json` (~203 KB). Skrip harian `deep_sync_foxe.py` otomatis memakai cache ini sehingga proses sinkronisasi instan (< 0.01 detik).
+
 

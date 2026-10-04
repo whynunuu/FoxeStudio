@@ -157,3 +157,21 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
   - **Agen DILARANG KERAS berasumsi atau menyembunyikan masalah**, melainkan **WAJIB LANGSUNG ESKALASI LAPOR KE OWNER VIA TELEGRAM (@NunuFxBot)** melalui pesan darurat terstruktur.
   - Proses `git push` otomatis wajib **DITAHAN** saat terjadi insiden untuk menjaga stabilitas data live, dan snapshot sehat `foxe_full_state.json.bak` siap digunakan untuk recovery.
 
+### 13. UI Security — Modal Konfirmasi Universal (Edit & Hapus) & Format Rupiah:
+- **Dialog Modal Universal (`#confModal`)**:
+  - Mencegah human error salah ubah nilai atau ketidaksengajaan klik tombol hapus:
+    * Sebelum submit form edit / ubah status: Muncul modal *"Kamu yakin untuk menginput/mengubah data ini? [Yes/No]"*.
+    * Sebelum menghapus entri tabel via tombol `✕` / `.btn-del-payroll`: Muncul modal *"Kamu yakin untuk menghapus data ini? [No/Yes]"*.
+  - Menjaga integritas tabel: Kasir, Biaya Neraca, Leads, KPI Kru, dan Payroll.
+- **Standarisasi Format Mata Uang Rupiah**:
+  - Seluruh nilai nominal di dashboard wajib diformat baku Rupiah (`Rp X.XXX.XXX`) dengan pemisah ribuan titik.
+
+### 14. Protokol Background Sync — Isolasi Bulan Aktif & Zero-Scan Arsip Lama:
+- **Fokus Murni Bulan Aktif**:
+  - Seluruh sinkronisasi latar belakang harian & malam (GitHub Actions & Railway) **HANYA DAN KHUSUS menyinkronkan data bulan aktif berjalan** (September rekap final & Oktober live kasir / pipeline booking).
+  - Data historis Januari–Agustus wajib dibaca instan (< 0.01 detik) via `historical_cache.json`.
+- **Dilarang Scanning Folder Arsip Google Drive**:
+  - Sistem DILARANG dan TIDAK PERNAH melakukan scanning/download ulang folder-folder arsip lama di Google Drive.
+  - Panggilan API dibatasi presisi pada 7 file operasional aktif: `file1.xlsm`, `file1_okt.xlsm`, `file2.xlsx`, `file2_okt.xlsx`, `file_wisuda_3okt.xlsx`, `file_wisuda_4okt.xlsx`, `file_neraca.xlsx`.
+
+
