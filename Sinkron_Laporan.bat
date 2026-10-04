@@ -11,7 +11,7 @@ cd /d "%~dp0"
 python deep_sync_foxe.py
 echo.
 echo Mengunggah pembaruan ke live website GitHub...
-git add foxe_full_state.json index.html assemble_app.py logo_foxe.png file1.xlsm file1_okt.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx parser_neraca.py parser_schedule.py parser_log_order.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md
+git add foxe_full_state.json index.html assemble_app.py logo_foxe.png file1.xlsm file1_okt.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx file_wisuda_uin_1sep.xlsx file_wisuda_uin_2sep.xlsx file_wisuda_unsoed_8sep.xlsx file_wisuda_unsoed_9sep.xlsx parser_neraca.py parser_schedule.py parser_log_order.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md
 git commit -m "Auto-sync Google Drive update (Log Order, Schedule & Neraca)" 2>nul
 git push origin main
 echo.

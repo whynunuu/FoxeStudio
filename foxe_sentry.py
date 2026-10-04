@@ -30,7 +30,7 @@ except ImportError:
     send_telegram_message = None
     load_config = lambda: {"token": "8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s", "chat_id": 1608969830}
 
-# 7 File Operasional Wajib
+# 11 File Operasional Wajib
 REQUIRED_OPERATIONAL_FILES = [
     ("file1.xlsm", "Log Order September 2026"),
     ("file1_okt.xlsm", "Log Order Oktober 2026"),
@@ -39,6 +39,10 @@ REQUIRED_OPERATIONAL_FILES = [
     ("file2_okt.xlsx", "Schedule Reguler Oktober 2026"),
     ("file_wisuda_3okt.xlsx", "Schedule Wisuda UMP Hari 1 (3 Okt)"),
     ("file_wisuda_4okt.xlsx", "Schedule Wisuda UMP Hari 2 (4 Okt)"),
+    ("file_wisuda_uin_1sep.xlsx", "Schedule Wisuda UIN Saizu Hari 1 (1 Sept)"),
+    ("file_wisuda_uin_2sep.xlsx", "Schedule Wisuda UIN Saizu Hari 2 (2 Sept)"),
+    ("file_wisuda_unsoed_8sep.xlsx", "Schedule Wisuda UNSOED Hari 1 (8 Sept)"),
+    ("file_wisuda_unsoed_9sep.xlsx", "Schedule Wisuda UNSOED Hari 2 (9 Sept)"),
 ]
 
 STATE_FILE = "foxe_full_state.json"

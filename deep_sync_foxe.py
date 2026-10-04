@@ -28,7 +28,7 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 # Import parser modular (File 1, File 2, dan File Neraca)
 from parser_log_order import parse_log_order
-from parser_schedule import parse_schedule, parse_october_pipeline
+from parser_schedule import parse_schedule, parse_october_pipeline, parse_september_wisuda
 from parser_neraca import parse_neraca
 from parser_historical import parse_historical_months
 
@@ -36,6 +36,12 @@ LOG_ORDER_FILE_ID = "1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ"
 LOG_ORDER_OKT_FILE_ID = "1xibgfKWJZWmcwh9lxR9Dt7IkHyMi7b75"
 SCHEDULE_SHEET_ID = "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I"
 NERACA_SHEET_ID = "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM"
+
+# Sumber Jadwal September 2026 (Wisuda UIN Saizu 1-2 Sept & Wisuda UNSOED 8-9 Sept)
+WISUDA_UIN_1SEP_FILE_ID = "10ombL-MWte-Gfh9aOkBoSqRAbrA7KiNc"
+WISUDA_UIN_2SEP_FILE_ID = "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ"
+WISUDA_UNSOED_8SEP_FILE_ID = "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL"
+WISUDA_UNSOED_9SEP_FILE_ID = "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn"
 
 # Sumber Jadwal Oktober 2026 (Reguler & Wisuda UMP 3 & 4 Okt)
 SCHEDULE_OKT_SHEET_ID = "17QPAAhmPZqkomwajFhAw3JBmDyBFuklfNMqyVqlK484"
@@ -149,6 +155,10 @@ def run_integration():
         p_f2_okt = download_gsheet(SCHEDULE_OKT_SHEET_ID, "file2_okt.xlsx") or "file2_okt.xlsx"
         p_w3 = download_gsheet(WISUDA_3OKT_FILE_ID, "file_wisuda_3okt.xlsx") or "file_wisuda_3okt.xlsx"
         p_w4 = download_gsheet(WISUDA_4OKT_FILE_ID, "file_wisuda_4okt.xlsx") or "file_wisuda_4okt.xlsx"
+        p_w_uin1 = download_gsheet(WISUDA_UIN_1SEP_FILE_ID, "file_wisuda_uin_1sep.xlsx") or "file_wisuda_uin_1sep.xlsx"
+        p_w_uin2 = download_gsheet(WISUDA_UIN_2SEP_FILE_ID, "file_wisuda_uin_2sep.xlsx") or "file_wisuda_uin_2sep.xlsx"
+        p_w_uns1 = download_gsheet(WISUDA_UNSOED_8SEP_FILE_ID, "file_wisuda_unsoed_8sep.xlsx") or "file_wisuda_unsoed_8sep.xlsx"
+        p_w_uns2 = download_gsheet(WISUDA_UNSOED_9SEP_FILE_ID, "file_wisuda_unsoed_9sep.xlsx") or "file_wisuda_unsoed_9sep.xlsx"
 
         # STEP 5: Jalankan Parser File 1 (Log Order September & Oktober)
         print("\n[2/5] Menjalankan parser_log_order.py (File 1 September & Oktober)...")
@@ -158,11 +168,20 @@ def run_integration():
         res_f1_okt = parse_log_order(p_f1_okt, bulan="2026-10")
         print(f"[OK] File 1 Okt terurai: {len(res_f1_okt['orders'])} transaksi, {len(res_f1_okt['shifts'])} shift, cutoff {res_f1_okt['cutoff']}.")
 
-        # STEP 6: Jalankan Parser File 2 (Schedule) & Merge Booking
-        print("\n[3/5] Menjalankan parser_schedule.py (File 2)...")
+        # STEP 6: Jalankan Parser File 2 (Schedule) & Merge Booking Wisuda September
+        print("\n[3/5] Menjalankan parser_schedule.py (File 2 & Wisuda September)...")
         existing_bk = (state.get("schedule") or {}).get("bookings", [])
         res_f2_bookings = parse_schedule(p_f2, bulan="2026-09", existing_bookings=existing_bk)
-        print(f"[OK] File 2 terurai: {len(res_f2_bookings)} jadwal booking studio.")
+        print(f"[OK] File 2 terurai: {len(res_f2_bookings)} jadwal booking studio reguler.")
+
+        # Integrasikan 4 File Wisuda September (UIN Saizu & UNSOED)
+        sept_wisuda = parse_september_wisuda(p_w_uin1, p_w_uin2, p_w_uns1, p_w_uns2)
+        b_wisuda_sept = sept_wisuda.get("bookings", [])
+        print(f"[OK] Wisuda September terurai: {len(b_wisuda_sept)} sesi booking (UIN: {sept_wisuda['breakdown']['uin_day1']['sesi']+sept_wisuda['breakdown']['uin_day2']['sesi']}, UNSOED: {sept_wisuda['breakdown']['unsoed_day1']['sesi']+sept_wisuda['breakdown']['unsoed_day2']['sesi']}).")
+
+        # Gabungkan ke bookings resmi September
+        res_f2_bookings = res_f2_bookings + b_wisuda_sept
+        print(f"[OK] Total Jadwal Terpadu September: {len(res_f2_bookings)} sesi booking.")
 
         # STEP 7: Jalankan Parser File Neraca (COGS, OPEX, Log Debit Kredit & Gaji Karyawan)
         print("\n[4/5] Menjalankan parser_neraca.py (File Neraca September & Oktober)...")
@@ -324,23 +343,31 @@ def run_integration():
         state["marketingCalendar"] = state.get("marketingCalendar", [])
         state["schedule"] = {
             "bulan": "2026-09",
-            "sumber": "Schedule September 2026 (Google Drive)",
+            "sumber": "Schedule Terpadu September 2026 (Studio Reguler + Wisuda UIN & UNSOED)",
             "lgPerOrang": 25000,
-            "bookings": res_f2_bookings if res_f2_bookings else state.get("schedule", {}).get("bookings", [])
+            "bookings": res_f2_bookings if res_f2_bookings else state.get("schedule", {}).get("bookings", []),
+            "septemberWisuda": sept_wisuda
         }
         
-        # Metadata Google Drive (File 1, File 2, dan File Neraca)
+        # Metadata Google Drive (File 1, File 2, Wisuda, dan File Neraca)
         state["gdrive"] = {
             "file1_id": LOG_ORDER_FILE_ID,
             "file1_okt_id": LOG_ORDER_OKT_FILE_ID,
             "file2_id": SCHEDULE_SHEET_ID,
             "file_neraca_id": NERACA_SHEET_ID,
+            "file2_okt_id": SCHEDULE_OKT_SHEET_ID,
+            "wisuda_3okt_id": WISUDA_3OKT_FILE_ID,
+            "wisuda_4okt_id": WISUDA_4OKT_FILE_ID,
+            "wisuda_uin_1sep_id": WISUDA_UIN_1SEP_FILE_ID,
+            "wisuda_uin_2sep_id": WISUDA_UIN_2SEP_FILE_ID,
+            "wisuda_unsoed_8sep_id": WISUDA_UNSOED_8SEP_FILE_ID,
+            "wisuda_unsoed_9sep_id": WISUDA_UNSOED_9SEP_FILE_ID,
             "last_sync": now.astimezone(datetime.timezone.utc).isoformat()
         }
 
         # STEP 11: Tutup sync -> status 'sukses'
         current_sync["status"] = "sukses"
-        current_sync["ringkas"] = f"Integrasi berhasil: {len(res_f1['orders'])} order Sep, {len(res_f1_okt['orders'])} order Okt, {len(res_f2_bookings)} jadwal, {neraca_count} pos pengeluaran Neraca, {okt_pipeline['totalBookings']} pipeline Okt."
+        current_sync["ringkas"] = f"Integrasi berhasil: {len(res_f1['orders'])} order Sep, {len(res_f1_okt['orders'])} order Okt, {len(res_f2_bookings)} jadwal terpadu Sep (termasuk 141 wisuda), {neraca_count} pos pengeluaran Neraca, {okt_pipeline['totalBookings']} pipeline Okt."
 
         print("\n[5/5] Menyimpan state dan merender artefak...")
         with open("foxe_full_state.json", "w", encoding="utf-8") as f:
@@ -353,7 +380,7 @@ def run_integration():
         print("[OK] index.html berhasil dirakit ulang!")
 
         # Salin ke direktori artifact conversation jika ada (lingkungan lokal Antigravity)
-        for c_id in ["a202e1d1-7772-49fd-ab2a-7c3772959edd", "b33216a3-0a5f-4df8-aff3-aeef2408089b", "cab0ebc5-5150-4303-bbe6-c97db01a1692"]:
+        for c_id in ["a9b8acb9-5ee7-437b-8fa7-362a5c8bfb84", "a202e1d1-7772-49fd-ab2a-7c3772959edd", "b33216a3-0a5f-4df8-aff3-aeef2408089b", "cab0ebc5-5150-4303-bbe6-c97db01a1692"]:
             art_dir = os.path.join(r"C:\Users\ASUS\.gemini\antigravity\brain", c_id)
             if os.path.exists(art_dir):
                 target_file = os.path.join(art_dir, "foxe_studio_keuangan.html")

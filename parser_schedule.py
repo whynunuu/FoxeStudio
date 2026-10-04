@@ -207,16 +207,27 @@ def parse_schedule(filepath="file2.xlsx", bulan="2026-09", existing_bookings=Non
     wb.close()
     return bookings
 
-def parse_wisuda_schedule(filepath, tgl_str, start_id=1):
+def parse_wisuda_schedule(filepath, tgl_str, kategori="Wisuda UMP", start_id=1):
     import os
     if not os.path.exists(filepath):
         return []
-    spots = ['LIMBO', 'WOODEN', 'CONCRETE', 'DIPAN', 'CALMBLUE']
+    
     wb = openpyxl.load_workbook(filepath, data_only=True)
     if "GRADUATION UMP" in wb.sheetnames:
         ws = wb["GRADUATION UMP"]
     else:
         ws = wb.active
+    
+    # Deteksi nama spot secara dinamis dari Baris 3
+    spots = []
+    for s_idx in range(5):
+        base_c = s_idx * 6 + 1
+        s_val = ws.cell(3, base_c).value
+        if s_val and str(s_val).strip():
+            spots.append(str(s_val).strip().upper())
+        else:
+            default_spots = ['LIMBO', 'WOODEN', 'CONCRETE', 'DIPAN', 'CALMBLUE']
+            spots.append(default_spots[s_idx] if s_idx < len(default_spots) else f"SPOT_{s_idx+1}")
     
     bookings = []
     b_idx = start_id
@@ -228,7 +239,7 @@ def parse_wisuda_schedule(filepath, tgl_str, start_id=1):
             if not nama_val:
                 continue
             nama = str(nama_val).strip()
-            if not nama or nama.lower() in ["nama", "none", "-"]:
+            if not nama or nama.lower() in ["nama", "none", "-", "closed"]:
                 continue
             
             # Deteksi warna sel schedule
@@ -270,6 +281,15 @@ def parse_wisuda_schedule(filepath, tgl_str, start_id=1):
             if "prem" in paket_raw.lower():
                 paket_std = "Graduation Premium"
                 harga = 500000.0
+            elif "lg" in paket_raw.lower() or "large" in paket_raw.lower():
+                m_lg = re.search(r'(?:lg|large\s*group)\s*(\d+)', paket_raw.lower())
+                if m_lg:
+                    jml = int(m_lg.group(1))
+                    paket_std = f"Large Group {jml}"
+                    harga = max(7, jml) * 25000.0
+                else:
+                    paket_std = "Large Group"
+                    harga = 175000.0
             elif "wisuda" in paket_raw.lower() or "grad" in paket_raw.lower():
                 paket_std = "Graduation"
                 harga = 350000.0
@@ -289,7 +309,7 @@ def parse_wisuda_schedule(filepath, tgl_str, start_id=1):
                 "id": f"sc_wisuda_{tgl_str}_{b_idx}",
                 "tgl": tgl_str,
                 "waktu": waktu,
-                "studio": f"Wisuda ({s_name})",
+                "studio": f"{kategori} ({s_name})",
                 "studioNama": f"Spot {s_name}",
                 "spot": s_name,
                 "nama": nama,
@@ -302,7 +322,7 @@ def parse_wisuda_schedule(filepath, tgl_str, start_id=1):
                 "admin": admin,
                 "noHp": hp,
                 "manual": False,
-                "kategori": "Wisuda UMP",
+                "kategori": kategori,
                 "color": col,
                 "statusColor": col.lower(),
                 "statusSesi": status_sesi,
@@ -315,6 +335,26 @@ def parse_wisuda_schedule(filepath, tgl_str, start_id=1):
             
     wb.close()
     return bookings
+
+def parse_september_wisuda(f_uin1="file_wisuda_uin_1sep.xlsx", f_uin2="file_wisuda_uin_2sep.xlsx", f_uns1="file_wisuda_unsoed_8sep.xlsx", f_uns2="file_wisuda_unsoed_9sep.xlsx"):
+    b_uin1 = parse_wisuda_schedule(f_uin1, "2026-09-01", kategori="Wisuda UIN Saizu", start_id=1)
+    b_uin2 = parse_wisuda_schedule(f_uin2, "2026-09-02", kategori="Wisuda UIN Saizu", start_id=len(b_uin1) + 1)
+    b_uns1 = parse_wisuda_schedule(f_uns1, "2026-09-08", kategori="Wisuda UNSOED", start_id=len(b_uin1) + len(b_uin2) + 1)
+    b_uns2 = parse_wisuda_schedule(f_uns2, "2026-09-09", kategori="Wisuda UNSOED", start_id=len(b_uin1) + len(b_uin2) + len(b_uns1) + 1)
+    
+    all_wisuda_sept = b_uin1 + b_uin2 + b_uns1 + b_uns2
+    return {
+        "bookings": all_wisuda_sept,
+        "total": len(all_wisuda_sept),
+        "totalNilai": sum(b["harga"] for b in all_wisuda_sept),
+        "totalDp": sum(b["dp"] for b in all_wisuda_sept),
+        "breakdown": {
+            "uin_day1": {"sesi": len(b_uin1), "nilai": sum(b["harga"] for b in b_uin1)},
+            "uin_day2": {"sesi": len(b_uin2), "nilai": sum(b["harga"] for b in b_uin2)},
+            "unsoed_day1": {"sesi": len(b_uns1), "nilai": sum(b["harga"] for b in b_uns1)},
+            "unsoed_day2": {"sesi": len(b_uns2), "nilai": sum(b["harga"] for b in b_uns2)}
+        }
+    }
 
 def parse_october_pipeline(file_default="file2_okt.xlsx", file_w1="file_wisuda_3okt.xlsx", file_w2="file_wisuda_4okt.xlsx"):
     import os

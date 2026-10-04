@@ -4,7 +4,7 @@
 Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "update data", "sinkronkan data"), Agent **HARUS LANGSUNG mengeksekusi pipeline kerja lengkap** secara mandiri dari awal hingga selesai tanpa perlu konfirmasi manual lagi:
 
 ### 1. Eksekusi Sinkronisasi Operasional Google Drive (`deep_sync_foxe.py`):
-- Unduh & parse data operasional dari 7 sumber Google Drive resmi (File 3 / Rekap Global DI-SKIP):
+- Unduh & parse data operasional dari 11 sumber Google Drive resmi (File 3 / Rekap Global DI-SKIP):
   * **File 1 (Log Order Sept `.xlsm`)**: ID `1tQGIdkwGn4jXwroiMkctmOuEPb_444CJ` (`file1.xlsm`).
   * **File 1 (Log Order Okt `.xlsm`)**: ID `1xibgfKWJZWmcwh9lxR9Dt7IkHyMi7b75` (`file1_okt.xlsm`).
   * **File 2 (Schedule Sept `.xlsx`)**: ID `14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I` (`file2.xlsx`).
@@ -12,6 +12,10 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
   * **Schedule Reguler Oktober (`.xlsx`)**: ID `17QPAAhmPZqkomwajFhAw3JBmDyBFuklfNMqyVqlK484` (`file2_okt.xlsx`).
   * **Wisuda UMP Hari 1 / 3 Okt (`.xlsx`)**: ID `1sRILPoZD09Rm5aKn6tswNxvxOiRkSu4Z` (`file_wisuda_3okt.xlsx`).
   * **Wisuda UMP Hari 2 / 4 Okt (`.xlsx`)**: ID `1hDeuOh-6fnsP7vzWAl4HVwlYoEumu1hA` (`file_wisuda_4okt.xlsx`).
+  * **Wisuda UIN Saizu Hari 1 / 1 Sept (`.xlsx`)**: ID `10ombL-MWte-Gfh9aOkBoSqRAbrA7KiNc` (`file_wisuda_uin_1sep.xlsx`).
+  * **Wisuda UIN Saizu Hari 2 / 2 Sept (`.xlsx`)**: ID `1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ` (`file_wisuda_uin_2sep.xlsx`).
+  * **Wisuda UNSOED Hari 1 / 8 Sept (`.xlsx`)**: ID `14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL` (`file_wisuda_unsoed_8sep.xlsx`).
+  * **Wisuda UNSOED Hari 2 / 9 Sept (`.xlsx`)**: ID `17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn` (`file_wisuda_unsoed_9sep.xlsx`).
 - **Pipeline & Realisasi Live Oktober:** Otomatis parse & merge realisasi live 1 transaksi DP (Rp 100 rb) via AMEL (2 shift) + 164 booking terdaftar (Potensi omzet Rp 59,15 jt, estimasi pelunasan Rp 47,80 jt).
 - **Roster Shift:** Hitung akumulasi total shift slot aktual dari Log Order s.d. tanggal sekarang/cut-off.
 - **ATURAN MUTLAK BIAYA:** Pengeluaran COGS & OPEX murni diambil dari section `Detail` File Neraca (kolom P s.d. U). JANGAN mengambil pengeluaran dari File Log Order karena referensinya berbeda.
@@ -23,7 +27,7 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
 
 ### 2. Auto-Commit & Deploy ke GitHub:
 - Otomatis commit dan push pembaruan data ke repository:
-  `git add foxe_full_state.json index.html assemble_app.py logo_foxe.png file1.xlsm file1_okt.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx parser_neraca.py parser_schedule.py parser_log_order.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
+  `git add foxe_full_state.json index.html assemble_app.py logo_foxe.png file1.xlsm file1_okt.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx file_wisuda_uin_1sep.xlsx file_wisuda_uin_2sep.xlsx file_wisuda_unsoed_8sep.xlsx file_wisuda_unsoed_9sep.xlsx parser_neraca.py parser_schedule.py parser_log_order.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md VAULT.md`
   `git commit -m "Auto-sync data update"`
   `git push origin main`
 - Remote URL: `https://github.com/whynunuu/FoxeStudio.git`
