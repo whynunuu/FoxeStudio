@@ -423,8 +423,12 @@ class FoxeSentry:
         fail_count = sum(1 for _, st in items if st == "FAIL")
 
         lines.append(f"{f'TOTAL  : {pass_count} PASS / {warn_count} WARN / {fail_count} FAIL':<{w}}")
+        is_morning = datetime.datetime.now().hour < 12
         if fail_count == 0 and warn_count == 0:
-            lines.append(f"{'HASIL  : SEMUA FLOW SEHAT & SIAP BESOK':<{w}}")
+            if is_morning:
+                lines.append(f"{'HASIL  : SEMUA FLOW SIAP BUKA STUDIO':<{w}}")
+            else:
+                lines.append(f"{'HASIL  : SEMUA FLOW SEHAT & SIAP BESOK':<{w}}")
         elif fail_count > 0:
             lines.append(f"{'HASIL  : EMERGENCY STOP / AUTO-PUSH HOLD':<{w}}")
         else:
@@ -490,16 +494,29 @@ class FoxeSentry:
             self.log("ALERT", "Pesan eskalasi Anomali Kasir terkirim ke Telegram.")
             return False
 
-        # SKENARIO C: ALL GREEN (NIGHTLY AUDIT PASSED)
+        # SKENARIO C: ALL GREEN (AUDIT PASSED - PAGI / MALAM)
         if self.mode in ["nightly", "verbose"]:
+            now_dt = datetime.datetime.now()
+            is_morning_report = now_dt.hour < 12
+            if is_morning_report:
+                title_badge = "PRE-OPENING AUDIT SYSTEM"
+                status_badge = "100% READY TO OPEN"
+                header = "PRE-OPENING READINESS PASSED"
+                greeting = "✨ <i>Semua flow operasional 100% siap menyambut opening studio hari ini! ☀️</i>"
+            else:
+                title_badge = "FOXE SENTRY AUDIT SYSTEM"
+                status_badge = "100% HEALTHY & OPERATIONAL"
+                header = "NIGHTLY AUDIT PASSED"
+                greeting = "✨ <i>Semua flow operasional aman terkendali. Selamat beristirahat! 🌙</i>"
+
             receipt = self.build_receipt_view(
-                title="FOXE SENTRY AUDIT SYSTEM",
-                status_badge="100% HEALTHY & OPERATIONAL"
+                title=title_badge,
+                status_badge=status_badge
             )
             text = (
-                "🛡️ <b>[FOXE SENTRY: NIGHTLY AUDIT PASSED]</b> ✅\n\n"
+                f"🛡️ <b>[FOXE SENTRY: {header}]</b> ✅\n\n"
                 f"<pre>{receipt}</pre>\n\n"
-                "✨ <i>Semua flow operasional aman terkendali. Selamat beristirahat! 🌙</i>\n"
+                f"{greeting}\n"
                 "👉 <a href=\"https://whynunuu.github.io/FoxeStudio/\"><b>Buka Dashboard Live Foxe Studio</b></a>"
             )
             send_telegram_message(text)

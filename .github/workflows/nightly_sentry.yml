@@ -2,6 +2,8 @@ name: Foxe Sentry - Nightly Reliability & Security Audit
 
 on:
   schedule:
+    # 08:30 WIB (Pre-Opening Readiness Audit) = 01:30 UTC
+    - cron: '30 1 * * *'
     # 21:30 WIB (Post-Closing Audit) = 14:30 UTC
     - cron: '30 14 * * *'
     # 00:00 WIB (Midnight Readiness Check) = 17:00 UTC

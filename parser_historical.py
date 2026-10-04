@@ -10,6 +10,7 @@ Parser khusus untuk mengurai data operasional bulanan (Januari–Agustus 2026):
 """
 
 import os
+import re
 import json
 import openpyxl
 from parser_log_order import parse_log_order
@@ -123,7 +124,7 @@ def parse_historical_months(neraca_path="file_neraca.xlsx", force_reparse=False)
         try:
             with open(HISTORICAL_CACHE_FILE, "r", encoding="utf-8") as f:
                 cached = json.load(f)
-                if "historicalMonths" in cached and len(cached["historicalMonths"]) >= 8:
+                if "historicalMonths" in cached and len(cached["historicalMonths"]) >= 8 and "scheduleByMonth" in cached and len(cached["scheduleByMonth"]) >= 8:
                     print(f"[CACHE] Menggunakan cache data historis Jan–Ags (8 bulan selesai direkap) [Instan < 0.01s].")
                     return cached
         except Exception as e:
@@ -133,6 +134,7 @@ def parse_historical_months(neraca_path="file_neraca.xlsx", force_reparse=False)
     historical_months = {}
     neraca_by_month = {}
     roster_gaji_by_month = {}
+    schedule_by_month = {}
     all_historical_orders = []
     all_historical_shifts = []
 
@@ -175,14 +177,41 @@ def parse_historical_months(neraca_path="file_neraca.xlsx", force_reparse=False)
             if c:
                 crew_shifts[c] = crew_shifts.get(c, 0) + 1
 
-        # 2. Parse Schedule (jika ada)
+        # 2. Parse Schedule (jika ada) & Hitung Waste / Reschedule
         sessions_count = 0
+        month_bookings = []
+        waste_count = 0
+        waste_tot = 0.0
+        waste_dp = 0.0
+        waste_lost = 0.0
+        done_count = 0
+        conf_count = 0
+
         if os.path.exists(f_sch):
             try:
-                bookings = parse_schedule(f_sch, bulan=iso)
-                sessions_count = len(bookings)
+                raw_bookings = parse_schedule(f_sch, bulan=iso)
+                sessions_count = len(raw_bookings)
+                for b in raw_bookings:
+                    hp = str(b.get("noHp", "")).lower()
+                    m = re.search(r'dp\s*(\d+)', hp)
+                    dp = float(m.group(1)) * 1000 if m else (b.get("harga", 0.0) if "lunas" in hp else 0.0)
+                    if dp == 0 and "dp" in hp:
+                        dp = 100000.0
+                    b["dp"] = dp
+                    b["sisaPelunasan"] = max(0.0, b.get("harga", 0.0) - dp)
+                    month_bookings.append(b)
+
+                orange_bks = [b for b in month_bookings if b.get("statusColor") == "orange"]
+                waste_count = len(orange_bks)
+                waste_tot = sum(b.get("harga", 0.0) for b in orange_bks)
+                waste_dp = sum(b.get("dp", 0.0) for b in orange_bks)
+                waste_lost = sum(b.get("sisaPelunasan", 0.0) for b in orange_bks)
+                done_count = len([b for b in month_bookings if b.get("statusColor") == "biru"])
+                conf_count = len([b for b in month_bookings if b.get("statusColor") == "hijau"])
             except Exception as e:
                 print(f"[WARN] Gagal parse schedule {f_sch}: {e}")
+
+        schedule_by_month[iso] = month_bookings
 
         # 3. Parse Neraca
         cogs = 0.0
@@ -226,6 +255,12 @@ def parse_historical_months(neraca_path="file_neraca.xlsx", force_reparse=False)
             "crewShifts": crew_shifts,
             "totalShifts": len(shifts),
             "sessionsCount": sessions_count,
+            "wasteCount": waste_count,
+            "wasteNilai": waste_tot,
+            "wasteDp": waste_dp,
+            "wasteLost": waste_lost,
+            "doneCount": done_count,
+            "confirmedCount": conf_count,
             "leadsDays": len(leads),
             "kpiEntries": len(kpi),
             "hasLeadsKpi": (len(leads) > 0 or len(kpi) > 0),
@@ -234,12 +269,13 @@ def parse_historical_months(neraca_path="file_neraca.xlsx", force_reparse=False)
             "status": "Terverifikasi (Real Data)"
         }
 
-        print(f"[OK] {cfg['label']}: Omzet Rp {tot_omzet:,.0f} | Orders {len(orders)} | YoY {yoy:+.2f}% | Nett Rp {nett_profit:,.0f}")
+        print(f"[OK] {cfg['label']}: Omzet Rp {tot_omzet:,.0f} | Orders {len(orders)} | Sesi {sessions_count} (Waste: {waste_count}) | YoY {yoy:+.2f}% | Nett Rp {nett_profit:,.0f}")
 
     res_payload = {
         "historicalMonths": historical_months,
         "neracaByMonth": neraca_by_month,
         "rosterGajiByMonth": roster_gaji_by_month,
+        "scheduleByMonth": schedule_by_month,
         "historicalOrders": all_historical_orders,
         "historicalShifts": all_historical_shifts
     }

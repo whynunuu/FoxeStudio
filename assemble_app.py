@@ -1594,11 +1594,21 @@ const VIEWS=[
 function render(){
   try {
     const R=compute();
-    if(view === "est" && estMonth === 10 && S.oktoberPipeline){
+    if(view === "est" && (estMonth === 10 || R.c.bulan === "2026-10") && S.oktoberPipeline){
       document.getElementById("tbPeriod").textContent = "Oktober 2026";
       document.getElementById("tbCut").textContent = `Pipeline ${S.oktoberPipeline.totalBookings} Booking · Reguler & Wisuda UMP`;
       const st=document.getElementById("tbStatus");
       if(st){ st.textContent="Pipeline"; st.className="pill prog"; }
+    } else if(view === "est"){
+      const eYr = R.c.bulan.split("-")[0];
+      const eMn = BULAN[+R.c.bulan.split("-")[1] - 1] || "";
+      const bMap = S.scheduleByMonth || {};
+      const curBks = (bMap[R.c.bulan] || []);
+      const wasteN = curBks.filter(b => b.statusColor === "orange" || b.isReschedule).length;
+      document.getElementById("tbPeriod").textContent = `${eMn} ${eYr}`;
+      document.getElementById("tbCut").textContent = `Schedule ${curBks.length} Sesi (${wasteN} Batal/Waste) · ${eMn} ${eYr}`;
+      const st=document.getElementById("tbStatus");
+      if(st){ st.textContent = (R.c.bulan === "2026-09" ? "Sisa Jadwal" : "Arsip Schedule"); st.className = "pill " + (R.c.bulan === "2026-09" ? "crit" : "final"); }
     } else if(view === "ads"){
       const aYr = R.c.bulan.split("-")[0];
       const aMn = BULAN[+R.c.bulan.split("-")[1] - 1] || "";
@@ -3388,22 +3398,54 @@ function vAds(R){
 }
 
 function hitungBooking(R){
-  const S1=S.schedule&&S.schedule.bulan===R.c.bulan?S.schedule:null;
-  if(!S1)return null;
+  const bMap = S.scheduleByMonth || {};
+  let bookings = null;
+  let sumber = "Schedule";
+  
+  if (bMap[R.c.bulan] && Array.isArray(bMap[R.c.bulan]) && bMap[R.c.bulan].length > 0) {
+    bookings = bMap[R.c.bulan];
+    sumber = `Schedule ${R.c.bulan}`;
+  } else if (S.schedule && S.schedule.bulan === R.c.bulan) {
+    bookings = S.schedule.bookings || [];
+    sumber = S.schedule.sumber || "Schedule";
+  } else if (R.c.bulan === "2026-10" && S.oktoberPipeline) {
+    bookings = S.oktoberPipeline.bookings || [];
+    sumber = "Pipeline Oktober";
+  }
+  
+  if (!bookings || !bookings.length) return null;
+
   const byND={},byN={};
   S.orders.forEach(o=>{const k=nkey(o.client);if(!k)return;
     if(o.tanggalFoto) byND[k+"|"+o.tanggalFoto]=(byND[k+"|"+o.tanggalFoto]||0)+dnum(o.total);
     else byN[k]=(byN[k]||0)+dnum(o.total);});
-  const bk=(S1.bookings||[]).map(b=>{
+
+  const bk=bookings.map(b=>{
     const k=nkey(b.nama), bayar=(byND[k+"|"+b.tgl]||0)+(byN[k]||0);
-    const dp=Math.min(dnum(b.harga),bayar);
-    return {...b,dp,sisa:Math.max(0,dnum(b.harga)-dp),cocok:bayar>0,
-      lewat:b.tgl<=R.c.cutoff};
+    const bDp = (b.dp != null && dnum(b.dp) > 0) ? dnum(b.dp) : (bayar > 0 ? Math.min(dnum(b.harga), bayar) : (b.noHp && b.noHp.toLowerCase().includes("dp") ? 100000 : 0));
+    return {
+      ...b,
+      dp: bDp,
+      sisa: Math.max(0, dnum(b.harga) - bDp),
+      cocok: bayar > 0,
+      lewat: b.tgl <= R.c.cutoff
+    };
   });
+
   const fut=bk.filter(b=>!b.lewat && b.statusColor !== "orange"), sudah=bk.filter(b=>b.lewat || b.statusColor === "orange");
   const estimasi=fut.reduce((s,b)=>s+b.sisa,0);
   const kotor=fut.reduce((s,b)=>s+dnum(b.harga),0);
   const dpTot=fut.reduce((s,b)=>s+b.dp,0);
+
+  const doneBks = bk.filter(b => b.statusColor === "biru" || b.isDone);
+  const doneTot = doneBks.reduce((s, b) => s + dnum(b.harga), 0);
+  const doneDp = doneBks.reduce((s, b) => s + dnum(b.dp), 0);
+  const donePelunasan = doneBks.reduce((s, b) => s + Math.max(0, dnum(b.harga) - dnum(b.dp)), 0);
+
+  const confBks = bk.filter(b => b.statusColor === "hijau" || (b.statusColor !== "orange" && b.statusColor !== "biru" && !b.isDone && !b.isReschedule));
+  const confTot = confBks.reduce((s, b) => s + dnum(b.harga), 0);
+  const confDp = confBks.reduce((s, b) => s + dnum(b.dp), 0);
+  const confPelunasan = confBks.reduce((s, b) => s + Math.max(0, dnum(b.harga) - dnum(b.dp)), 0);
 
   const perTgl=R.days.map(d=>{
     const bs=bk.filter(b=>b.tgl===d.ds);
@@ -3421,12 +3463,14 @@ function hitungBooking(R){
     (pm[p]=pm[p]||{paket:p,n:0,est:0,kotor:0}); pm[p].n++; pm[p].est+=b.sisa; pm[p].kotor+=dnum(b.harga);});
   const paket=Object.values(pm).sort((a,b)=>b.est-a.est||b.n-a.n);
 
-  const wasteBks = bk.filter(b => b.statusColor === "orange");
+  const wasteBks = bk.filter(b => b.statusColor === "orange" || b.isReschedule);
   const wasteTot = wasteBks.reduce((s, b) => s + dnum(b.harga), 0);
   const wasteDp = wasteBks.reduce((s, b) => s + dnum(b.dp || (b.noHp && b.noHp.toLowerCase().includes("dp") ? 100000 : 0)), 0);
   const wasteLost = wasteBks.reduce((s, b) => s + Math.max(0, dnum(b.harga) - dnum(b.dp || (b.noHp && b.noHp.toLowerCase().includes("dp") ? 100000 : 0))), 0);
 
-  return {sumber:S1.sumber,bk,fut,sudah,estimasi,kotor,dpTot,perTgl,paket,
+  return {sumber,bk,fut,sudah,doneBks,doneTot,doneDp,donePelunasan,
+    confBks,confTot,confDp,confPelunasan,
+    estimasi,kotor,dpTot,perTgl,paket,
     total:R.omzet+estimasi, cocok:fut.filter(b=>b.cocok).length,
     wasteBks, wasteTot, wasteDp, wasteLost};
 }
@@ -3435,29 +3479,51 @@ function vEst(R){
   const B=hitungBooking(R);
   const mn=BULAN[+R.c.bulan.split("-")[1]-1], yr=R.c.bulan.split("-")[0];
   const okp = S.oktoberPipeline;
+  const isOkt = (activeMonth === "2026-10" || R.c.bulan === "2026-10");
 
-  // Segment Switcher Bar (Oktober Pipeline vs September Sisa)
+  const mList = [
+    {iso: "2026-10", em: 10, label: "Oktober 2026", sub: `${okp ? okp.totalBookings : 164} Booking · Pipeline Live`},
+    {iso: "2026-09", em: 9, label: "September 2026", sub: "191 Booking · 5 Batal"},
+    {iso: "2026-08", em: 8, label: "Agustus 2026", sub: "223 Booking · 10 Batal"},
+    {iso: "2026-07", em: 7, label: "Juli 2026", sub: "168 Booking · 5 Batal"},
+    {iso: "2026-06", em: 6, label: "Juni 2026", sub: "232 Booking · 5 Batal"},
+    {iso: "2026-05", em: 5, label: "Mei 2026", sub: "208 Booking · 5 Batal"},
+    {iso: "2026-04", em: 4, label: "April 2026", sub: "162 Booking · 4 Batal"},
+    {iso: "2026-03", em: 3, label: "Maret 2026", sub: "201 Booking · 6 Batal"},
+    {iso: "2026-02", em: 2, label: "Februari 2026", sub: "113 Booking · 4 Batal"},
+    {iso: "2026-01", em: 1, label: "Januari 2026", sub: "98 Booking · 1 Batal"}
+  ];
+
+  // Segment Switcher Bar Multi-Bulan (Januari s.d. Oktober 2026)
   const switcherHtml = `
-  <div class="card" style="margin-bottom:16px;padding:10px 14px;background:var(--surface);">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:12.5px;font-weight:600;color:var(--ink);">Pilih Periode:</span>
-        <div class="seg" id="segEstMonth">
-          <button class="btn sm ${estMonth === 10 ? 'pri' : ''}" data-em="10" style="padding:6px 14px;font-size:12px;font-weight:600;">
-            📅 Oktober 2026 (${okp ? okp.totalBookings : 0} Booking Pipeline)
-          </button>
-          <button class="btn sm ${estMonth === 9 ? 'pri' : ''}" data-em="9" style="padding:6px 14px;font-size:12px;font-weight:600;">
-            📅 September 2026 (Sisa Jadwal)
-          </button>
+  <div class="card" style="margin-bottom:16px;padding:12px 16px;background:var(--surface);">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:13px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;">
+          📅 Periode Schedule &amp; Audit Waste:
+        </span>
+        <select id="selEstMonth" aria-label="Pilih Periode Estimasi & Audit" style="font-weight:600;padding:6px 14px;font-size:12.5px;background:var(--surface2);border:1px solid var(--hairline-strong);border-radius:8px;color:var(--ink);cursor:pointer;outline:none;">
+          ${mList.map(item => `
+            <option value="${item.iso}" ${R.c.bulan === item.iso ? "selected" : ""}>
+              ${item.label} (${item.sub})
+            </option>
+          `).join("")}
+        </select>
+        <div class="seg" id="segEstMonth" style="display:flex;flex-wrap:wrap;gap:3px;">
+          ${mList.map(item => `
+            <button class="btn sm ${R.c.bulan === item.iso ? 'pri' : ''}" data-em="${item.em}" data-iso="${item.iso}" style="padding:4px 9px;font-size:11.5px;font-weight:600;">
+              ${BULAN[item.em - 1].slice(0, 3)}
+            </button>
+          `).join("")}
         </div>
       </div>
-      <span class="pill ${estMonth === 10 ? 'prog' : 'crit'}" style="font-size:11px;">
-        ${estMonth === 10 ? '✨ Forward Pipeline' : '🔴 Sisa Jadwal Bulan Berjalan'}
+      <span class="pill ${isOkt ? 'prog' : (R.c.bulan === '2026-09' ? 'crit' : 'final')}" style="font-size:11px;">
+        ${isOkt ? '✨ Forward Pipeline Live' : (R.c.bulan === '2026-09' ? '🔴 Sisa Jadwal Bulan Berjalan' : '📁 Closed Book (Arsip Schedule)')}
       </span>
     </div>
   </div>`;
 
-  if (estMonth === 10 && okp) {
+  if (isOkt && okp) {
     const oktLog = S.oktoberLogOrder;
     const oktOrders = (oktLog && oktLog.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
     const oktShifts = (oktLog && oktLog.shifts) || S.shifts.filter(s => s.tanggal && s.tanggal.startsWith("2026-10-"));
@@ -4043,6 +4109,17 @@ function vEst(R){
   const maxN=Math.max(1,...B.perTgl.map(t=>t.nilai||0));
   const selisih=R.proyeksi-B.total;
 
+  const doneCount = B.doneBks.length > 0 ? B.doneBks.length : (B.bk.length - B.wasteBks.length);
+  const doneVal = B.doneTot > 0 ? B.doneTot : (doneCount * 350000);
+  const successRate = B.bk.length > 0 ? (100 - (B.wasteBks.length / B.bk.length * 100)).toFixed(1) : 100;
+
+  const wastePkgMap = {};
+  B.wasteBks.forEach(b => {
+    const p = b.paketRaw || b.paket || "Lainnya";
+    wastePkgMap[p] = (wastePkgMap[p] || 0) + 1;
+  });
+  const topWastePkgs = Object.entries(wastePkgMap).sort((a,b)=>b[1]-a[1]).map(e => `${e[0]} (${e[1]} sesi)`).join(", ");
+
   return `
   ${switcherHtml}
   <div class="vhead"><div><div class="eyebrow">Forward-looking · ${mn} ${yr}</div><h2>Estimasi Omzet &amp; Audit Schedule</h2></div>
@@ -4051,14 +4128,14 @@ function vEst(R){
   <div class="stats" style="margin-bottom:14px">
     <div class="stat"><span class="k">Realized s.d. ${R.cutDay} ${mn}</span><span class="v">${rp(R.omzet)}</span>
       <span class="m">dari Log Order</span></div>
-    <div class="stat"><span class="k">Selesai / Hadir (🔵)</span><span class="v sm" style="color:var(--good);">${rp(64200000)}</span>
-      <span class="m">184 sesi foto terlaksana</span></div>
+    <div class="stat"><span class="k">Selesai / Hadir (🔵)</span><span class="v sm" style="color:var(--good);">${rp(doneVal)}</span>
+      <span class="m">${doneCount} sesi foto terlaksana</span></div>
     <div class="stat"><span class="k">Waste / Batal Sesi (🟠)</span><span class="v sm" style="color:var(--warn);">${rp(B.wasteTot)}</span>
       <span class="m">${B.wasteBks.length} sesi batal (sisa ${rp(B.wasteLost)} hilang)</span></div>
     <div class="stat"><span class="k">DP Waste Diamankan</span><span class="v sm" style="color:var(--accent);">${rp(B.wasteDp)}</span>
       <span class="m">non-refundable di kas studio</span></div>
-    <div class="stat"><span class="k">Tingkat Keberhasilan Sesi</span><span class="v sm" style="color:var(--good);">${(100 - (B.wasteBks.length / Math.max(1, B.bk.length) * 100)).toFixed(1)}%</span>
-      <span class="m">hanya ${pct(B.wasteBks.length / Math.max(1, B.bk.length))} batal</span></div>
+    <div class="stat"><span class="k">Tingkat Keberhasilan Sesi</span><span class="v sm" style="color:var(--good);">${successRate}%</span>
+      <span class="m">hanya ${pct(B.bk.length ? B.wasteBks.length / B.bk.length : 0)} batal</span></div>
   </div>
 
   <!-- Card Audit Booking Batal & Reschedule (Waste) -->
@@ -4118,7 +4195,7 @@ function vEst(R){
       </table>
     </div>
     <div class="note warn" style="margin-top:10px;font-size:12px;">
-      <b>Insight Audit:</b> Seluruh sesi batal di bulan ${mn} adalah paket <b>Large Group</b> (rombongan 8–11 orang). Uang DP sebesar <b>${rp(B.wasteDp)}</b> tetap aman di kas studio karena non-refundable, namun studio kehilangan potensi pelunasan kas masuk sebesar <b>${rp(B.wasteLost)}</b>.
+      <b>Insight Audit:</b> ${B.wasteBks.length > 0 ? `Tercatat ${B.wasteBks.length} sesi batal di bulan ${mn} ${topWastePkgs ? '(' + topWastePkgs + ')' : ''}. Uang DP sebesar <b>${rp(B.wasteDp)}</b> tetap aman di kas studio karena non-refundable, namun studio kehilangan potensi pelunasan kas masuk sebesar <b>${rp(B.wasteLost)}</b>.` : `Sempurna! Tidak ada booking batal atau reschedule di bulan ${mn}. Seluruh sesi terlaksana dengan baik.`}
     </div>
   </div>
 
@@ -4134,7 +4211,7 @@ function vEst(R){
       </tbody></table></div>
       <p class="tiny muted" style="margin-top:9px">${B.cocok} dari ${B.fut.length} booking ketemu padanannya
         di Log Order lewat nama client.</p></div>
-    <div class="card"><h3>Per paket <span class="eyebrow">booking belum masuk</span></h3>
+    <div class="card"><h3>Per paket <span class="eyebrow">${B.fut.length > 0 ? 'booking belum masuk' : 'sesi terjadwal'}</span></h3>
       <div class="tw"><table><thead><tr><th>Paket</th><th class="n">Booking</th>
         <th class="n">Estimasi</th><th class="n">Porsi</th></tr></thead><tbody>
         ${B.paket.map(p=>`<tr><td>${esc(p.paket)}</td><td class="n">${num(p.n)}</td>
@@ -4161,27 +4238,60 @@ function vEst(R){
       <td colspan="2" class="tiny">Log Order + Schedule</td><td class="n">${rp(B.estimasi)}</td></tr>
   </tbody></table></div>
 
-  <div class="card" style="margin-bottom:14px"><h3>Daftar booking belum masuk <span class="eyebrow">${B.fut.length} sesi</span></h3>
-    <div class="tw scrollable" style="max-height:480px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr><th>Tgl</th><th>Waktu</th><th>Client</th><th>Paket</th>
-      <th class="n">Harga</th><th class="n">Sudah dibayar</th><th class="n">Sisa</th><th>Studio</th></tr></thead><tbody>
-      ${B.fut.sort((a,b)=>a.tgl<b.tgl?-1:a.tgl>b.tgl?1:(a.waktu||"")<(b.waktu||"")?-1:1).map(b=>`
-        <tr><td class="mono">${b.tgl.slice(8)}</td><td class="mono muted">${esc(b.waktu||"—")}</td>
-        <td>${esc(b.nama)}</td><td class="tiny">${esc(b.paketRaw)||'<span class="muted">—</span>'}</td>
-        <td class="n">${b.harga?rp(b.harga):'<span class="muted">—</span>'}</td>
-        <td class="n">${b.dp?rp(b.dp):'<span class="muted">—</span>'}</td>
-        <td class="n"${b.sisa?'':' style="color:var(--muted)"'}>${rp(b.sisa)}</td>
-        <td class="tiny muted">${esc(b.studioNama||String(b.studio))}${b.manual?' <span class="pill neutral" style="font-size:9px;padding:1px 5px">manual</span>':""}</td></tr>`).join("")}
-    </tbody>
-    ${B.fut.length ? `<tfoot>
-      <tr class="total">
-        <td colspan="4">Total Belum Masuk (${B.fut.length} sesi)</td>
-        <td class="n">${rp(B.fut.reduce((s,b)=>s+dnum(b.harga),0))}</td>
-        <td class="n">${rp(B.fut.reduce((s,b)=>s+dnum(b.dp),0))}</td>
-        <td class="n" style="font-weight:700;">${rp(B.fut.reduce((s,b)=>s+dnum(b.sisa),0))}</td>
-        <td></td>
-      </tr>
-    </tfoot>` : ''}
-    </table></div>
+  <div class="card" style="margin-bottom:14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+      <div>
+        <h3 style="margin:0;">${B.fut.length > 0 ? 'Daftar Booking Belum Masuk' : 'Daftar Seluruh Sesi Foto Terjadwal &amp; Terlaksana'} <span class="eyebrow">${B.fut.length > 0 ? B.fut.length : B.bk.length} sesi</span></h3>
+        <span class="tiny muted">${B.fut.length > 0 ? 'Booking yang menunggu sesi foto dan pelunasan' : 'Rekap seluruh jadwal sesi booking studio bulan ' + mn + ' ' + yr}</span>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <span class="pill good" style="font-size:10.5px;">🔵 Hadir: ${doneCount} sesi</span>
+        <span class="pill warn" style="font-size:10.5px;">🟠 Batal/Waste: ${B.wasteBks.length} sesi</span>
+      </div>
+    </div>
+    <div class="tw scrollable" style="max-height:480px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;">
+      <table>
+        <thead style="position:sticky;top:0;z-index:3;background:var(--surface2);">
+          <tr>
+            <th>Tgl</th>
+            <th>Waktu</th>
+            <th>Status</th>
+            <th>Client</th>
+            <th>Paket</th>
+            <th>Studio</th>
+            <th class="n">Harga Paket</th>
+            <th class="n">DP Terdata</th>
+            <th class="n">Pelunasan</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${(B.fut.length > 0 ? B.fut : B.bk).sort((a,b)=>a.tgl<b.tgl?-1:a.tgl>b.tgl?1:(a.waktu||"")<(b.waktu||"")?-1:1).map(b=>{
+            const isOrange = b.statusColor === "orange" || b.isReschedule;
+            const isDone = b.statusColor === "biru" || b.isDone;
+            return `
+            <tr style="${isOrange ? 'background:color-mix(in srgb,var(--warn) 6%,transparent);' : ''}">
+              <td class="mono">${b.tgl.slice(8)}</td>
+              <td class="mono muted">${esc(b.waktu||"—")}</td>
+              <td><span class="pill ${isOrange ? 'warn' : (isDone ? 'crit' : 'prog')}" style="font-size:9.5px;padding:1px 6px;">${isOrange ? '🟠 Batal/Reschedule' : (isDone ? '🔵 Hadir/Selesai' : '🟢 Terjadwal')}</span></td>
+              <td><b>${esc(b.nama)}</b></td>
+              <td class="tiny">${esc(b.paketRaw || b.paket || "—")}</td>
+              <td class="tiny muted">${esc(b.studioNama || String(b.studio))}</td>
+              <td class="n">${b.harga ? rp(b.harga) : '—'}</td>
+              <td class="n" style="color:var(--crit);">${b.dp ? rp(b.dp) : '—'}</td>
+              <td class="n" style="color:var(--good);font-weight:600;">${isOrange ? '<span class="muted" style="text-decoration:line-through;">' + rp(b.sisa) + '</span>' : rp(b.sisa)}</td>
+            </tr>
+          `;}).join("")}
+        </tbody>
+        <tfoot>
+          <tr class="total">
+            <td colspan="6">Total (${(B.fut.length > 0 ? B.fut : B.bk).length} sesi foto)</td>
+            <td class="n">${rp((B.fut.length > 0 ? B.fut : B.bk).reduce((s,b)=>s+dnum(b.harga),0))}</td>
+            <td class="n" style="color:var(--crit);">${rp((B.fut.length > 0 ? B.fut : B.bk).reduce((s,b)=>s+dnum(b.dp),0))}</td>
+            <td class="n" style="color:var(--good);font-weight:700;">${rp((B.fut.length > 0 ? B.fut : B.bk).reduce((s,b)=>s+(b.statusColor === 'orange' ? 0 : dnum(b.sisa)),0))}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
 
   ${okp ? `
@@ -4908,17 +5018,27 @@ function wire(R){
     };
   });
 
-  // Switcher Tab Periode di Estimasi Omzet
+  // Switcher Tab Periode di Estimasi Omzet (Januari s.d. Oktober 2026)
   const segEm = document.getElementById("segEstMonth");
   if (segEm) {
     segEm.querySelectorAll("button[data-em]").forEach(b => {
       b.onclick = () => {
-        estMonth = +b.dataset.em;
-        activeMonth = (estMonth === 10) ? "2026-10" : "2026-09";
+        const m = +b.dataset.em;
+        estMonth = m;
+        activeMonth = b.dataset.iso || `2026-${String(m).padStart(2, "0")}`;
         render();
         window.scrollTo({top: 0, behavior: "smooth"});
       };
     });
+  }
+  const selEm = document.getElementById("selEstMonth");
+  if (selEm) {
+    selEm.onchange = (e) => {
+      activeMonth = e.target.value;
+      estMonth = +activeMonth.split("-")[1];
+      render();
+      window.scrollTo({top: 0, behavior: "smooth"});
+    };
   }
   const btnGoEstOkt = document.getElementById("btnGoEstOkt");
   if (btnGoEstOkt) {

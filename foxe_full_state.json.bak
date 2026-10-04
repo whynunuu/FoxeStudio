@@ -15616,6 +15616,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261004-1248",
+      "mulai": "2026-10-04T05:48:48.794673+00:00",
+      "status": "berjalan",
+      "ringkas": "Sinkronisasi sedang berlangsung..."
+    },
+    {
       "id": "sy_20261003-0848",
       "mulai": "2026-10-03T08:48:59.563007+00:00",
       "status": "sukses",

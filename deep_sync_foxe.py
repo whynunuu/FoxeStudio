@@ -225,6 +225,12 @@ def run_integration():
         hist_res = parse_historical_months(p_neraca)
         state["historicalMonths"] = {str(k): v for k, v in hist_res.get("historicalMonths", {}).items()}
 
+        # Gabungkan Schedule multi-bulan ke state (Januari s.d. Oktober 2026)
+        sch_by_month = dict(hist_res.get("scheduleByMonth", {}))
+        sch_by_month["2026-09"] = res_f2_bookings if res_f2_bookings else state.get("schedule", {}).get("bookings", [])
+        sch_by_month["2026-10"] = okt_pipeline.get("bookings", [])
+        state["scheduleByMonth"] = sch_by_month
+
         # Gabungkan Neraca bulanan dan Roster Gaji bulanan
         for iso_key, nrc_data in hist_res.get("neracaByMonth", {}).items():
             state["neracaByMonth"][iso_key] = nrc_data
