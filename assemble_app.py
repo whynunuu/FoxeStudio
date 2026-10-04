@@ -690,7 +690,7 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
       <span style="font-size:24px;">⚠️</span>
     </div>
     <h3 id="confirmDialogTitle" style="font-size:18px;font-weight:700;color:var(--ink);margin:0 0 8px 0;line-height:1.35;">Konfirmasi</h3>
-    <p id="confirmDialogMessage" style="font-size:14.5px;color:var(--ink);margin:0 0 14px 0;line-height:1.5;font-weight:600;">Kamu yakin untuk menginput/mengubah data ini?</p>
+    <p id="confirmDialogMessage" style="font-size:14.5px;color:var(--ink);margin:0 0 14px 0;line-height:1.5;font-weight:600;">Kamu yakin untuk menghapus/mengubah data ini?</p>
     <div id="confirmDialogDetail" style="font-size:12px;color:var(--ink2);background:var(--surface2);border:1px solid var(--hairline);border-radius:8px;padding:9px 12px;margin:0 0 18px 0;text-align:left;line-height:1.45;display:none;"></div>
     <div style="display:flex;gap:10px;justify-content:center;">
       <button class="btn" id="btnConfirmNo" type="button" style="flex:1;padding:10px 16px;font-size:13.5px;font-weight:600;border:1px solid var(--hairline-strong);background:var(--surface2);color:var(--muted);border-radius:8px;cursor:pointer;">No</button>
@@ -4720,7 +4720,7 @@ function vSet(R){
 /* ============================ modal konfirmasi universal ============================ */
 function confirmAction({
   title = "Konfirmasi Perubahan",
-  message = "Kamu yakin untuk menginput/mengubah data ini?",
+  message = "Kamu yakin untuk menghapus/mengubah data ini?",
   detail = "",
   yesText = "Yes",
   noText = "No"
@@ -4796,10 +4796,37 @@ function confirmAction({
 function wire(R){
   document.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => {
     const col = b.dataset.del, id = b.dataset.id;
+    let detailMsg = "Data yang dipilih akan dihapus secara permanen dari sesi ini.";
+    let itemTitle = "Data";
+    if (col === "orders") {
+      const item = (S.orders || []).find(x => x.id === id);
+      if (item) {
+        itemTitle = "Transaksi";
+        detailMsg = `Hapus transaksi client <b>${esc(item.client)}</b> (Total: <b>${rp(item.total)}</b>) tanggal <b>${item.tanggal}</b>`;
+      }
+    } else if (col === "expenses") {
+      const item = (S.expenses || []).find(x => x.id === id);
+      if (item) {
+        itemTitle = "Beban / Pengeluaran";
+        detailMsg = `Hapus pengeluaran <b>${esc(item.deskripsi)}</b> (${item.kategori || item.jenis || 'Biaya'}) senilai <b>${rp(item.nilai)}</b>`;
+      }
+    } else if (col === "leads") {
+      const item = (S.leads || []).find(x => x.id === id);
+      if (item) {
+        itemTitle = "Data Leads";
+        detailMsg = `Hapus leads tanggal <b>${item.tanggal}</b> (${item.leads || 0} leads, ${item.dp || 0} DP)`;
+      }
+    } else if (col === "kpi") {
+      const item = (S.kpi || []).find(x => x.id === id);
+      if (item) {
+        itemTitle = "Posisi KPI";
+        detailMsg = `Hapus evaluasi KPI kru <b>${esc(item.nama)}</b> (${item.role || 'Kru'})`;
+      }
+    }
     const confirmed = await confirmAction({
-      title: "Konfirmasi Hapus Data",
-      message: "Kamu yakin untuk menginput/mengubah data ini?",
-      detail: "Data yang dipilih akan dihapus dari pembukuan sesi ini.",
+      title: `Konfirmasi Hapus ${itemTitle}`,
+      message: "Kamu yakin untuk menghapus/mengubah data ini?",
+      detail: detailMsg,
       yesText: "Yes",
       noText: "No"
     });
@@ -4807,7 +4834,7 @@ function wire(R){
     S[col] = S[col].filter(x => x.id !== id);
     saveLocal();
     render();
-    showToast("Data berhasil dihapus.", "neutral", 2000);
+    showToast(`✅ ${itemTitle} berhasil dihapus.`, "neutral", 2500);
   });
 
   const F = (id, fn) => {
@@ -5621,9 +5648,9 @@ function wire(R){
       const id = btn.dataset.id;
       const r = PL.find(x => x.id === id);
       const confirmed = await confirmAction({
-        title: "Hapus Kru",
-        message: "Kamu yakin untuk menginput/mengubah data ini?",
-        detail: `Menghapus <b>${r ? r.nama : 'kru ini'}</b> dari daftar penggajian bulan ini.`,
+        title: "Konfirmasi Hapus Kru",
+        message: "Kamu yakin untuk menghapus/mengubah data ini?",
+        detail: `Menghapus kru <b>${r ? r.nama : 'ini'}</b> (${r ? (r.job || 'Kru') : ''}) dari daftar penggajian bulan ini.`,
         yesText: "Yes",
         noText: "No"
       });
@@ -5631,7 +5658,7 @@ function wire(R){
         S.rosterGaji = (S.rosterGaji || []).filter(x => x.id !== id);
         recalculatePayroll();
         render();
-        showToast("Kru berhasil dihapus.", "neutral", 2000);
+        showToast("✅ Kru berhasil dihapus dari penggajian.", "neutral", 2500);
       }
     };
   });
