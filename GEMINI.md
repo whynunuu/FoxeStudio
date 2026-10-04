@@ -104,6 +104,7 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
   2. **File & Komponen yang Diperbarui**: Daftar file script, JSON state, visual HTML, atau dokumen Obsidian yang mengalami perubahan.
   3. **Status Integrasi & Deploy**: Konfirmasi git commit & push ke GitHub Pages, serta status pengiriman Telegram.
   4. **Metrik & Highlight Operasional Terkini**: Ringkasan data penting (omzet, order, pipeline, ads, schedule besok) agar owner dapat memantau studio secara transparan dan jelas.
+  5. **Durasi Waktu Pengerjaan**: Wajib menyertakan catatan durasi pengerjaan di baris penutup dengan format: `⏱️ Waktu Pengerjaan : [X] Menit [Y] Detik`.
 
 ### 8. Integrasi Kalender Marketing & Meta Ads Tracker 2026/2027:
 - Meta Ads Tracker mendukung pergantian multi-bulan dinamis: **Oktober 2026 (Live Tracker)** dan **September 2026 (Arsip)**.
