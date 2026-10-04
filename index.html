@@ -1854,7 +1854,7 @@ function kartuPembaruan(R){
           ${recList.slice(0, 2).map(r => `<div style="margin-bottom:2px;">• ${r}</div>`).join("")}
         </div>
 
-        <button class="btn sm" onclick="nav('biaya')" style="width:100%;padding:4px 8px;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:5px;background:var(--surface2);">
+        <button class="btn sm" onclick="view='biaya';render();window.scrollTo({top:0,behavior:'smooth'})" style="width:100%;padding:4px 8px;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:5px;background:var(--surface2);">
           📋 Buka Buku Neraca ➔
         </button>
       </div>`;
@@ -6584,13 +6584,29 @@ function wireSyncEvents() {
 wireSyncEvents();
 render();
 
+// Deteksi versi kode baru (deploy baru) -> muat ulang otomatis agar fitur terbaru langsung aktif
+const BUILD_ID = "1791099845";
+async function checkNewBuild() {
+  if (window.location.protocol === "file:") return;
+  try {
+    const res = await fetch("index.html?v=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) return;
+    const txt = await res.text();
+    const m = txt.match(/const BUILD_ID = "(\d+)"/);
+    if (m && m[1] && m[1] !== BUILD_ID) {
+      showToast("🔄 Versi dashboard terbaru tersedia, memuat ulang...", "ok", 1500);
+      setTimeout(() => location.reload(), 1200);
+    }
+  } catch (e) {}
+}
+
 // Auto-Sync Background Polling (Jadwal & Data Selalu Up-to-Date 24/7)
 setInterval(() => {
-  if (!document.hidden) fastRefresh(true);
+  if (!document.hidden) { fastRefresh(true); checkNewBuild(); }
 }, 60000);
 
 document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) fastRefresh(true);
+  if (!document.hidden) { fastRefresh(true); checkNewBuild(); }
 });
 </script>
 
