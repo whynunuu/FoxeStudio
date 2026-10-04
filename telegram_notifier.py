@@ -138,7 +138,7 @@ def build_summary_message(state, bulan=None):
         orders = [o for o in state.get("orders", []) if o.get("tanggal", "").startswith("2026-09")]
         shifts = [s for s in state.get("shifts", []) if s.get("tanggal", "").startswith("2026-09")]
         leads_list = [l for l in state.get("leads", []) if l.get("tanggal", "").startswith("2026-09")]
-        expenses = state.get("expenses", [])
+        expenses = [e for e in state.get("expenses", []) if e.get("tanggal", "").startswith(bulan)]
         bookings_source = state.get("schedule", {}).get("bookings", [])
 
     try:
@@ -214,10 +214,22 @@ def build_summary_message(state, bulan=None):
     cogs_tot = sum(e.get("nilai", 0) for e in expenses if e.get("jenis") == "COGS")
     opex_tot = sum(e.get("nilai", 0) for e in expenses if e.get("jenis") == "OPEX")
     nett_profit = grand_total - cogs_tot - opex_tot
+    outcome_tot = cogs_tot + opex_tot
+    outcome_ratio = (outcome_tot / grand_total * 100) if grand_total > 0 else 0.0
+
+    # Rule: Berlakukan setelah tanggal 15 (> 15) atau jika bulan sudah tutup
+    is_closed_month = (cutoff_day >= total_days)
+    is_after_day_15 = (cutoff_day > 15) or is_closed_month
+    is_outcome_alert = is_after_day_15 and (outcome_ratio >= 45.0) and (grand_total > 0)
+
     table_lines.append("--------------------------------------------")
     table_lines.append(f"{'TOTAL COGS (Produksi)':<24} {rp(cogs_tot):>19}")
     table_lines.append(f"{'TOTAL OPEX (Studio)':<24} {rp(opex_tot):>19}")
     table_lines.append(f"{'ESTIMASI NETT PROFIT':<24} {rp(nett_profit):>19}")
+    if is_outcome_alert:
+        table_lines.append("--------------------------------------------")
+        table_lines.append(f"{'OUTCOME RATIO (≥45%)':<24} {f'{outcome_ratio:.1f}% ⚠️':>19}")
+        table_lines.append(f"{'STATUS BUDGET CAP':<24} {'ALERT KRITIS':>19}")
 
     # Section Estimate Omzet Sampai Akhir Bulan (Unrealized Cash In & Omzet)
     if is_oktober:
@@ -347,10 +359,23 @@ def build_summary_message(state, bulan=None):
             f"• <b>Kesiapan Roster</b> : Siaga 5 Fotografer & Asisten per hari.\n"
         )
 
+    outcome_alert_block = ""
+    if is_outcome_alert:
+        outcome_alert_block = (
+            f"🚨 <b>ALARM OPERASIONAL: BEBAN COGS + OPEX ≥ 45%!</b>\n"
+            f"⚠️ <b>Rasio Beban: {outcome_ratio:.1f}%</b> (Ambang Batas: 45.0%)\n"
+            f"• <b>Total Omzet</b>  : {rp(grand_total)}\n"
+            f"• <b>Total Beban</b>  : {rp(outcome_tot)} (COGS {rp(cogs_tot)} + OPEX {rp(opex_tot)})\n"
+            f"• <b>Estimasi Nett</b> : {rp(nett_profit)}\n"
+            f"<i>Perhatian: Pengeluaran operasional studio telah menyerap ≥ 45% omzet. Segera perketat anggaran dan audit pos belanja COGS & OPEX!</i>\n\n"
+            f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+        )
+
     now = datetime.datetime.now()
     now_str = f"{now.day:02d} {BULAN_NAMA[now.month-1]} {now.year}, {now.strftime('%H:%M')} WIB"
 
     full_msg = (
+        f"{outcome_alert_block}"
         f"<pre>{table_block}</pre>\n\n"
         f"🎯 <b>LEADS (s.d. {cutoff_day} {month_short}):</b>\n"
         f"• Leads   : <b>{int(total_leads)}</b>\n"

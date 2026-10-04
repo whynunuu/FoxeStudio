@@ -1748,12 +1748,53 @@ function durasi(a,b){
 const syncUrut=()=>[...S.sync].sort((a,b)=>String(b.mulai||"").localeCompare(String(a.mulai||"")));
 const syncSukses=()=>syncUrut().find(s=>s.status==="sukses"||s.status==="manual")||null;
 
-function kartuPembaruan(){
+function kartuPembaruan(R){
   const list=syncUrut(), ok=syncSukses(), akhir=list[0];
   if(!list.length) return "";
   const belumTuntas=akhir&&(akhir.status==="gagal"||akhir.status==="berjalan");
   const LBL={sukses:["berhasil","ok"],manual:["manual","skip"],gagal:["gagal","no"],
              berjalan:["berjalan","wait"],sebagian:["sebagian","wait"],dilewati:["dilewati","skip"]};
+  
+  // Hitung Rasio Beban (COGS + OPEX) untuk bulan ini (Rule: Berlaku setelah tanggal 15)
+  let alertOutcomeHtml = "";
+  if (R) {
+    const outcome = (R.cogs || 0) + (R.opex || 0);
+    const outcomeRatio = (R.omzet && R.omzet > 0) ? (outcome / R.omzet) : 0;
+    const isClosed = (R.hariBerjalan >= R.dim);
+    const isAfterDay15 = isClosed || (R.cutDay > 15);
+    const isOutcomeAlert = isAfterDay15 && (outcomeRatio >= 0.45) && (R.omzet > 0) && (R.adaBiaya || outcome > 0);
+
+    if (isOutcomeAlert) {
+      alertOutcomeHtml = `
+      <div class="card" style="margin-top:12px;border:1.5px solid var(--crit);background:color-mix(in srgb,var(--crit) 10%,var(--surface));box-shadow:0 0 20px rgba(168,59,46,0.28);position:relative;overflow:hidden;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <div style="display:flex;align-items:center;gap:6px;font-weight:700;color:var(--crit);font-size:13px;text-transform:uppercase;letter-spacing:0.4px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--crit);flex-shrink:0;animation:pulseDot 1.4s infinite;">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            <span>Alarm Beban ≥ 45%</span>
+          </div>
+          <span class="pill crit" style="font-weight:700;font-size:10.5px;padding:2px 7px;animation:pulseDot 1.6s infinite;">KRITIS: ${pct(outcomeRatio)}</span>
+        </div>
+        <p style="font-size:11.5px;color:var(--ink);line-height:1.4;margin-bottom:9px;">
+          Total beban operasional (COGS + OPEX) telah menyerap <b>${pct(outcomeRatio)}</b> dari total omzet, melampaui batas aman maksimal (45%).
+        </p>
+        <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:7px;padding:8px 10px;display:flex;flex-direction:column;gap:3px;font-size:11px;font-family:var(--ff-mono);margin-bottom:8px;">
+          <div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Total Omzet</span><b>${rp(R.omzet)}</b></div>
+          <div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Beban COGS</span><span style="color:var(--crit);">${rp(R.cogs || 0)} (${pct(R.omzet?(R.cogs||0)/R.omzet:0)})</span></div>
+          <div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Beban OPEX</span><span style="color:var(--crit);">${rp(R.opex || 0)} (${pct(R.omzet?(R.opex||0)/R.omzet:0)})</span></div>
+          <div style="display:flex;justify-content:space-between;border-top:1px dashed var(--hairline-strong);padding-top:3px;"><span style="color:var(--ink);font-weight:600;">Total Beban</span><b style="color:var(--crit);">${rp(outcome)}</b></div>
+        </div>
+        <div style="font-size:10.5px;color:var(--muted);line-height:1.35;display:flex;align-items:flex-start;gap:4px;">
+          <span>⚠️</span>
+          <span><b>SOP Pengendalian:</b> Tinjau pos belanja COGS &amp; OPEX segera dan perketat anggaran agar margin laba bersih studio tetap terjaga.</span>
+        </div>
+      </div>`;
+    }
+  }
+
   return `
   <div class="updwrap"><div class="card">
     <h3>Pembaruan Data</h3>
@@ -1768,7 +1809,9 @@ function kartuPembaruan(){
           <span class="ut">${w?w.tgl:"—"} <b>${w?w.jam:""}</b></span>
           <span class="us ${cls}">${lbl}</span></div>`}).join("")}
     </div>
-  </div></div>`;
+  </div>
+  ${alertOutcomeHtml}
+  </div>`;
 }
 
 function vDash(R){
@@ -1807,7 +1850,7 @@ function vDash(R){
     ${calendar(R)}
     <p class="tiny muted" style="margin-top:9px">Warna mengikuti besarnya angka. Tanggal setelah cut-off tampil tanpa angka; kolom kanan menjumlah tiap pekan.</p>
   </div>
-  ${kartuPembaruan()}
+  ${kartuPembaruan(R)}
   </div>
 
   <div class="card" style="margin-bottom:14px"><h3>Omzet harian &amp; progresif <span class="eyebrow">cash + transfer · menuju target</span></h3>${chartGabung(R)}</div>
@@ -2016,6 +2059,37 @@ function vTahunan(R) {
       yoy = o25 ? (((okp ? okp.estimateCashIn : oktOmzet) - o25) / o25) : null;
     }
 
+    // Perhitungan Rasio Beban (COGS + OPEX) & Alarm Peringatan >= 45% (berlaku setelah tanggal 15)
+    let cogsM = 0;
+    let opexM = 0;
+    let hasExpenses = false;
+    let cutDayM = 31;
+
+    if (hist) {
+      cogsM = dnum(hist.cogs);
+      opexM = dnum(hist.opex);
+      hasExpenses = (cogsM > 0 || opexM > 0);
+      cutDayM = 31; // Buku ditutup (lewat tgl 15)
+    } else if (info.no === 9) {
+      const sepExpenses = (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-09-"));
+      cogsM = sepExpenses.filter(e => e.jenis === "COGS").reduce((s, e) => s + dnum(e.nilai), 0);
+      opexM = sepExpenses.filter(e => e.jenis === "OPEX").reduce((s, e) => s + dnum(e.nilai), 0);
+      hasExpenses = (cogsM > 0 || opexM > 0);
+      cutDayM = 30; // Rekap final September (lewat tgl 15)
+    } else if (info.no === 10) {
+      const oktExpenses = (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-10-"));
+      cogsM = oktExpenses.filter(e => e.jenis === "COGS").reduce((s, e) => s + dnum(e.nilai), 0);
+      opexM = oktExpenses.filter(e => e.jenis === "OPEX").reduce((s, e) => s + dnum(e.nilai), 0);
+      hasExpenses = (cogsM > 0 || opexM > 0);
+      const oktCutoff = (S.oktoberLogOrder && S.oktoberLogOrder.cutoff) || (S.config && S.config.cutoff) || "2026-10-01";
+      cutDayM = parseInt(oktCutoff.split("-")[2] || "1", 10);
+    }
+
+    const totalOutcome = cogsM + opexM;
+    const outcomeRatio = (o26 && o26 > 0) ? (totalOutcome / o26) : 0;
+    // Rule: Berlakukan setelah tanggal 15 (> 15)
+    const isOutcomeAlert = hasExpenses && (o26 > 0) && (cutDayM > 15) && (outcomeRatio >= 0.45);
+
     return {
       ...info,
       short: info.label.slice(0, 3),
@@ -2031,7 +2105,10 @@ function vTahunan(R) {
       isPast: isPast,
       isFuture: isFuture,
       yoy: yoy,
-      hist: hist
+      hist: hist,
+      totalOutcome: totalOutcome,
+      outcomeRatio: outcomeRatio,
+      isOutcomeAlert: isOutcomeAlert
     };
   });
 
@@ -2107,12 +2184,26 @@ function vTahunan(R) {
 
       return `
       <div class="month-card ${m.isCurrent ? 'active-month' : ''}" data-month="${m.no}">
-        <div class="mhead">
-          <div>
-            <span class="mname">${m.label} ${yr} ${m.isCurrent ? '<i class="live-dot" title="Bulan Berjalan Live"></i>' : ''}</span>
-            <div class="mmomentum">${esc(m.momentum)}</div>
+        <div class="mhead" style="display:flex;flex-direction:column;gap:5px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">
+            <span class="mname" style="font-size:21px;display:flex;align-items:center;gap:6px;">
+              ${m.label} ${yr} ${m.isCurrent ? '<i class="live-dot" title="Bulan Berjalan Live"></i>' : ''}
+            </span>
+            ${m.isOutcomeAlert ? `
+              <span class="pill crit" style="font-size:10px;padding:2px 7px;display:inline-flex;align-items:center;gap:4px;font-weight:700;white-space:nowrap;border:1px solid rgba(224,122,104,0.5);box-shadow:0 0 8px rgba(168,59,46,0.3);animation:pulseDot 2s infinite;" title="Peringatan Beban Operasional: Total COGS + OPEX mencapai ${pct(m.outcomeRatio)} dari omzet (Ambang Batas ≥ 45%)">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                  <line x1="12" y1="9" x2="12" y2="13"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <span>≥45% (${pct(m.outcomeRatio)})</span>
+              </span>
+            ` : ''}
           </div>
-          <span class="pill ${m.statusPill}" style="font-size:10.5px;">${m.status}</span>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:6px;flex-wrap:wrap;">
+            <div class="mmomentum">${esc(m.momentum)}</div>
+            <span class="pill ${m.statusPill}" style="font-size:10.5px;">${m.status}</span>
+          </div>
         </div>
 
         <div class="mbody">
