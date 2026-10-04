@@ -829,6 +829,17 @@ const KAT_NONPL=["Asset / CAPEX","Prive / Owner Draw","Pembayaran Hutang"];
 
 const rp=n=>(n==null||isNaN(n))?"—":"Rp "+Math.round(n).toLocaleString("en-US");
 const rpc=n=>(n==null||isNaN(n))?"—":"Rp "+Math.round(n).toLocaleString("en-US");
+const formatRupiahInput=val=>{
+  if(val==null||val===""||isNaN(val))return "Rp 0";
+  const num=Math.round(Number(val));
+  return "Rp "+num.toLocaleString("id-ID");
+};
+const parseRupiahInput=val=>{
+  if(typeof val==="number")return isNaN(val)?0:val;
+  if(!val)return 0;
+  const clean=String(val).replace(/[^0-9]/g,"");
+  return parseInt(clean,10)||0;
+};
 const num=n=>(n==null||isNaN(n))?"—":Math.round(n).toLocaleString("en-US");
 const pct=n=>(n==null||isNaN(n)||!isFinite(n))?"—":(n*100).toFixed(1)+"%";
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;","'":"&#39;"}[c]));
@@ -4330,29 +4341,29 @@ function vGaji(R){
       </td>
       <td>${rolePill(r.job)}</td>
       <td class="n">
-        <input type="number" step="0.5" min="0" class="payroll-input pi-q" data-id="${r.id}" data-field="q" value="${r.q}" style="width:70px">
+        <input type="number" step="0.5" min="0" class="payroll-input pi-q" data-id="${r.id}" data-field="q" value="${r.q}" style="width:65px;text-align:right">
       </td>
       <td class="n">
-        <input type="number" step="1000" min="0" class="payroll-input pi-cost" data-id="${r.id}" data-field="cost" value="${r.cost}" style="width:95px">
+        <input type="text" inputmode="numeric" class="payroll-input payroll-currency pi-cost" data-id="${r.id}" data-field="cost" value="${formatRupiahInput(r.cost)}" style="width:110px;text-align:right" title="Tarif per shift atau gaji pokok">
       </td>
-      <td class="n mono pi-total" data-id="${r.id}" style="font-weight:600">${rp(r.total_gaji)}</td>
+      <td class="n mono pi-total" data-id="${r.id}" style="font-weight:600">${formatRupiahInput(r.total_gaji)}</td>
       <td class="n">
-        <input type="number" step="1000" min="0" class="payroll-input pi-bonus-kpi" data-id="${r.id}" data-field="bonus_kpi" value="${r.bonus_kpi || 0}" style="width:90px;color:var(--good)" title="Bonus capaian KPI & Target (Sheet 9)">
+        <input type="text" inputmode="numeric" class="payroll-input payroll-currency pi-bonus-kpi" data-id="${r.id}" data-field="bonus_kpi" value="${formatRupiahInput(r.bonus_kpi || 0)}" style="width:110px;text-align:right;color:var(--good)" title="Bonus capaian KPI & Target (Sheet 9)">
         ${(r.bonus_kpi > 0) ? `<div class="tiny muted" style="font-size:10px;color:var(--good);margin-top:2px">KPI Sheet 9</div>` : ""}
       </td>
       <td class="n">
-        <input type="number" step="1000" min="0" class="payroll-input pi-additional" data-id="${r.id}" data-field="additional" value="${r.additional || 0}" placeholder="0" style="width:85px;color:var(--accent)" title="Insentif project di luar operasional">
+        <input type="text" inputmode="numeric" class="payroll-input payroll-currency pi-additional" data-id="${r.id}" data-field="additional" value="${formatRupiahInput(r.additional || 0)}" placeholder="Rp 0" style="width:110px;text-align:right;color:var(--accent)" title="Insentif project di luar operasional">
       </td>
       <td class="n">
-        <input type="number" step="1000" min="0" class="payroll-input pi-bonus" data-id="${r.id}" data-field="bonus" value="${r.bonus || 0}" style="width:75px;color:var(--good)" title="Bonus umum / lembur">
+        <input type="text" inputmode="numeric" class="payroll-input payroll-currency pi-bonus" data-id="${r.id}" data-field="bonus" value="${formatRupiahInput(r.bonus || 0)}" style="width:105px;text-align:right;color:var(--good)" title="Bonus umum / lembur">
       </td>
       <td class="n">
-        <input type="number" step="1000" min="0" class="payroll-input pi-hukuman" data-id="${r.id}" data-field="hukuman" value="${r.hukuman || 0}" style="width:70px;color:var(--crit)" title="Denda / keterlambatan">
+        <input type="text" inputmode="numeric" class="payroll-input payroll-currency pi-hukuman" data-id="${r.id}" data-field="hukuman" value="${formatRupiahInput(r.hukuman || 0)}" style="width:100px;text-align:right;color:var(--crit)" title="Denda / keterlambatan">
       </td>
       <td class="n">
-        <input type="number" step="1000" min="0" class="payroll-input pi-bon" data-id="${r.id}" data-field="bon" value="${r.bon || 0}" style="width:80px;color:var(--crit)" title="Potongan kasbon">
+        <input type="text" inputmode="numeric" class="payroll-input payroll-currency pi-bon" data-id="${r.id}" data-field="bon" value="${formatRupiahInput(r.bon || 0)}" style="width:105px;text-align:right;color:var(--crit)" title="Potongan kasbon">
       </td>
-      <td class="n mono pi-thp" data-id="${r.id}" style="font-weight:700;font-size:14px;color:var(--accent)">${rp(r.thp)}</td>
+      <td class="n mono pi-thp" data-id="${r.id}" style="font-weight:700;font-size:14px;color:var(--accent)">${formatRupiahInput(r.thp)}</td>
       <td style="text-align:center">
         <select class="payroll-status-select" data-id="${r.id}" style="background:var(--surface2);border:1px solid var(--hairline-strong);border-radius:6px;padding:3px 6px;font-size:11.5px;color:var(--ink)">
           <option value="Draft" ${r.status === "Draft" ? "selected" : ""}>Draft</option>
@@ -4400,27 +4411,27 @@ function vGaji(R){
   <div class="stats" style="margin-bottom:20px" id="payrollStatsRow">
     <div class="stat">
       <span class="k">Total Gaji Pokok &amp; Shift</span>
-      <span class="v sm mono" id="statGajiPokok">${rp(sm.total_gaji)}</span>
+      <span class="v sm mono" id="statGajiPokok">${formatRupiahInput(sm.total_gaji)}</span>
       <span class="m">${sm.total_karyawan} kru terdaftar</span>
     </div>
     <div class="stat">
       <span class="k">Total Bonus &amp; Insentif</span>
-      <span class="v sm mono" id="statGajiBonus" style="color:var(--good)">${rp((sm.total_bonus_kpi || 0) + (sm.total_additional || 0) + (sm.total_bonus || 0))}</span>
-      <span class="m" id="statGajiBonusSub">KPI ${rp(sm.total_bonus_kpi || 0)} · Add ${rp(sm.total_additional || 0)} · Lain ${rp(sm.total_bonus || 0)}</span>
+      <span class="v sm mono" id="statGajiBonus" style="color:var(--good)">${formatRupiahInput((sm.total_bonus_kpi || 0) + (sm.total_additional || 0) + (sm.total_bonus || 0))}</span>
+      <span class="m" id="statGajiBonusSub">KPI ${formatRupiahInput(sm.total_bonus_kpi || 0)} · Add ${formatRupiahInput(sm.total_additional || 0)} · Lain ${formatRupiahInput(sm.total_bonus || 0)}</span>
     </div>
     <div class="stat">
       <span class="k">Total Potongan (Bon &amp; Denda)</span>
-      <span class="v sm mono" id="statGajiPotongan" style="color:var(--crit)">${rp(sm.total_bon + sm.total_hukuman)}</span>
-      <span class="m">kasbon ${rp(sm.total_bon)} · denda ${rp(sm.total_hukuman)}</span>
+      <span class="v sm mono" id="statGajiPotongan" style="color:var(--crit)">${formatRupiahInput(sm.total_bon + sm.total_hukuman)}</span>
+      <span class="m">kasbon ${formatRupiahInput(sm.total_bon)} · denda ${formatRupiahInput(sm.total_hukuman)}</span>
     </div>
     <div class="stat" style="background:color-mix(in srgb,var(--accent) 5%,var(--surface))">
       <span class="k" style="color:var(--accent)">Grand Total Take Home Pay</span>
-      <span class="v mono" id="statGajiTHP" style="color:var(--accent)">${rp(sm.grand_total_thp)}</span>
+      <span class="v mono" id="statGajiTHP" style="color:var(--accent)">${formatRupiahInput(sm.grand_total_thp)}</span>
       <span class="m">payroll closing ${mn} ${yr}</span>
     </div>
   </div>
 
-  <div class="tw" style="margin-bottom:24px">
+  <div class="tw" style="margin-bottom:24px;overflow-x:auto">
     <table>
       <thead>
         <tr>
@@ -4428,14 +4439,14 @@ function vGaji(R){
           <th>Nama Kru</th>
           <th>Jabatan</th>
           <th class="n" style="width:70px">Q (Shift)</th>
-          <th class="n" style="width:95px">Tarif / Rate</th>
-          <th class="n" style="width:110px">Gaji Pokok</th>
-          <th class="n" style="width:95px">Bonus KPI (+)</th>
-          <th class="n" style="width:95px">Additional (+)</th>
-          <th class="n" style="width:85px">Bonus Lain (+)</th>
-          <th class="n" style="width:75px">Denda (-)</th>
-          <th class="n" style="width:85px">Kasbon (-)</th>
-          <th class="n" style="width:125px">Take Home Pay</th>
+          <th class="n" style="width:115px">Tarif / Rate</th>
+          <th class="n" style="width:120px">Gaji Pokok</th>
+          <th class="n" style="width:115px">Bonus KPI (+)</th>
+          <th class="n" style="width:115px">Additional (+)</th>
+          <th class="n" style="width:110px">Bonus Lain (+)</th>
+          <th class="n" style="width:105px">Denda (-)</th>
+          <th class="n" style="width:110px">Kasbon (-)</th>
+          <th class="n" style="width:130px">Take Home Pay</th>
           <th style="text-align:center;width:90px">Status</th>
           <th style="text-align:center;width:105px">Aksi</th>
         </tr>
@@ -4448,13 +4459,13 @@ function vGaji(R){
           <td colspan="3"><b>Total Penggajian Studio (${mn} ${yr})</b></td>
           <td class="n mono" id="totQ">${list.reduce((s,r)=>s+dnum(r.q),0)}</td>
           <td class="n"></td>
-          <td class="n mono" id="totGajiCol">${rp(sm.total_gaji)}</td>
-          <td class="n mono" id="totBonusKpiCol" style="color:var(--good)">${rp(sm.total_bonus_kpi || 0)}</td>
-          <td class="n mono" id="totAdditionalCol" style="color:var(--accent)">${rp(sm.total_additional || 0)}</td>
-          <td class="n mono" id="totBonusCol" style="color:var(--good)">${rp(sm.total_bonus)}</td>
-          <td class="n mono" id="totDendaCol" style="color:var(--crit)">${rp(sm.total_hukuman)}</td>
-          <td class="n mono" id="totBonCol" style="color:var(--crit)">${rp(sm.total_bon)}</td>
-          <td class="n mono" id="totTHPCol" style="font-weight:700;color:var(--accent);font-size:15px">${rp(sm.grand_total_thp)}</td>
+          <td class="n mono" id="totGajiCol">${formatRupiahInput(sm.total_gaji)}</td>
+          <td class="n mono" id="totBonusKpiCol" style="color:var(--good)">${formatRupiahInput(sm.total_bonus_kpi || 0)}</td>
+          <td class="n mono" id="totAdditionalCol" style="color:var(--accent)">${formatRupiahInput(sm.total_additional || 0)}</td>
+          <td class="n mono" id="totBonusCol" style="color:var(--good)">${formatRupiahInput(sm.total_bonus)}</td>
+          <td class="n mono" id="totDendaCol" style="color:var(--crit)">${formatRupiahInput(sm.total_hukuman)}</td>
+          <td class="n mono" id="totBonCol" style="color:var(--crit)">${formatRupiahInput(sm.total_bon)}</td>
+          <td class="n mono" id="totTHPCol" style="font-weight:700;color:var(--accent);font-size:15px">${formatRupiahInput(sm.grand_total_thp)}</td>
           <td colspan="2"></td>
         </tr>
       </tfoot>
@@ -5200,12 +5211,12 @@ function wire(R){
       const rowEl = document.querySelector(`.payroll-row[data-id="${r.id}"]`);
       if (rowEl) {
         const q = parseFloat(rowEl.querySelector('.pi-q').value) || 0;
-        const cost = parseFloat(rowEl.querySelector('.pi-cost').value) || 0;
-        const bonusKpi = parseFloat(rowEl.querySelector('.pi-bonus-kpi').value) || 0;
-        const additional = parseFloat(rowEl.querySelector('.pi-additional').value) || 0;
-        const bonus = parseFloat(rowEl.querySelector('.pi-bonus').value) || 0;
-        const denda = parseFloat(rowEl.querySelector('.pi-hukuman').value) || 0;
-        const bon = parseFloat(rowEl.querySelector('.pi-bon').value) || 0;
+        const cost = parseRupiahInput(rowEl.querySelector('.pi-cost').value);
+        const bonusKpi = parseRupiahInput(rowEl.querySelector('.pi-bonus-kpi').value);
+        const additional = parseRupiahInput(rowEl.querySelector('.pi-additional').value);
+        const bonus = parseRupiahInput(rowEl.querySelector('.pi-bonus').value);
+        const denda = parseRupiahInput(rowEl.querySelector('.pi-hukuman').value);
+        const bon = parseRupiahInput(rowEl.querySelector('.pi-bon').value);
         const total = q * cost;
         const thp = total + bonusKpi + additional + bonus - denda - bon;
         
@@ -5220,9 +5231,9 @@ function wire(R){
         r.thp = thp;
         
         const totCell = rowEl.querySelector('.pi-total');
-        if (totCell) totCell.textContent = rp(total);
+        if (totCell) totCell.textContent = formatRupiahInput(total);
         const thpCell = rowEl.querySelector('.pi-thp');
-        if (thpCell) thpCell.textContent = rp(thp);
+        if (thpCell) thpCell.textContent = formatRupiahInput(thp);
         
         totQ += q;
         totGaji += total;
@@ -5237,33 +5248,33 @@ function wire(R){
     
     // Update summary cards
     const elGaji = document.getElementById('statGajiPokok');
-    if (elGaji) elGaji.textContent = rp(totGaji);
+    if (elGaji) elGaji.textContent = formatRupiahInput(totGaji);
     const elBonus = document.getElementById('statGajiBonus');
-    if (elBonus) elBonus.textContent = rp(totBonusKpi + totAdditional + totBonus);
+    if (elBonus) elBonus.textContent = formatRupiahInput(totBonusKpi + totAdditional + totBonus);
     const elBonusSub = document.getElementById('statGajiBonusSub');
-    if (elBonusSub) elBonusSub.textContent = `KPI ${rp(totBonusKpi)} · Add ${rp(totAdditional)} · Lain ${rp(totBonus)}`;
+    if (elBonusSub) elBonusSub.textContent = `KPI ${formatRupiahInput(totBonusKpi)} · Add ${formatRupiahInput(totAdditional)} · Lain ${formatRupiahInput(totBonus)}`;
     const elPot = document.getElementById('statGajiPotongan');
-    if (elPot) elPot.textContent = rp(totBon + totDenda);
+    if (elPot) elPot.textContent = formatRupiahInput(totBon + totDenda);
     const elTHP = document.getElementById('statGajiTHP');
-    if (elTHP) elTHP.textContent = rp(totTHP);
+    if (elTHP) elTHP.textContent = formatRupiahInput(totTHP);
     
     // Update table footer
     const tQ = document.getElementById('totQ');
     if (tQ) tQ.textContent = totQ.toFixed(1).replace('.0', '');
     const tGaji = document.getElementById('totGajiCol');
-    if (tGaji) tGaji.textContent = rp(totGaji);
+    if (tGaji) tGaji.textContent = formatRupiahInput(totGaji);
     const tBKpi = document.getElementById('totBonusKpiCol');
-    if (tBKpi) tBKpi.textContent = rp(totBonusKpi);
+    if (tBKpi) tBKpi.textContent = formatRupiahInput(totBonusKpi);
     const tAdd = document.getElementById('totAdditionalCol');
-    if (tAdd) tAdd.textContent = rp(totAdditional);
+    if (tAdd) tAdd.textContent = formatRupiahInput(totAdditional);
     const tBon = document.getElementById('totBonusCol');
-    if (tBon) tBon.textContent = rp(totBonus);
+    if (tBon) tBon.textContent = formatRupiahInput(totBonus);
     const tDen = document.getElementById('totDendaCol');
-    if (tDen) tDen.textContent = rp(totDenda);
+    if (tDen) tDen.textContent = formatRupiahInput(totDenda);
     const tKas = document.getElementById('totBonCol');
-    if (tKas) tKas.textContent = rp(totBon);
+    if (tKas) tKas.textContent = formatRupiahInput(totBon);
     const tTHP = document.getElementById('totTHPCol');
-    if (tTHP) tTHP.textContent = rp(totTHP);
+    if (tTHP) tTHP.textContent = formatRupiahInput(totTHP);
     
     // Update inline slip if active
     const curSel = document.getElementById('selSlipKru');
@@ -5279,8 +5290,33 @@ function wire(R){
     } catch (e) {}
   };
 
-  document.querySelectorAll('.payroll-input').forEach(inp => {
+  // Event listener untuk input shift (pi-q)
+  document.querySelectorAll('.pi-q').forEach(inp => {
     inp.oninput = recalculatePayroll;
+  });
+
+  // Event listener untuk input moneter rupiah (.payroll-currency)
+  document.querySelectorAll('.payroll-currency').forEach(inp => {
+    inp.onfocus = function() {
+      this.select();
+    };
+    inp.oninput = function() {
+      const raw = String(this.value || '');
+      const clean = raw.replace(/[^0-9]/g, '');
+      if (clean === '') {
+        this.value = 'Rp ';
+      } else {
+        const num = parseInt(clean, 10) || 0;
+        this.value = 'Rp ' + num.toLocaleString('id-ID');
+      }
+      recalculatePayroll();
+    };
+    inp.onblur = function() {
+      const clean = String(this.value || '').replace(/[^0-9]/g, '');
+      const num = parseInt(clean, 10) || 0;
+      this.value = 'Rp ' + num.toLocaleString('id-ID');
+      recalculatePayroll();
+    };
   });
 
   document.querySelectorAll('.payroll-status-select').forEach(sel => {
@@ -5324,7 +5360,7 @@ function wire(R){
       const nama = prompt('Masukkan nama kru baru:');
       if (!nama || !nama.trim()) return;
       const job = prompt('Masukkan jabatan/role (contoh: Fotografer, Admin, Freelance):', 'Freelance') || 'Freelance';
-      const cost = parseFloat(prompt('Tarif per shift atau gaji bulanan (Rp):', '40000')) || 40000;
+      const cost = parseRupiahInput(prompt('Tarif per shift atau gaji bulanan (Rp):', 'Rp 40.000')) || 40000;
       const q = parseFloat(prompt('Jumlah shift / qty:', '1')) || 1;
       
       const newR = {
@@ -5383,24 +5419,24 @@ function wire(R){
     
     const isShift = r.cost <= 100000;
     const elLabel = document.getElementById('slipShiftLabel');
-    if (elLabel) elLabel.textContent = isShift ? `Gaji Shift (${r.q} shift × ${rp(r.cost)})` : `Gaji Pokok / Fixed (${r.q} bln)`;
-    const elGaji = document.getElementById('slipGajiPokok'); if (elGaji) elGaji.textContent = rp(r.total_gaji || 0);
-    const elBKpi = document.getElementById('slipBonusKpi'); if (elBKpi) elBKpi.textContent = rp(r.bonus_kpi || 0);
-    const elAdd = document.getElementById('slipAdditional'); if (elAdd) elAdd.textContent = rp(r.additional || 0);
-    const elBonus = document.getElementById('slipBonusLain'); if (elBonus) elBonus.textContent = rp(r.bonus || 0);
+    if (elLabel) elLabel.textContent = isShift ? `Gaji Shift (${r.q} shift × ${formatRupiahInput(r.cost)})` : `Gaji Pokok / Fixed (${r.q} bln)`;
+    const elGaji = document.getElementById('slipGajiPokok'); if (elGaji) elGaji.textContent = formatRupiahInput(r.total_gaji || 0);
+    const elBKpi = document.getElementById('slipBonusKpi'); if (elBKpi) elBKpi.textContent = formatRupiahInput(r.bonus_kpi || 0);
+    const elAdd = document.getElementById('slipAdditional'); if (elAdd) elAdd.textContent = formatRupiahInput(r.additional || 0);
+    const elBonus = document.getElementById('slipBonusLain'); if (elBonus) elBonus.textContent = formatRupiahInput(r.bonus || 0);
     
     const rowBKpi = document.getElementById('slipRowBonusKpi'); if (rowBKpi) rowBKpi.style.display = (r.bonus_kpi > 0) ? 'flex' : 'none';
     const rowAdd = document.getElementById('slipRowAdditional'); if (rowAdd) rowAdd.style.display = (r.additional > 0) ? 'flex' : 'none';
     const rowBLain = document.getElementById('slipRowBonusLain'); if (rowBLain) rowBLain.style.display = (r.bonus > 0) ? 'flex' : 'none';
 
     const kotor = (r.total_gaji || 0) + (r.bonus_kpi || 0) + (r.additional || 0) + (r.bonus || 0);
-    const elKotor = document.getElementById('slipTotalKotor'); if (elKotor) elKotor.textContent = rp(kotor);
+    const elKotor = document.getElementById('slipTotalKotor'); if (elKotor) elKotor.textContent = formatRupiahInput(kotor);
     
-    const elKasbon = document.getElementById('slipKasbon'); if (elKasbon) elKasbon.textContent = rp(r.bon || 0);
-    const elDenda = document.getElementById('slipDenda'); if (elDenda) elDenda.textContent = rp(r.hukuman || 0);
-    const elPot = document.getElementById('slipTotalPotongan'); if (elPot) elPot.textContent = rp((r.bon || 0) + (r.hukuman || 0));
+    const elKasbon = document.getElementById('slipKasbon'); if (elKasbon) elKasbon.textContent = formatRupiahInput(r.bon || 0);
+    const elDenda = document.getElementById('slipDenda'); if (elDenda) elDenda.textContent = formatRupiahInput(r.hukuman || 0);
+    const elPot = document.getElementById('slipTotalPotongan'); if (elPot) elPot.textContent = formatRupiahInput((r.bon || 0) + (r.hukuman || 0));
     
-    const elTHP = document.getElementById('slipTHP'); if (elTHP) elTHP.textContent = rp(r.thp || (kotor - (r.bon || 0) - (r.hukuman || 0)));
+    const elTHP = document.getElementById('slipTHP'); if (elTHP) elTHP.textContent = formatRupiahInput(r.thp || (kotor - (r.bon || 0) - (r.hukuman || 0)));
   };
 
   const selKru = document.getElementById('selSlipKru');
@@ -5437,11 +5473,11 @@ function wire(R){
     const isShift = r.cost <= 100000;
     
     const earnRows = [
-      `   • ${isShift ? `Gaji Shift (${r.q} shift × ${rp(r.cost)})` : 'Gaji Pokok'}: ${rp(r.total_gaji)}`
+      `   • ${isShift ? `Gaji Shift (${r.q} shift × ${formatRupiahInput(r.cost)})` : 'Gaji Pokok'}: ${formatRupiahInput(r.total_gaji)}`
     ];
-    if (r.bonus_kpi > 0) earnRows.push(`   • Bonus KPI & Target: ${rp(r.bonus_kpi)}`);
-    if (r.additional > 0) earnRows.push(`   • Additional (Insentif Project): ${rp(r.additional)}`);
-    if (r.bonus > 0) earnRows.push(`   • Bonus Lain: ${rp(r.bonus)}`);
+    if (r.bonus_kpi > 0) earnRows.push(`   • Bonus KPI & Target: ${formatRupiahInput(r.bonus_kpi)}`);
+    if (r.additional > 0) earnRows.push(`   • Additional (Insentif Project): ${formatRupiahInput(r.additional)}`);
+    if (r.bonus > 0) earnRows.push(`   • Bonus Lain: ${formatRupiahInput(r.bonus)}`);
     const kotor = (r.total_gaji||0) + (r.bonus_kpi||0) + (r.additional||0) + (r.bonus||0);
     const pot = (r.bon||0) + (r.hukuman||0);
 
@@ -5451,13 +5487,13 @@ function wire(R){
       `----------------------------------------\n` +
       `1. Penghasilan:\n` +
       earnRows.join(String.fromCharCode(10)) + String.fromCharCode(10) +
-      `   Total Penghasilan Kotor: ${rp(kotor)}\n\n` +
+      `   Total Penghasilan Kotor: ${formatRupiahInput(kotor)}\n\n` +
       `2. Potongan:\n` +
-      `   • Kasbon: ${rp(r.bon || 0)}\n` +
-      `   • Denda/Potongan: ${rp(r.hukuman || 0)}\n` +
-      `   Total Potongan: ${rp(pot)}\n` +
+      `   • Kasbon: ${formatRupiahInput(r.bon || 0)}\n` +
+      `   • Denda/Potongan: ${formatRupiahInput(r.hukuman || 0)}\n` +
+      `   Total Potongan: ${formatRupiahInput(pot)}\n` +
       `----------------------------------------\n` +
-      `*TAKE HOME PAY (BERSIH): ${rp(r.thp || (kotor - pot))}*\n` +
+      `*TAKE HOME PAY (BERSIH): ${formatRupiahInput(r.thp || (kotor - pot))}*\n` +
       `Status: ${r.status || 'Draft'}\n` +
       `----------------------------------------\n` +
       `Terima kasih atas dedikasi dan kerja kerasmu!`;
