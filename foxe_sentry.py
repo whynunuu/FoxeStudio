@@ -272,7 +272,7 @@ class FoxeSentry:
         non_okt_in_okt = [o for o in okt_orders if not str(o.get("tanggal", "")).startswith("2026-10")]
         
         all_orders = state.get("orders", [])
-        invalid_dates = [o for o in all_orders if not (str(o.get("tanggal", "")).startswith("2026-09") or str(o.get("tanggal", "")).startswith("2026-10"))]
+        invalid_dates = [o for o in all_orders if not str(o.get("tanggal", "")).startswith("2026-")]
 
         if non_okt_in_okt:
             self.confusions_anomalies.append({
@@ -285,11 +285,11 @@ class FoxeSentry:
             self.confusions_anomalies.append({
                 "cp": "CP-4 (Anti-Silang Bulan)",
                 "type": "INVALID DATE FORMAT",
-                "desc": f"Ditemukan {len(invalid_dates)} transaksi dengan format tanggal di luar Sept/Okt 2026.",
+                "desc": f"Ditemukan {len(invalid_dates)} transaksi dengan format tanggal di luar tahun 2026.",
                 "action": "Cek format kolom tanggal di file Log Order."
             })
         else:
-            self.passed_checks.append("Anti-Silang Bulan: Nol Kebocoran Transaksi Sept/Okt")
+            self.passed_checks.append("Anti-Silang Bulan: Nol Kebocoran Transaksi (Jan–Okt 2026)")
 
         # 2. Anti-Ghost Slot & Standard Schedule Color Audit (Oktober Pipeline)
         pipeline = state.get("oktoberPipeline", {})

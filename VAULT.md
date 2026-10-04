@@ -21,7 +21,7 @@ Dokumentasi ini menghubungkan workspace Foxe Agent dengan **Obsidian Vault** pri
 
 ### A. Cloud Cron Serverless (GitHub Actions)
 - **File Workflow**: `.github/workflows/daily_sync.yml`
-- **Jadwal Operasional Studio (Interval 3 Jam)**: `0 2,5,8,11,14 * * *` (UTC) = **09:00, 12:00, 15:00, 18:00, 21:00 WIB**.
+- **Jadwal Operasional Studio**: 08:30 WIB (Pre-Opening Sync & Sentry Audit), serta 12:00, 15:00, 18:00, 21:00 WIB (Closing), 21:30 WIB (Nightly Audit), 00:00 WIB (Midnight Check).
 - **Kredensial**: Menggunakan GitHub Secrets `TELEGRAM_BOT_TOKEN` dan `TELEGRAM_CHAT_ID`.
 - **Aksi Otomatis**: Mengunduh 7 file resmi Google Drive (termasuk Log Order Oktober file1_okt.xlsm), mengeksekusi semua parser, merakit ulang dashboard, mengunggah pembaruan ke GitHub Pages, dan mengirim notifikasi closing ke Telegram via `@NunuFxBot`.
 
@@ -36,7 +36,7 @@ Dokumentasi ini menghubungkan workspace Foxe Agent dengan **Obsidian Vault** pri
 ### D. Local Task Scheduler (Windows)
 - **Script Pendaftaran**: `Pasang_Jadwal_Windows_Task.bat`
 - **Nama Task**: `FoxeStudioDailySync`
-- **Jadwal**: Setiap hari pukul 09:00 WIB via `schtasks`.
+- **Jadwal**: Setiap hari pukul 08:30 WIB via `schtasks` (sebelum studio buka).
 
 ---
 
