@@ -509,23 +509,32 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
 
 /* ---------- Section Tahunan (Annual Dashboard & 12 Month Tiles) ---------- */
 .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px}
-.month-card{background:var(--surface);border:1px solid var(--hairline);border-radius:14px;
-  padding:20px;display:flex;flex-direction:column;gap:13px;transition:all .18s cubic-bezier(0.16,1,0.3,1);
-  position:relative;cursor:pointer}
-.month-card:hover{border-color:var(--hairline-strong);transform:translateY(-3px);
-  box-shadow:0 8px 24px rgba(0,0,0,0.12)}
-.month-card.active-month{border:2px solid #00f2fe;
-  background:radial-gradient(circle at top right, rgba(0,242,254,0.08), transparent 65%), color-mix(in srgb,var(--accent) 5%,var(--surface));
-  box-shadow:0 0 16px rgba(0,242,254,0.45), 0 0 35px rgba(16,185,129,0.28);
-  animation:neonPulse 3s infinite alternate ease-in-out;
+.month-card{background:linear-gradient(90deg, rgba(0,242,254,0.035) 0%, rgba(16,185,129,0.025) 50%, rgba(163,230,53,0.035) 100%), var(--surface);
+  border:1px solid var(--hairline);border-radius:14px;
+  padding:20px;display:flex;flex-direction:column;gap:13px;transition:all .22s cubic-bezier(0.16,1,0.3,1);
+  position:relative;overflow:hidden;cursor:pointer}
+.month-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0;
+  background:linear-gradient(90deg, #00f2fe 0%, #10b981 50%, #a3e635 100%);opacity:0.45;
+  transition:opacity .25s ease, height .25s ease, box-shadow .25s ease}
+.month-card:hover{border-color:rgba(16,185,129,0.45);transform:translateY(-3px);
+  box-shadow:0 10px 28px rgba(0,0,0,0.22), 0 0 20px rgba(0,242,254,0.12), 0 0 30px rgba(16,185,129,0.08)}
+.month-card:hover::before{opacity:1;height:4px;box-shadow:0 0 12px rgba(0,242,254,0.6), 0 0 22px rgba(16,185,129,0.45)}
+.month-card.active-month{border:2px solid transparent;
+  background:linear-gradient(var(--surface), var(--surface)) padding-box,
+             linear-gradient(90deg, #00f2fe 0%, #10b981 50%, #a3e635 100%) border-box;
+  box-shadow:0 0 20px rgba(0,242,254,0.48), 0 0 38px rgba(16,185,129,0.32), inset 0 0 14px rgba(0,242,254,0.08);
+  animation:neonAuroraPulse 3.5s infinite alternate ease-in-out;
   position:relative}
-@keyframes neonPulse{
-  0%{border-color:#00f2fe;box-shadow:0 0 14px rgba(0,242,254,0.4),0 0 28px rgba(16,185,129,0.22)}
-  50%{border-color:#10b981;box-shadow:0 0 20px rgba(16,185,129,0.48),0 0 38px rgba(0,242,254,0.32)}
-  100%{border-color:#00f2fe;box-shadow:0 0 14px rgba(0,242,254,0.4),0 0 28px rgba(16,185,129,0.22)}
+.month-card.active-month::before{height:4px;opacity:1;
+  background:linear-gradient(90deg, #00f2fe 0%, #10b981 50%, #a3e635 100%);
+  box-shadow:0 0 16px rgba(0,242,254,0.7), 0 0 26px rgba(16,185,129,0.5)}
+@keyframes neonAuroraPulse{
+  0%{box-shadow:0 0 16px rgba(0,242,254,0.42), 0 0 30px rgba(16,185,129,0.25)}
+  50%{box-shadow:0 0 24px rgba(16,185,129,0.55), 0 0 44px rgba(163,230,53,0.35)}
+  100%{box-shadow:0 0 16px rgba(0,242,254,0.42), 0 0 30px rgba(16,185,129,0.25)}
 }
 .pin-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;letter-spacing:0.6px;
-  padding:3px 9px;border-radius:20px;background:linear-gradient(135deg,rgba(0,242,254,0.16),rgba(16,185,129,0.18));
+  padding:3px 9px;border-radius:20px;background:linear-gradient(90deg,rgba(0,242,254,0.18),rgba(16,185,129,0.22));
   border:1px solid #00f2fe;color:#00f2fe;box-shadow:0 0 10px rgba(0,242,254,0.35);text-transform:uppercase}
 .month-card .mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap}
 .month-card .mname{font-family:var(--ff-display);font-size:22px;font-weight:700;letter-spacing:-.4px;
@@ -552,6 +561,29 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
 .month-card .myoy-val{font-family:var(--ff-mono);font-weight:600}
 .month-card .mfoot{margin-top:auto}
 tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));font-weight:500}
+
+/* ---------- Cyber Aurora Heatmap Ribbon & Controls (Gradasi Kiri ke Kanan) ---------- */
+.aurora-heatmap-card{background:linear-gradient(90deg, rgba(0,242,254,0.06) 0%, rgba(16,185,129,0.04) 50%, rgba(163,230,53,0.06) 100%), var(--surface);
+  border:1px solid rgba(0,242,254,0.24);border-radius:14px;padding:16px 20px;margin-bottom:20px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.18), 0 0 24px rgba(0,242,254,0.08);position:relative;overflow:hidden}
+.aurora-heatmap-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg, #00f2fe 0%, #10b981 50%, #a3e635 100%);box-shadow:0 0 14px rgba(0,242,254,0.6)}
+.aurora-track{display:grid;grid-template-columns:repeat(12, 1fr);gap:7px;margin:12px 0 6px}
+@media (max-width: 960px){
+  .aurora-track{display:flex;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+  .aurora-cell{min-width:78px;scroll-snap-align:start}
+}
+.aurora-cell{background:var(--surface2);border:1px solid var(--hairline);border-radius:9px;padding:9px 6px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all .18s;position:relative}
+.aurora-cell:hover{transform:translateY(-2px);border-color:rgba(0,242,254,0.7);box-shadow:0 4px 14px rgba(0,242,254,0.22)}
+.aurora-cell.active-cell{border:1.5px solid #00f2fe;background:rgba(0,242,254,0.1);box-shadow:0 0 14px rgba(0,242,254,0.4)}
+.aurora-cell-m{font-size:11px;font-weight:700;font-family:var(--ff-mono);color:var(--ink)}
+.aurora-cell-idx{font-size:10px;font-family:var(--ff-mono);font-weight:600}
+.aurora-cell-bar{width:100%;height:4px;background:var(--surface3);border-radius:2px;overflow:hidden;margin-top:2px}
+.aurora-cell-bar i{display:block;height:100%;border-radius:2px}
+.aurora-gradient-strip{height:6px;width:100%;border-radius:3px;
+  background:linear-gradient(90deg, #00f2fe 0%, #10b981 50%, #a3e635 100%);
+  box-shadow:0 0 14px rgba(0,242,254,0.5), 0 0 24px rgba(16,185,129,0.3);margin-top:10px}
 
 /* ---------- Payroll & Slip Gaji Styling ---------- */
 .payroll-input{background:var(--surface2);border:1px solid var(--hairline-strong);border-radius:6px;
@@ -2104,24 +2136,32 @@ function chartTahunanSeasonality(months, yr, avg25) {
     curvePoints.push({ x: cx, y: dotY, sIndex: m.sIndex, pill: m.seasonPill });
   });
 
-  // Polyline for seasonality
-  let poly = `<polyline fill="none" stroke="var(--accent)" stroke-width="2" opacity=".4" points="${curvePoints.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ")}"/>`;
+  const svgDefs = `
+  <defs>
+    <linearGradient id="cyberAuroraGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f2fe"/>
+      <stop offset="50%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#a3e635"/>
+    </linearGradient>
+  </defs>`;
+
+  // Polyline for seasonality with Cyber Aurora gradient
+  let poly = `<polyline fill="none" stroke="url(#cyberAuroraGrad)" stroke-width="2.5" opacity=".85" points="${curvePoints.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ")}"/>`;
   let dots = curvePoints.map(p => {
-    const col = p.pill === 'crit' ? 'var(--crit)' : (p.pill === 'final' ? 'var(--good)' : 'var(--warn)');
+    const col = p.pill === 'crit' ? '#a3e635' : (p.pill === 'final' ? '#10b981' : '#00f2fe');
     return `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.5" fill="${col}" stroke="var(--surface)" stroke-width="1.5"/>
     <text x="${p.x.toFixed(1)}" y="${(p.y - 7).toFixed(1)}" text-anchor="middle" font-size="8.5" font-family="JetBrains Mono,monospace" font-weight="600" fill="${col}">${p.sIndex.toFixed(2)}×</text>`;
   }).join("");
 
   return `
   <div class="legend">
+    <span><i class="swatch" style="background:linear-gradient(90deg,#00f2fe,#10b981,#a3e635);box-shadow:0 0 6px rgba(0,242,254,0.6)"></i>Trendline Seasonality (Cyber Aurora Kiri ➔ Kanan)</span>
     <span><i class="swatch" style="background:var(--hairline-strong)"></i>${yr-1} Benchmark Musiman</span>
     <span><i class="swatch" style="background:var(--accent)"></i>${yr} Terverifikasi Riil (Jan–Sep)</span>
     <span><i class="swatch" style="background:var(--good);border:1px dashed var(--good)"></i>${yr} Oktober (Pipeline)</span>
-    <span><i class="swatch" style="background:var(--crit)"></i>Super Peak (&gt;1.50×)</span>
-    <span><i class="swatch" style="background:var(--good)"></i>High Season (1.10–1.49×)</span>
     <span class="muted" style="margin-left:auto;">Garis putus-putus kuning = 1.00× Rata-rata Musiman</span>
   </div>
-  <svg class="chart" viewBox="0 0 ${W} ${H2}" role="img" aria-label="Siklus Seasonality dan Omzet 12 Bulan">${g}${bars}${poly}${dots}</svg>`;
+  <svg class="chart" viewBox="0 0 ${W} ${H2}" role="img" aria-label="Siklus Seasonality dan Omzet 12 Bulan">${svgDefs}${g}${bars}${poly}${dots}</svg>`;
 }
 
 function vTahunan(R) {
@@ -2315,6 +2355,52 @@ function vTahunan(R) {
     </div>
   </div>
 
+  <!-- Heatmap Intensitas Musiman 12 Bulan (Cyber Aurora - Gradasi Kiri ke Kanan) -->
+  <div class="aurora-heatmap-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span style="font-size:14px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:7px;">
+          🌌 Heatmap Musiman 12 Bulan (${yr})
+        </span>
+        <span class="pill" style="font-size:10px;font-weight:700;background:linear-gradient(90deg,rgba(0,242,254,0.18),rgba(16,185,129,0.2),rgba(163,230,53,0.18));color:#00f2fe;border:1px solid rgba(0,242,254,0.4);box-shadow:0 0 8px rgba(0,242,254,0.25);">
+          Cyber Aurora Gradient (Kiri ➔ Kanan)
+        </span>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;font-size:11px;font-family:var(--ff-mono);">
+        <span style="display:flex;align-items:center;gap:5px;color:#00f2fe;"><i style="width:9px;height:9px;border-radius:2px;background:#00f2fe;box-shadow:0 0 6px #00f2fe;display:inline-block;"></i> Low Season (&lt;0.9×)</span>
+        <span style="display:flex;align-items:center;gap:5px;color:#10b981;"><i style="width:9px;height:9px;border-radius:2px;background:#10b981;box-shadow:0 0 6px #10b981;display:inline-block;"></i> Normal (1.00×)</span>
+        <span style="display:flex;align-items:center;gap:5px;color:#a3e635;"><i style="width:9px;height:9px;border-radius:2px;background:#a3e635;box-shadow:0 0 6px #a3e635;display:inline-block;"></i> Super Peak (&gt;1.5×)</span>
+      </div>
+    </div>
+
+    <!-- 12-Month Cyber Aurora Track Grid -->
+    <div class="aurora-track">
+      ${months.map((m, idx) => {
+        const colors = [
+          "#00f2fe", "#00eff5", "#03e2e8", "#08d4d5",
+          "#0ec5be", "#10b981", "#23c470", "#45cf56",
+          "#70db3b", "#a3e635", "#8ede35", "#50d350"
+        ];
+        const cellCol = colors[idx] || "#10b981";
+        const heightPct = Math.min(100, (m.sIndex / 2.2) * 100).toFixed(0);
+        return `
+        <div class="aurora-cell ${m.isCurrent ? 'active-cell' : ''} btn-go-month" data-month="${m.no}" title="${m.label} ${yr} · Indeks ${m.sIndex.toFixed(2)}× (${m.seasonTag})">
+          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+            <span class="aurora-cell-m" style="${m.isCurrent ? 'color:#00f2fe;' : ''}">${m.short.toUpperCase()}</span>
+            ${m.isCurrent ? '<i class="live-dot" style="width:5px;height:5px;" title="Bulan Aktif"></i>' : ''}
+          </div>
+          <span class="aurora-cell-idx" style="color:${cellCol};font-weight:700;">${m.sIndex.toFixed(2)}×</span>
+          <div class="aurora-cell-bar">
+            <i style="width:${heightPct}%;background:${cellCol};box-shadow:0 0 6px ${cellCol};"></i>
+          </div>
+        </div>`;
+      }).join("")}
+    </div>
+
+    <!-- Smooth Continuous Cyber Aurora Gradient Strip (Left-to-Right) -->
+    <div class="aurora-gradient-strip" title="Gradasi Kontinu Cyber Aurora (Jan ➔ Des)"></div>
+  </div>
+
   <!-- Section 12 Kotak Bulan (Grid of 12 Month Cards) -->
   <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
     <div>
@@ -2407,7 +2493,7 @@ function vTahunan(R) {
               <span class="mseason-label">Seasonality Index</span>
               <span class="pill ${m.seasonPill}" style="font-size:10px;padding:1px 7px;">${m.sIndex.toFixed(2)}× · ${m.seasonTag}</span>
             </div>
-            <div class="mseason-bar"><i style="width:${Math.min(100, (m.sIndex / 2.2) * 100).toFixed(0)}%;background:var(--${m.seasonPill==='crit'?'crit':(m.seasonPill==='final'?'good':'warn')});"></i></div>
+            <div class="mseason-bar"><i style="width:${Math.min(100, (m.sIndex / 2.2) * 100).toFixed(0)}%;background:linear-gradient(90deg, #00f2fe 0%, #10b981 50%, #a3e635 100%);box-shadow:0 0 8px rgba(0,242,254,0.35);"></i></div>
           </div>
 
           <div class="myoy">
@@ -2454,7 +2540,14 @@ function vTahunan(R) {
             <td class="n mono">${rp(m.omzet25)}</td>
             <td class="n mono" style="${m.isCurrent ? 'font-weight:700;color:var(--accent);' : (m.omzet26 != null ? 'font-weight:600;color:var(--ink);' : 'color:var(--muted-soft);')}">${m.omzet26 != null ? rp(m.omzet26) : "—"}</td>
             <td class="n mono" style="${m.yoy != null ? (m.yoy >= 0 ? 'color:var(--good);' : 'color:var(--crit);') : 'color:var(--muted-soft);'}">${m.yoy == null ? '—' : (m.yoy >= 0 ? '+' : '') + pct(m.yoy)}</td>
-            <td class="n mono"><b>${m.sIndex.toFixed(2)}×</b></td>
+            <td class="n mono">
+              <div style="display:flex;align-items:center;gap:7px;justify-content:flex-end;">
+                <div style="width:44px;height:5px;background:var(--surface3);border-radius:3px;overflow:hidden;border:1px solid rgba(0,242,254,0.25);">
+                  <i style="display:block;height:100%;width:${Math.min(100,(m.sIndex/2.2)*100).toFixed(0)}%;background:linear-gradient(90deg,#00f2fe 0%,#10b981 50%,#a3e635 100%);box-shadow:0 0 6px rgba(0,242,254,0.4);"></i>
+                </div>
+                <b>${m.sIndex.toFixed(2)}×</b>
+              </div>
+            </td>
             <td><span class="pill ${m.seasonPill}" style="font-size:10px;">${m.seasonTag}</span></td>
             <td class="tiny"><b>${esc(m.momentum)}</b> — ${esc(m.note)}</td>
             <td><button class="btn sm btn-go-month" data-month="${m.no}" style="padding:2px 8px;font-size:11px;">Buka ➔</button></td>
@@ -2465,7 +2558,14 @@ function vTahunan(R) {
           <td class="n mono">${rp(tot25)}</td>
           <td class="n mono" style="font-weight:700;color:var(--accent);">${rp(totYtdOmzet)}</td>
           <td class="n mono" style="color:var(--good);">${tot25 ? "+" + pct((totYtdOmzet - tot25) / tot25) : "—"}</td>
-          <td class="n mono">1.00× avg</td>
+          <td class="n mono">
+            <div style="display:flex;align-items:center;gap:7px;justify-content:flex-end;">
+              <div style="width:44px;height:5px;background:var(--surface3);border-radius:3px;overflow:hidden;border:1px solid rgba(0,242,254,0.25);">
+                <i style="display:block;height:100%;width:45%;background:linear-gradient(90deg,#00f2fe 0%,#10b981 50%,#a3e635 100%);"></i>
+              </div>
+              <b>1.00×</b> avg
+            </div>
+          </td>
           <td colspan="3" class="tiny">✅ Januari–September ${yr} telah 100% terverifikasi riil dari Log Order &amp; Neraca (3.739 order). Oktober ${yr} berjalan (Live + Pipeline), November–Desember belum berjalan.</td>
         </tr>
       </tbody>
@@ -6708,7 +6808,7 @@ wireSyncEvents();
 render();
 
 // Deteksi versi kode baru (deploy baru) -> muat ulang otomatis agar fitur terbaru langsung aktif
-const BUILD_ID = "1791124039";
+const BUILD_ID = "1791125125";
 async function checkNewBuild() {
   if (window.location.protocol === "file:") return;
   try {
