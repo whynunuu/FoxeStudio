@@ -51007,6 +51007,721 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
+    },
+    {
+      "id": "or_73",
+      "tanggal": "2026-10-04",
+      "client": "1. Sandlyra",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-03",
+      "cash": 0.0,
+      "transfer": 350000.0,
+      "total": 350000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_74",
+      "tanggal": "2026-10-04",
+      "client": "Wisnu pamungkas",
+      "paket": "Add Cetak",
+      "tanggalFoto": "2026-10-03",
+      "cash": 0.0,
+      "transfer": 50000.0,
+      "total": 50000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_75",
+      "tanggal": "2026-10-04",
+      "client": "Pratama",
+      "paket": "Single",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 0.0,
+      "total": 0.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_76",
+      "tanggal": "2026-10-04",
+      "client": "alya",
+      "paket": "Photofox",
+      "tanggalFoto": "2026-10-10",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_77",
+      "tanggal": "2026-10-04",
+      "client": "Adi",
+      "paket": "Family B",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 470000.0,
+      "total": 470000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_78",
+      "tanggal": "2026-10-04",
+      "client": "Dian",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 250000.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_79",
+      "tanggal": "2026-10-04",
+      "client": "Yeni A",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 270000.0,
+      "total": 270000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_80",
+      "tanggal": "2026-10-04",
+      "client": "Nurul Indah Amalia",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 270000.0,
+      "total": 270000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_81",
+      "tanggal": "2026-10-04",
+      "client": "Bening",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 250000.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_82",
+      "tanggal": "2026-10-04",
+      "client": "alfian wicaksana",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 290000.0,
+      "total": 290000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "FAHME"
+    },
+    {
+      "id": "or_83",
+      "tanggal": "2026-10-04",
+      "client": "aida",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 270000.0,
+      "total": 270000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ABROR"
+    },
+    {
+      "id": "or_84",
+      "tanggal": "2026-10-04",
+      "client": "azhar",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 450000.0,
+      "transfer": 180000.0,
+      "total": 630000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ABROR"
+    },
+    {
+      "id": "or_85",
+      "tanggal": "2026-10-04",
+      "client": "Widika Aden Agatha",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 250000.0,
+      "transfer": 0.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "FAHME"
+    },
+    {
+      "id": "or_86",
+      "tanggal": "2026-10-04",
+      "client": "oktafira",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 370000.0,
+      "transfer": 0.0,
+      "total": 370000.0,
+      "pembayaran": "Lunas",
+      "admin": "",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_87",
+      "tanggal": "2026-10-04",
+      "client": "ine amalia",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 290000.0,
+      "transfer": 0.0,
+      "total": 290000.0,
+      "pembayaran": "Lunas",
+      "admin": "",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_88",
+      "tanggal": "2026-10-04",
+      "client": "Sulton Hidayah Arrosid",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 460000.0,
+      "transfer": 0.0,
+      "total": 460000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_89",
+      "tanggal": "2026-10-04",
+      "client": "fedinda nara",
+      "paket": "Graduation Premium",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 610000.0,
+      "total": 610000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "FAHME"
+    },
+    {
+      "id": "or_90",
+      "tanggal": "2026-10-04",
+      "client": "titin setiawan",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 270000.0,
+      "total": 270000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ABROR"
+    },
+    {
+      "id": "or_91",
+      "tanggal": "2026-10-04",
+      "client": "Akira Aditya Pandya",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 270000.0,
+      "transfer": 0.0,
+      "total": 270000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_92",
+      "tanggal": "2026-10-04",
+      "client": "salsa",
+      "paket": "",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 330000.0,
+      "total": 330000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "FAHME"
+    },
+    {
+      "id": "or_93",
+      "tanggal": "2026-10-04",
+      "client": "bela",
+      "paket": "",
+      "tanggalFoto": "2026-10-04",
+      "cash": 250000.0,
+      "transfer": 0.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_94",
+      "tanggal": "2026-10-04",
+      "client": "aghnia",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 290000.0,
+      "transfer": 0.0,
+      "total": 290000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_95",
+      "tanggal": "2026-10-04",
+      "client": "andin",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 250000.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ABROR"
+    },
+    {
+      "id": "or_96",
+      "tanggal": "2026-10-04",
+      "client": "Riski Mulyawan Pangestu",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 430000.0,
+      "transfer": 0.0,
+      "total": 430000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "FAHME"
+    },
+    {
+      "id": "or_97",
+      "tanggal": "2026-10-04",
+      "client": "alif",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 150000.0,
+      "total": 150000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ABROR"
+    },
+    {
+      "id": "or_98",
+      "tanggal": "2026-10-04",
+      "client": "sema",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 350000.0,
+      "total": 350000.0,
+      "pembayaran": "Lunas",
+      "admin": "",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_99",
+      "tanggal": "2026-10-04",
+      "client": "Fahmy Bagas",
+      "paket": "",
+      "tanggalFoto": "2026-10-04",
+      "cash": 250000.0,
+      "transfer": 0.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "FAHME"
+    },
+    {
+      "id": "or_100",
+      "tanggal": "2026-10-04",
+      "client": "asrul ridho",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 310000.0,
+      "total": 310000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ABROR"
+    },
+    {
+      "id": "or_101",
+      "tanggal": "2026-10-04",
+      "client": "Fakhrian Yoga Permana",
+      "paket": "Graduation",
+      "tanggalFoto": null,
+      "cash": 0.0,
+      "transfer": 330000.0,
+      "total": 330000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_102",
+      "tanggal": "2026-10-04",
+      "client": "rio furqon",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 250000.0,
+      "transfer": 0.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "FAHME"
+    },
+    {
+      "id": "or_103",
+      "tanggal": "2026-10-04",
+      "client": "Dhabi",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 250000.0,
+      "transfer": 0.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ABROR"
+    },
+    {
+      "id": "or_104",
+      "tanggal": "2026-10-04",
+      "client": "ilham zambrot",
+      "paket": "Graduation Premium",
+      "tanggalFoto": "2026-10-04",
+      "cash": 420000.0,
+      "transfer": 0.0,
+      "total": 420000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_105",
+      "tanggal": "2026-10-04",
+      "client": "allez galan",
+      "paket": "Graduation Premium",
+      "tanggalFoto": "2026-10-04",
+      "cash": 580000.0,
+      "transfer": 0.0,
+      "total": 580000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_106",
+      "tanggal": "2026-10-04",
+      "client": "Ezar Nadhif",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 430000.0,
+      "transfer": 0.0,
+      "total": 430000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "FAHME"
+    },
+    {
+      "id": "or_107",
+      "tanggal": "2026-10-04",
+      "client": "Hanan",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 330000.0,
+      "transfer": 0.0,
+      "total": 330000.0,
+      "pembayaran": "Lunas",
+      "admin": "",
+      "fotografer": "FAHME"
+    },
+    {
+      "id": "or_108",
+      "tanggal": "2026-10-04",
+      "client": "rendy nIlhamsyah",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 270000.0,
+      "total": 270000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ABROR"
+    },
+    {
+      "id": "or_109",
+      "tanggal": "2026-10-04",
+      "client": "cibita",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 0.0,
+      "total": 0.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "FAHME"
+    },
+    {
+      "id": "or_110",
+      "tanggal": "2026-10-04",
+      "client": "Renaldy",
+      "paket": "Graduation",
+      "tanggalFoto": null,
+      "cash": 0.0,
+      "transfer": 290000.0,
+      "total": 290000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ABROR"
+    },
+    {
+      "id": "or_111",
+      "tanggal": "2026-10-04",
+      "client": "rizma",
+      "paket": "Graduation",
+      "tanggalFoto": null,
+      "cash": 0.0,
+      "transfer": 310000.0,
+      "total": 310000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_112",
+      "tanggal": "2026-10-04",
+      "client": "restu",
+      "paket": "",
+      "tanggalFoto": null,
+      "cash": 0.0,
+      "transfer": 350000.0,
+      "total": 350000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_113",
+      "tanggal": "2026-10-04",
+      "client": "Nola",
+      "paket": "Couple A",
+      "tanggalFoto": "2026-10-10",
+      "cash": 0.0,
+      "transfer": 150000.0,
+      "total": 150000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_114",
+      "tanggal": "2026-10-04",
+      "client": "1. Mayzila",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 370000.0,
+      "transfer": 0.0,
+      "total": 370000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_115",
+      "tanggal": "2026-10-04",
+      "client": "2. Desni",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 0.0,
+      "total": 0.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_116",
+      "tanggal": "2026-10-04",
+      "client": "3. Rindi",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 270000.0,
+      "transfer": 0.0,
+      "total": 270000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_117",
+      "tanggal": "2026-10-04",
+      "client": "4. Dinah",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 430000.0,
+      "transfer": 0.0,
+      "total": 430000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "ABROR"
+    },
+    {
+      "id": "or_118",
+      "tanggal": "2026-10-04",
+      "client": "5. Fitri dina",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 250000.0,
+      "transfer": 0.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "ABROR"
+    },
+    {
+      "id": "or_119",
+      "tanggal": "2026-10-04",
+      "client": "6. Wildan",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 530000.0,
+      "total": 530000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "FAHME"
+    },
+    {
+      "id": "or_120",
+      "tanggal": "2026-10-04",
+      "client": "7. Silvia",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 330000.0,
+      "transfer": 0.0,
+      "total": 330000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_121",
+      "tanggal": "2026-10-04",
+      "client": "8. Fadlah Faqih",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 390000.0,
+      "transfer": 0.0,
+      "total": 390000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_122",
+      "tanggal": "2026-10-04",
+      "client": "9. Ridho",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 350000.0,
+      "transfer": 0.0,
+      "total": 350000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_123",
+      "tanggal": "2026-10-04",
+      "client": "10. Febby",
+      "paket": "Graduation Premium",
+      "tanggalFoto": "2026-10-04",
+      "cash": 420000.0,
+      "transfer": 0.0,
+      "total": 420000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_124",
+      "tanggal": "2026-10-04",
+      "client": "Queenbees DC",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_125",
+      "tanggal": "2026-10-04",
+      "client": "Ridhoo",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 410000.0,
+      "total": 410000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_126",
+      "tanggal": "2026-10-04",
+      "client": "Salsabila Nurlina",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-06",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_127",
+      "tanggal": "2026-10-04",
+      "client": "viona",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-06",
+      "cash": 0.0,
+      "transfer": 410000.0,
+      "total": 410000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -57381,6 +58096,42 @@
       "tanggal": "2026-10-03",
       "nama": "SAKA",
       "slot": 1
+    },
+    {
+      "id": "sh_13",
+      "tanggal": "2026-10-04",
+      "nama": "ABROR",
+      "slot": 1
+    },
+    {
+      "id": "sh_14",
+      "tanggal": "2026-10-04",
+      "nama": "ADIF",
+      "slot": 1
+    },
+    {
+      "id": "sh_15",
+      "tanggal": "2026-10-04",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_16",
+      "tanggal": "2026-10-04",
+      "nama": "FAHME",
+      "slot": 1
+    },
+    {
+      "id": "sh_17",
+      "tanggal": "2026-10-04",
+      "nama": "INDAH",
+      "slot": 1
+    },
+    {
+      "id": "sh_18",
+      "tanggal": "2026-10-04",
+      "nama": "SAKA",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -62537,9 +63288,9 @@
       "id": "ld_4",
       "tanggal": "2026-10-04",
       "leads": 0.0,
-      "dp": 2.0,
-      "sesiFoto": 50.0,
-      "transaksi": 52.0
+      "dp": 3.0,
+      "sesiFoto": 52.0,
+      "transaksi": 55.0
     },
     {
       "id": "ld_7",
@@ -66933,7 +67684,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 16170000.0
+        "omzet": 32820000.0
       }
     ]
   },
@@ -67281,6 +68032,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261004-2027",
+      "mulai": "2026-10-04T13:27:23.834705+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 127 order Okt, 191 jadwal, 79 pos pengeluaran Neraca, 145 pipeline Okt."
+    },
     {
       "id": "sy_20261004-1247",
       "mulai": "2026-10-04T12:47:01.188907+00:00",
@@ -67947,7 +68704,7 @@
     "file1_okt_id": "1xibgfKWJZWmcwh9lxR9Dt7IkHyMi7b75",
     "file2_id": "14UfXpQhjpRpKtMIwGtdihL0Bu_n5SJpu6vNcLjZ7A8I",
     "file_neraca_id": "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM",
-    "last_sync": "2026-10-04T12:47:01.188907+00:00"
+    "last_sync": "2026-10-04T13:27:23.834705+00:00"
   },
   "neracaDetail": [
     {
@@ -68509,15 +69266,15 @@
   },
   "oktoberPipeline": {
     "bulan": "2026-10",
-    "totalBookings": 144,
-    "potentialOmzet": 50300000.0,
-    "totalDp": 13250000.0,
+    "totalBookings": 145,
+    "potentialOmzet": 50450000.0,
+    "totalDp": 13400000.0,
     "estimateCashIn": 37050000.0,
     "breakdown": {
       "reguler": {
-        "sesi": 44,
-        "nilai": 13800000.0,
-        "dp": 3900000.0
+        "sesi": 45,
+        "nilai": 13950000.0,
+        "dp": 4050000.0
       },
       "wisudaDay1": {
         "sesi": 48,
@@ -68538,9 +69295,9 @@
         "cashIn": 27075000.0
       },
       "confirmed": {
-        "sesi": 32,
-        "nilai": 10825000.0,
-        "dp": 2900000.0,
+        "sesi": 33,
+        "nilai": 10975000.0,
+        "dp": 3050000.0,
         "cashIn": 8075000.0
       },
       "reschedule": {
@@ -69229,6 +69986,31 @@
       {
         "id": "sc_bk_28",
         "tgl": "2026-10-10",
+        "waktu": "10:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Nola",
+        "paket": "Couple A",
+        "paketRaw": "Couple A",
+        "jmlOrang": 1,
+        "harga": 150000.0,
+        "admin": "AL",
+        "noHp": "lunas concrete",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false,
+        "dp": 150000.0,
+        "sisaPelunasan": 0.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_29",
+        "tgl": "2026-10-10",
         "waktu": "11:30",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -69252,7 +70034,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_29",
+        "id": "sc_bk_30",
         "tgl": "2026-10-10",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -69277,7 +70059,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_30",
+        "id": "sc_bk_31",
         "tgl": "2026-10-10",
         "waktu": "17:00",
         "studio": "Studio 1",
@@ -69302,7 +70084,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_31",
+        "id": "sc_bk_32",
         "tgl": "2026-10-11",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -69327,7 +70109,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_32",
+        "id": "sc_bk_33",
         "tgl": "2026-10-11",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -69352,7 +70134,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_33",
+        "id": "sc_bk_34",
         "tgl": "2026-10-17",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -69377,7 +70159,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_34",
+        "id": "sc_bk_35",
         "tgl": "2026-10-17",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -69402,7 +70184,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_35",
+        "id": "sc_bk_36",
         "tgl": "2026-10-17",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -69427,7 +70209,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_36",
+        "id": "sc_bk_37",
         "tgl": "2026-10-17",
         "waktu": "14:40",
         "studio": "Studio 1",
@@ -69452,7 +70234,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_37",
+        "id": "sc_bk_38",
         "tgl": "2026-10-17",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -69477,7 +70259,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_38",
+        "id": "sc_bk_39",
         "tgl": "2026-10-22",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -69502,7 +70284,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_39",
+        "id": "sc_bk_40",
         "tgl": "2026-10-22",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -69527,7 +70309,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_40",
+        "id": "sc_bk_41",
         "tgl": "2026-10-22",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -69552,7 +70334,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_41",
+        "id": "sc_bk_42",
         "tgl": "2026-10-22",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -69577,7 +70359,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_42",
+        "id": "sc_bk_43",
         "tgl": "2026-10-22",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -69602,7 +70384,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_43",
+        "id": "sc_bk_44",
         "tgl": "2026-10-22",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -69627,7 +70409,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_44",
+        "id": "sc_bk_45",
         "tgl": "2026-10-22",
         "waktu": "15:40",
         "studio": "Studio 1",
@@ -73430,6 +74212,721 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": "ADIF"
+      },
+      {
+        "id": "or_73",
+        "tanggal": "2026-10-04",
+        "client": "1. Sandlyra",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-03",
+        "cash": 0.0,
+        "transfer": 350000.0,
+        "total": 350000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_74",
+        "tanggal": "2026-10-04",
+        "client": "Wisnu pamungkas",
+        "paket": "Add Cetak",
+        "tanggalFoto": "2026-10-03",
+        "cash": 0.0,
+        "transfer": 50000.0,
+        "total": 50000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_75",
+        "tanggal": "2026-10-04",
+        "client": "Pratama",
+        "paket": "Single",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 0.0,
+        "total": 0.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_76",
+        "tanggal": "2026-10-04",
+        "client": "alya",
+        "paket": "Photofox",
+        "tanggalFoto": "2026-10-10",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_77",
+        "tanggal": "2026-10-04",
+        "client": "Adi",
+        "paket": "Family B",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 470000.0,
+        "total": 470000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_78",
+        "tanggal": "2026-10-04",
+        "client": "Dian",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 250000.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_79",
+        "tanggal": "2026-10-04",
+        "client": "Yeni A",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 270000.0,
+        "total": 270000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_80",
+        "tanggal": "2026-10-04",
+        "client": "Nurul Indah Amalia",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 270000.0,
+        "total": 270000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_81",
+        "tanggal": "2026-10-04",
+        "client": "Bening",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 250000.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_82",
+        "tanggal": "2026-10-04",
+        "client": "alfian wicaksana",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 290000.0,
+        "total": 290000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "FAHME"
+      },
+      {
+        "id": "or_83",
+        "tanggal": "2026-10-04",
+        "client": "aida",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 270000.0,
+        "total": 270000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ABROR"
+      },
+      {
+        "id": "or_84",
+        "tanggal": "2026-10-04",
+        "client": "azhar",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 450000.0,
+        "transfer": 180000.0,
+        "total": 630000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ABROR"
+      },
+      {
+        "id": "or_85",
+        "tanggal": "2026-10-04",
+        "client": "Widika Aden Agatha",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 250000.0,
+        "transfer": 0.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "FAHME"
+      },
+      {
+        "id": "or_86",
+        "tanggal": "2026-10-04",
+        "client": "oktafira",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 370000.0,
+        "transfer": 0.0,
+        "total": 370000.0,
+        "pembayaran": "Lunas",
+        "admin": "",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_87",
+        "tanggal": "2026-10-04",
+        "client": "ine amalia",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 290000.0,
+        "transfer": 0.0,
+        "total": 290000.0,
+        "pembayaran": "Lunas",
+        "admin": "",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_88",
+        "tanggal": "2026-10-04",
+        "client": "Sulton Hidayah Arrosid",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 460000.0,
+        "transfer": 0.0,
+        "total": 460000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_89",
+        "tanggal": "2026-10-04",
+        "client": "fedinda nara",
+        "paket": "Graduation Premium",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 610000.0,
+        "total": 610000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "FAHME"
+      },
+      {
+        "id": "or_90",
+        "tanggal": "2026-10-04",
+        "client": "titin setiawan",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 270000.0,
+        "total": 270000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ABROR"
+      },
+      {
+        "id": "or_91",
+        "tanggal": "2026-10-04",
+        "client": "Akira Aditya Pandya",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 270000.0,
+        "transfer": 0.0,
+        "total": 270000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_92",
+        "tanggal": "2026-10-04",
+        "client": "salsa",
+        "paket": "",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 330000.0,
+        "total": 330000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "FAHME"
+      },
+      {
+        "id": "or_93",
+        "tanggal": "2026-10-04",
+        "client": "bela",
+        "paket": "",
+        "tanggalFoto": "2026-10-04",
+        "cash": 250000.0,
+        "transfer": 0.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_94",
+        "tanggal": "2026-10-04",
+        "client": "aghnia",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 290000.0,
+        "transfer": 0.0,
+        "total": 290000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_95",
+        "tanggal": "2026-10-04",
+        "client": "andin",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 250000.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ABROR"
+      },
+      {
+        "id": "or_96",
+        "tanggal": "2026-10-04",
+        "client": "Riski Mulyawan Pangestu",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 430000.0,
+        "transfer": 0.0,
+        "total": 430000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "FAHME"
+      },
+      {
+        "id": "or_97",
+        "tanggal": "2026-10-04",
+        "client": "alif",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 150000.0,
+        "total": 150000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ABROR"
+      },
+      {
+        "id": "or_98",
+        "tanggal": "2026-10-04",
+        "client": "sema",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 350000.0,
+        "total": 350000.0,
+        "pembayaran": "Lunas",
+        "admin": "",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_99",
+        "tanggal": "2026-10-04",
+        "client": "Fahmy Bagas",
+        "paket": "",
+        "tanggalFoto": "2026-10-04",
+        "cash": 250000.0,
+        "transfer": 0.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "FAHME"
+      },
+      {
+        "id": "or_100",
+        "tanggal": "2026-10-04",
+        "client": "asrul ridho",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 310000.0,
+        "total": 310000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ABROR"
+      },
+      {
+        "id": "or_101",
+        "tanggal": "2026-10-04",
+        "client": "Fakhrian Yoga Permana",
+        "paket": "Graduation",
+        "tanggalFoto": null,
+        "cash": 0.0,
+        "transfer": 330000.0,
+        "total": 330000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_102",
+        "tanggal": "2026-10-04",
+        "client": "rio furqon",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 250000.0,
+        "transfer": 0.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "FAHME"
+      },
+      {
+        "id": "or_103",
+        "tanggal": "2026-10-04",
+        "client": "Dhabi",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 250000.0,
+        "transfer": 0.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ABROR"
+      },
+      {
+        "id": "or_104",
+        "tanggal": "2026-10-04",
+        "client": "ilham zambrot",
+        "paket": "Graduation Premium",
+        "tanggalFoto": "2026-10-04",
+        "cash": 420000.0,
+        "transfer": 0.0,
+        "total": 420000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_105",
+        "tanggal": "2026-10-04",
+        "client": "allez galan",
+        "paket": "Graduation Premium",
+        "tanggalFoto": "2026-10-04",
+        "cash": 580000.0,
+        "transfer": 0.0,
+        "total": 580000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_106",
+        "tanggal": "2026-10-04",
+        "client": "Ezar Nadhif",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 430000.0,
+        "transfer": 0.0,
+        "total": 430000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "FAHME"
+      },
+      {
+        "id": "or_107",
+        "tanggal": "2026-10-04",
+        "client": "Hanan",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 330000.0,
+        "transfer": 0.0,
+        "total": 330000.0,
+        "pembayaran": "Lunas",
+        "admin": "",
+        "fotografer": "FAHME"
+      },
+      {
+        "id": "or_108",
+        "tanggal": "2026-10-04",
+        "client": "rendy nIlhamsyah",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 270000.0,
+        "total": 270000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ABROR"
+      },
+      {
+        "id": "or_109",
+        "tanggal": "2026-10-04",
+        "client": "cibita",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 0.0,
+        "total": 0.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "FAHME"
+      },
+      {
+        "id": "or_110",
+        "tanggal": "2026-10-04",
+        "client": "Renaldy",
+        "paket": "Graduation",
+        "tanggalFoto": null,
+        "cash": 0.0,
+        "transfer": 290000.0,
+        "total": 290000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ABROR"
+      },
+      {
+        "id": "or_111",
+        "tanggal": "2026-10-04",
+        "client": "rizma",
+        "paket": "Graduation",
+        "tanggalFoto": null,
+        "cash": 0.0,
+        "transfer": 310000.0,
+        "total": 310000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_112",
+        "tanggal": "2026-10-04",
+        "client": "restu",
+        "paket": "",
+        "tanggalFoto": null,
+        "cash": 0.0,
+        "transfer": 350000.0,
+        "total": 350000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_113",
+        "tanggal": "2026-10-04",
+        "client": "Nola",
+        "paket": "Couple A",
+        "tanggalFoto": "2026-10-10",
+        "cash": 0.0,
+        "transfer": 150000.0,
+        "total": 150000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_114",
+        "tanggal": "2026-10-04",
+        "client": "1. Mayzila",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 370000.0,
+        "transfer": 0.0,
+        "total": 370000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_115",
+        "tanggal": "2026-10-04",
+        "client": "2. Desni",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 0.0,
+        "total": 0.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_116",
+        "tanggal": "2026-10-04",
+        "client": "3. Rindi",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 270000.0,
+        "transfer": 0.0,
+        "total": 270000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_117",
+        "tanggal": "2026-10-04",
+        "client": "4. Dinah",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 430000.0,
+        "transfer": 0.0,
+        "total": 430000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "ABROR"
+      },
+      {
+        "id": "or_118",
+        "tanggal": "2026-10-04",
+        "client": "5. Fitri dina",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 250000.0,
+        "transfer": 0.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "ABROR"
+      },
+      {
+        "id": "or_119",
+        "tanggal": "2026-10-04",
+        "client": "6. Wildan",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 530000.0,
+        "total": 530000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "FAHME"
+      },
+      {
+        "id": "or_120",
+        "tanggal": "2026-10-04",
+        "client": "7. Silvia",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 330000.0,
+        "transfer": 0.0,
+        "total": 330000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_121",
+        "tanggal": "2026-10-04",
+        "client": "8. Fadlah Faqih",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 390000.0,
+        "transfer": 0.0,
+        "total": 390000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_122",
+        "tanggal": "2026-10-04",
+        "client": "9. Ridho",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 350000.0,
+        "transfer": 0.0,
+        "total": 350000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_123",
+        "tanggal": "2026-10-04",
+        "client": "10. Febby",
+        "paket": "Graduation Premium",
+        "tanggalFoto": "2026-10-04",
+        "cash": 420000.0,
+        "transfer": 0.0,
+        "total": 420000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_124",
+        "tanggal": "2026-10-04",
+        "client": "Queenbees DC",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_125",
+        "tanggal": "2026-10-04",
+        "client": "Ridhoo",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 410000.0,
+        "total": 410000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_126",
+        "tanggal": "2026-10-04",
+        "client": "Salsabila Nurlina",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-06",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_127",
+        "tanggal": "2026-10-04",
+        "client": "viona",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-06",
+        "cash": 0.0,
+        "transfer": 410000.0,
+        "total": 410000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
       }
     ],
     "shifts": [
@@ -73502,6 +74999,42 @@
       {
         "id": "sh_12",
         "tanggal": "2026-10-03",
+        "nama": "SAKA",
+        "slot": 1
+      },
+      {
+        "id": "sh_13",
+        "tanggal": "2026-10-04",
+        "nama": "ABROR",
+        "slot": 1
+      },
+      {
+        "id": "sh_14",
+        "tanggal": "2026-10-04",
+        "nama": "ADIF",
+        "slot": 1
+      },
+      {
+        "id": "sh_15",
+        "tanggal": "2026-10-04",
+        "nama": "AMEL",
+        "slot": 1
+      },
+      {
+        "id": "sh_16",
+        "tanggal": "2026-10-04",
+        "nama": "FAHME",
+        "slot": 1
+      },
+      {
+        "id": "sh_17",
+        "tanggal": "2026-10-04",
+        "nama": "INDAH",
+        "slot": 1
+      },
+      {
+        "id": "sh_18",
+        "tanggal": "2026-10-04",
         "nama": "SAKA",
         "slot": 1
       }
@@ -73692,9 +75225,9 @@
         "id": "ld_4",
         "tanggal": "2026-10-04",
         "leads": 0.0,
-        "dp": 2.0,
-        "sesiFoto": 50.0,
-        "transaksi": 52.0
+        "dp": 3.0,
+        "sesiFoto": 52.0,
+        "transaksi": 55.0
       },
       {
         "id": "ld_5",
@@ -74073,8 +75606,8 @@
         ]
       }
     },
-    "cutoff": "2026-10-03",
-    "hariBerjalan": 3
+    "cutoff": "2026-10-04",
+    "hariBerjalan": 4
   },
   "adsByMonth": {
     "2026-09": {
@@ -76270,18 +77803,18 @@
           "row_idx": 10,
           "nama": "Adif",
           "job": "Fotografer",
-          "q": 4.0,
+          "q": 5.0,
           "q_raw": 0.0,
-          "actual_shift": 4,
+          "actual_shift": 5,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 160000.0,
+          "total_gaji": 200000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 160000.0,
+          "thp": 200000.0,
           "status": "Draft"
         },
         {
@@ -76289,18 +77822,18 @@
           "row_idx": 12,
           "nama": "Saka",
           "job": "Fotografer",
-          "q": 2.0,
+          "q": 3.0,
           "q_raw": 0.0,
-          "actual_shift": 2,
+          "actual_shift": 3,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 80000.0,
+          "total_gaji": 120000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 80000.0,
+          "thp": 120000.0,
           "status": "Draft"
         },
         {
@@ -76308,18 +77841,18 @@
           "row_idx": 14,
           "nama": "Amel",
           "job": "Admin",
-          "q": 4.0,
+          "q": 5.0,
           "q_raw": 0.0,
-          "actual_shift": 4,
+          "actual_shift": 5,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 160000.0,
+          "total_gaji": 200000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 160000.0,
+          "thp": 200000.0,
           "status": "Draft"
         },
         {
@@ -76327,18 +77860,18 @@
           "row_idx": 16,
           "nama": "Indah",
           "job": "Admin",
-          "q": 2.0,
+          "q": 3.0,
           "q_raw": 0.0,
-          "actual_shift": 2,
+          "actual_shift": 3,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 80000.0,
+          "total_gaji": 120000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 80000.0,
+          "thp": 120000.0,
           "status": "Draft"
         },
         {
@@ -76495,13 +78028,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 8630000.0,
+        "total_gaji": 8790000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 8630000.0,
+        "grand_total_thp": 8790000.0,
         "total_karyawan": 12
       }
     },
@@ -86443,18 +87976,18 @@
         "row_idx": 10,
         "nama": "Adif",
         "job": "Fotografer",
-        "q": 4.0,
+        "q": 5.0,
         "q_raw": 0.0,
-        "actual_shift": 4,
+        "actual_shift": 5,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 160000.0,
+        "total_gaji": 200000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 160000.0,
+        "thp": 200000.0,
         "status": "Draft"
       },
       {
@@ -86462,18 +87995,18 @@
         "row_idx": 12,
         "nama": "Saka",
         "job": "Fotografer",
-        "q": 2.0,
+        "q": 3.0,
         "q_raw": 0.0,
-        "actual_shift": 2,
+        "actual_shift": 3,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 80000.0,
+        "total_gaji": 120000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 80000.0,
+        "thp": 120000.0,
         "status": "Draft"
       },
       {
@@ -86481,18 +88014,18 @@
         "row_idx": 14,
         "nama": "Amel",
         "job": "Admin",
-        "q": 4.0,
+        "q": 5.0,
         "q_raw": 0.0,
-        "actual_shift": 4,
+        "actual_shift": 5,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 160000.0,
+        "total_gaji": 200000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 160000.0,
+        "thp": 200000.0,
         "status": "Draft"
       },
       {
@@ -86500,18 +88033,18 @@
         "row_idx": 16,
         "nama": "Indah",
         "job": "Admin",
-        "q": 2.0,
+        "q": 3.0,
         "q_raw": 0.0,
-        "actual_shift": 2,
+        "actual_shift": 3,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 80000.0,
+        "total_gaji": 120000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 80000.0,
+        "thp": 120000.0,
         "status": "Draft"
       },
       {
@@ -127717,6 +129250,31 @@
       {
         "id": "sc_bk_28",
         "tgl": "2026-10-10",
+        "waktu": "10:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Nola",
+        "paket": "Couple A",
+        "paketRaw": "Couple A",
+        "jmlOrang": 1,
+        "harga": 150000.0,
+        "admin": "AL",
+        "noHp": "lunas concrete",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false,
+        "dp": 150000.0,
+        "sisaPelunasan": 0.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_29",
+        "tgl": "2026-10-10",
         "waktu": "11:30",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -127740,7 +129298,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_29",
+        "id": "sc_bk_30",
         "tgl": "2026-10-10",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -127765,7 +129323,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_30",
+        "id": "sc_bk_31",
         "tgl": "2026-10-10",
         "waktu": "17:00",
         "studio": "Studio 1",
@@ -127790,7 +129348,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_31",
+        "id": "sc_bk_32",
         "tgl": "2026-10-11",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -127815,7 +129373,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_32",
+        "id": "sc_bk_33",
         "tgl": "2026-10-11",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -127840,7 +129398,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_33",
+        "id": "sc_bk_34",
         "tgl": "2026-10-17",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -127865,7 +129423,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_34",
+        "id": "sc_bk_35",
         "tgl": "2026-10-17",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -127890,7 +129448,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_35",
+        "id": "sc_bk_36",
         "tgl": "2026-10-17",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -127915,7 +129473,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_36",
+        "id": "sc_bk_37",
         "tgl": "2026-10-17",
         "waktu": "14:40",
         "studio": "Studio 1",
@@ -127940,7 +129498,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_37",
+        "id": "sc_bk_38",
         "tgl": "2026-10-17",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -127965,7 +129523,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_38",
+        "id": "sc_bk_39",
         "tgl": "2026-10-22",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -127990,7 +129548,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_39",
+        "id": "sc_bk_40",
         "tgl": "2026-10-22",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -128015,7 +129573,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_40",
+        "id": "sc_bk_41",
         "tgl": "2026-10-22",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -128040,7 +129598,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_41",
+        "id": "sc_bk_42",
         "tgl": "2026-10-22",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -128065,7 +129623,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_42",
+        "id": "sc_bk_43",
         "tgl": "2026-10-22",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -128090,7 +129648,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_43",
+        "id": "sc_bk_44",
         "tgl": "2026-10-22",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -128115,7 +129673,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_44",
+        "id": "sc_bk_45",
         "tgl": "2026-10-22",
         "waktu": "15:40",
         "studio": "Studio 1",

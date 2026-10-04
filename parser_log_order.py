@@ -87,7 +87,15 @@ def parse_log_order(filepath="file1.xlsm", bulan="2026-09"):
         # 1. Parsing Tabel Transaksi
         in_tx = False
         for r in rows:
-            if len(r) > 2 and r[1] == "No" and r[2] == "Nama":
+            is_header = False
+            if len(r) > 3 and str(r[2] or "").strip().lower() == "nama" and str(r[3] or "").strip().lower() == "paket":
+                is_header = True
+            elif len(r) > 2 and str(r[1] or "").strip().lower() in ["no", "no."] and str(r[2] or "").strip().lower() == "nama":
+                is_header = True
+            elif len(r) > 2 and str(r[2] or "").strip().lower() == "nama" and any(str(x or "").strip().lower() == "paket" for x in r):
+                is_header = True
+
+            if is_header:
                 in_tx = True
                 continue
             if in_tx:
@@ -129,6 +137,7 @@ def parse_log_order(filepath="file1.xlsm", bulan="2026-09"):
                     order_idx += 1
         
         # 2. Parsing Kas Harian & Shift Roster
+        day_shifts_found = 0
         for r in rows:
             if len(r) > 2 and str(r[2] or "").strip() == "Pendapatan Tunai":
                 val = dnum(r[3]) if len(r) > 3 else 0.0
@@ -148,6 +157,25 @@ def parse_log_order(filepath="file1.xlsm", bulan="2026-09"):
                         "slot": 1
                     })
                     shift_idx += 1
+                    day_shifts_found += 1
+                    
+        # Fallback roster shift jika tabel shift kolom N/O kosong tapi ada transaksi aktif
+        if day_shifts_found == 0 and any(o["tanggal"] == tgl_str for o in orders):
+            day_crew = set()
+            for o in orders:
+                if o["tanggal"] == tgl_str:
+                    if o.get("admin") and o["admin"] not in ["BELUM DIISI", "-", ""]:
+                        day_crew.add(o["admin"].strip().upper())
+                    if o.get("fotografer") and o["fotografer"] not in ["BELUM DIISI", "-", ""]:
+                        day_crew.add(o["fotografer"].strip().upper())
+            for c_nm in sorted(day_crew):
+                shifts.append({
+                    "id": f"sh_{shift_idx}",
+                    "tanggal": tgl_str,
+                    "nama": c_nm,
+                    "slot": 1
+                })
+                shift_idx += 1
                     
         # 3. Parsing Leads & Funnel (Kolom K & M: index 10 & 12)
         day_leads = None
