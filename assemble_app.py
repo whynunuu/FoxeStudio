@@ -1774,6 +1774,41 @@ function kartuPembaruan(R){
     const isOutcomeAlert = isAfterDay15 && (outcomeRatio >= 0.45) && (R.omzet > 0) && (R.adaBiaya || outcome > 0);
 
     if (isOutcomeAlert) {
+      // Kelompokkan dan urutkan pos pengeluaran yang paling bengkak (menurun / descending)
+      const catMap = {};
+      (R.ex || []).forEach(e => {
+        const kat = (e.kategori && String(e.kategori).trim()) || (e.jenis === "COGS" ? "COGS Produksi" : "OPEX Studio");
+        const val = dnum(e.nilai);
+        if (val > 0) {
+          if (!catMap[kat]) catMap[kat] = { kategori: kat, jenis: e.jenis || "OPEX", total: 0, count: 0 };
+          catMap[kat].total += val;
+          catMap[kat].count += 1;
+        }
+      });
+      const topBengkak = Object.values(catMap).sort((a, b) => b.total - a.total);
+
+      // Rumuskan rekomendasi spesifik berdasarkan pos teratas
+      const recList = [];
+      topBengkak.slice(0, 4).forEach(tb => {
+        const kLow = tb.kategori.toLowerCase();
+        if (kLow.includes("cetak") || kLow.includes("paper") || kLow.includes("album") || kLow.includes("frame")) {
+          recList.push(`<b>Audit Vendor Cetak & Lab:</b> Cocokkan faktur lab (${rp(tb.total)}) dengan kuantiti lembar foto pesanan riil; teliti retur & pastikan tidak ada tagihan ganda.`);
+        } else if (kLow.includes("gaji") || kLow.includes("kru") || kLow.includes("fotografer") || kLow.includes("admin")) {
+          recList.push(`<b>Audit Shift & Lembur Kru:</b> Rekonsiliasi slot shift Log Order vs daftar absensi neraca (${rp(tb.total)}); pastikan pembagian shift sesuai kapasitas studio.`);
+        } else if (kLow.includes("listrik") || kLow.includes("air") || kLow.includes("utilitas")) {
+          recList.push(`<b>Cek Lonjakan Utilitas:</b> Beban listrik/air mencapai ${rp(tb.total)} (${pct(R.omzet?tb.total/R.omzet:0)}); periksa efisiensi AC/lighting studio.`);
+        } else if (kLow.includes("prive") || kLow.includes("owner")) {
+          recList.push(`<b>Rekonsiliasi Prive Owner:</b> Penarikan prive tercatat ${rp(tb.total)}; pastikan dipisahkan secara disiplin dari akun belanja operasional studio.`);
+        } else if (kLow.includes("marketing") || kLow.includes("ads") || kLow.includes("kol") || kLow.includes("iklan")) {
+          recList.push(`<b>Evaluasi ROAS Ads:</b> Anggaran iklan ${rp(tb.total)}; cek rasio konversi leads/booking vs belanja Meta Ads.`);
+        } else if (kLow.includes("outsource") || kLow.includes("freelance") || kLow.includes("vendor")) {
+          recList.push(`<b>Evaluasi Vendor Luar:</b> Outsource sebesar ${rp(tb.total)}; tinjau apakah pekerjaan dapat dikerjakan internal.`);
+        }
+      });
+      if (recList.length === 0) {
+        recList.push(`<b>Tinjau Rincian Pengeluaran:</b> Teliti seluruh transaksi debit neraca dan tahan belanja diskresioner non-mendesak.`);
+      }
+
       alertOutcomeHtml = `
       <div class="card" style="margin-top:12px;border:1.5px solid var(--crit);background:color-mix(in srgb,var(--crit) 10%,var(--surface));box-shadow:0 0 20px rgba(168,59,46,0.28);position:relative;overflow:hidden;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
@@ -1790,16 +1825,59 @@ function kartuPembaruan(R){
         <p style="font-size:11.5px;color:var(--ink);line-height:1.4;margin-bottom:9px;">
           Total beban operasional (COGS + OPEX) telah menyerap <b>${pct(outcomeRatio)}</b> dari total omzet, melampaui batas aman maksimal (45%).
         </p>
-        <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:7px;padding:8px 10px;display:flex;flex-direction:column;gap:3px;font-size:11px;font-family:var(--ff-mono);margin-bottom:8px;">
+
+        <!-- Ringkasan Angka Beban -->
+        <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:7px;padding:8px 10px;display:flex;flex-direction:column;gap:3px;font-size:11px;font-family:var(--ff-mono);margin-bottom:10px;">
           <div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Total Omzet</span><b>${rp(R.omzet)}</b></div>
           <div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Beban COGS</span><span style="color:var(--crit);">${rp(R.cogs || 0)} (${pct(R.omzet?(R.cogs||0)/R.omzet:0)})</span></div>
           <div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Beban OPEX</span><span style="color:var(--crit);">${rp(R.opex || 0)} (${pct(R.omzet?(R.opex||0)/R.omzet:0)})</span></div>
           <div style="display:flex;justify-content:space-between;border-top:1px dashed var(--hairline-strong);padding-top:3px;"><span style="color:var(--ink);font-weight:600;">Total Beban</span><b style="color:var(--crit);">${rp(outcome)}</b></div>
         </div>
-        <div style="font-size:10.5px;color:var(--muted);line-height:1.35;display:flex;align-items:flex-start;gap:4px;">
-          <span>⚠️</span>
-          <span><b>SOP Pengendalian:</b> Tinjau pos belanja COGS &amp; OPEX segera dan perketat anggaran agar margin laba bersih studio tetap terjaga.</span>
+
+        <!-- Tabel Menurun: Apa Saja yang Bengkak -->
+        <div style="border-top:1px dashed var(--hairline-strong);padding-top:8px;margin-bottom:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--crit);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px;display:flex;align-items:center;gap:4px;">
+            <span>📉</span><span>Rincian Biaya Paling Bengkak (Menurun):</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;max-height:220px;overflow-y:auto;padding-right:2px;">
+            ${topBengkak.slice(0, 5).map((tb, idx) => {
+              const pOmzet = R.omzet ? (tb.total / R.omzet) : 0;
+              const pOutcome = outcome ? (tb.total / outcome) : 0;
+              return `
+              <div style="background:var(--surface);border:1px solid var(--hairline);border-radius:6px;padding:6px 8px;display:flex;flex-direction:column;gap:2px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">
+                  <span style="font-size:11px;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                    #${idx+1} ${esc(tb.kategori)}
+                  </span>
+                  <span class="pill ${tb.jenis==='COGS'?'warn':'crit'}" style="font-size:9px;padding:1px 5px;flex-shrink:0;">${tb.jenis}</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;font-family:var(--ff-mono);">
+                  <b style="color:var(--crit);">${rp(tb.total)}</b>
+                  <span style="color:var(--muted);font-size:10px;">${pct(pOmzet)} omzet · ${pct(pOutcome)} beban</span>
+                </div>
+              </div>`;
+            }).join("")}
+          </div>
         </div>
+
+        <!-- Rekomendasi Crosscheck -->
+        <div style="border-top:1px dashed var(--hairline-strong);padding-top:8px;display:flex;flex-direction:column;gap:5px;">
+          <div style="font-size:11px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:4px;">
+            <span>🔍</span><span>Rekomendasi Tindakan Crosscheck:</span>
+          </div>
+          <div style="font-size:10.5px;color:var(--ink2);line-height:1.4;display:flex;flex-direction:column;gap:4px;">
+            ${recList.map(rec => `
+              <div style="display:flex;align-items:flex-start;gap:5px;background:color-mix(in srgb,var(--surface) 80%,transparent);padding:4px 6px;border-radius:4px;border-left:2px solid var(--warn);">
+                <span>•</span>
+                <div>${rec}</div>
+              </div>
+            `).join("")}
+          </div>
+          <button class="btn sm" onclick="nav('biaya')" style="margin-top:4px;width:100%;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px;background:var(--surface2);border-color:var(--hairline-strong);">
+            📋 Buka Buku Detail Neraca (Audit Transaksi) ➔
+          </button>
+        </div>
+
       </div>`;
     }
   }
