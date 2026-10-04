@@ -552,6 +552,21 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
   box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)}
 .payroll-row:hover td{background:color-mix(in srgb,var(--accent) 3%,var(--surface))!important}
 
+/* ---------- FIT-IN: semua tabel muat lebar layar, scroll hanya vertikal ---------- */
+.tw table{table-layout:auto;width:100%;font-size:12px}
+.tw th{font-size:9.5px;letter-spacing:.4px;padding:8px 6px;white-space:normal;line-height:1.25;vertical-align:bottom}
+.tw td{padding:7px 6px;font-size:12px;overflow-wrap:anywhere;vertical-align:middle}
+.tw td.n,.tw th.n{font-size:11.5px;white-space:nowrap;overflow-wrap:normal}
+.tw td.mono{font-size:11.5px}
+.tw .pill{font-size:10px;padding:2px 7px}
+.tw .btn{padding:4px 8px;font-size:11.5px}
+.tw select{font-size:11.5px;padding:3px 4px;max-width:100%}
+.tw input:not([type=checkbox]):not([type=radio]){max-width:100%;box-sizing:border-box}
+.payroll-input{width:100%!important;min-width:56px;max-width:120px;box-sizing:border-box;padding:4px 5px;font-size:11.5px}
+.payroll-row td{padding:6px 5px}
+.payroll-row td:has(.payroll-input){min-width:0}
+.tw{overflow-x:auto}
+
 @media print {
   body *{visibility:hidden!important}
   #printableSlip, #printableSlip *{visibility:visible!important}
