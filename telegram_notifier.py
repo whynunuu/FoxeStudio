@@ -230,6 +230,10 @@ def build_summary_message(state, bulan=None):
         table_lines.append("--------------------------------------------")
         table_lines.append(f"{'OUTCOME RATIO (≥45%)':<24} {f'{outcome_ratio:.1f}% ⚠️':>19}")
         table_lines.append(f"{'STATUS BUDGET CAP':<24} {'ALERT KRITIS':>19}")
+    elif is_after_day_15 and grand_total > 0 and (cogs_tot + opex_tot > 0):
+        table_lines.append("--------------------------------------------")
+        table_lines.append(f"{'OUTCOME RATIO (<45%)':<24} {f'{outcome_ratio:.1f}% ✅':>19}")
+        table_lines.append(f"{'STATUS BUDGET CAP':<24} {'PASSED (AMAN)':>19}")
 
     # Section Estimate Omzet Sampai Akhir Bulan (Unrealized Cash In & Omzet)
     if is_oktober:

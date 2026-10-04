@@ -1771,7 +1771,7 @@ function kartuPembaruan(R){
   const LBL={sukses:["berhasil","ok"],manual:["manual","skip"],gagal:["gagal","no"],
              berjalan:["berjalan","wait"],sebagian:["sebagian","wait"],dilewati:["dilewati","skip"]};
   
-  // Hitung Rasio Beban (COGS + OPEX) untuk bulan ini (Rule: Berlaku setelah tanggal 15)
+  // Hitung Rasio Beban (COGS + OPEX) untuk bulan ini (Rule: Berlaku setelah tanggal 15 atau buku ditutup)
   let alertOutcomeHtml = "";
   if (R) {
     const outcome = (R.cogs || 0) + (R.opex || 0);
@@ -1779,6 +1779,7 @@ function kartuPembaruan(R){
     const isClosed = (R.hariBerjalan >= R.dim);
     const isAfterDay15 = isClosed || (R.cutDay > 15);
     const isOutcomeAlert = isAfterDay15 && (outcomeRatio >= 0.45) && (R.omzet > 0) && (R.adaBiaya || outcome > 0);
+    const isOutcomeSafe = (outcomeRatio < 0.45) && (R.omzet > 0) && (R.adaBiaya || outcome > 0);
 
     if (isOutcomeAlert) {
       // Kelompokkan dan urutkan pos pengeluaran yang paling bengkak (menurun / descending)
@@ -1861,6 +1862,69 @@ function kartuPembaruan(R){
         <div style="font-size:10px;color:var(--ink2);line-height:1.35;background:color-mix(in srgb,var(--surface) 65%,transparent);border-left:2px solid var(--warn);padding:4px 6px;border-radius:0 4px 4px 0;margin-bottom:6px;">
           <div style="font-weight:700;color:var(--ink);margin-bottom:2px;">🔍 Rekomendasi Cross-Check:</div>
           ${recList.slice(0, 2).map(r => `<div style="margin-bottom:2px;">• ${r}</div>`).join("")}
+        </div>
+
+        <button class="btn sm" onclick="view='biaya';render();window.scrollTo({top:0,behavior:'smooth'})" style="width:100%;padding:4px 8px;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:5px;background:var(--surface2);">
+          📋 Buka Buku Neraca ➔
+        </button>
+      </div>`;
+    } else if (isOutcomeSafe) {
+      // Status Aman / Lolos (< 45%) - Laporan Checklist Pass Hijau
+      const cogsP = R.omzet ? (R.cogs || 0) / R.omzet : 0;
+      const opexP = R.omzet ? (R.opex || 0) / R.omzet : 0;
+      const operMargin = R.omzet ? (R.omzet - outcome) / R.omzet : 0;
+
+      alertOutcomeHtml = `
+      <div class="card" style="margin-top:8px;padding:12px 14px;border:1.5px solid var(--good);background:color-mix(in srgb,var(--good) 8%,var(--surface));box-shadow:0 0 16px rgba(47,125,79,0.18);position:relative;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <div style="display:flex;align-items:center;gap:5px;font-weight:700;color:var(--good);font-size:12px;text-transform:uppercase;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--good);">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <span>Kontrol Biaya Sehat</span>
+          </div>
+          <span class="pill good" style="font-weight:700;font-size:10px;padding:1px 6px;">✓ ${pct(outcomeRatio)} Aman</span>
+        </div>
+
+        <!-- KPI Ringkas -->
+        <div style="display:flex;justify-content:space-between;align-items:baseline;font-size:10.5px;font-family:var(--ff-mono);margin-bottom:7px;padding:4px 6px;background:var(--surface2);border-radius:5px;border:1px solid var(--hairline);">
+          <span style="color:var(--muted);">Omzet ${rp(R.omzet)}</span>
+          <span style="color:var(--good);font-weight:700;">Beban ${rp(outcome)}</span>
+        </div>
+
+        <!-- Summary Checklist Efisiensi Biaya (Micro List) -->
+        <div style="margin-bottom:7px;">
+          <div style="font-size:10px;font-weight:700;color:var(--good);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:4px;display:flex;justify-content:space-between;">
+            <span>📋 Summary Checklist Efisiensi</span>
+            <span style="color:var(--muted);font-weight:500;">Status</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px;font-size:10.5px;font-family:var(--ff-body);">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;border-bottom:1px solid var(--hairline-soft);">
+              <span style="color:var(--ink);display:flex;align-items:center;gap:4px;">
+                <b style="color:var(--good);">✓</b> Pagu Cap Risiko (&lt; 45%)
+              </span>
+              <span class="pill good" style="font-size:8.5px;padding:0 5px;font-family:var(--ff-mono);">Lolos (${pct(outcomeRatio)})</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;border-bottom:1px solid var(--hairline-soft);">
+              <span style="color:var(--ink);display:flex;align-items:center;gap:4px;">
+                <b style="color:var(--good);">✓</b> COGS Produksi (${rp(R.cogs || 0)})
+              </span>
+              <span class="pill good" style="font-size:8.5px;padding:0 5px;font-family:var(--ff-mono);">${pct(cogsP)}</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;border-bottom:1px solid var(--hairline-soft);">
+              <span style="color:var(--ink);display:flex;align-items:center;gap:4px;">
+                <b style="color:var(--good);">✓</b> OPEX Studio &amp; Gaji (${rp(R.opex || 0)})
+              </span>
+              <span class="pill good" style="font-size:8.5px;padding:0 5px;font-family:var(--ff-mono);">${pct(opexP)}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rekomendasi / Kesimpulan Biaya Sehat -->
+        <div style="font-size:10px;color:var(--ink2);line-height:1.35;background:color-mix(in srgb,var(--surface) 65%,transparent);border-left:2px solid var(--good);padding:4px 6px;border-radius:0 4px 4px 0;margin-bottom:6px;">
+          <div style="font-weight:700;color:var(--good);margin-bottom:2px;">✨ Evaluasi Margin:</div>
+          <div>• Margin operasional studio terjaga di <b>${pct(operMargin)}</b>. Struktur beban terkontrol optimal di bawah batas ambang 45%.</div>
         </div>
 
         <button class="btn sm" onclick="view='biaya';render();window.scrollTo({top:0,behavior:'smooth'})" style="width:100%;padding:4px 8px;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:5px;background:var(--surface2);">
@@ -2134,36 +2198,55 @@ function vTahunan(R) {
       yoy = o25 ? (((okp ? okp.estimateCashIn : oktOmzet) - o25) / o25) : null;
     }
 
-    // Perhitungan Rasio Beban (COGS + OPEX) & Alarm Peringatan >= 45% (berlaku setelah tanggal 15)
+    // Perhitungan Rasio Beban (COGS + OPEX) & Alarm Peringatan >= 45% (berlaku setelah tanggal 15 atau closed book)
     let cogsM = 0;
     let opexM = 0;
     let hasExpenses = false;
     let cutDayM = 31;
+    let isClosedM = true;
 
     if (hist) {
       cogsM = dnum(hist.cogs);
       opexM = dnum(hist.opex);
       hasExpenses = (cogsM > 0 || opexM > 0);
       cutDayM = 31; // Buku ditutup (lewat tgl 15)
+      isClosedM = true;
     } else if (info.no === 9) {
-      const sepExpenses = (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-09-"));
-      cogsM = sepExpenses.filter(e => e.jenis === "COGS").reduce((s, e) => s + dnum(e.nilai), 0);
-      opexM = sepExpenses.filter(e => e.jenis === "OPEX").reduce((s, e) => s + dnum(e.nilai), 0);
+      const sepExp = (S.neracaByMonth && S.neracaByMonth["2026-09"] && S.neracaByMonth["2026-09"].expenses) 
+        ? S.neracaByMonth["2026-09"].expenses 
+        : (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-09-"));
+      const sepSeen = new Set();
+      sepExp.forEach(e => {
+        const k = e.id || `${e.tanggal}|${e.deskripsi}|${e.nilai}`;
+        if (!sepSeen.has(k)) {
+          sepSeen.add(k);
+          if (e.jenis === "COGS") cogsM += dnum(e.nilai);
+          else if (e.jenis === "OPEX") opexM += dnum(e.nilai);
+        }
+      });
       hasExpenses = (cogsM > 0 || opexM > 0);
       cutDayM = 30; // Rekap final September (lewat tgl 15)
+      isClosedM = true;
     } else if (info.no === 10) {
-      const oktExpenses = (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-10-"));
-      cogsM = oktExpenses.filter(e => e.jenis === "COGS").reduce((s, e) => s + dnum(e.nilai), 0);
-      opexM = oktExpenses.filter(e => e.jenis === "OPEX").reduce((s, e) => s + dnum(e.nilai), 0);
+      const oktExp = (S.neracaByMonth && S.neracaByMonth["2026-10"] && S.neracaByMonth["2026-10"].expenses) 
+        ? S.neracaByMonth["2026-10"].expenses 
+        : (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-10-"));
+      oktExp.forEach(e => {
+        if (e.jenis === "COGS") cogsM += dnum(e.nilai);
+        else if (e.jenis === "OPEX") opexM += dnum(e.nilai);
+      });
       hasExpenses = (cogsM > 0 || opexM > 0);
-      const oktCutoff = (S.oktoberLogOrder && S.oktoberLogOrder.cutoff) || (S.config && S.config.cutoff) || "2026-10-01";
-      cutDayM = parseInt(oktCutoff.split("-")[2] || "1", 10);
+      const oktCutoff = (S.oktoberLogOrder && S.oktoberLogOrder.cutoff) || (S.config && S.config.cutoff) || "2026-10-04";
+      cutDayM = parseInt(oktCutoff.split("-")[2] || "4", 10);
+      isClosedM = false;
     }
 
     const totalOutcome = cogsM + opexM;
     const outcomeRatio = (o26 && o26 > 0) ? (totalOutcome / o26) : 0;
-    // Rule: Berlakukan setelah tanggal 15 (> 15)
-    const isOutcomeAlert = hasExpenses && (o26 > 0) && (cutDayM > 15) && (outcomeRatio >= 0.45);
+    const isEvaluated = hasExpenses && (o26 > 0) && (isClosedM || cutDayM > 15);
+    const isOutcomeAlert = isEvaluated && (outcomeRatio >= 0.45);
+    const isOutcomeSafe = isEvaluated && (outcomeRatio < 0.45);
+    const isEarlyCycle = hasExpenses && (o26 > 0) && !isClosedM && (cutDayM <= 15);
 
     return {
       ...info,
@@ -2183,7 +2266,10 @@ function vTahunan(R) {
       hist: hist,
       totalOutcome: totalOutcome,
       outcomeRatio: outcomeRatio,
-      isOutcomeAlert: isOutcomeAlert
+      isOutcomeAlert: isOutcomeAlert,
+      isOutcomeSafe: isOutcomeSafe,
+      isEarlyCycle: isEarlyCycle,
+      cutDayM: cutDayM
     };
   });
 
@@ -2273,7 +2359,18 @@ function vTahunan(R) {
                 </svg>
                 <span>≥45% (${pct(m.outcomeRatio)})</span>
               </span>
-            ` : ''}
+            ` : (m.isOutcomeSafe ? `
+              <span class="pill good" style="font-size:10px;padding:2px 7px;display:inline-flex;align-items:center;gap:4px;font-weight:700;white-space:nowrap;border:1px solid rgba(47,125,79,0.5);box-shadow:0 0 8px rgba(47,125,79,0.2);" title="Status Pengeluaran Sehat: Total COGS + OPEX ${pct(m.outcomeRatio)} berada di bawah batas aman 45%">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <span>✅ ${pct(m.outcomeRatio)} Aman</span>
+              </span>
+            ` : (m.isEarlyCycle ? `
+              <span class="pill prog" style="font-size:10px;padding:2px 7px;display:inline-flex;align-items:center;gap:4px;font-weight:700;white-space:nowrap;" title="Periode Berjalan: Awal bulan (H-${m.cutDayM}), rasio beban sementara ${pct(m.outcomeRatio)}">
+                <span>🌱 ${pct(m.outcomeRatio)} (H-${m.cutDayM})</span>
+              </span>
+            ` : ''))}
           </div>
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:6px;flex-wrap:wrap;">
             <div class="mmomentum">${esc(m.momentum)}</div>
