@@ -631,9 +631,19 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
         </div>
         <div class="period"><b id="tbPeriod">Oktober 2026</b><span class="co" id="tbCut">memuat…</span></div>
         <span class="pill prog" id="tbStatus">Progressive</span>
-        <div class="seg" id="tbMonthSwitcher" style="margin-left:4px;display:inline-flex;">
-          <button type="button" class="btn sm" id="btnSwitchOkt" style="font-weight:600;padding:4px 10px;font-size:11.5px;">📅 Oktober (Live)</button>
-          <button type="button" class="btn sm" id="btnSwitchSep" style="font-weight:500;padding:4px 10px;font-size:11.5px;">📅 September (Rekap)</button>
+        <div class="seg" id="tbMonthSwitcher" style="margin-left:4px;display:inline-flex;align-items:center;">
+          <select id="selActiveMonth" aria-label="Pilih Periode Bulan" style="font-weight:600;padding:5px 12px;font-size:12px;background:var(--surface);border:1px solid var(--hairline-strong);border-radius:8px;color:var(--ink);cursor:pointer;outline:none;">
+            <option value="2026-10">📅 Oktober 2026 (Live &amp; Pipeline)</option>
+            <option value="2026-09">📅 September 2026 (Rekap Final)</option>
+            <option value="2026-08">📅 Agustus 2026 (Closed Book)</option>
+            <option value="2026-07">📅 Juli 2026 (Closed Book)</option>
+            <option value="2026-06">📅 Juni 2026 (Closed Book)</option>
+            <option value="2026-05">📅 Mei 2026 (Closed Book)</option>
+            <option value="2026-04">📅 April 2026 (Closed Book)</option>
+            <option value="2026-03">📅 Maret 2026 (Closed Book)</option>
+            <option value="2026-02">📅 Februari 2026 (Closed Book)</option>
+            <option value="2026-01">📅 Januari 2026 (Closed Book)</option>
+          </select>
         </div>
         <span class="spacer"></span>
         <button class="btn sm" id="btnTheme" title="Ganti Tema">🌓 Tema</button>
@@ -799,7 +809,8 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
         <b>✅ Rekonsiliasi 100% Selaras:</b> Total omzet uang masuk kasir pada File Log Order tercatat cocok sempurna dengan total mutasi kas &amp; bank masuk pada sheet Neraca. Beban COGS &amp; OPEX diklasifikasikan secara transparan berdasarkan detail operasional riil.
       </div>
 
-      <div style="display:flex;justify-content:flex-end;margin-top:4px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:8px;">
+        <button class="btn pri sm" id="btnModalOpenFullDash" style="font-weight:600;">👉 Buka Dashboard Penuh Bulan Ini ➔</button>
         <button class="btn sm" id="btnDismissMonthModal">Tutup Laporan</button>
       </div>
     </div>
@@ -892,15 +903,26 @@ function nkey(s){
 function compute(targetMonth){
   const mStr = targetMonth || activeMonth || "2026-10";
   const isOkt = (mStr === "2026-10");
+  const isSep = (mStr === "2026-09");
   const [y,m] = mStr.split("-").map(Number);
   const dim = new Date(y,m,0).getDate();
   const oktCut = (S.oktoberLogOrder && S.oktoberLogOrder.cutoff) ? S.oktoberLogOrder.cutoff : "2026-10-02";
-  const cutoff = isOkt ? oktCut : ((S.config && S.config.cutoff) ? S.config.cutoff : "2026-09-30");
-  const status = isOkt ? "Progressive" : "Final";
+  let cutoff = `${mStr}-${String(dim).padStart(2,"0")}`;
+  let status = "Final";
+  if (isOkt) {
+    cutoff = oktCut;
+    status = "Progressive";
+  } else if (isSep) {
+    cutoff = (S.config && S.config.cutoff) ? S.config.cutoff : "2026-09-30";
+    status = "Final (Rekap)";
+  } else {
+    cutoff = `${mStr}-${String(dim).padStart(2,"0")}`;
+    status = "Final (Closed Book)";
+  }
   const cut = new Date(cutoff+"T00:00:00");
   const cutDay = cut.getDate();
   const hariBerjalan = isOkt ? cutDay : dim;
-  const inRange = d => d && d <= cutoff && d >= `${mStr}-01`;
+  const inRange = d => d && d.startsWith(mStr) && d <= cutoff;
 
   const c = {
     bulan: mStr,
@@ -1010,7 +1032,12 @@ function compute(targetMonth){
   const offRoster={admin:admin.arr.filter(a=>!roster.has(a.nama)),fotografer:fotografer.arr.filter(f=>!roster.has(f.nama))};
 
   // biaya
-  const ex=S.expenses.filter(e=>e.tanggal?inRange(e.tanggal):(isOkt?false:e.bulan===mStr));
+  let ex = [];
+  if (S.neracaByMonth && S.neracaByMonth[mStr] && Array.isArray(S.neracaByMonth[mStr].expenses) && S.neracaByMonth[mStr].expenses.length) {
+    ex = S.neracaByMonth[mStr].expenses;
+  } else if (Array.isArray(S.expenses)) {
+    ex = S.expenses.filter(e => e.tanggal ? inRange(e.tanggal) : (e.bulan === mStr));
+  }
   const sumJ=j=>ex.filter(e=>e.jenis===j).reduce((s,e)=>s+dnum(e.nilai),0);
 
   const bonDoc=S.bon.filter(b=>b.bulan===c.bulan)
@@ -1105,20 +1132,21 @@ function compute(targetMonth){
     nettMargin:omzet?nettProfit/omzet:null,
     rekon,rekonBeda,rekonAda,tiers,tierAktif,tierBerikut,pool,kpi,kpiDinilai,avgOp,bonusCair,
     ld,totLeads,totDP,totSesi,totTx,conv,leadKosong,leadTerakhir,
-    baseline: isOkt ? {
-      label: "Oktober 2025",
-      sumber: "Benchmark 2025",
-      omzet: 48000000,
-      txPaid: 251,
-      cash: 20000000,
-      transfer: 28000000,
-      cogs: 9500000,
-      opex: 12000000,
-      nettProfit: 26500000,
-      seasonalityStatus: "NORMAL",
-      seasonalityRank: 7,
-      seasonalityIndex: 0.82
-    } : S.baseline,
+    baseline: (()=>{
+      const BENCH_25 = {
+        1: { label: "Januari 2025", omzet: 46000000, txPaid: 215, cash: 16000000, transfer: 30000000, cogs: 9200000, opex: 16500000, nettProfit: 20300000, seasonalityIndex: 0.77, seasonalityStatus: "LOW" },
+        2: { label: "Februari 2025", omzet: 48000000, txPaid: 220, cash: 17000000, transfer: 31000000, cogs: 9600000, opex: 16800000, nettProfit: 21600000, seasonalityIndex: 0.80, seasonalityStatus: "LOW" },
+        3: { label: "Maret 2025", omzet: 52000000, txPaid: 240, cash: 19000000, transfer: 33000000, cogs: 10400000, opex: 17200000, nettProfit: 24400000, seasonalityIndex: 0.87, seasonalityStatus: "NORMAL" },
+        4: { label: "April 2025", omzet: 51000000, txPaid: 235, cash: 18000000, transfer: 33000000, cogs: 10200000, opex: 17000000, nettProfit: 23800000, seasonalityIndex: 0.85, seasonalityStatus: "NORMAL" },
+        5: { label: "Mei 2025", omzet: 55000000, txPaid: 260, cash: 20000000, transfer: 35000000, cogs: 11000000, opex: 18000000, nettProfit: 26000000, seasonalityIndex: 0.92, seasonalityStatus: "NORMAL" },
+        6: { label: "Juni 2025", omzet: 54000000, txPaid: 255, cash: 19000000, transfer: 35000000, cogs: 10800000, opex: 17800000, nettProfit: 25400000, seasonalityIndex: 0.90, seasonalityStatus: "HIGH" },
+        7: { label: "Juli 2025", omzet: 53000000, txPaid: 250, cash: 19000000, transfer: 34000000, cogs: 10600000, opex: 17500000, nettProfit: 24900000, seasonalityIndex: 0.88, seasonalityStatus: "NORMAL" },
+        8: { label: "Agustus 2025", omzet: 59000000, txPaid: 280, cash: 22000000, transfer: 37000000, cogs: 11800000, opex: 18500000, nettProfit: 28700000, seasonalityIndex: 0.98, seasonalityStatus: "HIGH" },
+        9: S.baseline || { label: "September 2025", omzet: 151036150, txPaid: 634, cash: 64061150, transfer: 86975000, cogs: 23221500, opex: 21144209, nettProfit: 106156441, seasonalityIndex: 1.85, seasonalityStatus: "PEAK" },
+        10: { label: "Oktober 2025", omzet: 48000000, txPaid: 251, cash: 20000000, transfer: 28000000, cogs: 9500000, opex: 12000000, nettProfit: 26500000, seasonalityIndex: 0.82, seasonalityStatus: "NORMAL" }
+      };
+      return BENCH_25[m] || S.baseline;
+    })(),
     neracaDetail: (()=>{
       if (S.neracaByMonth && S.neracaByMonth[mStr] && S.neracaByMonth[mStr].detail) {
         return S.neracaByMonth[mStr].detail;
@@ -1582,31 +1610,19 @@ function render(){
       document.getElementById("tbPeriod").textContent=BULAN[+R.c.bulan.split("-")[1]-1]+" "+R.c.bulan.split("-")[0];
       document.getElementById("tbCut").textContent=`s.d. ${R.cutDay} ${BULAN[+R.c.bulan.split("-")[1]-1]} · ${R.hariBerjalan}/${R.dim} hari`;
       const st=document.getElementById("tbStatus");
-      if(st){ st.textContent=R.c.status; st.className="pill "+(R.c.status==="Final"?"final":"prog"); }
+      if(st){ st.textContent=R.c.status; st.className="pill "+(R.c.status.startsWith("Final")?"final":"prog"); }
     }
 
-    const btnSwOkt = document.getElementById("btnSwitchOkt");
-    const btnSwSep = document.getElementById("btnSwitchSep");
-    if(btnSwOkt && btnSwSep) {
-      if(activeMonth === "2026-10") {
-        btnSwOkt.style.background = "var(--accent)";
-        btnSwOkt.style.color = "#ffffff";
-        btnSwOkt.style.borderColor = "var(--accent)";
-        btnSwOkt.style.fontWeight = "600";
-        btnSwSep.style.background = "transparent";
-        btnSwSep.style.color = "var(--muted)";
-        btnSwSep.style.borderColor = "var(--hairline)";
-        btnSwSep.style.fontWeight = "500";
-      } else {
-        btnSwSep.style.background = "var(--accent)";
-        btnSwSep.style.color = "#ffffff";
-        btnSwSep.style.borderColor = "var(--accent)";
-        btnSwSep.style.fontWeight = "600";
-        btnSwOkt.style.background = "transparent";
-        btnSwOkt.style.color = "var(--muted)";
-        btnSwOkt.style.borderColor = "var(--hairline)";
-        btnSwOkt.style.fontWeight = "500";
-      }
+    const selM = document.getElementById("selActiveMonth");
+    if(selM) {
+      selM.value = activeMonth;
+      selM.onchange = (e) => {
+        activeMonth = e.target.value;
+        estMonth = +activeMonth.split("-")[1];
+        render();
+        window.scrollTo({top: 0, behavior: "smooth"});
+        showToast(`📅 Beralih ke periode: ${BULAN[estMonth-1]} 2026`, "ok", 2500);
+      };
     }
 
     const up=document.getElementById("tbUpd"), ok=syncSukses(), akhir=syncUrut()[0];
@@ -2037,11 +2053,11 @@ function vTahunan(R) {
 
       let btnLabel = "";
       if (m.hist) {
-        btnLabel = `📋 Laporan &amp; Neraca ${m.short} ➔`;
+        btnLabel = `👉 Buka Dashboard ${m.short} ➔`;
       } else if (m.no === 10) {
         btnLabel = m.isCurrent ? "👉 Buka Dashboard Oktober (Live)" : "📅 Buka Dashboard Oktober (Live) ➔";
       } else if (m.no === 9) {
-        btnLabel = m.isCurrent ? "👉 Buka Laporan September (Rekap)" : "📊 Buka Laporan September (Rekap) ➔";
+        btnLabel = m.isCurrent ? "👉 Buka Dashboard September (Rekap)" : "📊 Buka Dashboard September (Rekap) ➔";
       } else {
         btnLabel = "Belum Berjalan (—)";
       }
@@ -2079,10 +2095,11 @@ function vTahunan(R) {
           </div>
         </div>
 
-        <div class="mfoot">
-          <button class="btn sm ${m.isCurrent ? 'pri' : ''} btn-go-month" data-month="${m.no}" style="width:100%;display:flex;justify-content:center;align-items:center;gap:6px;">
+        <div class="mfoot" style="display:flex;gap:6px;align-items:center;">
+          <button class="btn sm ${m.isCurrent ? 'pri' : ''} btn-go-month" data-month="${m.no}" style="flex:1;display:flex;justify-content:center;align-items:center;gap:6px;font-weight:600;">
             ${btnLabel}
           </button>
+          ${m.hist ? `<button class="btn sm btn-modal-month" data-month="${m.no}" title="Lihat Ringkasan Neraca &amp; Roster" style="padding:4px 8px;font-size:11px;">🔍</button>` : ''}
         </div>
       </div>
       `;
@@ -2156,8 +2173,28 @@ function vOmzet(R){
   const maxO=Math.max(...run.map(d=>d.omzet||0))||1;
   const t1=R.tiers[0]?R.tiers[0].omzet:0;
   return `
-  <div class="vhead"><div><div class="eyebrow">Sheet 2</div><h2>Omzet Harian &amp; Progresif</h2></div>
-    <p>Batang menjawab hari mana yang ramai, kurva menjawab sudah sampai mana terhadap target — sumbu tanggalnya sama, jadi dibaca sekali. Tanggal setelah cut-off tetap tampil tanpa angka apa pun.</p></div>
+  <div class="vhead" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:14px">
+    <div>
+      <div class="eyebrow">Sheet 2 · ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}</div>
+      <h2>Omzet Harian &amp; Progresif — ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}</h2>
+      <p>Batang menjawab hari mana yang ramai, kurva menjawab sudah sampai mana terhadap target — sumbu tanggalnya sama, jadi dibaca sekali. Tanggal setelah cut-off tetap tampil tanpa angka apa pun.</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;background:var(--surface2);padding:4px 8px;border-radius:8px">
+      <span style="font-size:11px;font-weight:600;color:var(--muted);">PERIODE:</span>
+      <select id="selOmzetMonth" style="background:var(--surface);border:1px solid var(--hairline-strong);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--ink);cursor:pointer;font-weight:600;outline:none;" onchange="activeMonth=this.value;render()">
+        <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Oktober 2026 (Live)</option>
+        <option value="2026-09" ${R.c.bulan==='2026-09'?'selected':''}>📅 September 2026 (Final)</option>
+        <option value="2026-08" ${R.c.bulan==='2026-08'?'selected':''}>📅 Agustus 2026 (Closed)</option>
+        <option value="2026-07" ${R.c.bulan==='2026-07'?'selected':''}>📅 Juli 2026 (Closed)</option>
+        <option value="2026-06" ${R.c.bulan==='2026-06'?'selected':''}>📅 Juni 2026 (Closed)</option>
+        <option value="2026-05" ${R.c.bulan==='2026-05'?'selected':''}>📅 Mei 2026 (Closed)</option>
+        <option value="2026-04" ${R.c.bulan==='2026-04'?'selected':''}>📅 April 2026 (Closed)</option>
+        <option value="2026-03" ${R.c.bulan==='2026-03'?'selected':''}>📅 Maret 2026 (Closed)</option>
+        <option value="2026-02" ${R.c.bulan==='2026-02'?'selected':''}>📅 Februari 2026 (Closed)</option>
+        <option value="2026-01" ${R.c.bulan==='2026-01'?'selected':''}>📅 Januari 2026 (Closed)</option>
+      </select>
+    </div>
+  </div>
   <div class="stats" style="margin-bottom:14px">
     <div class="stat"><span class="k">Total omzet</span><span class="v">${rp(R.omzet)}</span>
       <span class="m">${num(R.txPaid)} transaksi masuk dari ${num(R.tx)} order</span></div>
@@ -2244,15 +2281,35 @@ function vTarget(R){
 }
 
 function vTrx(R){
-  const inRange = d => d && d <= R.c.cutoff && d >= `${R.c.bulan}-01`;
+  const inRange = d => d && d.startsWith(R.c.bulan) && d <= R.c.cutoff;
   const ordList = S.orders.filter(o => inRange(o.tanggal));
   const pakets = [...new Set(ordList.map(o=>npak(o.paket)).filter(Boolean))].sort();
   const admins = [...new Set(ordList.map(o=>String(o.admin||"").toUpperCase()).filter(Boolean))].sort();
   const fgs = [...new Set(ordList.map(o=>String(o.fotografer||"").toUpperCase()).filter(Boolean))].sort();
   const list = [...ordList].sort((a,b)=>a.tanggal<b.tanggal?1:a.tanggal>b.tanggal?-1:0).slice(0,400);
   return `
-  <div class="vhead"><div><div class="eyebrow">Sheet 1 · ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}</div><h2>Log Transaksi</h2></div>
-    <p>Cash dan transfer dipisah, total terisi otomatis. Order tanpa pembayaran tetap dicatat Rp0 dan ikut jumlah transaksi.</p></div>
+  <div class="vhead" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:14px">
+    <div>
+      <div class="eyebrow">Sheet 1 · ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}</div>
+      <h2>Log Transaksi — ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}</h2>
+      <p>Cash dan transfer dipisah, total terisi otomatis. Order tanpa pembayaran tetap dicatat Rp0 dan ikut jumlah transaksi.</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;background:var(--surface2);padding:4px 8px;border-radius:8px">
+      <span style="font-size:11px;font-weight:600;color:var(--muted);">PERIODE:</span>
+      <select id="selTrxMonth" style="background:var(--surface);border:1px solid var(--hairline-strong);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--ink);cursor:pointer;font-weight:600;outline:none;" onchange="activeMonth=this.value;render()">
+        <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Oktober 2026 (Live)</option>
+        <option value="2026-09" ${R.c.bulan==='2026-09'?'selected':''}>📅 September 2026 (Final)</option>
+        <option value="2026-08" ${R.c.bulan==='2026-08'?'selected':''}>📅 Agustus 2026 (Closed)</option>
+        <option value="2026-07" ${R.c.bulan==='2026-07'?'selected':''}>📅 Juli 2026 (Closed)</option>
+        <option value="2026-06" ${R.c.bulan==='2026-06'?'selected':''}>📅 Juni 2026 (Closed)</option>
+        <option value="2026-05" ${R.c.bulan==='2026-05'?'selected':''}>📅 Mei 2026 (Closed)</option>
+        <option value="2026-04" ${R.c.bulan==='2026-04'?'selected':''}>📅 April 2026 (Closed)</option>
+        <option value="2026-03" ${R.c.bulan==='2026-03'?'selected':''}>📅 Maret 2026 (Closed)</option>
+        <option value="2026-02" ${R.c.bulan==='2026-02'?'selected':''}>📅 Februari 2026 (Closed)</option>
+        <option value="2026-01" ${R.c.bulan==='2026-01'?'selected':''}>📅 Januari 2026 (Closed)</option>
+      </select>
+    </div>
+  </div>
   <div class="card" style="margin-bottom:14px"><h3>Tambah transaksi</h3>
     <form class="form" id="fTrx">
       <div class="f"><label>Tanggal setoran</label><input name="tanggal" type="date" value="${R.c.cutoff}" required></div>
@@ -2390,9 +2447,20 @@ function vBiaya(R){
       <h2>Neraca (COGS &amp; OPEX) — ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}</h2>
       <p>Laporan terpadu neraca Foxe Studio: klasifikasi otomatis COGS (beban produksi langsung) &amp; OPEX (operasional studio), mutasi kas &amp; bank harian, serta estimasi laba rugi.</p>
     </div>
-    <div style="display:flex;gap:6px;background:var(--surface2);padding:4px;border-radius:8px">
-      <button class="btn btn-sm ${R.c.bulan==='2026-10'?'btn-pri':'btn-sub'}" onclick="activeMonth='2026-10';render()">📅 Oktober 2026 (Live Neraca)</button>
-      <button class="btn btn-sm ${R.c.bulan==='2026-09'?'btn-pri':'btn-sub'}" onclick="activeMonth='2026-09';render()">📅 September 2026 (Final)</button>
+    <div style="display:flex;align-items:center;gap:6px;background:var(--surface2);padding:4px 8px;border-radius:8px">
+      <span style="font-size:11px;font-weight:600;color:var(--muted);">PERIODE:</span>
+      <select id="selBiayaMonth" style="background:var(--surface);border:1px solid var(--hairline-strong);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--ink);cursor:pointer;font-weight:600;outline:none;" onchange="activeMonth=this.value;render()">
+        <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Oktober 2026 (Live Neraca)</option>
+        <option value="2026-09" ${R.c.bulan==='2026-09'?'selected':''}>📅 September 2026 (Final)</option>
+        <option value="2026-08" ${R.c.bulan==='2026-08'?'selected':''}>📅 Agustus 2026 (Closed)</option>
+        <option value="2026-07" ${R.c.bulan==='2026-07'?'selected':''}>📅 Juli 2026 (Closed)</option>
+        <option value="2026-06" ${R.c.bulan==='2026-06'?'selected':''}>📅 Juni 2026 (Closed)</option>
+        <option value="2026-05" ${R.c.bulan==='2026-05'?'selected':''}>📅 Mei 2026 (Closed)</option>
+        <option value="2026-04" ${R.c.bulan==='2026-04'?'selected':''}>📅 April 2026 (Closed)</option>
+        <option value="2026-03" ${R.c.bulan==='2026-03'?'selected':''}>📅 Maret 2026 (Closed)</option>
+        <option value="2026-02" ${R.c.bulan==='2026-02'?'selected':''}>📅 Februari 2026 (Closed)</option>
+        <option value="2026-01" ${R.c.bulan==='2026-01'?'selected':''}>📅 Januari 2026 (Closed)</option>
+      </select>
     </div>
   </div>
 
@@ -2530,8 +2598,28 @@ function vShift(R){
     const m=byDate.get(k);const n=String(s.nama).toUpperCase();m.set(n,(m.get(n)||0)+dnum(s.slot))});
   const orang=R.shift.filter(s=>s.total>0).map(s=>s.nama);
   return `
-  <div class="vhead"><div><div class="eyebrow">Sheet 5</div><h2>Rekap Shift</h2></div>
-    <p>Satu slot tercatat sama dengan satu shift. Nama yang sama mengisi dua slot di hari yang sama dihitung dua shift, bukan satu.</p></div>
+  <div class="vhead" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:14px">
+    <div>
+      <div class="eyebrow">Sheet 5 · ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}</div>
+      <h2>Rekap Shift — ${BULAN[+R.c.bulan.split("-")[1]-1]} ${R.c.bulan.split("-")[0]}</h2>
+      <p>Satu slot tercatat sama dengan satu shift. Nama yang sama mengisi dua slot di hari yang sama dihitung dua shift, bukan satu.</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;background:var(--surface2);padding:4px 8px;border-radius:8px">
+      <span style="font-size:11px;font-weight:600;color:var(--muted);">PERIODE:</span>
+      <select id="selShiftMonth" style="background:var(--surface);border:1px solid var(--hairline-strong);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--ink);cursor:pointer;font-weight:600;outline:none;" onchange="activeMonth=this.value;render()">
+        <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Oktober 2026 (Live)</option>
+        <option value="2026-09" ${R.c.bulan==='2026-09'?'selected':''}>📅 September 2026 (Final)</option>
+        <option value="2026-08" ${R.c.bulan==='2026-08'?'selected':''}>📅 Agustus 2026 (Closed)</option>
+        <option value="2026-07" ${R.c.bulan==='2026-07'?'selected':''}>📅 Juli 2026 (Closed)</option>
+        <option value="2026-06" ${R.c.bulan==='2026-06'?'selected':''}>📅 Juni 2026 (Closed)</option>
+        <option value="2026-05" ${R.c.bulan==='2026-05'?'selected':''}>📅 Mei 2026 (Closed)</option>
+        <option value="2026-04" ${R.c.bulan==='2026-04'?'selected':''}>📅 April 2026 (Closed)</option>
+        <option value="2026-03" ${R.c.bulan==='2026-03'?'selected':''}>📅 Maret 2026 (Closed)</option>
+        <option value="2026-02" ${R.c.bulan==='2026-02'?'selected':''}>📅 Februari 2026 (Closed)</option>
+        <option value="2026-01" ${R.c.bulan==='2026-01'?'selected':''}>📅 Januari 2026 (Closed)</option>
+      </select>
+    </div>
+  </div>
   <div class="two" style="margin-bottom:14px">
     <div class="card"><h3>Total shift per karyawan <span class="eyebrow">${num(R.shiftTot)} shift</span></h3>
       ${barlist(R.shift.filter(s=>s.total>0).map(s=>({k:s.nama,v:s.total,sub:pct(s.porsi)})),"accent",num)}</div>
@@ -4177,9 +4265,20 @@ function vGaji(R){
       <p>Data pos gaji terhubung dengan File Neraca. Nilai shift, tarif, bonus, dan potongan kasbon <b>dapat diedit langsung</b>. Di bagian bawah langsung tersedia slip gaji resmi siap cetak.</p>
     </div>
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <div style="display:flex;gap:4px;background:var(--surface2);padding:3px;border-radius:7px">
-        <button class="btn sm ${R.c.bulan==='2026-10'?'pri':''}" onclick="activeMonth='2026-10';render()">📅 Okt 2026</button>
-        <button class="btn sm ${R.c.bulan==='2026-09'?'pri':''}" onclick="activeMonth='2026-09';render()">📅 Sep 2026</button>
+      <div style="display:flex;align-items:center;gap:6px;background:var(--surface2);padding:3px 8px;border-radius:7px">
+        <span style="font-size:11px;font-weight:600;color:var(--muted);">PERIODE:</span>
+        <select id="selGajiMonth" style="background:var(--surface);border:1px solid var(--hairline-strong);border-radius:6px;padding:3px 8px;font-size:11.5px;color:var(--ink);cursor:pointer;font-weight:600;outline:none;" onchange="activeMonth=this.value;render()">
+          <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Okt 2026</option>
+          <option value="2026-09" ${R.c.bulan==='2026-09'?'selected':''}>📅 Sep 2026</option>
+          <option value="2026-08" ${R.c.bulan==='2026-08'?'selected':''}>📅 Ags 2026</option>
+          <option value="2026-07" ${R.c.bulan==='2026-07'?'selected':''}>📅 Jul 2026</option>
+          <option value="2026-06" ${R.c.bulan==='2026-06'?'selected':''}>📅 Jun 2026</option>
+          <option value="2026-05" ${R.c.bulan==='2026-05'?'selected':''}>📅 Mei 2026</option>
+          <option value="2026-04" ${R.c.bulan==='2026-04'?'selected':''}>📅 Apr 2026</option>
+          <option value="2026-03" ${R.c.bulan==='2026-03'?'selected':''}>📅 Mar 2026</option>
+          <option value="2026-02" ${R.c.bulan==='2026-02'?'selected':''}>📅 Feb 2026</option>
+          <option value="2026-01" ${R.c.bulan==='2026-01'?'selected':''}>📅 Jan 2026</option>
+        </select>
       </div>
       <span class="pill prog" id="payrollEditBadge" style="font-size:11.5px">✏️ Mode Edit Aktif</span>
       <button class="btn sm pri" id="btnSavePayroll">💾 Simpan Perubahan</button>
@@ -4690,13 +4789,18 @@ function wire(R){
     const pkgTbody = document.getElementById("mdmPkgTbody");
     if (pkgTbody) {
       if (hist.topPaket && hist.topPaket.length > 0) {
-        pkgTbody.innerHTML = hist.topPaket.map((p, idx) => `
+        pkgTbody.innerHTML = hist.topPaket.map((p, idx) => {
+          const nm = p.nama || p.paket || "Paket";
+          const cnt = (p.count != null) ? p.count : ((p.qty != null) ? p.qty : 0);
+          const omz = (p.omzet != null) ? rp(p.omzet) : (cnt ? `${num(cnt)} tx` : "—");
+          return `
           <tr>
-            <td><span class="mono muted">#${idx + 1}</span> <b>${esc(p.paket)}</b></td>
-            <td class="n mono">${num(p.qty)} tx</td>
-            <td class="n mono" style="font-weight:600;color:var(--accent);">${rp(p.omzet)}</td>
+            <td><span class="mono muted">#${idx + 1}</span> <b>${esc(nm)}</b></td>
+            <td class="n mono">${num(cnt)} tx</td>
+            <td class="n mono" style="font-weight:600;color:var(--accent);">${omz}</td>
           </tr>
-        `).join("");
+        `;
+        }).join("");
       } else {
         pkgTbody.innerHTML = `<tr><td colspan="3" class="muted tc">Tidak ada rincian paket</td></tr>`;
       }
@@ -4710,22 +4814,36 @@ function wire(R){
       if (rosterList && rosterList.length > 0) {
         crewTbody.innerHTML = rosterList.map(r => `
           <tr>
-            <td><b>${esc(r.nama || '—')}</b><br><span class="tiny muted">${esc(r.posisi || 'Kru')}</span></td>
-            <td class="n mono">${num(r.shift || 0)} shift</td>
+            <td><b>${esc(r.nama || '—')}</b><br><span class="tiny muted">${esc(r.job || r.posisi || 'Kru')}</span></td>
+            <td class="n mono">${num(r.q || r.shift || 0)} shift</td>
             <td class="n mono" style="color:var(--good);font-weight:600;">${rp(r.thp || r.total_gaji || 0)}</td>
           </tr>
         `).join("");
-      } else if (hist.crewShifts && hist.crewShifts.length > 0) {
-        crewTbody.innerHTML = hist.crewShifts.map(c => `
+      } else if (hist.crewShifts && typeof hist.crewShifts === "object") {
+        crewTbody.innerHTML = Object.entries(hist.crewShifts).map(([nm, sh]) => `
           <tr>
-            <td><b>${esc(c.nama)}</b></td>
-            <td class="n mono">${num(c.shifts)} shift</td>
+            <td><b>${esc(nm)}</b></td>
+            <td class="n mono">${num(sh)} shift</td>
             <td class="n mono muted">—</td>
           </tr>
         `).join("");
       } else {
         crewTbody.innerHTML = `<tr><td colspan="3" class="muted tc">Roster kru tidak tercatat</td></tr>`;
       }
+    }
+
+    const btnOpenFull = document.getElementById("btnModalOpenFullDash");
+    if (btnOpenFull) {
+      btnOpenFull.textContent = `👉 Buka Dashboard Penuh ${hist.label} ➔`;
+      btnOpenFull.onclick = () => {
+        activeMonth = hist.iso;
+        estMonth = m;
+        view = "dash";
+        modal.classList.remove("open");
+        render();
+        window.scrollTo({top: 0, behavior: "smooth"});
+        showToast(`📊 Membuka Dashboard Penuh ${hist.label}`, "ok", 2500);
+      };
     }
 
     modal.classList.add("open");
@@ -4744,26 +4862,45 @@ function wire(R){
   }
 
   // Interaksi 12 Kotak Bulan di Section Tahunan
-  document.querySelectorAll(".month-card, .btn-go-month").forEach(el => {
+  document.querySelectorAll(".btn-go-month").forEach(el => {
     el.onclick = (e) => {
       e.stopPropagation();
       const m = +el.dataset.month;
-      if (m === 10) {
-        activeMonth = "2026-10";
-        estMonth = 10;
+      if (m >= 1 && m <= 10) {
+        const iso = `2026-${String(m).padStart(2, "0")}`;
+        activeMonth = iso;
+        estMonth = m;
         view = "dash";
         render();
         window.scrollTo({top: 0, behavior: "smooth"});
-        showToast("📅 Membuka Dashboard Live Oktober 2026", "ok", 3000);
-      } else if (m === 9) {
-        activeMonth = "2026-09";
-        estMonth = 9;
+        showToast(`📊 Membuka Dashboard Penuh ${BULAN[m - 1]} 2026`, "ok", 2500);
+      } else {
+        const bln = BULAN[m - 1] || "";
+        showToast(`ℹ️ Bulan ${bln} 2026 belum dicocokkan.`, "neutral", 3500);
+      }
+    };
+  });
+
+  document.querySelectorAll(".btn-modal-month").forEach(el => {
+    el.onclick = (e) => {
+      e.stopPropagation();
+      const m = +el.dataset.month;
+      openMonthModal(m);
+    };
+  });
+
+  document.querySelectorAll(".month-card").forEach(el => {
+    el.onclick = (e) => {
+      if (e.target.closest("button")) return;
+      const m = +el.dataset.month;
+      if (m >= 1 && m <= 10) {
+        const iso = `2026-${String(m).padStart(2, "0")}`;
+        activeMonth = iso;
+        estMonth = m;
         view = "dash";
         render();
         window.scrollTo({top: 0, behavior: "smooth"});
-        showToast("📊 Membuka Dashboard Rekap September 2026", "ok", 2500);
-      } else if (m >= 1 && m <= 8) {
-        openMonthModal(m);
+        showToast(`📊 Membuka Dashboard Penuh ${BULAN[m - 1]} 2026`, "ok", 2500);
       } else {
         const bln = BULAN[m - 1] || "";
         showToast(`ℹ️ Bulan ${bln} 2026 belum dicocokkan.`, "neutral", 3500);

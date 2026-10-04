@@ -133,6 +133,8 @@ def parse_historical_months(neraca_path="file_neraca.xlsx", force_reparse=False)
     historical_months = {}
     neraca_by_month = {}
     roster_gaji_by_month = {}
+    all_historical_orders = []
+    all_historical_shifts = []
 
     for cfg in HISTORICAL_CONFIG:
         m_no = str(cfg["no"])
@@ -155,6 +157,9 @@ def parse_historical_months(neraca_path="file_neraca.xlsx", force_reparse=False)
         shifts = res_lo.get("shifts", [])
         leads = res_lo.get("leads", [])
         kpi = res_lo.get("kpi", [])
+
+        all_historical_orders.extend(orders)
+        all_historical_shifts.extend(shifts)
 
         # Top Packages
         pkg_counts = {}
@@ -234,7 +239,9 @@ def parse_historical_months(neraca_path="file_neraca.xlsx", force_reparse=False)
     res_payload = {
         "historicalMonths": historical_months,
         "neracaByMonth": neraca_by_month,
-        "rosterGajiByMonth": roster_gaji_by_month
+        "rosterGajiByMonth": roster_gaji_by_month,
+        "historicalOrders": all_historical_orders,
+        "historicalShifts": all_historical_shifts
     }
 
     try:

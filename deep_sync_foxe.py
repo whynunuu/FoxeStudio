@@ -228,6 +228,9 @@ def run_integration():
         # Gabungkan Neraca bulanan dan Roster Gaji bulanan
         for iso_key, nrc_data in hist_res.get("neracaByMonth", {}).items():
             state["neracaByMonth"][iso_key] = nrc_data
+            if nrc_data and "expenses" in nrc_data:
+                all_expenses.extend(nrc_data["expenses"])
+        state["expenses"] = all_expenses
         for iso_key, rg_data in hist_res.get("rosterGajiByMonth", {}).items():
             state["rosterGajiByMonth"][iso_key] = rg_data
 
@@ -267,8 +270,10 @@ def run_integration():
             ]
         state["config"] = cfg
         state["oktoberLogOrder"] = res_f1_okt
-        state["orders"] = res_f1["orders"] + res_f1_okt["orders"]
-        state["shifts"] = res_f1["shifts"] + res_f1_okt["shifts"]
+        hist_orders = hist_res.get("historicalOrders", [])
+        hist_shifts = hist_res.get("historicalShifts", [])
+        state["orders"] = hist_orders + res_f1["orders"] + res_f1_okt["orders"]
+        state["shifts"] = hist_shifts + res_f1["shifts"] + res_f1_okt["shifts"]
         state["cashControl"] = res_f1["cashControl"] + res_f1_okt["cashControl"]
         state["leads"] = res_f1["leads"] + [l for l in res_f1_okt["leads"] if l.get("transaksi") or l.get("dp") or l.get("leads")]
         state["kpi"] = res_f1["kpi"]
