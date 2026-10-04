@@ -683,6 +683,22 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
 
 <div class="toast" id="toast"></div>
 
+<!-- Modal Konfirmasi Edit/Input Data -->
+<div class="modal-overlay" id="confirmDialogModal" style="z-index:9999;">
+  <div class="modal-box" style="max-width:410px;text-align:center;padding:26px 22px;border-radius:16px;background:var(--surface);box-shadow:0 24px 60px rgba(0,0,0,0.55);border:1px solid var(--hairline-strong);">
+    <div style="width:52px;height:52px;border-radius:50%;background:color-mix(in srgb,var(--warn) 15%,transparent);border:1.5px solid var(--warn);display:inline-flex;align-items:center;justify-content:center;margin:0 auto 14px auto;">
+      <span style="font-size:24px;">⚠️</span>
+    </div>
+    <h3 id="confirmDialogTitle" style="font-size:18px;font-weight:700;color:var(--ink);margin:0 0 8px 0;line-height:1.35;">Konfirmasi</h3>
+    <p id="confirmDialogMessage" style="font-size:14.5px;color:var(--ink);margin:0 0 14px 0;line-height:1.5;font-weight:600;">Kamu yakin untuk menginput/mengubah data ini?</p>
+    <div id="confirmDialogDetail" style="font-size:12px;color:var(--ink2);background:var(--surface2);border:1px solid var(--hairline);border-radius:8px;padding:9px 12px;margin:0 0 18px 0;text-align:left;line-height:1.45;display:none;"></div>
+    <div style="display:flex;gap:10px;justify-content:center;">
+      <button class="btn" id="btnConfirmNo" type="button" style="flex:1;padding:10px 16px;font-size:13.5px;font-weight:600;border:1px solid var(--hairline-strong);background:var(--surface2);color:var(--muted);border-radius:8px;cursor:pointer;">No</button>
+      <button class="btn pri" id="btnConfirmYes" type="button" style="flex:1;padding:10px 16px;font-size:13.5px;font-weight:600;background:var(--accent);color:#fff;border-radius:8px;cursor:pointer;">Yes</button>
+    </div>
+  </div>
+</div>
+
 <!-- Modal Sinkronisasi Data -->
 <div class="modal-overlay" id="syncModal">
   <div class="modal-box">
@@ -4701,16 +4717,114 @@ function vSet(R){
   </div>`;
 }
 
+/* ============================ modal konfirmasi universal ============================ */
+function confirmAction({
+  title = "Konfirmasi Perubahan",
+  message = "Kamu yakin untuk menginput/mengubah data ini?",
+  detail = "",
+  yesText = "Yes",
+  noText = "No"
+} = {}) {
+  return new Promise((resolve) => {
+    const modal = document.getElementById("confirmDialogModal");
+    if (!modal) {
+      const ok = window.confirm(message);
+      return resolve(ok);
+    }
+    const titleEl = document.getElementById("confirmDialogTitle");
+    const msgEl = document.getElementById("confirmDialogMessage");
+    const detailEl = document.getElementById("confirmDialogDetail");
+    const btnYes = document.getElementById("btnConfirmYes");
+    const btnNo = document.getElementById("btnConfirmNo");
+
+    if (titleEl) titleEl.textContent = title;
+    if (msgEl) msgEl.textContent = message;
+    if (detailEl) {
+      if (detail) {
+        detailEl.innerHTML = detail;
+        detailEl.style.display = "block";
+      } else {
+        detailEl.style.display = "none";
+      }
+    }
+    if (btnYes) btnYes.textContent = yesText;
+    if (btnNo) btnNo.textContent = noText;
+
+    modal.classList.add("open");
+
+    const cleanup = () => {
+      modal.classList.remove("open");
+      btnYes.onclick = null;
+      btnNo.onclick = null;
+      document.removeEventListener("keydown", onKey);
+      modal.onclick = null;
+    };
+
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        cleanup();
+        resolve(false);
+      } else if (e.key === "Enter") {
+        cleanup();
+        resolve(true);
+      }
+    };
+
+    btnYes.onclick = () => {
+      cleanup();
+      resolve(true);
+    };
+
+    btnNo.onclick = () => {
+      cleanup();
+      resolve(false);
+    };
+
+    modal.onclick = (e) => {
+      if (e.target === modal) {
+        cleanup();
+        resolve(false);
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+    setTimeout(() => { if (btnYes) btnYes.focus(); }, 60);
+  });
+}
+
 /* ============================ interaksi ============================ */
 function wire(R){
-  document.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{
-    const col=b.dataset.del,id=b.dataset.id;
-    S[col]=S[col].filter(x=>x.id!==id);
+  document.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => {
+    const col = b.dataset.del, id = b.dataset.id;
+    const confirmed = await confirmAction({
+      title: "Konfirmasi Hapus Data",
+      message: "Kamu yakin untuk menginput/mengubah data ini?",
+      detail: "Data yang dipilih akan dihapus dari pembukuan sesi ini.",
+      yesText: "Yes",
+      noText: "No"
+    });
+    if (!confirmed) return;
+    S[col] = S[col].filter(x => x.id !== id);
     saveLocal();
-    render();});
+    render();
+    showToast("Data berhasil dihapus.", "neutral", 2000);
+  });
 
-  const F=(id,fn)=>{const f=document.getElementById(id);if(f)f.onsubmit=e=>{e.preventDefault();
-    const d=Object.fromEntries(new FormData(f).entries());fn(d,f);};};
+  const F = (id, fn) => {
+    const f = document.getElementById(id);
+    if (f) f.onsubmit = async (e) => {
+      e.preventDefault();
+      const confirmed = await confirmAction({
+        title: "Konfirmasi Simpan Data",
+        message: "Kamu yakin untuk menginput/mengubah data ini?",
+        yesText: "Yes",
+        noText: "No"
+      });
+      if (!confirmed) return;
+      const d = Object.fromEntries(new FormData(f).entries());
+      fn(d, f);
+    };
+  };
 
   F("fTrx",(d,f)=>{const rec={id:uid(),tanggal:d.tanggal,client:d.client.trim(),paket:npak(d.paket),
     tanggalFoto:d.tanggalFoto||null,cash:dnum(d.cash),transfer:dnum(d.transfer),
@@ -5307,12 +5421,40 @@ function wire(R){
 
   // Event listener untuk input shift (pi-q)
   document.querySelectorAll('.pi-q').forEach(inp => {
+    inp.onfocus = function() {
+      this.dataset.origVal = this.value;
+    };
     inp.oninput = recalculatePayroll;
+    inp.onchange = async function() {
+      const oldVal = parseFloat(this.dataset.origVal) || 0;
+      const newVal = parseFloat(this.value) || 0;
+      if (oldVal !== newVal) {
+        const row = this.closest('.payroll-row');
+        const kruName = row ? (row.querySelector('b')?.textContent || 'Kru') : 'Kru';
+        const confirmed = await confirmAction({
+          title: "Konfirmasi Perubahan Shift",
+          message: "Kamu yakin untuk menginput/mengubah data ini?",
+          detail: `Ubah shift <b>${kruName}</b> dari <b>${oldVal}</b> menjadi <b>${newVal}</b> shift.`,
+          yesText: "Yes",
+          noText: "No"
+        });
+        if (confirmed) {
+          this.dataset.origVal = String(newVal);
+          recalculatePayroll();
+          showToast("✅ Data shift berhasil diperbarui!", "ok", 2000);
+        } else {
+          this.value = oldVal;
+          recalculatePayroll();
+          showToast("Perubahan shift dibatalkan.", "neutral", 2000);
+        }
+      }
+    };
   });
 
   // Event listener untuk input moneter rupiah (.payroll-currency)
   document.querySelectorAll('.payroll-currency').forEach(inp => {
     inp.onfocus = function() {
+      this.dataset.origVal = this.value;
       this.select();
     };
     inp.oninput = function() {
@@ -5332,34 +5474,98 @@ function wire(R){
       this.value = 'Rp ' + num.toLocaleString('id-ID');
       recalculatePayroll();
     };
+    inp.onchange = async function() {
+      const oldNum = parseRupiahInput(this.dataset.origVal);
+      const newNum = parseRupiahInput(this.value);
+      if (oldNum !== newNum) {
+        const row = this.closest('.payroll-row');
+        const kruName = row ? (row.querySelector('b')?.textContent || 'Kru') : 'Kru';
+        const fieldName = this.title || this.dataset.field || 'Nominal';
+        const confirmed = await confirmAction({
+          title: "Konfirmasi Perubahan Gaji",
+          message: "Kamu yakin untuk menginput/mengubah data ini?",
+          detail: `Ubah <b>${fieldName}</b> untuk <b>${kruName}</b> dari <b>${formatRupiahInput(oldNum)}</b> menjadi <b>${formatRupiahInput(newNum)}</b>.`,
+          yesText: "Yes",
+          noText: "No"
+        });
+        if (confirmed) {
+          this.dataset.origVal = formatRupiahInput(newNum);
+          this.value = formatRupiahInput(newNum);
+          recalculatePayroll();
+          showToast("✅ Perubahan gaji berhasil disimpan!", "ok", 2000);
+        } else {
+          this.value = formatRupiahInput(oldNum);
+          recalculatePayroll();
+          showToast("Perubahan dibatalkan.", "neutral", 2000);
+        }
+      }
+    };
   });
 
   document.querySelectorAll('.payroll-status-select').forEach(sel => {
-    sel.onchange = () => {
-      const id = sel.dataset.id;
-      const r = PL.find(x => x.id === id);
-      if (r) {
-        r.status = sel.value;
-        try {
-          persistPay();
-          saveLocal();
-        } catch (e) {}
+    sel.onfocus = function() {
+      this.dataset.origVal = this.value;
+    };
+    sel.onchange = async () => {
+      const oldVal = sel.dataset.origVal || sel.value;
+      const newVal = sel.value;
+      if (oldVal !== newVal) {
+        const row = sel.closest('.payroll-row');
+        const kruName = row ? (row.querySelector('b')?.textContent || 'Kru') : 'Kru';
+        const confirmed = await confirmAction({
+          title: "Konfirmasi Status Penggajian",
+          message: "Kamu yakin untuk menginput/mengubah data ini?",
+          detail: `Ubah status penggajian <b>${kruName}</b> dari <b>${oldVal}</b> menjadi <b>${newVal}</b>.`,
+          yesText: "Yes",
+          noText: "No"
+        });
+        if (confirmed) {
+          sel.dataset.origVal = newVal;
+          const id = sel.dataset.id;
+          const r = PL.find(x => x.id === id);
+          if (r) {
+            r.status = newVal;
+            try {
+              persistPay();
+              saveLocal();
+            } catch (e) {}
+            showToast(`✅ Status ${kruName} diubah ke ${newVal}`, "ok", 2000);
+          }
+        } else {
+          sel.value = oldVal;
+        }
       }
     };
   });
 
   const btnSavePay = document.getElementById('btnSavePayroll');
   if (btnSavePay) {
-    btnSavePay.onclick = () => {
-      recalculatePayroll();
-      showToast('💾 Perubahan slip gaji berhasil disimpan!', 'ok', 2500);
+    btnSavePay.onclick = async () => {
+      const confirmed = await confirmAction({
+        title: "Simpan Perubahan Penggajian",
+        message: "Kamu yakin untuk menginput/mengubah data ini?",
+        detail: "Seluruh penyesuaian tarif, shift, bonus, denda, dan kasbon bulan ini akan disimpan.",
+        yesText: "Yes",
+        noText: "No"
+      });
+      if (confirmed) {
+        recalculatePayroll();
+        showToast('💾 Perubahan slip gaji berhasil disimpan!', 'ok', 2500);
+      }
     };
   }
 
   const btnResetPay = document.getElementById('btnResetPayroll');
   if (btnResetPay) {
-    btnResetPay.onclick = () => {
-      if (confirm('Kembalikan data penggajian ke acuan default Neraca?')) {
+    btnResetPay.onclick = async () => {
+      const confirmed = await confirmAction({
+        title: "Reset Data Penggajian",
+        message: "Kamu yakin untuk menginput/mengubah data ini?",
+        detail: "Semua penyesuaian penggajian akan dikembalikan ke acuan default Neraca.",
+        yesText: "Yes",
+        noText: "No"
+      });
+      if (confirmed) {
         localStorage.removeItem('foxe_payroll_custom_' + (S.config ? S.config.bulan : '2026-09'));
         S.rosterGaji = JSON.parse(JSON.stringify(INITIAL_STATE.rosterGaji || []));
         saveLocal();
@@ -5371,12 +5577,21 @@ function wire(R){
 
   const btnAddPay = document.getElementById('btnAddPayrollRow');
   if (btnAddPay) {
-    btnAddPay.onclick = () => {
+    btnAddPay.onclick = async () => {
       const nama = prompt('Masukkan nama kru baru:');
       if (!nama || !nama.trim()) return;
       const job = prompt('Masukkan jabatan/role (contoh: Fotografer, Admin, Freelance):', 'Freelance') || 'Freelance';
       const cost = parseRupiahInput(prompt('Tarif per shift atau gaji bulanan (Rp):', 'Rp 40.000')) || 40000;
       const q = parseFloat(prompt('Jumlah shift / qty:', '1')) || 1;
+      
+      const confirmed = await confirmAction({
+        title: "Tambah Kru Baru",
+        message: "Kamu yakin untuk menginput/mengubah data ini?",
+        detail: `Kru: <b>${nama.trim().toUpperCase()}</b> (${job})<br>Tarif: <b>${formatRupiahInput(cost)}</b> · Shift: <b>${q}</b>`,
+        yesText: "Yes",
+        noText: "No"
+      });
+      if (!confirmed) return;
       
       const newR = {
         id: 'pay_' + Date.now(),
@@ -5402,13 +5617,21 @@ function wire(R){
   }
 
   document.querySelectorAll('.btn-del-payroll').forEach(btn => {
-    btn.onclick = () => {
+    btn.onclick = async () => {
       const id = btn.dataset.id;
       const r = PL.find(x => x.id === id);
-      if (confirm(`Hapus ${r ? r.nama : 'kru ini'} dari daftar penggajian bulan ini?`)) {
+      const confirmed = await confirmAction({
+        title: "Hapus Kru",
+        message: "Kamu yakin untuk menginput/mengubah data ini?",
+        detail: `Menghapus <b>${r ? r.nama : 'kru ini'}</b> dari daftar penggajian bulan ini.`,
+        yesText: "Yes",
+        noText: "No"
+      });
+      if (confirmed) {
         S.rosterGaji = (S.rosterGaji || []).filter(x => x.id !== id);
         recalculatePayroll();
         render();
+        showToast("Kru berhasil dihapus.", "neutral", 2000);
       }
     };
   });
@@ -6144,8 +6367,15 @@ function wireSyncEvents() {
   }
 
   if (btnRemoveToken) {
-    btnRemoveToken.onclick = () => {
-      if (confirm("Hapus token GitHub dari browser ini?")) {
+    btnRemoveToken.onclick = async () => {
+      const confirmed = await confirmAction({
+        title: "Hapus Token GitHub",
+        message: "Kamu yakin untuk menginput/mengubah data ini?",
+        detail: "Token GitHub yang tersimpan di browser ini akan dihapus.",
+        yesText: "Yes",
+        noText: "No"
+      });
+      if (confirmed) {
         localStorage.removeItem(GITHUB_TOKEN_KEY);
         updateTokenUI();
         showToast("Token GitHub telah dihapus.");
