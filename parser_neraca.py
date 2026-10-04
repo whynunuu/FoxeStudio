@@ -20,43 +20,47 @@ NERACA_SHEET_ID = "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM"
 def classify_expense(desc):
     d = str(desc or "").lower().strip()
     
-    # 1. COGS (Biaya Langsung Produksi / Paket / Sesi Foto)
-    if any(k in d for k in ["cetak", "print"]):
+    # 1. COGS (Biaya Langsung Produksi / Paket / Sesi Foto / Vendor)
+    if any(k in d for k in ["cetak", "print", "add packing"]):
         return "COGS", "Cetak Foto & Photo Paper"
-    if "frame" in d or "bingkai" in d or "album" in d:
+    if any(k in d for k in ["frame", "bingkai", "album"]):
         return "COGS", "Frame / Album / Packaging"
-    if any(k in d for k in ["batrei", "baterai", "rent batrei", "sewa batrei"]):
+    if any(k in d for k in ["batre", "baterai", "battery", "rent batrei", "sewa batrei", "reflektor", "properti"]):
         return "COGS", "Properti / Consumable Sesi"
-    if "rent equipment" in d or "sewa alat" in d:
-        return "COGS", "Outsource / Freelancer Produksi"
-    if any(k in d for k in ["freelance", "ruslan", "camera", "fg "]):
-        return "COGS", "Outsource / Freelancer Produksi"
+    if any(k in d for k in ["freelance", "ruslan", "camera", "fg ", "rent equipment", "sewa alat", "mua", "makeup"]):
+        return "COGS", "Outsource / Freelancer & Vendor"
         
     # 2. OPEX (Biaya Operasional Studio Rutin)
-    if "listrik" in d:
+    if any(k in d for k in ["listrik", "pdam", "air"]):
         return "OPEX", "Listrik & Air"
-    if "wifi" in d or "internet" in d:
+    if any(k in d for k in ["wifi", "internet", "kuota"]):
         return "OPEX", "Internet & Telekomunikasi"
-    if "ads" in d or "iklan" in d:
+    if any(k in d for k in ["ads", "iklan", "kol", "endorse", "meta", "instagram"]):
         return "OPEX", "Marketing / Ads / KOL"
-    if any(k in d for k in ["makan", "sarapan", "konsumsi", "snack"]):
+    if any(k in d for k in ["makan", "sarapan", "konsumsi", "snack", "kopi"]):
         return "OPEX", "Konsumsi Crew"
-    if "adobe" in d or "software" in d or "subscription" in d:
+    if any(k in d for k in ["adobe", "software", "subscription", "claude", "chatgpt", "canva", "midjourney", "openai", "domain"]):
         return "OPEX", "Software / Subscription"
-    if any(k in d for k in ["cat limbo", "paralon", "maintenance", "dop", "perbaikan"]):
+    if any(k in d for k in ["cat limbo", "paralon", "maintenance", "dop", "perbaikan", "service", "serv ", "ac ", "exhaust", "curtain", "closet", "colokan", "fitting"]):
         return "OPEX", "Maintenance Studio & Equipment"
-    if any(k in d for k in ["galon", "parfum", "cleaning", "tissue", "kebersihan"]):
+    if any(k in d for k in ["galon", "parfum", "cleaning", "tissue", "kebersihan", "baygon", "wd cleaner", "lakban", "atk", "sticky", "stiky", "protektor"]):
         return "OPEX", "Office & Cleaning Supplies"
+    if any(k in d for k in ["gosend", "kurir", "ongkir", "ekspedisi", "jne", "j&t"]):
+        return "OPEX", "Pengiriman & Logistik"
+    if any(k in d for k in ["bensin", "genset", "parkir"]):
+        return "OPEX", "Transport & Operasional Lapangan"
+    if any(k in d for k in ["biaya admin", "admin bank", "bunga"]):
+        return "OPEX", "Biaya Admin Bank & Finansial"
+    if "pajak" in d:
+        return "OPEX", "Pajak & Perizinan"
     if "gaji" in d:
         return "OPEX", "Gaji Admin & Fotografer"
         
-    # 3. Non-PL / Lainnya
-    if "bon" in d:
+    # 3. Non-P&L / Lainnya
+    if any(k in d for k in ["bon", "prive", "draw"]):
         return "NON-P&L", "Prive / Owner Draw"
-    if "pajak" in d:
-        return "OPEX", "Pajak & Perizinan"
-    if "amal" in d:
-        return "Biaya Lainnya", "Biaya Lainnya"
+    if "amal" in d or "sedekah" in d:
+        return "Biaya Lainnya", "Amal & Sosial"
         
     return "OPEX", "OPEX Lainnya"
 
