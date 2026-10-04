@@ -35,9 +35,13 @@ temp_html = os.path.abspath('temp_orange.html')
 with open(temp_html, 'w', encoding='utf-8') as f:
     f.write(html_mod)
 
-chrome_path = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-if not os.path.exists(chrome_path):
-    chrome_path = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+chrome_candidates = [
+    os.path.expandvars(r"%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe"),
+    r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+    r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+    r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+]
+chrome_path = next((p for p in chrome_candidates if os.path.exists(p)), "chrome")
 
 out_png = os.path.abspath('temp_orange.png')
 cmd = [
