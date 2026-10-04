@@ -199,6 +199,13 @@ html:not([data-theme="dark"]) .brand .brand-img{filter:drop-shadow(0 1px 4px rgb
 .stat .bar{height:3px;border-radius:2px;background:var(--surface4);overflow:hidden;margin-top:5px}
 .stat .bar i{display:block;height:100%;background:var(--accent)}
 
+/* Custom Dark Scrollbar Universal */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--canvas)}
+::-webkit-scrollbar-thumb{background:var(--hairline-strong);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--muted-soft)}
+*{scrollbar-width:thin;scrollbar-color:var(--hairline-strong) var(--canvas)}
+
 table{width:100%;border-collapse:collapse;font-size:13.5px}
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x pan-y;border:1px solid var(--hairline);border-radius:12px;background:var(--surface);width:100%;max-width:100%;min-width:0;scrollbar-width:thin;scrollbar-color:var(--hairline-strong) var(--surface)}
 .tw::-webkit-scrollbar{height:6px;width:6px}
@@ -1810,74 +1817,55 @@ function kartuPembaruan(R){
       }
 
       alertOutcomeHtml = `
-      <div class="card" style="margin-top:12px;border:1.5px solid var(--crit);background:color-mix(in srgb,var(--crit) 10%,var(--surface));box-shadow:0 0 20px rgba(168,59,46,0.28);position:relative;overflow:hidden;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-          <div style="display:flex;align-items:center;gap:6px;font-weight:700;color:var(--crit);font-size:13px;text-transform:uppercase;letter-spacing:0.4px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--crit);flex-shrink:0;animation:pulseDot 1.4s infinite;">
+      <div class="card" style="margin-top:8px;padding:12px 14px;border:1.5px solid var(--crit);background:color-mix(in srgb,var(--crit) 8%,var(--surface));box-shadow:0 0 16px rgba(168,59,46,0.22);position:relative;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <div style="display:flex;align-items:center;gap:5px;font-weight:700;color:var(--crit);font-size:12px;text-transform:uppercase;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--crit);animation:pulseDot 1.4s infinite;">
               <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
               <line x1="12" y1="9" x2="12" y2="13"/>
               <line x1="12" y1="17" x2="12.01" y2="17"/>
             </svg>
-            <span>Alarm Beban ≥ 45%</span>
+            <span>Beban Operasional ≥ 45%</span>
           </div>
-          <span class="pill crit" style="font-weight:700;font-size:10.5px;padding:2px 7px;animation:pulseDot 1.6s infinite;">KRITIS: ${pct(outcomeRatio)}</span>
-        </div>
-        <p style="font-size:11.5px;color:var(--ink);line-height:1.4;margin-bottom:9px;">
-          Total beban operasional (COGS + OPEX) telah menyerap <b>${pct(outcomeRatio)}</b> dari total omzet, melampaui batas aman maksimal (45%).
-        </p>
-
-        <!-- Ringkasan Angka Beban -->
-        <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:7px;padding:8px 10px;display:flex;flex-direction:column;gap:3px;font-size:11px;font-family:var(--ff-mono);margin-bottom:10px;">
-          <div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Total Omzet</span><b>${rp(R.omzet)}</b></div>
-          <div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Beban COGS</span><span style="color:var(--crit);">${rp(R.cogs || 0)} (${pct(R.omzet?(R.cogs||0)/R.omzet:0)})</span></div>
-          <div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Beban OPEX</span><span style="color:var(--crit);">${rp(R.opex || 0)} (${pct(R.omzet?(R.opex||0)/R.omzet:0)})</span></div>
-          <div style="display:flex;justify-content:space-between;border-top:1px dashed var(--hairline-strong);padding-top:3px;"><span style="color:var(--ink);font-weight:600;">Total Beban</span><b style="color:var(--crit);">${rp(outcome)}</b></div>
+          <span class="pill crit" style="font-weight:700;font-size:10px;padding:1px 6px;">${pct(outcomeRatio)}</span>
         </div>
 
-        <!-- Tabel Menurun: Apa Saja yang Bengkak -->
-        <div style="border-top:1px dashed var(--hairline-strong);padding-top:8px;margin-bottom:10px;">
-          <div style="font-size:11px;font-weight:700;color:var(--crit);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px;display:flex;align-items:center;gap:4px;">
-            <span>📉</span><span>Rincian Biaya Paling Bengkak (Menurun):</span>
+        <!-- KPI Ringkas -->
+        <div style="display:flex;justify-content:space-between;align-items:baseline;font-size:10.5px;font-family:var(--ff-mono);margin-bottom:7px;padding:4px 6px;background:var(--surface2);border-radius:5px;border:1px solid var(--hairline);">
+          <span style="color:var(--muted);">Omzet ${rp(R.omzet)}</span>
+          <span style="color:var(--crit);font-weight:700;">Beban ${rp(outcome)}</span>
+        </div>
+
+        <!-- Top 3 Pos Paling Bengkak (Micro List) -->
+        <div style="margin-bottom:7px;">
+          <div style="font-size:10px;font-weight:700;color:var(--crit);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:4px;display:flex;justify-content:space-between;">
+            <span>📉 Top 3 Pos Bengkak</span>
+            <span style="color:var(--muted);font-weight:500;">Porsi</span>
           </div>
-          <div style="display:flex;flex-direction:column;gap:5px;max-height:220px;overflow-y:auto;padding-right:2px;">
-            ${topBengkak.slice(0, 5).map((tb, idx) => {
-              const pOmzet = R.omzet ? (tb.total / R.omzet) : 0;
-              const pOutcome = outcome ? (tb.total / outcome) : 0;
-              return `
-              <div style="background:var(--surface);border:1px solid var(--hairline);border-radius:6px;padding:6px 8px;display:flex;flex-direction:column;gap:2px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">
-                  <span style="font-size:11px;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-                    #${idx+1} ${esc(tb.kategori)}
-                  </span>
-                  <span class="pill ${tb.jenis==='COGS'?'warn':'crit'}" style="font-size:9px;padding:1px 5px;flex-shrink:0;">${tb.jenis}</span>
+          <div style="display:flex;flex-direction:column;gap:3px;font-size:10.5px;font-family:var(--ff-mono);">
+            ${topBengkak.slice(0, 3).map((tb, idx) => `
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;border-bottom:1px solid var(--hairline-soft);">
+                <span style="font-size:10.5px;font-family:var(--ff-body);color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:130px;" title="${esc(tb.kategori)}">
+                  ${idx+1}. ${esc(tb.kategori)}
+                </span>
+                <div style="display:flex;align-items:center;gap:4px;">
+                  <b style="color:var(--crit);font-size:10px;">${rp(tb.total)}</b>
+                  <span class="pill ${tb.jenis==='COGS'?'warn':'crit'}" style="font-size:8.5px;padding:0 4px;">${pct(R.omzet ? tb.total/R.omzet : 0)}</span>
                 </div>
-                <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;font-family:var(--ff-mono);">
-                  <b style="color:var(--crit);">${rp(tb.total)}</b>
-                  <span style="color:var(--muted);font-size:10px;">${pct(pOmzet)} omzet · ${pct(pOutcome)} beban</span>
-                </div>
-              </div>`;
-            }).join("")}
-          </div>
-        </div>
-
-        <!-- Rekomendasi Crosscheck -->
-        <div style="border-top:1px dashed var(--hairline-strong);padding-top:8px;display:flex;flex-direction:column;gap:5px;">
-          <div style="font-size:11px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:4px;">
-            <span>🔍</span><span>Rekomendasi Tindakan Crosscheck:</span>
-          </div>
-          <div style="font-size:10.5px;color:var(--ink2);line-height:1.4;display:flex;flex-direction:column;gap:4px;">
-            ${recList.map(rec => `
-              <div style="display:flex;align-items:flex-start;gap:5px;background:color-mix(in srgb,var(--surface) 80%,transparent);padding:4px 6px;border-radius:4px;border-left:2px solid var(--warn);">
-                <span>•</span>
-                <div>${rec}</div>
               </div>
             `).join("")}
           </div>
-          <button class="btn sm" onclick="nav('biaya')" style="margin-top:4px;width:100%;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px;background:var(--surface2);border-color:var(--hairline-strong);">
-            📋 Buka Buku Detail Neraca (Audit Transaksi) ➔
-          </button>
         </div>
 
+        <!-- Rekomendasi Crosscheck (Top 2 Aksi) -->
+        <div style="font-size:10px;color:var(--ink2);line-height:1.35;background:color-mix(in srgb,var(--surface) 65%,transparent);border-left:2px solid var(--warn);padding:4px 6px;border-radius:0 4px 4px 0;margin-bottom:6px;">
+          <div style="font-weight:700;color:var(--ink);margin-bottom:2px;">🔍 Rekomendasi Cross-Check:</div>
+          ${recList.slice(0, 2).map(r => `<div style="margin-bottom:2px;">• ${r}</div>`).join("")}
+        </div>
+
+        <button class="btn sm" onclick="nav('biaya')" style="width:100%;padding:4px 8px;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:5px;background:var(--surface2);">
+          📋 Buka Buku Neraca ➔
+        </button>
       </div>`;
     }
   }
