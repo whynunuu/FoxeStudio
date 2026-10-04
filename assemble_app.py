@@ -523,14 +523,24 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
   position:relative;cursor:pointer}
 .month-card:hover{border-color:var(--hairline-strong);transform:translateY(-3px);
   box-shadow:0 8px 24px rgba(0,0,0,0.12)}
-.month-card.active-month{border:1.5px solid var(--accent);
-  background:color-mix(in srgb,var(--accent) 4%,var(--surface));
-  box-shadow:0 0 24px rgba(0,101,184,0.18)}
+.month-card.active-month{border:2px solid #00f2fe;
+  background:radial-gradient(circle at top right, rgba(0,242,254,0.08), transparent 65%), color-mix(in srgb,var(--accent) 5%,var(--surface));
+  box-shadow:0 0 16px rgba(0,242,254,0.45), 0 0 35px rgba(16,185,129,0.28);
+  animation:neonPulse 3s infinite alternate ease-in-out;
+  position:relative}
+@keyframes neonPulse{
+  0%{border-color:#00f2fe;box-shadow:0 0 14px rgba(0,242,254,0.4),0 0 28px rgba(16,185,129,0.22)}
+  50%{border-color:#10b981;box-shadow:0 0 20px rgba(16,185,129,0.48),0 0 38px rgba(0,242,254,0.32)}
+  100%{border-color:#00f2fe;box-shadow:0 0 14px rgba(0,242,254,0.4),0 0 28px rgba(16,185,129,0.22)}
+}
+.pin-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;letter-spacing:0.6px;
+  padding:3px 9px;border-radius:20px;background:linear-gradient(135deg,rgba(0,242,254,0.16),rgba(16,185,129,0.18));
+  border:1px solid #00f2fe;color:#00f2fe;box-shadow:0 0 10px rgba(0,242,254,0.35);text-transform:uppercase}
 .month-card .mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap}
 .month-card .mname{font-family:var(--ff-display);font-size:22px;font-weight:700;letter-spacing:-.4px;
   color:var(--ink);display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.month-card .live-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;
-  box-shadow:0 0 8px var(--accent);animation:pulseDot 1.6s infinite}
+.month-card .live-dot{width:8px;height:8px;border-radius:50%;background:#00f2fe;display:inline-block;
+  box-shadow:0 0 8px #00f2fe;animation:pulseDot 1.6s infinite}
 @keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.25)}}
 .month-card .mmomentum{font-size:11.5px;color:var(--muted);margin-top:2px;font-weight:500;line-height:1.35}
 .month-card .mbody{display:flex;flex-direction:column;gap:11px;padding:11px 0;border-top:1px solid var(--hairline-soft);
@@ -2279,6 +2289,11 @@ function vTahunan(R) {
   const countVerified = realMonths.length;
   const sep25 = months.find(m => m.no === 9)?.omzet25 || 151036150;
 
+  // Urutan 12 Kotak: Pinned Bulan Aktif di paling pertama, lalu Januari, Februari, dst.
+  const activeMonthObj = months.find(m => m.isCurrent);
+  const otherMonths = months.filter(m => !m.isCurrent);
+  const displayMonths = activeMonthObj ? [activeMonthObj, ...otherMonths] : months;
+
   return `
   <div class="vhead"><div><div class="eyebrow">Tahun Fiskal ${yr} · Multi-Bulan &amp; Siklus Musiman</div>
     <h2>Laporan Tahunan &amp; Seasonality</h2></div>
@@ -2312,14 +2327,17 @@ function vTahunan(R) {
   <!-- Section 12 Kotak Bulan (Grid of 12 Month Cards) -->
   <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
     <div>
-      <h3 style="font-size:18px;font-weight:600;color:var(--ink);margin:0;">Ringkasan 12 Bulan Eksplisit (${yr})</h3>
-      <p class="tiny muted" style="margin-top:2px;">Klik pada kotak bulan mana saja untuk menuju ke laporan operasional &amp; neraca bulanan.</p>
+      <h3 style="font-size:18px;font-weight:600;color:var(--ink);margin:0;display:flex;align-items:center;gap:8px;">
+        Ringkasan 12 Bulan Eksplisit (${yr})
+        <span class="pill" style="font-size:11px;background:rgba(0,242,254,0.12);color:#00f2fe;border:1px solid rgba(0,242,254,0.4);">📌 Bulan Aktif di Depan</span>
+      </h3>
+      <p class="tiny muted" style="margin-top:2px;">Bulan aktif dipin di urutan pertama (highlight neon biru-ijo), diikuti urutan kalender Januari s.d. Desember.</p>
     </div>
     <span class="eyebrow">12 Kotak Interaktif</span>
   </div>
 
   <div class="mgrid">
-    ${months.map(m => {
+    ${displayMonths.map(m => {
       let subText = "";
       if (m.hist) {
         subText = `<span class="msub" style="color:var(--ink2);font-weight:500;">${num(m.hist.ordersCount)} orders · Cash ${rp(m.hist.cash)} | Trf ${rp(m.hist.transfer)}</span>
@@ -2333,12 +2351,14 @@ function vTahunan(R) {
       }
 
       let btnLabel = "";
-      if (m.hist) {
+      if (m.isCurrent) {
+        btnLabel = `👉 Buka Dashboard ${m.label} (Live) ➔`;
+      } else if (m.hist) {
         btnLabel = `👉 Buka Dashboard ${m.short} ➔`;
       } else if (m.no === 10) {
-        btnLabel = m.isCurrent ? "👉 Buka Dashboard Oktober (Live)" : "📅 Buka Dashboard Oktober (Live) ➔";
+        btnLabel = "📅 Buka Dashboard Oktober (Live) ➔";
       } else if (m.no === 9) {
-        btnLabel = m.isCurrent ? "👉 Buka Dashboard September (Rekap)" : "📊 Buka Dashboard September (Rekap) ➔";
+        btnLabel = "📊 Buka Dashboard September (Rekap) ➔";
       } else {
         btnLabel = "Belum Berjalan (—)";
       }
@@ -2346,8 +2366,14 @@ function vTahunan(R) {
       return `
       <div class="month-card ${m.isCurrent ? 'active-month' : ''}" data-month="${m.no}">
         <div class="mhead" style="display:flex;flex-direction:column;gap:5px;">
+          ${m.isCurrent ? `
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+              <span class="pin-badge">📌 PINNED · BULAN AKTIF</span>
+              <span class="tiny mono" style="color:#00f2fe;font-weight:700;letter-spacing:0.5px;">LIVE PULSE</span>
+            </div>
+          ` : ''}
           <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">
-            <span class="mname" style="font-size:21px;display:flex;align-items:center;gap:6px;">
+            <span class="mname" style="font-size:21px;display:flex;align-items:center;gap:6px;${m.isCurrent ? 'color:#00f2fe;' : ''}">
               ${m.label} ${yr} ${m.isCurrent ? '<i class="live-dot" title="Bulan Berjalan Live"></i>' : ''}
             </span>
             ${m.isOutcomeAlert ? `
@@ -2402,7 +2428,7 @@ function vTahunan(R) {
         </div>
 
         <div class="mfoot" style="display:flex;gap:6px;align-items:center;">
-          <button class="btn sm ${m.isCurrent ? 'pri' : ''} btn-go-month" data-month="${m.no}" style="flex:1;display:flex;justify-content:center;align-items:center;gap:6px;font-weight:600;">
+          <button class="btn sm ${m.isCurrent ? 'pri' : ''} btn-go-month" data-month="${m.no}" style="flex:1;display:flex;justify-content:center;align-items:center;gap:6px;font-weight:700;${m.isCurrent ? 'background:linear-gradient(135deg,#0088cc,#059669);border-color:#00f2fe;box-shadow:0 0 12px rgba(0,242,254,0.3);' : ''}">
             ${btnLabel}
           </button>
           ${m.hist ? `<button class="btn sm btn-modal-month" data-month="${m.no}" title="Lihat Ringkasan Neraca &amp; Roster" style="padding:4px 8px;font-size:11px;">🔍</button>` : ''}
