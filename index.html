@@ -427,14 +427,14 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
 
 /* ---------- lock screen (autentikasi studio) ---------- */
 .lock-screen{position:fixed;inset:0;z-index:99999;
-  background:radial-gradient(circle at 50% 35%, #22201d 0%, #100f0e 100%);
+  background:radial-gradient(circle at 50% 35%, #1e1d1a 0%, #0c0b0a 100%);
   display:flex;align-items:center;justify-content:center;padding:24px 16px;
-  overflow-y:auto;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.lock-card{width:100%;max-width:360px;margin:auto;background:rgba(27,26,24,0.95);
+  overflow-y:auto}
+.lock-card{width:100%;max-width:360px;margin:auto;background:#1a1917;
   border:1px solid rgba(0,128,200,0.4);
-  box-shadow:0 24px 48px rgba(0,0,0,0.7),0 0 32px rgba(0,128,200,0.18);
+  box-shadow:0 24px 48px rgba(0,0,0,0.8),0 0 24px rgba(0,128,200,0.15);
   border-radius:24px;padding:32px 24px;text-align:center;color:#faf9f5;
-  animation:lockFadeIn .35s cubic-bezier(0.16,1,0.3,1)}
+  animation:lockFadeIn .25s ease-out}
 @keyframes lockFadeIn{from{opacity:0;transform:scale(0.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .lock-logo{margin-bottom:14px;display:inline-flex;filter:drop-shadow(0 2px 10px rgba(0,128,200,0.45))}
 .lock-title{font-family:var(--ff-display,serif);font-size:29px;font-weight:700;letter-spacing:-.5px;color:#faf9f5;margin-bottom:3px}
@@ -620,7 +620,7 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
 </head>
 <body>
 
-<div id="lockScreen" class="lock-screen" style="display:none">
+<div id="lockScreen" class="lock-screen" style="display:flex">
   <div class="lock-card">
     <div class="lock-logo" style="margin-bottom:14px">
       <img src="logo_foxe.png" alt="Foxe Studio" style="height:44px;width:auto;max-width:210px;object-fit:contain;filter:brightness(1.1) drop-shadow(0 4px 14px rgba(0,85,184,0.35))">
@@ -660,7 +660,7 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
   </div>
 </div>
 
-<div class="app" id="appShell">
+<div class="app" id="appShell" style="display:none">
   <aside class="rail" id="rail">
     <div class="brand">
       <div class="brand-txt">
@@ -6470,25 +6470,49 @@ const VALID_HASHES = [
 ];
 
 // ============================ AUTO-LOCK IDLE & BRUTE-FORCE LIMITER ============================
-let idleTimeoutMinutes = parseInt(localStorage.getItem("foxe_idle_timeout") || "10", 10);
+let idleTimeoutMinutes = (() => {
+  try {
+    const val = localStorage.getItem("foxe_idle_timeout");
+    return val !== null ? parseInt(val, 10) : 10;
+  } catch(e) {
+    return 10;
+  }
+})();
+
 let idleTimer = null;
 let lastActiveTimestamp = Date.now();
+let lastThrottledActivity = 0;
+let isLockedState = true;
+let dashboardRendered = false;
 
-let failedPinAttempts = parseInt(sessionStorage.getItem("foxe_failed_pin_attempts") || "0", 10);
-let lockoutUntil = parseInt(sessionStorage.getItem("foxe_pin_lockout_until") || "0", 10);
+let failedPinAttempts = (() => {
+  try {
+    return parseInt(sessionStorage.getItem("foxe_failed_pin_attempts") || "0", 10);
+  } catch(e) {
+    return 0;
+  }
+})();
+
+let lockoutUntil = (() => {
+  try {
+    return parseInt(sessionStorage.getItem("foxe_pin_lockout_until") || "0", 10);
+  } catch(e) {
+    return 0;
+  }
+})();
+
 let lockoutInterval = null;
 
 function isDashboardLocked() {
-  const lock = document.getElementById("lockScreen");
-  return lock && lock.style.display !== "none";
+  return isLockedState;
 }
 
 function resetIdleTimer() {
   lastActiveTimestamp = Date.now();
   if (idleTimer) clearTimeout(idleTimer);
-  if (idleTimeoutMinutes > 0 && !isDashboardLocked()) {
+  if (idleTimeoutMinutes > 0 && !isLockedState) {
     idleTimer = setTimeout(() => {
-      if (!isDashboardLocked()) {
+      if (!isLockedState) {
         lockDashboard();
         showToast("🔒 Sesi terkunci otomatis karena tidak ada aktivitas (Idle Timeout).", "neutral", 4000);
       }
@@ -6496,11 +6520,22 @@ function resetIdleTimer() {
   }
 }
 
-// Activity listeners
+// Activity listeners dengan THROTTLING cerdas (bebas lag 60fps)
 if (typeof window !== "undefined") {
-  ["mousedown", "mousemove", "keydown", "touchstart", "scroll", "click"].forEach(evt => {
+  // Klik & ketik di dalam aplikasi mereset idle timer langsung
+  ["mousedown", "keydown", "touchstart", "click"].forEach(evt => {
     window.addEventListener(evt, () => {
-      if (Date.now() - lastActiveTimestamp > 3000) {
+      if (!isLockedState) resetIdleTimer();
+    }, { passive: true });
+  });
+
+  // Mousemove & Scroll dibatasi maksimal 1x per 10 detik dan TIDAK berjalan saat layar terkunci
+  ["mousemove", "scroll"].forEach(evt => {
+    window.addEventListener(evt, () => {
+      if (isLockedState) return;
+      const now = Date.now();
+      if (now - lastThrottledActivity > 10000) {
+        lastThrottledActivity = now;
         resetIdleTimer();
       }
     }, { passive: true });
@@ -6509,12 +6544,12 @@ if (typeof window !== "undefined") {
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) {
       if (idleTimeoutMinutes > 0 && (Date.now() - lastActiveTimestamp > idleTimeoutMinutes * 60 * 1000)) {
-        if (!isDashboardLocked()) {
+        if (!isLockedState) {
           lockDashboard();
           showToast("🔒 Sesi terkunci otomatis saat tab ditinggalkan.", "neutral", 4000);
         }
       } else {
-        resetIdleTimer();
+        if (!isLockedState) resetIdleTimer();
       }
     }
   });
@@ -6645,8 +6680,12 @@ async function verifyPin() {
     sessionStorage.removeItem("foxe_failed_pin_attempts");
     sessionStorage.removeItem("foxe_pin_lockout_until");
     clearLockoutUI();
-    recordAccessSession();
-    resetIdleTimer();
+    try {
+      if (!sessionStorage.getItem("foxe_access_recorded")) {
+        recordAccessSession();
+        sessionStorage.setItem("foxe_access_recorded", "1");
+      }
+    } catch(e){}
     unlockDashboard();
   } else {
     failedPinAttempts++;
@@ -6683,24 +6722,46 @@ async function verifyPin() {
   }
 }
 
-function unlockDashboard() {
+// UNLOCK DASHBOARD: Lazy render jika belum pernah dirender
+function unlockDashboard(immediate = false) {
+  isLockedState = false;
   const lock = document.getElementById("lockScreen");
-  const appEl = document.querySelector(".app");
-  if (lock) {
-    lock.style.transition = "opacity 0.25s ease, transform 0.25s ease";
-    lock.style.opacity = "0";
-    lock.style.transform = "scale(1.04)";
-    setTimeout(() => {
-      lock.style.display = "none";
-      if (appEl) {
-        appEl.style.filter = "none";
-        appEl.style.pointerEvents = "auto";
-      }
-    }, 250);
+  const appEl = document.getElementById("appShell") || document.querySelector(".app");
+
+  // DEFERRED LAZY RENDER: Render dashboard hanya setelah user memasukkan PIN yang benar
+  if (!dashboardRendered) {
+    try {
+      wireSyncEvents();
+      render();
+      dashboardRendered = true;
+    } catch(e) {
+      console.error("Error saat rendering dashboard:", e);
+    }
   }
+
+  if (appEl) {
+    appEl.style.display = ""; // Kembalikan ke grid stylesheet
+    appEl.style.pointerEvents = "auto";
+  }
+
+  if (lock) {
+    if (immediate) {
+      lock.style.display = "none";
+    } else {
+      lock.style.transition = "opacity 0.2s ease, transform 0.2s ease";
+      lock.style.opacity = "0";
+      lock.style.transform = "scale(1.03)";
+      setTimeout(() => {
+        lock.style.display = "none";
+      }, 200);
+    }
+  }
+
+  resetIdleTimer();
 }
 
-function lockDashboard() {
+function lockDashboard(immediate = false) {
+  isLockedState = true;
   try {
     localStorage.removeItem(AUTH_KEY);
     sessionStorage.removeItem("foxe_session_auth");
@@ -6709,22 +6770,25 @@ function lockDashboard() {
   enteredPin = "";
   updatePinDots();
   const lock = document.getElementById("lockScreen");
-  const appEl = document.querySelector(".app");
+  const appEl = document.getElementById("appShell") || document.querySelector(".app");
   if (lock) {
     lock.style.display = "flex";
     lock.style.opacity = "1";
     lock.style.transform = "none";
-    if (appEl) {
-      appEl.style.filter = "blur(14px)";
-      appEl.style.pointerEvents = "none";
-    }
-    const pinInp = document.getElementById("pinInput");
-    if (pinInp) {
-      pinInp.value = "";
-      pinInp.focus();
-    }
-    checkLockout();
   }
+  if (appEl) {
+    // Sembunyikan appShell seutuhnya -> ZERO GPU paint & ZERO layout overhead
+    appEl.style.display = "none";
+    appEl.style.pointerEvents = "none";
+  }
+  const pinInp = document.getElementById("pinInput");
+  if (pinInp) {
+    pinInp.value = "";
+    if (!lockoutUntil) {
+      setTimeout(() => pinInp.focus(), 50);
+    }
+  }
+  checkLockout();
 }
 
 // Bind Keypad & Events
@@ -6787,10 +6851,12 @@ if (lockCard && pinInput) {
   });
 }
 
-// Global keydown listener for keyboard typing
+// Global keydown listener for keyboard typing (bebas dobel-event)
 document.addEventListener("keydown", e => {
   const lock = document.getElementById("lockScreen");
   if (lock && lock.style.display !== "none") {
+    // Jika user sedang mengetik langsung di pinInput, biarkan oninput yang menangani
+    if (e.target === pinInput) return;
     if (e.key >= "0" && e.key <= "9") {
       if (enteredPin.length < 6) {
         enteredPin += e.key;
@@ -6808,25 +6874,7 @@ document.addEventListener("keydown", e => {
   }
 });
 
-// Initial Auth Check
-if (checkSavedAuth()) {
-  const lock = document.getElementById("lockScreen");
-  if (lock) lock.style.display = "none";
-  const appEl = document.querySelector(".app");
-  if (appEl) {
-    appEl.style.filter = "none";
-    appEl.style.pointerEvents = "auto";
-  }
-  try {
-    if (!sessionStorage.getItem("foxe_access_recorded")) {
-      recordAccessSession();
-      sessionStorage.setItem("foxe_access_recorded", "1");
-    }
-  } catch(e){}
-  resetIdleTimer();
-} else {
-  lockDashboard();
-}
+
 
 /* ============================ MODUL UPDATE & SINKRONISASI ============================ */
 // ============================ ENKRIPSI KLIEN & LOCALSTORAGE SECURITY ============================
@@ -7225,11 +7273,17 @@ function wireSyncEvents() {
 }
 
 /* ============================ start ============================ */
-wireSyncEvents();
-render();
+const isAuthedOnLoad = checkSavedAuth();
+if (isAuthedOnLoad) {
+  // Sesi sudah terautentikasi -> render langsung
+  unlockDashboard(true);
+} else {
+  // Layar terkunci -> JANGAN render dashboard, tampilkan PIN pad instan 0ms!
+  lockDashboard(true);
+}
 
 // Deteksi versi kode baru (deploy baru) -> muat ulang otomatis agar fitur terbaru langsung aktif
-const BUILD_ID = "1791184291";
+const BUILD_ID = "1791187015";
 async function checkNewBuild() {
   if (window.location.protocol === "file:") return;
   try {
