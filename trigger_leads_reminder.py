@@ -43,7 +43,8 @@ try:
                 live_data = json.loads(resp.read().decode("utf-8"))
                 if live_data.get("leads"):
                     engine.leads = live_data["leads"]
-                    print(f"[SYNC] Memuat {len(engine.leads)} leads live dari Railway.")
+                    engine.reconcile_and_clean_leads()
+                    print(f"[SYNC] Memuat {len(engine.leads)} leads live dari Railway & berhasil rekonsiliasi.")
     except Exception as e:
         print(f"[WARN] Menggunakan data leads lokal: {e}")
 

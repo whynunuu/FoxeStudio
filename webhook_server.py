@@ -55,6 +55,7 @@ def sync_state_from_remote():
                 with open(STATE_FILE, "w", encoding="utf-8") as f:
                     json.dump(raw_data, f, ensure_ascii=False, indent=2)
                 engine.state = raw_data
+                engine.reconcile_and_clean_leads()
                 orders_count = len(raw_data.get("orders", []))
                 sched_count = len(raw_data.get("schedule", []))
                 print(f"[STATE SYNC] Berhasil sinkronisasi jadwal dari GitHub Pages ({orders_count} orders, {sched_count} bookings).")

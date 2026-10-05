@@ -180,6 +180,7 @@ class AgenticLeadEngine:
         self.vault_path = vault_path
         self.state = self._load_state()
         self.leads = self._load_vault()
+        self.reconcile_and_clean_leads()
 
     def _load_state(self) -> Dict[str, Any]:
         if os.path.exists(self.state_path):
@@ -216,26 +217,30 @@ class AgenticLeadEngine:
         1. Nomor HP cocok persis (min 8 digit)
         2. Nama client cocok persis atau multi-kata di bulan aktif / pipeline berjalan
         """
-        clean_phone = "".join(filter(str.isdigit, phone))
+        clean_phone = "".join(filter(str.isdigit, str(phone or "")))
         if clean_phone.startswith("0"):
             clean_phone = "62" + clean_phone[1:]
         valid_phone = len(clean_phone) >= 9
 
-        # Ambil transaksi bulan aktif (Oktober 2026) dan pipeline berjalan
-        active_orders = [o for o in self.state.get("orders", []) if str(o.get("tanggal", "")).startswith("2026-10")]
-        if not active_orders:
-            active_orders = self.state.get("orders", [])[-50:] # Fallback 50 transaksi terakhir
-        
-        okt_pipe = (self.state.get("oktoberPipeline") or {}).get("allBookings", [])
-        schedule = (self.state.get("schedule") or {}).get("bookings", [])
+        # Ambil transaksi kasir (Oktober 2026 & September)
+        okt_orders = (self.state.get("oktoberLogOrder") or {}).get("orders", [])
+        sept_orders = self.state.get("orders", [])
+        active_orders = okt_orders + sept_orders
 
-        norm_name = name.strip().lower()
+        # Ambil jadwal & pipeline
+        okt_pipe = (self.state.get("oktoberPipeline") or {}).get("bookings", [])
+        schedule = (self.state.get("schedule") or {}).get("bookings", [])
+        all_bookings = okt_pipe + schedule
+
+        norm_name = str(name or "").strip().lower()
 
         def is_match_name(target: str) -> bool:
-            t = target.strip().lower()
-            if not t or not norm_name:
+            t = str(target or "").strip().lower()
+            if not t or not norm_name or norm_name in ("-", "."):
                 return False
             if t == norm_name:
+                return True
+            if len(norm_name) >= 4 and (norm_name in t or t in norm_name):
                 return True
             w1 = set(norm_name.split())
             w2 = set(t.split())
@@ -243,7 +248,7 @@ class AgenticLeadEngine:
                 return True
             return False
 
-        # Layer 1: Check Orders Aktif (Sudah DP/Lunas di Kasir)
+        # Layer 1: Check Orders Aktif Kasir (Sudah DP/Lunas di Kasir)
         for ord in active_orders:
             ord_client = str(ord.get("client", "")).strip()
             ord_phone = str(ord.get("phone", "")).strip()
@@ -253,8 +258,8 @@ class AgenticLeadEngine:
             if norm_name and ord_client and is_match_name(ord_client):
                 return {"type": "order", "match": "name", "data": ord}
 
-        # Layer 2: Check Schedule Pipeline (Sudah terjadwal)
-        for bk in (okt_pipe + schedule):
+        # Layer 2: Check Schedule Pipeline (Sudah terjadwal di Studio)
+        for bk in all_bookings:
             bk_client = str(bk.get("client") or bk.get("nama") or "").strip()
             bk_phone = str(bk.get("noHp") or bk.get("phone") or "").strip()
             clean_bk_phone = "".join(filter(str.isdigit, bk_phone))
@@ -264,6 +269,68 @@ class AgenticLeadEngine:
                 return {"type": "pipeline", "match": "name", "data": bk}
 
         return None
+
+    def reconcile_and_clean_leads(self) -> Dict[str, Any]:
+        """
+        Rekonsiliasi berkala leads terhadap data live Google Sheets (File 1 Kasir & File 2 Schedule):
+        1. Hapus entri dummy / test / pesan non-text tanpa nama.
+        2. Cocokkan dengan Log Order & Schedule: Ubah status menjadi CONVERTED / DEAL atau RESCHEDULE.
+        3. Arsipkan leads yang tanggal event incarannya sudah terlewati (misal wisuda UMP 3-4 Okt).
+        4. Simpan ke leads_vault.json secara otomatis.
+        """
+        cleaned = []
+        now_dt = datetime.datetime.now()
+
+        for l in self.leads:
+            name = str(l.get("display_name", "")).strip()
+            phone = str(l.get("phone", "")).strip()
+            msg = str(l.get("last_customer_msg", "")).strip().lower()
+
+            # Filter data dummy / testing / sampah
+            if phone in ("6289998887771", "089998887771") or "tes webhook" in name.lower() or "test" in name.lower():
+                continue
+            if name in ("-", ".", "") and (not msg or msg == "non-text message"):
+                continue
+
+            match = self.match_with_spreadsheet(phone, name)
+            if match:
+                m_type = match.get("type")
+                m_data = match.get("data", {})
+                if m_type == "order":
+                    l["status"] = "CONVERTED"
+                    l["tier"] = "CLOSED"
+                    l["summary"] = f"Deal kasir: {m_data.get('paket','')} ({m_data.get('pembayaran','Lunas')})"
+                    l["ai_recommendation"] = "Status: DEAL di Kasir Log Order. Siapkan SOP reminder."
+                elif m_type == "pipeline":
+                    is_done = m_data.get("isDone") or m_data.get("statusSesi") == "done" or m_data.get("statusColor") == "biru"
+                    is_resched = m_data.get("isReschedule") or m_data.get("statusSesi") == "reschedule" or m_data.get("statusColor") == "orange"
+                    if is_done:
+                        l["status"] = "CONVERTED"
+                        l["tier"] = "CLOSED"
+                        l["summary"] = f"Sesi foto selesai: {m_data.get('paket','')} ({m_data.get('tgl','')})"
+                        l["ai_recommendation"] = "Status: SELESAI di Studio. Kirim ucapan terima kasih."
+                    elif is_resched:
+                        l["status"] = "UNCONVERTED"
+                        l["tier"] = "WARM"
+                        l["summary"] = f"Reschedule: DP Rp {int(m_data.get('dp',100000)):,} tersimpan (Hak aktif 30 hari)"
+                        l["ai_recommendation"] = "Status: RESCHEDULE. Follow up untuk re-book sesi weekday / foto santai."
+                    else:
+                        l["status"] = "CONVERTED"
+                        l["tier"] = "CLOSED"
+                        l["summary"] = f"Terjadwal: {m_data.get('paket','')} ({m_data.get('tgl','')} {m_data.get('waktu','')})"
+            else:
+                # Cek apakah lead kadaluwarsa (event wisuda 3-4 Okt sudah lewat)
+                if l.get("status") != "CONVERTED":
+                    if ("3 okt" in msg or "4 okt" in msg or "wisuda" in msg) and (now_dt.month >= 10 and now_dt.day >= 5):
+                        l["status"] = "EXPIRED"
+                        l["tier"] = "COLD"
+                        l["summary"] = "Event wisuda 3-4 Okt telah terlewati."
+
+            cleaned.append(l)
+
+        self.leads = cleaned
+        self._save_vault(self.leads)
+        return {"status": "success", "total_cleaned": len(self.leads)}
 
     def classify_lead_tier(self, messages: List[str]) -> str:
         """
@@ -488,33 +555,52 @@ class AgenticLeadEngine:
 
     def format_followup_reminder(self, current_hour_str: str = "12:00 WIB") -> str:
         """
-        Meracik pesan reminder terstruktur untuk Admin Studio:
-        - Memprioritaskan HOT leads (hampir closing/minta rekening/lock slot)
-        - Diikuti WARM leads (butuh konsultasi paket)
-        - Sertakan total potensi nominal yang tertahan
+        Meracik pesan reminder CRM & Follow-Up terstruktur untuk Admin Studio:
+        1. 🟠 PIPELINE RECOVERY CRM: Klien Reschedule dengan hak DP 30 hari (Data live dari Google Sheets)
+        2. 🔥 HOT & WARM LEADS AKTIF: Calon klien baru yang butuh closing DP
+        3. 📊 RINGKASAN METRIK CRM: Total DP tersimpan, closing rate, & link ke CRM Web
         """
-        unconverted = [l for l in self.leads if l.get("status") != "CONVERTED"]
+        # Ambil data booking label Orange (Reschedule) langsung dari state live
+        okt_pipe = (self.state.get("oktoberPipeline") or {}).get("bookings", [])
+        orange_bookings = [
+            b for b in okt_pipe
+            if b.get("isReschedule") or b.get("statusColor") == "orange" or b.get("statusSesi") == "reschedule"
+        ]
+        tot_orange_dp = sum(b.get("dp", 0) for b in orange_bookings)
+        tot_orange_sisa = sum(b.get("sisaPelunasan", 0) for b in orange_bookings)
+
+        # Filter leads aktif (bukan CONVERTED dan bukan EXPIRED)
+        unconverted = [l for l in self.leads if l.get("status") not in ("CONVERTED", "EXPIRED")]
         hot_leads = [l for l in unconverted if l.get("tier") == "HOT"]
         warm_leads = [l for l in unconverted if l.get("tier") == "WARM"]
-        cold_leads = [l for l in unconverted if l.get("tier") == "COLD"]
-        total_potensi = sum(l.get("estimated_value", 0) for l in unconverted)
-
-        if not unconverted:
-            return (
-                f"✅ *REMINDER FOXE STUDIO ({current_hour_str})*\n\n"
-                f"Luar biasa! Tidak ada leads yang menggantung saat ini.\n"
-                f"Semua calon klien telah terkonversi / tercatat di spreadsheet!"
-            )
+        total_potensi_leads = sum(l.get("estimated_value", 0) for l in unconverted)
 
         lines = [
-            "🚨 *REMINDER FOLLOW-UP ADMIN FOXE STUDIO*",
-            f"⏰ *Pukul {current_hour_str}* | Jam Operasional (09:00 - 21:00 WIB)\n",
-            f"Ditemukan *{len(hot_leads) + len(warm_leads)} Calon Klien Prioritas* yang butuh balasan follow-up agar segera closing DP:\n"
+            "🚨 *REMINDER CRM & FOLLOW-UP FOXE STUDIO*",
+            f"⏰ *Pukul {current_hour_str}* | Jam Operasional (09:00 - 21:00 WIB)\n"
         ]
 
+        # 1. Section Reschedule Recovery (Klien Orange)
+        if orange_bookings:
+            lines.append(f"🟠 *[CRM RECOVERY — {len(orange_bookings)} KLIEN RESCHEDULE]*")
+            lines.append("🛡️ *Kredit DP 100% Aktif 30 Hari (s.d. 03 Nov 2026)*")
+            lines.append(f"💰 *DP Terkunci:* Rp {int(tot_orange_dp):,} | *Target Pelunasan:* Rp {int(tot_orange_sisa):,}\n")
+            for i, b in enumerate(orange_bookings[:8], 1):
+                nama = b.get("nama", "Klien")
+                waktu = b.get("waktu", "-")
+                tgl = b.get("tgl", "")
+                tgl_str = f"{tgl[-2:]} Okt" if len(tgl) >= 10 else ""
+                paket = b.get("paket") or "Graduation"
+                dp_val = int(b.get("dp", 100000))
+                sisa_val = int(b.get("sisaPelunasan", 250000))
+                lines.append(f"{i}. *{nama}* ({tgl_str} {waktu}) — {paket}")
+                lines.append(f"   • DP Aman: Rp {dp_val:,} | Sisa Target: Rp {sisa_val:,}")
+                lines.append(f"   • Aksi: Segera hubungi untuk re-book slot weekday / foto kasual\n")
+
+        # 2. Section Leads Chat Baru (Hot & Warm)
         if hot_leads:
-            lines.append("🔥 *[HOT LEADS - PRIORITAS AMANKAN SLOT]*")
-            for i, l in enumerate(hot_leads[:4], 1):
+            lines.append("🔥 *[HOT LEADS — PRIORITAS AMANKAN SLOT]*")
+            for i, l in enumerate(hot_leads[:3], 1):
                 name = l.get("display_name", "Klien")
                 phone = l.get("phone", "")
                 adm = l.get("admin", "AMEL")
@@ -522,25 +608,34 @@ class AgenticLeadEngine:
                 summary = l.get("summary", "Menunggu konfirmasi")
                 lines.append(f"{i}. *{name}* ({phone}) — Admin {adm}")
                 lines.append(f"   • Situasi: {summary}")
-                lines.append(f"   • Potensi: Rp {val:,}")
-                lines.append(f"   • Aksi: Segera amankan slot & ingatkan DP min 100K ke BCA 0462897055 an Dicky Ferry A\n")
+                lines.append(f"   • Potensi: Rp {val:,}\n")
 
         if warm_leads:
-            lines.append("⚡ *[WARM LEADS - PERLU KONSULTASI]*")
-            for i, l in enumerate(warm_leads[:4], 1):
+            lines.append("⚡ *[WARM LEADS — KONSULTASI AKTIF]*")
+            for i, l in enumerate(warm_leads[:3], 1):
                 name = l.get("display_name", "Klien")
                 phone = l.get("phone", "")
                 adm = l.get("admin", "AMEL")
                 summary = l.get("summary", "Konsultasi paket")
                 lines.append(f"{i}. *{name}* ({phone}) — Admin {adm}")
-                lines.append(f"   • Pertanyaan: {summary}\n")
+                lines.append(f"   • Info: {summary}\n")
 
-        lines.append("📊 *Ringkasan Status:*")
-        lines.append(f"• Hot Leads: {len(hot_leads)} Klien")
-        lines.append(f"• Warm Leads: {len(warm_leads)} Klien")
-        lines.append(f"• Potensi Tertahan: Rp {total_potensi:,}\n")
-        lines.append("👉 *Buka CRM & Draft Balasan AI:*")
-        lines.append("https://whynunuu.github.io/FoxeStudio/flow.html")
+        if not hot_leads and not warm_leads:
+            lines.append("✅ *[STATUS CHAT MASUK]*")
+            lines.append("Seluruh leads chat wisuda telah terkonversi / selesai.")
+            lines.append("Fokus follow-up dialihkan ke: *8 Klien Reschedule di atas!* 🎯\n")
+
+        # 3. Ringkasan Status CRM
+        converted_cnt = sum(1 for l in self.leads if l.get("status") == "CONVERTED")
+        total_cnt = len(self.leads)
+        crate = round((converted_cnt / total_cnt * 100), 1) if total_cnt > 0 else 0.0
+
+        lines.append("📊 *Ringkasan Status CRM:*")
+        lines.append(f"• Klien Reschedule Aktif: {len(orange_bookings)} Klien (DP Rp {int(tot_orange_dp):,})")
+        lines.append(f"• Leads Terkonversi: {converted_cnt} Klien ({crate}%)")
+        lines.append(f"• Potensi Cash Recovery: Rp {int(tot_orange_sisa):,}\n")
+        lines.append("👉 *Buka CRM & Detail Client:*")
+        lines.append("https://whynunuu.github.io/FoxeStudio/")
 
         return "\n".join(lines)
 
@@ -548,29 +643,38 @@ class AgenticLeadEngine:
         """
         Format ringkas padat khusus WhatsApp agar kompatibel dengan limit karakter Fonnte Free Package.
         """
-        unconverted = [l for l in self.leads if l.get("status") != "CONVERTED"]
-        hot_leads = [l for l in unconverted if l.get("tier") == "HOT"]
-        warm_leads = [l for l in unconverted if l.get("tier") == "WARM"]
-        total_potensi = sum(l.get("estimated_value", 0) for l in unconverted)
+        okt_pipe = (self.state.get("oktoberPipeline") or {}).get("bookings", [])
+        orange_bookings = [
+            b for b in okt_pipe
+            if b.get("isReschedule") or b.get("statusColor") == "orange" or b.get("statusSesi") == "reschedule"
+        ]
+        tot_orange_dp = sum(b.get("dp", 0) for b in orange_bookings)
+        tot_orange_sisa = sum(b.get("sisaPelunasan", 0) for b in orange_bookings)
 
-        if not unconverted:
-            return f"✅ *REMINDER FOXE STUDIO ({current_hour_str})*\nSemua leads telah closing / terkonversi!"
+        unconverted = [l for l in self.leads if l.get("status") not in ("CONVERTED", "EXPIRED")]
+        hot_leads = [l for l in unconverted if l.get("tier") == "HOT"]
 
         lines = [
-            "🚨 *REMINDER FOLLOW-UP FOXE STUDIO*",
-            f"⏰ *Pukul {current_hour_str}* (09:00 - 21:00 WIB)\n",
-            "🔥 *HOT LEADS:*"
+            f"🚨 *REMINDER CRM FOXE STUDIO ({current_hour_str})*",
+            "⏰ Jam Operasional (09:00 - 21:00 WIB)\n"
         ]
-        for i, l in enumerate(hot_leads[:2], 1):
-            lines.append(f"{i}. {l.get('display_name')} ({l.get('phone')}) - {l.get('admin')}")
 
-        if warm_leads:
-            lines.append("\n⚡ *WARM LEADS:*")
-            for i, l in enumerate(warm_leads[:2], 1):
-                lines.append(f"{i}. {l.get('display_name')} ({l.get('phone')}) - {l.get('admin')}")
+        if orange_bookings:
+            lines.append(f"🟠 *{len(orange_bookings)} KLIEN RESCHEDULE (HAK DP 30 HARI):*")
+            lines.append(f"DP Aman: Rp {int(tot_orange_dp):,} | Target Pelunasan: Rp {int(tot_orange_sisa):,}")
+            for i, b in enumerate(orange_bookings[:6], 1):
+                dp_k = int(b.get('dp', 100000) / 1000)
+                sisa_k = int(b.get('sisaPelunasan', 250000) / 1000)
+                lines.append(f"{i}. {b.get('nama')} (DP {dp_k}k - Sisa {sisa_k}k)")
+            lines.append("💡 *Aksi:* Segera hubungi untuk re-book slot weekday sebelum 03 Nov 2026.\n")
 
-        lines.append(f"\n💰 Potensi: Rp {total_potensi:,}")
-        lines.append("CRM: whynunuu.github.io/FoxeStudio/flow.html")
+        if hot_leads:
+            lines.append("🔥 *HOT LEADS BARU:*")
+            for i, l in enumerate(hot_leads[:2], 1):
+                lines.append(f"{i}. {l.get('display_name')} ({l.get('phone')})")
+            lines.append("")
+
+        lines.append("CRM Web: whynunuu.github.io/FoxeStudio/")
         return "\n".join(lines)
 
     def send_followup_reminder(self, current_hour_str: str = "12:00 WIB", target_phone: Optional[str] = None) -> Dict[str, Any]:
