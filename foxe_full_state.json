@@ -51800,6 +51800,19 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
+    },
+    {
+      "id": "or_134",
+      "tanggal": "2026-10-05",
+      "client": "Desti Ika Cahyani",
+      "paket": "Graduation Premium",
+      "tanggalFoto": "2026-10-03",
+      "cash": 0.0,
+      "transfer": 150000.0,
+      "total": 150000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -63387,8 +63400,8 @@
       "tanggal": "2026-10-05",
       "leads": 0.0,
       "dp": 1.0,
-      "sesiFoto": 4.0,
-      "transaksi": 5.0
+      "sesiFoto": 5.0,
+      "transaksi": 6.0
     },
     {
       "id": "ld_7",
@@ -75139,7 +75152,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 33615000.0
+        "omzet": 33765000.0
       }
     ]
   },
@@ -75487,6 +75500,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261005-0820",
+      "mulai": "2026-10-05T08:20:35.190991+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 134 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 79 pos pengeluaran Neraca, 146 pipeline Okt."
+    },
     {
       "id": "sy_20261005-0524",
       "mulai": "2026-10-05T05:24:32.229975+00:00",
@@ -76190,7 +76209,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-05T05:24:32.229975+00:00"
+    "last_sync": "2026-10-05T08:20:35.190991+00:00"
   },
   "neracaDetail": [
     {
@@ -82516,6 +82535,19 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": "ADIF"
+      },
+      {
+        "id": "or_134",
+        "tanggal": "2026-10-05",
+        "client": "Desti Ika Cahyani",
+        "paket": "Graduation Premium",
+        "tanggalFoto": "2026-10-03",
+        "cash": 0.0,
+        "transfer": 150000.0,
+        "total": 150000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -82835,8 +82867,8 @@
         "tanggal": "2026-10-05",
         "leads": 0.0,
         "dp": 1.0,
-        "sesiFoto": 4.0,
-        "transaksi": 5.0
+        "sesiFoto": 5.0,
+        "transaksi": 6.0
       },
       {
         "id": "ld_6",
