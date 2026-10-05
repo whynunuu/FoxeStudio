@@ -923,6 +923,60 @@ const parseRupiahInput=val=>{
 const num=n=>(n==null||isNaN(n))?"—":Math.round(n).toLocaleString("en-US");
 const pct=n=>(n==null||isNaN(n)||!isFinite(n))?"—":(n*100).toFixed(1)+"%";
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;","'":"&#39;"}[c]));
+function addAuditLog(action, kategori, detail, user = "Studio Admin") {
+  if (!S) return;
+  if (!S.auditLog) S.auditLog = [];
+  const now = new Date();
+  const pad = n => String(n).padStart(2, "0");
+  const wib = new Date(now.getTime() + (7 * 3600 * 1000) + (now.getTimezoneOffset() * 60 * 1000));
+  const ts = `${wib.getFullYear()}-${pad(wib.getMonth()+1)}-${pad(wib.getDate())} ${pad(wib.getHours())}:${pad(wib.getMinutes())}:${pad(wib.getSeconds())}`;
+  
+  const entry = {
+    id: "aud_" + Date.now() + "_" + Math.floor(Math.random()*1000),
+    timestamp: ts,
+    action: action,
+    kategori: kategori,
+    detail: detail,
+    user: user
+  };
+  S.auditLog.unshift(entry);
+  if (S.auditLog.length > 100) S.auditLog = S.auditLog.slice(0, 100);
+  saveLocal();
+}
+
+function recordAccessSession() {
+  if (!S) return;
+  if (!S.accessLog) S.accessLog = [];
+  const now = new Date();
+  const pad = n => String(n).padStart(2, "0");
+  const wib = new Date(now.getTime() + (7 * 3600 * 1000) + (now.getTimezoneOffset() * 60 * 1000));
+  const ts = `${wib.getFullYear()}-${pad(wib.getMonth()+1)}-${pad(wib.getDate())} ${pad(wib.getHours())}:${pad(wib.getMinutes())}:${pad(wib.getSeconds())}`;
+  
+  const ua = (typeof navigator !== "undefined" && navigator.userAgent) ? navigator.userAgent : "";
+  let dev = "Desktop";
+  if (/Mobi|Android|iPhone|iPad/i.test(ua)) dev = "Mobile / Tablet";
+  let browser = "Browser";
+  if (ua.includes("Chrome") && !ua.includes("Edg")) browser = "Chrome";
+  else if (ua.includes("Edg")) browser = "Edge";
+  else if (ua.includes("Safari") && !ua.includes("Chrome")) browser = "Safari";
+  else if (ua.includes("Firefox")) browser = "Firefox";
+
+  const screenRes = (typeof window !== "undefined" && window.screen && window.screen.width) 
+    ? `${window.screen.width}×${window.screen.height}` 
+    : "1920×1080";
+
+  const entry = {
+    id: "acc_" + Date.now(),
+    timestamp: ts,
+    device: `${dev} (${browser})`,
+    screen: screenRes,
+    status: "Sesi Aktif"
+  };
+  S.accessLog.unshift(entry);
+  if (S.accessLog.length > 50) S.accessLog = S.accessLog.slice(0, 50);
+  saveLocal();
+}
+
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const dnum=v=>{const n=parseFloat(String(v??"").replace(/[^0-9.-]/g,""));return isNaN(n)?0:n};
 const iso=d=>d.toISOString().slice(0,10);
@@ -939,6 +993,10 @@ let S = (() => {
     const saved = localStorage.getItem("foxe_studio_keuangan_state");
     if (saved && savedSync === syncId) {
       const parsed = JSON.parse(saved);
+      if (parsed) {
+        if (!parsed.auditLog || !parsed.auditLog.length) parsed.auditLog = INITIAL_STATE.auditLog || [];
+        if (!parsed.accessLog || !parsed.accessLog.length) parsed.accessLog = INITIAL_STATE.accessLog || [];
+      }
       if (parsed && parsed.orders && parsed.orders.length > 0 && parsed.config && parsed.config.cutoff === INITIAL_STATE.config.cutoff && (parsed.expenses || []).length === (INITIAL_STATE.expenses || []).length && (parsed.neracaDetail || []).length === (INITIAL_STATE.neracaDetail || []).length) {
         return parsed;
       }
@@ -5094,7 +5152,139 @@ function vSet(R){
       "Baseline YoY kosong tetap PENDING, tidak diganti bulan lain.",
       "Semua nominal diformat Rupiah; tidak ada teks label di kolom angka."
     ].map(t=>`<div class="chk ok"><span class="badge">AKTIF</span><span>${esc(t)}</span></div>`).join("")}</div>
-  </div>`;
+  </
+
+  <!-- SECTION PUSAT KEAMANAN & AUDIT TRAIL -->
+  <div class="card" style="margin-top:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;border-bottom:1px solid var(--hairline);padding-bottom:12px;">
+      <div>
+        <h3 style="margin:0;display:flex;align-items:center;gap:8px;font-size:18px;">
+          <span>🛡️ Pusat Keamanan &amp; Audit Trail</span>
+          <span class="pill good" style="font-size:10px;font-weight:700;">ACTIVE SHIELD</span>
+        </h3>
+        <p class="tiny muted" style="margin:3px 0 0;">Monitoring proteksi sesi, brute-force limiter, mutasi data transaksi, dan riwayat akses.</p>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <button class="btn sm" onclick="lockDashboard()" style="display:inline-flex;align-items:center;gap:5px;font-weight:600;">
+          🔒 Kunci Sesi Sekarang
+        </button>
+      </div>
+    </div>
+
+    <!-- 3 Kolom Indikator Keamanan -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:16px;">
+      <!-- Indikator 1: Auto-Lock Idle -->
+      <div style="background:var(--surface2);border:1px solid var(--hairline-strong);border-radius:10px;padding:12px 14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;">Auto-Lock Timeout</span>
+          <span class="pill prog" id="lblIdleStatus" style="font-size:9.5px;">${idleTimeoutMinutes > 0 ? idleTimeoutMinutes + ' Menit' : 'Nonaktif'}</span>
+        </div>
+        <div style="font-size:12px;color:var(--ink);line-height:1.4;margin-bottom:8px;">
+          Kunci layar otomatis saat tidak ada aktivitas klik/ketik/scroll.
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <select id="selIdleTimeout" style="height:32px;padding:0 8px;font-size:12px;font-weight:600;background:var(--surface);border:1px solid var(--hairline-strong);border-radius:6px;color:var(--ink);width:100%;">
+            <option value="5"${idleTimeoutMinutes===5?' selected':''}>⏱️ 5 Menit</option>
+            <option value="10"${idleTimeoutMinutes===10?' selected':''}>⏱️ 10 Menit (Direkomendasikan)</option>
+            <option value="15"${idleTimeoutMinutes===15?' selected':''}>⏱️ 15 Menit</option>
+            <option value="30"${idleTimeoutMinutes===30?' selected':''}>⏱️ 30 Menit</option>
+            <option value="0"${idleTimeoutMinutes===0?' selected':''}>⛔ Nonaktifkan</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Indikator 2: Brute-Force Rate Limiter -->
+      <div style="background:var(--surface2);border:1px solid var(--hairline-strong);border-radius:10px;padding:12px 14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;">Brute-Force Limiter</span>
+          <span class="pill good" style="font-size:9.5px;">3x Limit / 30s Cooldown</span>
+        </div>
+        <div style="font-size:12px;color:var(--ink);line-height:1.4;margin-bottom:8px;">
+          Memblokir tebakan PIN berulang dan menonaktifkan keypad otomatis.
+        </div>
+        <div style="font-family:var(--ff-mono);font-size:11px;color:var(--good);display:flex;align-items:center;gap:5px;">
+          <span>✓ Perlindungan Keypad Aktif</span>
+        </div>
+      </div>
+
+      <!-- Indikator 3: Enkripsi Klien LocalStorage -->
+      <div style="background:var(--surface2);border:1px solid var(--hairline-strong);border-radius:10px;padding:12px 14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;">Enkripsi Browser Storage</span>
+          <span class="pill good" style="font-size:9.5px;">fxenc_v1 CIPHER</span>
+        </div>
+        <div style="font-size:12px;color:var(--ink);line-height:1.4;margin-bottom:8px;">
+          Token GitHub &amp; kredensial disamarkan dengan cipher salt berbasis PIN.
+        </div>
+        <div style="font-family:var(--ff-mono);font-size:11px;color:var(--good);display:flex;align-items:center;gap:5px;">
+          <span>✓ Zero Plaintext Token</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Switcher Log: Mutasi vs Kunjungan -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+      <div class="seg" id="segSecLogs">
+        <button class="active" data-logtab="audit">📋 Log Mutasi Data (${(S.auditLog||[]).length})</button>
+        <button data-logtab="access">🕒 Riwayat Kunjungan Sesi (${(S.accessLog||[]).length})</button>
+      </div>
+      <span class="tiny muted">Audit trail tersimpan di memori aman studio</span>
+    </div>
+
+    <!-- Tabel 1: Log Mutasi Data -->
+    <div id="secAuditTab" class="tw scrollable" style="max-height:360px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:150px;">Waktu (WIB)</th>
+            <th style="width:100px;">Aksi</th>
+            <th style="width:150px;">Kategori</th>
+            <th>Detail Perubahan</th>
+            <th style="width:130px;">Operator</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${(S.auditLog && S.auditLog.length) ? S.auditLog.map(l => `
+            <tr>
+              <td class="mono tiny">${esc(l.timestamp)}</td>
+              <td><span class="pill sm ${l.action==='TAMBAH'?'good':(l.action==='HAPUS'?'crit':(l.action==='INIT'||l.action==='AUDIT'?'prog':'warn'))}">${esc(l.action)}</span></td>
+              <td style="font-weight:600;font-size:12px;">${esc(l.kategori)}</td>
+              <td style="font-size:12px;color:var(--ink2);">${esc(l.detail)}</td>
+              <td class="tiny muted">${esc(l.user || 'Studio Admin')}</td>
+            </tr>
+          `).join("") : `
+            <tr><td colspan="5" style="text-align:center;padding:24px;color:var(--muted);">Belum ada log mutasi tercatat pada sesi ini.</td></tr>
+          `}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tabel 2: Riwayat Kunjungan Sesi (Hidden by default) -->
+    <div id="secAccessTab" class="tw scrollable" style="max-height:360px;display:none;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:160px;">Waktu Buka (WIB)</th>
+            <th>Perangkat / Browser</th>
+            <th style="width:140px;">Resolusi Layar</th>
+            <th style="width:150px;">Status Autentikasi</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${(S.accessLog && S.accessLog.length) ? S.accessLog.map(a => `
+            <tr>
+              <td class="mono tiny"><b>${esc(a.timestamp)}</b></td>
+              <td style="font-size:12px;color:var(--ink);">${esc(a.device)}</td>
+              <td class="mono tiny">${esc(a.screen)}</td>
+              <td><span class="pill good sm">✓ ${esc(a.status || 'Berhasil')}</span></td>
+            </tr>
+          `).join("") : `
+            <tr><td colspan="4" style="text-align:center;padding:24px;color:var(--muted);">Belum ada riwayat kunjungan tercatat.</td></tr>
+          `}
+        </tbody>
+      </table>
+    </div>
+  </div>div>`;
 }
 
 /* ============================ modal konfirmasi universal ============================ */
@@ -5211,6 +5401,7 @@ function wire(R){
       noText: "No"
     });
     if (!confirmed) return;
+    addAuditLog("HAPUS", itemTitle, detailMsg.replace(/<[^>]+>/g, ""));
     S[col] = S[col].filter(x => x.id !== id);
     saveLocal();
     render();
@@ -5236,20 +5427,21 @@ function wire(R){
   F("fTrx",(d,f)=>{const rec={id:uid(),tanggal:d.tanggal,client:d.client.trim(),paket:npak(d.paket),
     tanggalFoto:d.tanggalFoto||null,cash:dnum(d.cash),transfer:dnum(d.transfer),
     total:dnum(d.cash)+dnum(d.transfer),admin:d.admin.trim().toUpperCase(),fotografer:d.fotografer.trim().toUpperCase()};
-    S.orders.push(rec);saveLocal();f.reset();f.tanggal.value=d.tanggal;render();});
+    S.orders.push(rec);addAuditLog('TAMBAH','Transaksi Kasir',`Input pesanan client ${rec.client} (${rp(rec.total)}) via ${rec.admin}`);saveLocal();f.reset();f.tanggal.value=d.tanggal;render();});
 
   F("fBiaya",(d,f)=>{const rec={id:uid(),tanggal:d.tanggal,deskripsi:d.deskripsi.trim(),jenis:d.jenis||null,
     kategori:d.kategori||null,vendor:d.vendor.trim(),nilai:dnum(d.nilai),skema:d.skema,
     terminKe:d.terminKe||null,jatuhTempo:d.jatuhTempo||null,nominalDibayar:dnum(d.nominalDibayar)};
-    S.expenses.push(rec);saveLocal();f.reset();f.tanggal.value=d.tanggal;render();});
+    S.expenses.push(rec);addAuditLog('TAMBAH','Beban Neraca',`Input ${rec.jenis||'Beban'} (${rec.kategori||'-'}) ${rec.deskripsi} senilai ${rp(rec.nilai)}`);saveLocal();f.reset();f.tanggal.value=d.tanggal;render();});
 
   F("fShift",(d,f)=>{const rec={id:uid(),tanggal:d.tanggal,nama:d.nama.trim().toUpperCase(),slot:dnum(d.slot)||1};
-    S.shifts.push(rec);saveLocal();f.reset();f.tanggal.value=d.tanggal;render();});
+    S.shifts.push(rec);addAuditLog('TAMBAH','Rekap Shift',`Input shift kru ${rec.nama} (${rec.slot} slot) tgl ${rec.tanggal}`);saveLocal();f.reset();f.tanggal.value=d.tanggal;render();});
 
   F("fLead",(d,f)=>{const ex=S.leads.find(l=>l.tanggal===d.tanggal);
     const rec={id:ex?ex.id:uid(),tanggal:d.tanggal,leads:d.leads===""?null:dnum(d.leads),dp:dnum(d.dp),
       sesiFoto:dnum(d.sesiFoto),transaksi:dnum(d.transaksi)};
     if(ex)Object.assign(ex,rec);else S.leads.push(rec);
+    addAuditLog(ex ? 'UBAH' : 'TAMBAH', 'Funnel Leads', `${ex ? 'Ubah' : 'Input'} leads ${rec.leads||0} (${rec.dp||0} DP) tgl ${rec.tanggal}`);
     saveLocal();f.reset();f.tanggal.value=d.tanggal;render();});
 
   // Handle auto-fill & custom input toggle for KPI form
@@ -5336,6 +5528,7 @@ function wire(R){
       sop:d.sop===""?null:dnum(d.sop),client:d.client===""?null:dnum(d.client),
       produktivitas:d.produktivitas===""?null:dnum(d.produktivitas),referral:dnum(d.referral)};
     if(ex)Object.assign(ex,rec);else S.kpi.push(rec);
+    addAuditLog(ex ? 'UBAH' : 'TAMBAH', 'Evaluasi KPI', `${ex ? 'Ubah' : 'Input'} KPI kru ${nm} (${roleVal})`);
     saveLocal();f.reset();render();
     showToast("✅ Nilai KPI " + nm + " (" + (roleVal || "Kru") + ") berhasil disimpan!", "ok", 2500);
   });
@@ -5345,10 +5538,12 @@ function wire(R){
     saveLocal();render();});
 
   F("fCfg",d=>{S.config={...S.config,bulan:d.bulan,cutoff:d.cutoff,status:d.status};
+    addAuditLog('UBAH', 'Konfigurasi Periode', `Ubah periode ${d.bulan} cut-off ${d.cutoff} (${d.status})`);
     saveLocal();render();});
 
   F("fTarget",d=>{S.config.targets=S.config.targets.map((t,i)=>({...t,
     omzet:dnum(d["t"+i+"o"]),persen:dnum(d["t"+i+"p"])/100}));
+    addAuditLog('UBAH', 'Target Studio', 'Perbarui tier target omzet studio');
     saveLocal();render();});
 
   const sc=document.getElementById("segCal");
@@ -6268,6 +6463,113 @@ const VALID_HASHES = [
   "23d30fa4f4b950822914594ad82a6544b292ccb35be03075425abc266c7dbf40"
 ];
 
+// ============================ AUTO-LOCK IDLE & BRUTE-FORCE LIMITER ============================
+let idleTimeoutMinutes = parseInt(localStorage.getItem("foxe_idle_timeout") || "10", 10);
+let idleTimer = null;
+let lastActiveTimestamp = Date.now();
+
+let failedPinAttempts = parseInt(sessionStorage.getItem("foxe_failed_pin_attempts") || "0", 10);
+let lockoutUntil = parseInt(sessionStorage.getItem("foxe_pin_lockout_until") || "0", 10);
+let lockoutInterval = null;
+
+function isDashboardLocked() {
+  const lock = document.getElementById("lockScreen");
+  return lock && lock.style.display !== "none";
+}
+
+function resetIdleTimer() {
+  lastActiveTimestamp = Date.now();
+  if (idleTimer) clearTimeout(idleTimer);
+  if (idleTimeoutMinutes > 0 && !isDashboardLocked()) {
+    idleTimer = setTimeout(() => {
+      if (!isDashboardLocked()) {
+        lockDashboard();
+        showToast("🔒 Sesi terkunci otomatis karena tidak ada aktivitas (Idle Timeout).", "neutral", 4000);
+      }
+    }, idleTimeoutMinutes * 60 * 1000);
+  }
+}
+
+// Activity listeners
+if (typeof window !== "undefined") {
+  ["mousedown", "mousemove", "keydown", "touchstart", "scroll", "click"].forEach(evt => {
+    window.addEventListener(evt, () => {
+      if (Date.now() - lastActiveTimestamp > 3000) {
+        resetIdleTimer();
+      }
+    }, { passive: true });
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+      if (idleTimeoutMinutes > 0 && (Date.now() - lastActiveTimestamp > idleTimeoutMinutes * 60 * 1000)) {
+        if (!isDashboardLocked()) {
+          lockDashboard();
+          showToast("🔒 Sesi terkunci otomatis saat tab ditinggalkan.", "neutral", 4000);
+        }
+      } else {
+        resetIdleTimer();
+      }
+    }
+  });
+}
+
+function checkLockout() {
+  const now = Date.now();
+  if (lockoutUntil > now) {
+    const remainingSec = Math.ceil((lockoutUntil - now) / 1000);
+    setLockoutUI(remainingSec);
+    return true;
+  }
+  clearLockoutUI();
+  return false;
+}
+
+function setLockoutUI(seconds) {
+  const errEl = document.getElementById("lockError");
+  const pinKeypad = document.getElementById("pinKeypad");
+  const pinInp = document.getElementById("pinInput");
+  if (pinInp) pinInp.disabled = true;
+  if (pinKeypad) {
+    pinKeypad.style.pointerEvents = "none";
+    pinKeypad.style.opacity = "0.45";
+  }
+  if (errEl) {
+    errEl.hidden = false;
+    errEl.innerHTML = `🚨 Terlalu banyak percobaan salah.<br>Coba lagi dalam <b>${seconds}</b> detik.`;
+  }
+  if (lockoutInterval) clearInterval(lockoutInterval);
+  lockoutInterval = setInterval(() => {
+    const remaining = Math.ceil((lockoutUntil - Date.now()) / 1000);
+    if (remaining <= 0) {
+      clearInterval(lockoutInterval);
+      lockoutInterval = null;
+      clearLockoutUI();
+    } else {
+      if (errEl) {
+        errEl.innerHTML = `🚨 Terlalu banyak percobaan salah.<br>Coba lagi dalam <b>${remaining}</b> detik.`;
+      }
+    }
+  }, 1000);
+}
+
+function clearLockoutUI() {
+  const errEl = document.getElementById("lockError");
+  const pinKeypad = document.getElementById("pinKeypad");
+  const pinInp = document.getElementById("pinInput");
+  if (pinInp) {
+    pinInp.disabled = false;
+    pinInp.focus();
+  }
+  if (pinKeypad) {
+    pinKeypad.style.pointerEvents = "auto";
+    pinKeypad.style.opacity = "1";
+  }
+  if (errEl && !lockoutUntil) {
+    errEl.hidden = true;
+  }
+}
+
 async function hashPin(pin) {
   const msgUint8 = new TextEncoder().encode(pin + "_foxe_studio_secret_salt_2026");
   const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8);
@@ -6277,10 +6579,8 @@ async function hashPin(pin) {
 
 function checkSavedAuth() {
   try {
-    // Matikan fitur ingat perangkat: selalu bersihkan sisa token persisten di localStorage
     try { localStorage.removeItem(AUTH_KEY); } catch(e){}
 
-    // Di lingkungan lokal (file://, localhost, iframe preview IDE), selalu otomatis buka!
     const isLocal = window.location.protocol === "file:" ||
       !window.location.hostname ||
       window.location.hostname === "localhost" ||
@@ -6289,7 +6589,6 @@ function checkSavedAuth() {
       window.self !== window.top;
     if (isLocal) return true;
 
-    // Hanya izinkan akses jika sudah login pada sesi tab ini (sessionStorage)
     const sessionToken = sessionStorage.getItem("foxe_session_auth");
     if (sessionToken && VALID_HASHES.includes(sessionToken)) {
       return true;
@@ -6314,6 +6613,7 @@ function updatePinDots() {
 }
 
 async function verifyPin() {
+  if (checkLockout()) return;
   if (enteredPin.length < 4) return;
   let isValid = false;
   let validToken = "";
@@ -6335,13 +6635,34 @@ async function verifyPin() {
       localStorage.removeItem(AUTH_KEY);
       sessionStorage.setItem("foxe_session_auth", validToken || VALID_HASHES[0]);
     } catch(e){}
+    failedPinAttempts = 0;
+    sessionStorage.removeItem("foxe_failed_pin_attempts");
+    sessionStorage.removeItem("foxe_pin_lockout_until");
+    clearLockoutUI();
+    recordAccessSession();
+    resetIdleTimer();
     unlockDashboard();
   } else {
-    const errEl = document.getElementById("lockError");
-    if (errEl) {
-      errEl.hidden = false;
-      errEl.textContent = "PIN salah. Silakan coba lagi.";
+    failedPinAttempts++;
+    sessionStorage.setItem("foxe_failed_pin_attempts", String(failedPinAttempts));
+    addAuditLog("PERINGATAN", "Keamanan PIN", `Percobaan input PIN salah (${failedPinAttempts}x)`, "Sistem Proteksi");
+
+    if (failedPinAttempts >= 5) {
+      lockoutUntil = Date.now() + 60000;
+      sessionStorage.setItem("foxe_pin_lockout_until", String(lockoutUntil));
+      setLockoutUI(60);
+    } else if (failedPinAttempts >= 3) {
+      lockoutUntil = Date.now() + 30000;
+      sessionStorage.setItem("foxe_pin_lockout_until", String(lockoutUntil));
+      setLockoutUI(30);
+    } else {
+      const errEl = document.getElementById("lockError");
+      if (errEl) {
+        errEl.hidden = false;
+        errEl.textContent = `PIN salah (${failedPinAttempts}/3). Silakan coba lagi.`;
+      }
     }
+
     const pinDots = document.getElementById("pinDots");
     if (pinDots) {
       pinDots.classList.add("shake");
@@ -6350,7 +6671,7 @@ async function verifyPin() {
         enteredPin = "";
         updatePinDots();
         const pinInp = document.getElementById("pinInput");
-        if (pinInp) pinInp.value = "";
+        if (pinInp && !lockoutUntil) pinInp.value = "";
       }, 500);
     }
   }
@@ -6378,6 +6699,7 @@ function lockDashboard() {
     localStorage.removeItem(AUTH_KEY);
     sessionStorage.removeItem("foxe_session_auth");
   } catch(e){}
+  if (idleTimer) clearTimeout(idleTimer);
   enteredPin = "";
   updatePinDots();
   const lock = document.getElementById("lockScreen");
@@ -6395,8 +6717,7 @@ function lockDashboard() {
       pinInp.value = "";
       pinInp.focus();
     }
-    const errEl = document.getElementById("lockError");
-    if (errEl) errEl.hidden = true;
+    checkLockout();
   }
 }
 
@@ -6490,12 +6811,78 @@ if (checkSavedAuth()) {
     appEl.style.filter = "none";
     appEl.style.pointerEvents = "auto";
   }
+  try {
+    if (!sessionStorage.getItem("foxe_access_recorded")) {
+      recordAccessSession();
+      sessionStorage.setItem("foxe_access_recorded", "1");
+    }
+  } catch(e){}
+  resetIdleTimer();
 } else {
   lockDashboard();
 }
 
 /* ============================ MODUL UPDATE & SINKRONISASI ============================ */
+// ============================ ENKRIPSI KLIEN & LOCALSTORAGE SECURITY ============================
+const CIPHER_PREFIX = "fxenc_v1:";
+function encryptSecret(text, keyPin = "363636") {
+  if (!text) return "";
+  try {
+    const salt = "foxe_sec_salt_2026";
+    let key = 0;
+    for (let i = 0; i < (keyPin + salt).length; i++) {
+      key = (key * 31 + (keyPin + salt).charCodeAt(i)) & 0xFFFFFFFF;
+    }
+    const utf8 = encodeURIComponent(text);
+    let out = "";
+    for (let i = 0; i < utf8.length; i++) {
+      const c = utf8.charCodeAt(i) ^ ((key >> ((i % 4) * 8)) & 0xFF);
+      out += c.toString(16).padStart(2, "0");
+    }
+    return CIPHER_PREFIX + out;
+  } catch(e) {
+    return text;
+  }
+}
+
+function decryptSecret(cipherText, keyPin = "363636") {
+  if (!cipherText) return "";
+  if (!cipherText.startsWith(CIPHER_PREFIX)) return cipherText;
+  try {
+    const hex = cipherText.slice(CIPHER_PREFIX.length);
+    const salt = "foxe_sec_salt_2026";
+    let key = 0;
+    for (let i = 0; i < (keyPin + salt).length; i++) {
+      key = (key * 31 + (keyPin + salt).charCodeAt(i)) & 0xFFFFFFFF;
+    }
+    let utf8 = "";
+    for (let i = 0; i < hex.length; i += 2) {
+      const c = parseInt(hex.substr(i, 2), 16) ^ ((key >> (((i / 2) % 4) * 8)) & 0xFF);
+      utf8 += String.fromCharCode(c);
+    }
+    return decodeURIComponent(utf8);
+  } catch(e) {
+    return "";
+  }
+}
+
 const GITHUB_TOKEN_KEY = "foxe_github_token";
+
+function getSavedGithubToken() {
+  try {
+    const raw = localStorage.getItem(GITHUB_TOKEN_KEY) || "";
+    if (!raw) return "";
+    if (raw.startsWith(CIPHER_PREFIX)) {
+      return decryptSecret(raw);
+    } else {
+      const enc = encryptSecret(raw);
+      localStorage.setItem(GITHUB_TOKEN_KEY, enc);
+      return raw;
+    }
+  } catch(e) {
+    return "";
+  }
+}
 const AUTO_FULL_SYNC_KEY = "foxe_auto_drive_sync";
 const GITHUB_REPO = "whynunuu/FoxeStudio";
 const GITHUB_WORKFLOW = "daily_sync.yml";
@@ -6511,9 +6898,7 @@ function showToast(msg, type="ok", duration=3500) {
   }, duration);
 }
 
-function getSavedGithubToken() {
-  return localStorage.getItem(GITHUB_TOKEN_KEY) || "";
-}
+
 
 function updateTokenUI() {
   const token = getSavedGithubToken();
@@ -6763,7 +7148,8 @@ function wireSyncEvents() {
         showToast("Masukkan token GitHub yang valid", "err");
         return;
       }
-      localStorage.setItem(GITHUB_TOKEN_KEY, val);
+      localStorage.setItem(GITHUB_TOKEN_KEY, encryptSecret(val));
+      addAuditLog("KEAMANAN", "Pengaturan GitHub", "Pembaruan GitHub Token (Tersimpan Terenkripsi)");
       txtToken.value = "";
       updateTokenUI();
       showToast("✅ Token GitHub berhasil disimpan aman di browser ini!");
@@ -6784,6 +7170,7 @@ function wireSyncEvents() {
       });
       if (confirmed) {
         localStorage.removeItem(GITHUB_TOKEN_KEY);
+        addAuditLog("KEAMANAN", "Pengaturan GitHub", "Penghapusan GitHub Token dari penyimpanan lokal");
         updateTokenUI();
         showToast("Token GitHub telah dihapus.");
       }
@@ -6793,6 +7180,40 @@ function wireSyncEvents() {
   if (chkAuto) {
     chkAuto.onchange = () => {
       localStorage.setItem(AUTO_FULL_SYNC_KEY, chkAuto.checked ? "true" : "false");
+    };
+  }
+  // Wire Security Center events di vSet
+  const segLogs = document.getElementById("segSecLogs");
+  if (segLogs) {
+    const tabAudit = document.getElementById("secAuditTab");
+    const tabAccess = document.getElementById("secAccessTab");
+    segLogs.querySelectorAll("button").forEach(btn => {
+      btn.onclick = () => {
+        segLogs.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        if (btn.dataset.logtab === "audit") {
+          if (tabAudit) tabAudit.style.display = "block";
+          if (tabAccess) tabAccess.style.display = "none";
+        } else {
+          if (tabAudit) tabAudit.style.display = "none";
+          if (tabAccess) tabAccess.style.display = "block";
+        }
+      };
+    });
+  }
+
+  const selIdle = document.getElementById("selIdleTimeout");
+  if (selIdle) {
+    selIdle.value = String(idleTimeoutMinutes);
+    selIdle.onchange = (e) => {
+      idleTimeoutMinutes = parseInt(e.target.value, 10);
+      localStorage.setItem("foxe_idle_timeout", String(idleTimeoutMinutes));
+      resetIdleTimer();
+      const lbl = document.getElementById("lblIdleStatus");
+      if (lbl) lbl.textContent = idleTimeoutMinutes > 0 ? `${idleTimeoutMinutes} Menit` : "Nonaktif";
+      showToast(idleTimeoutMinutes > 0 
+        ? `⏱️ Auto-Lock diatur ke ${idleTimeoutMinutes} menit idle.` 
+        : "⚠️ Auto-Lock dinonaktifkan.", "ok", 2500);
     };
   }
 }

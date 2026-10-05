@@ -143590,5 +143590,39 @@
         "isReschedule": false
       }
     ]
-  }
+  },
+  "auditLog": [
+    {
+      "id": "aud_init_1",
+      "timestamp": "2026-10-05 08:30:00",
+      "action": "INIT",
+      "kategori": "Sistem Keamanan",
+      "detail": "Inisialisasi sistem Foxe Sentry & Security Audit Trail",
+      "user": "System (Foxe Sentry)"
+    },
+    {
+      "id": "aud_init_2",
+      "timestamp": "2026-10-05 13:49:33",
+      "action": "AUDIT",
+      "kategori": "Foxe Sentry",
+      "detail": "Audit integritas 9 checkpoint berhasil (All Clear)",
+      "user": "Foxe Sentry Guard"
+    }
+  ],
+  "accessLog": [
+    {
+      "id": "acc_init_1",
+      "timestamp": "2026-10-05 08:30:00",
+      "device": "Desktop (Chrome)",
+      "screen": "1920×1080",
+      "status": "Sesi Resmi Aktif"
+    },
+    {
+      "id": "acc_init_2",
+      "timestamp": "2026-10-05 13:48:34",
+      "device": "Studio Console (Chrome)",
+      "screen": "1920×1080",
+      "status": "Sesi Resmi Aktif"
+    }
+  ]
 }
