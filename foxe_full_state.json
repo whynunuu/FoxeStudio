@@ -51813,6 +51813,19 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_135",
+      "tanggal": "2026-10-05",
+      "client": "Kresna",
+      "paket": "Couple A",
+      "tanggalFoto": "2026-10-05",
+      "cash": 0.0,
+      "transfer": 50000.0,
+      "total": 50000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
     }
   ],
   "shifts": [
@@ -58233,7 +58246,19 @@
     {
       "id": "sh_20",
       "tanggal": "2026-10-05",
+      "nama": "INDAH",
+      "slot": 1
+    },
+    {
+      "id": "sh_21",
+      "tanggal": "2026-10-05",
       "nama": "ADIF",
+      "slot": 1
+    },
+    {
+      "id": "sh_22",
+      "tanggal": "2026-10-05",
+      "nama": "SAKA",
       "slot": 1
     }
   ],
@@ -63400,8 +63425,8 @@
       "tanggal": "2026-10-05",
       "leads": 0.0,
       "dp": 1.0,
-      "sesiFoto": 5.0,
-      "transaksi": 6.0
+      "sesiFoto": 6.0,
+      "transaksi": 7.0
     },
     {
       "id": "ld_7",
@@ -75152,7 +75177,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 33765000.0
+        "omzet": 33815000.0
       }
     ]
   },
@@ -75500,6 +75525,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261005-1118",
+      "mulai": "2026-10-05T11:18:13.272454+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 135 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 79 pos pengeluaran Neraca, 146 pipeline Okt."
+    },
     {
       "id": "sy_20261005-0820",
       "mulai": "2026-10-05T08:20:35.190991+00:00",
@@ -76209,7 +76240,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-05T08:20:35.190991+00:00"
+    "last_sync": "2026-10-05T11:18:13.272454+00:00"
   },
   "neracaDetail": [
     {
@@ -76794,16 +76825,16 @@
     },
     "statusBreakdown": {
       "done": {
-        "sesi": 106,
-        "nilai": 37225000.0,
-        "dp": 9750000.0,
-        "cashIn": 27475000.0
+        "sesi": 107,
+        "nilai": 37375000.0,
+        "dp": 9850000.0,
+        "cashIn": 27525000.0
       },
       "confirmed": {
-        "sesi": 32,
-        "nilai": 10575000.0,
-        "dp": 2850000.0,
-        "cashIn": 7875000.0
+        "sesi": 31,
+        "nilai": 10425000.0,
+        "dp": 2750000.0,
+        "cashIn": 7825000.0
       },
       "reschedule": {
         "sesi": 8,
@@ -77177,12 +77208,12 @@
         "admin": "IN",
         "noHp": "dp 100",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 50000.0,
@@ -77266,31 +77297,6 @@
       {
         "id": "sc_bk_19",
         "tgl": "2026-10-06",
-        "waktu": "13:20",
-        "studio": "Studio 1",
-        "studioNama": "Studio 1",
-        "nama": "Yudi",
-        "paket": "Graduation",
-        "paketRaw": "Graduation",
-        "jmlOrang": 1,
-        "harga": 350000.0,
-        "admin": "IN",
-        "noHp": "",
-        "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
-        "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 350000.0,
-        "kategori": "Studio Reguler"
-      },
-      {
-        "id": "sc_bk_20",
-        "tgl": "2026-10-06",
         "waktu": "13:40",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -77314,7 +77320,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_21",
+        "id": "sc_bk_20",
         "tgl": "2026-10-06",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -77339,7 +77345,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_22",
+        "id": "sc_bk_21",
         "tgl": "2026-10-06",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -77364,7 +77370,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_23",
+        "id": "sc_bk_22",
         "tgl": "2026-10-06",
         "waktu": "14:40",
         "studio": "Studio 1",
@@ -77389,7 +77395,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_24",
+        "id": "sc_bk_23",
         "tgl": "2026-10-06",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -77411,6 +77417,31 @@
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 250000.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_24",
+        "tgl": "2026-10-06",
+        "waktu": "15:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Yudi",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "IN",
+        "noHp": "",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false,
+        "dp": 0.0,
+        "sisaPelunasan": 350000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -82548,6 +82579,19 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_135",
+        "tanggal": "2026-10-05",
+        "client": "Kresna",
+        "paket": "Couple A",
+        "tanggalFoto": "2026-10-05",
+        "cash": 0.0,
+        "transfer": 50000.0,
+        "total": 50000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
       }
     ],
     "shifts": [
@@ -82668,7 +82712,19 @@
       {
         "id": "sh_20",
         "tanggal": "2026-10-05",
+        "nama": "INDAH",
+        "slot": 1
+      },
+      {
+        "id": "sh_21",
+        "tanggal": "2026-10-05",
         "nama": "ADIF",
+        "slot": 1
+      },
+      {
+        "id": "sh_22",
+        "tanggal": "2026-10-05",
+        "nama": "SAKA",
         "slot": 1
       }
     ],
@@ -82867,8 +82923,8 @@
         "tanggal": "2026-10-05",
         "leads": 0.0,
         "dp": 1.0,
-        "sesiFoto": 5.0,
-        "transaksi": 6.0
+        "sesiFoto": 6.0,
+        "transaksi": 7.0
       },
       {
         "id": "ld_6",
@@ -85455,18 +85511,18 @@
           "row_idx": 12,
           "nama": "Saka",
           "job": "Fotografer",
-          "q": 3.0,
+          "q": 4.0,
           "q_raw": 0.0,
-          "actual_shift": 3,
+          "actual_shift": 4,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 120000.0,
+          "total_gaji": 160000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 120000.0,
+          "thp": 160000.0,
           "status": "Draft"
         },
         {
@@ -85493,18 +85549,18 @@
           "row_idx": 16,
           "nama": "Indah",
           "job": "Admin",
-          "q": 3.0,
+          "q": 4.0,
           "q_raw": 0.0,
-          "actual_shift": 3,
+          "actual_shift": 4,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 120000.0,
+          "total_gaji": 160000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 120000.0,
+          "thp": 160000.0,
           "status": "Draft"
         },
         {
@@ -85661,13 +85717,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 8870000.0,
+        "total_gaji": 8950000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 8870000.0,
+        "grand_total_thp": 8950000.0,
         "total_karyawan": 12
       }
     },
@@ -95628,18 +95684,18 @@
         "row_idx": 12,
         "nama": "Saka",
         "job": "Fotografer",
-        "q": 3.0,
+        "q": 4.0,
         "q_raw": 0.0,
-        "actual_shift": 3,
+        "actual_shift": 4,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 120000.0,
+        "total_gaji": 160000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 120000.0,
+        "thp": 160000.0,
         "status": "Draft"
       },
       {
@@ -95666,18 +95722,18 @@
         "row_idx": 16,
         "nama": "Indah",
         "job": "Admin",
-        "q": 3.0,
+        "q": 4.0,
         "q_raw": 0.0,
-        "actual_shift": 3,
+        "actual_shift": 4,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 120000.0,
+        "total_gaji": 160000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 120000.0,
+        "thp": 160000.0,
         "status": "Draft"
       },
       {
@@ -140235,12 +140291,12 @@
         "admin": "IN",
         "noHp": "dp 100",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 50000.0,
@@ -140324,31 +140380,6 @@
       {
         "id": "sc_bk_19",
         "tgl": "2026-10-06",
-        "waktu": "13:20",
-        "studio": "Studio 1",
-        "studioNama": "Studio 1",
-        "nama": "Yudi",
-        "paket": "Graduation",
-        "paketRaw": "Graduation",
-        "jmlOrang": 1,
-        "harga": 350000.0,
-        "admin": "IN",
-        "noHp": "",
-        "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
-        "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 350000.0,
-        "kategori": "Studio Reguler"
-      },
-      {
-        "id": "sc_bk_20",
-        "tgl": "2026-10-06",
         "waktu": "13:40",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -140372,7 +140403,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_21",
+        "id": "sc_bk_20",
         "tgl": "2026-10-06",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -140397,7 +140428,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_22",
+        "id": "sc_bk_21",
         "tgl": "2026-10-06",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -140422,7 +140453,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_23",
+        "id": "sc_bk_22",
         "tgl": "2026-10-06",
         "waktu": "14:40",
         "studio": "Studio 1",
@@ -140447,7 +140478,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_24",
+        "id": "sc_bk_23",
         "tgl": "2026-10-06",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -140469,6 +140500,31 @@
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 250000.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_24",
+        "tgl": "2026-10-06",
+        "waktu": "15:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Yudi",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "IN",
+        "noHp": "",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false,
+        "dp": 0.0,
+        "sisaPelunasan": 350000.0,
         "kategori": "Studio Reguler"
       },
       {
