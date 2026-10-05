@@ -349,12 +349,14 @@ def build_summary_message(state, bulan=None):
     booking_block = "\n".join(booking_lines)
     total_klien_besok = len(tomorrow_bookings)
 
-    # Super Peak Wisuda UMP Alert (jika Oktober)
-    super_peak_block = ""
-    if is_oktober:
+    # Dynamic Event & Momentum Reminder dengan Expiry Otomatis
+    event_reminder_block = ""
+    # 1. Pengecekan Super Peak Wisuda UMP (Expiry: 2026-10-04)
+    # Hanya tampil jika tanggal cutoff masih sebelum atau saat hari H wisuda UMP
+    if is_oktober and cutoff <= "2026-10-04":
         w_d1 = [b for b in bookings_source if b.get("tgl") == "2026-10-03"]
         w_d2 = [b for b in bookings_source if b.get("tgl") == "2026-10-04"]
-        super_peak_block = (
+        event_reminder_block = (
             f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
             f"🎓 <b>SUPER PEAK WISUDA UMP (3-4 OKT 2026):</b>\n"
             f"• <b>Jumat, 03 Okt</b> : <b>{len(w_d1)} Sesi Foto</b> (5 Backdrop Wisuda)\n"
@@ -362,6 +364,40 @@ def build_summary_message(state, bulan=None):
             f"• <b>Total Gelombang</b> : <b>{len(w_d1) + len(w_d2)} Sesi Terdaftar</b> (Potensi Kas: Rp 48,65 jt)\n"
             f"• <b>Kesiapan Roster</b> : Siaga 5 Fotografer & Asisten per hari.\n"
         )
+    else:
+        # 2. Jika event sebelumnya sudah lewat (Expired), cari momentum marketing terdekat berikutnya yang AKTIF (dalam jendela H-10)
+        m_calendar = state.get("marketingCalendar", [])
+        upcoming_events = [ev for ev in m_calendar if ev.get("tanggal") and cutoff <= ev.get("tanggal")]
+        upcoming_events.sort(key=lambda x: x.get("tanggal"))
+        if upcoming_events:
+            next_ev = upcoming_events[0]
+            ev_tgl = next_ev.get("tanggal", "")
+            try:
+                ev_dt = datetime.datetime.strptime(ev_tgl, "%Y-%m-%d")
+                ev_display = f"{ev_dt.day:02d} {BULAN_NAMA[ev_dt.month-1][:3]} {ev_dt.year}"
+                days_diff = (ev_dt.date() - cutoff_dt.date()).days
+                countdown_str = " (Hari H!)" if days_diff == 0 else (f" (H-{days_diff})" if days_diff > 0 else "")
+            except Exception:
+                ev_display = ev_tgl
+                days_diff = 99
+                countdown_str = ""
+
+            if 0 <= days_diff <= 10:
+                ev_action = next_ev.get("action", "EVENT")
+                ev_momentum = next_ev.get("momentum", "Agenda Marketing")
+                ev_paket = next_ev.get("paket", "Paket Studio")
+                ev_alasan = next_ev.get("alasan", "")
+                badge_icon = "📢" if ev_action == "BOOST" else "🎯"
+                event_reminder_block = (
+                    f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+                    f"{badge_icon} <b>AGENDA MOMENTUM TERDEKAT:</b>\n"
+                    f"• <b>Tanggal</b> : <b>{ev_display}{countdown_str}</b>\n"
+                    f"• <b>Fokus</b>   : <b>{ev_momentum}</b>\n"
+                    f"• <b>Aksi Ads</b> : {ev_action} ({ev_paket})\n"
+                )
+                if ev_alasan:
+                    short_alasan = ev_alasan[:85] + "..." if len(ev_alasan) > 85 else ev_alasan
+                    event_reminder_block += f"• <i>Catatan</i> : {short_alasan}\n"
 
     outcome_alert_block = ""
     if is_outcome_alert:
@@ -392,7 +428,7 @@ def build_summary_message(state, bulan=None):
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"{booking_block}\n\n"
         f"Total Jadwal Besok: <b>{total_klien_besok} Klien</b>\n\n"
-        f"{super_peak_block}"
+        f"{event_reminder_block}"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         f"📌 <i>Sumber: Foxe Studio — Schedule & Log Order {month_label.title()}.xlsm</i>\n"
         f"🕒 <i>Last Updated: {now_str}</i>\n"
