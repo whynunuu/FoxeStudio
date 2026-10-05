@@ -118,28 +118,28 @@ def build_summary_message(state, bulan=None):
         else:
             bulan = "2026-09"
 
+    import calendar
+    year_val, month_val = int(bulan.split("-")[0]), int(bulan.split("-")[1])
+    total_days = calendar.monthrange(year_val, month_val)[1]
+    month_label = f"{BULAN_NAMA[month_val - 1].upper()} {year_val}"
+    month_short = BULAN_NAMA[month_val - 1][:3].title()
+
     is_oktober = (bulan == "2026-10")
 
     if is_oktober:
-        cutoff = ok_lo.get("cutoff", "2026-10-01")
-        total_days = 31
-        month_label = "OKTOBER 2026"
-        month_short = "Okt"
+        cutoff = ok_lo.get("cutoff") or (max([o.get("tanggal") for o in ok_lo.get("orders", []) if o.get("tanggal")] or ["2026-10-01"]))
         orders = ok_lo.get("orders", [])
         shifts = ok_lo.get("shifts", [])
         leads_list = ok_lo.get("leads", [])
         expenses = [e for e in state.get("expenses", []) if e.get("tanggal", "").startswith("2026-10")]
         bookings_source = ok_pip.get("bookings", [])
     else:
-        cutoff = cfg.get("cutoff", "2026-09-30")
-        total_days = 30
-        month_label = "SEPTEMBER 2026"
-        month_short = "Sept"
-        orders = [o for o in state.get("orders", []) if o.get("tanggal", "").startswith("2026-09")]
-        shifts = [s for s in state.get("shifts", []) if s.get("tanggal", "").startswith("2026-09")]
-        leads_list = [l for l in state.get("leads", []) if l.get("tanggal", "").startswith("2026-09")]
+        cutoff = cfg.get("cutoff") or (max([o.get("tanggal") for o in state.get("orders", []) if o.get("tanggal", "").startswith(bulan)] or [f"{bulan}-{total_days:02d}"]))
+        orders = [o for o in state.get("orders", []) if o.get("tanggal", "").startswith(bulan)]
+        shifts = [s for s in state.get("shifts", []) if s.get("tanggal", "").startswith(bulan)]
+        leads_list = [l for l in state.get("leads", []) if l.get("tanggal", "").startswith(bulan)]
         expenses = [e for e in state.get("expenses", []) if e.get("tanggal", "").startswith(bulan)]
-        bookings_source = state.get("schedule", {}).get("bookings", [])
+        bookings_source = (state.get("scheduleByMonth", {}).get(bulan) or state.get("schedule", {}).get("bookings", []))
 
     try:
         cutoff_dt = datetime.datetime.strptime(cutoff, "%Y-%m-%d")
@@ -309,19 +309,26 @@ def build_summary_message(state, bulan=None):
         except Exception:
             pass
 
-    shift_order = [
-        ("Admin AMEL", shift_counts.get("AMEL", 0)),
-        ("Admin INDAH", shift_counts.get("INDAH", 0)),
-        ("Fotografer ADIF", shift_counts.get("ADIF", 0)),
-        ("Fotografer SAKA", shift_counts.get("SAKA", 0))
-    ]
-    tot_shifts = sum(cnt for _, cnt in shift_order)
+    ROLE_MAP = {
+        "AMEL": "Admin", "INDAH": "Admin", "ADDEL": "Admin", "AL": "Admin",
+        "ADIF": "Fotografer", "SAKA": "Fotografer", "FAHME": "Fotografer",
+        "ABROR": "Fotografer", "VERO": "Fotografer"
+    }
 
     shift_lines = []
-    for label, cnt in shift_order:
+    # Urutkan: Admin dahulu, lalu Fotografer/Kru lain, urut berdasarkan jumlah shift terbanyak
+    sorted_crew = sorted(
+        [nm for nm, cnt in shift_counts.items() if cnt > 0 and nm],
+        key=lambda nm: (0 if ROLE_MAP.get(nm) == "Admin" else 1, -shift_counts[nm], nm)
+    )
+    tot_shifts = sum(shift_counts[nm] for nm in sorted_crew)
+    for nm in sorted_crew:
+        cnt = shift_counts[nm]
+        role = ROLE_MAP.get(nm, "Kru")
+        label = f"{role} {nm}"
         shift_lines.append(f"• {label:<17} : <b>{cnt}</b>")
     shift_lines.append(f"• <b>{'TOTAL SHIFT':<17} : {tot_shifts}</b>")
-    shift_block = "\n".join(shift_lines)
+    shift_block = "\n".join(shift_lines) if shift_lines else "• Belum ada shift tercatat."
 
     # Jadwal Foto Besok
     tomorrow_bookings = [
@@ -345,7 +352,8 @@ def build_summary_message(state, bulan=None):
                 status = "Confirmed"
             
             adm_code = str(b.get("admin", "")).strip().upper()
-            adm_name = {"IN": "INDAH", "AM": "AMEL", "AD": "ADDEL"}.get(adm_code, adm_code) if adm_code else "-"
+            admin_map = {"IN": "INDAH", "AM": "AMEL", "AD": "ADDEL", "AL": "ADEL", "AMEL": "AMEL", "INDAH": "INDAH", "ADDEL": "ADDEL"}
+            adm_name = admin_map.get(adm_code, adm_code) if adm_code else "-"
             waktu = b.get("waktu", "")
             studio = b.get("studio", "") or b.get("studioNama", "")
             extra_info = f" | {waktu} @ {studio}" if waktu and studio else ""

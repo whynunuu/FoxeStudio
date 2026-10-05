@@ -2301,13 +2301,25 @@ function vTahunan(R) {
       const okp = S.oktoberPipeline;
       const oktOrders = S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
       const oktOmzet = oktOrders.reduce((s, o) => s + dnum(o.total), 0);
-      o26 = (oktOmzet > 0) ? oktOmzet : (okp ? okp.estimateCashIn : 100000);
-      proyeksi26 = okp ? okp.potentialOmzet : (oktOmzet > 0 ? oktOmzet * 31 : 59150000);
+      const sisaCashIn = okp ? (okp.remainingCashIn != null ? okp.remainingCashIn : (okp.statusBreakdown ? okp.statusBreakdown.confirmed.cashIn : okp.estimateCashIn)) : 0;
+      o26 = (oktOmzet > 0) ? oktOmzet : (okp ? sisaCashIn : 0);
+      proyeksi26 = (oktOmzet > 0) ? (oktOmzet + sisaCashIn) : (okp ? okp.potentialOmzet : 0);
       status = (oktOmzet > 0 && okp)
-        ? `Live (1 Order) + Pipeline (${okp.totalBookings} Booking)`
-        : (okp ? `Pipeline (${okp.totalBookings} Booking)` : "Live Berjalan");
+        ? `Live (${oktOrders.length} Order) + Pipeline (${okp.totalBookings} Booking)`
+        : (okp ? `Pipeline (${okp.totalBookings} Booking)` : (oktOmzet > 0 ? `Live (${oktOrders.length} Order)` : "Belum Dicocokkan"));
       statusPill = "crit";
-      yoy = o25 ? (((okp ? okp.estimateCashIn : oktOmzet) - o25) / o25) : null;
+      yoy = o25 ? ((proyeksi26 - o25) / o25) : null;
+    } else {
+      const mIso = `2026-${String(info.no).padStart(2, '0')}`;
+      const mOrders = S.orders.filter(o => o.tanggal && o.tanggal.startsWith(mIso));
+      if (mOrders.length > 0) {
+        const mOmzet = mOrders.reduce((s, o) => s + dnum(o.total), 0);
+        o26 = mOmzet;
+        proyeksi26 = mOmzet;
+        status = isCurrent ? `Live (${mOrders.length} Order)` : `Rekap (${mOrders.length} Order)`;
+        statusPill = isCurrent ? "crit" : "prog";
+        yoy = o25 ? ((mOmzet - o25) / o25) : null;
+      }
     }
 
     // Perhitungan Rasio Beban (COGS + OPEX) & Alarm Peringatan >= 45% (berlaku setelah tanggal 15 atau closed book)
