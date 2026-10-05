@@ -1055,7 +1055,15 @@ function compute(targetMonth){
   const isSep = (mStr === "2026-09");
   const [y,m] = mStr.split("-").map(Number);
   const dim = new Date(y,m,0).getDate();
-  const oktCut = (S.oktoberLogOrder && S.oktoberLogOrder.cutoff) ? S.oktoberLogOrder.cutoff : "2026-10-02";
+  let oktMaxDay = 1;
+  (S.orders || []).forEach(o => {
+    if (o.tanggal && o.tanggal.startsWith("2026-10-") && dnum(o.total) > 0) {
+      const d = parseInt(o.tanggal.split("-")[2], 10);
+      if (d > oktMaxDay && d <= 31) oktMaxDay = d;
+    }
+  });
+  const dynamicOktCut = `2026-10-${String(oktMaxDay).padStart(2, "0")}`;
+  const oktCut = (S.oktoberLogOrder && S.oktoberLogOrder.cutoff) ? S.oktoberLogOrder.cutoff : dynamicOktCut;
   let cutoff = `${mStr}-${String(dim).padStart(2,"0")}`;
   let status = "Final";
   if (isOkt) {
@@ -2360,8 +2368,8 @@ function vTahunan(R) {
         else if (e.jenis === "OPEX") opexM += dnum(e.nilai);
       });
       hasExpenses = (cogsM > 0 || opexM > 0);
-      const oktCutoff = (S.oktoberLogOrder && S.oktoberLogOrder.cutoff) || (S.config && S.config.cutoff) || "2026-10-04";
-      cutDayM = parseInt(oktCutoff.split("-")[2] || "4", 10);
+      const oktCutoff = (S.oktoberLogOrder && S.oktoberLogOrder.cutoff) || (S.config && S.config.cutoff && S.config.cutoff.startsWith("2026-10") ? S.config.cutoff : "") || `2026-10-${String(Math.max(1, ...((S.orders||[]).filter(o=>o.tanggal&&o.tanggal.startsWith("2026-10-")&&dnum(o.total)>0).map(o=>parseInt(o.tanggal.split("-")[2],10))||[1]))).padStart(2,"0")}`;
+      cutDayM = parseInt(oktCutoff.split("-")[2] || "1", 10);
       isClosedM = false;
     }
 
