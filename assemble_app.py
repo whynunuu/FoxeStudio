@@ -2145,18 +2145,22 @@ function vDash(R){
         ].map(([k,v])=>`<tr><td>${k}</td><td class="n">${v}</td></tr>`).join("")}
       </tbody></table></div></div>
   </div>
-  ${S.oktoberPipeline ? `
+  ${S.oktoberPipeline ? (() => {
+    const oktOrders = (S.oktoberLogOrder && S.oktoberLogOrder.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
+    const oktOmzetLive = oktOrders.reduce((s, o) => s + dnum(o.total), 0);
+    const sisaCashIn = S.oktoberPipeline.remainingCashIn != null ? S.oktoberPipeline.remainingCashIn : (S.oktoberPipeline.statusBreakdown ? S.oktoberPipeline.statusBreakdown.confirmed.cashIn : S.oktoberPipeline.estimateCashIn);
+    return `
   <div class="card" style="margin-top:16px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
       <div>
         <div class="eyebrow" style="color:var(--accent);">Forward Outlook · Realisasi Live &amp; Pipeline</div>
-        <h3 style="margin:2px 0 4px;font-size:16px;">Oktober 2026: Live Hari Ini (Rp 100 rb) &amp; Pipeline ${S.oktoberPipeline.totalBookings} Booking</h3>
-        <p class="tiny muted" style="margin:0;">Realisasi live hari pertama telah masuk kasir (DP Hanifah via AMEL). Total potensi nilai paket <b>${rp(S.oktoberPipeline.potentialOmzet)}</b> dengan estimasi pelunasan <b>${rp(S.oktoberPipeline.estimateCashIn)}</b> (${S.oktoberPipeline.breakdown.wisudaDay1.sesi + S.oktoberPipeline.breakdown.wisudaDay2.sesi} Wisuda UMP + ${S.oktoberPipeline.breakdown.reguler.sesi} Studio Reguler).</p>
+        <h3 style="margin:2px 0 4px;font-size:16px;">Oktober 2026: Realisasi Kasir ${rp(oktOmzetLive)} (${oktOrders.length} Order) &amp; Pipeline ${S.oktoberPipeline.totalBookings} Booking</h3>
+        <p class="tiny muted" style="margin:0;">Realisasi live kasir s.d. hari ini telah mencapai <b>${rp(oktOmzetLive)}</b> dari <b>${oktOrders.length} transaksi</b>. Total potensi nilai paket <b>${rp(S.oktoberPipeline.potentialOmzet)}</b> dengan sisa pelunasan terjadwal <b>${rp(sisaCashIn)}</b> (${S.oktoberPipeline.breakdown.wisudaDay1.sesi + S.oktoberPipeline.breakdown.wisudaDay2.sesi} Wisuda UMP + ${S.oktoberPipeline.breakdown.reguler.sesi} Studio Reguler).</p>
       </div>
       <button class="btn pri sm" id="btnDashToOkt" style="padding:6px 14px;font-size:12px;">Buka Oktober (Live &amp; Pipeline) ➔</button>
     </div>
-  </div>
-  ` : ""}`;
+  </div>`;
+  })() : ""}`;
 }
 
 function chartTahunanSeasonality(months, yr, avg25) {
@@ -2411,9 +2415,18 @@ function vTahunan(R) {
       <div class="bar"><i style="width:${Math.min(100, (R.omzet/(R.proyeksi||1))*100).toFixed(0)}%"></i></div>
     </div>
     <div class="stat">
-      <span class="k">Oktober ${yr} Pipeline</span>
-      <span class="v sm" style="color:var(--good);">${S.oktoberPipeline ? rp(S.oktoberPipeline.estimateCashIn) : "—"}</span>
-      <span class="m">${S.oktoberPipeline ? `${S.oktoberPipeline.totalBookings} Booking Terdaftar` : "Live Berjalan"}</span>
+      <span class="k">Oktober ${yr} (Live + Sisa Pipeline)</span>
+      <span class="v sm" style="color:var(--good);">${(() => {
+        const oktOrders = (S.oktoberLogOrder && S.oktoberLogOrder.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
+        const oktOmzetLive = oktOrders.reduce((s, o) => s + dnum(o.total), 0);
+        const sisaCashIn = S.oktoberPipeline ? (S.oktoberPipeline.remainingCashIn != null ? S.oktoberPipeline.remainingCashIn : (S.oktoberPipeline.statusBreakdown ? S.oktoberPipeline.statusBreakdown.confirmed.cashIn : S.oktoberPipeline.estimateCashIn)) : 0;
+        return rp(oktOmzetLive + sisaCashIn);
+      })()}</span>
+      <span class="m">${(() => {
+        const oktOrders = (S.oktoberLogOrder && S.oktoberLogOrder.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
+        const sisaSesi = S.oktoberPipeline ? (S.oktoberPipeline.statusBreakdown ? S.oktoberPipeline.statusBreakdown.confirmed.sesi : S.oktoberPipeline.totalBookings) : 0;
+        return `${oktOrders.length} Realized · ${sisaSesi} Sisa Terjadwal`;
+      })()}</span>
     </div>
     <div class="stat">
       <span class="k">Status Rekonsiliasi Tahunan</span>
@@ -2489,7 +2502,8 @@ function vTahunan(R) {
       } else if (m.isCurrent) {
         subText = `<span class="msub" style="color:var(--accent);">Proyeksi run-rate: ${rp(R.proyeksi)} · Acuan ${yr-1}: ${rp(m.omzet25)}</span>`;
       } else if (m.no === 10 && S.oktoberPipeline) {
-        subText = `<span class="msub" style="color:var(--accent);">Live: ${rp(m.omzet26)} · Pipeline Pelunasan: ${rp(S.oktoberPipeline.estimateCashIn)}</span>`;
+        const sisaCashIn = S.oktoberPipeline.remainingCashIn != null ? S.oktoberPipeline.remainingCashIn : (S.oktoberPipeline.statusBreakdown ? S.oktoberPipeline.statusBreakdown.confirmed.cashIn : S.oktoberPipeline.estimateCashIn);
+        subText = `<span class="msub" style="color:var(--accent);">Live: ${rp(m.omzet26)} · Sisa Pelunasan: ${rp(sisaCashIn)}</span>`;
       } else {
         subText = `<span class="msub muted">Belum dicocokkan (—) · Acuan ${yr-1}: ${rp(m.omzet25)}</span>`;
       }
@@ -2840,18 +2854,22 @@ function vTrx(R){
   </tfoot>` : ''}
   </table></div>
   ${ordList.length>400?`<p class="tiny muted" style="margin-top:8px">Menampilkan 400 transaksi terbaru dari ${num(ordList.length)}.</p>`:""}
-  ${activeMonth === "2026-10" && S.oktoberPipeline ? `
+  ${activeMonth === "2026-10" && S.oktoberPipeline ? (() => {
+    const oktOrders = (S.oktoberLogOrder && S.oktoberLogOrder.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
+    const oktOmzetLive = oktOrders.reduce((s, o) => s + dnum(o.total), 0);
+    const sisaCashIn = S.oktoberPipeline.remainingCashIn != null ? S.oktoberPipeline.remainingCashIn : (S.oktoberPipeline.statusBreakdown ? S.oktoberPipeline.statusBreakdown.confirmed.cashIn : S.oktoberPipeline.estimateCashIn);
+    return `
   <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
       <div>
         <div class="eyebrow" style="color:var(--accent);">Pipeline Booking Terdaftar · Oktober 2026</div>
-        <h3 style="margin:2px 0 4px;font-size:16px;">1 Transaksi Realized + ${S.oktoberPipeline.totalBookings} Booking Terjadwal</h3>
-        <p class="tiny muted" style="margin:0;">Di samping 1 transaksi live di atas, terdapat <b>${S.oktoberPipeline.totalBookings} booking terdaftar</b> di File 2 Schedule &amp; Wisuda UMP dengan potensi omzet <b>${rp(S.oktoberPipeline.potentialOmzet)}</b> dan estimasi pelunasan <b>${rp(S.oktoberPipeline.estimateCashIn)}</b>.</p>
+        <h3 style="margin:2px 0 4px;font-size:16px;">${oktOrders.length} Transaksi Realized (${rp(oktOmzetLive)}) + ${S.oktoberPipeline.totalBookings} Booking Terdaftar</h3>
+        <p class="tiny muted" style="margin:0;">Di samping ${oktOrders.length} transaksi live kasir di atas, terdapat <b>${S.oktoberPipeline.totalBookings} booking terdaftar</b> di File 2 Schedule &amp; Wisuda UMP dengan sisa pelunasan terjadwal <b>${rp(sisaCashIn)}</b>.</p>
       </div>
       <button class="btn pri sm" id="btnTrxToEst" style="padding:6px 14px;font-size:12px;">Lihat Rincian ${S.oktoberPipeline.totalBookings} Booking ➔</button>
     </div>
-  </div>
-  ` : ""}`;
+  </div>`;
+  })() : ""}`;
 }
 
 function kartuPaket(R){
@@ -4047,23 +4065,23 @@ function vEst(R){
       </div>
       <div class="stat">
         <span class="k">Realisasi Selesai / Hadir (🔵)</span>
-        <span class="v sm" style="color:var(--crit);">${rp(okp.statusBreakdown ? okp.statusBreakdown.done.nilai : 2600000)}</span>
-        <span class="m">${okp.statusBreakdown ? okp.statusBreakdown.done.sesi : 10} sesi beres (1–2 Okt)</span>
+        <span class="v sm" style="color:var(--crit);">${rp(okp.statusBreakdown ? okp.statusBreakdown.done.nilai : 0)}</span>
+        <span class="m">${okp.statusBreakdown ? okp.statusBreakdown.done.sesi : 0} sesi beres foto</span>
       </div>
       <div class="stat">
         <span class="k">Terjadwal Belum Sesi (🟢)</span>
-        <span class="v sm" style="color:var(--good);">${rp(okp.statusBreakdown ? okp.statusBreakdown.confirmed.nilai : 50325000)}</span>
-        <span class="m">${okp.statusBreakdown ? okp.statusBreakdown.confirmed.sesi : 139} sesi terkonfirmasi</span>
+        <span class="v sm" style="color:var(--good);">${rp(okp.statusBreakdown ? okp.statusBreakdown.confirmed.nilai : 0)}</span>
+        <span class="m">${okp.statusBreakdown ? okp.statusBreakdown.confirmed.sesi : 0} sesi terkonfirmasi</span>
       </div>
       <div class="stat">
         <span class="k">Reschedule / Kendala (🟠)</span>
-        <span class="v sm" style="color:var(--warn);">${rp(okp.statusBreakdown ? okp.statusBreakdown.reschedule.nilai : 3300000)}</span>
-        <span class="m">${okp.statusBreakdown ? okp.statusBreakdown.reschedule.sesi : 9} sesi tertunda/ganti jadwal</span>
+        <span class="v sm" style="color:var(--warn);">${rp(okp.statusBreakdown ? okp.statusBreakdown.reschedule.nilai : 0)}</span>
+        <span class="m">${okp.statusBreakdown ? okp.statusBreakdown.reschedule.sesi : 0} sesi tertunda/ganti jadwal</span>
       </div>
       <div class="stat">
-        <span class="k">Estimasi Pelunasan Riil</span>
-        <span class="v sm" style="color:var(--good);">${rp(okp.estimateCashIn)}</span>
-        <span class="m">kas masuk saat hari-H foto</span>
+        <span class="k">Sisa Pelunasan Terjadwal</span>
+        <span class="v sm" style="color:var(--good);">${rp(okp.remainingCashIn != null ? okp.remainingCashIn : (okp.statusBreakdown ? okp.statusBreakdown.confirmed.cashIn : okp.estimateCashIn))}</span>
+        <span class="m">kas masuk dari 🟢 sesi terkonfirmasi</span>
       </div>
     </div>
 
@@ -4073,13 +4091,13 @@ function vEst(R){
         <div>
           <h3 style="margin:0;font-size:16px;display:flex;align-items:center;gap:8px;">
             <span class="live-dot" style="display:inline-block;width:9px;height:9px;background:var(--crit);border-radius:50%;"></span>
-            Realisasi Live Log Order (1 Oktober 2026)
+            Realisasi Live Log Order (${oktLog && oktLog.cutoff ? 's.d. ' + parseInt(oktLog.cutoff.split('-')[2]) + ' Okt 2026' : 'Oktober 2026'})
           </h3>
-          <span class="eyebrow">Data riil pembukuan kasir &amp; absensi shift kru hari ini (file1_okt.xlsm)</span>
+          <span class="eyebrow">Data riil pembukuan kasir &amp; absensi shift kru s.d. cut-off hari ini (file1_okt.xlsm)</span>
         </div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <span class="pill crit" style="font-size:11px;">1 Order Realized · ${rp(oktOmzetLive)}</span>
-          <span class="pill info" style="font-size:11px;">${oktShifts.length} Shift Kru (AMEL)</span>
+          <span class="pill crit" style="font-size:11px;">${oktOrders.length} Order Realized · ${rp(oktOmzetLive)}</span>
+          <span class="pill info" style="font-size:11px;">${oktShifts.length} Shift Kru</span>
         </div>
       </div>
       <div class="tw scrollable" style="max-height:460px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;">

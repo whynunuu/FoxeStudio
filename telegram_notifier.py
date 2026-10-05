@@ -236,10 +236,37 @@ def build_summary_message(state, bulan=None):
         table_lines.append(f"{'STATUS BUDGET CAP':<24} {'PASSED (AMAN)':>19}")
 
     # Section Estimate Omzet Sampai Akhir Bulan (Unrealized Cash In & Omzet)
-    if is_oktober:
-        unrealized_cash_in = float(ok_pip.get("potentialOmzet", 0))
-        total_dp_future = float(ok_pip.get("totalDp", 0))
-        sisa_pelunasan = float(ok_pip.get("estimateCashIn", 0))
+    future_bookings = [
+        b for b in bookings_source
+        if b.get("tgl") and b.get("tgl") > cutoff and b.get("tgl").startswith(cutoff[:7])
+    ]
+    if future_bookings:
+        unrealized_cash_in = sum(b.get("harga", 0) for b in future_bookings)
+        total_dp_future = 0.0
+        sisa_pelunasan = 0.0
+        for b in future_bookings:
+            harga = float(b.get("harga", 0))
+            dp_val = b.get("dp")
+            if dp_val is not None and dp_val > 0:
+                dp = float(dp_val)
+            else:
+                hp = str(b.get("noHp", "")).lower()
+                m = re.search(r'dp\s*(\d+)', hp)
+                if m:
+                    dp = float(m.group(1)) * 1000
+                elif "lunas" in hp:
+                    dp = harga
+                else:
+                    dp = 0.0
+            total_dp_future += dp
+
+            # Rule 11: Reschedule (Orange) dinetralkan (Rp 0 sisa pelunasan)
+            if b.get("statusSesi") == "reschedule" or b.get("isReschedule"):
+                continue
+
+            sisa = max(0.0, harga - dp)
+            sisa_pelunasan += sisa
+
         unrealized_omzet = grand_total + sisa_pelunasan
 
         table_lines.append("--------------------------------------------")
@@ -249,30 +276,12 @@ def build_summary_message(state, bulan=None):
         table_lines.append("")
         table_lines.append(f"{'Unrealized Omzet':<24} {rp(unrealized_omzet):>19}")
     else:
-        future_bookings = [
-            b for b in bookings_source
-            if b.get("tgl") and b.get("tgl") > cutoff and b.get("tgl").startswith(cutoff[:7])
-        ]
-        if future_bookings:
-            unrealized_cash_in = sum(b.get("harga", 0) for b in future_bookings)
-            total_dp_future = 0.0
-            for b in future_bookings:
-                hp = str(b.get("noHp", "")).lower()
-                m = re.search(r'dp\s*(\d+)', hp)
-                if m:
-                    total_dp_future += float(m.group(1)) * 1000
-                elif "lunas" in hp:
-                    total_dp_future += float(b.get("harga", 0))
-
-            sisa_pelunasan = max(0.0, unrealized_cash_in - total_dp_future)
-            unrealized_omzet = grand_total + sisa_pelunasan
-
-            table_lines.append("--------------------------------------------")
-            table_lines.append(f"{'Unrealized Cash In':<24} {rp(unrealized_cash_in):>19}")
-            table_lines.append(f"{'DP (-)':<24} {rp(total_dp_future):>19}")
-            table_lines.append(f"{'Total':<24} {rp(sisa_pelunasan):>19}")
-            table_lines.append("")
-            table_lines.append(f"{'Unrealized Omzet':<24} {rp(unrealized_omzet):>19}")
+        table_lines.append("--------------------------------------------")
+        table_lines.append(f"{'Unrealized Cash In':<24} {rp(0):>19}")
+        table_lines.append(f"{'DP (-)':<24} {rp(0):>19}")
+        table_lines.append(f"{'Total':<24} {rp(0):>19}")
+        table_lines.append("")
+        table_lines.append(f"{'Unrealized Omzet':<24} {rp(grand_total):>19}")
 
     table_lines.append("============================================")
     table_block = "\n".join(table_lines)

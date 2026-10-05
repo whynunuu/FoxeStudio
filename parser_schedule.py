@@ -394,16 +394,20 @@ def parse_october_pipeline(file_default="file2_okt.xlsx", file_w1="file_wisuda_3
             "sesi": len([b for b in all_okt if b.get("statusSesi") == "reschedule"]),
             "nilai": sum(b.get("harga", 0.0) for b in all_okt if b.get("statusSesi") == "reschedule"),
             "dp": sum(b.get("dp", 0.0) for b in all_okt if b.get("statusSesi") == "reschedule"),
-            "cashIn": sum(b.get("sisaPelunasan", 0.0) for b in all_okt if b.get("statusSesi") == "reschedule")
+            "cashIn": 0.0  # Rule 11: sisa pelunasan slot Orange dinetralkan Rp 0
         }
     }
     
+    remaining_cash_in = status_breakdown["confirmed"]["cashIn"]
+
     return {
         "bulan": "2026-10",
         "totalBookings": len(all_okt),
         "potentialOmzet": total_val,
         "totalDp": total_dp,
-        "estimateCashIn": estimate_cash_in,
+        "estimateCashIn": remaining_cash_in,
+        "remainingCashIn": remaining_cash_in,
+        "totalPipelineCashIn": estimate_cash_in,
         "breakdown": {
             "reguler": {"sesi": len(b_reg), "nilai": sum(b.get("harga",0) for b in b_reg), "dp": sum(b.get("dp",0) for b in b_reg)},
             "wisudaDay1": {"sesi": len(b_w1), "nilai": sum(b.get("harga",0) for b in b_w1), "dp": sum(b.get("dp",0) for b in b_w1)},
