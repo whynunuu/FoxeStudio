@@ -178,4 +178,20 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
   - Sistem DILARANG dan TIDAK PERNAH melakukan scanning/download ulang folder-folder arsip lama di Google Drive.
   - Panggilan API dibatasi presisi pada 7 file operasional aktif: `file1.xlsm`, `file1_okt.xlsm`, `file2.xlsx`, `file2_okt.xlsx`, `file_wisuda_3okt.xlsx`, `file_wisuda_4okt.xlsx`, `file_neraca.xlsx`.
 
+### 15. Protokol Investigasi & Solusi Cepat "Desync Dashboard vs Log Order" (Tombol Update Tidak Berubah):
+- **Indikasi Kasus / Keluhan Pengguna**:
+  Pengguna menanyakan *"udah di pastiin sync sama log order kan?"* atau mengeluhkan *"di dashboard belum update padahal udah klik tombol Update"*.
+- **Akar Masalah yang Wajib Diperiksa (Root Causes)**:
+  1. **Fallback Cut-Off Statis**: Variabel cut-off di Javascript (`compute()` / `vTahunan()`) memiliki nilai tanggal fallback statis/hardcoded (misal `"2026-10-02"` atau `"2026-10-04"`), sehingga transaksi setelah tanggal tersebut otomatis terfilter dan tersembunyi dari layar.
+  2. **Integritas Objek State `oktoberLogOrder`**: Properti `state["oktoberLogOrder"]` belum tersimpan atau tertimpa snapshot lama di `foxe_full_state.json`.
+  3. **Fast Refresh Mode vs GitHub Push**: Tombol `🔄 Update` di website hanya memicu *Fast Refresh* (`fetch foxe_full_state.json?t=...` dari GitHub Pages). Jika commit lokal/closing belum di-push ke remote (`origin main`), atau tertimpa commit Cloud Cron yang berbeda, website tetap menyajikan data lama.
+  4. **Browser Cache & `BUILD_ID`**: Browser client menyimpan cache `localStorage` dan asset HTML. `BUILD_ID` wajib di-bump agar fungsi `checkNewBuild()` otomatis mendeteksi versi baru dan me-reload browser client.
+- **Standar Eksekusi Resolusi Cepat (Zero-Guesswork Fast Solving)**:
+  1. **Periksa Formula Cut-Off**: Pastikan cut-off dihitung 100% dinamis dari tanggal order aktif tertinggi (`oktMaxDay` dari `S.orders`), DILARANG menggunakan tanggal fallback statis.
+  2. **Jalankan Deep Sync Penuh**: Eksekusi `python deep_sync_foxe.py` untuk mengunduh 11 sumber Google Drive, mengurai seluruh transaksi Log Order, dan memperbarui `foxe_full_state.json`.
+  3. **Rakit Bundel Visual & Bump Build**: Jalankan `python assemble_app.py` untuk memperbarui `BUILD_ID` dan merakit `index.html`.
+  4. **Deploy ke Remote**: Jalankan `git add`, `git commit`, dan `git push origin main`.
+  5. **Instruksi Pengguna**: Minta pengguna melakukan **Hard Refresh** (`Ctrl + F5` / `Ctrl + Shift + R` di PC, atau tutup dan buka kembali tab browser di HP) untuk langsung memuat data terbaru.
+
+
 

@@ -188,4 +188,22 @@ Unrealized Omzet               Rp 104.625.000
   - Nett Profit YTD Bersih: **Rp 414.896.451** (Margin 55,9%)
 - **Mekanisme Caching**: Data olahan disimpan ke `historical_cache.json` (~203 KB). Skrip harian `deep_sync_foxe.py` otomatis memakai cache ini sehingga proses sinkronisasi instan (< 0.01 detik).
 
+---
+
+## 15. Protokol Investigasi & Solusi Cepat "Desync Dashboard vs Log Order" (Tombol Update Tidak Berubah)
+- **Indikasi Kasus / Pertanyaan Owner**:
+  Owner menanyakan *"udah di pastiin sync sama log order kan?"* atau mengeluhkan *"di dashboard belum update padahal udah klik tombol Update"*.
+- **Penyebab Utama (Root Causes)**:
+  1. **Fallback Cut-Off Statis**: Parameter cut-off di Javascript (`compute()` / `vTahunan()`) memiliki nilai fallback statis (misal `"2026-10-02"` atau `"2026-10-04"`), sehingga transaksi baru otomatis tersembunyi dari visual dashboard.
+  2. **Integritas Objek State `oktoberLogOrder`**: Properti `state["oktoberLogOrder"]` di `foxe_full_state.json` tertimpa snapshot lama atau tidak terisi.
+  3. **Fast Refresh Mode vs GitHub Pages Deploy**: Tombol `🔄 Update` di web memicu Fast Refresh dari GitHub Pages. Jika commit lokal belum di-push ke GitHub (`origin main`), atau ter-overwrite sinkronisasi Cloud Cron lama, browser client hanya me-reload data lama.
+  4. **Browser Cache & BUILD_ID**: Browser client menahan cache `localStorage` dan file HTML. `BUILD_ID` wajib di-bump agar `checkNewBuild()` otomatis mendeteksi pembaruan dan memicu reload halaman secara mandiri.
+- **Standar Eksekusi Resolusi Cepat**:
+  1. Pastikan cut-off dihitung 100% dinamis dari tanggal order aktif tertinggi (`oktMaxDay` dari `S.orders`), bebas hardcoded.
+  2. Jalankan `python deep_sync_foxe.py` untuk mengunduh 11 sumber Google Drive dan memperbarui `foxe_full_state.json`.
+  3. Jalankan `python assemble_app.py` untuk membump `BUILD_ID` dan merakit bundle `index.html`.
+  4. Jalankan `git add`, `git commit`, dan `git push origin main`.
+  5. Instruksikan owner untuk melakukan **Hard Refresh** (`Ctrl + F5` / `Ctrl + Shift + R` di PC atau tutup tab buka baru di HP).
+
+
 
