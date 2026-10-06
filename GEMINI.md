@@ -193,5 +193,31 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
   4. **Deploy ke Remote**: Jalankan `git add`, `git commit`, dan `git push origin main`.
   5. **Instruksi Pengguna**: Minta pengguna melakukan **Hard Refresh** (`Ctrl + F5` / `Ctrl + Shift + R` di PC, atau tutup dan buka kembali tab browser di HP) untuk langsung memuat data terbaru.
 
+### 16. Standar Integrasi CRM Leads — Desain Harmonis Foxe Studio, MTD Awal Bulan & Demand Analytics:
+- **Harmonisasi Desain Total ke Palet Foxe Studio (`flow.html`)**:
+  - CRM Dashboard dan seluruh view turunan di `flow.html` WAJIB mengadopsi 100% sistem desain visual Foxe Studio:
+    * **Palet Warna**: Kanvas gelap hangat (`--canvas: #141413`), permukaan kartu (`--surface: #1b1a18`, `--surface2: #22211e`, `--surface3: #292724`), hairline (`--hairline: #2a2926`, `--hairline-strong: #3a3834`), tinta teks (`--ink: #faf9f5`, `--ink2: #d3cfc7`, `--muted: #a09d96`), aksen biru voltase (`--accent: #0080c8`, `--accent-ink: #38bdf8`), serta semantic status pills (Closed: `#5db872` / bg `#19271f`, Hot/Warm: `#d4a017` / bg `#2a2414`, Cold/Urgent: `#e07a68` / bg `#2d1e1a`).
+    * **Tipografi**: Editorial serif `Cormorant Garamond` untuk judul/headline section & nilai angka KPI besar, `Inter` untuk body, labels, dan chat, serta monospace `JetBrains Mono` untuk nominal Rupiah, jam, nomor telepon/WA, dan tanggal.
+  - **Kepatuhan Rule 4 Fit-In & Anti-Tabrakan**:
+    * Kontainer utama `.leads-view-container` WAJIB menggunakan `max-width: 1600px; width: 100%; margin: 0 auto; padding: 24px 32px 80px; box-sizing: border-box; overflow-x: hidden;` (DILARANG membatasi ke 1200px kaku atau meninggalkan deadzone hitam di samping saat zoom out).
+    * Grid KPI dan filter responsif adaptif (`repeat(auto-fit, minmax(210px, 1fr))`) dengan breakpoint `1080px` (otomatis tumpuk 1 kolom rapi bila sempit).
+    * Tipografi KPI adaptif: `clamp(22px, 2.2vw, 32px)` anti-meluber.
+    * **Standarisasi Kontainer Scrollable (`.turunan-scroll-wrapper`)**: Daftar leads/turunan wajib dibungkus kontainer scrollable (`max-height: 480px; overflow-y: auto;`) dengan custom scrollbar halus agar halaman tidak memanjang vertikal tak terkontrol.
+- **Standar Perhitungan dari Awal Bulan (MTD / Month-to-Date)**:
+  - Seluruh hitungan metrik CRM leads (total leads, hot, warm, cold, closed, win rate, potensi unconverted) **WAJIB dihitung dari awal bulan berjalan (Month-to-Date / MTD)**, yaitu 1 Oktober s.d. cut-off hari ini.
+  - Dilengkapi **Dual-Period Switcher**:
+    * `[ 📅 Oktober 2026 MTD (Awal Bulan) ]` (Aktif Bawaan / Default)
+    * `[ 🗂️ Semua Riwayat ]` (Mencakup data arsip bulan lalu)
+  - Dilengkapi **Timeline Status Harian Awal Bulan (`#crmMtdTrackerCard`)**: Memetakan traffic hari demi hari (01 Okt s.d. 06 Okt), status deal/closed harian, dan fitur klik kartu tanggal untuk filtering instan antar-hari.
+- **Fitur Filter Paket Masuk & Demand Analytics CRM**:
+  - Modul Analisis Tren Permintaan Paket (`#paketAnalyticsCard`) menampilkan **Peringkat Minat Paket Foto (Demand Analytics)** berdasarkan chat masuk:
+    * Rank #1 Wisuda / Graduation (Hot super peak demand)
+    * Rank #2 Large Group
+    * Rank #3 Family
+    * Rank #4 Self Photo & Single
+  - Dilengkapi filter cepat interaktif: Quick filter chips (`[ 📦 Semua Paket ]`, `[ 🎓 Wisuda ]`, `[ 👥 Large Group ]`, dll.), dropdown filter paket, dan kartu peringkat interaktif yang dapat diklik untuk menyaring daftar prospek seketika.
+  - Setiap kartu prospek menampilkan badge tag paket (`lead-paket-pill`) yang jelas.
+
+
 
 

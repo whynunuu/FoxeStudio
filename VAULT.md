@@ -15,6 +15,7 @@ Dokumentasi ini menghubungkan workspace Foxe Agent dengan **Obsidian Vault** pri
 | **Analisis Wisuda & Slot Orange** | `04 Projects/Foxe Studio - Analisis Wisuda & Recovery Slot Orange.md` | Analisis perbandingan performa cluster wisuda UNSOED vs UMP, evaluasi wasting deposit September vs Oktober, dan 5 rekomendasi penyelamatan booking label Orange. |
 | **Foxe Sentry Security** | `04 Projects/Foxe Studio - Sentry Security & Flow Reliability Agent.md` | Agen pengawas keandalan alur sistem: audit 5 checkpoint di jam malam (21:30 & 00:00 WIB), zero-guesswork eskalasi, format struk monospace 40 karakter di Telegram, dan auto-rollback. |
 | **Rekap Historis 2026** | `04 Projects/Foxe Studio - Rekap Historis 2026 & Multi-Month Sync.md` | Integrasi data 8 bulan Januari–Agustus (3.218 order) via `parser_historical.py`, caching instan `historical_cache.json`, dan isolasi background sync. |
+| **AI CRM & Demand Analytics** | `04 Projects/Foxe Studio/Foxe Studio - AI CRM & Automation Memory.md` | Standar integrasi CRM leads, harmonisasi tema Foxe Studio (`flow.html`), Dual-Period Switcher (MTD 1 Okt s.d. cut-off), timeline status harian, dan analitika tren paket (Demand Analytics). |
 
 ---
 
