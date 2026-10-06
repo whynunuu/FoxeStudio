@@ -13,7 +13,8 @@
     "summary": "Deal kasir: Large Group (Lunas)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Large Group"
   },
   {
     "id": "lead_1791016723",
@@ -29,7 +30,8 @@
     "summary": "Deal kasir: Graduation (Lunas)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Graduation"
   },
   {
     "id": "lead_1791016607",
@@ -45,7 +47,8 @@
     "summary": "Deal kasir: Graduation (Lunas)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Graduation"
   },
   {
     "id": "lead_1791016540",
@@ -61,7 +64,8 @@
     "summary": "Pesan baru masuk: Hallo kak, kenalin aku almuna mau nanya dong terkait foto st...",
     "ai_recommendation": "Halo Kak Almuna, bisa banget kok kalau mau nambah waktu fotonya! Rencananya mau nambah berapa menit dan untuk tanggal berapa nih, biar sekalian kita cek slot jadwalnya?",
     "estimated_value": 250000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Large Group"
   },
   {
     "id": "lead_1791016535",
@@ -77,7 +81,8 @@
     "summary": "Deal kasir: Graduation (Lunas)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Graduation"
   },
   {
     "id": "lead_1791016535",
@@ -93,7 +98,8 @@
     "summary": "Pesan baru masuk: free edit 3 kak?...",
     "ai_recommendation": "Hai kak -! Kemarin sempat liat-liat paket foto Foxe Studio yaa? Kebetulan kita ada beberapa referensi hasil foto terbaru di studio yang mungkin cocok buat ide gaya kakak. Mau aku kirimin beberapa contoh fotonya kak buat inspirasi nanti?",
     "estimated_value": 250000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Graduation"
   },
   {
     "id": "lead_1791016523",
@@ -109,7 +115,8 @@
     "summary": "Deal kasir: Graduation (Lunas)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Graduation"
   },
   {
     "id": "lead_1791016518",
@@ -125,7 +132,8 @@
     "summary": "Deal kasir: Graduation (Lunas)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Graduation"
   },
   {
     "id": "lead_1791016510",
@@ -141,7 +149,8 @@
     "summary": "Deal kasir: Graduation Premium (Lunas)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Graduation Premium"
   },
   {
     "id": "lead_1791016505",
@@ -157,7 +166,8 @@
     "summary": "Pesan baru masuk: Oke ka...",
     "ai_recommendation": "Hai kak .! Kemarin sempat liat-liat paket foto Foxe Studio yaa? Kebetulan kita ada beberapa referensi hasil foto terbaru di studio yang mungkin cocok buat ide gaya kakak. Mau aku kirimin beberapa contoh fotonya kak buat inspirasi nanti?",
     "estimated_value": 250000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Graduation"
   },
   {
     "id": "lead_1791016500",
@@ -173,7 +183,8 @@
     "summary": "Pesan baru masuk: non-text message...",
     "ai_recommendation": "Halo Kak icha! Kira-kira udah ada rencana tanggal atau konsep foto yang lagi diincer nih? Kalau masih mau tanya-tanya dulu atau butuh saran paket yang pas, kabarin santai aja yaa. 😊",
     "estimated_value": 250000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Graduation"
   },
   {
     "id": "lead_101",
@@ -189,7 +200,8 @@
     "summary": "Deal kasir: Graduation (Lunas)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 350000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Graduation"
   },
   {
     "id": "lead_102",
@@ -206,7 +218,8 @@
     "summary": "Deal kasir: Large Group (DP)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 300000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Large Group"
   },
   {
     "id": "lead_103",
@@ -222,7 +235,8 @@
     "summary": "Deal kasir: Single (Lunas)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Single"
   },
   {
     "id": "lead_104",
@@ -238,7 +252,8 @@
     "summary": "Deal kasir: Graduation (DP)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 450000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Graduation"
   },
   {
     "id": "lead_105",
@@ -254,7 +269,8 @@
     "summary": "Deal kasir: Single (Lunas)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 200000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Single"
   },
   {
     "id": "lead_106",
@@ -270,7 +286,8 @@
     "summary": "Deal kasir: Large Group (Lunas)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 85000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Large Group"
   },
   {
     "id": "lead_107",
@@ -286,6 +303,7 @@
     "summary": "Deal kasir: Graduation (DP)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 100000,
-    "follow_up_count": 0
+    "follow_up_count": 0,
+    "paket": "Graduation"
   }
 ]

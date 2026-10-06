@@ -63,6 +63,7 @@ DEFAULT_LEADS = [
         "id": "lead_101",
         "phone": "6281298421102",
         "display_name": "Dinda Maharani",
+        "paket": "Graduation",
         "admin": "AMEL",
         "tier": "HOT",
         "status": "UNCONVERTED",
@@ -79,6 +80,7 @@ DEFAULT_LEADS = [
         "id": "lead_102",
         "phone": "6285877124091",
         "display_name": "Farhan Maulana",
+        "paket": "Graduation",
         "admin": "INDAH",
         "tier": "HOT",
         "status": "UNCONVERTED",
@@ -96,6 +98,7 @@ DEFAULT_LEADS = [
         "id": "lead_103",
         "phone": "6285743218890",
         "display_name": "Rizky Pratama",
+        "paket": "Large Group",
         "admin": "AMEL",
         "tier": "WARM",
         "status": "UNCONVERTED",
@@ -112,6 +115,7 @@ DEFAULT_LEADS = [
         "id": "lead_104",
         "phone": "6281322895501",
         "display_name": "Nabila Putri",
+        "paket": "Family",
         "admin": "ADIF",
         "tier": "WARM",
         "status": "UNCONVERTED",
@@ -128,6 +132,7 @@ DEFAULT_LEADS = [
         "id": "lead_105",
         "phone": "6287833129904",
         "display_name": "Anisa Rahma",
+        "paket": "Graduation",
         "admin": "INDAH",
         "tier": "COLD",
         "status": "UNCONVERTED",
@@ -144,6 +149,7 @@ DEFAULT_LEADS = [
         "id": "lead_106",
         "phone": "6289655410023",
         "display_name": "Dimas Bagus",
+        "paket": "Self Photo",
         "admin": "AMEL",
         "tier": "COLD",
         "status": "UNCONVERTED",
@@ -160,6 +166,7 @@ DEFAULT_LEADS = [
         "id": "lead_107",
         "phone": "6281234567890",
         "display_name": "Hanifah (Live 1 Okt)",
+        "paket": "Graduation",
         "admin": "AMEL",
         "tier": "CLOSED",
         "status": "CONVERTED",
@@ -300,10 +307,12 @@ class AgenticLeadEngine:
                     l["status"] = "CONVERTED"
                     l["tier"] = "CLOSED"
                     l["summary"] = f"Deal kasir: {m_data.get('paket','')} ({m_data.get('pembayaran','Lunas')})"
+                    l["paket"] = m_data.get("paket") or l.get("paket") or self.detect_lead_paket(l)
                     l["ai_recommendation"] = "Status: DEAL di Kasir Log Order. Siapkan SOP reminder."
                 elif m_type == "pipeline":
                     is_done = m_data.get("isDone") or m_data.get("statusSesi") == "done" or m_data.get("statusColor") == "biru"
                     is_resched = m_data.get("isReschedule") or m_data.get("statusSesi") == "reschedule" or m_data.get("statusColor") == "orange"
+                    l["paket"] = m_data.get("paket") or l.get("paket") or self.detect_lead_paket(l)
                     if is_done:
                         l["status"] = "CONVERTED"
                         l["tier"] = "CLOSED"
@@ -326,11 +335,58 @@ class AgenticLeadEngine:
                         l["tier"] = "COLD"
                         l["summary"] = "Event wisuda 3-4 Okt telah terlewati."
 
+            if not l.get("paket"):
+                l["paket"] = self.detect_lead_paket(l)
             cleaned.append(l)
 
         self.leads = cleaned
         self._save_vault(self.leads)
         return {"status": "success", "total_cleaned": len(self.leads)}
+
+    def detect_lead_paket(self, lead: Dict[str, Any]) -> str:
+        """
+        Deteksi paket foto yang diincar calon klien dari teks chat, summary, atau log order.
+        """
+        p = str(lead.get("paket") or "").strip()
+        p_lower = p.lower()
+        if "self photo" in p_lower or "photofox" in p_lower:
+            return "Self Photo"
+        if "family" in p_lower or "keluarga" in p_lower:
+            return "Family"
+        if "couple" in p_lower or "pasangan" in p_lower:
+            return "Couple"
+        if "single" in p_lower or "pas foto" in p_lower or "pasfoto" in p_lower:
+            return "Single"
+        if "large group" in p_lower:
+            return "Large Group"
+        if "graduation premium" in p_lower:
+            return "Graduation Premium"
+        if "graduation" in p_lower or "wisuda" in p_lower:
+            return "Graduation"
+
+        summary = str(lead.get("summary") or "").lower()
+        msg = str(lead.get("last_customer_msg") or "").lower()
+        rec = str(lead.get("ai_recommendation") or "").lower()
+        text = f"{summary} {msg} {rec}".lower()
+
+        if any(k in text for k in ["self photo", "selfphoto", "photofox", "self studio"]):
+            return "Self Photo"
+        if any(k in text for k in ["keluarga", "family"]):
+            return "Family"
+        if any(k in text for k in ["couple", "pasangan", "pacar", "prewed"]):
+            return "Couple"
+        if any(k in text for k in ["single", "pas foto", "pasfoto", "ijazah", "ktp"]):
+            return "Single"
+        if any(k in text for k in ["large group", "kelompok", "rombongan", "berlima", "5 orang"]):
+            return "Large Group"
+        if "graduation premium" in text:
+            return "Graduation Premium"
+        if any(k in text for k in ["wisuda", "graduation", "toga", "selempang", "backdrop b", "ump"]):
+            return "Graduation"
+
+        if p and p not in ("Konsultasi Umum", "Umum / Konsultasi"):
+            return p
+        return "Konsultasi Umum"
 
     def classify_lead_tier(self, messages: List[str]) -> str:
         """

@@ -607,6 +607,249 @@
     .ai-draft-text { font-size: 12.5px; color: #f1f5f9; line-height: 1.5; font-style: italic; background: rgba(0,0,0,0.3); padding: 10px 12px; border-radius: 6px; border-left: 3px solid #38bdf8; }
     .ai-draft-actions { display: flex; justify-content: flex-end; align-items: center; gap: 8px; flex-wrap: wrap; }
 
+    
+    /* ==========================================================
+       ANALISIS TREN PAKET MASUK & FILTER CRM (DEMAND ANALYTICS)
+       ========================================================== */
+    .paket-analytics-card {
+      background: #111722;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+    .paket-analytics-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 10px;
+    }
+    .badge-live-pulse {
+      font-size: 9px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .badge-live-pulse::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 6px #38bdf8;
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+
+    .paket-rank-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+    }
+    .paket-card-item {
+      background: #141c28;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      user-select: none;
+    }
+    .paket-card-item:hover {
+      transform: translateY(-2px);
+      border-color: #38bdf8;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    }
+    .paket-card-item.active-paket {
+      background: #18263d !important;
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4), 0 8px 20px rgba(0,0,0,0.4);
+    }
+    .paket-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .paket-card-title {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .paket-rank-badge {
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      display: inline-block;
+      align-self: flex-start;
+    }
+    .paket-rank-badge.rank-top {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.25), rgba(234, 88, 12, 0.35));
+      color: #fb923c;
+      border: 1px solid rgba(249, 115, 22, 0.5);
+    }
+    .paket-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .paket-card-val {
+      text-align: right;
+      white-space: nowrap;
+    }
+    .paket-bar-track {
+      height: 5px;
+      background: #1e293b;
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 1px 0;
+    }
+    .paket-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    .paket-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+    .paket-status-mini {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .pill-mini {
+      font-size: 9.5px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+    .pill-mini.hot { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+    .pill-mini.warm { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+    .pill-mini.closed { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    .pill-mini.cold { background: rgba(6, 182, 212, 0.15); color: #22d3ee; }
+    .paket-est-val {
+      font-weight: 700;
+      color: #c084fc;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+    }
+
+    .paket-insight-box {
+      background: #0d121a;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #cbd5e1;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* CHIPS FILTER ROW */
+    .paket-chips-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 6px 0;
+      scrollbar-width: thin;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 4px;
+    }
+    .paket-chip-btn {
+      background: #141c28;
+      border: 1px solid var(--border-subtle);
+      color: #cbd5e1;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .paket-chip-btn:hover {
+      background: #1e293b;
+      border-color: #38bdf8;
+      color: #fff;
+    }
+    .paket-chip-btn.active {
+      background: #0284c7 !important;
+      border-color: #38bdf8 !important;
+      color: #fff !important;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+    }
+    .paket-chip-count {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.12);
+      font-weight: 700;
+    }
+    .paket-chip-btn.active .paket-chip-count {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* LEAD ITEM PAKET BADGE */
+    .lead-paket-pill {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .lead-paket-pill:hover {
+      opacity: 0.85;
+      transform: scale(1.03);
+    }
+    .paket-graduation { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); }
+    .paket-grad_premium { background: rgba(168, 85, 247, 0.18); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); }
+    .paket-large_group { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .paket-self_photo { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+    .paket-family { background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.35); }
+    .paket-couple { background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.35); }
+    .paket-single { background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.35); }
+    .paket-other { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.3); }
+
     .cal-view-container {
       flex: 1;
       height: calc(100vh - 56px);
@@ -1054,6 +1297,40 @@
       </div>
     </div>
 
+    
+    <!-- 1.5 ANALISIS SEBARAN & POPULARITAS PAKET MASUK (TRENDING DEMAND WIDGET) -->
+    <div class="paket-analytics-card" id="paketAnalyticsCard">
+      <div class="paket-analytics-head">
+        <div>
+          <div style="font-size:11px; font-weight:700; text-transform:uppercase; color:#38bdf8; letter-spacing:0.5px; display:flex; align-items:center; gap:6px;">
+            <span>🔥 ANALISIS TREN PAKET MASUK DARI CHAT</span>
+            <span class="badge-live-pulse">LIVE CRM</span>
+          </div>
+          <h3 style="font-size:15px; font-weight:700; color:#fff; margin-top:2px; display:flex; align-items:center; gap:8px;">
+            📊 Peringkat Minat Paket Foto (Chat &amp; Leads Demand)
+          </h3>
+          <p style="font-size:11.5px; color:#94a3b8; margin-top:2px;">
+            Daftar paket foto yang paling ramai ditanyakan &amp; dipesan calon klien di WhatsApp. Klik kartu paket untuk menyaring daftar chat klien di bawah.
+          </p>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button id="btnResetPaketFilter" class="btn btn-sm" style="background:#1e293b; color:#38bdf8; border-color:#38bdf8;" title="Reset filter paket dan tampilkan semua chat">
+            🔄 Tampilkan Semua Paket
+          </button>
+        </div>
+      </div>
+
+      <!-- GRID KARTU PERINGKAT PAKET -->
+      <div class="paket-rank-grid" id="paketRankGrid">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- INSIGHT RINGKASAN OTOMATIS -->
+      <div class="paket-insight-box" id="paketInsightBox">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
     <!-- 2. TURUNAN KLIK DASHBOARD STATUS (DAFTAR LEADS KELOMPOK TERPILIH) -->
     <div class="turunan-leads-section" id="turunanLeadsSection">
       <div class="turunan-header">
@@ -1063,6 +1340,9 @@
         </div>
         <div class="turunan-toolbar-right" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
           <input type="text" id="leadSearchInput" class="lead-search-box" placeholder="🔍 Cari nama klien, no HP, atau isi chat...">
+          <select id="leadPaketFilter" class="field-select" style="min-width:175px; padding:6px 10px; font-size:12px; border-color:rgba(56,189,248,0.5); color:#38bdf8;">
+            <option value="ALL">📦 Semua Paket Masuk</option>
+          </select>
           <select id="leadAdminFilter" class="field-select" style="width:130px; padding:6px 10px; font-size:12px;">
             <option value="ALL">Semua Admin</option>
             <option value="AMEL">Admin AMEL</option>
@@ -1071,6 +1351,7 @@
           </select>
         </div>
       </div>
+      <div class="paket-chips-bar" id="paketChipsBar"></div>
       <div class="turunan-items-grid" id="turunanListContainer">
         <!-- Loaded dynamically -->
       </div>
@@ -2620,6 +2901,7 @@
     let currentLeadFilter = 'all';
     let currentLeadAdmin = 'ALL';
     let currentLeadSearch = '';
+    let currentLeadPaket = 'ALL';
 
     let leadsData = [
       {
@@ -3303,6 +3585,229 @@
 
     let selectedLeadId = null;
 
+    
+    // ==========================================
+    // ANALISIS & NORMALISASI PAKET CHAT / LEADS
+    // ==========================================
+    function getLeadPaket(lead) {
+      if (!lead) return { key: 'OTHER', name: 'Konsultasi Umum', icon: '💬', tag: 'Konsultasi', group: 'OTHER' };
+      
+      let p = String(lead.paket || '').trim();
+      const pLower = p.toLowerCase();
+      
+      if (pLower.includes('self photo') || pLower.includes('photofox')) {
+        return { key: 'SELF_PHOTO', name: 'Self Photo Studio (Photofox)', icon: '📸', tag: 'Self Photo', group: 'SELF_PHOTO' };
+      }
+      if (pLower.includes('family') || pLower.includes('keluarga')) {
+        return { key: 'FAMILY', name: 'Family / Foto Keluarga', icon: '👨‍👩‍👧', tag: 'Family', group: 'FAMILY' };
+      }
+      if (pLower.includes('couple') || pLower.includes('pasangan')) {
+        return { key: 'COUPLE', name: 'Couple / Pasangan', icon: '💑', tag: 'Couple', group: 'COUPLE' };
+      }
+      if (pLower.includes('single') || pLower.includes('pas foto') || pLower.includes('pasfoto')) {
+        return { key: 'SINGLE', name: 'Single / Pas Foto', icon: '👤', tag: 'Single', group: 'SINGLE' };
+      }
+      if (pLower.includes('large group')) {
+        return { key: 'LARGE_GROUP', name: 'Large Group (5+ Orang)', icon: '👥', tag: 'Large Group', group: 'LARGE_GROUP' };
+      }
+      if (pLower.includes('graduation premium')) {
+        return { key: 'GRAD_PREMIUM', name: 'Graduation Premium', icon: '🎓', tag: 'Grad Premium', group: 'GRADUATION' };
+      }
+      if (pLower.includes('graduation') || pLower.includes('wisuda')) {
+        return { key: 'GRADUATION', name: 'Wisuda / Graduation', icon: '🎓', tag: 'Graduation', group: 'GRADUATION' };
+      }
+
+      const summary = String(lead.summary || '').toLowerCase();
+      const msg = String(lead.last_customer_msg || '').toLowerCase();
+      const rec = String(lead.ai_recommendation || '').toLowerCase();
+      const text = `${summary} ${msg} ${rec}`.toLowerCase();
+
+      if (text.includes('self photo') || text.includes('selfphoto') || text.includes('photofox') || text.includes('self studio')) {
+        return { key: 'SELF_PHOTO', name: 'Self Photo Studio (Photofox)', icon: '📸', tag: 'Self Photo', group: 'SELF_PHOTO' };
+      }
+      if (text.includes('keluarga') || text.includes('family')) {
+        return { key: 'FAMILY', name: 'Family / Foto Keluarga', icon: '👨‍👩‍👧', tag: 'Family', group: 'FAMILY' };
+      }
+      if (text.includes('couple') || text.includes('pasangan') || text.includes('pacar') || text.includes('prewed')) {
+        return { key: 'COUPLE', name: 'Couple / Pasangan', icon: '💑', tag: 'Couple', group: 'COUPLE' };
+      }
+      if (text.includes('single') || text.includes('pas foto') || text.includes('pasfoto') || text.includes('ijazah') || text.includes('ktp')) {
+        return { key: 'SINGLE', name: 'Single / Pas Foto', icon: '👤', tag: 'Single', group: 'SINGLE' };
+      }
+      if (text.includes('large group') || text.includes('kelompok') || text.includes('rombongan') || text.includes('berlima') || text.includes('banyak orang')) {
+        return { key: 'LARGE_GROUP', name: 'Large Group (5+ Orang)', icon: '👥', tag: 'Large Group', group: 'LARGE_GROUP' };
+      }
+      if (text.includes('graduation premium')) {
+        return { key: 'GRAD_PREMIUM', name: 'Graduation Premium', icon: '🎓', tag: 'Grad Premium', group: 'GRADUATION' };
+      }
+      if (text.includes('wisuda') || text.includes('graduation') || text.includes('toga') || text.includes('selempang') || text.includes('backdrop b') || text.includes('ump')) {
+        return { key: 'GRADUATION', name: 'Wisuda / Graduation', icon: '🎓', tag: 'Graduation', group: 'GRADUATION' };
+      }
+
+      if (p && p !== 'Konsultasi Umum' && p !== 'Umum / Konsultasi') {
+        return { key: 'OTHER', name: p, icon: '📦', tag: p, group: 'OTHER' };
+      }
+
+      return { key: 'OTHER', name: 'Konsultasi Umum / Belum Pilih', icon: '💬', tag: 'Konsultasi', group: 'OTHER' };
+    }
+
+    function setPaketFilter(pkgKey) {
+      if (currentLeadPaket === pkgKey && pkgKey !== 'ALL') {
+        currentLeadPaket = 'ALL'; // toggle reset
+      } else {
+        currentLeadPaket = pkgKey || 'ALL';
+      }
+
+      const sel = document.getElementById('leadPaketFilter');
+      if (sel) sel.value = currentLeadPaket;
+
+      // Update active state in rank grid
+      document.querySelectorAll('.paket-card-item').forEach(card => {
+        card.classList.toggle('active-paket', card.getAttribute('data-paket') === currentLeadPaket);
+      });
+
+      // Update active state in chips
+      document.querySelectorAll('.paket-chip-btn').forEach(chip => {
+        chip.classList.toggle('active', chip.getAttribute('data-paket') === currentLeadPaket);
+      });
+
+      renderPaketAnalytics();
+      renderTurunanAndChat();
+    }
+    window.setPaketFilter = setPaketFilter;
+
+    function renderPaketAnalytics() {
+      const grid = document.getElementById('paketRankGrid');
+      const insightBox = document.getElementById('paketInsightBox');
+      const selFilter = document.getElementById('leadPaketFilter');
+      const chipsBar = document.getElementById('paketChipsBar');
+      if (!grid) return;
+
+      const total = leadsData.length;
+      if (total === 0) {
+        grid.innerHTML = '<div style="color:#94a3b8; font-size:12px; padding:12px;">Belum ada data leads untuk dianalisis.</div>';
+        return;
+      }
+
+      // Group statistics
+      const statsMap = {};
+      leadsData.forEach(lead => {
+        const pkg = getLeadPaket(lead);
+        const groupKey = pkg.group || pkg.key;
+        if (!statsMap[groupKey]) {
+          statsMap[groupKey] = {
+            group: groupKey,
+            name: pkg.name,
+            icon: pkg.icon,
+            tag: pkg.tag,
+            count: 0,
+            totalVal: 0,
+            hot: 0,
+            warm: 0,
+            cold: 0,
+            closed: 0
+          };
+          if (groupKey === 'GRADUATION') {
+            statsMap[groupKey].name = 'Wisuda / Graduation';
+          }
+        }
+        statsMap[groupKey].count++;
+        statsMap[groupKey].totalVal += (Number(lead.estimated_value) || 0);
+        if (lead.tier === 'HOT') statsMap[groupKey].hot++;
+        else if (lead.tier === 'WARM') statsMap[groupKey].warm++;
+        else if (lead.tier === 'COLD') statsMap[groupKey].cold++;
+        else if (lead.tier === 'CLOSED' || lead.status === 'CONVERTED') statsMap[groupKey].closed++;
+      });
+
+      const sorted = Object.values(statsMap).sort((a, b) => b.count - a.count);
+
+      // Render rank cards
+      let cardsHtml = '';
+      sorted.forEach((item, idx) => {
+        const rank = idx + 1;
+        const pct = Math.round((item.count / total) * 100);
+        const isActive = (currentLeadPaket === item.group);
+
+        let barColor = 'linear-gradient(90deg, #f97316, #ea580c)';
+        if (rank === 2) barColor = 'linear-gradient(90deg, #0284c7, #38bdf8)';
+        else if (rank === 3) barColor = 'linear-gradient(90deg, #8b5cf6, #a855f7)';
+        else if (rank > 3) barColor = '#475569';
+
+        cardsHtml += `
+          <div class="paket-card-item ${isActive ? 'active-paket' : ''}" data-paket="${item.group}" onclick="setPaketFilter('${item.group}')" title="Klik untuk saring ${item.name}">
+            <div class="paket-card-top">
+              <div class="paket-card-title">
+                <span class="paket-rank-badge ${rank === 1 ? 'rank-top' : ''}">
+                  #${rank} ${rank === 1 ? '🔥 PALING RAMAI' : 'TRENDING'}
+                </span>
+                <span class="paket-name">${item.icon} ${item.name}</span>
+              </div>
+              <div class="paket-card-val">
+                <b style="color:#fff; font-size:16px;">${item.count}</b> <span style="font-size:11px; color:#94a3b8;">leads (${pct}%)</span>
+              </div>
+            </div>
+
+            <div class="paket-bar-track">
+              <div class="paket-bar-fill" style="width: ${pct}%; background: ${barColor};"></div>
+            </div>
+
+            <div class="paket-card-footer">
+              <div class="paket-status-mini">
+                ${item.closed ? `<span class="pill-mini closed">✅ ${item.closed} Closed</span>` : ''}
+                ${item.hot ? `<span class="pill-mini hot">🔥 ${item.hot} Hot</span>` : ''}
+                ${item.warm ? `<span class="pill-mini warm">⚡ ${item.warm} Warm</span>` : ''}
+                ${item.cold ? `<span class="pill-mini cold">❄️ ${item.cold} Cold</span>` : ''}
+              </div>
+              <div class="paket-est-val">Rp ${item.totalVal.toLocaleString('id-ID')}</div>
+            </div>
+          </div>
+        `;
+      });
+      grid.innerHTML = cardsHtml;
+
+      // Render Insight Box
+      if (insightBox && sorted.length > 0) {
+        const top1 = sorted[0];
+        const topPct = Math.round((top1.count / total) * 100);
+        insightBox.innerHTML = `
+          <div style="font-size:18px;">💡</div>
+          <div style="flex:1;">
+            <b>Kesimpulan Analisis Chat:</b> Paket <b>${top1.icon} ${top1.name}</b> mendominasi traffic dengan <b>${top1.count} dari ${total} leads (${topPct}%)</b>. 
+            ${top1.hot > 0 ? `Terdapat <b>${top1.hot} calon klien HOT</b> yang sudah siap transfer DP.` : ''}
+            Admin studio disarankan memprioritaskan ketersediaan slot backdrop dan respon cepat untuk paket ini.
+          </div>
+        `;
+      }
+
+      // Populate Select Filter
+      if (selFilter) {
+        let optHtml = `<option value="ALL">📦 Semua Paket Masuk (${total})</option>`;
+        sorted.forEach(item => {
+          optHtml += `<option value="${item.group}" ${currentLeadPaket === item.group ? 'selected' : ''}>${item.icon} ${item.name} (${item.count})</option>`;
+        });
+        selFilter.innerHTML = optHtml;
+        selFilter.value = currentLeadPaket;
+      }
+
+      // Populate Quick Chips Bar
+      if (chipsBar) {
+        let chipsHtml = `
+          <button class="paket-chip-btn ${currentLeadPaket === 'ALL' ? 'active' : ''}" data-paket="ALL" onclick="setPaketFilter('ALL')">
+            <span>📦 Semua</span> <span class="paket-chip-count">${total}</span>
+          </button>
+        `;
+        sorted.forEach(item => {
+          const isActive = (currentLeadPaket === item.group);
+          chipsHtml += `
+            <button class="paket-chip-btn ${isActive ? 'active' : ''}" data-paket="${item.group}" onclick="setPaketFilter('${item.group}')">
+              <span>${item.icon} ${item.tag}</span> <span class="paket-chip-count">${item.count}</span>
+            </button>
+          `;
+        });
+        chipsBar.innerHTML = chipsHtml;
+      }
+    }
+
     function renderLeads() {
       const total = leadsData.length;
       const hot = leadsData.filter(l => l.tier === 'HOT').length;
@@ -3411,6 +3916,15 @@
         );
       }
 
+      // Filter paket yang masuk
+      if (currentLeadPaket !== 'ALL') {
+        filtered = filtered.filter(l => {
+          const pkg = getLeadPaket(l);
+          return (pkg.group === currentLeadPaket || pkg.key === currentLeadPaket);
+        });
+        labelGroup += ` · Filter Paket "${currentLeadPaket}"`;
+      }
+
       if (titleEl) titleEl.innerHTML = `${labelGroup} (<span id="turunanCount">${filtered.length}</span>)`;
       if (subtitleEl) subtitleEl.textContent = descGroup;
 
@@ -3452,6 +3966,10 @@
 
               <div class="turunan-item-meta">
                 <span>👩‍💼 Admin ${lead.admin}</span>
+                ${(() => {
+                  const lp = getLeadPaket(lead);
+                  return `<span class="lead-paket-pill paket-${lp.key.toLowerCase()}" onclick="event.stopPropagation(); setPaketFilter('${lp.group || lp.key}')" title="Saring paket ${lp.name}">${lp.icon} ${lp.tag}</span>`;
+                })()}
                 <b style="color:#c084fc;">Rp ${(Number(lead.estimated_value) || 0).toLocaleString('id-ID')}</b>
               </div>
 
@@ -3497,8 +4015,12 @@
       container.innerHTML = `
         <div class="chat-workspace-header">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-            <div style="font-size:15px; font-weight:700; color:#fff;">
-              💬 Ruang Chat: <span style="color:#38bdf8;">${escapeHtml(lead.display_name)}</span>
+            <div style="font-size:15px; font-weight:700; color:#fff; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <span>💬 Ruang Chat: <span style="color:#38bdf8;">${escapeHtml(lead.display_name)}</span></span>
+              ${(() => {
+                const lp = getLeadPaket(lead);
+                return `<span class="lead-paket-pill paket-${lp.key.toLowerCase()}" style="font-size:11px; padding:3px 9px;">🏷️ Paket: ${lp.icon} ${lp.name}</span>`;
+              })()}
             </div>
             <a href="https://wa.me/${phoneClean}" target="_blank" class="lead-phone" style="font-size:12px;">
               📱 +${phoneClean}
@@ -3725,6 +4247,22 @@
         });
       }
 
+      // Paket filter select
+      const paketFilter = document.getElementById('leadPaketFilter');
+      if (paketFilter) {
+        paketFilter.addEventListener('change', (e) => {
+          setPaketFilter(e.target.value);
+        });
+      }
+
+      // Reset paket filter button
+      const btnResetPaket = document.getElementById('btnResetPaketFilter');
+      if (btnResetPaket) {
+        btnResetPaket.addEventListener('click', () => {
+          setPaketFilter('ALL');
+        });
+      }
+
       // Simulate Fonnte buttons
       const btnSim1 = document.getElementById('btnSimulateFonnte');
       const btnSim2 = document.getElementById('btnSimulateFonnte2');
@@ -3904,7 +4442,21 @@
       await loadLeadsData();
       await loadStudioData();
       setupLeadsEventListeners();
-      switchAppMode('calendar');
+      
+      // Cek apakah URL hash atau query param meminta tab Leads/CRM
+      const hash = window.location.hash.toLowerCase();
+      const params = new URLSearchParams(window.location.search);
+      if (hash.includes('leads') || params.get('tab') === 'leads') {
+        switchAppMode('leads');
+      } else if (hash.includes('flow') || params.get('tab') === 'flow') {
+        switchAppMode('flow');
+      } else {
+        switchAppMode('calendar');
+      }
+
+      if (params.get('paket')) {
+        setPaketFilter(params.get('paket'));
+      }
     });
   </script>
 </body>

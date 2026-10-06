@@ -3221,6 +3221,18 @@ function vLead(R){
       <span class="m">${R.leadKosong.length?"provisional":"lengkap"}</span></div>
   </div>
   ${R.leadKosong.length?`<div class="note warn" style="margin-bottom:14px">${R.leadKosong.length} hari punya DP masuk tapi Leads belum diisi (${R.leadKosong.map(l=>l.tanggal.slice(8)).join(", ")} ${BULAN[+R.c.bulan.split("-")[1]-1]}). Conversion di atas provisional sampai angka lead dilengkapi.</div>`:""}
+  <div class="card" style="margin-bottom:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 5%,var(--surface));">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div class="eyebrow" style="color:var(--accent);">WhatsApp CRM &amp; AI Leads Engine</div>
+        <h3 style="margin:2px 0 4px;font-size:15.5px;">🔥 Analisis Minat Paket Masuk dari Chat (CRM)</h3>
+        <p class="tiny muted" style="margin:0;">Lihat peringkat paket foto paling ramai ditanyakan di WhatsApp (Wisuda, Large Group, Self Photo, Family), filter calon klien per paket, dan racik draf follow-up cerdas AI.</p>
+      </div>
+      <a href="flow.html#leads" class="btn pri sm" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-weight:600;padding:7px 15px;">
+        ⚡ Buka Pustaka Leads &amp; Analisis Paket ➔
+      </a>
+    </div>
+  </div>
   <div class="two" style="margin-bottom:14px">
     <div class="card">${chart}</div>
     <div class="card"><h3>Input lead harian</h3>
