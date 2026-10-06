@@ -52060,6 +52060,32 @@
       "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_154",
+      "tanggal": "2026-10-06",
+      "client": "lavandula",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-06",
+      "cash": 0.0,
+      "transfer": 325000.0,
+      "total": 325000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_155",
+      "tanggal": "2026-10-06",
+      "client": "anggi",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-07",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -63753,9 +63779,9 @@
       "id": "ld_6",
       "tanggal": "2026-10-06",
       "leads": 0.0,
-      "dp": 4.0,
-      "sesiFoto": 10.0,
-      "transaksi": 14.0
+      "dp": 5.0,
+      "sesiFoto": 11.0,
+      "transaksi": 16.0
     },
     {
       "id": "ld_7",
@@ -75506,7 +75532,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 37345000.0
+        "omzet": 37770000.0
       }
     ]
   },
@@ -75854,6 +75880,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261006-1329",
+      "mulai": "2026-10-06T13:29:20.048455+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 155 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 86 pos pengeluaran Neraca, 155 pipeline Okt."
+    },
     {
       "id": "sy_20261006-1116",
       "mulai": "2026-10-06T11:16:42.964539+00:00",
@@ -76593,7 +76625,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-06T11:16:42.964539+00:00"
+    "last_sync": "2026-10-06T13:29:20.048455+00:00"
   },
   "neracaDetail": [
     {
@@ -77156,16 +77188,16 @@
   "oktoberPipeline": {
     "bulan": "2026-10",
     "totalBookings": 155,
-    "potentialOmzet": 52875000.0,
-    "totalDp": 14300000.0,
-    "estimateCashIn": 6525000.0,
-    "remainingCashIn": 6525000.0,
-    "totalPipelineCashIn": 38575000.0,
+    "potentialOmzet": 52850000.0,
+    "totalDp": 14400000.0,
+    "estimateCashIn": 6000000.0,
+    "remainingCashIn": 6000000.0,
+    "totalPipelineCashIn": 38450000.0,
     "breakdown": {
       "reguler": {
         "sesi": 55,
-        "nilai": 16375000.0,
-        "dp": 4950000.0
+        "nilai": 16350000.0,
+        "dp": 5050000.0
       },
       "wisudaDay1": {
         "sesi": 48,
@@ -77180,16 +77212,16 @@
     },
     "statusBreakdown": {
       "done": {
-        "sesi": 116,
-        "nilai": 40550000.0,
-        "dp": 10650000.0,
-        "cashIn": 29900000.0
+        "sesi": 117,
+        "nilai": 41050000.0,
+        "dp": 10750000.0,
+        "cashIn": 30300000.0
       },
       "confirmed": {
-        "sesi": 30,
-        "nilai": 9025000.0,
+        "sesi": 29,
+        "nilai": 8500000.0,
         "dp": 2650000.0,
-        "cashIn": 6525000.0
+        "cashIn": 6000000.0
       },
       "reschedule": {
         "sesi": 9,
@@ -77838,12 +77870,12 @@
         "admin": "AL",
         "noHp": "dp 100 limbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 400000.0,
@@ -77906,12 +77938,12 @@
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "anggi",
-        "paket": "Photofox",
-        "paketRaw": "Photofox",
-        "jmlOrang": 1,
-        "harga": 200000.0,
+        "paket": "Large Group",
+        "paketRaw": "LG 7",
+        "jmlOrang": 7,
+        "harga": 175000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100 limbo",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -77920,8 +77952,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 200000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 75000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -83406,6 +83438,32 @@
         "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_154",
+        "tanggal": "2026-10-06",
+        "client": "lavandula",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-06",
+        "cash": 0.0,
+        "transfer": 325000.0,
+        "total": 325000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_155",
+        "tanggal": "2026-10-06",
+        "client": "anggi",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-07",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -83768,9 +83826,9 @@
         "id": "ld_6",
         "tanggal": "2026-10-06",
         "leads": 0.0,
-        "dp": 4.0,
-        "sesiFoto": 10.0,
-        "transaksi": 14.0
+        "dp": 5.0,
+        "sesiFoto": 11.0,
+        "transaksi": 16.0
       },
       {
         "id": "ld_7",
@@ -141533,12 +141591,12 @@
         "admin": "AL",
         "noHp": "dp 100 limbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 400000.0,
@@ -141601,12 +141659,12 @@
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "anggi",
-        "paket": "Photofox",
-        "paketRaw": "Photofox",
-        "jmlOrang": 1,
-        "harga": 200000.0,
+        "paket": "Large Group",
+        "paketRaw": "LG 7",
+        "jmlOrang": 7,
+        "harga": 175000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100 limbo",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -141615,8 +141673,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 200000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 75000.0,
         "kategori": "Studio Reguler"
       },
       {
