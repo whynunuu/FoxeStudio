@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="logo_foxe.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
   <style>
     :root {
       --bg-canvas: #0b0f17;
@@ -41,13 +41,13 @@
 
     /* TOPBAR */
     .topbar {
-      height: 56px;
-      background: #0f1520;
-      border-bottom: 1px solid var(--border-subtle);
+      height: 58px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--hairline);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
+      padding: 0 20px;
       z-index: 50;
       user-select: none;
     }
@@ -311,101 +311,188 @@
       background: #090d14; border: 1px solid var(--border-subtle); border-radius: 6px;
       padding: 10px; font-family: var(--font-mono); font-size: 11px; color: #38bdf8; word-break: break-all;
     }
-    /* LEADS LIBRARY & AI DRAFT STYLES */
+    /* ============================================================
+       FOXE STUDIO CRM & LEADS LIBRARY — DESIGNclaude.md SPECIFICATION
+       Palet warna gelap hangat, Cormorant Garamond display,
+       JetBrains Mono data, Rule 4 Fit-In (max 1600px anti-tabrakan),
+       dan Scrollable Turunan List Container.
+       ============================================================ */
     .leads-view-container {
-      flex: 1; height: calc(100vh - 56px); overflow-y: auto; background: var(--bg-canvas);
-      padding: 24px 32px; display: flex; flex-direction: column; gap: 20px;
+      flex: 1;
+      height: calc(100vh - 58px);
+      overflow-y: auto;
+      background: var(--canvas);
+      padding: 24px 32px 80px;
+      max-width: 1600px;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
-    .leads-header {
-      display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px;
+    .leads-view-container::-webkit-scrollbar {
+      width: 8px;
     }
-    .leads-title { font-size: 20px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
-    .leads-sub { font-size: 13px; color: var(--text-secondary); margin-top: 4px; line-height: 1.5; max-width: 860px; }
-    
-    .leads-kpi-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px;
+    .leads-view-container::-webkit-scrollbar-track {
+      background: var(--canvas);
     }
-    .kpi-card {
-      background: #141c28; border: 1px solid var(--border-subtle); border-radius: 10px;
-      padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; position: relative; overflow: hidden;
+    .leads-view-container::-webkit-scrollbar-thumb {
+      background: var(--hairline-strong);
+      border-radius: 4px;
     }
-    .kpi-card::before {
-      content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--border-subtle);
-    }
-    .kpi-card.hot::before { background: #ef4444; }
-    .kpi-card.warm::before { background: #f59e0b; }
-    .kpi-card.cold::before { background: #06b6d4; }
-    .kpi-card.closed::before { background: #10b981; }
-    .kpi-card.unconverted::before { background: #a855f7; }
-    
-    .kpi-card .k { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; }
-    .kpi-card .v { font-size: 22px; font-weight: 700; color: #fff; font-family: var(--font-mono); }
-    .kpi-card .sub { font-size: 11.5px; color: var(--text-secondary); }
 
-    /* CLICKABLE KPI CARDS */
-    .kpi-card.clickable-kpi {
+    /* HEADER & PERIOD SWITCHER */
+    .leads-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .leads-title-block {
+      flex: 1;
+      min-width: 320px;
+    }
+    .leads-title {
+      font-family: var(--ff-display);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+    }
+    .leads-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.55;
+      max-width: 920px;
+    }
+
+    /* CRM PERIOD SWITCHER TABS */
+    .crm-period-switch-bar {
+      display: inline-flex;
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      border-radius: 9999px;
+      padding: 3px;
+      gap: 4px;
+    }
+    .crm-period-btn {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-family: var(--ff-body);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 9999px;
       cursor: pointer;
-      position: relative;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.18s ease;
       user-select: none;
     }
-    .kpi-card.clickable-kpi:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-      border-color: rgba(56, 189, 248, 0.6) !important;
+    .crm-period-btn:hover {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.04);
     }
-    .kpi-card.clickable-kpi.active-kpi {
-      background: #172438 !important;
-      border-color: #38bdf8 !important;
-      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4), 0 8px 24px rgba(0,0,0,0.4);
+    .crm-period-btn.active {
+      background: var(--surface);
+      color: var(--ink);
+      border: 1px solid var(--hairline-strong);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
-    .kpi-card-active-indicator {
-      position: absolute;
-      top: 8px;
-      right: 10px;
+    .crm-period-pill {
       font-size: 10px;
-      font-weight: 700;
-      padding: 1px 6px;
-      border-radius: 4px;
-      background: rgba(56, 189, 248, 0.2);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      display: none;
+      padding: 1px 7px;
+      border-radius: 9999px;
+      background: var(--surface3);
+      color: var(--muted-soft);
+      font-family: var(--ff-mono);
+      font-weight: 600;
     }
-    .kpi-card.active-kpi .kpi-card-active-indicator {
-      display: inline-block;
+    .crm-period-btn.active .crm-period-pill {
+      background: var(--accent-soft);
+      color: var(--accent-ink);
+      border: 1px solid rgba(56, 189, 248, 0.3);
     }
 
-    /* 2. TURUNAN LEADS SECTION */
-    .turunan-leads-section {
-      background: #111722;
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      padding: 16px 18px;
+    /* MTD DAILY TIMELINE TRACKER (1 OKTOBER S.D. CUT-OFF HARI INI) */
+    .crm-mtd-tracker-card {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 18px 22px;
       display: flex;
       flex-direction: column;
       gap: 14px;
+      box-shadow: var(--shadow);
+      position: relative;
     }
-    .turunan-header {
+    .crm-mtd-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      padding-bottom: 12px;
     }
-    .turunan-title-box { display: flex; flex-direction: column; gap: 4px; }
-    .turunan-title { font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
-    .turunan-subtitle { font-size: 11.5px; color: #94a3b8; }
-    .turunan-items-grid {
+    .crm-mtd-title-box {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .crm-mtd-title {
+      font-family: var(--ff-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .crm-mtd-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .crm-mtd-stats-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .crm-mtd-badge {
+      font-size: 11.5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      color: var(--ink2);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--ff-mono);
+    }
+    .crm-mtd-badge b {
+      color: var(--good);
+    }
+
+    /* MINI DAY CARDS (1 OKT - 6 OKT) */
+    .crm-day-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
       gap: 10px;
     }
-    .turunan-item-card {
-      background: #16202e;
-      border: 1px solid var(--border-subtle);
+    .crm-day-card {
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
       border-radius: 8px;
       padding: 12px 14px;
       cursor: pointer;
@@ -413,324 +500,286 @@
       flex-direction: column;
       gap: 8px;
       transition: all 0.18s ease;
+      user-select: none;
       position: relative;
     }
-    .turunan-item-card:hover {
-      border-color: #38bdf8;
+    .crm-day-card:hover {
+      border-color: var(--accent-ink);
       transform: translateY(-2px);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      background: var(--surface3);
     }
-    .turunan-item-card.active-lead-item {
-      background: #17273d !important;
-      border-color: #38bdf8 !important;
-      box-shadow: 0 0 0 2px rgba(56,189,248,0.35);
+    .crm-day-card.active-day {
+      border-color: var(--accent-ink) !important;
+      background: var(--surface3) !important;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35), 0 6px 16px rgba(0,0,0,0.5);
     }
-    .turunan-item-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 6px;
+    .crm-day-card.today {
+      border-color: rgba(56, 189, 248, 0.6);
     }
-    .turunan-item-name {
-      font-weight: 700;
-      font-size: 13.5px;
-      color: #fff;
-    }
-    .turunan-item-phone {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: #38bdf8;
-    }
-    .turunan-item-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      color: #94a3b8;
-      margin-top: 2px;
-    }
-    .turunan-item-btn {
-      margin-top: 4px;
-      font-size: 11px;
-      padding: 4px 8px;
-      width: 100%;
-      text-align: center;
-      background: #1e293b;
-      border: 1px solid rgba(56,189,248,0.3);
-      color: #38bdf8;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .turunan-item-btn:hover {
-      background: #0284c7;
-      color: #fff;
-    }
-
-    /* 3. CHAT WORKSPACE SECTION */
-    .chat-workspace-section {
-      background: #111722;
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      padding: 16px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .chat-workspace-header {
+    .crm-day-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      background: #16202e;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 8px;
-      padding: 12px 14px;
     }
-    .chat-workspace-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    @media (max-width: 900px) {
-      .chat-workspace-grid { grid-template-columns: 1fr; }
-    }
-    .chat-conversation-pane {
-      background: #0d121a;
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      min-height: 220px;
-      max-height: 360px;
-      overflow-y: auto;
-    }
-    .ai-workspace-pane {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    /* 4. PERFORMANCE LEADERBOARD (MINIMALIST DI PALING BAWAH) */
-    .leaderboard-sec.minimalist-perf {
-      background: #0f1520;
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      padding: 12px 16px;
-      margin-top: 4px;
-    }
-    .leaderboard-sec.minimalist-perf .leaderboard-title {
+    .crm-day-date {
+      font-family: var(--ff-mono);
       font-size: 13px;
       font-weight: 700;
-      color: #e2e8f0;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      color: var(--ink);
     }
-    .minimalist-perf .admin-cards-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 10px;
-      transition: all 0.2s ease;
+    .crm-day-tag {
+      font-size: 9.5px;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 600;
     }
-    .minimalist-perf .admin-perf-card {
-      background: #141c28;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 7px;
-      padding: 10px 12px;
+    .crm-day-tag.closed { background: var(--good-bg); color: var(--good); border: 1px solid rgba(93, 184, 114, 0.3); }
+    .crm-day-tag.mixed { background: var(--warn-bg); color: var(--warn); border: 1px solid rgba(212, 160, 23, 0.3); }
+    .crm-day-tag.idle { background: var(--surface4); color: var(--muted); border: 1px solid var(--hairline); }
+
+    .crm-day-metric {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 3px;
     }
-    .minimalist-perf .admin-perf-head {
+    .crm-day-count-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size: 11.5px;
+      color: var(--muted);
     }
-    .minimalist-perf .admin-name {
-      font-weight: 700;
-      font-size: 12.5px;
-      color: #38bdf8;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .crm-day-count-row b {
+      color: var(--ink);
+      font-family: var(--ff-mono);
     }
-    .perf-progress-bar {
+    .crm-day-progress {
       height: 4px;
-      background: #1e293b;
+      background: var(--surface4);
       border-radius: 2px;
       overflow: hidden;
-      margin: 2px 0 4px 0;
-    }
-    .perf-progress-fill {
-      height: 100%;
-      background: #34d399;
-      border-radius: 2px;
-      transition: width 0.3s ease;
-    }
-    .perf-metrics-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px 8px;
-      font-size: 11px;
-    }
-    .perf-metric-item {
       display: flex;
-      justify-content: space-between;
-      color: #94a3b8;
     }
-    .perf-metric-item b {
-      color: #e2e8f0;
+    .crm-day-fill-closed {
+      background: var(--good);
+      height: 100%;
+    }
+    .crm-day-fill-pending {
+      background: var(--warn);
+      height: 100%;
+    }
+    .crm-day-amount {
+      font-family: var(--ff-mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink2);
+      text-align: right;
     }
 
-    .lead-pill { font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .pill-hot { background: rgba(239, 68, 68, 0.18); color: #f87171; border: 1px solid rgba(239,68,68,0.4); }
-    .pill-warm { background: rgba(245, 158, 11, 0.18); color: #fbbf24; border: 1px solid rgba(245,158,11,0.4); }
-    .pill-cold { background: rgba(6, 182, 212, 0.18); color: #22d3ee; border: 1px solid rgba(6,182,212,0.4); }
-    .pill-closed { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16,185,129,0.4); }
-
-    .lead-summary-box { font-size: 12px; color: var(--text-secondary); background: #0b0f17; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-subtle); }
-    
-    .chat-bubble-preview { display: flex; flex-direction: column; gap: 6px; font-size: 12px; }
-    .chat-bubble { max-width: 85%; padding: 7px 12px; border-radius: 8px; line-height: 1.4; }
-    .chat-bubble.customer { background: #1e293b; color: #e2e8f0; align-self: flex-start; border-bottom-left-radius: 2px; }
-    .chat-bubble.admin { background: #0284c7; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
-
-    .ai-draft-container {
-      background: linear-gradient(135deg, rgba(2,132,199,0.1), rgba(139,92,246,0.1));
-      border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
+    /* 1. DASHBOARD STATUS (INTERACTIVE KPI CARDS) */
+    .leads-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
     }
-    .ai-draft-header { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.5px; }
-    .ai-draft-text { font-size: 12.5px; color: #f1f5f9; line-height: 1.5; font-style: italic; background: rgba(0,0,0,0.3); padding: 10px 12px; border-radius: 6px; border-left: 3px solid #38bdf8; }
-    .ai-draft-actions { display: flex; justify-content: flex-end; align-items: center; gap: 8px; flex-wrap: wrap; }
-
-    
-    /* ==========================================================
-       ANALISIS TREN PAKET MASUK & FILTER CRM (DEMAND ANALYTICS)
-       ========================================================== */
-    .paket-analytics-card {
-      background: #111722;
-      border: 1px solid var(--border-subtle);
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
       border-radius: 10px;
       padding: 16px 18px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 4px;
+      gap: 4px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.2s ease;
+    }
+    .kpi-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--hairline);
+    }
+    .kpi-card.hot::before { background: var(--crit); }
+    .kpi-card.warm::before { background: var(--warn); }
+    .kpi-card.cold::before { background: var(--accent-ink); }
+    .kpi-card.closed::before { background: var(--good); }
+    .kpi-card.unconverted::before { background: var(--lead); }
+
+    .kpi-lbl {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+    }
+    .kpi-val {
+      font-family: var(--ff-display);
+      font-size: clamp(22px, 2.2vw, 32px);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.15;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .kpi-sub {
+      font-size: 11.5px;
+      color: var(--muted-soft);
+      line-height: 1.35;
+    }
+
+    .kpi-card.clickable-kpi {
+      cursor: pointer;
+      user-select: none;
+    }
+    .kpi-card.clickable-kpi:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-ink) !important;
+      background: var(--surface2);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    }
+    .kpi-card.clickable-kpi.active-kpi {
+      background: var(--surface2) !important;
+      border-color: var(--accent-ink) !important;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35), 0 8px 20px rgba(0,0,0,0.5);
+    }
+    .kpi-card-active-indicator {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 7px;
+      border-radius: 9999px;
+      background: var(--accent-soft);
+      color: var(--accent-ink);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      display: none;
+    }
+    .kpi-card.active-kpi .kpi-card-active-indicator {
+      display: inline-block;
+    }
+
+    /* 1.5 ANALISIS SEBARAN & POPULARITAS PAKET (DEMAND ANALYTICS) */
+    .paket-analytics-card {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: var(--shadow);
     }
     .paket-analytics-head {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       flex-wrap: wrap;
       gap: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      padding-bottom: 10px;
     }
     .badge-live-pulse {
-      font-size: 9px;
-      padding: 2px 7px;
-      border-radius: 4px;
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.35);
+      font-size: 9.5px;
       font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: var(--accent-soft);
+      color: var(--accent-ink);
+      border: 1px solid rgba(56, 189, 248, 0.4);
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
     }
     .badge-live-pulse::before {
       content: "";
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
-      background: #38bdf8;
-      box-shadow: 0 0 6px #38bdf8;
-      animation: pulseDot 2s infinite ease-in-out;
-    }
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.35; transform: scale(0.8); }
+      background: var(--accent-ink);
+      box-shadow: 0 0 6px var(--accent-ink);
     }
 
     .paket-rank-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 10px;
+      gap: 12px;
     }
     .paket-card-item {
-      background: #141c28;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
       border-radius: 8px;
       padding: 12px 14px;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
+      transition: all 0.18s ease;
       user-select: none;
+      position: relative;
     }
     .paket-card-item:hover {
+      border-color: var(--accent-ink);
       transform: translateY(-2px);
-      border-color: #38bdf8;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+      background: var(--surface3);
     }
     .paket-card-item.active-paket {
-      background: #18263d !important;
-      border-color: #38bdf8 !important;
-      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4), 0 8px 20px rgba(0,0,0,0.4);
+      background: var(--surface3) !important;
+      border-color: var(--accent-ink) !important;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35);
     }
     .paket-card-top {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 6px;
+      gap: 8px;
     }
     .paket-card-title {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 4px;
     }
     .paket-rank-badge {
       font-size: 9.5px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 1px 6px;
+      padding: 2px 6px;
       border-radius: 4px;
-      background: rgba(255, 255, 255, 0.08);
-      color: #94a3b8;
+      background: var(--surface4);
+      color: var(--muted);
       display: inline-block;
       align-self: flex-start;
+      font-family: var(--ff-mono);
     }
     .paket-rank-badge.rank-top {
-      background: linear-gradient(135deg, rgba(249, 115, 22, 0.25), rgba(234, 88, 12, 0.35));
-      color: #fb923c;
-      border: 1px solid rgba(249, 115, 22, 0.5);
+      background: var(--warn-bg);
+      color: var(--warn);
+      border: 1px solid rgba(212, 160, 23, 0.4);
     }
     .paket-name {
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ink);
     }
     .paket-card-val {
       text-align: right;
       white-space: nowrap;
     }
     .paket-bar-track {
-      height: 5px;
-      background: #1e293b;
-      border-radius: 3px;
+      height: 4px;
+      background: var(--surface4);
+      border-radius: 2px;
       overflow: hidden;
-      margin: 1px 0;
+      margin: 2px 0;
     }
     .paket-bar-fill {
       height: 100%;
-      border-radius: 3px;
+      border-radius: 2px;
       transition: width 0.3s ease;
     }
     .paket-card-footer {
@@ -747,32 +796,34 @@
     }
     .pill-mini {
       font-size: 9.5px;
-      padding: 1px 5px;
-      border-radius: 3px;
+      padding: 1px 6px;
+      border-radius: 4px;
       font-weight: 600;
+      font-family: var(--ff-mono);
     }
-    .pill-mini.hot { background: rgba(239, 68, 68, 0.15); color: #f87171; }
-    .pill-mini.warm { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
-    .pill-mini.closed { background: rgba(16, 185, 129, 0.15); color: #34d399; }
-    .pill-mini.cold { background: rgba(6, 182, 212, 0.15); color: #22d3ee; }
+    .pill-mini.hot { background: var(--crit-bg); color: var(--crit); }
+    .pill-mini.warm { background: var(--warn-bg); color: var(--warn); }
+    .pill-mini.closed { background: var(--good-bg); color: var(--good); }
+    .pill-mini.cold { background: var(--accent-soft); color: var(--accent-ink); }
     .paket-est-val {
       font-weight: 700;
-      color: #c084fc;
-      font-family: var(--font-mono);
+      color: var(--ink2);
+      font-family: var(--ff-mono);
       font-size: 11.5px;
     }
 
     .paket-insight-box {
-      background: #0d121a;
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      border-radius: 6px;
-      padding: 10px 14px;
-      font-size: 12px;
-      color: #cbd5e1;
-      line-height: 1.5;
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 12.5px;
+      color: var(--ink2);
+      line-height: 1.55;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     /* CHIPS FILTER ROW */
@@ -783,45 +834,149 @@
       overflow-x: auto;
       padding: 6px 0;
       scrollbar-width: thin;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      margin-bottom: 4px;
+      border-bottom: 1px solid var(--hairline);
+      margin-bottom: 6px;
     }
     .paket-chip-btn {
-      background: #141c28;
-      border: 1px solid var(--border-subtle);
-      color: #cbd5e1;
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      color: var(--ink2);
       font-size: 11.5px;
       font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 20px;
+      padding: 4px 12px;
+      border-radius: 9999px;
       cursor: pointer;
       white-space: nowrap;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       transition: all 0.15s ease;
       user-select: none;
     }
     .paket-chip-btn:hover {
-      background: #1e293b;
-      border-color: #38bdf8;
-      color: #fff;
+      background: var(--surface3);
+      border-color: var(--accent-ink);
+      color: var(--ink);
     }
     .paket-chip-btn.active {
-      background: #0284c7 !important;
-      border-color: #38bdf8 !important;
-      color: #fff !important;
-      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+      background: var(--accent) !important;
+      border-color: var(--accent) !important;
+      color: var(--on-accent) !important;
+      box-shadow: 0 2px 8px rgba(0, 128, 200, 0.35);
     }
     .paket-chip-count {
       font-size: 10px;
       padding: 1px 6px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.15);
       font-weight: 700;
+      font-family: var(--ff-mono);
     }
-    .paket-chip-btn.active .paket-chip-count {
-      background: rgba(255, 255, 255, 0.25);
+
+    /* 2. TURUNAN LEADS SECTION & SCROLLABLE CONTAINER (RULE 4) */
+    .turunan-leads-section {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow);
+    }
+    .turunan-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: 1px solid var(--hairline);
+      padding-bottom: 12px;
+    }
+    .turunan-title-box { display: flex; flex-direction: column; gap: 4px; }
+    .turunan-title {
+      font-family: var(--ff-display);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .turunan-subtitle { font-size: 12px; color: var(--muted); }
+
+    /* RULE 4: STANDARISASI KONTAINER SCROLLABLE */
+    .turunan-scroll-wrapper {
+      max-height: 480px;
+      overflow-y: auto;
+      padding-right: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--hairline-strong) transparent;
+    }
+    .turunan-scroll-wrapper::-webkit-scrollbar {
+      width: 6px;
+    }
+    .turunan-scroll-wrapper::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .turunan-scroll-wrapper::-webkit-scrollbar-thumb {
+      background: var(--hairline-strong);
+      border-radius: 3px;
+    }
+
+    .turunan-items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 10px;
+    }
+    .turunan-item-card {
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      padding: 12px 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.18s ease;
+      position: relative;
+    }
+    .turunan-item-card:hover {
+      border-color: var(--accent-ink);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      background: var(--surface3);
+    }
+    .turunan-item-card.active-lead-item {
+      background: var(--surface3) !important;
+      border-color: var(--accent-ink) !important;
+      box-shadow: 0 0 0 2px rgba(56,189,248,0.35);
+    }
+    .turunan-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .turunan-item-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .turunan-item-phone {
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .turunan-item-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--muted);
+      flex-wrap: wrap;
     }
 
     /* LEAD ITEM PAKET BADGE */
@@ -836,20 +991,191 @@
       cursor: pointer;
       transition: all 0.15s ease;
       white-space: nowrap;
+      font-family: var(--ff-body);
     }
     .lead-paket-pill:hover {
       opacity: 0.85;
       transform: scale(1.03);
     }
-    .paket-graduation { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); }
-    .paket-grad_premium { background: rgba(168, 85, 247, 0.18); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); }
-    .paket-large_group { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
-    .paket-self_photo { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+    .paket-graduation { background: var(--accent-soft); color: var(--accent-ink); border: 1px solid rgba(56, 189, 248, 0.35); }
+    .paket-grad_premium { background: rgba(139, 92, 246, 0.18); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4); }
+    .paket-large_group { background: var(--warn-bg); color: var(--warn); border: 1px solid rgba(212, 160, 23, 0.35); }
+    .paket-self_photo { background: var(--good-bg); color: var(--good); border: 1px solid rgba(93, 184, 114, 0.35); }
     .paket-family { background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.35); }
     .paket-couple { background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.35); }
-    .paket-single { background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.35); }
-    .paket-other { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.3); }
+    .paket-single { background: var(--accent-soft); color: var(--accent-ink); border: 1px solid rgba(56, 189, 248, 0.35); }
+    .paket-other { background: var(--surface4); color: var(--ink2); border: 1px solid var(--hairline); }
 
+    /* STATUS PILLS */
+    .lead-pill {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+      font-family: var(--ff-mono);
+    }
+    .lead-pill.pill-hot { background: var(--crit-bg); color: var(--crit); border: 1px solid rgba(224, 122, 104, 0.35); }
+    .lead-pill.pill-warm { background: var(--warn-bg); color: var(--warn); border: 1px solid rgba(212, 160, 23, 0.35); }
+    .lead-pill.pill-cold { background: var(--accent-soft); color: var(--accent-ink); border: 1px solid rgba(56, 189, 248, 0.35); }
+    .lead-pill.pill-closed { background: var(--good-bg); color: var(--good); border: 1px solid rgba(93, 184, 114, 0.35); }
+
+    /* SEARCH & INPUTS */
+    .lead-search-box {
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      padding: 6px 12px;
+      color: var(--ink);
+      font-size: 12.5px;
+      font-family: var(--ff-body);
+      min-width: 220px;
+      outline: none;
+      transition: all 0.15s ease;
+    }
+    .lead-search-box:focus {
+      border-color: var(--accent-ink);
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+    }
+    .field-select {
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      color: var(--ink2);
+      font-size: 12px;
+      font-family: var(--ff-body);
+      outline: none;
+    }
+    .field-select:focus {
+      border-color: var(--accent-ink);
+    }
+
+    /* 3. CHAT WORKSPACE & AI ASSISTANT */
+    .chat-workspace-section {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 20px 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* 4. PERFORMANCE ADMIN & LEADERBOARD */
+    .leaderboard-sec.minimalist-perf {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: var(--shadow);
+    }
+    .leaderboard-title {
+      font-family: var(--ff-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .admin-cards-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+    .admin-perf-card {
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .admin-perf-name {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .admin-perf-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+    .admin-perf-row b {
+      color: var(--ink2);
+      font-family: var(--ff-mono);
+    }
+
+    /* BUTTONS */
+    .btn {
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+    }
+    .btn:hover {
+      background: var(--surface3);
+      border-color: var(--hairline-strong);
+    }
+    .btn-sm {
+      padding: 4px 10px;
+      font-size: 11.5px;
+    }
+    .btn-primary {
+      background: var(--accent) !important;
+      border-color: var(--accent) !important;
+      color: var(--on-accent) !important;
+    }
+    .btn-primary:hover {
+      background: var(--accent-ink) !important;
+    }
+    .btn-outline-cyan {
+      background: var(--accent-soft) !important;
+      color: var(--accent-ink) !important;
+      border-color: rgba(56, 189, 248, 0.4) !important;
+    }
+    .btn-outline-cyan:hover {
+      border-color: var(--accent-ink) !important;
+    }
+
+    /* RESPONSIVE LAYOUT BREAKPOINTS (RULE 4) */
+    @media (max-width: 1080px) {
+      .leads-view-container {
+        padding: 16px 16px 60px;
+      }
+      .leads-kpi-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+      .turunan-items-grid {
+        grid-template-columns: 1fr;
+      }
+      .crm-day-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+    }
+    
     .cal-view-container {
       flex: 1;
       height: calc(100vh - 56px);
@@ -1235,8 +1561,9 @@
     </div>
   </div>
 
-  <!-- PUSTAKA LEADS & AI DRAFT VIEW -->
+    <!-- PUSTAKA LEADS & AI DRAFT VIEW (FOXE STUDIO CRM) -->
   <div id="leadsViewContainer" class="leads-view-container" style="display: none;">
+    <!-- HEADER & PERIOD SWITCHER -->
     <div class="leads-header">
       <div class="leads-title-block">
         <h2 class="leads-title">📚 Pustaka Leads Masuk WhatsApp &amp; AI Follow-Up Assistant</h2>
@@ -1244,16 +1571,56 @@
           Mencocokkan chat mentah WhatsApp via Webhook Fonnte dengan spreadsheet transaksi resmi studio, menampung leads unconverted (Hot, Warm, Cold), dan meracik rekomendasi balasan humanis tanpa template kaku robot (no slop).
         </p>
       </div>
-      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-        <button id="btnTriggerReminderWeb" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#f87171; border:1px solid #ef4444;" title="Kirim reminder daftar chat urgent ke WhatsApp & Telegram Admin">
-          🔔 Trigger Reminder Admin (3 Jam)
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+        <!-- DUAL-PERIOD SWITCHER (AWAL BULAN MTD VS SEMUA RIWAYAT) -->
+        <div class="crm-period-switch-bar">
+          <button id="btnPeriodMtd" class="crm-period-btn active" onclick="switchCrmPeriod('MTD')" title="Hitungan dari Awal Bulan (1 Okt s.d. Hari Ini)">
+            📅 Oktober 2026 MTD <span class="crm-period-pill" id="periodMtdCount">14 Leads</span>
+          </button>
+          <button id="btnPeriodAll" class="crm-period-btn" onclick="switchCrmPeriod('ALL')" title="Seluruh Riwayat Masuk (Termasuk Arsip September)">
+            🗂️ Semua Riwayat <span class="crm-period-pill" id="periodAllCount">18 Leads</span>
+          </button>
+        </div>
+        <button id="btnTriggerReminderWeb" class="btn btn-sm" style="background:var(--crit-bg); color:var(--crit); border:1px solid rgba(224,122,104,0.4);" title="Kirim reminder daftar chat urgent ke WhatsApp & Telegram Admin">
+          🔔 Reminder Admin
         </button>
-        <button id="btnSyncStateSheet" class="btn btn-sm" style="background:#1e293b; color:#38bdf8; border:1px solid #38bdf8;">
-          🔄 Sinkronkan Data Sheet
+        <button id="btnSyncStateSheet" class="btn btn-sm btn-outline-cyan" title="Sinkronkan dengan Sheet & Vault">
+          🔄 Sinkronkan Data
         </button>
         <button id="btnSimulateFonnte2" class="btn btn-primary btn-sm">
           + Simulasi Chat Baru
         </button>
+      </div>
+    </div>
+
+    <!-- MTD DAILY TIMELINE TRACKER (1 OKTOBER S.D. CUT-OFF HARI INI) -->
+    <div class="crm-mtd-tracker-card" id="crmMtdTrackerCard">
+      <div class="crm-mtd-head">
+        <div class="crm-mtd-title-box">
+          <div class="crm-mtd-title">
+            <span>📅 Perjalanan Status Leads dari Awal Bulan (Oktober 2026 MTD)</span>
+            <span class="badge-live-pulse">MTD LIVE</span>
+          </div>
+          <div class="crm-mtd-sub">
+            Rekap pergerakan status chat harian dari 01 Oktober s.d. hari ini. Klik salah satu tanggal untuk menyaring calon klien hari tersebut.
+          </div>
+        </div>
+        <div class="crm-mtd-stats-row">
+          <div class="crm-mtd-badge">
+            <span>Win Rate MTD:</span> <b id="mtdWinRateVal">71.4%</b> (10 Closed)
+          </div>
+          <div class="crm-mtd-badge">
+            <span>Total Nilai MTD:</span> <b id="mtdTotalVal" style="color:var(--accent-ink);">Rp 3.500.000</b>
+          </div>
+          <button id="btnResetDateFilter" class="btn btn-sm" onclick="filterByLeadDate('ALL')" style="font-size:11px; padding:3px 9px;" title="Reset filter tanggal dan tampilkan seluruh hari MTD">
+            🔄 Semua Hari MTD
+          </button>
+        </div>
+      </div>
+
+      <!-- MINI DAY CARDS (01 OKT - 06 OKT) -->
+      <div class="crm-day-grid" id="crmDayGrid">
+        <!-- Rendered dynamically by renderMtdTimeline() -->
       </div>
     </div>
 
@@ -1262,59 +1629,58 @@
       <div class="kpi-card clickable-kpi active-kpi" id="kpiCardTotal" data-filter="all" title="Klik untuk lihat Semua Leads">
         <span class="kpi-card-active-indicator">● Aktif</span>
         <div class="kpi-lbl">Total Leads Masuk</div>
-        <div class="kpi-val" id="kpiTotalLeads">7</div>
-        <div class="kpi-sub">WhatsApp Fonnte Webhook</div>
+        <div class="kpi-val" id="kpiTotalLeads">14</div>
+        <div class="kpi-sub" id="kpiTotalSub">WhatsApp Fonnte Webhook (MTD)</div>
       </div>
-      <div class="kpi-card clickable-kpi" id="kpiCardHot" data-filter="HOT" style="border-left: 3px solid #ef4444;" title="Klik untuk lihat Hot Leads">
+      <div class="kpi-card clickable-kpi hot" id="kpiCardHot" data-filter="HOT" title="Klik untuk lihat Hot Leads">
         <span class="kpi-card-active-indicator">● Aktif</span>
-        <div class="kpi-lbl" style="color:#f87171;">🔥 Hot Leads</div>
-        <div class="kpi-val" style="color:#f87171;" id="kpiHotLeads">2</div>
+        <div class="kpi-lbl" style="color:var(--crit);">🔥 Hot Leads</div>
+        <div class="kpi-val" style="color:var(--crit);" id="kpiHotLeads">0</div>
         <div class="kpi-sub">Isi form / hampir DP</div>
       </div>
-      <div class="kpi-card clickable-kpi" id="kpiCardWarm" data-filter="WARM" style="border-left: 3px solid #f59e0b;" title="Klik untuk lihat Warm Leads">
+      <div class="kpi-card clickable-kpi warm" id="kpiCardWarm" data-filter="WARM" title="Klik untuk lihat Warm Leads">
         <span class="kpi-card-active-indicator">● Aktif</span>
-        <div class="kpi-lbl" style="color:#fbbf24;">⚡ Warm Leads</div>
-        <div class="kpi-val" style="color:#fbbf24;" id="kpiWarmLeads">2</div>
+        <div class="kpi-lbl" style="color:var(--warn);">⚡ Warm Leads</div>
+        <div class="kpi-val" style="color:var(--warn);" id="kpiWarmLeads">0</div>
         <div class="kpi-sub">Tanya lanjut paket</div>
       </div>
-      <div class="kpi-card clickable-kpi" id="kpiCardCold" data-filter="COLD" style="border-left: 3px solid #06b6d4;" title="Klik untuk lihat Cold Leads">
+      <div class="kpi-card clickable-kpi cold" id="kpiCardCold" data-filter="COLD" title="Klik untuk lihat Cold Leads">
         <span class="kpi-card-active-indicator">● Aktif</span>
-        <div class="kpi-lbl" style="color:#22d3ee;">❄️ Cold Leads</div>
-        <div class="kpi-val" style="color:#22d3ee;" id="kpiColdLeads">2</div>
+        <div class="kpi-lbl" style="color:var(--accent-ink);">❄️ Cold Leads</div>
+        <div class="kpi-val" style="color:var(--accent-ink);" id="kpiColdLeads">4</div>
         <div class="kpi-sub">Tanya pricelist lalu hening</div>
       </div>
-      <div class="kpi-card clickable-kpi" id="kpiCardClosed" data-filter="CLOSED" style="border-left: 3px solid #10b981;" title="Klik untuk lihat Closed DP">
+      <div class="kpi-card clickable-kpi closed" id="kpiCardClosed" data-filter="CLOSED" title="Klik untuk lihat Closed DP">
         <span class="kpi-card-active-indicator">● Aktif</span>
-        <div class="kpi-lbl" style="color:#34d399;">✅ Closed DP</div>
-        <div class="kpi-val" style="color:#34d399;" id="kpiClosedLeads">1</div>
-        <div class="kpi-sub">Match terverifikasi di Sheet</div>
+        <div class="kpi-lbl" style="color:var(--good);">✅ Closed DP</div>
+        <div class="kpi-val" style="color:var(--good);" id="kpiClosedLeads">10</div>
+        <div class="kpi-sub">Match terverifikasi di Sheet Log Order</div>
       </div>
-      <div class="kpi-card clickable-kpi" id="kpiCardUnconv" data-filter="UNCONVERTED" style="border-left: 3px solid #a855f7;" title="Klik untuk lihat Unconverted Pipeline">
+      <div class="kpi-card clickable-kpi unconverted" id="kpiCardUnconv" data-filter="UNCONVERTED" title="Klik untuk lihat Unconverted Pipeline">
         <span class="kpi-card-active-indicator">● Aktif</span>
-        <div class="kpi-lbl" style="color:#c084fc;">💰 Unconverted Pipeline</div>
-        <div class="kpi-val" style="color:#c084fc;" id="kpiUnconvertedVal">Rp 1.635.000</div>
+        <div class="kpi-lbl" style="color:var(--lead);">💰 Unconverted Pipeline</div>
+        <div class="kpi-val" style="color:var(--lead);" id="kpiUnconvertedVal">Rp 1.000.000</div>
         <div class="kpi-sub">Potensi omzet tertahan di chat</div>
       </div>
     </div>
 
-    
     <!-- 1.5 ANALISIS SEBARAN & POPULARITAS PAKET MASUK (TRENDING DEMAND WIDGET) -->
     <div class="paket-analytics-card" id="paketAnalyticsCard">
       <div class="paket-analytics-head">
         <div>
-          <div style="font-size:11px; font-weight:700; text-transform:uppercase; color:#38bdf8; letter-spacing:0.5px; display:flex; align-items:center; gap:6px;">
+          <div style="font-size:11px; font-weight:700; text-transform:uppercase; color:var(--accent-ink); letter-spacing:0.5px; display:flex; align-items:center; gap:6px;">
             <span>🔥 ANALISIS TREN PAKET MASUK DARI CHAT</span>
-            <span class="badge-live-pulse">LIVE CRM</span>
+            <span class="badge-live-pulse">DEMAND ANALYTICS</span>
           </div>
-          <h3 style="font-size:15px; font-weight:700; color:#fff; margin-top:2px; display:flex; align-items:center; gap:8px;">
+          <h3 style="font-family:var(--ff-display); font-size:18px; font-weight:700; color:var(--ink); margin-top:2px; display:flex; align-items:center; gap:8px;">
             📊 Peringkat Minat Paket Foto (Chat &amp; Leads Demand)
           </h3>
-          <p style="font-size:11.5px; color:#94a3b8; margin-top:2px;">
+          <p style="font-size:12px; color:var(--muted); margin-top:2px;">
             Daftar paket foto yang paling ramai ditanyakan &amp; dipesan calon klien di WhatsApp. Klik kartu paket untuk menyaring daftar chat klien di bawah.
           </p>
         </div>
         <div style="display:flex; align-items:center; gap:8px;">
-          <button id="btnResetPaketFilter" class="btn btn-sm" style="background:#1e293b; color:#38bdf8; border-color:#38bdf8;" title="Reset filter paket dan tampilkan semua chat">
+          <button id="btnResetPaketFilter" class="btn btn-sm btn-outline-cyan" onclick="setPaketFilter('ALL')" title="Reset filter paket dan tampilkan semua chat">
             🔄 Tampilkan Semua Paket
           </button>
         </div>
@@ -1335,12 +1701,12 @@
     <div class="turunan-leads-section" id="turunanLeadsSection">
       <div class="turunan-header">
         <div class="turunan-title-box">
-          <div class="turunan-title" id="turunanTitle">📋 Daftar Semua Leads (<span id="turunanCount">7</span>)</div>
-          <div class="turunan-subtitle" id="turunanSubtitle">Menampilkan seluruh data prospek masuk dari WhatsApp Fonnte Webhook. Klik klien untuk membuka chat.</div>
+          <div class="turunan-title" id="turunanTitle">📋 Daftar Semua Leads (<span id="turunanCount">14</span>)</div>
+          <div class="turunan-subtitle" id="turunanSubtitle">Menampilkan prospek WhatsApp Fonnte Webhook dari awal bulan (Oktober 2026 MTD). Klik klien untuk membuka chat.</div>
         </div>
         <div class="turunan-toolbar-right" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
           <input type="text" id="leadSearchInput" class="lead-search-box" placeholder="🔍 Cari nama klien, no HP, atau isi chat...">
-          <select id="leadPaketFilter" class="field-select" style="min-width:175px; padding:6px 10px; font-size:12px; border-color:rgba(56,189,248,0.5); color:#38bdf8;">
+          <select id="leadPaketFilter" class="field-select" style="min-width:175px; padding:6px 10px; font-size:12px; border-color:rgba(56,189,248,0.5); color:var(--accent-ink);">
             <option value="ALL">📦 Semua Paket Masuk</option>
           </select>
           <select id="leadAdminFilter" class="field-select" style="width:130px; padding:6px 10px; font-size:12px;">
@@ -1352,8 +1718,12 @@
         </div>
       </div>
       <div class="paket-chips-bar" id="paketChipsBar"></div>
-      <div class="turunan-items-grid" id="turunanListContainer">
-        <!-- Loaded dynamically -->
+
+      <!-- RULE 4: STANDARISASI KONTAINER SCROLLABLE -->
+      <div class="turunan-scroll-wrapper">
+        <div class="turunan-items-grid" id="turunanListContainer">
+          <!-- Loaded dynamically -->
+        </div>
       </div>
     </div>
 
@@ -2902,6 +3272,8 @@
     let currentLeadAdmin = 'ALL';
     let currentLeadSearch = '';
     let currentLeadPaket = 'ALL';
+    let currentCrmPeriod = 'MTD'; // 'MTD' (Default: 1 Okt s.d. cut-off hari ini) or 'ALL' (Semua Riwayat)
+    let currentLeadDate = 'ALL';   // 'ALL' or specific date e.g. '2026-10-01'
 
     let leadsData = [
       {
@@ -3651,6 +4023,131 @@
       return { key: 'OTHER', name: 'Konsultasi Umum / Belum Pilih', icon: '💬', tag: 'Konsultasi', group: 'OTHER' };
     }
 
+    function getActiveLeadsDataset() {
+      if (currentCrmPeriod === 'MTD') {
+        // Ambil prospek dari awal bulan (Oktober 2026 MTD: 1 Okt s.d. hari ini)
+        return leadsData.filter(l => (l.created_at || '').startsWith('2026-10'));
+      }
+      return leadsData.slice(); // Semua riwayat (Oktober + September)
+    }
+
+    function switchCrmPeriod(p) {
+      currentCrmPeriod = p || 'MTD';
+      currentLeadDate = 'ALL';
+      const btnMtd = document.getElementById('btnPeriodMtd');
+      const btnAll = document.getElementById('btnPeriodAll');
+      if (btnMtd) btnMtd.classList.toggle('active', currentCrmPeriod === 'MTD');
+      if (btnAll) btnAll.classList.toggle('active', currentCrmPeriod === 'ALL');
+      renderMtdTimeline();
+      renderLeads();
+      renderPaketAnalytics();
+    }
+    window.switchCrmPeriod = switchCrmPeriod;
+
+    function filterByLeadDate(dateStr) {
+      if (currentLeadDate === dateStr && dateStr !== 'ALL') {
+        currentLeadDate = 'ALL'; // toggle reset
+      } else {
+        currentLeadDate = dateStr;
+      }
+      renderMtdTimeline();
+      renderTurunanAndChat();
+    }
+    window.filterByLeadDate = filterByLeadDate;
+
+    function renderMtdTimeline() {
+      const grid = document.getElementById('crmDayGrid');
+      const winRateEl = document.getElementById('mtdWinRateVal');
+      const totalValEl = document.getElementById('mtdTotalVal');
+      const periodMtdPill = document.getElementById('periodMtdCount');
+      const periodAllPill = document.getElementById('periodAllCount');
+      if (!grid) return;
+
+      const mtdLeads = leadsData.filter(l => (l.created_at || '').startsWith('2026-10'));
+      const totalMtd = mtdLeads.length;
+      const closedMtd = mtdLeads.filter(l => l.tier === 'CLOSED' || l.status === 'CONVERTED').length;
+      const totalValMtd = mtdLeads.reduce((s, l) => s + (Number(l.estimated_value) || 0), 0);
+      const winRatePct = totalMtd > 0 ? Math.round((closedMtd / totalMtd) * 100) : 0;
+
+      if (periodMtdPill) periodMtdPill.textContent = `${totalMtd} Leads`;
+      if (periodAllPill) periodAllPill.textContent = `${leadsData.length} Leads`;
+      if (winRateEl) winRateEl.textContent = `${winRatePct}%`;
+      if (totalValEl) totalValEl.textContent = `Rp ${totalValMtd.toLocaleString('id-ID')}`;
+
+      // Daftar 6 hari aktif Oktober 2026 MTD (1 Okt s.d. cut-off 6 Okt)
+      const days = [
+        { date: '2026-10-01', label: '01 Okt', dayName: 'Kam', note: 'Awal Bulan' },
+        { date: '2026-10-02', label: '02 Okt', dayName: 'Jum', note: 'H-1 Wisuda' },
+        { date: '2026-10-03', label: '03 Okt', dayName: 'Sab', note: 'Super Peak UMP H1' },
+        { date: '2026-10-04', label: '04 Okt', dayName: 'Min', note: 'Super Peak UMP H2' },
+        { date: '2026-10-05', label: '05 Okt', dayName: 'Sen', note: 'Post-Peak' },
+        { date: '2026-10-06', label: '06 Okt', dayName: 'Sel', note: 'Hari Ini (Live)' }
+      ];
+
+      let html = '';
+      days.forEach(d => {
+        const dLeads = mtdLeads.filter(l => (l.created_at || '').startsWith(d.date));
+        const count = dLeads.length;
+        const closed = dLeads.filter(l => l.tier === 'CLOSED' || l.status === 'CONVERTED').length;
+        const pending = count - closed;
+        const val = dLeads.reduce((s, l) => s + (Number(l.estimated_value) || 0), 0);
+        const isSelected = (currentLeadDate === d.date);
+        const isToday = (d.date === '2026-10-06');
+
+        let tagClass = 'idle';
+        let tagText = '⚪ Tenang';
+        let barClosedPct = 0;
+        let barPendingPct = 0;
+
+        if (count > 0) {
+          barClosedPct = Math.round((closed / count) * 100);
+          barPendingPct = 100 - barClosedPct;
+          if (closed === count) {
+            tagClass = 'closed';
+            tagText = `✅ ${closed} Closed`;
+          } else if (closed > 0) {
+            tagClass = 'mixed';
+            tagText = `⚡ ${closed} Deal / ${pending} Nurture`;
+          } else {
+            tagClass = 'mixed';
+            tagText = `❄️ ${pending} Nurturing`;
+          }
+        } else if (isToday) {
+          tagClass = 'idle';
+          tagText = '🟢 Live Monitor';
+        }
+
+        html += `
+          <div class="crm-day-card ${isSelected ? 'active-day' : ''} ${isToday ? 'today' : ''}" onclick="filterByLeadDate('${d.date}')" title="Klik untuk saring leads tgl ${d.label}">
+            <div class="crm-day-top">
+              <div>
+                <div class="crm-day-date">${d.label} <span style="font-size:11px; font-weight:400; color:var(--muted);">${d.dayName}</span></div>
+                <div style="font-size:10px; color:var(--muted-soft); margin-top:1px;">${d.note}</div>
+              </div>
+              <span class="crm-day-tag ${tagClass}">${tagText}</span>
+            </div>
+
+            <div class="crm-day-metric">
+              <div class="crm-day-count-row">
+                <span>Traffic:</span>
+                <b>${count} Leads ${closed > 0 ? `<span style="color:var(--good); font-size:10.5px;">(${closed} DP)</span>` : ''}</b>
+              </div>
+              <div class="crm-day-progress">
+                <div class="crm-day-fill-closed" style="width: ${barClosedPct}%;"></div>
+                <div class="crm-day-fill-pending" style="width: ${barPendingPct}%;"></div>
+              </div>
+              <div class="crm-day-amount">
+                ${val > 0 ? `Rp ${val.toLocaleString('id-ID')}` : '<span style="color:var(--muted-soft); font-weight:400;">Rp 0</span>'}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+    }
+    window.renderMtdTimeline = renderMtdTimeline;
+
     function setPaketFilter(pkgKey) {
       if (currentLeadPaket === pkgKey && pkgKey !== 'ALL') {
         currentLeadPaket = 'ALL'; // toggle reset
@@ -3683,15 +4180,17 @@
       const chipsBar = document.getElementById('paketChipsBar');
       if (!grid) return;
 
-      const total = leadsData.length;
+      const activeDataset = getActiveLeadsDataset();
+      const total = activeDataset.length;
       if (total === 0) {
-        grid.innerHTML = '<div style="color:#94a3b8; font-size:12px; padding:12px;">Belum ada data leads untuk dianalisis.</div>';
+        grid.innerHTML = '<div style="color:var(--muted); font-size:12px; padding:12px;">Belum ada data leads untuk periode ini.</div>';
+        if (insightBox) insightBox.innerHTML = '<div style="color:var(--muted); font-size:12px;">Tidak ada data tren pada periode yang dipilih.</div>';
         return;
       }
 
       // Group statistics
       const statsMap = {};
-      leadsData.forEach(lead => {
+      activeDataset.forEach(lead => {
         const pkg = getLeadPaket(lead);
         const groupKey = pkg.group || pkg.key;
         if (!statsMap[groupKey]) {
@@ -3729,9 +4228,9 @@
         const isActive = (currentLeadPaket === item.group);
 
         let barColor = 'linear-gradient(90deg, #f97316, #ea580c)';
-        if (rank === 2) barColor = 'linear-gradient(90deg, #0284c7, #38bdf8)';
+        if (rank === 2) barColor = 'linear-gradient(90deg, #0080c8, #38bdf8)';
         else if (rank === 3) barColor = 'linear-gradient(90deg, #8b5cf6, #a855f7)';
-        else if (rank > 3) barColor = '#475569';
+        else if (rank > 3) barColor = 'var(--hairline-strong)';
 
         cardsHtml += `
           <div class="paket-card-item ${isActive ? 'active-paket' : ''}" data-paket="${item.group}" onclick="setPaketFilter('${item.group}')" title="Klik untuk saring ${item.name}">
@@ -3743,7 +4242,7 @@
                 <span class="paket-name">${item.icon} ${item.name}</span>
               </div>
               <div class="paket-card-val">
-                <b style="color:#fff; font-size:16px;">${item.count}</b> <span style="font-size:11px; color:#94a3b8;">leads (${pct}%)</span>
+                <b style="color:var(--ink); font-size:16px; font-family:var(--ff-display);">${item.count}</b> <span style="font-size:11px; color:var(--muted);">leads (${pct}%)</span>
               </div>
             </div>
 
@@ -3769,12 +4268,14 @@
       if (insightBox && sorted.length > 0) {
         const top1 = sorted[0];
         const topPct = Math.round((top1.count / total) * 100);
+        const periodLabel = (currentCrmPeriod === 'MTD') ? 'Oktober 2026 MTD (Awal Bulan)' : 'Seluruh Riwayat';
         insightBox.innerHTML = `
           <div style="font-size:18px;">💡</div>
           <div style="flex:1;">
-            <b>Kesimpulan Analisis Chat:</b> Paket <b>${top1.icon} ${top1.name}</b> mendominasi traffic dengan <b>${top1.count} dari ${total} leads (${topPct}%)</b>. 
-            ${top1.hot > 0 ? `Terdapat <b>${top1.hot} calon klien HOT</b> yang sudah siap transfer DP.` : ''}
-            Admin studio disarankan memprioritaskan ketersediaan slot backdrop dan respon cepat untuk paket ini.
+            <b>Kesimpulan Analisis Tren (${periodLabel}):</b> Paket <b>${top1.icon} ${top1.name}</b> mendominasi traffic minat dengan <b>${top1.count} dari ${total} leads (${topPct}%)</b>. 
+            ${top1.closed > 0 ? `Tercatat <b>${top1.closed} klien telah closed DP resmi</b> di kasir.` : ''}
+            ${top1.hot > 0 ? `Terdapat <b>${top1.hot} calon klien HOT</b> siap booking.` : ''}
+            Admin disarankan memprioritaskan ketersediaan slot backdrop dan respon cepat untuk paket ini.
           </div>
         `;
       }
@@ -3793,7 +4294,7 @@
       if (chipsBar) {
         let chipsHtml = `
           <button class="paket-chip-btn ${currentLeadPaket === 'ALL' ? 'active' : ''}" data-paket="ALL" onclick="setPaketFilter('ALL')">
-            <span>📦 Semua</span> <span class="paket-chip-count">${total}</span>
+            <span>📦 Semua Paket</span> <span class="paket-chip-count">${total}</span>
           </button>
         `;
         sorted.forEach(item => {
@@ -3809,12 +4310,13 @@
     }
 
     function renderLeads() {
-      const total = leadsData.length;
-      const hot = leadsData.filter(l => l.tier === 'HOT').length;
-      const warm = leadsData.filter(l => l.tier === 'WARM').length;
-      const cold = leadsData.filter(l => l.tier === 'COLD').length;
-      const closed = leadsData.filter(l => l.tier === 'CLOSED' || l.status === 'CONVERTED').length;
-      const unconverted = leadsData.filter(l => l.status === 'UNCONVERTED');
+      const activeDataset = getActiveLeadsDataset();
+      const total = activeDataset.length;
+      const hot = activeDataset.filter(l => l.tier === 'HOT').length;
+      const warm = activeDataset.filter(l => l.tier === 'WARM').length;
+      const cold = activeDataset.filter(l => l.tier === 'COLD').length;
+      const closed = activeDataset.filter(l => l.tier === 'CLOSED' || l.status === 'CONVERTED').length;
+      const unconverted = activeDataset.filter(l => l.status === 'UNCONVERTED' || (l.tier !== 'CLOSED' && l.status !== 'CONVERTED'));
       const unconvertedVal = unconverted.reduce((sum, l) => sum + (Number(l.estimated_value) || 0), 0);
 
       // KPI elements
@@ -3824,6 +4326,7 @@
       const elCold = document.getElementById('kpiColdLeads');
       const elClosed = document.getElementById('kpiClosedLeads');
       const elUnconv = document.getElementById('kpiUnconvertedVal');
+      const elTotalSub = document.getElementById('kpiTotalSub');
       const badgeUnconv = document.getElementById('leadsUnconvertedBadge');
 
       if (elTot) elTot.textContent = total;
@@ -3832,6 +4335,11 @@
       if (elCold) elCold.textContent = cold;
       if (elClosed) elClosed.textContent = closed;
       if (elUnconv) elUnconv.textContent = `Rp ${unconvertedVal.toLocaleString('id-ID')}`;
+      if (elTotalSub) {
+        elTotalSub.textContent = (currentCrmPeriod === 'MTD')
+          ? 'WhatsApp Fonnte Webhook (MTD 1-6 Okt)'
+          : 'Seluruh Riwayat Masuk WhatsApp';
+      }
       if (badgeUnconv) badgeUnconv.textContent = unconverted.length;
 
       // Update active state on clickable KPI cards
@@ -3839,7 +4347,11 @@
         c.classList.toggle('active-kpi', c.getAttribute('data-filter') === currentLeadFilter);
       });
 
+      // Render MTD timeline
+      renderMtdTimeline();
+
       // Render Turunan & Chat Workspace
+      renderPaketAnalytics();
       renderTurunanAndChat();
 
       // Render Minimalist Performance Leaderboard at bottom
@@ -3871,11 +4383,13 @@
       const subtitleEl = document.getElementById('turunanSubtitle');
       if (!container) return;
 
-      let filtered = leadsData.slice();
+      let filtered = getActiveLeadsDataset();
 
       // Filter category
-      let labelGroup = '📋 Semua Leads';
-      let descGroup = 'Menampilkan seluruh data prospek masuk dari WhatsApp Fonnte Webhook.';
+      let labelGroup = (currentCrmPeriod === 'MTD') ? '📋 Leads MTD (Awal Bulan)' : '📋 Semua Riwayat Leads';
+      let descGroup = (currentCrmPeriod === 'MTD') 
+        ? 'Menampilkan data prospek WhatsApp masuk dari awal bulan (1 Oktober s.d. cut-off hari ini).'
+        : 'Menampilkan seluruh riwayat prospek WhatsApp Fonnte Webhook (Oktober MTD + Arsip September).';
 
       if (currentLeadFilter === 'HOT') {
         filtered = filtered.filter(l => l.tier === 'HOT');
@@ -3892,9 +4406,9 @@
       } else if (currentLeadFilter === 'CLOSED') {
         filtered = filtered.filter(l => l.tier === 'CLOSED' || l.status === 'CONVERTED');
         labelGroup = '✅ Closed DP (Match Terverifikasi)';
-        descGroup = 'Pembayaran DP Rp 100.000 sudah terverifikasi masuk rekening & jadwal booking terkunci.';
+        descGroup = 'Pembayaran DP sudah terverifikasi masuk rekening kasir & jadwal booking terkunci.';
       } else if (currentLeadFilter === 'UNCONVERTED') {
-        filtered = filtered.filter(l => l.status === 'UNCONVERTED');
+        filtered = filtered.filter(l => l.status === 'UNCONVERTED' || (l.tier !== 'CLOSED' && l.status !== 'CONVERTED'));
         labelGroup = '💰 Unconverted Pipeline (Tertahan di Chat)';
         descGroup = 'Seluruh prospek yang belum transfer DP dengan akumulasi potensi nilai booking.';
       }
@@ -3902,6 +4416,12 @@
       // Filter admin
       if (currentLeadAdmin !== 'ALL') {
         filtered = filtered.filter(l => l.admin === currentLeadAdmin);
+      }
+
+      // Filter tanggal spesifik (jika dipilih di MTD timeline)
+      if (currentLeadDate !== 'ALL') {
+        filtered = filtered.filter(l => (l.created_at || '').startsWith(currentLeadDate));
+        labelGroup += ` · Tanggal ${currentLeadDate.slice(8, 10)} Okt`;
       }
 
       // Filter search
@@ -3922,7 +4442,7 @@
           const pkg = getLeadPaket(l);
           return (pkg.group === currentLeadPaket || pkg.key === currentLeadPaket);
         });
-        labelGroup += ` · Filter Paket "${currentLeadPaket}"`;
+        labelGroup += ` · Paket "${currentLeadPaket}"`;
       }
 
       if (titleEl) titleEl.innerHTML = `${labelGroup} (<span id="turunanCount">${filtered.length}</span>)`;
@@ -3935,27 +4455,27 @@
 
       if (filtered.length === 0) {
         container.innerHTML = `
-          <div style="grid-column: 1 / -1; text-align:center; padding:32px 20px; background:#141c28; border-radius:8px; border:1px solid var(--border-subtle); color:#94a3b8;">
-            <div style="font-size:24px; margin-bottom:6px;">🔍</div>
-            <div style="font-size:13.5px; font-weight:600; color:#fff;">Tidak ada calon klien di kelompok ini</div>
-            <div style="font-size:11.5px; margin-top:2px;">Coba pilih kartu KPI lain di atas atau ubah filter pencarian.</div>
+          <div style="grid-column: 1 / -1; text-align:center; padding:36px 20px; background:var(--surface2); border-radius:8px; border:1px solid var(--hairline); color:var(--muted);">
+            <div style="font-size:26px; margin-bottom:6px;">🔍</div>
+            <div style="font-size:14px; font-weight:700; color:var(--ink);">Tidak ada calon klien di kelompok ini</div>
+            <div style="font-size:12px; margin-top:4px;">Coba pilih tanggal lain pada timeline di atas, ubah kartu status, atau klik reset filter paket.</div>
           </div>
         `;
       } else {
         let html = '';
         filtered.forEach(lead => {
           const isSelected = lead.id === selectedLeadId;
-          const isClosed = lead.status === 'CONVERTED' || lead.tier === 'CLOSED';
           const tierClass = lead.tier ? lead.tier.toLowerCase() : 'warm';
           const pillClass = `pill-${tierClass}`;
           const phoneClean = (lead.phone || '').replace(/[^0-9]/g, '');
+          const lp = getLeadPaket(lead);
 
           html += `
             <div class="turunan-item-card tier-${tierClass} ${isSelected ? 'active-lead-item' : ''}" onclick="selectLead('${lead.id}')">
               <div class="turunan-item-top">
                 <div>
                   <div class="turunan-item-name">${escapeHtml(lead.display_name)}</div>
-                  <div class="turunan-item-phone">📱 +${phoneClean}</div>
+                  <div class="turunan-item-phone">📱 +${phoneClean} · ${escapeHtml(lead.created_at ? lead.created_at.slice(5, 10) : '')}</div>
                 </div>
                 <div style="text-align:right;">
                   <span class="lead-pill ${pillClass}">
@@ -3965,30 +4485,25 @@
               </div>
 
               <div class="turunan-item-meta">
-                <span>👩‍💼 Admin ${lead.admin}</span>
-                ${(() => {
-                  const lp = getLeadPaket(lead);
-                  return `<span class="lead-paket-pill paket-${lp.key.toLowerCase()}" onclick="event.stopPropagation(); setPaketFilter('${lp.group || lp.key}')" title="Saring paket ${lp.name}">${lp.icon} ${lp.tag}</span>`;
-                })()}
-                <b style="color:#c084fc;">Rp ${(Number(lead.estimated_value) || 0).toLocaleString('id-ID')}</b>
+                <span>👩‍💼 Admin ${escapeHtml(lead.admin || 'AMEL')}</span>
+                <span class="lead-paket-pill paket-${lp.key.toLowerCase()}" onclick="event.stopPropagation(); setPaketFilter('${lp.group || lp.key}')" title="Saring paket ${lp.name}">${lp.icon} ${lp.tag}</span>
+                <b style="color:var(--accent-ink); font-family:var(--ff-mono);">Rp ${(Number(lead.estimated_value) || 0).toLocaleString('id-ID')}</b>
               </div>
 
-              <div style="font-size:11px; color:#cbd5e1; line-height:1.3; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; background:rgba(0,0,0,0.25); padding:5px 8px; border-radius:4px;">
-                💬 "${escapeHtml(lead.last_customer_msg || lead.summary || 'Proses follow up')}"
+              <div style="font-size:11.5px; color:var(--ink2); line-height:1.35; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; background:var(--surface3); padding:6px 8px; border-radius:4px; border:1px solid var(--hairline-soft);">
+                ${lead.last_customer_msg ? `💬 "<i>${escapeHtml(lead.last_customer_msg)}</i>"` : escapeHtml(lead.summary || 'Prospek chat Fonnte')}
               </div>
-
-              <button class="turunan-item-btn" onclick="event.stopPropagation(); selectLead('${lead.id}', true);">
-                ${isSelected ? '✓ Chat Sedang Dibuka' : '💬 Buka Chat & AI Draft'}
-              </button>
             </div>
           `;
         });
         container.innerHTML = html;
       }
 
-      // Render Chat Workspace for the selected lead
-      renderChatWorkspace();
+      // Render detail chat workspace
+      const activeLead = leadsData.find(l => l.id === selectedLeadId) || filtered[0] || null;
+      renderChatWorkspace(activeLead);
     }
+    
 
     function renderChatWorkspace() {
       const container = document.getElementById('chatWorkspaceSection');
