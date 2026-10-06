@@ -58504,7 +58504,19 @@
     {
       "id": "sh_24",
       "tanggal": "2026-10-06",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_25",
+      "tanggal": "2026-10-06",
       "nama": "ADIF",
+      "slot": 1
+    },
+    {
+      "id": "sh_26",
+      "tanggal": "2026-10-06",
+      "nama": "SAKA",
       "slot": 1
     }
   ],
@@ -75843,6 +75855,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261006-1116",
+      "mulai": "2026-10-06T11:16:42.964539+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 153 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 86 pos pengeluaran Neraca, 155 pipeline Okt."
+    },
+    {
       "id": "sy_20261006-1041",
       "mulai": "2026-10-06T10:41:24.669990+00:00",
       "status": "sukses",
@@ -76575,7 +76593,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-06T10:41:24.669990+00:00"
+    "last_sync": "2026-10-06T11:16:42.964539+00:00"
   },
   "neracaDetail": [
     {
@@ -77139,15 +77157,15 @@
     "bulan": "2026-10",
     "totalBookings": 155,
     "potentialOmzet": 52875000.0,
-    "totalDp": 14200000.0,
-    "estimateCashIn": 6625000.0,
-    "remainingCashIn": 6625000.0,
-    "totalPipelineCashIn": 38675000.0,
+    "totalDp": 14300000.0,
+    "estimateCashIn": 6525000.0,
+    "remainingCashIn": 6525000.0,
+    "totalPipelineCashIn": 38575000.0,
     "breakdown": {
       "reguler": {
         "sesi": 55,
         "nilai": 16375000.0,
-        "dp": 4850000.0
+        "dp": 4950000.0
       },
       "wisudaDay1": {
         "sesi": 48,
@@ -77170,8 +77188,8 @@
       "confirmed": {
         "sesi": 30,
         "nilai": 9025000.0,
-        "dp": 2550000.0,
-        "cashIn": 6625000.0
+        "dp": 2650000.0,
+        "cashIn": 6525000.0
       },
       "reschedule": {
         "sesi": 9,
@@ -77809,7 +77827,7 @@
       {
         "id": "sc_bk_26",
         "tgl": "2026-10-06",
-        "waktu": "17:40",
+        "waktu": "18:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "lavandula",
@@ -77818,7 +77836,7 @@
         "jmlOrang": 20,
         "harga": 500000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100 limbo",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -77827,8 +77845,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 500000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 400000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -83532,7 +83550,19 @@
       {
         "id": "sh_24",
         "tanggal": "2026-10-06",
+        "nama": "AMEL",
+        "slot": 1
+      },
+      {
+        "id": "sh_25",
+        "tanggal": "2026-10-06",
         "nama": "ADIF",
+        "slot": 1
+      },
+      {
+        "id": "sh_26",
+        "tanggal": "2026-10-06",
+        "nama": "SAKA",
         "slot": 1
       }
     ],
@@ -86448,18 +86478,18 @@
           "row_idx": 12,
           "nama": "Saka",
           "job": "Fotografer",
-          "q": 4.0,
+          "q": 5.0,
           "q_raw": 0.0,
-          "actual_shift": 4,
+          "actual_shift": 5,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 160000.0,
+          "total_gaji": 200000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 160000.0,
+          "thp": 200000.0,
           "status": "Draft"
         },
         {
@@ -86467,18 +86497,18 @@
           "row_idx": 14,
           "nama": "Amel",
           "job": "Admin",
-          "q": 6.0,
+          "q": 7.0,
           "q_raw": 0.0,
-          "actual_shift": 6,
+          "actual_shift": 7,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 240000.0,
+          "total_gaji": 280000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 240000.0,
+          "thp": 280000.0,
           "status": "Draft"
         },
         {
@@ -86654,13 +86684,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 9030000.0,
+        "total_gaji": 9110000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 9030000.0,
+        "grand_total_thp": 9110000.0,
         "total_karyawan": 12
       }
     },
@@ -96621,18 +96651,18 @@
         "row_idx": 12,
         "nama": "Saka",
         "job": "Fotografer",
-        "q": 4.0,
+        "q": 5.0,
         "q_raw": 0.0,
-        "actual_shift": 4,
+        "actual_shift": 5,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 160000.0,
+        "total_gaji": 200000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 160000.0,
+        "thp": 200000.0,
         "status": "Draft"
       },
       {
@@ -96640,18 +96670,18 @@
         "row_idx": 14,
         "nama": "Amel",
         "job": "Admin",
-        "q": 6.0,
+        "q": 7.0,
         "q_raw": 0.0,
-        "actual_shift": 6,
+        "actual_shift": 7,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 240000.0,
+        "total_gaji": 280000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 240000.0,
+        "thp": 280000.0,
         "status": "Draft"
       },
       {
@@ -141492,7 +141522,7 @@
       {
         "id": "sc_bk_26",
         "tgl": "2026-10-06",
-        "waktu": "17:40",
+        "waktu": "18:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "lavandula",
@@ -141501,7 +141531,7 @@
         "jmlOrang": 20,
         "harga": 500000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100 limbo",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -141510,8 +141540,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 500000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 400000.0,
         "kategori": "Studio Reguler"
       },
       {
