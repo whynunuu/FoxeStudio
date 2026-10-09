@@ -132,9 +132,24 @@ def health():
     return {"status": "healthy"}
 
 @app.get("/api/leads")
-def get_leads():
+def get_leads(request: Request):
     """Mengambil daftar leads tersimpan untuk disinkronkan ke dashboard."""
-    return engine.get_leads_summary()
+    summary = engine.get_leads_summary()
+    api_key = request.headers.get("X-Foxe-Secret") or request.query_params.get("key")
+    # Mask phone numbers for unauthenticated public requests
+    expected_secret = os.environ.get("FOXE_API_SECRET", "foxe_sec_2026_safe")
+    if api_key != expected_secret:
+        leads = summary.get("leads", [])
+        masked = []
+        for l in leads:
+            lc = dict(l)
+            ph = str(lc.get("phone", ""))
+            clean = "".join(filter(str.isdigit, ph))
+            if len(clean) >= 8 and "****" not in ph:
+                lc["phone"] = clean[:5] + "****" + clean[-4:]
+            masked.append(lc)
+        summary["leads"] = masked
+    return summary
 
 @app.get("/api/trigger-reminder")
 @app.post("/api/trigger-reminder")

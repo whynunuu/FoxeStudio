@@ -27,9 +27,9 @@ jobs:
 
       - name: Run Follow-Up Reminder Script
         env:
-          FONNTE_TOKEN: ${{ secrets.FONNTE_TOKEN || 'Q87WP9YMCkXEWYEg4pRz' }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN || '8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s' }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID || '1608969830' }}
-          ADMIN_PHONE: ${{ secrets.ADMIN_PHONE || '6285159210021' }}
+          FONNTE_TOKEN: ${{ secrets.FONNTE_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ADMIN_PHONE: ${{ secrets.ADMIN_PHONE }}
         run: |
           python trigger_leads_reminder.py

@@ -19,6 +19,7 @@ from typing import Dict, List, Any, Optional
 
 STATE_FILE = "foxe_full_state.json"
 VAULT_FILE = "leads_vault.json"
+PRIVATE_VAULT_FILE = "leads_vault_private.json"
 SECRETS_FILE = "foxe_secrets.json"
 
 _local_secrets = {}
@@ -199,9 +200,11 @@ class AgenticLeadEngine:
         return {}
 
     def _load_vault(self) -> List[Dict[str, Any]]:
-        if os.path.exists(self.vault_path):
+        # Prioritize private vault with full numbers if present
+        target = PRIVATE_VAULT_FILE if os.path.exists(PRIVATE_VAULT_FILE) else self.vault_path
+        if os.path.exists(target):
             try:
-                with open(self.vault_path, "r", encoding="utf-8") as f:
+                with open(target, "r", encoding="utf-8") as f:
                     data = json.load(f)
                     if isinstance(data, list) and len(data) > 0:
                         return data
@@ -213,8 +216,22 @@ class AgenticLeadEngine:
 
     def _save_vault(self, leads: List[Dict[str, Any]]):
         try:
-            with open(self.vault_path, "w", encoding="utf-8") as f:
-                json.dump(leads, f, ensure_ascii=False, indent=2)
+            # 1. Save unmasked leads to private vault (gitignored)
+            with open(PRIVATE_VAULT_FILE, "w", encoding="utf-8") as f_priv:
+                json.dump(leads, f_priv, ensure_ascii=False, indent=2)
+
+            # 2. Save masked leads to public vault for frontend safety
+            masked_leads = []
+            for l in leads:
+                l_copy = dict(l)
+                ph = str(l_copy.get("phone", ""))
+                clean = "".join(filter(str.isdigit, ph))
+                if len(clean) >= 8 and "****" not in ph:
+                    l_copy["phone"] = clean[:5] + "****" + clean[-4:]
+                masked_leads.append(l_copy)
+
+            with open(self.vault_path, "w", encoding="utf-8") as f_pub:
+                json.dump(masked_leads, f_pub, ensure_ascii=False, indent=2)
         except Exception as e:
             print(f"[ERROR] Gagal menyimpan vault: {e}")
 

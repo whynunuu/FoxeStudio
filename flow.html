@@ -1249,9 +1249,99 @@
       width: 100%; height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-top: 4px;
     }
     .conv-fill { height: 100%; border-radius: 3px; transition: width 0.3s ease; }
+  
+    /* ---------- FOXE FLOW PIN LOCK SCREEN ---------- */
+    .lock-screen {
+      position: fixed; inset: 0; z-index: 99999;
+      background: radial-gradient(circle at 50% 35%, #1e1d1a 0%, #0c0b0a 100%);
+      display: flex; align-items: center; justify-content: center; padding: 24px 16px;
+      overflow-y: auto;
+    }
+    .lock-card {
+      width: 100%; max-width: 360px; margin: auto; background: #1a1917;
+      border: 1px solid rgba(0,128,200,0.4);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.8), 0 0 24px rgba(0,128,200,0.15);
+      border-radius: 24px; padding: 32px 24px; text-align: center; color: #faf9f5;
+      animation: lockFadeIn .25s ease-out;
+    }
+    @keyframes lockFadeIn { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .lock-logo { margin-bottom: 14px; display: inline-flex; filter: drop-shadow(0 2px 10px rgba(0,128,200,0.45)); }
+    .lock-subtitle { font-size: 13px; color: #a09d96; margin-bottom: 12px; }
+    .lock-badge {
+      display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase;
+      padding: 3px 12px; border-radius: 9999px; background: rgba(0,128,200,0.18); color: #0080c8;
+      border: 1px solid rgba(0,128,200,0.4); margin-bottom: 22px;
+    }
+    .pin-display { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; }
+    .pin-display .dot {
+      width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgba(160,157,150,0.4);
+      background: transparent; transition: all .18s cubic-bezier(0.16,1,0.3,1);
+    }
+    .pin-display .dot.filled {
+      background: #0080c8; border-color: #0080c8; box-shadow: 0 0 12px rgba(0,128,200,0.8); transform: scale(1.15);
+    }
+    .pin-display.shake { animation: pinShake .45s cubic-bezier(0.36,0.07,0.19,0.97); }
+    @keyframes pinShake { 10%,90%{transform:translate3d(-3px,0,0)} 20%,80%{transform:translate3d(5px,0,0)} 30%,50%,70%{transform:translate3d(-6px,0,0)} 40%,60%{transform:translate3d(6px,0,0)} }
+    .pin-hidden-input { position: absolute; opacity: 0; pointer-events: none; }
+    .lock-error { color: #e07a68; font-size: 12.5px; font-weight: 500; margin-top: -8px; margin-bottom: 14px; min-height: 18px; }
+    .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+    .key-btn {
+      background: rgba(37,35,32,0.85); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+      padding: 13px 0; font-size: 19px; font-weight: 600; color: #faf9f5; cursor: pointer;
+      transition: all .12s ease; user-select: none; -webkit-user-select: none;
+    }
+    .key-btn:hover { background: rgba(52,50,45,0.95); border-color: rgba(0,128,200,0.45); }
+    .key-btn:active { transform: scale(0.92); background: #0080c8; color: #fff; }
+    .key-btn.action-btn { font-size: 16px; color: #a09d96; }
+    .key-btn.ok-btn { background: rgba(0,128,200,0.25); color: #0080c8; border-color: rgba(0,128,200,0.45); }
+    .key-btn.ok-btn:active { background: #0080c8; color: #fff; }
+    .lock-footer { font-size: 11.5px; color: #6c6a64; }
+
   </style>
 </head>
 <body>
+
+<div id="lockScreen" class="lock-screen" style="display:flex">
+  <div class="lock-card">
+    <div class="lock-logo" style="margin-bottom:14px">
+      <img src="logo_foxe.png" alt="Foxe Studio" style="height:44px;width:auto;max-width:210px;object-fit:contain;filter:brightness(1.1) drop-shadow(0 4px 14px rgba(0,85,184,0.35))">
+    </div>
+    <p class="lock-subtitle" style="margin-top:0">Foxe Flow — Visual Admin &amp; CRM Leads</p>
+    <div class="lock-badge">🔒 Akses Terbatas</div>
+    
+    <div class="pin-display" id="pinDots">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <input type="password" id="pinInput" maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" class="pin-hidden-input" autofocus>
+
+    <div class="lock-error" id="lockError" hidden>PIN Salah. Silakan coba lagi.</div>
+
+    <div class="keypad" id="pinKeypad">
+      <button class="key-btn" type="button" data-val="1">1</button>
+      <button class="key-btn" type="button" data-val="2">2</button>
+      <button class="key-btn" type="button" data-val="3">3</button>
+      <button class="key-btn" type="button" data-val="4">4</button>
+      <button class="key-btn" type="button" data-val="5">5</button>
+      <button class="key-btn" type="button" data-val="6">6</button>
+      <button class="key-btn" type="button" data-val="7">7</button>
+      <button class="key-btn" type="button" data-val="8">8</button>
+      <button class="key-btn" type="button" data-val="9">9</button>
+      <button class="key-btn action-btn" type="button" id="keyClear">⌫</button>
+      <button class="key-btn" type="button" data-val="0">0</button>
+      <button class="key-btn action-btn ok-btn" type="button" id="keySubmit">➔</button>
+    </div>
+
+    <p class="lock-footer" style="font-size:11.5px;color:#a09d96;">Akses internal khusus Tim &amp; Manajemen Foxe Studio</p>
+  </div>
+</div>
+
+
 
   <!-- TOPBAR -->
   <header class="topbar">
@@ -2095,8 +2185,8 @@
             type: "telegram_bot",
             position: { x: 980, y: 300 },
             parameters: {
-              token: "8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s",
-              chat_id: "1608969830",
+              token: "",
+              chat_id: "",
               message: "🔔 <b>BOOKING MASUK & DP TERKONFIRMASI!</b>\n\n👤 Client: <b>{{client_name}}</b>\n📸 Paket: {{paket}}\n📅 Tanggal: {{tanggal_foto}} ({{jam_foto}})\n💰 DP: Rp {{rupiah(dp_masuk)}} (Sisa: Rp {{rupiah(sisa_bayar)}})\n📞 WA: {{phone}}\n\n<i>Pesan konfirmasi otomatis telah dikirim.</i>"
             }
           }
@@ -2566,7 +2656,7 @@
           case 'fonnte_whatsapp':
             return { title: 'Kirim WhatsApp Fonnte', category: 'Action', icon: '💬', color: '#25d366', headerBg: 'rgba(37,211,102,0.25)', desc: 'Kirim pesan via Fonnte & WhatsApp Web.', defaultParams: { token: '', target_phone: '{{phone}}', message: '{{rendered_message}}', is_simulation: true } };
           case 'telegram_bot':
-            return { title: 'Notif Telegram Admin', category: 'Action', icon: '📢', color: '#0088cc', headerBg: 'rgba(0,136,204,0.25)', desc: 'Kirim alert ke Telegram studio.', defaultParams: { token: '8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s', chat_id: '1608969830', message: '🔔 <b>Update Otomasi Studio</b>\n{{rendered_message}}' } };
+            return { title: 'Notif Telegram Admin', category: 'Action', icon: '📢', color: '#0088cc', headerBg: 'rgba(0,136,204,0.25)', desc: 'Kirim alert ke Telegram studio.', defaultParams: { token: '', chat_id: '', message: '🔔 <b>Update Otomasi Studio</b>\n{{rendered_message}}' } };
           case 'delay':
             return { title: 'Delay / Jeda Waktu', category: 'Logic', icon: '⏳', color: '#64748b', headerBg: 'rgba(100,116,139,0.25)', desc: 'Menunda eksekusi beberapa detik.', defaultParams: { seconds: 2 } };
           default:
@@ -2580,9 +2670,9 @@
     let currentWorkflow = null;
     let workflows = [];
     let settings = {
-      fonnte_token: localStorage.getItem('foxe_fonnte_token') || 'Q87WP9YMCkXEWYEg4pRz',
-      telegram_token: '8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s',
-      telegram_chat_id: '1608969830'
+      fonnte_token: localStorage.getItem('foxe_fonnte_token') || '',
+      telegram_token: localStorage.getItem('foxe_tg_token') || '',
+      telegram_chat_id: localStorage.getItem('foxe_tg_chat_id') || ''
     };
     let studioBookings = [];
 
@@ -4468,6 +4558,9 @@
           const tierClass = lead.tier ? lead.tier.toLowerCase() : 'warm';
           const pillClass = `pill-${tierClass}`;
           const phoneClean = (lead.phone || '').replace(/[^0-9]/g, '');
+          const phoneDisplay = (phoneClean.length >= 8 && !String(lead.phone).includes('*'))
+            ? phoneClean.slice(0, 4) + '••••' + phoneClean.slice(-4)
+            : (lead.phone || '-');
           const lp = getLeadPaket(lead);
 
           html += `
@@ -4475,7 +4568,7 @@
               <div class="turunan-item-top">
                 <div>
                   <div class="turunan-item-name">${escapeHtml(lead.display_name)}</div>
-                  <div class="turunan-item-phone">📱 +${phoneClean} · ${escapeHtml(lead.created_at ? lead.created_at.slice(5, 10) : '')}</div>
+                  <div class="turunan-item-phone">📱 +${escapeHtml(phoneDisplay)} · ${escapeHtml(lead.created_at ? lead.created_at.slice(5, 10) : '')}</div>
                 </div>
                 <div style="text-align:right;">
                   <span class="lead-pill ${pillClass}">
@@ -4525,6 +4618,9 @@
       const tierClass = lead.tier ? lead.tier.toLowerCase() : 'warm';
       const pillClass = `pill-${tierClass}`;
       const phoneClean = (lead.phone || '').replace(/[^0-9]/g, '');
+      const phoneDisplay = (phoneClean.length >= 8 && !String(lead.phone).includes('*'))
+        ? phoneClean.slice(0, 4) + '••••' + phoneClean.slice(-4)
+        : (lead.phone || '-');
       const waLink = `https://wa.me/${phoneClean}?text=${encodeURIComponent(lead.ai_recommendation || '')}`;
 
       container.innerHTML = `
@@ -4538,7 +4634,7 @@
               })()}
             </div>
             <a href="https://wa.me/${phoneClean}" target="_blank" class="lead-phone" style="font-size:12px;">
-              📱 +${phoneClean}
+              📱 +${escapeHtml(phoneDisplay)}
             </a>
             <span class="pill neutral" style="font-size:11px;">Admin ${lead.admin}</span>
             <span class="lead-pill ${pillClass}">
@@ -4819,29 +4915,13 @@
 
           const tgMsg = `🚨 *REMINDER FOLLOW-UP ADMIN FOXE STUDIO*\n⏰ *Pukul ${timeStr}* | Jam Operasional (09:00 - 21:00 WIB)\n\nDitemukan *${hot.length + warm.length} Calon Klien Prioritas* yang butuh balasan follow-up agar segera closing DP:\n\n🔥 *[HOT LEADS]*\n${hot.map((l, i) => `${i+1}. *${l.display_name}* (${l.phone}) — Admin ${l.admin}\n   • Situasi: ${l.summary || 'Menunggu konfirmasi'}\n   • Nilai: Rp ${(Number(l.estimated_value) || 0).toLocaleString('id-ID')}\n   • Aksi: Segera amankan slot & tagih DP 100K ke Rek BCA 0462897055 an Dicky Ferry A`).join('\n\n')}\n\n⚡ *[WARM LEADS]*\n${warm.map((l, i) => `${i+1}. *${l.display_name}* (${l.phone}) — Admin ${l.admin}\n   • Pertanyaan: ${l.summary || 'Konsultasi paket'}`).join('\n\n')}\n\n💰 *Potensi Tertahan:* Rp ${totalVal.toLocaleString('id-ID')}\n👉 *Buka CRM:* https://whynunuu.github.io/FoxeStudio/flow.html`;
 
-          // Send to Telegram
-          const tgToken = '8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s';
-          const tgChatId = '1608969830';
+          // Send via Railway backend (tokens kept safe on server, no client leak)
           try {
-            await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-              body: new URLSearchParams({ chat_id: tgChatId, text: tgMsg, parse_mode: 'Markdown' })
+            await fetch('https://foxestudio.up.railway.app/api/trigger-reminder', {
+              method: 'POST'
             });
           } catch (e) {
-            console.warn('Telegram send error:', e);
-          }
-
-          // Send to WhatsApp via Fonnte
-          const fonnteToken = 'Q87WP9YMCkXEWYEg4pRz';
-          try {
-            await fetch('https://api.fonnte.com/send', {
-              method: 'POST',
-              headers: { 'Authorization': fonnteToken, 'Content-Type': 'application/json' },
-              body: JSON.stringify({ target: '6285159210021', message: waMsg })
-            });
-          } catch (e) {
-            console.warn('Fonnte send error:', e);
+            console.warn('Backend reminder error:', e);
           }
 
           btnReminder.textContent = '✓ Reminder Terkirim';
@@ -4952,8 +5032,226 @@
       }
     }
 
+    
+    /* =========================================================
+       FOXE FLOW — UNIVERSAL PIN AUTHENTICATION (363636)
+       ========================================================= */
+    const AUTH_KEY = "foxe_studio_auth_token_v2";
+    const VALID_HASHES = [
+      "23d30fa4f4b950822914594ad82a6544b292ccb35be03075425abc266c7dbf40"
+    ];
+
+    let enteredPin = "";
+    let failedPinAttempts = (() => {
+      try { return parseInt(sessionStorage.getItem("foxe_failed_pin_attempts") || "0", 10); } catch(e) { return 0; }
+    })();
+    let lockoutUntil = (() => {
+      try { return parseInt(sessionStorage.getItem("foxe_pin_lockout_until") || "0", 10); } catch(e) { return 0; }
+    })();
+    let lockoutInterval = null;
+
+    async function hashPin(pin) {
+      if (window.crypto && window.crypto.subtle) {
+        const enc = new TextEncoder();
+        const buf = await window.crypto.subtle.digest("SHA-256", enc.encode(pin));
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+      }
+      return "";
+    }
+
+    function checkSessionAuth() {
+      try {
+        const token = sessionStorage.getItem(AUTH_KEY);
+        if (token && VALID_HASHES.includes(token)) return true;
+      } catch(e){}
+      return false;
+    }
+
+    function updatePinDots() {
+      const dots = document.querySelectorAll("#pinDots .dot");
+      dots.forEach((dot, idx) => {
+        if (idx < enteredPin.length) dot.classList.add("filled");
+        else dot.classList.remove("filled");
+      });
+    }
+
+    function checkLockout() {
+      const now = Date.now();
+      if (lockoutUntil > now) {
+        const remainingSec = Math.ceil((lockoutUntil - now) / 1000);
+        setLockoutUI(remainingSec);
+        return true;
+      }
+      clearLockoutUI();
+      return false;
+    }
+
+    function setLockoutUI(seconds) {
+      const errEl = document.getElementById("lockError");
+      const pinKeypad = document.getElementById("pinKeypad");
+      const pinInp = document.getElementById("pinInput");
+      if (pinInp) pinInp.disabled = true;
+      if (pinKeypad) { pinKeypad.style.pointerEvents = "none"; pinKeypad.style.opacity = "0.45"; }
+      if (errEl) { errEl.hidden = false; errEl.innerHTML = `🚨 Terlalu banyak percobaan salah.<br>Coba lagi dalam <b>${seconds}</b> detik.`; }
+      if (lockoutInterval) clearInterval(lockoutInterval);
+      lockoutInterval = setInterval(() => {
+        const remaining = Math.ceil((lockoutUntil - Date.now()) / 1000);
+        if (remaining <= 0) {
+          clearInterval(lockoutInterval);
+          lockoutInterval = null;
+          clearLockoutUI();
+        } else if (errEl) {
+          errEl.innerHTML = `🚨 Terlalu banyak percobaan salah.<br>Coba lagi dalam <b>${remaining}</b> detik.`;
+        }
+      }, 1000);
+    }
+
+    function clearLockoutUI() {
+      const errEl = document.getElementById("lockError");
+      const pinKeypad = document.getElementById("pinKeypad");
+      const pinInp = document.getElementById("pinInput");
+      if (pinInp) { pinInp.disabled = false; pinInp.focus(); }
+      if (pinKeypad) { pinKeypad.style.pointerEvents = ""; pinKeypad.style.opacity = ""; }
+      if (errEl) { errEl.hidden = true; errEl.textContent = ""; }
+    }
+
+    async function verifyPin() {
+      if (checkLockout()) return;
+      if (enteredPin.length < 4) return;
+      let isValid = false;
+      let validToken = "";
+      if (window.crypto && window.crypto.subtle) {
+        try {
+          const hash = await hashPin(enteredPin);
+          if (VALID_HASHES.includes(hash)) {
+            isValid = true;
+            validToken = hash;
+          }
+        } catch(e){}
+      }
+      if (!isValid && typeof btoa === "function" && btoa(enteredPin) === "MzYzNjM2") {
+        isValid = true;
+        validToken = VALID_HASHES[0];
+      }
+
+      if (isValid) {
+        try {
+          sessionStorage.setItem(AUTH_KEY, validToken);
+        } catch(e){}
+        failedPinAttempts = 0;
+        sessionStorage.removeItem("foxe_failed_pin_attempts");
+        sessionStorage.removeItem("foxe_pin_lockout_until");
+        clearLockoutUI();
+        unlockFlowDashboard();
+      } else {
+        failedPinAttempts++;
+        sessionStorage.setItem("foxe_failed_pin_attempts", String(failedPinAttempts));
+        if (failedPinAttempts >= 5) {
+          lockoutUntil = Date.now() + 60000;
+          sessionStorage.setItem("foxe_pin_lockout_until", String(lockoutUntil));
+          setLockoutUI(60);
+        } else if (failedPinAttempts >= 3) {
+          lockoutUntil = Date.now() + 30000;
+          sessionStorage.setItem("foxe_pin_lockout_until", String(lockoutUntil));
+          setLockoutUI(30);
+        } else {
+          const errEl = document.getElementById("lockError");
+          if (errEl) {
+            errEl.hidden = false;
+            errEl.textContent = `PIN salah (${failedPinAttempts}/3). Silakan coba lagi.`;
+          }
+        }
+
+        const pinDots = document.getElementById("pinDots");
+        if (pinDots) {
+          pinDots.classList.add("shake");
+          setTimeout(() => {
+            pinDots.classList.remove("shake");
+            enteredPin = "";
+            updatePinDots();
+            const pinInp = document.getElementById("pinInput");
+            if (pinInp && !lockoutUntil) pinInp.value = "";
+          }, 500);
+        }
+      }
+    }
+
+    function unlockFlowDashboard() {
+      const lock = document.getElementById("lockScreen");
+      if (lock) lock.style.display = "none";
+    }
+
+    function setupPinLockHandlers() {
+      if (checkSessionAuth()) {
+        unlockFlowDashboard();
+        return;
+      }
+      checkLockout();
+      const pinKeypad = document.getElementById("pinKeypad");
+      const keyClear = document.getElementById("keyClear");
+      const keySubmit = document.getElementById("keySubmit");
+      const pinInput = document.getElementById("pinInput");
+
+      if (pinKeypad) {
+        pinKeypad.querySelectorAll(".key-btn[data-val]").forEach(btn => {
+          btn.onclick = () => {
+            if (enteredPin.length < 6) {
+              enteredPin += btn.dataset.val;
+              if (pinInput) pinInput.value = enteredPin;
+              updatePinDots();
+              if (enteredPin.length === 6) verifyPin();
+            }
+          };
+        });
+      }
+      if (keyClear) {
+        keyClear.onclick = () => {
+          enteredPin = enteredPin.slice(0, -1);
+          if (pinInput) pinInput.value = enteredPin;
+          updatePinDots();
+          const errEl = document.getElementById("lockError");
+          if (errEl) errEl.hidden = true;
+        };
+      }
+      if (keySubmit) {
+        keySubmit.onclick = () => verifyPin();
+      }
+      if (pinInput) {
+        pinInput.oninput = () => {
+          enteredPin = pinInput.value.replace(/[^0-9]/g, "").slice(0, 6);
+          pinInput.value = enteredPin;
+          updatePinDots();
+          if (enteredPin.length === 6) verifyPin();
+        };
+        pinInput.onkeydown = e => {
+          if (e.key === "Enter") verifyPin();
+        };
+      }
+      window.addEventListener("keydown", e => {
+        const lock = document.getElementById("lockScreen");
+        if (!lock || lock.style.display === "none") return;
+        if (e.target === pinInput) return;
+        if (e.key >= "0" && e.key <= "9") {
+          if (enteredPin.length < 6) {
+            enteredPin += e.key;
+            if (pinInput) pinInput.value = enteredPin;
+            updatePinDots();
+            if (enteredPin.length === 6) verifyPin();
+          }
+        } else if (e.key === "Backspace") {
+          enteredPin = enteredPin.slice(0, -1);
+          if (pinInput) pinInput.value = enteredPin;
+          updatePinDots();
+        } else if (e.key === "Enter") {
+          verifyPin();
+        }
+      });
+    }
+
+
     // Call loadLeadsData, loadStudioData & setup on start
     window.addEventListener('DOMContentLoaded', async () => {
+      setupPinLockHandlers();
       await loadLeadsData();
       await loadStudioData();
       setupLeadsEventListeners();
