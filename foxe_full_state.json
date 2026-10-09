@@ -59049,155 +59049,143 @@
     {
       "id": "sh_13",
       "tanggal": "2026-10-04",
-      "nama": "ABROR",
+      "nama": "INDAH",
       "slot": 1
     },
     {
       "id": "sh_14",
       "tanggal": "2026-10-04",
-      "nama": "ADIF",
+      "nama": "AMEL",
       "slot": 1
     },
     {
       "id": "sh_15",
       "tanggal": "2026-10-04",
-      "nama": "AMEL",
+      "nama": "ADIF",
       "slot": 1
     },
     {
       "id": "sh_16",
       "tanggal": "2026-10-04",
-      "nama": "FAHME",
+      "nama": "SAKA",
       "slot": 1
     },
     {
       "id": "sh_17",
-      "tanggal": "2026-10-04",
-      "nama": "INDAH",
+      "tanggal": "2026-10-05",
+      "nama": "AMEL",
       "slot": 1
     },
     {
       "id": "sh_18",
-      "tanggal": "2026-10-04",
-      "nama": "SAKA",
+      "tanggal": "2026-10-05",
+      "nama": "INDAH",
       "slot": 1
     },
     {
       "id": "sh_19",
       "tanggal": "2026-10-05",
-      "nama": "AMEL",
+      "nama": "ADIF",
       "slot": 1
     },
     {
       "id": "sh_20",
       "tanggal": "2026-10-05",
-      "nama": "INDAH",
+      "nama": "SAKA",
       "slot": 1
     },
     {
       "id": "sh_21",
-      "tanggal": "2026-10-05",
-      "nama": "ADIF",
+      "tanggal": "2026-10-06",
+      "nama": "INDAH",
       "slot": 1
     },
     {
       "id": "sh_22",
-      "tanggal": "2026-10-05",
-      "nama": "SAKA",
+      "tanggal": "2026-10-06",
+      "nama": "AMEL",
       "slot": 1
     },
     {
       "id": "sh_23",
       "tanggal": "2026-10-06",
-      "nama": "INDAH",
+      "nama": "ADIF",
       "slot": 1
     },
     {
       "id": "sh_24",
       "tanggal": "2026-10-06",
-      "nama": "AMEL",
+      "nama": "SAKA",
       "slot": 1
     },
     {
       "id": "sh_25",
-      "tanggal": "2026-10-06",
-      "nama": "ADIF",
+      "tanggal": "2026-10-07",
+      "nama": "INDAH",
       "slot": 1
     },
     {
       "id": "sh_26",
-      "tanggal": "2026-10-06",
-      "nama": "SAKA",
+      "tanggal": "2026-10-07",
+      "nama": "AMEL",
       "slot": 1
     },
     {
       "id": "sh_27",
       "tanggal": "2026-10-07",
-      "nama": "INDAH",
+      "nama": "SAKA",
       "slot": 1
     },
     {
       "id": "sh_28",
       "tanggal": "2026-10-07",
-      "nama": "AMEL",
+      "nama": "SAKA",
       "slot": 1
     },
     {
       "id": "sh_29",
-      "tanggal": "2026-10-07",
-      "nama": "SAKA",
+      "tanggal": "2026-10-08",
+      "nama": "AMEL",
       "slot": 1
     },
     {
       "id": "sh_30",
-      "tanggal": "2026-10-07",
-      "nama": "SAKA",
+      "tanggal": "2026-10-08",
+      "nama": "AMEL",
       "slot": 1
     },
     {
       "id": "sh_31",
       "tanggal": "2026-10-08",
-      "nama": "AMEL",
+      "nama": "ADIF",
       "slot": 1
     },
     {
       "id": "sh_32",
       "tanggal": "2026-10-08",
-      "nama": "AMEL",
-      "slot": 1
-    },
-    {
-      "id": "sh_33",
-      "tanggal": "2026-10-08",
-      "nama": "ADIF",
-      "slot": 1
-    },
-    {
-      "id": "sh_34",
-      "tanggal": "2026-10-08",
       "nama": "SAKA",
       "slot": 1
     },
     {
-      "id": "sh_35",
+      "id": "sh_33",
       "tanggal": "2026-10-09",
       "nama": "AMEL",
       "slot": 1
     },
     {
-      "id": "sh_36",
+      "id": "sh_34",
       "tanggal": "2026-10-09",
       "nama": "INDAH",
       "slot": 1
     },
     {
-      "id": "sh_37",
+      "id": "sh_35",
       "tanggal": "2026-10-09",
       "nama": "ADIF",
       "slot": 1
     },
     {
-      "id": "sh_38",
+      "id": "sh_36",
       "tanggal": "2026-10-09",
       "nama": "ADIF",
       "slot": 1
@@ -59962,15 +59950,60 @@
     },
     {
       "id": "ex_nrc_17",
+      "tanggal": "2026-10-06",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "Marketing / Ads / KOL",
+      "deskripsi": "Ads",
+      "nilai": 500000.0
+    },
+    {
+      "id": "ex_nrc_18",
+      "tanggal": "2026-10-07",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "Software / Subscription",
+      "deskripsi": "Adobe",
+      "nilai": 315500.0
+    },
+    {
+      "id": "ex_nrc_19",
+      "tanggal": "2026-10-07",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "Software / Subscription",
+      "deskripsi": "Adobe",
+      "nilai": 628500.0
+    },
+    {
+      "id": "ex_nrc_20",
+      "tanggal": "2026-10-07",
+      "bulan": "2026-10",
+      "jenis": "COGS",
+      "kategori": "Properti / Consumable Sesi",
+      "deskripsi": "Rent Batrei",
+      "nilai": 15000.0
+    },
+    {
+      "id": "ex_nrc_21",
+      "tanggal": "2026-10-07",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 503000.0
+    },
+    {
+      "id": "ex_nrc_22",
       "tanggal": "2026-10-07",
       "bulan": "2026-10",
       "jenis": "NON-P&L",
       "kategori": "Prive / Owner Draw",
       "deskripsi": "Bon",
-      "nilai": 1385200.0
+      "nilai": 1809200.0
     },
     {
-      "id": "ex_nrc_18",
+      "id": "ex_nrc_23",
       "tanggal": "2026-10-07",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -59979,7 +60012,7 @@
       "nilai": 196100.0
     },
     {
-      "id": "ex_nrc_19",
+      "id": "ex_nrc_24",
       "tanggal": "2026-10-07",
       "bulan": "2026-10",
       "jenis": "Biaya Lainnya",
@@ -76563,6 +76596,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261009-1804",
+      "mulai": "2026-10-09T18:04:52.527621+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 200 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 92 pos pengeluaran Neraca, 178 pipeline Okt."
+    },
+    {
       "id": "sy_20261009-1419",
       "mulai": "2026-10-09T14:19:00.891621+00:00",
       "status": "sukses",
@@ -77361,7 +77400,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-09T14:19:00.891621+00:00"
+    "last_sync": "2026-10-09T18:04:52.527621+00:00"
   },
   "neracaDetail": [
     {
@@ -85438,155 +85477,143 @@
       {
         "id": "sh_13",
         "tanggal": "2026-10-04",
-        "nama": "ABROR",
+        "nama": "INDAH",
         "slot": 1
       },
       {
         "id": "sh_14",
         "tanggal": "2026-10-04",
-        "nama": "ADIF",
+        "nama": "AMEL",
         "slot": 1
       },
       {
         "id": "sh_15",
         "tanggal": "2026-10-04",
-        "nama": "AMEL",
+        "nama": "ADIF",
         "slot": 1
       },
       {
         "id": "sh_16",
         "tanggal": "2026-10-04",
-        "nama": "FAHME",
+        "nama": "SAKA",
         "slot": 1
       },
       {
         "id": "sh_17",
-        "tanggal": "2026-10-04",
-        "nama": "INDAH",
+        "tanggal": "2026-10-05",
+        "nama": "AMEL",
         "slot": 1
       },
       {
         "id": "sh_18",
-        "tanggal": "2026-10-04",
-        "nama": "SAKA",
+        "tanggal": "2026-10-05",
+        "nama": "INDAH",
         "slot": 1
       },
       {
         "id": "sh_19",
         "tanggal": "2026-10-05",
-        "nama": "AMEL",
+        "nama": "ADIF",
         "slot": 1
       },
       {
         "id": "sh_20",
         "tanggal": "2026-10-05",
-        "nama": "INDAH",
+        "nama": "SAKA",
         "slot": 1
       },
       {
         "id": "sh_21",
-        "tanggal": "2026-10-05",
-        "nama": "ADIF",
+        "tanggal": "2026-10-06",
+        "nama": "INDAH",
         "slot": 1
       },
       {
         "id": "sh_22",
-        "tanggal": "2026-10-05",
-        "nama": "SAKA",
+        "tanggal": "2026-10-06",
+        "nama": "AMEL",
         "slot": 1
       },
       {
         "id": "sh_23",
         "tanggal": "2026-10-06",
-        "nama": "INDAH",
+        "nama": "ADIF",
         "slot": 1
       },
       {
         "id": "sh_24",
         "tanggal": "2026-10-06",
-        "nama": "AMEL",
+        "nama": "SAKA",
         "slot": 1
       },
       {
         "id": "sh_25",
-        "tanggal": "2026-10-06",
-        "nama": "ADIF",
+        "tanggal": "2026-10-07",
+        "nama": "INDAH",
         "slot": 1
       },
       {
         "id": "sh_26",
-        "tanggal": "2026-10-06",
-        "nama": "SAKA",
+        "tanggal": "2026-10-07",
+        "nama": "AMEL",
         "slot": 1
       },
       {
         "id": "sh_27",
         "tanggal": "2026-10-07",
-        "nama": "INDAH",
+        "nama": "SAKA",
         "slot": 1
       },
       {
         "id": "sh_28",
         "tanggal": "2026-10-07",
-        "nama": "AMEL",
+        "nama": "SAKA",
         "slot": 1
       },
       {
         "id": "sh_29",
-        "tanggal": "2026-10-07",
-        "nama": "SAKA",
+        "tanggal": "2026-10-08",
+        "nama": "AMEL",
         "slot": 1
       },
       {
         "id": "sh_30",
-        "tanggal": "2026-10-07",
-        "nama": "SAKA",
+        "tanggal": "2026-10-08",
+        "nama": "AMEL",
         "slot": 1
       },
       {
         "id": "sh_31",
         "tanggal": "2026-10-08",
-        "nama": "AMEL",
+        "nama": "ADIF",
         "slot": 1
       },
       {
         "id": "sh_32",
         "tanggal": "2026-10-08",
-        "nama": "AMEL",
-        "slot": 1
-      },
-      {
-        "id": "sh_33",
-        "tanggal": "2026-10-08",
-        "nama": "ADIF",
-        "slot": 1
-      },
-      {
-        "id": "sh_34",
-        "tanggal": "2026-10-08",
         "nama": "SAKA",
         "slot": 1
       },
       {
-        "id": "sh_35",
+        "id": "sh_33",
         "tanggal": "2026-10-09",
         "nama": "AMEL",
         "slot": 1
       },
       {
-        "id": "sh_36",
+        "id": "sh_34",
         "tanggal": "2026-10-09",
         "nama": "INDAH",
         "slot": 1
       },
       {
-        "id": "sh_37",
+        "id": "sh_35",
         "tanggal": "2026-10-09",
         "nama": "ADIF",
         "slot": 1
       },
       {
-        "id": "sh_38",
+        "id": "sh_36",
         "tanggal": "2026-10-09",
         "nama": "ADIF",
         "slot": 1
@@ -86004,8 +86031,8 @@
         "id": "kp_1",
         "nama": "ADIF",
         "role": "Fotografer 1",
-        "hariDinilai": 7,
-        "disiplin": 4.71,
+        "hariDinilai": 10,
+        "disiplin": 4.8,
         "akurasi": 5.0,
         "sop": 5.0,
         "client": 5.0,
@@ -86016,19 +86043,19 @@
         "id": "kp_2",
         "nama": "AMEL",
         "role": "Admin 2",
-        "hariDinilai": 8,
-        "disiplin": 4.62,
-        "akurasi": 4.75,
-        "sop": 4.5,
-        "client": 4.62,
-        "produktivitas": 4.62,
+        "hariDinilai": 11,
+        "disiplin": 4.64,
+        "akurasi": 4.64,
+        "sop": 4.55,
+        "client": 4.64,
+        "produktivitas": 4.64,
         "referral": 0
       },
       {
         "id": "kp_3",
         "nama": "INDAH",
         "role": "Admin 1",
-        "hariDinilai": 4,
+        "hariDinilai": 7,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -86040,7 +86067,7 @@
         "id": "kp_4",
         "nama": "SAKA",
         "role": "Fotografer 2",
-        "hariDinilai": 4,
+        "hariDinilai": 8,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -86058,6 +86085,9 @@
           5.0,
           5.0,
           5.0,
+          4.0,
+          5.0,
+          5.0,
           5.0,
           4.0
         ],
@@ -86066,6 +86096,9 @@
           4.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          3.0,
           5.0,
           5.0,
           5.0,
@@ -86078,6 +86111,9 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          4.0,
           4.0,
           4.0
         ],
@@ -86088,6 +86124,9 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          4.0,
           4.0,
           5.0
         ],
@@ -86096,6 +86135,9 @@
           4.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          4.0,
           5.0,
           5.0,
           5.0,
@@ -86110,9 +86152,15 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -86128,6 +86176,9 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "client": [
@@ -86137,9 +86188,15 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "produktivitas": [
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -86154,9 +86211,15 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -86166,15 +86229,24 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "client": [
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "produktivitas": [
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -86186,9 +86258,17 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -86198,15 +86278,27 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "client": [
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "produktivitas": [
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -88344,15 +88436,60 @@
         },
         {
           "id": "ex_nrc_17",
+          "tanggal": "2026-10-06",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "Marketing / Ads / KOL",
+          "deskripsi": "Ads",
+          "nilai": 500000.0
+        },
+        {
+          "id": "ex_nrc_18",
+          "tanggal": "2026-10-07",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "Software / Subscription",
+          "deskripsi": "Adobe",
+          "nilai": 315500.0
+        },
+        {
+          "id": "ex_nrc_19",
+          "tanggal": "2026-10-07",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "Software / Subscription",
+          "deskripsi": "Adobe",
+          "nilai": 628500.0
+        },
+        {
+          "id": "ex_nrc_20",
+          "tanggal": "2026-10-07",
+          "bulan": "2026-10",
+          "jenis": "COGS",
+          "kategori": "Properti / Consumable Sesi",
+          "deskripsi": "Rent Batrei",
+          "nilai": 15000.0
+        },
+        {
+          "id": "ex_nrc_21",
+          "tanggal": "2026-10-07",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "Listrik & Air",
+          "deskripsi": "Listrik",
+          "nilai": 503000.0
+        },
+        {
+          "id": "ex_nrc_22",
           "tanggal": "2026-10-07",
           "bulan": "2026-10",
           "jenis": "NON-P&L",
           "kategori": "Prive / Owner Draw",
           "deskripsi": "Bon",
-          "nilai": 1385200.0
+          "nilai": 1809200.0
         },
         {
-          "id": "ex_nrc_18",
+          "id": "ex_nrc_23",
           "tanggal": "2026-10-07",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -88361,7 +88498,7 @@
           "nilai": 196100.0
         },
         {
-          "id": "ex_nrc_19",
+          "id": "ex_nrc_24",
           "tanggal": "2026-10-07",
           "bulan": "2026-10",
           "jenis": "Biaya Lainnya",
@@ -88553,10 +88690,10 @@
           "tanggal_iso": "2026-10-06",
           "first_of_day": true,
           "masuk": 2495000.0,
-          "keluar": 0.0,
-          "balance": 30884000.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
+          "keluar": 500000.0,
+          "balance": 30384000.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Ads"
         },
         {
           "id": "det_nrc_18",
@@ -88565,7 +88702,7 @@
           "first_of_day": false,
           "masuk": 1230000.0,
           "keluar": 0.0,
-          "balance": 32114000.0,
+          "balance": 31614000.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -88575,17 +88712,50 @@
           "tanggal_iso": "2026-10-07",
           "first_of_day": true,
           "masuk": 1450000.0,
-          "keluar": 0.0,
-          "balance": 33564000.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
+          "keluar": 315500.0,
+          "balance": 32748500.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Adobe"
+        },
+        {
+          "id": "det_nrc_20",
+          "tgl": 7,
+          "tanggal_iso": "2026-10-07",
+          "first_of_day": false,
+          "masuk": 0.0,
+          "keluar": 628500.0,
+          "balance": 32120000.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Adobe"
+        },
+        {
+          "id": "det_nrc_21",
+          "tgl": 7,
+          "tanggal_iso": "2026-10-07",
+          "first_of_day": false,
+          "masuk": 0.0,
+          "keluar": 15000.0,
+          "balance": 32105000.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Rent Batrei"
+        },
+        {
+          "id": "det_nrc_22",
+          "tgl": 7,
+          "tanggal_iso": "2026-10-07",
+          "first_of_day": false,
+          "masuk": 0.0,
+          "keluar": 503000.0,
+          "balance": 31602000.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Listrik"
         }
       ],
       "summary": {
         "total_masuk": 39220000.0,
-        "total_keluar": 5656000.0,
-        "ending_balance": 33564000.0,
-        "total_rows": 19
+        "total_keluar": 7618000.0,
+        "ending_balance": 31602000.0,
+        "total_rows": 22
       },
       "rosterGaji": [
         {
