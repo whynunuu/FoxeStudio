@@ -52827,6 +52827,71 @@
       "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
+    },
+    {
+      "id": "or_213",
+      "tanggal": "2026-10-10",
+      "client": "Isma",
+      "paket": "Couple A",
+      "tanggalFoto": "2026-10-10",
+      "cash": 50000.0,
+      "transfer": 0.0,
+      "total": 50000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_214",
+      "tanggal": "2026-10-10",
+      "client": "Kingkin Alman",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-22",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_215",
+      "tanggal": "2026-10-10",
+      "client": "kkn 75",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-11",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_216",
+      "tanggal": "2026-10-10",
+      "client": "Yunan",
+      "paket": "Couple A",
+      "tanggalFoto": "2026-10-10",
+      "cash": 0.0,
+      "transfer": 50000.0,
+      "total": 50000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_217",
+      "tanggal": "2026-10-10",
+      "client": "Atletik",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-10",
+      "cash": 0.0,
+      "transfer": 500000.0,
+      "total": 500000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
     }
   ],
   "shifts": [
@@ -64275,7 +64340,7 @@
     {
       "id": "cc_2026-10-10",
       "tanggal": "2026-10-10",
-      "nilai": 200000.0
+      "nilai": 250000.0
     },
     {
       "id": "cc_2026-10-11",
@@ -64707,10 +64772,10 @@
     {
       "id": "ld_10",
       "tanggal": "2026-10-10",
-      "leads": 0.0,
-      "dp": 4.0,
-      "sesiFoto": 8.0,
-      "transaksi": 12.0
+      "leads": 26.0,
+      "dp": 6.0,
+      "sesiFoto": 11.0,
+      "transaksi": 17.0
     }
   ],
   "kpi": [
@@ -76453,7 +76518,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 45700000.0
+        "omzet": 46500000.0
       }
     ]
   },
@@ -76801,6 +76866,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261010-1510",
+      "mulai": "2026-10-10T15:10:23.981415+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 217 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 94 pos pengeluaran Neraca, 185 pipeline Okt."
+    },
     {
       "id": "sy_20261010-1103",
       "mulai": "2026-10-10T11:03:31.713713+00:00",
@@ -77624,7 +77695,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-10T11:03:31.713713+00:00"
+    "last_sync": "2026-10-10T15:10:23.981415+00:00"
   },
   "neracaDetail": [
     {
@@ -78186,17 +78257,17 @@
   },
   "oktoberPipeline": {
     "bulan": "2026-10",
-    "totalBookings": 183,
-    "potentialOmzet": 60675000.0,
-    "totalDp": 16150000.0,
-    "estimateCashIn": 8425000.0,
-    "remainingCashIn": 8425000.0,
-    "totalPipelineCashIn": 44525000.0,
+    "totalBookings": 185,
+    "potentialOmzet": 61300000.0,
+    "totalDp": 16350000.0,
+    "estimateCashIn": 8175000.0,
+    "remainingCashIn": 8175000.0,
+    "totalPipelineCashIn": 44950000.0,
     "breakdown": {
       "reguler": {
-        "sesi": 83,
-        "nilai": 24175000.0,
-        "dp": 6800000.0
+        "sesi": 85,
+        "nilai": 24800000.0,
+        "dp": 7000000.0
       },
       "wisudaDay1": {
         "sesi": 48,
@@ -78211,20 +78282,20 @@
     },
     "statusBreakdown": {
       "done": {
-        "sesi": 144,
-        "nilai": 46600000.0,
-        "dp": 12750000.0,
-        "cashIn": 33950000.0
+        "sesi": 146,
+        "nilai": 47175000.0,
+        "dp": 12950000.0,
+        "cashIn": 34325000.0
       },
       "confirmed": {
-        "sesi": 30,
-        "nilai": 10775000.0,
+        "sesi": 29,
+        "nilai": 10525000.0,
         "dp": 2400000.0,
-        "cashIn": 8425000.0
+        "cashIn": 8175000.0
       },
       "reschedule": {
-        "sesi": 9,
-        "nilai": 3300000.0,
+        "sesi": 10,
+        "nilai": 3600000.0,
         "dp": 1000000.0,
         "cashIn": 0.0
       }
@@ -79569,12 +79640,12 @@
         "admin": "IN",
         "noHp": "dp 100 limbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 50000.0,
@@ -79594,13 +79665,13 @@
         "admin": "AL",
         "noHp": "",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
+        "color": "ORANGE",
+        "statusColor": "orange",
+        "statusSesi": "reschedule",
+        "statusLabel": "Reschedule / Kendala",
+        "statusBadge": "warn",
         "isDone": false,
-        "isReschedule": false,
+        "isReschedule": true,
         "dp": 0.0,
         "sisaPelunasan": 300000.0,
         "kategori": "Studio Reguler"
@@ -79619,12 +79690,12 @@
         "admin": "IN",
         "noHp": "dp 100",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 325000.0,
@@ -79807,6 +79878,31 @@
       },
       {
         "id": "sc_bk_64",
+        "tgl": "2026-10-11",
+        "waktu": "18:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "kkn 75",
+        "paket": "Large Group",
+        "paketRaw": "LG 11",
+        "jmlOrang": 11,
+        "harga": 275000.0,
+        "admin": "IN",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false,
+        "dp": 100000.0,
+        "sisaPelunasan": 175000.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_65",
         "tgl": "2026-10-12",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -79831,7 +79927,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_65",
+        "id": "sc_bk_66",
         "tgl": "2026-10-12",
         "waktu": "14:40",
         "studio": "Studio 1",
@@ -79856,7 +79952,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_66",
+        "id": "sc_bk_67",
         "tgl": "2026-10-17",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -79881,7 +79977,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_67",
+        "id": "sc_bk_68",
         "tgl": "2026-10-17",
         "waktu": "12:00",
         "studio": "Studio 1",
@@ -79906,7 +80002,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_68",
+        "id": "sc_bk_69",
         "tgl": "2026-10-17",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -79931,7 +80027,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_69",
+        "id": "sc_bk_70",
         "tgl": "2026-10-17",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -79956,7 +80052,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_70",
+        "id": "sc_bk_71",
         "tgl": "2026-10-17",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -79981,7 +80077,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_71",
+        "id": "sc_bk_72",
         "tgl": "2026-10-17",
         "waktu": "14:40",
         "studio": "Studio 1",
@@ -80006,7 +80102,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_72",
+        "id": "sc_bk_73",
         "tgl": "2026-10-17",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -80031,7 +80127,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_73",
+        "id": "sc_bk_74",
         "tgl": "2026-10-17",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -80056,7 +80152,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_74",
+        "id": "sc_bk_75",
         "tgl": "2026-10-20",
         "waktu": "20:00",
         "studio": "Studio 1",
@@ -80081,7 +80177,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_75",
+        "id": "sc_bk_76",
         "tgl": "2026-10-21",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -80106,7 +80202,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_76",
+        "id": "sc_bk_77",
         "tgl": "2026-10-22",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -80131,7 +80227,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_77",
+        "id": "sc_bk_78",
         "tgl": "2026-10-22",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -80156,7 +80252,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_78",
+        "id": "sc_bk_79",
         "tgl": "2026-10-22",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -80181,7 +80277,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_79",
+        "id": "sc_bk_80",
         "tgl": "2026-10-22",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -80206,7 +80302,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_80",
+        "id": "sc_bk_81",
         "tgl": "2026-10-22",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -80231,7 +80327,32 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_81",
+        "id": "sc_bk_82",
+        "tgl": "2026-10-22",
+        "waktu": "14:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Kingkin Alman",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "IN",
+        "noHp": "dp 100 calmblue",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false,
+        "dp": 100000.0,
+        "sisaPelunasan": 250000.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_83",
         "tgl": "2026-10-22",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -80256,7 +80377,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_82",
+        "id": "sc_bk_84",
         "tgl": "2026-10-22",
         "waktu": "15:40",
         "studio": "Studio 1",
@@ -80281,7 +80402,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_83",
+        "id": "sc_bk_85",
         "tgl": "2026-10-29",
         "waktu": "15:20",
         "studio": "Studio 1",
@@ -85904,6 +86025,71 @@
         "pembayaran": "Lunas",
         "admin": "INDAH",
         "fotografer": "SAKA"
+      },
+      {
+        "id": "or_213",
+        "tanggal": "2026-10-10",
+        "client": "Isma",
+        "paket": "Couple A",
+        "tanggalFoto": "2026-10-10",
+        "cash": 50000.0,
+        "transfer": 0.0,
+        "total": 50000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_214",
+        "tanggal": "2026-10-10",
+        "client": "Kingkin Alman",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-22",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_215",
+        "tanggal": "2026-10-10",
+        "client": "kkn 75",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-11",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_216",
+        "tanggal": "2026-10-10",
+        "client": "Yunan",
+        "paket": "Couple A",
+        "tanggalFoto": "2026-10-10",
+        "cash": 0.0,
+        "transfer": 50000.0,
+        "total": 50000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_217",
+        "tanggal": "2026-10-10",
+        "client": "Atletik",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-10",
+        "cash": 0.0,
+        "transfer": 500000.0,
+        "total": 500000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
       }
     ],
     "shifts": [
@@ -86197,7 +86383,7 @@
       {
         "id": "cc_2026-10-10",
         "tanggal": "2026-10-10",
-        "nilai": 200000.0
+        "nilai": 250000.0
       },
       {
         "id": "cc_2026-10-11",
@@ -86381,10 +86567,10 @@
       {
         "id": "ld_10",
         "tanggal": "2026-10-10",
-        "leads": 0.0,
-        "dp": 4.0,
-        "sesiFoto": 8.0,
-        "transaksi": 12.0
+        "leads": 26.0,
+        "dp": 6.0,
+        "sesiFoto": 11.0,
+        "transaksi": 17.0
       },
       {
         "id": "ld_11",
@@ -145095,12 +145281,12 @@
         "admin": "IN",
         "noHp": "dp 100 limbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 50000.0,
@@ -145120,13 +145306,13 @@
         "admin": "AL",
         "noHp": "",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
+        "color": "ORANGE",
+        "statusColor": "orange",
+        "statusSesi": "reschedule",
+        "statusLabel": "Reschedule / Kendala",
+        "statusBadge": "warn",
         "isDone": false,
-        "isReschedule": false,
+        "isReschedule": true,
         "dp": 0.0,
         "sisaPelunasan": 300000.0,
         "kategori": "Studio Reguler"
@@ -145145,12 +145331,12 @@
         "admin": "IN",
         "noHp": "dp 100",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 325000.0,
@@ -145333,6 +145519,31 @@
       },
       {
         "id": "sc_bk_64",
+        "tgl": "2026-10-11",
+        "waktu": "18:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "kkn 75",
+        "paket": "Large Group",
+        "paketRaw": "LG 11",
+        "jmlOrang": 11,
+        "harga": 275000.0,
+        "admin": "IN",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false,
+        "dp": 100000.0,
+        "sisaPelunasan": 175000.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_65",
         "tgl": "2026-10-12",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -145357,7 +145568,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_65",
+        "id": "sc_bk_66",
         "tgl": "2026-10-12",
         "waktu": "14:40",
         "studio": "Studio 1",
@@ -145382,7 +145593,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_66",
+        "id": "sc_bk_67",
         "tgl": "2026-10-17",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -145407,7 +145618,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_67",
+        "id": "sc_bk_68",
         "tgl": "2026-10-17",
         "waktu": "12:00",
         "studio": "Studio 1",
@@ -145432,7 +145643,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_68",
+        "id": "sc_bk_69",
         "tgl": "2026-10-17",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -145457,7 +145668,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_69",
+        "id": "sc_bk_70",
         "tgl": "2026-10-17",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -145482,7 +145693,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_70",
+        "id": "sc_bk_71",
         "tgl": "2026-10-17",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -145507,7 +145718,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_71",
+        "id": "sc_bk_72",
         "tgl": "2026-10-17",
         "waktu": "14:40",
         "studio": "Studio 1",
@@ -145532,7 +145743,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_72",
+        "id": "sc_bk_73",
         "tgl": "2026-10-17",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -145557,7 +145768,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_73",
+        "id": "sc_bk_74",
         "tgl": "2026-10-17",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -145582,7 +145793,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_74",
+        "id": "sc_bk_75",
         "tgl": "2026-10-20",
         "waktu": "20:00",
         "studio": "Studio 1",
@@ -145607,7 +145818,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_75",
+        "id": "sc_bk_76",
         "tgl": "2026-10-21",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -145632,7 +145843,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_76",
+        "id": "sc_bk_77",
         "tgl": "2026-10-22",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -145657,7 +145868,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_77",
+        "id": "sc_bk_78",
         "tgl": "2026-10-22",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -145682,7 +145893,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_78",
+        "id": "sc_bk_79",
         "tgl": "2026-10-22",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -145707,7 +145918,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_79",
+        "id": "sc_bk_80",
         "tgl": "2026-10-22",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -145732,7 +145943,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_80",
+        "id": "sc_bk_81",
         "tgl": "2026-10-22",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -145757,7 +145968,32 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_81",
+        "id": "sc_bk_82",
+        "tgl": "2026-10-22",
+        "waktu": "14:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Kingkin Alman",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "IN",
+        "noHp": "dp 100 calmblue",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false,
+        "dp": 100000.0,
+        "sisaPelunasan": 250000.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_83",
         "tgl": "2026-10-22",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -145782,7 +146018,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_82",
+        "id": "sc_bk_84",
         "tgl": "2026-10-22",
         "waktu": "15:40",
         "studio": "Studio 1",
@@ -145807,7 +146043,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_83",
+        "id": "sc_bk_85",
         "tgl": "2026-10-29",
         "waktu": "15:20",
         "studio": "Studio 1",
