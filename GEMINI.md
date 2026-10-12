@@ -217,7 +217,8 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau variasi serupa seperti "up
     * Rank #4 Self Photo & Single
   - Dilengkapi filter cepat interaktif: Quick filter chips (`[ 📦 Semua Paket ]`, `[ 🎓 Wisuda ]`, `[ 👥 Large Group ]`, dll.), dropdown filter paket, dan kartu peringkat interaktif yang dapat diklik untuk menyaring daftar prospek seketika.
   - Setiap kartu prospek menampilkan badge tag paket (`lead-paket-pill`) yang jelas.
-- **Autentikasi PIN Terpisah (Keuangan vs CRM)**:
+- **Autentikasi PIN Terpisah & Opening Gate**:
+  - **Opening Gate Portal**: Saat membuka URL utama, muncul layar gerbang 2 opsi (*Option Card A: Foxe Keuangan* dan *Option Card B: Foxe CRM & Flow*) dengan prinsip Zero PIN Disclosure.
   - **Section Keuangan (`index.html`)**: Terproteksi Master PIN `363636`.
   - **Section CRM Leads & Foxe Flow (`flow.html`)**: Terproteksi Master PIN Khusus `112233` dengan token sesi terisolasi (`foxe_crm_auth_token_v1`).
 

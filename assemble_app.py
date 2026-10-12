@@ -434,27 +434,27 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
   .stats{grid-template-columns:1fr}
 }
 
-/* ---------- lock screen (autentikasi studio) ---------- */
+/* ---------- lock screen (autentikasi studio & opening gate) ---------- */
 .lock-screen{position:fixed;inset:0;z-index:99999;
   background:radial-gradient(circle at 50% 35%, #1e1d1a 0%, #0c0b0a 100%);
   display:flex;align-items:center;justify-content:center;padding:24px 16px;
   overflow-y:auto}
 .lock-card{width:100%;max-width:360px;margin:auto;background:#1a1917;
-  border:1px solid rgba(0,128,200,0.4);
-  box-shadow:0 24px 48px rgba(0,0,0,0.8),0 0 24px rgba(0,128,200,0.15);
+  border:1px solid rgba(212,160,23,0.4);
+  box-shadow:0 24px 48px rgba(0,0,0,0.8),0 0 24px rgba(212,160,23,0.15);
   border-radius:24px;padding:32px 24px;text-align:center;color:#faf9f5;
   animation:lockFadeIn .25s ease-out}
 @keyframes lockFadeIn{from{opacity:0;transform:scale(0.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.lock-logo{margin-bottom:14px;display:inline-flex;filter:drop-shadow(0 2px 10px rgba(0,128,200,0.45))}
+.lock-logo{margin-bottom:14px;display:inline-flex;filter:drop-shadow(0 2px 10px rgba(212,160,23,0.45))}
 .lock-title{font-family:var(--ff-display,serif);font-size:29px;font-weight:700;letter-spacing:-.5px;color:#faf9f5;margin-bottom:3px}
 .lock-subtitle{font-size:13px;color:#a09d96;margin-bottom:12px}
 .lock-badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
-  padding:3px 12px;border-radius:9999px;background:rgba(0,128,200,0.18);color:#0080c8;
-  border:1px solid rgba(0,128,200,0.4);margin-bottom:22px}
+  padding:3px 12px;border-radius:9999px;background:rgba(212,160,23,0.18);color:#d4a017;
+  border:1px solid rgba(212,160,23,0.4);margin-bottom:22px}
 .pin-display{display:flex;justify-content:center;gap:12px;margin-bottom:20px}
 .pin-display .dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(160,157,150,0.4);
   background:transparent;transition:all .18s cubic-bezier(0.16,1,0.3,1)}
-.pin-display .dot.filled{background:#0080c8;border-color:#0080c8;box-shadow:0 0 12px rgba(0,128,200,0.8);transform:scale(1.15)}
+.pin-display .dot.filled{background:#d4a017;border-color:#d4a017;box-shadow:0 0 12px rgba(212,160,23,0.8);transform:scale(1.15)}
 .pin-display.shake{animation:pinShake .45s cubic-bezier(0.36,0.07,0.19,0.97)}
 @keyframes pinShake{10%,90%{transform:translate3d(-3px,0,0)}20%,80%{transform:translate3d(5px,0,0)}30%,50%,70%{transform:translate3d(-6px,0,0)}40%,60%{transform:translate3d(6px,0,0)}}
 .pin-hidden-input{position:absolute;opacity:0;pointer-events:none}
@@ -463,12 +463,59 @@ tr.total td{font-weight:600;background:var(--surface2);border-top:1px solid var(
 .key-btn{background:rgba(37,35,32,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:12px;
   padding:13px 0;font-size:19px;font-weight:600;color:#faf9f5;cursor:pointer;
   transition:all .12s ease;user-select:none;-webkit-user-select:none}
-.key-btn:hover{background:rgba(52,50,45,0.95);border-color:rgba(0,128,200,0.45)}
-.key-btn:active{transform:scale(0.92);background:#0080c8;color:#fff}
+.key-btn:hover{background:rgba(52,50,45,0.95);border-color:rgba(212,160,23,0.45)}
+.key-btn:active{transform:scale(0.92);background:#d4a017;color:#141413}
 .key-btn.action-btn{font-size:16px;color:#a09d96}
-.key-btn.ok-btn{background:rgba(0,128,200,0.25);color:#0080c8;border-color:rgba(0,128,200,0.45)}
-.key-btn.ok-btn:active{background:#0080c8;color:#fff}
+.key-btn.ok-btn{background:rgba(212,160,23,0.25);color:#d4a017;border-color:rgba(212,160,23,0.45)}
+.key-btn.ok-btn:active{background:#d4a017;color:#141413}
 .lock-footer{font-size:11.5px;color:#6c6a64}
+
+/* ---------- OPENING GATE (PORTAL GERBANG UTAMA) ---------- */
+.gate-view{width:100%;max-width:1120px;margin:auto;display:flex;flex-direction:column;align-items:center;padding:24px 16px;animation:lockFadeIn .28s ease-out}
+.gate-container{width:100%;display:flex;flex-direction:column;align-items:center}
+.brand-header-gate{text-align:center;margin-bottom:34px}
+.brand-logo-wrap-gate{display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px;padding:8px 18px;background:rgba(255,255,255,0.02);border:1px solid var(--hairline);border-radius:999px;backdrop-filter:blur(8px)}
+.brand-logo-img-gate{height:38px;width:auto;object-fit:contain;filter:drop-shadow(0 4px 14px rgba(0,0,0,0.45))}
+.brand-title-gate{font-family:var(--ff-display,serif);font-size:clamp(26px, 3.8vw, 38px);font-weight:600;letter-spacing:-.5px;color:var(--ink);line-height:1.15;margin-bottom:8px}
+.brand-subtitle-gate{font-size:14px;color:var(--muted);max-width:540px;margin:0 auto;line-height:1.5}
+.badge-pill-gate{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;font-family:var(--ff-mono);font-size:11px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;background:var(--surface2);border:1px solid var(--hairline-strong);color:var(--ink2);margin-top:12px}
+
+.portal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;width:100%;margin-bottom:28px}
+@media (max-width: 768px){ .portal-grid{grid-template-columns:1fr;gap:20px} }
+
+.portal-card{background:var(--surface);border:1px solid var(--hairline);border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;position:relative;cursor:pointer;transition:all .28s cubic-bezier(0.16,1,0.3,1);box-shadow:0 10px 30px rgba(0,0,0,0.35);text-align:left}
+.portal-card:hover{transform:translateY(-4px);box-shadow:0 18px 45px rgba(0,0,0,0.55)}
+
+.portal-card.card-keuangan:hover{border-color:rgba(212,160,23,0.45);box-shadow:0 18px 45px rgba(212,160,23,0.12)}
+.portal-card.card-keuangan .card-tag{color:#eab308;background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.28)}
+.portal-card.card-keuangan .card-icon-wrap{background:linear-gradient(135deg,rgba(212,160,23,0.2),rgba(212,160,23,0.05));border:1px solid rgba(212,160,23,0.35);color:#facc15}
+.portal-card.card-keuangan .btn-enter{background:linear-gradient(135deg,#d4a017,#b8860b);color:#141413;font-weight:700}
+.portal-card.card-keuangan .btn-enter:hover{background:linear-gradient(135deg,#e5b32a,#c99414);box-shadow:0 6px 20px rgba(212,160,23,0.35)}
+
+.portal-card.card-crm:hover{border-color:rgba(0,128,200,0.55);box-shadow:0 18px 45px rgba(0,128,200,0.16)}
+.portal-card.card-crm .card-tag{color:#38bdf8;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.28)}
+.portal-card.card-crm .card-icon-wrap{background:linear-gradient(135deg,rgba(0,128,200,0.25),rgba(0,128,200,0.05));border:1px solid rgba(0,128,200,0.45);color:#38bdf8}
+.portal-card.card-crm .btn-enter{background:linear-gradient(135deg,#0080c8,#0066a3);color:#ffffff;font-weight:600}
+.portal-card.card-crm .btn-enter:hover{background:linear-gradient(135deg,#0093e9,#0077bd);box-shadow:0 6px 20px rgba(0,128,200,0.4)}
+
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+.card-icon-wrap{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.card-tag{font-family:var(--ff-mono);font-size:10.5px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;padding:4px 10px;border-radius:8px}
+
+.card-title{font-family:var(--ff-display,serif);font-size:25px;font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:6px}
+.card-desc{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.45}
+
+.card-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:26px;flex-grow:1;padding:0}
+.card-features li{font-size:12.5px;color:var(--ink2);display:flex;align-items:center;gap:10px;line-height:1.35}
+.card-features li .check-icon{font-family:var(--ff-mono);font-size:11px;font-weight:700;color:var(--muted);display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;background:var(--surface2);border-radius:6px;border:1px solid var(--hairline-strong);flex-shrink:0}
+
+.card-bottom{border-top:1px solid var(--hairline);padding-top:18px;display:flex;flex-direction:column;gap:12px}
+.access-label{font-size:11.5px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;font-weight:500}
+.btn-enter{width:100%;padding:12px 18px;border-radius:12px;border:none;cursor:pointer;font-size:13.5px;font-family:var(--ff-sans,sans-serif);display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s ease}
+
+.gate-footer{text-align:center;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;padding-top:10px}
+.btn-back-to-gate{background:transparent;border:none;color:var(--muted);font-size:12.5px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;margin-top:14px;transition:all .2s ease}
+.btn-back-to-gate:hover{color:var(--ink);background:rgba(255,255,255,0.05)}
 
 /* ---------- toast notification ---------- */
 .toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--rail);
@@ -630,42 +677,123 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
 <body>
 
 <div id="lockScreen" class="lock-screen" style="display:flex">
-  <div class="lock-card">
-    <div class="lock-logo" style="margin-bottom:14px">
-      <img src="logo_foxe.png" alt="Foxe Studio" style="height:44px;width:auto;max-width:210px;object-fit:contain;filter:brightness(1.1) drop-shadow(0 4px 14px rgba(0,85,184,0.35))">
+  <!-- 1. OPENING GATE VIEW -->
+  <div id="openingGateView" class="gate-view" style="display:flex">
+    <div class="gate-container">
+      <header class="brand-header-gate">
+        <div class="brand-logo-wrap-gate">
+          <img src="logo_foxe.png" alt="Foxe Studio" class="brand-logo-img-gate">
+        </div>
+        <h1 class="brand-title-gate">Pusat Kendali Bisnis &amp; Operasional</h1>
+        <p class="brand-subtitle-gate">
+          Sistem terpadu manajemen studio foto, analitik finansial eksekutif, dan mesin layanan prospek klien.
+        </p>
+        <div class="badge-pill-gate">
+          <span>● Multi-Portal System</span> · <span>Purwokerto Studio</span>
+        </div>
+      </header>
+
+      <main class="portal-grid">
+        <!-- KARTU A: FOXE KEUANGAN (MANAJEMEN / OWNER) -->
+        <article class="portal-card card-keuangan" id="btnSelectKeuangan">
+          <div class="card-top">
+            <div class="card-icon-wrap">📊</div>
+            <span class="card-tag">Portal A · Eksekutif</span>
+          </div>
+          <h2 class="card-title">Foxe Keuangan</h2>
+          <p class="card-desc">Executive Financial Intelligence &amp; Performance Control</p>
+          <ul class="card-features">
+            <li><span class="check-icon">✓</span><span>Realisasi Omzet MTD &amp; Run-rate Kasir Live</span></li>
+            <li><span class="check-icon">✓</span><span>Neraca Terpadu COGS, OPEX &amp; Margin Laba</span></li>
+            <li><span class="check-icon">✓</span><span>Roster Shift Aktual &amp; Rekap Payroll Kru</span></li>
+            <li><span class="check-icon">✓</span><span>Pipeline Jadwal &amp; Estimasi Pelunasan Sesi</span></li>
+          </ul>
+          <div class="card-bottom">
+            <div class="access-label"><span>🔒</span><span>Akses Khusus Owner &amp; Manajemen</span></div>
+            <button class="btn-enter" type="button">
+              <span>Masuk Portal Keuangan</span>
+              <span>➔</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- KARTU B: FOXE CRM (TIM OPERASIONAL / ADMIN WA) -->
+        <article class="portal-card card-crm" id="btnSelectCrm">
+          <div class="card-top">
+            <div class="card-icon-wrap">⚡</div>
+            <span class="card-tag">Portal B · Operasional</span>
+          </div>
+          <h2 class="card-title">Foxe CRM &amp; Flow</h2>
+          <p class="card-desc">Studio Floor Ops, WhatsApp Leads &amp; AI Assistant</p>
+          <ul class="card-features">
+            <li><span class="check-icon">✓</span><span>Pustaka Prospek WhatsApp Masuk &amp; Riwayat Chat</span></li>
+            <li><span class="check-icon">✓</span><span>AI Assistant Rekomendasi Balasan Cepat</span></li>
+            <li><span class="check-icon">✓</span><span>Demand Analytics (Peringkat Minat Paket Foto)</span></li>
+            <li><span class="check-icon">✓</span><span>Kalender Evaluasi Harian &amp; Otomasi Webhook</span></li>
+          </ul>
+          <div class="card-bottom">
+            <div class="access-label"><span>🔒</span><span>Akses Khusus Tim Operasional &amp; Admin</span></div>
+            <button class="btn-enter" type="button">
+              <span>Masuk Portal Operasional</span>
+              <span>➔</span>
+            </button>
+          </div>
+        </article>
+      </main>
+
+      <footer class="gate-footer">
+        <span>🛡️ Sesi Terisolasi Mandiri</span>
+        <span>•</span>
+        <span>Zero PIN Disclosure (Kerahasiaan Penuh)</span>
+        <span>•</span>
+        <span>Foxe Studio 2026</span>
+      </footer>
     </div>
-    <p class="lock-subtitle" style="margin-top:0">Portal Keuangan &amp; Operasional</p>
-    <div class="lock-badge">🔒 Akses Terbatas</div>
-    
-    <div class="pin-display" id="pinDots">
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
+  </div>
+
+  <!-- 2. PIN KEYPAD VIEW (TERSEMBUNYI, AKTIF SAAT KARTU KEUANGAN DIKLIK) -->
+  <div id="pinEntryView" class="pin-entry-view" style="display:none;width:100%;max-width:360px;margin:auto;">
+    <div class="lock-card">
+      <div class="lock-logo" style="margin-bottom:14px">
+        <img src="logo_foxe.png" alt="Foxe Studio" style="height:44px;width:auto;max-width:210px;object-fit:contain;filter:brightness(1.1) drop-shadow(0 4px 14px rgba(212,160,23,0.35))">
+      </div>
+      <p class="lock-subtitle" style="margin-top:0">Portal Manajemen &amp; Finansial</p>
+      <div class="lock-badge" style="background:rgba(212,160,23,0.18);color:#d4a017;border-color:rgba(212,160,23,0.4)">🔒 Akses Khusus Manajemen</div>
+      
+      <div class="pin-display" id="pinDots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+
+      <input type="password" id="pinInput" maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" class="pin-hidden-input" autofocus>
+
+      <div class="lock-error" id="lockError" hidden>PIN Salah. Silakan coba lagi.</div>
+
+      <div class="keypad" id="pinKeypad">
+        <button class="key-btn" type="button" data-val="1">1</button>
+        <button class="key-btn" type="button" data-val="2">2</button>
+        <button class="key-btn" type="button" data-val="3">3</button>
+        <button class="key-btn" type="button" data-val="4">4</button>
+        <button class="key-btn" type="button" data-val="5">5</button>
+        <button class="key-btn" type="button" data-val="6">6</button>
+        <button class="key-btn" type="button" data-val="7">7</button>
+        <button class="key-btn" type="button" data-val="8">8</button>
+        <button class="key-btn" type="button" data-val="9">9</button>
+        <button class="key-btn action-btn" type="button" id="keyClear">⌫</button>
+        <button class="key-btn" type="button" data-val="0">0</button>
+        <button class="key-btn action-btn ok-btn" type="button" id="keySubmit">➔</button>
+      </div>
+
+      <button type="button" id="btnBackToGate" class="btn-back-to-gate">
+        ← Kembali ke Pilihan Portal
+      </button>
+
+      <p class="lock-footer" style="margin-top:14px">Akses internal khusus Owner &amp; Manajemen Foxe Studio</p>
     </div>
-
-    <input type="password" id="pinInput" maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" class="pin-hidden-input" autofocus>
-
-    <div class="lock-error" id="lockError" hidden>PIN Salah. Silakan coba lagi.</div>
-
-    <div class="keypad" id="pinKeypad">
-      <button class="key-btn" type="button" data-val="1">1</button>
-      <button class="key-btn" type="button" data-val="2">2</button>
-      <button class="key-btn" type="button" data-val="3">3</button>
-      <button class="key-btn" type="button" data-val="4">4</button>
-      <button class="key-btn" type="button" data-val="5">5</button>
-      <button class="key-btn" type="button" data-val="6">6</button>
-      <button class="key-btn" type="button" data-val="7">7</button>
-      <button class="key-btn" type="button" data-val="8">8</button>
-      <button class="key-btn" type="button" data-val="9">9</button>
-      <button class="key-btn action-btn" type="button" id="keyClear">⌫</button>
-      <button class="key-btn" type="button" data-val="0">0</button>
-      <button class="key-btn action-btn ok-btn" type="button" id="keySubmit">➔</button>
-    </div>
-
-    <p class="lock-footer">Akses internal khusus Owner &amp; Manajemen Foxe Studio</p>
   </div>
 </div>
 
@@ -6819,6 +6947,10 @@ function lockDashboard(immediate = false) {
     lock.style.display = "flex";
     lock.style.opacity = "1";
     lock.style.transform = "none";
+    const gateEl = document.getElementById("openingGateView");
+    const pinEl = document.getElementById("pinEntryView");
+    if (gateEl) gateEl.style.display = "flex";
+    if (pinEl) pinEl.style.display = "none";
   }
   if (appEl) {
     // Sembunyikan appShell seutuhnya -> ZERO GPU paint & ZERO layout overhead
@@ -6828,14 +6960,51 @@ function lockDashboard(immediate = false) {
   const pinInp = document.getElementById("pinInput");
   if (pinInp) {
     pinInp.value = "";
-    if (!lockoutUntil) {
-      setTimeout(() => pinInp.focus(), 50);
-    }
   }
   checkLockout();
 }
 
-// Bind Keypad & Events
+// Bind Opening Gate & Keypad Events
+const btnSelectKeuangan = document.getElementById("btnSelectKeuangan");
+const btnSelectCrm = document.getElementById("btnSelectCrm");
+const btnBackToGate = document.getElementById("btnBackToGate");
+
+if (btnSelectKeuangan) {
+  btnSelectKeuangan.onclick = () => {
+    const gateEl = document.getElementById("openingGateView");
+    const pinEl = document.getElementById("pinEntryView");
+    if (gateEl) gateEl.style.display = "none";
+    if (pinEl) {
+      pinEl.style.display = "block";
+      const pinInp = document.getElementById("pinInput");
+      if (pinInp && !lockoutUntil) {
+        setTimeout(() => pinInp.focus(), 60);
+      }
+    }
+  };
+}
+
+if (btnSelectCrm) {
+  btnSelectCrm.onclick = () => {
+    window.location.href = "flow.html";
+  };
+}
+
+if (btnBackToGate) {
+  btnBackToGate.onclick = () => {
+    enteredPin = "";
+    updatePinDots();
+    const pinInp = document.getElementById("pinInput");
+    if (pinInp) pinInp.value = "";
+    const errEl = document.getElementById("lockError");
+    if (errEl) errEl.hidden = true;
+    const gateEl = document.getElementById("openingGateView");
+    const pinEl = document.getElementById("pinEntryView");
+    if (gateEl) gateEl.style.display = "flex";
+    if (pinEl) pinEl.style.display = "none";
+  };
+}
+
 const pinInput = document.getElementById("pinInput");
 const pinKeypad = document.getElementById("pinKeypad");
 const keyClear = document.getElementById("keyClear");
@@ -6899,6 +7068,15 @@ if (lockCard && pinInput) {
 document.addEventListener("keydown", e => {
   const lock = document.getElementById("lockScreen");
   if (lock && lock.style.display !== "none") {
+    const pinEl = document.getElementById("pinEntryView");
+    if (pinEl && pinEl.style.display === "none") {
+      return;
+    }
+    if (e.key === "Escape") {
+      const backBtn = document.getElementById("btnBackToGate");
+      if (backBtn) backBtn.click();
+      return;
+    }
     // Jika user sedang mengetik langsung di pinInput, biarkan oninput yang menangani
     if (e.target === pinInput) return;
     if (e.key >= "0" && e.key <= "9") {

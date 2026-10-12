@@ -64,6 +64,10 @@ Unrealized Omzet               Rp 104.625.000
 ---
 
 ## 4. Keamanan Autentikasi & Master PIN Portal
+- **Opening Gate (Pintu Gerbang Utama)**: Saat web dibuka, pengguna disambut gerbang 2 kartu:
+  * **Portal A: Foxe Keuangan (Eksekutif)** ➔ Membuka keypad PIN Manajemen (`363636`).
+  * **Portal B: Foxe CRM & Flow (Operasional)** ➔ Mengalihkan ke workspace CRM (`flow.html`) dengan PIN Operasional (`112233`).
+- **Zero PIN Disclosure**: Tidak ada nomor PIN yang ditampilkan di kartu gerbang utama demi kerahasiaan penuh.
 - **Master PIN Keuangan Aktif**: `363636` (Dashboard Laporan Keuangan `index.html`)
 - **Master PIN CRM Leads Aktif**: `112233` (Foxe Flow & AI Leads CRM `flow.html`)
 - **Mekanisme Anti-Ingat Perangkat**:

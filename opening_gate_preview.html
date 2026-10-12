@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview Desain Opening Gate — Foxe Studio</title>
+  <link rel="icon" type="image/png" href="logo_foxe.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <style>
+    :root {
+      --canvas: #141413;
+      --surface: #1b1a18;
+      --surface2: #22211e;
+      --surface3: #2a2925;
+      --hairline: #2e2c28;
+      --hairline-strong: #3f3d37;
+      --ink: #faf9f5;
+      --ink2: #d3cfc7;
+      --muted: #a09d96;
+      --accent-keuangan: #d4a017;
+      --accent-keuangan-glow: rgba(212, 160, 23, 0.22);
+      --accent-crm: #0080c8;
+      --accent-crm-glow: rgba(0, 128, 200, 0.25);
+      --ff-serif: 'Cormorant Garamond', Georgia, serif;
+      --ff-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --ff-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--canvas);
+      color: var(--ink);
+      font-family: var(--ff-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+      position: relative;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(ellipse at 50% -10%, rgba(212, 160, 23, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 110%, rgba(0, 128, 200, 0.08) 0%, transparent 60%);
+    }
+
+    /* Ambient background grid */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .gate-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Brand Header */
+    .brand-header {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .brand-logo-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      padding: 10px 18px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--hairline);
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand-logo-img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 14px rgba(0,0,0,0.45));
+    }
+
+    .brand-title {
+      font-family: var(--ff-serif);
+      font-size: clamp(28px, 4.2vw, 42px);
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .brand-subtitle {
+      font-size: 14.5px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: var(--surface2);
+      border: 1px solid var(--hairline-strong);
+      color: var(--ink2);
+      margin-top: 10px;
+    }
+
+    /* Cards Grid */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      width: 100%;
+      margin-bottom: 28px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .portal-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    /* Option Card Styling */
+    .portal-card {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      overflow: hidden;
+    }
+
+    .portal-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 60%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .portal-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.55);
+    }
+
+    /* Specific Accent Card: Keuangan */
+    .portal-card.card-keuangan:hover {
+      border-color: rgba(212, 160, 23, 0.45);
+      box-shadow: 0 18px 45px rgba(212, 160, 23, 0.12);
+    }
+    .portal-card.card-keuangan .card-tag {
+      color: #eab308;
+      background: rgba(234, 179, 8, 0.12);
+      border-color: rgba(234, 179, 8, 0.28);
+    }
+    .portal-card.card-keuangan .card-icon-wrap {
+      background: linear-gradient(135deg, rgba(212, 160, 23, 0.2), rgba(212, 160, 23, 0.05));
+      border: 1px solid rgba(212, 160, 23, 0.35);
+      color: #facc15;
+    }
+    .portal-card.card-keuangan .btn-enter {
+      background: linear-gradient(135deg, #d4a017, #b8860b);
+      color: #141413;
+      font-weight: 700;
+    }
+    .portal-card.card-keuangan .btn-enter:hover {
+      background: linear-gradient(135deg, #e5b32a, #c99414);
+      box-shadow: 0 6px 20px rgba(212, 160, 23, 0.35);
+    }
+
+    /* Specific Accent Card: CRM */
+    .portal-card.card-crm:hover {
+      border-color: rgba(0, 128, 200, 0.55);
+      box-shadow: 0 18px 45px rgba(0, 128, 200, 0.16);
+    }
+    .portal-card.card-crm .card-tag {
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border-color: rgba(56, 189, 248, 0.28);
+    }
+    .portal-card.card-crm .card-icon-wrap {
+      background: linear-gradient(135deg, rgba(0, 128, 200, 0.25), rgba(0, 128, 200, 0.05));
+      border: 1px solid rgba(0, 128, 200, 0.45);
+      color: #38bdf8;
+    }
+    .portal-card.card-crm .btn-enter {
+      background: linear-gradient(135deg, #0080c8, #0066a3);
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .portal-card.card-crm .btn-enter:hover {
+      background: linear-gradient(135deg, #0093e9, #0077bd);
+      box-shadow: 0 6px 20px rgba(0, 128, 200, 0.4);
+    }
+
+    /* Card Top Elements */
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .card-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .card-tag {
+      font-family: var(--ff-mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid;
+    }
+
+    /* Card Headings */
+    .card-title {
+      font-family: var(--ff-serif);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-bottom: 22px;
+      line-height: 1.45;
+    }
+
+    /* Feature Checklist */
+    .card-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 28px;
+      flex-grow: 1;
+    }
+
+    .card-features li {
+      font-size: 13px;
+      color: var(--ink2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.35;
+    }
+
+    .card-features li .check-icon {
+      font-family: var(--ff-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      background: var(--surface2);
+      border-radius: 6px;
+      border: 1px solid var(--hairline-strong);
+    }
+
+    /* Card Bottom Elements */
+    .card-bottom {
+      border-top: 1px solid var(--hairline);
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .access-label {
+      font-size: 11.5px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .btn-enter {
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: var(--ff-sans);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    /* Footer Meta */
+    .gate-footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding-top: 10px;
+    }
+
+    .gate-footer span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* =========================================================
+       MODAL / DIALOG INPUT PIN (TERSEMBUNYI SECARA DEFAULT)
+       ========================================================= */
+    .pin-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 9, 0.88);
+      backdrop-filter: blur(16px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .pin-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .pin-modal-card {
+      background: var(--surface);
+      border: 1px solid var(--hairline-strong);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 410px;
+      padding: 32px 28px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+      text-align: center;
+      position: relative;
+      transform: scale(0.95);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .pin-modal-overlay.active .pin-modal-card {
+      transform: scale(1);
+    }
+
+    .modal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .modal-badge.keuangan-mode {
+      background: rgba(212, 160, 23, 0.14);
+      color: #facc15;
+      border: 1px solid rgba(212, 160, 23, 0.35);
+    }
+
+    .modal-badge.crm-mode {
+      background: rgba(0, 128, 200, 0.16);
+      color: #38bdf8;
+      border: 1px solid rgba(0, 128, 200, 0.4);
+    }
+
+    .modal-title {
+      font-family: var(--ff-serif);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .modal-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    .pin-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .pin-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--hairline-strong);
+      background: transparent;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .pin-dot.filled {
+      background: var(--ink);
+      border-color: var(--ink);
+      transform: scale(1.15);
+      box-shadow: 0 0 10px rgba(255,255,255,0.4);
+    }
+
+    .modal-keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .key-btn {
+      aspect-ratio: 1.45;
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      color: var(--ink);
+      font-family: var(--ff-sans);
+      font-size: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .key-btn:hover {
+      background: var(--surface3);
+      border-color: var(--hairline-strong);
+    }
+
+    .key-btn:active {
+      transform: scale(0.96);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .key-btn.action {
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .key-btn.submit {
+      color: #fff;
+    }
+
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-back {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: color 0.2s;
+    }
+
+    .btn-back:hover {
+      color: var(--ink);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .simulation-toast {
+      position: fixed;
+      bottom: 24px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #38bdf8;
+      font-family: var(--ff-mono);
+      font-size: 12.5px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+    }
+
+    .simulation-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="gate-container">
+    
+    <!-- BRAND HEADER -->
+    <header class="brand-header">
+      <div class="brand-logo-wrap">
+        <img src="logo_foxe.png" alt="Foxe Studio" class="brand-logo-img">
+      </div>
+      <h1 class="brand-title">Pusat Kendali Bisnis &amp; Operasional</h1>
+      <p class="brand-subtitle">
+        Sistem terpadu manajemen studio foto, analitik finansial eksekutif, dan mesin layanan prospek klien.
+      </p>
+      <div class="badge-pill">
+        <span>● Multi-Portal System</span> · <span>Purwokerto Studio</span>
+      </div>
+    </header>
+
+    <!-- 2 OPTION CARDS (A VS B) -->
+    <main class="portal-grid">
+
+      <!-- KARTU A: FOXE KEUANGAN (MANAJEMEN / OWNER) -->
+      <article class="portal-card card-keuangan" onclick="openPinModal('keuangan')">
+        <div class="card-top">
+          <div class="card-icon-wrap">📊</div>
+          <span class="card-tag">Portal A · Eksekutif</span>
+        </div>
+        
+        <h2 class="card-title">Foxe Keuangan</h2>
+        <p class="card-desc">Executive Financial Intelligence &amp; Performance Control</p>
+
+        <ul class="card-features">
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Realisasi Omzet MTD &amp; Run-rate Kasir Live</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Neraca Terpadu COGS, OPEX &amp; Margin Laba</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Roster Shift Aktual &amp; Rekap Payroll Kru</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Pipeline Jadwal &amp; Estimasi Pelunasan Sesi</span>
+          </li>
+        </ul>
+
+        <div class="card-bottom">
+          <div class="access-label">
+            <span>🔒</span>
+            <span>Akses Khusus Owner &amp; Manajemen</span>
+          </div>
+          <button class="btn-enter" type="button">
+            <span>Masuk Portal Keuangan</span>
+            <span>➔</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- KARTU B: FOXE CRM (TIM OPERASIONAL / ADMIN WA) -->
+      <article class="portal-card card-crm" onclick="openPinModal('crm')">
+        <div class="card-top">
+          <div class="card-icon-wrap">⚡</div>
+          <span class="card-tag">Portal B · Operasional</span>
+        </div>
+        
+        <h2 class="card-title">Foxe CRM &amp; Flow</h2>
+        <p class="card-desc">Studio Floor Ops, WhatsApp Leads &amp; AI Assistant</p>
+
+        <ul class="card-features">
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Pustaka Prospek WhatsApp Masuk &amp; Riwayat Chat</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>AI Assistant Rekomendasi Balasan Cepat</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Demand Analytics (Peringkat Minat Paket Foto)</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Kalender Evaluasi Harian &amp; Otomasi Webhook</span>
+          </li>
+        </ul>
+
+        <div class="card-bottom">
+          <div class="access-label">
+            <span>🔒</span>
+            <span>Akses Khusus Tim Operasional &amp; Admin</span>
+          </div>
+          <button class="btn-enter" type="button">
+            <span>Masuk Portal Operasional</span>
+            <span>➔</span>
+          </button>
+        </div>
+      </article>
+
+    </main>
+
+    <!-- FOOTER META -->
+    <footer class="gate-footer">
+      <span>🛡️ Sesi Terisolasi Mandiri</span>
+      <span>•</span>
+      <span>Zero PIN Disclosure (Kerahasiaan Penuh)</span>
+      <span>•</span>
+      <span>Foxe Studio 2026</span>
+    </footer>
+
+  </div>
+
+
+  <!-- =========================================================
+       MODAL KEYPAD PIN INTERAKTIF (SIMULASI MASUK PORTAL)
+       ========================================================= -->
+  <div class="pin-modal-overlay" id="pinModalOverlay">
+    <div class="pin-modal-card">
+      
+      <div id="modalBadge" class="modal-badge keuangan-mode">
+        🔒 Akses Khusus Manajemen
+      </div>
+
+      <h3 class="modal-title" id="modalTitle">Autentikasi Keuangan</h3>
+      <p class="modal-subtitle" id="modalSubtitle">
+        Masukkan PIN Keamanan Manajemen untuk membuka data finansial studio.
+      </p>
+
+      <!-- 6 PIN DOTS -->
+      <div class="pin-dots" id="pinDots">
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+      </div>
+
+      <!-- KEYPAD NUMERIK -->
+      <div class="modal-keypad">
+        <button class="key-btn" onclick="pressKey('1')">1</button>
+        <button class="key-btn" onclick="pressKey('2')">2</button>
+        <button class="key-btn" onclick="pressKey('3')">3</button>
+        <button class="key-btn" onclick="pressKey('4')">4</button>
+        <button class="key-btn" onclick="pressKey('5')">5</button>
+        <button class="key-btn" onclick="pressKey('6')">6</button>
+        <button class="key-btn" onclick="pressKey('7')">7</button>
+        <button class="key-btn" onclick="pressKey('8')">8</button>
+        <button class="key-btn" onclick="pressKey('9')">9</button>
+        <button class="key-btn action" onclick="clearLastKey()">⌫</button>
+        <button class="key-btn" onclick="pressKey('0')">0</button>
+        <button class="key-btn submit" id="btnSubmitKey" onclick="submitPin()">➔</button>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-back" onclick="closePinModal()">
+          <span>← Kembali ke Pilihan Portal</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOAST FEEDBACK SIMULASI -->
+  <div class="simulation-toast" id="simToast"></div>
+
+  <script>
+    let currentMode = 'keuangan'; // 'keuangan' | 'crm'
+    let enteredCode = '';
+
+    function openPinModal(mode) {
+      currentMode = mode;
+      enteredCode = '';
+      updateDots();
+
+      const overlay = document.getElementById('pinModalOverlay');
+      const badge = document.getElementById('modalBadge');
+      const title = document.getElementById('modalTitle');
+      const subtitle = document.getElementById('modalSubtitle');
+      const btnSubmit = document.getElementById('btnSubmitKey');
+
+      if (mode === 'keuangan') {
+        badge.className = 'modal-badge keuangan-mode';
+        badge.textContent = '🔒 Akses Khusus Manajemen';
+        title.textContent = 'Autentikasi Keuangan';
+        subtitle.textContent = 'Masukkan PIN Keamanan Manajemen untuk membuka data finansial studio.';
+        btnSubmit.style.background = 'linear-gradient(135deg, #d4a017, #b8860b)';
+      } else {
+        badge.className = 'modal-badge crm-mode';
+        badge.textContent = '🔒 Akses Tim Operasional';
+        title.textContent = 'Autentikasi Operasional';
+        subtitle.textContent = 'Masukkan PIN Operasional untuk membuka workspace CRM & Leads WhatsApp.';
+        btnSubmit.style.background = 'linear-gradient(135deg, #0080c8, #0066a3)';
+      }
+
+      overlay.classList.add('active');
+    }
+
+    function closePinModal() {
+      const overlay = document.getElementById('pinModalOverlay');
+      overlay.classList.remove('active');
+      enteredCode = '';
+      updateDots();
+    }
+
+    function pressKey(num) {
+      if (enteredCode.length < 6) {
+        enteredCode += num;
+        updateDots();
+        if (enteredCode.length === 6) {
+          setTimeout(submitPin, 150);
+        }
+      }
+    }
+
+    function clearLastKey() {
+      enteredCode = enteredCode.slice(0, -1);
+      updateDots();
+    }
+
+    function updateDots() {
+      const dots = document.querySelectorAll('#pinDots .pin-dot');
+      dots.forEach((dot, idx) => {
+        if (idx < enteredCode.length) {
+          dot.classList.add('filled');
+        } else {
+          dot.classList.remove('filled');
+        }
+      });
+    }
+
+    function submitPin() {
+      if (enteredCode.length < 6) {
+        showToast('⚠️ Masukkan 6 digit PIN terlebih dahulu');
+        return;
+      }
+
+      if (currentMode === 'keuangan') {
+        if (enteredCode === '363636') {
+          showToast('✅ Berhasil! Mengalihkan ke Dashboard Keuangan...');
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 800);
+        } else {
+          showToast('❌ PIN Manajemen Salah. Coba lagi.');
+          enteredCode = '';
+          updateDots();
+        }
+      } else {
+        if (enteredCode === '112233') {
+          showToast('✅ Berhasil! Mengalihkan ke Foxe Flow CRM...');
+          setTimeout(() => {
+            window.location.href = 'flow.html';
+          }, 800);
+        } else {
+          showToast('❌ PIN Operasional Salah. Coba lagi.');
+          enteredCode = '';
+          updateDots();
+        }
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('simToast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // Keyboard support
+    window.addEventListener('keydown', (e) => {
+      const overlay = document.getElementById('pinModalOverlay');
+      if (!overlay.classList.contains('active')) return;
+
+      if (e.key >= '0' && e.key <= '9') {
+        pressKey(e.key);
+      } else if (e.key === 'Backspace') {
+        clearLastKey();
+      } else if (e.key === 'Enter') {
+        submitPin();
+      } else if (e.key === 'Escape') {
+        closePinModal();
+      }
+    });
+  </script>
+</body>
+</html>
