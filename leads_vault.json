@@ -14,7 +14,24 @@
     "ai_recommendation": "Halo Kak Almuna, bisa banget kok kalau mau nambah waktu fotonya! Rencananya mau nambah berapa menit dan untuk tanggal berapa nih, biar sekalian kita cek slot jadwalnya?",
     "estimated_value": 250000,
     "follow_up_count": 0,
-    "paket": "Large Group"
+    "paket": "Large Group",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Hallo kak, kenalin aku Almuna mau nanya dong terkait foto studio untuk kelompok 🙏",
+        "time": "08:32"
+      },
+      {
+        "sender": "admin",
+        "text": "Halo kak Almuna! Salam kenal dari Foxe Studio yaa 😊 Untuk foto kelompok kami ada paket Large Group, durasi 20-30 menit sudah dapat all soft files dan cetak kak. Rencana untuk berapa orang nih kak?",
+        "time": "08:35"
+      },
+      {
+        "sender": "customer",
+        "text": "Itu kan di list untuk pricenya 25/perorang ya kak kalau kelompok dan waktunya 20 menit, itu bisa nambah ngga ya kak?",
+        "time": "08:40"
+      }
+    ]
   },
   {
     "id": "lead_1791016535",
@@ -31,7 +48,24 @@
     "ai_recommendation": "Hai kak -! Kemarin sempat liat-liat paket foto Foxe Studio yaa? Kebetulan kita ada beberapa referensi hasil foto terbaru di studio yang mungkin cocok buat ide gaya kakak. Mau aku kirimin beberapa contoh fotonya kak buat inspirasi nanti?",
     "estimated_value": 250000,
     "follow_up_count": 0,
-    "paket": "Graduation"
+    "paket": "Graduation",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Halo kak, mau tanya paket foto wisuda di studio",
+        "time": "08:25"
+      },
+      {
+        "sender": "admin",
+        "text": "Halo kak! Untuk paket Graduation kami mulai Rp 250.000 sudah include sesi wisuda studio toga / kebaya, all unedited soft files dan cetak kak 🙏",
+        "time": "08:26"
+      },
+      {
+        "sender": "customer",
+        "text": "free edit 3 kak?",
+        "time": "08:27"
+      }
+    ]
   },
   {
     "id": "lead_1791016505",
@@ -48,7 +82,24 @@
     "ai_recommendation": "Hai kak .! Kemarin sempat liat-liat paket foto Foxe Studio yaa? Kebetulan kita ada beberapa referensi hasil foto terbaru di studio yang mungkin cocok buat ide gaya kakak. Mau aku kirimin beberapa contoh fotonya kak buat inspirasi nanti?",
     "estimated_value": 250000,
     "follow_up_count": 0,
-    "paket": "Graduation"
+    "paket": "Graduation",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Pricelist wisuda dong kak",
+        "time": "08:21"
+      },
+      {
+        "sender": "admin",
+        "text": "Halo kak! Berikut pricelist wisuda resmi Foxe Studio yaa 📄 [Katalog Pricelist Wisuda.pdf]. Untuk sesi tgl 3-4 Okt slot masih ada beberapa jam kosong kak 🙏",
+        "time": "08:22"
+      },
+      {
+        "sender": "customer",
+        "text": "Oke ka",
+        "time": "08:23"
+      }
+    ]
   },
   {
     "id": "lead_1791178238",
@@ -65,7 +116,34 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
     "follow_up_count": 0,
-    "paket": "Large Group"
+    "paket": "Large Group",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Halo kak, mau booking paket Large Group untuk tgl 5 Okt jam 13:00 yaa",
+        "time": "05:20"
+      },
+      {
+        "sender": "admin",
+        "text": "Halo kak Silvia! Siap, slot jam 13:00 tanggal 5 Okt Large Group tersedia yaa. Untuk kunci jadwal bisa DP min 100K ke Rek BCA 0462897055 a/n Dicky Ferry A kak.",
+        "time": "05:25"
+      },
+      {
+        "sender": "customer",
+        "text": "📷 [Foto Bukti Transfer BCA Rp 250.000 - Pelunasan Silvia Andani]",
+        "time": "05:28"
+      },
+      {
+        "sender": "admin",
+        "text": "Alhamdulillah pembayaran pelunasan Rp 250.000 sudah masuk kasir ya kak Silvia! Sesi foto resmi terkunci di Log Order. Sampai ketemu di studio 🙏",
+        "time": "05:29"
+      },
+      {
+        "sender": "customer",
+        "text": "Okay kak, terima kasih",
+        "time": "05:30"
+      }
+    ]
   },
   {
     "id": "lead_1791016723",
@@ -82,7 +160,44 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
     "follow_up_count": 0,
-    "paket": "Graduation"
+    "paket": "Graduation",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Kak untuk wisuda UMP tgl 3 Okt masih ada slot kosong?",
+        "time": "08:33"
+      },
+      {
+        "sender": "admin",
+        "text": "Masih ada kak Widyaloka! Di jam 11:30 Backdrop A masih aman. Mau langsung kita amankan jadwalnya kak?",
+        "time": "08:35"
+      },
+      {
+        "sender": "customer",
+        "text": "Boleh kak, minta no rek BCA nya",
+        "time": "08:36"
+      },
+      {
+        "sender": "admin",
+        "text": "BCA 0462897055 a/n Dicky Ferry A ya kak, min DP 100K 🙏",
+        "time": "08:37"
+      },
+      {
+        "sender": "customer",
+        "text": "📷 [Foto Bukti Transfer BCA Rp 250.000]",
+        "time": "08:38"
+      },
+      {
+        "sender": "admin",
+        "text": "Terima kasih kak Widyaloka! Pelunasan Rp 250.000 sudah masuk kasir dan jadwal terkunci.",
+        "time": "08:38"
+      },
+      {
+        "sender": "customer",
+        "text": "baikk ka terimaksihh",
+        "time": "08:38"
+      }
+    ]
   },
   {
     "id": "lead_1791016607",
@@ -99,7 +214,39 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
     "follow_up_count": 0,
-    "paket": "Graduation"
+    "paket": "Graduation",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Halo kak mau booking foto wisuda tgl 3 Okt",
+        "time": "08:34"
+      },
+      {
+        "sender": "admin",
+        "text": "Halo kak! Boleh cantumkan format nama dan paketnya yaa kak",
+        "time": "08:35"
+      },
+      {
+        "sender": "customer",
+        "text": "Afifah",
+        "time": "08:36"
+      },
+      {
+        "sender": "admin",
+        "text": "Siap kak Afifah! Untuk paket Graduation tgl 3 Okt ya. Silakan DP ke Rek BCA 0462897055 a/n Dicky Ferry A.",
+        "time": "08:36"
+      },
+      {
+        "sender": "customer",
+        "text": "📷 [Foto Bukti Transfer Pelunasan Rp 250.000]",
+        "time": "08:36"
+      },
+      {
+        "sender": "admin",
+        "text": "Alhamdulillah sudah masuk ya kak Afifah! Terdaftar resmi di kasir Log Order.",
+        "time": "08:37"
+      }
+    ]
   },
   {
     "id": "lead_1791016535",
@@ -116,7 +263,29 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
     "follow_up_count": 0,
-    "paket": "Graduation"
+    "paket": "Graduation",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Kak mau konfirmasi booking wisuda tgl 3 Okt jam 09.00 ya",
+        "time": "08:28"
+      },
+      {
+        "sender": "admin",
+        "text": "Siap kak Rahayu, slot jam 09.00 backdrop B masih aman yaa. Bisa transfer DP min 100K ke BCA 0462897055 an Dicky Ferry A.",
+        "time": "08:29"
+      },
+      {
+        "sender": "customer",
+        "text": "📷 [Foto Bukti Transfer BCA Rp 250.000 Lunas]",
+        "time": "08:31"
+      },
+      {
+        "sender": "admin",
+        "text": "Terima kasih kak Rahayu! Pembayaran terverifikasi lunas di Log Order Kasir yaa 🙏",
+        "time": "08:31"
+      }
+    ]
   },
   {
     "id": "lead_1791016523",
@@ -133,7 +302,34 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
     "follow_up_count": 0,
-    "paket": "Graduation"
+    "paket": "Graduation",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Kak untuk tgl 3 Okt studio utama jam 10 penuh ya?",
+        "time": "08:24"
+      },
+      {
+        "sender": "admin",
+        "text": "Iya kak Devinta, jam 10 studio utama sedang full sesi, tapi ada studio 2 backdrop alternatif yang kosong kak.",
+        "time": "08:25"
+      },
+      {
+        "sender": "customer",
+        "text": "Sisipkan di studio yg kosong aja gapapa",
+        "time": "08:26"
+      },
+      {
+        "sender": "customer",
+        "text": "📷 [Foto Bukti Transfer BCA Rp 250.000]",
+        "time": "08:26"
+      },
+      {
+        "sender": "admin",
+        "text": "Siap kak Devinta! Sudah kami sisipkan dan terdaftar resmi di Log Order Kasir yaa. Ditunggu kedatangannya!",
+        "time": "08:27"
+      }
+    ]
   },
   {
     "id": "lead_1791016518",
@@ -150,7 +346,39 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
     "follow_up_count": 0,
-    "paket": "Graduation"
+    "paket": "Graduation",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Kak lokasi studio Foxe di mana ya?",
+        "time": "08:23"
+      },
+      {
+        "sender": "admin",
+        "text": "Halo kak Helmi! Studio kami di Jl. HR Boenyamin Purwokerto (dekat UNSOED/UMP). Patokannya samping cafe kak.",
+        "time": "08:24"
+      },
+      {
+        "sender": "customer",
+        "text": "ini kmna kak",
+        "time": "08:25"
+      },
+      {
+        "sender": "admin",
+        "text": "Masuk ke ruko warna putih dengan plang Foxe Studio kak. Kak Helmi yang booking sesi Graduation ya?",
+        "time": "08:25"
+      },
+      {
+        "sender": "customer",
+        "text": "📷 [Foto Bukti Transfer Pelunasan Rp 250.000]",
+        "time": "08:25"
+      },
+      {
+        "sender": "admin",
+        "text": "Terima kasih kak Helmi, pembayaran sudah masuk kasir!",
+        "time": "08:26"
+      }
+    ]
   },
   {
     "id": "lead_1791016510",
@@ -167,7 +395,29 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
     "follow_up_count": 0,
-    "paket": "Graduation Premium"
+    "paket": "Graduation Premium",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Kak mau ambil Graduation Premium untuk tgl 3 Okt",
+        "time": "08:20"
+      },
+      {
+        "sender": "admin",
+        "text": "Halo kak Zaidan! Paket Grad Premium sudah include all soft files + 5 edited + frame cetak 12R kak. Transfer ke BCA 0462897055 an Dicky Ferry A yaa.",
+        "time": "08:22"
+      },
+      {
+        "sender": "customer",
+        "text": "📷 [Foto Bukti Transfer Pelunasan Rp 250.000 BCA]",
+        "time": "08:24"
+      },
+      {
+        "sender": "admin",
+        "text": "Alhamdulillah terverifikasi lunas kak Zaidan! Jadwal sesi foto sudah terkunci resmi di Log Order.",
+        "time": "08:24"
+      }
+    ]
   },
   {
     "id": "lead_1791016500",
@@ -184,7 +434,29 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
     "follow_up_count": 0,
-    "paket": "Single"
+    "paket": "Single",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Kak foto Single / pas foto tgl 3 Okt bisa?",
+        "time": "08:18"
+      },
+      {
+        "sender": "admin",
+        "text": "Bisa banget kak Icha! Sesi single slot pagi atau sore masih santai. Transfer ke BCA 0462897055 an Dicky Ferry A yaa.",
+        "time": "08:19"
+      },
+      {
+        "sender": "customer",
+        "text": "📷 [Foto Bukti Transfer Pelunasan Rp 250.000 BCA]",
+        "time": "08:20"
+      },
+      {
+        "sender": "admin",
+        "text": "Terima kasih kak Icha! Sesi Single sudah terdaftar di Log Order Kasir.",
+        "time": "08:20"
+      }
+    ]
   },
   {
     "id": "lead_102",
@@ -202,7 +474,39 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 300000,
     "follow_up_count": 0,
-    "paket": "Large Group"
+    "paket": "Large Group",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Halo kak kalau tgl 4 Okt sesi jam 14:00 backdrop B wisuda masih kosong? Totalnya jadi 300rb ya kak?",
+        "time": "09:00"
+      },
+      {
+        "sender": "admin",
+        "text": "Iya betul kak Farhan, tgl 4 Okt jam 14:00 backdrop B masih aman. Mau sekalian di-lock slotnya kak?",
+        "time": "09:15"
+      },
+      {
+        "sender": "customer",
+        "text": "Bisa tolong di-lock dulu kak? Aku transfer siang ini.",
+        "time": "10:05"
+      },
+      {
+        "sender": "admin",
+        "text": "Siap kak Farhan, kami tahanin slotnya yaa! Ditunggu konfirmasi transfer DP min 100k ke BCA 0462897055 a/n Dicky Ferry A.",
+        "time": "10:10"
+      },
+      {
+        "sender": "customer",
+        "text": "📷 [Foto Bukti Transfer DP Rp 100.000 BCA]",
+        "time": "11:30"
+      },
+      {
+        "sender": "admin",
+        "text": "Alhamdulillah DP Rp 100.000 sudah masuk kasir ya kak Farhan! Slot terkunci di Log Order.",
+        "time": "11:35"
+      }
+    ]
   },
   {
     "id": "lead_101",
@@ -219,7 +523,29 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 350000,
     "follow_up_count": 0,
-    "paket": "Graduation"
+    "paket": "Graduation",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Kak aku ambil yang wisuda tgl 3 Okt jam 10 ya. Nama: Dinda Maharani, 4 orang, minta rek BCA nya kak",
+        "time": "08:30"
+      },
+      {
+        "sender": "admin",
+        "text": "Siap kak Dinda! Untuk BCA Foxe Studio di 0462897055 a/n Dicky Ferry A. DP min 100K ya kak, ditunggu konfirmasinya 🙏",
+        "time": "09:15"
+      },
+      {
+        "sender": "customer",
+        "text": "📷 [Foto Bukti Transfer Pelunasan BCA Rp 350.000]",
+        "time": "09:20"
+      },
+      {
+        "sender": "admin",
+        "text": "Terima kasih kak Dinda! Pelunasan sudah masuk kasir, slot wisuda tgl 3 Okt jam 10 sudah terkunci resmi di Log Order.",
+        "time": "09:25"
+      }
+    ]
   },
   {
     "id": "lead_107",
@@ -236,7 +562,29 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 100000,
     "follow_up_count": 0,
-    "paket": "Graduation"
+    "paket": "Graduation",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Halo kak mau booking foto wisuda tgl 2 Okt",
+        "time": "07:15"
+      },
+      {
+        "sender": "admin",
+        "text": "Halo kak Hanifah! Sesi tgl 2 Okt masih tersedia kak. Untuk booking DP min 100K ke BCA 0462897055 an Dicky Ferry A yaa.",
+        "time": "07:20"
+      },
+      {
+        "sender": "customer",
+        "text": "Kak ini bukti transfer DP 100rb atas nama Hanifah yaa buat sesi tgl 2 Okt",
+        "time": "08:00"
+      },
+      {
+        "sender": "admin",
+        "text": "Alhamdulillah terverifikasi ya kak Hanifah! DP Rp 100.000 sudah masuk kasir, slot foto Graduation tgl 2 Okt sudah resmi terdaftar 🙏",
+        "time": "08:05"
+      }
+    ]
   },
   {
     "id": "lead_103",
@@ -253,7 +601,29 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
     "follow_up_count": 0,
-    "paket": "Single"
+    "paket": "Single",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Kak bedanya Graduation Reguler sama Large Group apa ya kalau kita berlima?",
+        "time": "16:20"
+      },
+      {
+        "sender": "admin",
+        "text": "Kalau berlima bisa ambil Graduation Reguler tambah add-person kak, atau langsung Large Group durasi 30 menit jadi lebih puas ganti gaya dan fotonya lebih banyak kak.",
+        "time": "17:10"
+      },
+      {
+        "sender": "customer",
+        "text": "📷 [Foto Bukti Transfer Pelunasan Rp 250.000]",
+        "time": "18:00"
+      },
+      {
+        "sender": "admin",
+        "text": "Terima kasih kak Rizky, sudah terverifikasi deal kasir!",
+        "time": "18:05"
+      }
+    ]
   },
   {
     "id": "lead_104",
@@ -270,7 +640,19 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 450000,
     "follow_up_count": 0,
-    "paket": "Graduation"
+    "paket": "Graduation",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Bisa bawa baju ganti berapa kali kak buat foto keluarga 6 orang di tgl 10 Okt?",
+        "time": "14:00"
+      },
+      {
+        "sender": "admin",
+        "text": "Bisa bawa 2 outfit kak, ada ruang ganti privat di studio kita. Untuk tgl 10 Okt slot pagi jam 09.30 dan siang jam 13.00 masih ada yang kosong kak.",
+        "time": "15:30"
+      }
+    ]
   },
   {
     "id": "lead_105",
@@ -287,7 +669,19 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 200000,
     "follow_up_count": 0,
-    "paket": "Single"
+    "paket": "Single",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Pricelist wisuda dong kak",
+        "time": "11:00"
+      },
+      {
+        "sender": "admin",
+        "text": "Halo kak Anisa! Ini pricelist paket wisuda Foxe Studio ya kak [PDF terkirim]. Ada promo free all soft files kalau booking minggu ini kak.",
+        "time": "11:15"
+      }
+    ]
   },
   {
     "id": "lead_106",
@@ -304,6 +698,18 @@
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 85000,
     "follow_up_count": 0,
-    "paket": "Graduation"
+    "paket": "Graduation",
+    "chat_history": [
+      {
+        "sender": "customer",
+        "text": "Pricelist self photo studio kak",
+        "time": "19:30"
+      },
+      {
+        "sender": "admin",
+        "text": "Halo kak Dimas! Untuk Self-Photo mulai 65rb per sesi sudah dapet cetak & soft files ya kak [Pricelist terkirim].",
+        "time": "19:40"
+      }
+    ]
   }
 ]

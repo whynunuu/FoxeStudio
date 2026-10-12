@@ -546,9 +546,18 @@ class AgenticLeadEngine:
         match_result = self.match_with_spreadsheet(sender, name)
         is_converted = match_result and match_result.get("type") == "order"
 
+        time_short = t_str[11:16] if len(t_str) >= 16 else "08:30"
         if lead:
             lead["last_message_at"] = t_str
             lead["last_customer_msg"] = msg
+            if "chat_history" not in lead or not isinstance(lead["chat_history"], list):
+                lead["chat_history"] = []
+            lead["chat_history"].append({
+                "sender": "customer",
+                "text": msg,
+                "time": time_short,
+                "timestamp": t_str
+            })
             if is_converted:
                 lead["status"] = "CONVERTED"
                 lead["tier"] = "CLOSED"
@@ -569,6 +578,14 @@ class AgenticLeadEngine:
                 "last_message_at": t_str,
                 "last_customer_msg": msg,
                 "last_admin_msg": "",
+                "chat_history": [
+                    {
+                        "sender": "customer",
+                        "text": msg,
+                        "time": time_short,
+                        "timestamp": t_str
+                    }
+                ],
                 "summary": f"Pesan baru masuk: {msg[:60]}...",
                 "ai_recommendation": "Status: DEAL di Spreadsheet." if is_converted else self.generate_ai_draft(name, tier, "", msg),
                 "estimated_value": 250000,

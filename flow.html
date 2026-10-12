@@ -1137,6 +1137,277 @@
       flex-direction: column;
       gap: 16px;
     }
+    .chat-workspace-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .chat-workspace-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 16px;
+    }
+    @media (max-width: 960px) {
+      .chat-workspace-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .chat-conversation-pane {
+      background: #0f1622;
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 240px;
+      max-height: 420px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--hairline-strong) transparent;
+    }
+    .chat-conversation-pane::-webkit-scrollbar,
+    .modal-conversation-pane::-webkit-scrollbar {
+      width: 6px;
+    }
+    .chat-conversation-pane::-webkit-scrollbar-thumb,
+    .modal-conversation-pane::-webkit-scrollbar-thumb {
+      background: var(--hairline-strong);
+      border-radius: 3px;
+    }
+    .chat-date-pill {
+      align-self: center;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--surface3);
+      padding: 3px 12px;
+      border-radius: 9999px;
+      border: 1px solid var(--hairline);
+      margin: 4px 0 8px;
+      font-family: var(--ff-mono);
+    }
+    .chat-bubble {
+      max-width: 84%;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      line-height: 1.45;
+      position: relative;
+      word-break: break-word;
+      animation: fadeIn 0.15s ease-out;
+    }
+    .chat-bubble.customer {
+      align-self: flex-start;
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-top-left-radius: 2px;
+    }
+    .chat-bubble.admin {
+      align-self: flex-end;
+      background: #064e3b;
+      color: #f0fdf4;
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      border-top-right-radius: 2px;
+    }
+    .chat-bubble-sender {
+      font-size: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 2px;
+    }
+    .chat-bubble.customer .chat-bubble-sender { color: #38bdf8; }
+    .chat-bubble.admin .chat-bubble-sender { color: #6ee7b7; }
+    .chat-bubble-text { font-size: 12.5px; line-height: 1.45; }
+    .chat-bubble-time {
+      font-size: 9.5px;
+      color: rgba(255, 255, 255, 0.55);
+      text-align: right;
+      margin-top: 4px;
+      font-family: var(--ff-mono);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+    }
+    .chat-media-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      font-size: 11.5px;
+      color: #f1f5f9;
+      margin: 2px 0;
+    }
+    .ai-workspace-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .lead-summary-box {
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      border-left: 3px solid #f59e0b;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: var(--ink2);
+      line-height: 1.45;
+    }
+    .ai-draft-container {
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .ai-draft-header {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ai-draft-text {
+      font-size: 12.5px;
+      color: #f1f5f9;
+      line-height: 1.5;
+      background: var(--surface3);
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--hairline);
+      font-style: italic;
+    }
+    .ai-draft-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* CARD ACTION BAR & HINT */
+    .card-chat-action-bar {
+      margin-top: 4px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--hairline);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+      transition: all 0.15s ease;
+    }
+    .card-chat-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--ink2);
+      font-weight: 500;
+      font-size: 11px;
+    }
+    .card-chat-btn {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent-ink);
+      background: var(--accent-soft);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 2px 7px;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+    }
+    .turunan-item-card:hover .card-chat-btn {
+      background: var(--accent);
+      color: #fff;
+      transform: translateX(2px);
+    }
+
+    /* MODAL CHAT HISTORY WHATSAPP STYLE */
+    .modal-chat-dialog {
+      background: var(--surface);
+      border: 1px solid var(--hairline-strong);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(56, 189, 248, 0.25);
+    }
+    .chat-modal-header {
+      padding: 14px 20px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--hairline);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .chat-modal-user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .chat-modal-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+      flex-shrink: 0;
+    }
+    .chat-modal-body {
+      padding: 16px 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: #0b111a;
+      max-height: calc(90vh - 140px);
+    }
+    .chat-context-strip {
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      border-left: 3px solid var(--warn);
+      border-radius: 8px;
+      padding: 9px 13px;
+    }
+    .modal-conversation-pane {
+      background: #0f1622;
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 340px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--hairline-strong) transparent;
+    }
+    .modal-ai-box {
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
     /* 4. PERFORMANCE ADMIN & LEADERBOARD */
     .leaderboard-sec.minimalist-perf {
@@ -2102,7 +2373,14 @@
     </div>
   </div>
 
-  <!-- STANDALONE VISUAL ENGINE SCRIPT -->
+  <!-- MODAL: RIWAYAT CHAT LENGKAP LEAD (WHATSAPP CONVERSATION) -->
+  <div class="modal-overlay" id="modalChatHistory">
+    <div class="modal-card modal-chat-dialog" style="width: 780px; max-width: 95vw; max-height: 92vh; display: flex; flex-direction: column;">
+      <div id="modalChatContent" style="display:flex; flex-direction:column; height:100%; overflow:hidden;">
+        <!-- Loaded dynamically via openLeadChatModal() -->
+      </div>
+    </div>
+  </div>
   <script>
     "use strict";
 
@@ -4574,6 +4852,44 @@
       renderTurunanAndChat();
     }
 
+    function getLeadChatHistory(lead) {
+      if (Array.isArray(lead.chat_history) && lead.chat_history.length > 0) {
+        return lead.chat_history;
+      }
+      const history = [];
+      const createdTime = lead.created_at ? lead.created_at.slice(11, 16) : '08:30';
+      const lastTime = lead.last_message_at ? lead.last_message_at.slice(11, 16) : createdTime;
+
+      if (lead.summary && lead.summary.startsWith('Pesan baru masuk:')) {
+        const rawIntro = lead.summary.replace('Pesan baru masuk:', '').replace('...', '').trim();
+        if (rawIntro && rawIntro !== lead.last_customer_msg) {
+          history.push({ sender: 'customer', text: rawIntro, time: createdTime });
+        }
+      }
+
+      if (lead.last_admin_msg) {
+        history.push({ sender: 'admin', text: lead.last_admin_msg, time: createdTime });
+      }
+
+      if (lead.last_customer_msg) {
+        history.push({ sender: 'customer', text: lead.last_customer_msg, time: lastTime });
+      }
+
+      if (lead.last_customer_msg_2) {
+        history.push({ sender: 'customer', text: lead.last_customer_msg_2, time: lastTime });
+      }
+
+      if ((lead.status === 'CONVERTED' || lead.tier === 'CLOSED') && !history.some(m => m.sender === 'admin')) {
+        history.push({
+          sender: 'admin',
+          text: `Alhamdulillah pembayaran telah kami verifikasi masuk kasir ya kak ${lead.display_name}! Jadwal foto resmi terkunci di sistem kami 🙏`,
+          time: lastTime
+        });
+      }
+
+      return history;
+    }
+
     function selectLead(id, scrollToChat = false) {
       selectedLeadId = id;
       renderTurunanAndChat();
@@ -4583,6 +4899,171 @@
           chatSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
+    }
+
+    function openLeadChatModal(id) {
+      const lead = leadsData.find(l => l.id === id);
+      if (!lead) return;
+
+      selectedLeadId = id;
+      // Re-render cards so active card is highlighted
+      renderTurunanAndChat();
+
+      const modal = document.getElementById('modalChatHistory');
+      const content = document.getElementById('modalChatContent');
+      if (!modal || !content) return;
+
+      const isClosed = lead.status === 'CONVERTED' || lead.tier === 'CLOSED';
+      const tierClass = lead.tier ? lead.tier.toLowerCase() : 'warm';
+      const pillClass = `pill-${tierClass}`;
+      const phoneClean = (lead.phone || '').replace(/[^0-9]/g, '');
+      const phoneDisplay = (phoneClean.length >= 8 && !String(lead.phone).includes('*'))
+        ? phoneClean.slice(0, 4) + '••••' + phoneClean.slice(-4)
+        : (lead.phone || '-');
+      const waLink = `https://wa.me/${phoneClean}?text=${encodeURIComponent(lead.ai_recommendation || '')}`;
+      const lp = getLeadPaket(lead);
+
+      const nameClean = (lead.display_name && lead.display_name !== '-' && lead.display_name !== '.')
+        ? lead.display_name
+        : (lead.phone ? `Klien +${phoneDisplay}` : 'Calon Klien');
+
+      const initials = (nameClean && nameClean !== 'Calon Klien')
+        ? nameClean.trim().split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase()
+        : '👤';
+
+      const history = getLeadChatHistory(lead);
+      const dateStr = lead.last_message_at || lead.created_at || 'Hari ini';
+
+      let messagesHtml = '';
+      if (history.length === 0) {
+        messagesHtml = `
+          <div style="text-align:center; padding:36px 15px; color:var(--muted); font-size:12.5px;">
+            Belum ada riwayat pesan untuk klien ini.
+          </div>
+        `;
+      } else {
+        history.forEach(m => {
+          const isCust = m.sender === 'customer';
+          const senderLabel = isCust ? nameClean : `Admin ${lead.admin || 'AMEL'}`;
+          const timeStr = m.time || (m.timestamp ? m.timestamp.slice(11, 16) : '08:30');
+          const isMedia = (m.text && (m.text.includes('📷') || m.text.includes('Bukti Transfer') || m.text.includes('non-text message')));
+
+          messagesHtml += `
+            <div class="chat-bubble ${isCust ? 'customer' : 'admin'}">
+              <div class="chat-bubble-sender">
+                ${isCust ? `👤 ${escapeHtml(senderLabel)}:` : `👩‍💼 ${escapeHtml(senderLabel)}:`}
+              </div>
+              <div class="chat-bubble-text">
+                ${isMedia ? `
+                  <div class="chat-media-badge">
+                    <span>📷</span>
+                    <span>${escapeHtml(m.text)}</span>
+                  </div>
+                ` : escapeHtml(m.text)}
+              </div>
+              <div class="chat-bubble-time">
+                <span>${escapeHtml(timeStr)}</span>
+                ${!isCust ? '<span style="color:#38bdf8; font-weight:700;">✓✓</span>' : ''}
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      content.innerHTML = `
+        <!-- HEADER MODAL -->
+        <div class="chat-modal-header">
+          <div class="chat-modal-user-info">
+            <div class="chat-modal-avatar">${escapeHtml(initials)}</div>
+            <div>
+              <div style="font-size:15.5px; font-weight:700; color:var(--ink); display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                <span>${escapeHtml(nameClean)}</span>
+                <span class="lead-paket-pill paket-${lp.key.toLowerCase()}">${lp.icon} ${lp.tag}</span>
+                <span class="lead-pill ${pillClass}">
+                  ${lead.tier === 'HOT' ? '🔥 HOT LEAD' : (lead.tier === 'WARM' ? '⚡ WARM LEAD' : (lead.tier === 'COLD' ? '❄️ COLD LEAD' : '✅ CLOSED DP'))}
+                </span>
+                <span class="pill ${isClosed ? 'final' : 'bad'}" style="font-size:10px;">
+                  ${isClosed ? 'TERKONVERSI' : 'BELUM DP'}
+                </span>
+              </div>
+              <div style="font-size:11.5px; color:var(--muted); display:flex; align-items:center; gap:10px; margin-top:3px; flex-wrap:wrap;">
+                <span style="font-family:var(--ff-mono);">📱 +${escapeHtml(phoneDisplay)}</span>
+                <span>👩‍💼 Admin ${escapeHtml(lead.admin || 'AMEL')}</span>
+                <span style="color:var(--accent-ink); font-weight:700; font-family:var(--ff-mono);">Potensi: Rp ${(Number(lead.estimated_value) || 0).toLocaleString('id-ID')}</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-sm btn-close-modal" onclick="closeLeadChatModal()" style="font-size:14px; padding:4px 10px;">✕</button>
+          </div>
+        </div>
+
+        <!-- BODY MODAL -->
+        <div class="chat-modal-body">
+          <!-- CONTEXT STRIP -->
+          <div class="chat-context-strip">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:3px;">
+              <b style="color:var(--ink); font-size:11px; text-transform:uppercase; letter-spacing:0.5px;">📌 Status &amp; Catatan Klien:</b>
+              <span style="font-size:10.5px; color:var(--muted); font-family:var(--ff-mono);">${escapeHtml(dateStr)}</span>
+            </div>
+            <div style="font-size:12px; color:var(--ink2); line-height:1.45;">
+              ${escapeHtml(lead.summary || 'Prospek chat Fonnte WhatsApp masuk.')}
+            </div>
+          </div>
+
+          <!-- WHATSAPP CHAT PANE -->
+          <div class="modal-conversation-pane" id="modalChatScrollArea">
+            <div class="chat-date-pill">📅 Riwayat Percakapan WhatsApp · ${escapeHtml(dateStr.slice(0, 10))} (${history.length} Pesan)</div>
+            ${messagesHtml}
+          </div>
+
+          <!-- AI RECOMMENDATION DRAFT & ACTIONS -->
+          <div class="modal-ai-box">
+            <div style="font-size:11px; font-weight:700; color:var(--accent-ink); display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span>🤖 Rekomendasi Balasan AI (Human Tone Studio)</span>
+              <span style="color:var(--muted); font-size:10px; font-weight:400;">Bebas Halusinasi · Siap Kirim</span>
+            </div>
+            <div class="ai-draft-text" id="modal-draft-text">
+              "${escapeHtml(lead.ai_recommendation || 'Halo kak, ada yang bisa kami bantu kembali seputar paket foto di Foxe Studio? 🙏')}"
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; flex-wrap:wrap; gap:8px;">
+              <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                <button class="btn btn-sm" onclick="copyDraftToClipboard('${lead.id}')" style="background:#1e293b; color:#38bdf8; border:1px solid rgba(56,189,248,0.4);" title="Salin draf ke clipboard">
+                  📋 Salin Draft
+                </button>
+                <a href="${waLink}" target="_blank" class="btn btn-sm" style="background:#25d366; color:#000; font-weight:700; border:none; text-decoration:none;" title="Buka WhatsApp Web">
+                  📲 Balas di WA Web
+                </a>
+                ${!isClosed ? `
+                  <button class="btn btn-sm btn-primary" onclick="markLeadConverted('${lead.id}'); closeLeadChatModal();" title="Tandai pembayaran DP telah masuk">
+                    ✓ Tandai DP Masuk (Rp 100 rb)
+                  </button>
+                ` : `
+                  <span style="font-size:11px; color:#34d399; font-weight:600; padding:4px 8px; background:rgba(16,185,129,0.15); border-radius:4px;">✓ Selesai Terkonversi</span>
+                `}
+              </div>
+              <div style="display:flex; gap:6px; align-items:center;">
+                <button class="btn btn-sm" onclick="closeLeadChatModal(); const s = document.getElementById('chatWorkspaceSection'); if(s) s.scrollIntoView({behavior:'smooth'});" style="color:var(--muted); font-size:11px;">
+                  ⬇️ Workspace Bawah
+                </button>
+                <button class="btn btn-sm" onclick="closeLeadChatModal()" style="color:var(--ink);">Tutup</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      modal.classList.add('active');
+
+      setTimeout(() => {
+        const scrollArea = document.getElementById('modalChatScrollArea');
+        if (scrollArea) scrollArea.scrollTop = scrollArea.scrollHeight;
+      }, 50);
+    }
+
+    function closeLeadChatModal() {
+      const modal = document.getElementById('modalChatHistory');
+      if (modal) modal.classList.remove('active');
     }
 
     function renderTurunanAndChat() {
@@ -4684,6 +5165,8 @@
             ? phoneClean.slice(0, 4) + '••••' + phoneClean.slice(-4)
             : (lead.phone || '-');
           const lp = getLeadPaket(lead);
+          const history = getLeadChatHistory(lead);
+          const chatCount = history.length;
 
           let priorityTag = '';
           if (lead.tier === 'HOT') {
@@ -4697,7 +5180,7 @@
           }
 
           html += `
-            <div class="turunan-item-card tier-${tierClass} ${isSelected ? 'active-lead-item' : ''}" onclick="selectLead('${lead.id}')">
+            <div class="turunan-item-card tier-${tierClass} ${isSelected ? 'active-lead-item' : ''}" onclick="openLeadChatModal('${lead.id}')" title="Klik untuk melihat riwayat chat WhatsApp ${escapeHtml(lead.display_name)}">
               <div class="turunan-item-top">
                 <div>
                   <div class="turunan-item-name" style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
@@ -4722,6 +5205,11 @@
               <div style="font-size:11.5px; color:var(--ink2); line-height:1.35; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; background:var(--surface3); padding:6px 8px; border-radius:4px; border:1px solid var(--hairline-soft);">
                 ${lead.last_customer_msg ? `💬 "<i>${escapeHtml(lead.last_customer_msg)}</i>"` : escapeHtml(lead.summary || 'Prospek chat Fonnte')}
               </div>
+
+              <div class="card-chat-action-bar">
+                <span class="card-chat-hint">💬 History (${chatCount} pesan)</span>
+                <span class="card-chat-btn">Lihat Chat ➔</span>
+              </div>
             </div>
           `;
         });
@@ -4732,7 +5220,6 @@
       const activeLead = leadsData.find(l => l.id === selectedLeadId) || filtered[0] || null;
       renderChatWorkspace(activeLead);
     }
-    
 
     function renderChatWorkspace() {
       const container = document.getElementById('chatWorkspaceSection');
@@ -4758,6 +5245,39 @@
         ? phoneClean.slice(0, 4) + '••••' + phoneClean.slice(-4)
         : (lead.phone || '-');
       const waLink = `https://wa.me/${phoneClean}?text=${encodeURIComponent(lead.ai_recommendation || '')}`;
+      const history = getLeadChatHistory(lead);
+
+      let historyBubbles = '';
+      if (history.length === 0) {
+        historyBubbles = '<div style="color:#64748b; font-size:12px; text-align:center; padding:30px;">Belum ada riwayat balon chat untuk klien ini.</div>';
+      } else {
+        history.forEach(m => {
+          const isCust = m.sender === 'customer';
+          const senderLabel = isCust ? (lead.display_name || 'Client') : `Admin ${lead.admin || 'AMEL'}`;
+          const timeStr = m.time || (m.timestamp ? m.timestamp.slice(11, 16) : '08:30');
+          const isMedia = (m.text && (m.text.includes('📷') || m.text.includes('Bukti Transfer') || m.text.includes('non-text message')));
+
+          historyBubbles += `
+            <div class="chat-bubble ${isCust ? 'customer' : 'admin'}">
+              <div class="chat-bubble-sender">
+                ${isCust ? `👤 ${escapeHtml(senderLabel)}:` : `👩‍💼 ${escapeHtml(senderLabel)}:`}
+              </div>
+              <div class="chat-bubble-text">
+                ${isMedia ? `
+                  <div class="chat-media-badge">
+                    <span>📷</span>
+                    <span>${escapeHtml(m.text)}</span>
+                  </div>
+                ` : escapeHtml(m.text)}
+              </div>
+              <div class="chat-bubble-time">
+                <span>${escapeHtml(timeStr)}</span>
+                ${!isCust ? '<span style="color:#38bdf8; font-weight:700;">✓✓</span>' : ''}
+              </div>
+            </div>
+          `;
+        });
+      }
 
       container.innerHTML = `
         <div class="chat-workspace-header">
@@ -4779,6 +5299,9 @@
             <span class="pill ${isClosed ? 'final' : 'bad'}" style="font-size:10px;">
               ${isClosed ? 'TERKONVERSI' : 'BELUM DP'}
             </span>
+            <button class="btn btn-sm" onclick="openLeadChatModal('${lead.id}')" style="font-size:10.5px; padding:2px 8px; background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.35);" title="Buka riwayat chat dalam tampilan pop-up modal">
+              🔍 Mode Pop-up Modal
+            </button>
           </div>
 
           <div style="text-align:right;">
@@ -4793,31 +5316,12 @@
           <!-- SISI KIRI: RIWAYAT CHAT LENGKAP -->
           <div>
             <div style="font-size:11.5px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; display:flex; justify-content:space-between;">
-              <span>💬 Riwayat Percakapan WhatsApp</span>
+              <span>💬 Riwayat Percakapan WhatsApp (${history.length} Pesan)</span>
               <span style="color:#64748b; font-weight:400;">${lead.last_message_at || lead.created_at || 'Hari ini'}</span>
             </div>
-            <div class="chat-conversation-pane">
-              ${lead.last_customer_msg ? `
-                <div class="chat-bubble customer">
-                  <span style="font-size:10px; font-weight:700; color:#93c5fd; display:block; margin-bottom:2px;">💬 ${escapeHtml(lead.display_name)}:</span>
-                  ${escapeHtml(lead.last_customer_msg)}
-                </div>
-              ` : ''}
-              ${lead.last_admin_msg ? `
-                <div class="chat-bubble admin">
-                  <span style="font-size:10px; font-weight:700; color:#e0f2fe; display:block; margin-bottom:2px;">👩‍💼 Admin ${lead.admin}:</span>
-                  ${escapeHtml(lead.last_admin_msg)}
-                </div>
-              ` : ''}
-              ${lead.last_customer_msg_2 ? `
-                <div class="chat-bubble customer">
-                  <span style="font-size:10px; font-weight:700; color:#93c5fd; display:block; margin-bottom:2px;">💬 ${escapeHtml(lead.display_name)} (Lanjutan):</span>
-                  ${escapeHtml(lead.last_customer_msg_2)}
-                </div>
-              ` : ''}
-              ${!lead.last_customer_msg && !lead.last_admin_msg ? `
-                <div style="color:#64748b; font-size:12px; text-align:center; padding:30px;">Belum ada riwayat balon chat untuk klien ini.</div>
-              ` : ''}
+            <div class="chat-conversation-pane" id="workspaceChatPane">
+              <div class="chat-date-pill">📅 Percakapan Aktif · ${escapeHtml((lead.created_at || '').slice(0, 10))}</div>
+              ${historyBubbles}
             </div>
           </div>
 
@@ -4860,6 +5364,9 @@
           </div>
         </div>
       `;
+
+      const pane = document.getElementById('workspaceChatPane');
+      if (pane) pane.scrollTop = pane.scrollHeight;
     }
 
     function renderAdminLeaderboard() {
@@ -4917,11 +5424,21 @@
 
     window.selectLead = selectLead;
     window.setLeadFilter = setLeadFilter;
+    window.openLeadChatModal = openLeadChatModal;
+    window.closeLeadChatModal = closeLeadChatModal;
+    window.getLeadChatHistory = getLeadChatHistory;
 
     window.copyDraftToClipboard = function(leadId) {
-      const el = document.getElementById(`draft-text-${leadId}`);
-      if (!el) return;
-      const text = el.innerText.replace(/^"|"$/g, '').trim();
+      let el = document.getElementById(`draft-text-${leadId}`);
+      if (!el) el = document.getElementById('modal-draft-text');
+      let text = '';
+      if (el) {
+        text = el.innerText.replace(/^"|"$/g, '').trim();
+      } else {
+        const lead = leadsData.find(l => l.id === leadId);
+        if (lead) text = lead.ai_recommendation || '';
+      }
+      if (!text) return;
       navigator.clipboard.writeText(text).then(() => {
         alert('📋 Draft pesan berhasil disalin ke clipboard!\nAdmin dapat langsung menempelkan (paste) di WhatsApp Web.');
       }).catch(err => {
@@ -5166,6 +5683,23 @@
           alert(`🚀 Webhook Fonnte Berhasil Diterima!\n\nNama: ${name}\nTier Terdeteksi: [${tier} LEAD]\nAdmin: ${admin}\nAI Recommendation: Draft balasan humanis telah siap dibuatkan!`);
         });
       }
+
+      // Close modalChatHistory when clicking outside backdrop
+      const modalChat = document.getElementById('modalChatHistory');
+      if (modalChat) {
+        modalChat.addEventListener('click', (e) => {
+          if (e.target === modalChat) {
+            closeLeadChatModal();
+          }
+        });
+      }
+
+      // Close modal on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeLeadChatModal();
+        }
+      });
     }
 
     
