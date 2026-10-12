@@ -1307,7 +1307,7 @@
       <img src="logo_foxe.png" alt="Foxe Studio" style="height:44px;width:auto;max-width:210px;object-fit:contain;filter:brightness(1.1) drop-shadow(0 4px 14px rgba(0,85,184,0.35))">
     </div>
     <p class="lock-subtitle" style="margin-top:0">Foxe Flow — Visual Admin &amp; CRM Leads</p>
-    <div class="lock-badge">🔒 Akses Terbatas</div>
+    <div class="lock-badge">🔒 Akses CRM Terbatas</div>
     
     <div class="pin-display" id="pinDots">
       <span class="dot"></span>
@@ -5034,26 +5034,28 @@
 
     
     /* =========================================================
-       FOXE FLOW — UNIVERSAL PIN AUTHENTICATION (363636)
+       FOXE FLOW — CRM PIN AUTHENTICATION (112233)
        ========================================================= */
-    const AUTH_KEY = "foxe_studio_auth_token_v2";
+    const AUTH_KEY = "foxe_crm_auth_token_v1";
     const VALID_HASHES = [
-      "23d30fa4f4b950822914594ad82a6544b292ccb35be03075425abc266c7dbf40"
+      "e433cf788d5910bb4e532fbc35fa94e4d1014fb7a222b5f73b4d9e9822cafdac", // SHA-256("112233_foxe_crm_secret_salt_2026")
+      "ccdae193464ace6fc3dc18880e3e94252313c6aeb5d9754437f954757e13e31e", // SHA-256("112233_foxe_studio_secret_salt_2026")
+      "e0bc60c82713f64ef8a57c0c40d02ce24fd0141d5cc3086259c19b1e62a62bea"  // plain SHA-256("112233")
     ];
 
     let enteredPin = "";
     let failedPinAttempts = (() => {
-      try { return parseInt(sessionStorage.getItem("foxe_failed_pin_attempts") || "0", 10); } catch(e) { return 0; }
+      try { return parseInt(sessionStorage.getItem("foxe_crm_failed_pin_attempts") || "0", 10); } catch(e) { return 0; }
     })();
     let lockoutUntil = (() => {
-      try { return parseInt(sessionStorage.getItem("foxe_pin_lockout_until") || "0", 10); } catch(e) { return 0; }
+      try { return parseInt(sessionStorage.getItem("foxe_crm_pin_lockout_until") || "0", 10); } catch(e) { return 0; }
     })();
     let lockoutInterval = null;
 
     async function hashPin(pin) {
       if (window.crypto && window.crypto.subtle) {
         const enc = new TextEncoder();
-        const buf = await window.crypto.subtle.digest("SHA-256", enc.encode(pin));
+        const buf = await window.crypto.subtle.digest("SHA-256", enc.encode(pin + "_foxe_crm_secret_salt_2026"));
         return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
       }
       return "";
@@ -5129,7 +5131,7 @@
           }
         } catch(e){}
       }
-      if (!isValid && typeof btoa === "function" && btoa(enteredPin) === "MzYzNjM2") {
+      if (!isValid && typeof btoa === "function" && btoa(enteredPin) === "MTEyMjMz") {
         isValid = true;
         validToken = VALID_HASHES[0];
       }
@@ -5139,20 +5141,20 @@
           sessionStorage.setItem(AUTH_KEY, validToken);
         } catch(e){}
         failedPinAttempts = 0;
-        sessionStorage.removeItem("foxe_failed_pin_attempts");
-        sessionStorage.removeItem("foxe_pin_lockout_until");
+        sessionStorage.removeItem("foxe_crm_failed_pin_attempts");
+        sessionStorage.removeItem("foxe_crm_pin_lockout_until");
         clearLockoutUI();
         unlockFlowDashboard();
       } else {
         failedPinAttempts++;
-        sessionStorage.setItem("foxe_failed_pin_attempts", String(failedPinAttempts));
+        sessionStorage.setItem("foxe_crm_failed_pin_attempts", String(failedPinAttempts));
         if (failedPinAttempts >= 5) {
           lockoutUntil = Date.now() + 60000;
-          sessionStorage.setItem("foxe_pin_lockout_until", String(lockoutUntil));
+          sessionStorage.setItem("foxe_crm_pin_lockout_until", String(lockoutUntil));
           setLockoutUI(60);
         } else if (failedPinAttempts >= 3) {
           lockoutUntil = Date.now() + 30000;
-          sessionStorage.setItem("foxe_pin_lockout_until", String(lockoutUntil));
+          sessionStorage.setItem("foxe_crm_pin_lockout_until", String(lockoutUntil));
           setLockoutUI(30);
         } else {
           const errEl = document.getElementById("lockError");

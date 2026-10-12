@@ -64,13 +64,15 @@ Unrealized Omzet               Rp 104.625.000
 ---
 
 ## 4. Keamanan Autentikasi & Master PIN Portal
-- **Master PIN Aktif**: `363636`
+- **Master PIN Keuangan Aktif**: `363636` (Dashboard Laporan Keuangan `index.html`)
+- **Master PIN CRM Leads Aktif**: `112233` (Foxe Flow & AI Leads CRM `flow.html`)
 - **Mekanisme Anti-Ingat Perangkat**:
   - Fitur "Ingat perangkat ini (30 hari)" dinonaktifkan dan dihapus total dari lock screen.
   - Sisa token lama di `localStorage` otomatis dibersihkan saat web dibuka.
   - Autentikasi murni berbasis tab browser (`sessionStorage`). Setiap tab/browser ditutup, pengguna wajib memasukkan ulang PIN `363636`.
   - Dilengkapi header meta `Cache-Control: no-cache, no-store, must-revalidate` untuk mencegah browser menahan cache usang.
-- **URL Live**: 👉 **https://whynunuu.github.io/FoxeStudio/**
+- **URL Live Keuangan**: 👉 **https://whynunuu.github.io/FoxeStudio/** (PIN: `363636`)
+- **URL Live CRM**: 👉 **https://whynunuu.github.io/FoxeStudio/flow.html** (PIN: `112233`)
 
 ---
 
