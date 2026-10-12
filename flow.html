@@ -2784,11 +2784,17 @@
 
       // Auto-Sync Background Polling (Jadwal & Leads Selalu Up-to-Date 24/7)
       setInterval(() => {
-        if (!document.hidden) loadStudioData();
-      }, 60000);
+        if (!document.hidden) {
+          loadStudioData();
+          loadLeadsData();
+        }
+      }, 30000);
 
       document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) loadStudioData();
+        if (!document.hidden) {
+          loadStudioData();
+          loadLeadsData();
+        }
       });
 
       initEvents();
@@ -4103,7 +4109,7 @@
     async function loadLeadsData() {
       // 1. Coba ambil data live real-time dari Railway Backend API
       try {
-        const liveRes = await fetch('https://foxestudio.up.railway.app/api/leads', { cache: 'no-store' });
+        const liveRes = await fetch('https://foxestudio.up.railway.app/api/leads?t=' + Date.now(), { cache: 'no-store' });
         if (liveRes.ok) {
           const liveData = await liveRes.json();
           if (liveData && Array.isArray(liveData.leads) && liveData.leads.length) {
@@ -4116,9 +4122,9 @@
         console.warn('Railway leads fetch fallback:', e);
       }
 
-      // 2. Fallback ke leads_vault.json statis
+      // 2. Fallback ke leads_vault.json statis dengan cache-buster
       try {
-        const res = await fetch('leads_vault.json');
+        const res = await fetch('leads_vault.json?t=' + Date.now(), { cache: 'no-store' });
         if (res.ok) {
           const remote = await res.json();
           if (Array.isArray(remote) && remote.length) {
@@ -4199,12 +4205,38 @@
       return { key: 'OTHER', name: 'Konsultasi Umum / Belum Pilih', icon: '💬', tag: 'Konsultasi', group: 'OTHER' };
     }
 
+    function getLeadFollowUpPriority(lead) {
+      if (!lead) return 99;
+      const isDone = (lead.tier === 'CLOSED' || lead.status === 'CONVERTED');
+      if (isDone) return 4; // SUDAH DONE / CLOSED -> paling bawah (sudah deal/lunas)
+      const t = (lead.tier || '').toUpperCase();
+      if (t === 'HOT') return 1;  // HOT -> paling atas (prioritas #1 harus segera follow-up)
+      if (t === 'WARM') return 2; // WARM -> prioritas #2 (konsultasi paket)
+      if (t === 'COLD') return 3; // COLD -> prioritas #3 (nurturing pricelist)
+      return 2.5; // Default / prospek baru
+    }
+
+    function sortLeadsByFollowUpPriority(arr) {
+      return arr.sort((a, b) => {
+        const pA = getLeadFollowUpPriority(a);
+        const pB = getLeadFollowUpPriority(b);
+        if (pA !== pB) return pA - pB;
+        // Secondary sort: pesan/aktivitas terbaru di atas
+        const tA = new Date(a.last_message_at || a.created_at || 0).getTime();
+        const tB = new Date(b.last_message_at || b.created_at || 0).getTime();
+        return tB - tA;
+      });
+    }
+
     function getActiveLeadsDataset() {
+      let ds = [];
       if (currentCrmPeriod === 'MTD') {
         // Ambil prospek dari awal bulan (Oktober 2026 MTD: 1 Okt s.d. hari ini)
-        return leadsData.filter(l => (l.created_at || '').startsWith('2026-10'));
+        ds = leadsData.filter(l => (l.created_at || '').startsWith('2026-10'));
+      } else {
+        ds = leadsData.slice(); // Semua riwayat (Oktober + September)
       }
-      return leadsData.slice(); // Semua riwayat (Oktober + September)
+      return sortLeadsByFollowUpPriority(ds);
     }
 
     function switchCrmPeriod(p) {
@@ -4621,10 +4653,13 @@
         labelGroup += ` · Paket "${currentLeadPaket}"`;
       }
 
+      // URUTKAN BERDASARKAN PRIORITAS FOLLOW-UP: 🔥 HOT -> ⚡ WARM -> ❄️ COLD -> ✅ SUDAH DONE
+      sortLeadsByFollowUpPriority(filtered);
+
       if (titleEl) titleEl.innerHTML = `${labelGroup} (<span id="turunanCount">${filtered.length}</span>)`;
       if (subtitleEl) subtitleEl.textContent = descGroup;
 
-      // Auto-select first lead if current selected not in list
+      // Auto-select lead prioritas pertama jika belum ada yang dipilih atau lead terpilih tidak ada di list
       if (!filtered.some(l => l.id === selectedLeadId)) {
         selectedLeadId = filtered.length > 0 ? filtered[0].id : null;
       }
@@ -4641,6 +4676,7 @@
         let html = '';
         filtered.forEach(lead => {
           const isSelected = lead.id === selectedLeadId;
+          const isDone = (lead.tier === 'CLOSED' || lead.status === 'CONVERTED');
           const tierClass = lead.tier ? lead.tier.toLowerCase() : 'warm';
           const pillClass = `pill-${tierClass}`;
           const phoneClean = (lead.phone || '').replace(/[^0-9]/g, '');
@@ -4649,16 +4685,30 @@
             : (lead.phone || '-');
           const lp = getLeadPaket(lead);
 
+          let priorityTag = '';
+          if (lead.tier === 'HOT') {
+            priorityTag = '<span style="font-size:10px; font-weight:700; color:#ef4444; background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.3); padding:2px 6px; border-radius:4px; margin-right:4px;">🔥 PRIORITAS #1</span>';
+          } else if (lead.tier === 'WARM') {
+            priorityTag = '<span style="font-size:10px; font-weight:700; color:#eab308; background:rgba(234,179,8,0.12); border:1px solid rgba(234,179,8,0.3); padding:2px 6px; border-radius:4px; margin-right:4px;">⚡ KONSULTASI</span>';
+          } else if (lead.tier === 'COLD') {
+            priorityTag = '<span style="font-size:10px; font-weight:700; color:#38bdf8; background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.3); padding:2px 6px; border-radius:4px; margin-right:4px;">❄️ NURTURE</span>';
+          } else if (isDone) {
+            priorityTag = '<span style="font-size:10px; font-weight:700; color:#22c55e; background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); padding:2px 6px; border-radius:4px; margin-right:4px;">✅ SUDAH DONE</span>';
+          }
+
           html += `
             <div class="turunan-item-card tier-${tierClass} ${isSelected ? 'active-lead-item' : ''}" onclick="selectLead('${lead.id}')">
               <div class="turunan-item-top">
                 <div>
-                  <div class="turunan-item-name">${escapeHtml(lead.display_name)}</div>
+                  <div class="turunan-item-name" style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                    ${priorityTag}
+                    <span>${escapeHtml(lead.display_name)}</span>
+                  </div>
                   <div class="turunan-item-phone">📱 +${escapeHtml(phoneDisplay)} · ${escapeHtml(lead.created_at ? lead.created_at.slice(5, 10) : '')}</div>
                 </div>
                 <div style="text-align:right;">
                   <span class="lead-pill ${pillClass}">
-                    ${lead.tier === 'HOT' ? '🔥 HOT' : (lead.tier === 'WARM' ? '⚡ WARM' : (lead.tier === 'COLD' ? '❄️ COLD' : '✅ CLOSED'))}
+                    ${lead.tier === 'HOT' ? '🔥 HOT' : (lead.tier === 'WARM' ? '⚡ WARM' : (lead.tier === 'COLD' ? '❄️ COLD' : '✅ SUDAH DONE'))}
                   </span>
                 </div>
               </div>

@@ -374,6 +374,16 @@ def run_integration():
             json.dump(state, f, ensure_ascii=False, indent=2)
         print("[OK] foxe_full_state.json tersimpan.")
 
+        # Rekonsiliasi Leads CRM dengan data Log Order & Schedule terbaru
+        try:
+            from agentic_lead_engine import AgenticLeadEngine
+            lead_engine = AgenticLeadEngine()
+            lead_engine.state = state
+            clean_res = lead_engine.reconcile_and_clean_leads()
+            print(f"[OK] Rekonsiliasi Leads CRM berhasil ({clean_res.get('total_cleaned', 0)} leads diperbarui di leads_vault.json).")
+        except Exception as l_err:
+            print(f"[WARN] Rekonsiliasi Leads CRM dilewati: {l_err}")
+
         # Render index.html
         import subprocess
         subprocess.run([sys.executable, "assemble_app.py"], check=True)

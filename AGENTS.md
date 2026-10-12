@@ -217,10 +217,14 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
     * Rank #4 Self Photo & Single
   - Dilengkapi filter cepat interaktif: Quick filter chips (`[ 📦 Semua Paket ]`, `[ 🎓 Wisuda ]`, `[ 👥 Large Group ]`, dll.), dropdown filter paket, dan kartu peringkat interaktif yang dapat diklik untuk menyaring daftar prospek seketika.
   - Setiap kartu prospek menampilkan badge tag paket (`lead-paket-pill`) yang jelas.
-- **Autentikasi PIN Terpisah & Opening Gate**:
-  - **Opening Gate Portal**: Saat membuka URL utama, muncul layar gerbang 2 opsi (*Option Card A: Foxe Keuangan* dan *Option Card B: Foxe CRM & Flow*) dengan prinsip Zero PIN Disclosure.
-  - **Section Keuangan (`index.html`)**: Terproteksi Master PIN `363636`.
-  - **Section CRM Leads & Foxe Flow (`flow.html`)**: Terproteksi Master PIN Khusus `112233` dengan token sesi terisolasi (`foxe_crm_auth_token_v1`).
+- **Standarisasi Urutan Prioritas Follow-Up Leads & Real-Time Sync WA Trigger**:
+  - Urutan kartu prospek di CRM (`flow.html`) dan `leads_vault.json` **WAJIB disusun berurutan berdasarkan tingkat urgensi follow-up admin**:
+    1. 🔥 **HOT** (Prioritas #1 / Paling Atas: Tanya rekening, minta lock slot, hampir transfer DP, respon cepat 1-2 jam).
+    2. ⚡ **WARM** (Prioritas #2: Sedang berkonsultasi paket, preferensi spot/jam, butuh portofolio).
+    3. ❄️ **COLD** (Prioritas #3: Tanya pricelist lalu hening, siapkan nurturing berkala / momentum promo).
+    4. ✅ **SUDAH DONE / CLOSED** (Prioritas #4 / Paling Bawah: Transaksi deal/lunas atau DP terverifikasi di kasir Log Order). Klien yang sudah selesai WAJIB diletakkan di urutan terbawah agar admin tidak terdistraksi dan tidak salah follow-up orang yang sudah deal.
+  - **Auto-Sync Real-Time**: Antarmuka CRM (`flow.html`) dilengkapi background polling otomatis setiap 30 detik (`loadStudioData()` & `loadLeadsData()`) serta pembaruan instan pada event `visibilitychange` (saat admin kembali membuka/fokus ke tab). Setiap eksekusi `python deep_sync_foxe.py` otomatis menjalankan `reconcile_and_clean_leads()` untuk mencocokkan mutasi kasir Google Sheets ke data prospek.
+
 
 
 

@@ -216,6 +216,22 @@ class AgenticLeadEngine:
 
     def _save_vault(self, leads: List[Dict[str, Any]]):
         try:
+            # Urutkan berdasarkan prioritas follow-up: HOT (1) -> WARM (2) -> COLD (3) -> SUDAH DONE (4)
+            def get_lead_rank(l):
+                if l.get("tier") == "CLOSED" or l.get("status") == "CONVERTED":
+                    return 4  # SUDAH DONE / CLOSED (paling bawah)
+                t = str(l.get("tier") or "").upper()
+                if t == "HOT":
+                    return 1  # HOT (paling atas / prioritas utama follow-up)
+                if t == "WARM":
+                    return 2  # WARM (konsultasi)
+                if t == "COLD":
+                    return 3  # COLD (nurturing pricelist)
+                return 2.5
+
+            leads.sort(key=lambda x: str(x.get("last_message_at") or x.get("created_at") or ""), reverse=True)
+            leads.sort(key=get_lead_rank)
+
             # 1. Save unmasked leads to private vault (gitignored)
             with open(PRIVATE_VAULT_FILE, "w", encoding="utf-8") as f_priv:
                 json.dump(leads, f_priv, ensure_ascii=False, indent=2)
