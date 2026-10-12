@@ -48,16 +48,30 @@
       --text-secondary: var(--ink2);
       --text-muted: var(--muted);
 
+      /* SEMANTIC COLORS & STATUS (EXECUTIVE LIGHT) */
+      --good: #15803d;
+      --good-bg: #ecfdf5;
+      --warn: #b45309;
+      --warn-bg: #fffbeb;
+      --crit: #dc2626;
+      --crit-bg: #fef2f2;
+      --lead: #4338ca;
+      --lead-bg: #eef2ff;
+
       --accent-blue: #2563eb;
       --accent-cyan: #0284c7;
-      --accent-green: #10b981;
+      --accent-green: #15803d;
       --accent-wa: #16a34a;
       --accent-purple: #7c3aed;
-      --accent-amber: #d97706;
-      --accent-orange: #ea580c;
+      --accent-amber: #b45309;
+      --accent-orange: #c2410c;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-mono: 'JetBrains Mono', Consolas, Monaco, monospace;
       --font-display: "Cormorant Garamond", Georgia, serif;
+      --ff-sans: var(--font-sans);
+      --ff-mono: var(--font-mono);
+      --ff-display: var(--font-display);
+      --ff-body: var(--font-sans);
       --shadow: 0 4px 18px rgba(17, 24, 39, 0.05);
     }
 
@@ -89,6 +103,16 @@
       --text-secondary: var(--ink2);
       --text-muted: var(--muted);
 
+      /* SEMANTIC COLORS & STATUS (EXECUTIVE DARK) */
+      --good: #34d399;
+      --good-bg: rgba(16, 185, 129, 0.15);
+      --warn: #fbbf24;
+      --warn-bg: rgba(245, 158, 11, 0.15);
+      --crit: #f87171;
+      --crit-bg: rgba(239, 68, 68, 0.15);
+      --lead: #a5b4fc;
+      --lead-bg: rgba(129, 140, 248, 0.15);
+
       --accent-blue: #3b82f6;
       --accent-cyan: #38bdf8;
       --accent-green: #10b981;
@@ -96,6 +120,13 @@
       --accent-purple: #a855f7;
       --accent-amber: #f59e0b;
       --accent-orange: #f97316;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, Monaco, monospace;
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --ff-sans: var(--font-sans);
+      --ff-mono: var(--font-mono);
+      --ff-display: var(--font-display);
+      --ff-body: var(--font-sans);
       --shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
     }
 
@@ -123,60 +154,45 @@
       user-select: none;
     }
     .topbar-left { display: flex; align-items: center; gap: 14px; }
-    .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; color: #fff; }
+    .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; color: var(--ink); }
     .brand-icon {
       width: 28px; height: 28px; background: linear-gradient(135deg, #f97316, #ea580c);
       border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 15px;
     }
     .brand-badge {
-      font-size: 10px; padding: 2px 6px; background: rgba(56, 189, 248, 0.15);
+      font-size: 10px; padding: 2px 6px; background: var(--accent-soft);
       color: var(--accent-cyan); border-radius: 4px; font-weight: 600; text-transform: uppercase;
     }
     .wf-select-wrapper {
-      display: flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.05);
-      padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-subtle);
+      display: flex; align-items: center; gap: 8px; background: var(--surface2);
+      padding: 4px 8px; border-radius: 6px; border: 1px solid var(--hairline);
     }
     .wf-select {
-      background: transparent; color: #fff; border: none; font-size: 13px;
+      background: transparent; color: var(--ink); border: none; font-size: 13px;
       font-weight: 600; outline: none; cursor: pointer; max-width: 280px;
     }
-    .wf-select option { background: #16202e; color: #fff; }
+    .wf-select option { background: var(--surface); color: var(--ink); }
     .active-toggle {
       display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;
       cursor: pointer; padding: 4px 10px; border-radius: 20px;
-      background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399;
+      background: var(--good-bg); border: 1px solid rgba(21, 128, 61, 0.35); color: var(--good);
     }
-    .active-toggle .dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; }
+    .active-toggle .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 8px var(--good); }
 
     .topbar-right { display: flex; align-items: center; gap: 8px; }
-
-    /* BUTTONS */
-    .btn {
-      display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
-      font-size: 12px; font-weight: 600; border-radius: 6px; border: 1px solid var(--border-subtle);
-      background: #182232; color: #e2e8f0; cursor: pointer; transition: all 0.15s ease;
-      text-decoration: none; user-select: none;
-    }
-    .btn:hover { background: #223044; border-color: #38bdf8; color: #fff; }
-    .btn-primary {
-      background: linear-gradient(135deg, #0284c7, #0369a1); border-color: #38bdf8;
-      color: #fff; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
-    }
-    .btn-primary:hover { background: linear-gradient(135deg, #0369a1, #075985); }
-    .btn-sm { padding: 4px 9px; font-size: 11px; }
 
     /* WORKSPACE */
     .workspace { display: flex; flex: 1; height: calc(100vh - 56px); position: relative; overflow: hidden; }
 
     /* LEFT PALETTE */
     .sidebar-palette {
-      width: 250px; background: var(--bg-sidebar); border-right: 1px solid var(--border-subtle);
+      width: 250px; background: var(--bg-sidebar); border-right: 1px solid var(--hairline);
       display: flex; flex-direction: column; z-index: 20; user-select: none;
       transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative; flex-shrink: 0;
     }
     .palette-header {
-      padding: 12px 14px; border-bottom: 1px solid var(--border-subtle); font-size: 11px;
+      padding: 12px 14px; border-bottom: 1px solid var(--hairline); font-size: 11px;
       font-weight: 700; color: var(--text-muted); text-transform: uppercase;
       display: flex; justify-content: space-between; align-items: center;
       transition: all 0.2s;
@@ -189,11 +205,11 @@
     }
     .palette-item {
       display: flex; align-items: center; gap: 10px; padding: 8px 10px;
-      background: #16202e; border: 1px solid var(--border-subtle); border-radius: 6px;
+      background: var(--surface2); border: 1px solid var(--hairline); border-radius: 6px;
       cursor: pointer; transition: all 0.15s; margin-bottom: 6px;
       position: relative;
     }
-    .palette-item:hover { background: #1e2c3e; border-color: #38bdf8; transform: translateX(2px); }
+    .palette-item:hover { background: var(--surface3); border-color: var(--accent); transform: translateX(2px); }
     .palette-item .icon {
       width: 26px; height: 26px; border-radius: 5px; display: flex;
       align-items: center; justify-content: center; font-size: 13px; color: #fff; flex-shrink: 0;
@@ -230,7 +246,7 @@
     }
     .sidebar-palette.collapsed .palette-item:hover {
       transform: scale(1.1);
-      border-color: #38bdf8;
+      border-color: var(--accent);
     }
     .sidebar-palette.collapsed .palette-item .icon {
       width: 28px;
@@ -242,7 +258,7 @@
     /* CANVAS */
     .canvas-container {
       flex: 1; height: 100%; position: relative; background-color: var(--bg-canvas);
-      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-image: radial-gradient(rgba(100, 116, 139, 0.18) 1px, transparent 1px);
       background-size: 24px 24px; overflow: hidden; cursor: crosshair;
     }
     .canvas-viewport { position: absolute; top: 0; left: 0; width: 10000px; height: 10000px; transform-origin: 0 0; }
@@ -252,87 +268,87 @@
       transition: stroke 0.2s, stroke-width 0.2s;
     }
     .wire-path:hover { stroke: #ef4444; stroke-width: 4px; }
-    .wire-path.wire-active { stroke: #38bdf8; stroke-dasharray: 8 4; animation: dash 1s linear infinite; }
-    .wire-path.wire-true { stroke: #10b981; }
-    .wire-path.wire-false { stroke: #ef4444; }
+    .wire-path.wire-active { stroke: var(--accent); stroke-dasharray: 8 4; animation: dash 1s linear infinite; }
+    .wire-path.wire-true { stroke: var(--good); }
+    .wire-path.wire-false { stroke: var(--crit); }
     @keyframes dash { to { stroke-dashoffset: -24; } }
 
     /* NODE CARD */
     .flow-node {
       position: absolute; width: 240px; background: var(--bg-card); border: 1px solid var(--border-subtle);
-      border-radius: 8px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); z-index: 10;
+      border-radius: 8px; box-shadow: var(--shadow); z-index: 10;
       cursor: grab; user-select: none; transition: border-color 0.15s, box-shadow 0.15s;
     }
     .flow-node:active { cursor: grabbing; }
-    .flow-node.selected { border-color: #38bdf8; box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3), 0 8px 24px rgba(0, 0, 0, 0.5); }
-    .flow-node.executing { border-color: #f59e0b; box-shadow: 0 0 16px rgba(245, 158, 11, 0.6); }
-    .flow-node.exec-success { border-color: #10b981; box-shadow: 0 0 16px rgba(16, 185, 129, 0.5); }
-    .flow-node.exec-error { border-color: #ef4444; box-shadow: 0 0 16px rgba(239, 68, 68, 0.5); }
+    .flow-node.selected { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft), var(--shadow); }
+    .flow-node.executing { border-color: var(--warn); box-shadow: 0 0 16px rgba(245, 158, 11, 0.4); }
+    .flow-node.exec-success { border-color: var(--good); box-shadow: 0 0 16px rgba(16, 185, 129, 0.4); }
+    .flow-node.exec-error { border-color: var(--crit); box-shadow: 0 0 16px rgba(239, 68, 68, 0.4); }
 
     .node-header {
       padding: 10px 12px; display: flex; align-items: center; gap: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05); border-top-left-radius: 7px; border-top-right-radius: 7px;
+      border-bottom: 1px solid var(--hairline); border-top-left-radius: 7px; border-top-right-radius: 7px;
     }
     .node-icon {
       width: 28px; height: 28px; border-radius: 6px; display: flex;
       align-items: center; justify-content: center; font-size: 14px; color: #fff; flex-shrink: 0;
     }
     .node-title-group { flex: 1; min-width: 0; }
-    .node-title { font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .node-title { font-size: 12px; font-weight: 700; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .node-category { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
     .node-body { padding: 10px 12px; font-size: 11px; color: var(--text-secondary); line-height: 1.4; position: relative; }
     .node-param-preview {
-      font-family: var(--font-mono); background: rgba(0, 0, 0, 0.3); padding: 4px 6px;
-      border-radius: 4px; color: #93c5fd; font-size: 10px; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      font-family: var(--font-mono); background: var(--surface2); padding: 4px 6px;
+      border-radius: 4px; color: var(--accent-ink); border: 1px solid var(--hairline); font-size: 10px; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
 
     /* PORTS */
     .port {
-      position: absolute; width: 14px; height: 14px; background: #1e293b;
-      border: 2px solid #64748b; border-radius: 50%; cursor: crosshair; z-index: 15; transition: all 0.15s ease;
+      position: absolute; width: 14px; height: 14px; background: var(--surface);
+      border: 2px solid var(--muted); border-radius: 50%; cursor: crosshair; z-index: 15; transition: all 0.15s ease;
     }
-    .port:hover { transform: scale(1.3); border-color: #38bdf8; background: #0284c7; }
+    .port:hover { transform: scale(1.3); border-color: var(--accent); background: var(--accent); }
     .port-input { left: -7px; top: 50%; transform: translateY(-50%); }
     .port-input:hover { transform: translateY(-50%) scale(1.3); }
     .port-output { right: -7px; top: 50%; transform: translateY(-50%); }
     .port-output:hover { transform: translateY(-50%) scale(1.3); }
-    .port-true { right: -7px; top: 35%; border-color: #10b981; }
-    .port-true:hover { background: #10b981; }
-    .port-false { right: -7px; top: 68%; border-color: #ef4444; }
-    .port-false:hover { background: #ef4444; }
+    .port-true { right: -7px; top: 35%; border-color: var(--good); }
+    .port-true:hover { background: var(--good); }
+    .port-false { right: -7px; top: 68%; border-color: var(--crit); }
+    .port-false:hover { background: var(--crit); }
     .port-label { position: absolute; right: 14px; font-size: 9px; font-weight: 700; text-transform: uppercase; user-select: none; }
-    .label-true { top: 30%; color: #10b981; }
-    .label-false { top: 63%; color: #ef4444; }
+    .label-true { top: 30%; color: var(--good); }
+    .label-false { top: 63%; color: var(--crit); }
 
     /* FLOATING CONTROLS */
     .canvas-controls {
       position: absolute; bottom: 24px; left: 20px; display: flex; align-items: center; gap: 4px;
-      background: rgba(17, 23, 34, 0.85); backdrop-filter: blur(8px); border: 1px solid var(--border-subtle);
-      border-radius: 8px; padding: 4px; z-index: 30; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      background: var(--surface); backdrop-filter: blur(8px); border: 1px solid var(--hairline);
+      border-radius: 8px; padding: 4px; z-index: 30; box-shadow: var(--shadow);
     }
 
     /* RIGHT INSPECTOR */
     .sidebar-inspector {
-      width: 340px; background: var(--bg-sidebar); border-left: 1px solid var(--border-subtle);
+      width: 340px; background: var(--bg-sidebar); border-left: 1px solid var(--hairline);
       display: flex; flex-direction: column; z-index: 20;
     }
     .inspector-header {
-      padding: 12px 16px; border-bottom: 1px solid var(--border-subtle);
+      padding: 12px 16px; border-bottom: 1px solid var(--hairline); color: var(--ink);
       display: flex; align-items: center; justify-content: space-between;
     }
     .inspector-content { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
     .field-group { display: flex; flex-direction: column; gap: 6px; }
     .field-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); }
     .field-input, .field-textarea, .field-select {
-      width: 100%; background: #16202e; border: 1px solid var(--border-subtle);
-      border-radius: 6px; padding: 8px 10px; color: #fff; font-size: 12px; font-family: inherit; outline: none;
+      width: 100%; background: var(--surface2); border: 1px solid var(--hairline);
+      border-radius: 6px; padding: 8px 10px; color: var(--ink); font-size: 12px; font-family: inherit; outline: none;
     }
-    .field-input:focus, .field-textarea:focus, .field-select:focus { border-color: #38bdf8; background: #1a2738; }
+    .field-input:focus, .field-textarea:focus, .field-select:focus { border-color: var(--accent); background: var(--surface); }
     .field-textarea { font-family: var(--font-mono); font-size: 11px; resize: vertical; min-height: 110px; line-height: 1.5; }
     .tag-suggestions { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
     .tag-badge {
-      font-size: 10px; font-family: var(--font-mono); background: rgba(56, 189, 248, 0.1);
-      color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 4px;
+      font-size: 10px; font-family: var(--font-mono); background: var(--accent-soft);
+      color: var(--accent-ink); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 4px;
       padding: 2px 6px; cursor: pointer;
     }
     .tag-badge:hover { background: rgba(56, 189, 248, 0.25); }
@@ -340,47 +356,49 @@
     /* DRAWER */
     .exec-drawer {
       position: absolute; bottom: 0; left: 250px; right: 0; height: 260px;
-      background: #0f1520; border-top: 1px solid var(--border-subtle); z-index: 40;
-      display: flex; flex-direction: column; box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.5);
+      background: var(--surface); border-top: 1px solid var(--hairline); z-index: 40;
+      display: flex; flex-direction: column; box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.12);
       transition: transform 0.25s ease, left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    html[data-theme="dark"] .exec-drawer { box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.5); }
     .workspace.palette-collapsed .exec-drawer {
       left: 54px;
     }
     .exec-drawer.collapsed { transform: translateY(220px); }
     .exec-drawer-header {
-      height: 40px; padding: 0 16px; background: #131a26; border-bottom: 1px solid var(--border-subtle);
+      height: 40px; padding: 0 16px; background: var(--surface2); border-bottom: 1px solid var(--hairline);
       display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none;
     }
-    .exec-drawer-title { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #fff; }
+    .exec-drawer-title { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--ink); }
     .exec-drawer-body { flex: 1; display: flex; overflow: hidden; }
-    .exec-timeline { width: 50%; border-right: 1px solid var(--border-subtle); overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-    .timeline-step { padding: 8px 10px; border-radius: 6px; background: #16202e; border-left: 3px solid #64748b; font-size: 11px; }
-    .timeline-step.success { border-left-color: #10b981; }
-    .timeline-step.error { border-left-color: #ef4444; }
-    .timeline-step.warning { border-left-color: #f59e0b; }
-    .step-top { display: flex; justify-content: space-between; font-weight: 600; color: #fff; margin-bottom: 2px; }
+    .exec-timeline { width: 50%; border-right: 1px solid var(--hairline); overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .timeline-step { padding: 8px 10px; border-radius: 6px; background: var(--surface2); border-left: 3px solid var(--hairline-strong); font-size: 11px; color: var(--ink); }
+    .timeline-step.success { border-left-color: var(--good); }
+    .timeline-step.error { border-left-color: var(--crit); }
+    .timeline-step.warning { border-left-color: var(--warn); }
+    .step-top { display: flex; justify-content: space-between; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
     .step-desc { color: var(--text-secondary); }
-    .exec-data-preview { width: 50%; padding: 12px; overflow-y: auto; font-family: var(--font-mono); font-size: 11px; background: #090d14; color: #a5b4fc; }
+    .exec-data-preview { width: 50%; padding: 12px; overflow-y: auto; font-family: var(--font-mono); font-size: 11px; background: var(--surface3); color: var(--accent-ink); }
 
     /* MODAL */
     .modal-overlay {
-      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px);
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px);
       z-index: 100; display: flex; align-items: center; justify-content: center;
       opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
     }
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
     .modal-card {
-      width: 540px; background: #141c28; border: 1px solid var(--border-subtle);
-      border-radius: 10px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
-      display: flex; flex-direction: column; overflow: hidden;
+      width: 540px; background: var(--surface); border: 1px solid var(--hairline);
+      border-radius: 10px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+      color: var(--ink); display: flex; flex-direction: column; overflow: hidden;
     }
-    .modal-header { padding: 14px 18px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; }
-    .modal-body { padding: 18px; max-height: 70vh; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
-    .modal-footer { padding: 12px 18px; background: #0f1520; border-top: 1px solid var(--border-subtle); display: flex; justify-content: flex-end; gap: 8px; }
+    html[data-theme="dark"] .modal-card { box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6); }
+    .modal-header { padding: 14px 18px; border-bottom: 1px solid var(--hairline); background: var(--surface2); color: var(--ink); display: flex; justify-content: space-between; align-items: center; }
+    .modal-body { padding: 18px; max-height: 70vh; overflow-y: auto; background: var(--surface); color: var(--ink); display: flex; flex-direction: column; gap: 14px; }
+    .modal-footer { padding: 12px 18px; background: var(--surface2); border-top: 1px solid var(--hairline); display: flex; justify-content: flex-end; gap: 8px; }
     .code-block {
-      background: #090d14; border: 1px solid var(--border-subtle); border-radius: 6px;
-      padding: 10px; font-family: var(--font-mono); font-size: 11px; color: #38bdf8; word-break: break-all;
+      background: var(--surface2); border: 1px solid var(--hairline); border-radius: 6px;
+      padding: 10px; font-family: var(--font-mono); font-size: 11px; color: var(--accent-ink); word-break: break-all;
     }
     /* ============================================================
        FOXE STUDIO CRM & LEADS LIBRARY — DESIGNclaude.md SPECIFICATION
@@ -1157,7 +1175,7 @@
       }
     }
     .chat-conversation-pane {
-      background: #0f1622;
+      background: var(--surface);
       border: 1px solid var(--hairline);
       border-radius: 10px;
       padding: 16px;
@@ -1208,12 +1226,23 @@
       border: 1px solid rgba(148, 163, 184, 0.22);
       border-top-left-radius: 2px;
     }
+    html[data-theme="light"] .chat-bubble.customer {
+      background: #ffffff;
+      color: #111827;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
     .chat-bubble.admin {
       align-self: flex-end;
       background: #064e3b;
       color: #f0fdf4;
       border: 1px solid rgba(52, 211, 153, 0.3);
       border-top-right-radius: 2px;
+    }
+    html[data-theme="light"] .chat-bubble.admin {
+      background: #dcf8c6;
+      color: #0f5132;
+      border: 1px solid #bbf7d0;
     }
     .chat-bubble-sender {
       font-size: 10px;
@@ -1224,7 +1253,9 @@
       margin-bottom: 2px;
     }
     .chat-bubble.customer .chat-bubble-sender { color: #38bdf8; }
+    html[data-theme="light"] .chat-bubble.customer .chat-bubble-sender { color: var(--accent-ink); }
     .chat-bubble.admin .chat-bubble-sender { color: #6ee7b7; }
+    html[data-theme="light"] .chat-bubble.admin .chat-bubble-sender { color: #166534; }
     .chat-bubble-text { font-size: 12.5px; line-height: 1.45; }
     .chat-bubble-time {
       font-size: 9.5px;
@@ -1237,6 +1268,8 @@
       justify-content: flex-end;
       gap: 4px;
     }
+    html[data-theme="light"] .chat-bubble.customer .chat-bubble-time { color: var(--muted); }
+    html[data-theme="light"] .chat-bubble.admin .chat-bubble-time { color: #15803d; }
     .chat-media-badge {
       display: inline-flex;
       align-items: center;
@@ -1249,6 +1282,11 @@
       color: #f1f5f9;
       margin: 2px 0;
     }
+    html[data-theme="light"] .chat-media-badge {
+      background: var(--surface2);
+      border-color: var(--hairline-strong);
+      color: var(--ink);
+    }
     .ai-workspace-pane {
       display: flex;
       flex-direction: column;
@@ -1257,7 +1295,7 @@
     .lead-summary-box {
       background: var(--surface2);
       border: 1px solid var(--hairline);
-      border-left: 3px solid #f59e0b;
+      border-left: 3px solid var(--warn);
       border-radius: 8px;
       padding: 10px 14px;
       font-size: 12px;
@@ -1283,7 +1321,7 @@
     }
     .ai-draft-text {
       font-size: 12.5px;
-      color: #f1f5f9;
+      color: var(--ink);
       line-height: 1.5;
       background: var(--surface3);
       padding: 10px 12px;
@@ -1330,7 +1368,7 @@
     }
     .turunan-item-card:hover .card-chat-btn {
       background: var(--accent);
-      color: #fff;
+      color: var(--on-accent);
       transform: translateX(2px);
     }
 
@@ -1340,6 +1378,9 @@
       border: 1px solid var(--hairline-strong);
       border-radius: 14px;
       overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(56, 189, 248, 0.25);
+    }
+    html[data-theme="dark"] .modal-chat-dialog {
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(56, 189, 248, 0.25);
     }
     .chat-modal-header {
@@ -1376,7 +1417,7 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
-      background: #0b111a;
+      background: var(--canvas);
       max-height: calc(90vh - 140px);
     }
     .chat-context-strip {
@@ -1387,7 +1428,7 @@
       padding: 9px 13px;
     }
     .modal-conversation-pane {
-      background: #0f1622;
+      background: var(--surface);
       border: 1px solid var(--hairline);
       border-radius: 10px;
       padding: 16px 14px;
@@ -1530,24 +1571,63 @@
       width: 8px;
     }
     .cal-view-container::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.2);
+      background: var(--canvas);
     }
     .cal-view-container::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
+      background: var(--hairline-strong);
       border-radius: 4px;
     }
-    .cal-view-container::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.25);
-    }
     .cal-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px; }
-    .cal-title { font-size: 20px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px; }
-    .cal-subtitle { font-size: 13px; color: var(--text-secondary); margin-top: 4px; max-width: 880px; line-height: 1.5; }
+    .cal-title { font-size: 24px; font-weight: 700; color: var(--ink); font-family: var(--ff-display); display: flex; align-items: center; gap: 10px; letter-spacing: -0.3px; }
+    .cal-subtitle { font-size: 13px; color: var(--muted); margin-top: 4px; max-width: 880px; line-height: 1.5; }
+
+    /* MODE SWITCHER TABS (DUAL-THEME) */
+    .mode-switcher {
+      display: inline-flex;
+      background: var(--surface2);
+      border-radius: 8px;
+      padding: 3px;
+      border: 1px solid var(--hairline);
+      gap: 3px;
+    }
+    .mode-switcher .btn {
+      margin: 0;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 11.5px;
+      background: transparent !important;
+      border: none !important;
+      color: var(--muted) !important;
+      padding: 5px 12px;
+      transition: all 0.15s ease;
+    }
+    .mode-switcher .btn:hover {
+      color: var(--ink) !important;
+      background: var(--surface3) !important;
+    }
+    .mode-switcher .btn.active {
+      background: var(--accent) !important;
+      color: var(--on-accent) !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+    }
     
     .cal-kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    .cal-kpi-grid .kpi-card { padding: 14px 16px; }
+    .cal-kpi-dp::before { background: var(--good); }
+    .cal-kpi-dp .kpi-lbl, .cal-kpi-dp .kpi-val { color: var(--good); }
+
+    .cal-kpi-conv::before { background: var(--accent); }
+    .cal-kpi-conv .kpi-lbl, .cal-kpi-conv .kpi-val { color: var(--accent-ink); }
+
+    .cal-kpi-omzet::before { background: var(--warn); }
+    .cal-kpi-omzet .kpi-lbl, .cal-kpi-omzet .kpi-val { color: var(--warn); }
+
+    .cal-kpi-best::before { background: var(--accent-purple); }
+    .cal-kpi-best .kpi-lbl, .cal-kpi-best .kpi-val { color: var(--accent-purple); }
     
     .cal-weekdays {
       display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; text-align: center;
-      font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;
+      font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;
       padding-bottom: 4px;
     }
     .cal-grid {
@@ -1562,35 +1642,217 @@
     }
     
     .cal-day-card {
-      background: #141c28; border: 1px solid var(--border-subtle); border-radius: 10px;
-      padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; cursor: pointer;
-      transition: all 0.18s ease; position: relative; min-height: 140px;
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      position: relative;
+      min-height: 145px;
+      box-shadow: var(--shadow);
     }
     .cal-day-card:hover {
-      border-color: #38bdf8; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.35); background: #172232;
+      border-color: var(--accent-ink);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      background: var(--surface2);
+    }
+    html[data-theme="dark"] .cal-day-card:hover {
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
     }
     .cal-day-card.today {
-      border: 2px solid #38bdf8; background: linear-gradient(180deg, rgba(2,132,199,0.12), #141c28);
+      border: 2px solid var(--accent);
+      background: linear-gradient(180deg, rgba(37,99,235,0.08), var(--surface));
+      box-shadow: 0 0 0 1px var(--accent), var(--shadow);
+    }
+    html[data-theme="dark"] .cal-day-card.today {
+      background: linear-gradient(180deg, rgba(59,130,246,0.14), var(--surface));
     }
     .cal-day-card.empty, .cal-day-card.blank {
-      background: transparent; border: 1px dashed rgba(255,255,255,0.05); cursor: default; pointer-events: none; min-height: 100px;
+      background: transparent;
+      border: 1px dashed var(--hairline-strong);
+      cursor: default;
+      pointer-events: none;
+      min-height: 100px;
+      opacity: 0.45;
     }
     .cal-day-card.future {
-      opacity: 0.65; background: #0e141e;
+      opacity: 0.72;
+      background: var(--surface2);
+      border-color: var(--hairline-soft);
     }
     
-    .day-top { display: flex; justify-content: space-between; align-items: flex-start; }
-    .day-num { font-size: 16px; font-weight: 700; color: #fff; font-family: var(--font-display); }
-    .day-badge { font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+    .cal-day-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .cal-day-num {
+      font-family: var(--ff-display);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .cal-day-dow {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .cal-day-card.weekend .cal-day-dow {
+      color: var(--accent-orange);
+    }
     
-    .day-metrics { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; }
-    .day-metric-item { display: flex; justify-content: space-between; align-items: center; color: var(--text-secondary); }
-    .day-metric-item b { color: #f1f5f9; font-variant-numeric: tabular-nums; }
+    .cal-day-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin: 4px 0;
+      background: var(--surface2);
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--hairline-soft);
+    }
+    .cal-sub-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      text-align: center;
+    }
+    .sub-lbl {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .sub-val {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--ink);
+      font-family: var(--ff-mono);
+    }
     
     .conv-bar {
-      width: 100%; height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-top: 4px;
+      width: 100%;
+      height: 5px;
+      background: var(--surface4);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 4px;
     }
-    .conv-fill { height: 100%; border-radius: 3px; transition: width 0.3s ease; }
+    .conv-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    
+    .cal-day-footer {
+      margin-top: auto;
+      padding-top: 6px;
+      border-top: 1px dashed var(--hairline-soft);
+      font-family: var(--ff-mono);
+    }
+    .cal-day-omzet-note {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--warn);
+    }
+    .cal-day-pipeline-note {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--accent-ink);
+    }
+    .cal-day-empty-note {
+      font-size: 10px;
+      color: var(--muted-soft);
+      font-style: italic;
+    }
+
+    /* UNIVERSAL STATUS PILLS */
+    .pill {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+      font-family: var(--ff-mono);
+      line-height: 1.2;
+    }
+    .pill.crit, .pill.pill-hot {
+      background: var(--crit-bg);
+      color: var(--crit);
+      border: 1px solid rgba(220, 38, 38, 0.35);
+    }
+    .pill.warn, .pill.pill-warm {
+      background: var(--warn-bg);
+      color: var(--warn);
+      border: 1px solid rgba(180, 83, 9, 0.35);
+    }
+    .pill.final, .pill.good, .pill.pill-closed {
+      background: var(--good-bg);
+      color: var(--good);
+      border: 1px solid rgba(21, 128, 61, 0.35);
+    }
+    .pill.prog, .pill.pill-cold {
+      background: var(--accent-soft);
+      color: var(--accent-ink);
+      border: 1px solid rgba(37, 99, 235, 0.35);
+    }
+    .pill.neutral {
+      background: var(--surface3);
+      color: var(--muted);
+      border: 1px solid var(--hairline-strong);
+    }
+
+    /* MODAL DAY DETAIL ITEM CARD */
+    .modal-list-card {
+      background: var(--surface2);
+      border: 1px solid var(--hairline);
+      border-radius: 6px;
+      padding: 9px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      transition: all 0.15s ease;
+    }
+    .modal-list-card:hover {
+      background: var(--surface3);
+      border-color: var(--hairline-strong);
+    }
+    .modal-list-card .item-title {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .modal-list-card .item-sub {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .modal-list-card .item-sub b {
+      color: var(--ink2);
+    }
+    .modal-list-card .item-amount {
+      font-weight: 700;
+      font-size: 12.5px;
+      font-family: var(--ff-mono);
+    }
   
     /* ---------- FOXE FLOW PIN LOCK SCREEN ---------- */
     .lock-screen {
@@ -1718,10 +1980,10 @@
         <span class="label">Otomasi Aktif</span>
       </div>
 
-      <div class="mode-switcher" style="display:inline-flex; background:rgba(255,255,255,0.06); border-radius:8px; padding:2px; border:1px solid var(--border-subtle); margin-left:8px;">
-        <button id="btnTabCalendar" class="btn btn-sm btn-primary" style="margin:0; border-radius:6px; font-weight:600; font-size:11.5px; background:var(--accent); color:var(--on-accent);">📅 Kalender Harian</button>
-        <button id="btnTabFlow" class="btn btn-sm" style="margin:0; background:transparent; border-color:transparent; color:var(--text-muted); border-radius:6px; font-weight:600; font-size:11.5px;">⚡ Alur Node n8n</button>
-        <button id="btnTabLeads" class="btn btn-sm" style="margin:0; background:transparent; border-color:transparent; color:var(--text-muted); border-radius:6px; font-weight:600; font-size:11.5px;">📚 Pustaka Leads &amp; AI Draft <span id="leadsUnconvertedBadge" style="background:#ef4444; color:#fff; font-size:9.5px; padding:1px 5px; border-radius:10px; margin-left:4px;">6</span></button>
+      <div class="mode-switcher" style="margin-left:8px;">
+        <button id="btnTabCalendar" class="btn btn-sm active">📅 Kalender Harian</button>
+        <button id="btnTabFlow" class="btn btn-sm">⚡ Alur Node n8n</button>
+        <button id="btnTabLeads" class="btn btn-sm">📚 Pustaka Leads &amp; AI Draft <span id="leadsUnconvertedBadge" style="background:var(--crit); color:#fff; font-size:9.5px; padding:1px 5px; border-radius:10px; margin-left:4px;">6</span></button>
       </div>
     </div>
 
@@ -1763,7 +2025,7 @@
     <aside class="sidebar-palette" id="sidebarPalette">
       <div class="palette-header">
         <div style="display:flex; align-items:center; gap:8px;">
-          <button id="btnTogglePalette" class="btn btn-sm btn-icon" style="padding:2px 6px; font-size:11px; background:#1e293b; border:1px solid #334155; color:#94a3b8; cursor:pointer;" title="Minimize Sidebar">◀</button>
+          <button id="btnTogglePalette" class="btn btn-sm btn-icon" style="padding:2px 6px; font-size:11px; cursor:pointer;" title="Minimize Sidebar">◀</button>
           <span class="palette-header-title">Koleksi Node</span>
         </div>
         <span class="palette-header-add" style="font-size: 10px; color: var(--accent-cyan);">+ Klik Tambah</span>
@@ -1932,7 +2194,7 @@
           <div style="padding:10px; color:#94a3b8">Klik "▶ Jalankan Tes" untuk menguji alur kerja ini.</div>
         </div>
         <div class="exec-data-preview" id="execPreview">
-          <div id="quickWaAction" style="margin-bottom:12px; display:none; background:#1e293b; padding:10px; border-radius:6px; border:1px solid #334155;">
+          <div id="quickWaAction" style="margin-bottom:12px; display:none; background:var(--surface2); padding:10px; border-radius:6px; border:1px solid var(--hairline);">
             <div style="font-weight:600; color:#34d399; margin-bottom:4px;">📱 Siap Dikirim ke WhatsApp:</div>
             <a id="btnDirectWaLink" href="#" target="_blank" class="btn btn-sm" style="background:#25d366; color:#000; font-weight:700; border:none; display:inline-flex;">
               🚀 Buka di WhatsApp Web / App Sekarang
@@ -1955,9 +2217,9 @@
         </p>
       </div>
       <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-        <div class="mode-switcher" style="display:inline-flex; background:rgba(255,255,255,0.06); border-radius:8px; padding:2px; border:1px solid var(--border-subtle);">
-          <button id="btnCalMonthOkt" class="btn btn-sm btn-primary" style="margin:0; border-radius:6px; font-weight:600; font-size:11.5px;">📅 Oktober 2026 (Live)</button>
-          <button id="btnCalMonthSep" class="btn btn-sm" style="margin:0; background:transparent; border-color:transparent; color:#94a3b8; border-radius:6px; font-weight:600; font-size:11.5px;">📅 September 2026 (Rekap 30 Hari)</button>
+        <div class="mode-switcher">
+          <button id="btnCalMonthOkt" class="btn btn-sm active">📅 Oktober 2026 (Live)</button>
+          <button id="btnCalMonthSep" class="btn btn-sm">📅 September 2026 (Rekap 30 Hari)</button>
         </div>
       </div>
     </div>
@@ -1969,24 +2231,24 @@
         <div class="kpi-val" id="calKpiTotalLeads">0</div>
         <div class="kpi-sub" id="calKpiLeadsSub">Leads WhatsApp &amp; Inquiries</div>
       </div>
-      <div class="kpi-card" style="border-left: 3px solid #10b981;">
-        <div class="kpi-lbl" style="color:#34d399;">Total DP Masuk</div>
-        <div class="kpi-val" style="color:#34d399;" id="calKpiTotalDp">0</div>
+      <div class="kpi-card cal-kpi-dp">
+        <div class="kpi-lbl">Total DP Masuk</div>
+        <div class="kpi-val" id="calKpiTotalDp">0</div>
         <div class="kpi-sub" id="calKpiDpSub">Booking Terkunci (DP Only)</div>
       </div>
-      <div class="kpi-card" style="border-left: 3px solid #38bdf8;">
-        <div class="kpi-lbl" style="color:#38bdf8;">Konversi DP (Closing Rate)</div>
-        <div class="kpi-val" style="color:#38bdf8;" id="calKpiAvgConv">0.0%</div>
+      <div class="kpi-card cal-kpi-conv">
+        <div class="kpi-lbl">Konversi DP (Closing Rate)</div>
+        <div class="kpi-val" id="calKpiAvgConv">0.0%</div>
         <div class="kpi-sub">Efisiensi Admin (DP / Leads)</div>
       </div>
-      <div class="kpi-card" style="border-left: 3px solid #f59e0b;">
-        <div class="kpi-lbl" style="color:#fbbf24;">Realisasi Uang Masuk</div>
-        <div class="kpi-val" style="color:#fbbf24;" id="calKpiTotalOmzet">Rp 0</div>
+      <div class="kpi-card cal-kpi-omzet">
+        <div class="kpi-lbl">Realisasi Uang Masuk</div>
+        <div class="kpi-val" id="calKpiTotalOmzet">Rp 0</div>
         <div class="kpi-sub" id="calKpiOmzetSub">Total Kas &amp; Bank Log Order</div>
       </div>
-      <div class="kpi-card" style="border-left: 3px solid #a855f7;">
-        <div class="kpi-lbl" style="color:#c084fc;">Best DP Closing Day</div>
-        <div class="kpi-val" style="color:#c084fc; font-size:18px;" id="calKpiBestDay">—</div>
+      <div class="kpi-card cal-kpi-best">
+        <div class="kpi-lbl">Best DP Closing Day</div>
+        <div class="kpi-val" style="font-size:18px;" id="calKpiBestDay">—</div>
         <div class="kpi-sub" id="calKpiBestDaySub">Puncak Konversi DP Tertinggi</div>
       </div>
     </div>
@@ -2184,9 +2446,9 @@
       <div class="leaderboard-title">
         <div style="display:flex; align-items:center; gap:8px;">
           <span>🏆 Performa Admin &amp; Konversi Chat Studio</span>
-          <span style="font-size:11px; font-weight:400; color:#94a3b8;">· Speed to Lead &amp; Closing Rate</span>
+          <span style="font-size:11px; font-weight:400; color:var(--muted);">· Speed to Lead &amp; Closing Rate</span>
         </div>
-        <button id="btnTogglePerf" class="btn btn-sm" style="background:#1e293b; color:#94a3b8; font-size:11px; padding:3px 8px; cursor:pointer;">➖ Ciutkan</button>
+        <button id="btnTogglePerf" class="btn btn-sm" style="cursor:pointer;">➖ Ciutkan</button>
       </div>
       <div class="admin-cards-row" id="adminPerfContainer">
         <!-- Loaded dynamically -->
@@ -2198,11 +2460,11 @@
   <div class="modal-overlay" id="modalWebhook">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 style="font-size:14px; font-weight:700; color:#fff;">📋 Webhook Endpoint Publik</h3>
+        <h3 style="font-size:14px; font-weight:700; color:var(--ink);">📋 Webhook Endpoint Publik</h3>
         <button class="btn btn-sm btn-close-modal">✕</button>
       </div>
       <div class="modal-body">
-        <p style="font-size:12px; color:#94a3b8;">
+        <p style="font-size:12px; color:var(--muted);">
           Gunakan payload format ini saat menghubungkan webhook dari Google Forms, formulir reservasi studio, atau sistem kasir:
         </p>
         <div class="field-group">
@@ -2231,11 +2493,11 @@
   <div class="modal-overlay" id="modalBookings">
     <div class="modal-card" style="width: 620px;">
       <div class="modal-header">
-        <h3 style="font-size:14px; font-weight:700; color:#fff;">👥 Pilih Booking Riil Foxe Studio</h3>
+        <h3 style="font-size:14px; font-weight:700; color:var(--ink);">👥 Pilih Booking Riil Foxe Studio</h3>
         <button class="btn btn-sm btn-close-modal">✕</button>
       </div>
       <div class="modal-body">
-        <p style="font-size:12px; color:#94a3b8;">
+        <p style="font-size:12px; color:var(--muted);">
           Pilih salah satu klien di bawah untuk langsung menguji alur kerja otomatisasi dengan data transaksi live:
         </p>
         <div id="listLiveBookings" style="display:flex; flex-direction:column; gap:6px; max-height:340px; overflow-y:auto;">
@@ -2252,14 +2514,14 @@
   <div class="modal-overlay" id="modalSettings">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 style="font-size:14px; font-weight:700; color:#fff;">⚙️ Konfigurasi Gateway Pesan</h3>
+        <h3 style="font-size:14px; font-weight:700; color:var(--ink);">⚙️ Konfigurasi Gateway Pesan</h3>
         <button class="btn btn-sm btn-close-modal">✕</button>
       </div>
       <div class="modal-body">
         <div class="field-group">
           <label class="field-label">Fonnte API Token (WhatsApp)</label>
           <input type="text" id="cfgFonnteToken" class="field-input" placeholder="Masukkan token Fonnte Anda">
-          <div style="font-size:10px; color:#64748b;">Dapatkan token di <a href="https://fonnte.com" target="_blank" style="color:#38bdf8;">fonnte.com</a>. Jika dibiarkan kosong, sistem aman berjalan dalam Mode Simulasi & WhatsApp Direct link.</div>
+          <div style="font-size:10px; color:var(--muted);">Dapatkan token di <a href="https://fonnte.com" target="_blank" style="color:var(--accent-ink);">fonnte.com</a>. Jika dibiarkan kosong, sistem aman berjalan dalam Mode Simulasi & WhatsApp Direct link.</div>
         </div>
         <div class="field-group">
           <label class="field-label">Telegram Bot Token (Admin Alert)</label>
@@ -2281,11 +2543,11 @@
   <div class="modal-overlay" id="modalFonnteSim">
     <div class="modal-card" style="width: 580px;">
       <div class="modal-header">
-        <h3 style="font-size:14px; font-weight:700; color:#fff;">📲 Simulasi Webhook Pesan Masuk (Fonnte WA)</h3>
+        <h3 style="font-size:14px; font-weight:700; color:var(--ink);">📲 Simulasi Webhook Pesan Masuk (Fonnte WA)</h3>
         <button class="btn btn-sm btn-close-modal">✕</button>
       </div>
       <div class="modal-body">
-        <p style="font-size:12px; color:#94a3b8;">
+        <p style="font-size:12px; color:var(--muted);">
           Uji cara AI Lead Engine memproses pesan baru dari WhatsApp, mengklasifikasikan tier (Hot/Warm/Cold), mencocokkan status dengan spreadsheet, dan meracik rekomendasi balasan humanis studio.
         </p>
 
@@ -2343,7 +2605,7 @@
   <div class="modal-overlay" id="modalDayDetail">
     <div class="modal-card" style="width: 760px; max-width: 95vw;">
       <div class="modal-header">
-        <h3 id="modalDayTitle" style="font-size:14px; font-weight:700; color:#fff;">📅 Rincian Status Tanggal</h3>
+        <h3 id="modalDayTitle" style="font-size:14px; font-weight:700; color:var(--ink);">📅 Rincian Status Tanggal</h3>
         <button class="btn btn-sm btn-close-modal">✕</button>
       </div>
       <div class="modal-body">
@@ -2351,17 +2613,17 @@
           <!-- Loaded dynamically -->
         </div>
 
-        <div style="font-size:12px; font-weight:700; color:#38bdf8; margin-bottom:8px; text-transform:uppercase; display:flex; justify-content:space-between; align-items:center;">
+        <div style="font-size:12px; font-weight:700; color:var(--accent-ink); margin-bottom:8px; text-transform:uppercase; display:flex; justify-content:space-between; align-items:center;">
           <span>📋 Transaksi &amp; Booking di Log Order:</span>
-          <span id="modalDayOrdersCount" style="font-size:11px; color:#94a3b8; font-weight:400;">0 order</span>
+          <span id="modalDayOrdersCount" style="font-size:11px; color:var(--muted); font-weight:400;">0 order</span>
         </div>
         <div id="modalDayOrdersList" style="display:flex; flex-direction:column; gap:6px; max-height:220px; overflow-y:auto; margin-bottom:16px;">
           <!-- Orders loaded dynamically -->
         </div>
 
-        <div style="font-size:12px; font-weight:700; color:#a855f7; margin-bottom:8px; text-transform:uppercase; display:flex; justify-content:space-between; align-items:center;">
+        <div style="font-size:12px; font-weight:700; color:var(--accent-purple); margin-bottom:8px; text-transform:uppercase; display:flex; justify-content:space-between; align-items:center;">
           <span>💬 Leads WhatsApp &amp; Inquiries Masuk:</span>
-          <span id="modalDayLeadsCount" style="font-size:11px; color:#94a3b8; font-weight:400;">0 leads</span>
+          <span id="modalDayLeadsCount" style="font-size:11px; color:var(--muted); font-weight:400;">0 leads</span>
         </div>
         <div id="modalDayLeadsList" style="display:flex; flex-direction:column; gap:6px; max-height:180px; overflow-y:auto;">
           <!-- Leads loaded dynamically -->
@@ -3866,61 +4128,25 @@
         if (cv) cv.style.display = 'flex';
         if (ws) ws.style.display = 'none';
         if (lv) lv.style.display = 'none';
-        if (btnCal) {
-          btnCal.className = 'btn btn-sm btn-primary';
-          btnCal.style.background = '#0284c7';
-          btnCal.style.color = '#fff';
-        }
-        if (btnFlow) {
-          btnFlow.className = 'btn btn-sm';
-          btnFlow.style.background = 'transparent';
-          btnFlow.style.color = '#94a3b8';
-        }
-        if (btnLeads) {
-          btnLeads.className = 'btn btn-sm';
-          btnLeads.style.background = 'transparent';
-          btnLeads.style.color = '#94a3b8';
-        }
+        if (btnCal) { btnCal.classList.add('active'); btnCal.style.background = ''; btnCal.style.color = ''; }
+        if (btnFlow) { btnFlow.classList.remove('active'); btnFlow.style.background = ''; btnFlow.style.color = ''; }
+        if (btnLeads) { btnLeads.classList.remove('active'); btnLeads.style.background = ''; btnLeads.style.color = ''; }
         renderCalendarDashboard();
       } else if (mode === 'flow') {
         if (ws) ws.style.display = 'flex';
         if (cv) cv.style.display = 'none';
         if (lv) lv.style.display = 'none';
-        if (btnFlow) {
-          btnFlow.className = 'btn btn-sm btn-primary';
-          btnFlow.style.background = '#0284c7';
-          btnFlow.style.color = '#fff';
-        }
-        if (btnCal) {
-          btnCal.className = 'btn btn-sm';
-          btnCal.style.background = 'transparent';
-          btnCal.style.color = '#94a3b8';
-        }
-        if (btnLeads) {
-          btnLeads.className = 'btn btn-sm';
-          btnLeads.style.background = 'transparent';
-          btnLeads.style.color = '#94a3b8';
-        }
+        if (btnFlow) { btnFlow.classList.add('active'); btnFlow.style.background = ''; btnFlow.style.color = ''; }
+        if (btnCal) { btnCal.classList.remove('active'); btnCal.style.background = ''; btnCal.style.color = ''; }
+        if (btnLeads) { btnLeads.classList.remove('active'); btnLeads.style.background = ''; btnLeads.style.color = ''; }
         if (window.canvas) window.canvas.fitView();
       } else {
         if (lv) lv.style.display = 'block';
         if (ws) ws.style.display = 'none';
         if (cv) cv.style.display = 'none';
-        if (btnLeads) {
-          btnLeads.className = 'btn btn-sm btn-primary';
-          btnLeads.style.background = '#0284c7';
-          btnLeads.style.color = '#fff';
-        }
-        if (btnCal) {
-          btnCal.className = 'btn btn-sm';
-          btnCal.style.background = 'transparent';
-          btnCal.style.color = '#94a3b8';
-        }
-        if (btnFlow) {
-          btnFlow.className = 'btn btn-sm';
-          btnFlow.style.background = 'transparent';
-          btnFlow.style.color = '#94a3b8';
-        }
+        if (btnLeads) { btnLeads.classList.add('active'); btnLeads.style.background = ''; btnLeads.style.color = ''; }
+        if (btnCal) { btnCal.classList.remove('active'); btnCal.style.background = ''; btnCal.style.color = ''; }
+        if (btnFlow) { btnFlow.classList.remove('active'); btnFlow.style.background = ''; btnFlow.style.color = ''; }
         renderLeads();
       }
     }
@@ -3945,12 +4171,14 @@
 
       const btnOkt = document.getElementById('btnCalMonthOkt');
       const btnSep = document.getElementById('btnCalMonthSep');
+      if (btnOkt) { btnOkt.style.background = ''; btnOkt.style.color = ''; }
+      if (btnSep) { btnSep.style.background = ''; btnSep.style.color = ''; }
       if (currentCalMonth === '2026-10') {
-        if (btnOkt) { btnOkt.className = 'btn btn-sm btn-primary'; btnOkt.style.background = '#0284c7'; btnOkt.style.color = '#fff'; }
-        if (btnSep) { btnSep.className = 'btn btn-sm'; btnSep.style.background = 'transparent'; btnSep.style.color = '#94a3b8'; }
+        if (btnOkt) btnOkt.classList.add('active');
+        if (btnSep) btnSep.classList.remove('active');
       } else {
-        if (btnSep) { btnSep.className = 'btn btn-sm btn-primary'; btnSep.style.background = '#0284c7'; btnSep.style.color = '#fff'; }
-        if (btnOkt) { btnOkt.className = 'btn btn-sm'; btnOkt.style.background = 'transparent'; btnOkt.style.color = '#94a3b8'; }
+        if (btnSep) btnSep.classList.add('active');
+        if (btnOkt) btnOkt.classList.remove('active');
       }
 
       const state = fullStudioState || {};
@@ -4086,19 +4314,19 @@
           }
         }
 
-        let convFillColor = '#334155';
-        if (convRate >= 30) convFillColor = '#10b981';
-        else if (convRate >= 18) convFillColor = '#0284c7';
-        else if (convRate > 0) convFillColor = '#f59e0b';
+        let convFillColor = 'var(--surface4)';
+        if (convRate >= 30) convFillColor = 'var(--good)';
+        else if (convRate >= 18) convFillColor = 'var(--accent)';
+        else if (convRate > 0) convFillColor = 'var(--warn)';
 
         let bottomNote = '';
         if (!isFuture) {
-          bottomNote = `<div style="font-size:10.5px; font-weight:700; color:#fbbf24;">💰 Rp ${dayOmzet.toLocaleString('id-ID')}</div>`;
+          bottomNote = `<div class="cal-day-omzet-note">💰 Rp ${dayOmzet.toLocaleString('id-ID')}</div>`;
         } else if (dayPipeline.length > 0) {
           const potVal = dayPipeline.reduce((s, b) => s + (Number(b.harga) || 0), 0);
-          bottomNote = `<div style="font-size:10px; color:#38bdf8;">📋 Potensi Rp ${(potVal / 1000000).toFixed(1)} jt</div>`;
+          bottomNote = `<div class="cal-day-pipeline-note">📋 Potensi Rp ${(potVal / 1000000).toFixed(1)} jt</div>`;
         } else {
-          bottomNote = `<div style="font-size:10px; color:#64748b;">Belum ada jadwal</div>`;
+          bottomNote = `<div class="cal-day-empty-note">Belum ada jadwal</div>`;
         }
 
         card.innerHTML = `
@@ -4112,15 +4340,15 @@
           <div class="cal-day-metrics">
             <div class="cal-sub-col">
               <span class="sub-lbl">Leads</span>
-              <span class="sub-val" style="color:#e2e8f0;">${isFuture ? '—' : totalLeads}</span>
+              <span class="sub-val">${isFuture ? '—' : totalLeads}</span>
             </div>
             <div class="cal-sub-col">
               <span class="sub-lbl">DP Masuk</span>
-              <span class="sub-val" style="color:${totalDp > 0 ? '#34d399' : '#94a3b8'};">${isFuture ? '—' : `${totalDp} DP`}</span>
+              <span class="sub-val" style="color:${totalDp > 0 ? 'var(--good)' : 'var(--muted)'};">${isFuture ? '—' : `${totalDp} DP`}</span>
             </div>
             <div class="cal-sub-col">
               <span class="sub-lbl">Konv DP</span>
-              <span class="sub-val" style="color:${convRate >= 25 ? '#34d399' : (convRate > 0 ? '#38bdf8' : '#64748b')};">${isFuture ? '—' : convRate.toFixed(1) + '%'}</span>
+              <span class="sub-val" style="color:${convRate >= 25 ? 'var(--good)' : (convRate > 0 ? 'var(--accent-ink)' : 'var(--muted)')};">${isFuture ? '—' : convRate.toFixed(1) + '%'}</span>
             </div>
           </div>
           <div class="conv-bar" title="Konversi DP: ${convRate.toFixed(1)}%">
@@ -4196,7 +4424,7 @@
       const mNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
       const dateReadable = `${dNum} ${mNames[parseInt(dParts[1], 10) - 1]} ${dParts[0]}`;
 
-      if (titleEl) titleEl.innerHTML = `📅 Rincian Status Tanggal: <span style="color:#38bdf8;">${dateReadable}</span>`;
+      if (titleEl) titleEl.innerHTML = `📅 Rincian Status Tanggal: <span style="color:var(--accent-ink);">${dateReadable}</span>`;
 
       // Metrics calculation
       const dpOrders = dayOrders.filter(o => isDpOrder(o));
@@ -4240,19 +4468,19 @@
             <div class="kpi-val" style="font-size:19px;">${totalLeads}</div>
             <div class="kpi-sub">WhatsApp &amp; CRM Leads</div>
           </div>
-          <div class="kpi-card" style="padding:10px; border-left:3px solid #10b981;">
-            <div class="kpi-lbl" style="color:#34d399;">Booking DP Masuk</div>
-            <div class="kpi-val" style="font-size:19px; color:#34d399;">${totalDp} DP</div>
+          <div class="kpi-card" style="padding:10px; border-left:3px solid var(--good);">
+            <div class="kpi-lbl" style="color:var(--good);">Booking DP Masuk</div>
+            <div class="kpi-val" style="font-size:19px; color:var(--good);">${totalDp} DP</div>
             <div class="kpi-sub">Rp ${dpNominal.toLocaleString('id-ID')} DP terkunci</div>
           </div>
-          <div class="kpi-card" style="padding:10px; border-left:3px solid #38bdf8;">
-            <div class="kpi-lbl" style="color:#38bdf8;">Konversi DP (Closing Rate)</div>
-            <div class="kpi-val" style="font-size:19px; color:#38bdf8;">${convRate.toFixed(1)}%</div>
+          <div class="kpi-card" style="padding:10px; border-left:3px solid var(--accent);">
+            <div class="kpi-lbl" style="color:var(--accent-ink);">Konversi DP (Closing Rate)</div>
+            <div class="kpi-val" style="font-size:19px; color:var(--accent-ink);">${convRate.toFixed(1)}%</div>
             <div class="kpi-sub">${totalDp} DP dari ${totalLeads} Leads</div>
           </div>
-          <div class="kpi-card" style="padding:10px; border-left:3px solid #f59e0b;">
-            <div class="kpi-lbl" style="color:#fbbf24;">Total Realisasi Masuk</div>
-            <div class="kpi-val" style="font-size:19px; color:#fbbf24;">Rp ${dayOmzet.toLocaleString('id-ID')}</div>
+          <div class="kpi-card" style="padding:10px; border-left:3px solid var(--warn);">
+            <div class="kpi-lbl" style="color:var(--warn);">Total Realisasi Masuk</div>
+            <div class="kpi-val" style="font-size:19px; color:var(--warn);">Rp ${dayOmzet.toLocaleString('id-ID')}</div>
             <div class="kpi-sub">DP: Rp ${dpNominal.toLocaleString('id-ID')} · Lunas: Rp ${lunasNominal.toLocaleString('id-ID')}</div>
           </div>
         `;
@@ -4261,8 +4489,8 @@
       // Orders list
       if (ordCountEl) {
         const orderSummaryParts = [];
-        if (dpOrders.length > 0) orderSummaryParts.push(`<b style="color:#34d399;">${dpOrders.length} Booking DP</b>`);
-        if (lunasOrders.length > 0) orderSummaryParts.push(`<b style="color:#38bdf8;">${lunasOrders.length} Pelunasan Hari H</b>`);
+        if (dpOrders.length > 0) orderSummaryParts.push(`<b style="color:var(--good);">${dpOrders.length} Booking DP</b>`);
+        if (lunasOrders.length > 0) orderSummaryParts.push(`<b style="color:var(--accent-ink);">${lunasOrders.length} Pelunasan Hari H</b>`);
         const summaryText = orderSummaryParts.length > 0 ? orderSummaryParts.join(' & ') : `${dayOrders.length} transaksi`;
         ordCountEl.innerHTML = `${dayOrders.length} transaksi (${summaryText})${dayPipeline.length > 0 ? ` · ${dayPipeline.length} booking pipeline` : ''}`;
       }
@@ -4271,33 +4499,31 @@
           ordListEl.innerHTML = dayOrders.map(o => {
             const isDp = isDpOrder(o);
             const nominal = (Number(o.cash) || 0) + (Number(o.transfer) || 0);
-            const badgeBg = isDp ? 'rgba(16,185,129,0.15)' : 'rgba(2,132,199,0.15)';
-            const badgeBorder = isDp ? 'rgba(16,185,129,0.3)' : 'rgba(2,132,199,0.3)';
-            const badgeColor = isDp ? '#34d399' : '#38bdf8';
+            const badgeClass = isDp ? 'final' : 'prog';
             const badgeText = isDp ? '✓ Transfer DP' : (String(o.pembayaran || '').toUpperCase().includes('LUNAS') ? '💎 Lunas' : 'Cash/Pelunasan');
             const typeLabel = isDp 
-              ? '<span style="font-size:10px; color:#34d399; font-weight:600; margin-left:6px; background:rgba(16,185,129,0.12); padding:1px 6px; border-radius:3px;">[Booking DP]</span>' 
-              : '<span style="font-size:10px; color:#38bdf8; font-weight:600; margin-left:6px; background:rgba(2,132,199,0.12); padding:1px 6px; border-radius:3px;">[Pelunasan Hari H]</span>';
+              ? '<span class="pill final" style="font-size:9.5px; margin-left:6px;">Booking DP</span>' 
+              : '<span class="pill prog" style="font-size:9.5px; margin-left:6px;">Pelunasan Hari H</span>';
 
             return `
-            <div style="background:#1e293b; border:1px solid ${isDp ? '#059669' : '#334155'}; border-radius:6px; padding:9px 12px; display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <div class="modal-list-card" style="border-left: 3px solid ${isDp ? 'var(--good)' : 'var(--accent)'};">
               <div>
-                <div style="font-weight:600; color:#fff; font-size:12px; display:flex; align-items:center;">
+                <div class="item-title">
                   👤 ${escapeHtml(o.client || 'Pelanggan')} 
-                  <span style="font-size:11px; color:#38bdf8; font-weight:400; margin-left:4px;">(${escapeHtml(o.paket || 'Paket Studio')})</span>
+                  <span style="font-size:11px; color:var(--accent-ink); font-weight:400; margin-left:4px;">(${escapeHtml(o.paket || 'Paket Studio')})</span>
                   ${typeLabel}
                 </div>
-                <div style="font-size:10px; color:#94a3b8; margin-top:2px;">
-                  Admin: <b style="color:#cbd5e1;">${escapeHtml(o.admin || 'Admin')}</b>
-                  ${o.fotografer ? ` · FG: <b style="color:#cbd5e1;">${escapeHtml(o.fotografer)}</b>` : ''} 
-                  · Jadwal Sesi: <b style="color:#e2e8f0;">${escapeHtml(o.tanggalFoto || o.tanggal || '—')}</b>
+                <div class="item-sub">
+                  Admin: <b>${escapeHtml(o.admin || 'Admin')}</b>
+                  ${o.fotografer ? ` · FG: <b>${escapeHtml(o.fotografer)}</b>` : ''} 
+                  · Jadwal Sesi: <b>${escapeHtml(o.tanggalFoto || o.tanggal || '—')}</b>
                 </div>
               </div>
               <div style="text-align:right;">
-                <div style="font-weight:700; color:${isDp ? '#34d399' : '#38bdf8'}; font-size:12.5px;">
+                <div class="item-amount" style="color:${isDp ? 'var(--good)' : 'var(--accent-ink)'};">
                   Rp ${nominal.toLocaleString('id-ID')}
                 </div>
-                <span class="pill" style="font-size:9px; padding:2px 7px; background:${badgeBg}; color:${badgeColor}; border:1px solid ${badgeBorder}; border-radius:4px;">
+                <span class="pill ${badgeClass}" style="font-size:9px; padding:2px 7px;">
                   ${badgeText}
                 </span>
               </div>
@@ -4307,29 +4533,29 @@
         } else if (dayPipeline.length > 0) {
           const totPot = dayPipeline.reduce((s, b) => s + (Number(b.harga) || 0), 0);
           ordListEl.innerHTML = `
-            <div style="background:rgba(14,165,233,0.1); border:1px solid rgba(14,165,233,0.3); border-radius:6px; padding:10px; margin-bottom:6px;">
-              <div style="font-weight:600; color:#38bdf8; font-size:12px;">📌 ${dayPipeline.length} Booking Terdaftar di Schedule</div>
-              <div style="font-size:11px; color:#94a3b8; margin-top:2px;">Total Potensi Omzet: <b>Rp ${totPot.toLocaleString('id-ID')}</b></div>
+            <div style="background:var(--accent-soft); border:1px solid rgba(56,189,248,0.3); border-radius:6px; padding:10px; margin-bottom:6px;">
+              <div style="font-weight:600; color:var(--accent-ink); font-size:12px;">📌 ${dayPipeline.length} Booking Terdaftar di Schedule</div>
+              <div style="font-size:11px; color:var(--muted); margin-top:2px;">Total Potensi Omzet: <b style="color:var(--ink);">Rp ${totPot.toLocaleString('id-ID')}</b></div>
             </div>
             ${dayPipeline.slice(0, 15).map(b => `
-              <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:8px 12px; display:flex; justify-content:space-between; align-items:center;">
+              <div class="modal-list-card" style="border-left: 3px solid var(--accent-purple);">
                 <div>
-                  <div style="font-weight:600; color:#fff; font-size:12px;">
+                  <div class="item-title">
                     🎓 ${escapeHtml(b.nama || 'Client')} 
-                    <span style="font-size:10px; color:#a855f7;">(${escapeHtml(b.paket || 'Wisuda UMP')})</span>
+                    <span style="font-size:10px; color:var(--accent-purple);">(${escapeHtml(b.paket || 'Wisuda UMP')})</span>
                   </div>
-                  <div style="font-size:10px; color:#94a3b8;">Jam ${escapeHtml(b.waktu || '—')} · ${escapeHtml(b.studio || 'Studio')}</div>
+                  <div class="item-sub">Jam ${escapeHtml(b.waktu || '—')} · ${escapeHtml(b.studio || 'Studio')}</div>
                 </div>
                 <div style="text-align:right;">
-                  <div style="font-weight:700; color:#fbbf24; font-size:12px;">Rp ${(Number(b.harga) || 0).toLocaleString('id-ID')}</div>
+                  <div class="item-amount" style="color:var(--warn);">Rp ${(Number(b.harga) || 0).toLocaleString('id-ID')}</div>
                   <span class="pill prog" style="font-size:9px;">Terkunci di Schedule</span>
                 </div>
               </div>
             `).join('')}
-            ${dayPipeline.length > 15 ? `<div style="text-align:center; font-size:10.5px; color:#94a3b8; padding:4px;">...dan ${dayPipeline.length - 15} booking lainnya</div>` : ''}
+            ${dayPipeline.length > 15 ? `<div style="text-align:center; font-size:10.5px; color:var(--muted); padding:4px;">...dan ${dayPipeline.length - 15} booking lainnya</div>` : ''}
           `;
         } else {
-          ordListEl.innerHTML = `<div style="padding:14px; text-align:center; color:#64748b; font-size:12px;">Tidak ada transaksi Log Order tercatat pada tanggal ini.</div>`;
+          ordListEl.innerHTML = `<div style="padding:14px; text-align:center; color:var(--muted); font-size:12px;">Tidak ada transaksi Log Order tercatat pada tanggal ini.</div>`;
         }
       }
 
@@ -4344,14 +4570,14 @@
             else if (l.tier === 'CLOSED') tClass = 'pill-closed';
 
             return `
-              <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:9px 12px; display:flex; justify-content:space-between; align-items:center;">
+              <div class="modal-list-card">
                 <div style="flex:1; padding-right:12px;">
-                  <div style="font-weight:600; color:#fff; font-size:12px; display:flex; align-items:center; gap:6px;">
+                  <div class="item-title" style="gap:6px;">
                     <span>${escapeHtml(l.display_name)}</span>
                     <span class="pill ${tClass}" style="font-size:9px; padding:1px 6px;">${l.tier}</span>
-                    <span style="font-size:10px; color:#94a3b8;">(Admin: ${l.admin})</span>
+                    <span style="font-size:10px; color:var(--muted);">(Admin: ${l.admin})</span>
                   </div>
-                  <div style="font-size:10.5px; color:#cbd5e1; margin-top:3px; font-style:italic;">
+                  <div style="font-size:10.5px; color:var(--ink2); margin-top:3px; font-style:italic;">
                     "${escapeHtml(l.last_customer_msg || l.summary || '')}"
                   </div>
                 </div>
@@ -4360,7 +4586,7 @@
                     ${l.status === 'CONVERTED' ? '✓ Closing DP' : 'Belum Konversi'}
                   </span>
                   <div style="margin-top:4px;">
-                    <button class="btn btn-sm" style="font-size:9.5px; padding:2px 7px; background:rgba(2,132,199,0.2); border-color:#0284c7; color:#38bdf8;" onclick="document.getElementById('modalDayDetail').classList.remove('active'); switchAppMode('leads');">
+                    <button class="btn btn-sm btn-outline-cyan" style="font-size:9.5px; padding:2px 7px;" onclick="document.getElementById('modalDayDetail').classList.remove('active'); switchAppMode('leads');">
                       Buka Draft AI
                     </button>
                   </div>
@@ -4370,14 +4596,14 @@
           }).join('');
         } else if (totalLeads > 0) {
           leadListEl.innerHTML = `
-            <div style="padding:12px; background:#1e293b; border-radius:6px; border:1px solid #334155; color:#cbd5e1; font-size:11.5px; line-height:1.6;">
-              📊 <b>Ringkasan Leads Resmi Studio:</b><br>
-              Tercatat <b>${totalLeads} calon leads masuk</b> via pesan WhatsApp/inquiry pada tanggal ini.<br>
-              Dari traffic tersebut, <b>${totalDp} klien berhasil konversi DP</b> dengan closing rate <b>${convRate.toFixed(1)}%</b>.
+            <div style="padding:12px; background:var(--surface2); border-radius:6px; border:1px solid var(--hairline); color:var(--ink2); font-size:11.5px; line-height:1.6;">
+              📊 <b style="color:var(--ink);">Ringkasan Leads Resmi Studio:</b><br>
+              Tercatat <b style="color:var(--ink);">${totalLeads} calon leads masuk</b> via pesan WhatsApp/inquiry pada tanggal ini.<br>
+              Dari traffic tersebut, <b style="color:var(--good);">${totalDp} klien berhasil konversi DP</b> dengan closing rate <b style="color:var(--accent-ink);">${convRate.toFixed(1)}%</b>.
             </div>
           `;
         } else {
-          leadListEl.innerHTML = `<div style="padding:14px; text-align:center; color:#64748b; font-size:12px;">Tidak ada riwayat leads WhatsApp tercatat pada tanggal ini.</div>`;
+          leadListEl.innerHTML = `<div style="padding:14px; text-align:center; color:var(--muted); font-size:12px;">Tidak ada riwayat leads WhatsApp tercatat pada tanggal ini.</div>`;
         }
       }
 
@@ -5028,7 +5254,7 @@
             </div>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; flex-wrap:wrap; gap:8px;">
               <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-                <button class="btn btn-sm" onclick="copyDraftToClipboard('${lead.id}')" style="background:#1e293b; color:#38bdf8; border:1px solid rgba(56,189,248,0.4);" title="Salin draf ke clipboard">
+                <button class="btn btn-sm" onclick="copyDraftToClipboard('${lead.id}')" style="background:var(--surface2); color:var(--accent-ink); border:1px solid var(--hairline-strong);" title="Salin draf ke clipboard">
                   📋 Salin Draft
                 </button>
                 <a href="${waLink}" target="_blank" class="btn btn-sm" style="background:#25d366; color:#000; font-weight:700; border:none; text-decoration:none;" title="Buka WhatsApp Web">
@@ -5170,13 +5396,13 @@
 
           let priorityTag = '';
           if (lead.tier === 'HOT') {
-            priorityTag = '<span style="font-size:10px; font-weight:700; color:#ef4444; background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.3); padding:2px 6px; border-radius:4px; margin-right:4px;">🔥 PRIORITAS #1</span>';
+            priorityTag = '<span style="font-size:10px; font-weight:700; color:var(--crit); background:var(--crit-bg); border:1px solid rgba(220,38,38,0.3); padding:2px 6px; border-radius:4px; margin-right:4px;">🔥 PRIORITAS #1</span>';
           } else if (lead.tier === 'WARM') {
-            priorityTag = '<span style="font-size:10px; font-weight:700; color:#eab308; background:rgba(234,179,8,0.12); border:1px solid rgba(234,179,8,0.3); padding:2px 6px; border-radius:4px; margin-right:4px;">⚡ KONSULTASI</span>';
+            priorityTag = '<span style="font-size:10px; font-weight:700; color:var(--warn); background:var(--warn-bg); border:1px solid rgba(180,83,9,0.3); padding:2px 6px; border-radius:4px; margin-right:4px;">⚡ KONSULTASI</span>';
           } else if (lead.tier === 'COLD') {
-            priorityTag = '<span style="font-size:10px; font-weight:700; color:#38bdf8; background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.3); padding:2px 6px; border-radius:4px; margin-right:4px;">❄️ NURTURE</span>';
+            priorityTag = '<span style="font-size:10px; font-weight:700; color:var(--accent-ink); background:var(--accent-soft); border:1px solid rgba(56,189,248,0.3); padding:2px 6px; border-radius:4px; margin-right:4px;">❄️ NURTURE</span>';
           } else if (isDone) {
-            priorityTag = '<span style="font-size:10px; font-weight:700; color:#22c55e; background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); padding:2px 6px; border-radius:4px; margin-right:4px;">✅ SUDAH DONE</span>';
+            priorityTag = '<span style="font-size:10px; font-weight:700; color:var(--good); background:var(--good-bg); border:1px solid rgba(21,128,61,0.3); padding:2px 6px; border-radius:4px; margin-right:4px;">✅ SUDAH DONE</span>';
           }
 
           html += `
@@ -5228,9 +5454,9 @@
       const lead = leadsData.find(l => l.id === selectedLeadId);
       if (!lead) {
         container.innerHTML = `
-          <div style="text-align:center; padding:36px 20px; color:#94a3b8; background:#141c28; border-radius:8px;">
+          <div style="text-align:center; padding:36px 20px; color:var(--muted); background:var(--surface2); border:1px solid var(--hairline); border-radius:8px;">
             <div style="font-size:28px; margin-bottom:8px;">💬</div>
-            <div style="font-size:14px; font-weight:700; color:#fff;">Belum Ada Klien Dipilih</div>
+            <div style="font-size:14px; font-weight:700; color:var(--ink);">Belum Ada Klien Dipilih</div>
             <div style="font-size:12px; margin-top:4px;">Klik salah satu kartu calon klien pada daftar di atas untuk membuka riwayat chat dan draf balasan AI.</div>
           </div>
         `;
@@ -5249,7 +5475,7 @@
 
       let historyBubbles = '';
       if (history.length === 0) {
-        historyBubbles = '<div style="color:#64748b; font-size:12px; text-align:center; padding:30px;">Belum ada riwayat balon chat untuk klien ini.</div>';
+        historyBubbles = '<div style="color:var(--muted); font-size:12px; text-align:center; padding:30px;">Belum ada riwayat balon chat untuk klien ini.</div>';
       } else {
         history.forEach(m => {
           const isCust = m.sender === 'customer';
@@ -5272,7 +5498,7 @@
               </div>
               <div class="chat-bubble-time">
                 <span>${escapeHtml(timeStr)}</span>
-                ${!isCust ? '<span style="color:#38bdf8; font-weight:700;">✓✓</span>' : ''}
+                ${!isCust ? '<span style="color:var(--accent-ink); font-weight:700;">✓✓</span>' : ''}
               </div>
             </div>
           `;
@@ -5282,8 +5508,8 @@
       container.innerHTML = `
         <div class="chat-workspace-header">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-            <div style="font-size:15px; font-weight:700; color:#fff; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-              <span>💬 Ruang Chat: <span style="color:#38bdf8;">${escapeHtml(lead.display_name)}</span></span>
+            <div style="font-size:15px; font-weight:700; color:var(--ink); display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <span>💬 Ruang Chat: <span style="color:var(--accent-ink);">${escapeHtml(lead.display_name)}</span></span>
               ${(() => {
                 const lp = getLeadPaket(lead);
                 return `<span class="lead-paket-pill paket-${lp.key.toLowerCase()}" style="font-size:11px; padding:3px 9px;">🏷️ Paket: ${lp.icon} ${lp.name}</span>`;
@@ -5299,14 +5525,14 @@
             <span class="pill ${isClosed ? 'final' : 'bad'}" style="font-size:10px;">
               ${isClosed ? 'TERKONVERSI' : 'BELUM DP'}
             </span>
-            <button class="btn btn-sm" onclick="openLeadChatModal('${lead.id}')" style="font-size:10.5px; padding:2px 8px; background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.35);" title="Buka riwayat chat dalam tampilan pop-up modal">
+            <button class="btn btn-sm" onclick="openLeadChatModal('${lead.id}')" style="font-size:10.5px; padding:2px 8px; background:var(--accent-soft); color:var(--accent-ink); border:1px solid rgba(56,189,248,0.35);" title="Buka riwayat chat dalam tampilan pop-up modal">
               🔍 Mode Pop-up Modal
             </button>
           </div>
 
           <div style="text-align:right;">
-            <span style="font-size:11px; color:#94a3b8;">Potensi Omzet:</span>
-            <span style="font-size:14px; font-weight:700; color:#c084fc; margin-left:4px;">
+            <span style="font-size:11px; color:var(--muted);">Potensi Omzet:</span>
+            <span style="font-size:14px; font-weight:700; color:var(--accent-purple); margin-left:4px;">
               Rp ${(Number(lead.estimated_value) || 0).toLocaleString('id-ID')}
             </span>
           </div>
@@ -5315,9 +5541,9 @@
         <div class="chat-workspace-grid">
           <!-- SISI KIRI: RIWAYAT CHAT LENGKAP -->
           <div>
-            <div style="font-size:11.5px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; display:flex; justify-content:space-between;">
+            <div style="font-size:11.5px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; display:flex; justify-content:space-between;">
               <span>💬 Riwayat Percakapan WhatsApp (${history.length} Pesan)</span>
-              <span style="color:#64748b; font-weight:400;">${lead.last_message_at || lead.created_at || 'Hari ini'}</span>
+              <span style="color:var(--muted); font-weight:400;">${lead.last_message_at || lead.created_at || 'Hari ini'}</span>
             </div>
             <div class="chat-conversation-pane" id="workspaceChatPane">
               <div class="chat-date-pill">📅 Percakapan Aktif · ${escapeHtml((lead.created_at || '').slice(0, 10))}</div>
@@ -5327,7 +5553,7 @@
 
           <!-- SISI KANAN: AI RECOMMENDATION DRAFT & OPERASIONAL -->
           <div class="ai-workspace-pane">
-            <div style="font-size:11.5px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:0.5px;">
+            <div style="font-size:11.5px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px;">
               <span>🤖 Rekomendasi Balasan AI (Human Tone Studio)</span>
             </div>
 
@@ -5340,13 +5566,13 @@
             <div class="ai-draft-container">
               <div class="ai-draft-header">
                 <span>Draf Rekomendasi Siap Kirim</span>
-                <span style="color:#94a3b8; font-weight:400; font-size:10px;">Bebas Halusinasi · No Slop</span>
+                <span style="color:var(--muted); font-weight:400; font-size:10px;">Bebas Halusinasi · No Slop</span>
               </div>
               <div class="ai-draft-text" id="draft-text-${lead.id}">
                 "${escapeHtml(lead.ai_recommendation || 'Halo kak, ada yang bisa kami bantu kembali seputar paket foto di Foxe Studio? 🙏')}"
               </div>
               <div class="ai-draft-actions">
-                <button class="btn btn-sm" onclick="copyDraftToClipboard('${lead.id}')" style="background:#1e293b; color:#38bdf8; border:1px solid rgba(56,189,248,0.4);" title="Salin draf ke clipboard">
+                <button class="btn btn-sm" onclick="copyDraftToClipboard('${lead.id}')" style="background:var(--surface2); color:var(--accent-ink); border:1px solid var(--hairline-strong);" title="Salin draf ke clipboard">
                   📋 Salin Draft
                 </button>
                 <a href="${waLink}" target="_blank" class="btn btn-sm" style="background:#25d366; color:#000; font-weight:700; border:none; text-decoration:none;" title="Buka WhatsApp Web">
