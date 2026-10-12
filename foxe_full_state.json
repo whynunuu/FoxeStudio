@@ -53100,6 +53100,19 @@
       "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": ""
+    },
+    {
+      "id": "or_234",
+      "tanggal": "2026-10-12",
+      "client": "OSIS SMPN 2 PWT",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-18",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -65033,9 +65046,9 @@
       "id": "ld_12",
       "tanggal": "2026-10-12",
       "leads": 0.0,
-      "dp": 1.0,
+      "dp": 2.0,
       "sesiFoto": 3.0,
-      "transaksi": 4.0
+      "transaksi": 5.0
     }
   ],
   "kpi": [
@@ -76778,7 +76791,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 50605000.0
+        "omzet": 50705000.0
       }
     ]
   },
@@ -77126,6 +77139,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261012-0743",
+      "mulai": "2026-10-12T07:43:53.473246+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 234 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 94 pos pengeluaran Neraca, 190 pipeline Okt."
+    },
     {
       "id": "sy_20261012-1335",
       "mulai": "2026-10-12T06:35:20.481642+00:00",
@@ -77991,7 +78010,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-12T06:35:20.481642+00:00"
+    "last_sync": "2026-10-12T07:43:53.473246+00:00"
   },
   "neracaDetail": [
     {
@@ -78555,15 +78574,15 @@
     "bulan": "2026-10",
     "totalBookings": 190,
     "potentialOmzet": 63125000.0,
-    "totalDp": 16650000.0,
-    "estimateCashIn": 7175000.0,
-    "remainingCashIn": 7175000.0,
-    "totalPipelineCashIn": 46475000.0,
+    "totalDp": 16750000.0,
+    "estimateCashIn": 6975000.0,
+    "remainingCashIn": 6975000.0,
+    "totalPipelineCashIn": 46375000.0,
     "breakdown": {
       "reguler": {
         "sesi": 91,
         "nilai": 26975000.0,
-        "dp": 7400000.0
+        "dp": 7500000.0
       },
       "wisudaDay1": {
         "sesi": 47,
@@ -78578,16 +78597,16 @@
     },
     "statusBreakdown": {
       "done": {
-        "sesi": 155,
-        "nilai": 50600000.0,
-        "dp": 13650000.0,
-        "cashIn": 37100000.0
+        "sesi": 156,
+        "nilai": 50800000.0,
+        "dp": 13750000.0,
+        "cashIn": 37200000.0
       },
       "confirmed": {
-        "sesi": 26,
-        "nilai": 9275000.0,
+        "sesi": 25,
+        "nilai": 9075000.0,
         "dp": 2100000.0,
-        "cashIn": 7175000.0
+        "cashIn": 6975000.0
       },
       "reschedule": {
         "sesi": 9,
@@ -80236,12 +80255,12 @@
         "admin": "IN",
         "noHp": "dp 100 limbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 100000.0,
@@ -80559,7 +80578,7 @@
         "jmlOrang": 37,
         "harga": 925000.0,
         "admin": "IN",
-        "noHp": "",
+        "noHp": "dp100",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -80568,8 +80587,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 925000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 825000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -86718,6 +86737,19 @@
         "pembayaran": "Lunas",
         "admin": "INDAH",
         "fotografer": ""
+      },
+      {
+        "id": "or_234",
+        "tanggal": "2026-10-12",
+        "client": "OSIS SMPN 2 PWT",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-18",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -87248,9 +87280,9 @@
         "id": "ld_12",
         "tanggal": "2026-10-12",
         "leads": 0.0,
-        "dp": 1.0,
+        "dp": 2.0,
         "sesiFoto": 3.0,
-        "transaksi": 4.0
+        "transaksi": 5.0
       },
       {
         "id": "ld_13",
@@ -146245,12 +146277,12 @@
         "admin": "IN",
         "noHp": "dp 100 limbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 100000.0,
@@ -146568,7 +146600,7 @@
         "jmlOrang": 37,
         "harga": 925000.0,
         "admin": "IN",
-        "noHp": "",
+        "noHp": "dp100",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -146577,8 +146609,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 925000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 825000.0,
         "kategori": "Studio Reguler"
       },
       {
