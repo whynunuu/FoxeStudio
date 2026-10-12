@@ -225,6 +225,30 @@ Jika USER mengirimkan instruksi **"ayo kerja"** (atau "update data", "sinkronkan
     4. ✅ **SUDAH DONE / CLOSED** (Prioritas #4 / Paling Bawah: Transaksi deal/lunas atau DP terverifikasi di kasir Log Order). Klien yang sudah selesai WAJIB diletakkan di urutan terbawah agar admin tidak terdistraksi dan tidak salah follow-up orang yang sudah deal.
   - **Auto-Sync Real-Time**: Antarmuka CRM (`flow.html`) dilengkapi background polling otomatis setiap 30 detik (`loadStudioData()` & `loadLeadsData()`) serta pembaruan instan pada event `visibilitychange` (saat admin kembali membuka/fokus ke tab). Setiap eksekusi `python deep_sync_foxe.py` otomatis menjalankan `reconcile_and_clean_leads()` untuk mencocokkan mutasi kasir Google Sheets ke data prospek.
 
+### 18. Standar Integritas Data 100% Riil & Larangan Keras Fabrikasi (Eksplisit Penanda Rekomendasi AI):
+- **ATURAN MUTLAK DATA 100% RIIL (Zero-Fabrication / Anti-Ngarang)**:
+  - Seluruh data yang disajikan di aplikasi (Dashboard Keuangan `index.html` dan CRM Studio `flow.html`) **WAJIB 100% BERASAL DARI SUMBER RESMI TERVERIFIKASI**:
+    * Log Order Kasir (`file1.xlsm`, `file1_okt.xlsm`),
+    * Neraca Keuangan (`file_neraca.xlsx`),
+    * Jadwal Studio & Wisuda (`file2.xlsx`, `file2_okt.xlsx`, `file_wisuda_*.xlsx`),
+    * Webhook WhatsApp Resmi Fonnte Inbound (`leads_vault.json`, `leads_vault_private.json`).
+  - **DILARANG KERAS** mengarang, memalsukan, atau membuat pesan obrolan fiktif seolah-olah itu adalah chat yang dikirim oleh klien asli atau admin.
+- **Standarisasi Penanda Rekomendasi Saran AI (Explicit Labelling)**:
+  - Jika sistem menyajikan saran balasan, prediksi, atau draf pesan yang dihasilkan oleh AI Engine (Google Gemini / prompt lokal):
+    * **WAJIB SECARA EKSPLISIT DITANDAI SEBAGAI REKOMENDASI / DRAF SARAN**:
+      - Badge Utama: `💡 REKOMENDASI SARAN JAWABAN AI`
+      - Badge Status: `⚠️ DRAF SARAN — BELUM TERKIRIM`
+      - Sub-label penjelas: *"Saran balasan otomatis untuk Admin agar respons cepat tanpa ketik manual. Klik 'Balas di WA Web' untuk mengirimkan pesan ini ke WhatsApp klien."*
+    * **DILARANG KERAS** menyamarkan draf AI seolah-olah merupakan percakapan yang sudah terkirim atau sudah disetujui klien.
+- **Standar Pembeda Balon Chat di Semua Tampilan (Universal Transparency)**:
+  - Di seluruh dialog modal chat dan panel workspace:
+    * Balon pesan masuk dari pelanggan **WAJIB** dilabeli: `🟢 ASLI DARI KLIEN` (dengan stempel waktu nyata dan nomor terverifikasi).
+    * Balon balasan kontekstual studio **WAJIB** dilabeli: `💬 Konteks Balasan`.
+    * Setiap kontak wajib dilengkapi tombol **`🔍 Log Pesan Riil (Raw Inbound)`** agar pemilik studio dapat menginspeksi secara instan teks murni apa adanya yang diterima dari server webhook Fonnte tanpa rekonstruksi apapun.
+- **Aturan Immutability (Jangan Ganti atau Remake)**:
+  - Aturan ini bersifat mengikat dan permanen bagi seluruh agent dan sesi pengembangan mendatang. Aturan ini DILARANG diubah, diremake, atau diabaikan.
+
+
 
 
 
