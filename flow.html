@@ -1,7 +1,13 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
   <meta charset="UTF-8">
+  <script>
+    try {
+      const t = localStorage.getItem("foxe_studio_theme") || sessionStorage.getItem("foxe_studio_theme") || "dark";
+      document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+    } catch(e) {}
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Foxe Flow — Visual Admin Automation (n8n Engine)</title>
   <link rel="icon" type="image/png" href="logo_foxe.png">
@@ -9,23 +15,88 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
   <style>
+    /* ============================================================
+       Foxe Studio CRM — Executive Formal Visual Design System
+       Dual-Theme System (Executive Formal Dark & Executive Crisp Light)
+       Modeled after modern executive analytics BI (Value Analytics style).
+       ============================================================ */
     :root {
-      --bg-canvas: #0b0f17;
-      --bg-sidebar: #111722;
-      --bg-card: #16202e;
-      --border-subtle: #223043;
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      --accent-blue: #0284c7;
-      --accent-cyan: #06b6d4;
+      /* FOXE CRM — EXECUTIVE LIGHT THEME */
+      --canvas: #eef2f8;
+      --surface: #ffffff;
+      --surface2: #f6f8fc;
+      --surface3: #edf1f8;
+      --surface4: #e1e7f3;
+      --hairline: #e2e8f2;
+      --hairline-soft: #edf2f8;
+      --hairline-strong: #cbd5e5;
+      --ink: #111827;
+      --ink2: #374151;
+      --ink-strong: #030712;
+      --muted: #6b7280;
+      --muted-soft: #9ca3af;
+      --accent: #2563eb;
+      --accent-ink: #1d4ed8;
+      --accent-soft: #eff6ff;
+      --on-accent: #ffffff;
+
+      --bg-canvas: var(--canvas);
+      --bg-sidebar: var(--surface);
+      --bg-card: var(--surface);
+      --border-subtle: var(--hairline);
+      --text-primary: var(--ink);
+      --text-secondary: var(--ink2);
+      --text-muted: var(--muted);
+
+      --accent-blue: #2563eb;
+      --accent-cyan: #0284c7;
       --accent-green: #10b981;
-      --accent-wa: #25d366;
-      --accent-purple: #8b5cf6;
-      --accent-amber: #f59e0b;
+      --accent-wa: #16a34a;
+      --accent-purple: #7c3aed;
+      --accent-amber: #d97706;
       --accent-orange: #ea580c;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-mono: 'JetBrains Mono', Consolas, Monaco, monospace;
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --shadow: 0 4px 18px rgba(17, 24, 39, 0.05);
+    }
+
+    :root[data-theme="dark"], html[data-theme="dark"] {
+      /* FOXE CRM — EXECUTIVE DARK THEME */
+      --canvas: #0f1322;
+      --surface: #181d33;
+      --surface2: #1f2540;
+      --surface3: #262e4d;
+      --surface4: #2f385c;
+      --hairline: #262e49;
+      --hairline-soft: #1e243b;
+      --hairline-strong: #364065;
+      --ink: #f8fafc;
+      --ink2: #cbd5e1;
+      --ink-strong: #ffffff;
+      --muted: #8e9bb5;
+      --muted-soft: #626d85;
+      --accent: #3b82f6;
+      --accent-ink: #60a5fa;
+      --accent-soft: rgba(59, 130, 246, 0.16);
+      --on-accent: #ffffff;
+
+      --bg-canvas: var(--canvas);
+      --bg-sidebar: var(--surface);
+      --bg-card: var(--surface);
+      --border-subtle: var(--hairline);
+      --text-primary: var(--ink);
+      --text-secondary: var(--ink2);
+      --text-muted: var(--muted);
+
+      --accent-blue: #3b82f6;
+      --accent-cyan: #38bdf8;
+      --accent-green: #10b981;
+      --accent-wa: #25d366;
+      --accent-purple: #a855f7;
+      --accent-amber: #f59e0b;
+      --accent-orange: #f97316;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
@@ -1253,49 +1324,55 @@
     /* ---------- FOXE FLOW PIN LOCK SCREEN ---------- */
     .lock-screen {
       position: fixed; inset: 0; z-index: 99999;
-      background: radial-gradient(circle at 50% 35%, #1e1d1a 0%, #0c0b0a 100%);
+      background: var(--canvas);
       display: flex; align-items: center; justify-content: center; padding: 24px 16px;
-      overflow-y: auto;
+      overflow-y: auto; transition: background .2s ease;
     }
     .lock-card {
-      width: 100%; max-width: 360px; margin: auto; background: #1a1917;
-      border: 1px solid rgba(0,128,200,0.4);
-      box-shadow: 0 24px 48px rgba(0,0,0,0.8), 0 0 24px rgba(0,128,200,0.15);
-      border-radius: 24px; padding: 32px 24px; text-align: center; color: #faf9f5;
+      width: 100%; max-width: 360px; margin: auto; background: var(--surface);
+      border: 1px solid var(--hairline);
+      box-shadow: var(--shadow);
+      border-radius: 20px; padding: 32px 24px; text-align: center; color: var(--ink);
       animation: lockFadeIn .25s ease-out;
     }
-    @keyframes lockFadeIn { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-    .lock-logo { margin-bottom: 14px; display: inline-flex; filter: drop-shadow(0 2px 10px rgba(0,128,200,0.45)); }
-    .lock-subtitle { font-size: 13px; color: #a09d96; margin-bottom: 12px; }
+    @keyframes lockFadeIn { from { opacity: 0; transform: scale(0.96) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .lock-logo { margin-bottom: 14px; display: inline-flex; }
+    .lock-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
     .lock-badge {
       display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase;
-      padding: 3px 12px; border-radius: 9999px; background: rgba(0,128,200,0.18); color: #0080c8;
-      border: 1px solid rgba(0,128,200,0.4); margin-bottom: 22px;
+      padding: 3px 12px; border-radius: 9999px; background: var(--surface2); color: var(--muted);
+      border: 1px solid var(--hairline); margin-bottom: 22px;
     }
     .pin-display { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; }
     .pin-display .dot {
-      width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgba(160,157,150,0.4);
+      width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--hairline-strong);
       background: transparent; transition: all .18s cubic-bezier(0.16,1,0.3,1);
     }
     .pin-display .dot.filled {
-      background: #0080c8; border-color: #0080c8; box-shadow: 0 0 12px rgba(0,128,200,0.8); transform: scale(1.15);
+      background: var(--accent); border-color: var(--accent); box-shadow: 0 0 8px var(--accent); transform: scale(1.15);
     }
     .pin-display.shake { animation: pinShake .45s cubic-bezier(0.36,0.07,0.19,0.97); }
     @keyframes pinShake { 10%,90%{transform:translate3d(-3px,0,0)} 20%,80%{transform:translate3d(5px,0,0)} 30%,50%,70%{transform:translate3d(-6px,0,0)} 40%,60%{transform:translate3d(6px,0,0)} }
     .pin-hidden-input { position: absolute; opacity: 0; pointer-events: none; }
-    .lock-error { color: #e07a68; font-size: 12.5px; font-weight: 500; margin-top: -8px; margin-bottom: 14px; min-height: 18px; }
+    .lock-error { color: var(--accent-orange); font-size: 12.5px; font-weight: 500; margin-top: -8px; margin-bottom: 14px; min-height: 18px; }
     .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
     .key-btn {
-      background: rgba(37,35,32,0.85); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
-      padding: 13px 0; font-size: 19px; font-weight: 600; color: #faf9f5; cursor: pointer;
+      background: var(--surface2); border: 1px solid var(--hairline); border-radius: 12px;
+      padding: 13px 0; font-size: 19px; font-weight: 600; color: var(--ink); cursor: pointer;
       transition: all .12s ease; user-select: none; -webkit-user-select: none;
     }
-    .key-btn:hover { background: rgba(52,50,45,0.95); border-color: rgba(0,128,200,0.45); }
-    .key-btn:active { transform: scale(0.92); background: #0080c8; color: #fff; }
-    .key-btn.action-btn { font-size: 16px; color: #a09d96; }
-    .key-btn.ok-btn { background: rgba(0,128,200,0.25); color: #0080c8; border-color: rgba(0,128,200,0.45); }
-    .key-btn.ok-btn:active { background: #0080c8; color: #fff; }
-    .lock-footer { font-size: 11.5px; color: #6c6a64; }
+    .key-btn:hover { background: var(--surface3); border-color: var(--hairline-strong); }
+    .key-btn:active { transform: scale(0.92); background: var(--accent); color: var(--on-accent); }
+    .key-btn.action-btn { font-size: 16px; color: var(--muted); }
+    .key-btn.ok-btn { background: var(--accent-soft); color: var(--accent); border-color: color-mix(in srgb,var(--accent) 40%,transparent); }
+    .key-btn.ok-btn:active { background: var(--accent); color: var(--on-accent); }
+    .btn-back-to-gate {
+      background: var(--surface2); border: 1px solid var(--hairline); color: var(--muted);
+      font-size: 12.5px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 8px; margin-top: 14px; transition: all .2s ease; text-decoration: none;
+    }
+    .btn-back-to-gate:hover { color: var(--ink); background: var(--surface3); border-color: var(--hairline-strong); }
+    .lock-footer { font-size: 11.5px; color: var(--muted-soft); }
 
   </style>
 </head>
@@ -1338,12 +1415,12 @@
     </div>
 
     <div style="margin-top:14px">
-      <a href="index.html" class="btn-back-to-gate" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#a09d96;padding:8px 16px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);transition:all .2s ease;">
+      <a href="index.html" class="btn-back-to-gate">
         ← Kembali ke Pilihan Portal
       </a>
     </div>
 
-    <p class="lock-footer" style="font-size:11.5px;color:#a09d96;margin-top:12px;">Akses internal khusus Tim Operasional Foxe Studio</p>
+    <p class="lock-footer" style="margin-top:12px;">Akses internal khusus Tim Operasional Foxe Studio</p>
   </div>
 </div>
 
@@ -1371,13 +1448,16 @@
       </div>
 
       <div class="mode-switcher" style="display:inline-flex; background:rgba(255,255,255,0.06); border-radius:8px; padding:2px; border:1px solid var(--border-subtle); margin-left:8px;">
-        <button id="btnTabCalendar" class="btn btn-sm btn-primary" style="margin:0; border-radius:6px; font-weight:600; font-size:11.5px; background:#0284c7; color:#fff;">📅 Kalender Harian</button>
-        <button id="btnTabFlow" class="btn btn-sm" style="margin:0; background:transparent; border-color:transparent; color:#94a3b8; border-radius:6px; font-weight:600; font-size:11.5px;">⚡ Alur Node n8n</button>
-        <button id="btnTabLeads" class="btn btn-sm" style="margin:0; background:transparent; border-color:transparent; color:#94a3b8; border-radius:6px; font-weight:600; font-size:11.5px;">📚 Pustaka Leads &amp; AI Draft <span id="leadsUnconvertedBadge" style="background:#ef4444; color:#fff; font-size:9.5px; padding:1px 5px; border-radius:10px; margin-left:4px;">6</span></button>
+        <button id="btnTabCalendar" class="btn btn-sm btn-primary" style="margin:0; border-radius:6px; font-weight:600; font-size:11.5px; background:var(--accent); color:var(--on-accent);">📅 Kalender Harian</button>
+        <button id="btnTabFlow" class="btn btn-sm" style="margin:0; background:transparent; border-color:transparent; color:var(--text-muted); border-radius:6px; font-weight:600; font-size:11.5px;">⚡ Alur Node n8n</button>
+        <button id="btnTabLeads" class="btn btn-sm" style="margin:0; background:transparent; border-color:transparent; color:var(--text-muted); border-radius:6px; font-weight:600; font-size:11.5px;">📚 Pustaka Leads &amp; AI Draft <span id="leadsUnconvertedBadge" style="background:#ef4444; color:#fff; font-size:9.5px; padding:1px 5px; border-radius:10px; margin-left:4px;">6</span></button>
       </div>
     </div>
 
     <div class="topbar-right">
+      <button id="btnThemeFlow" class="btn btn-sm" title="Ganti Tema (Dark / Light)">
+        🌙 Dark
+      </button>
       <button id="btnSimulateFonnte" class="btn btn-sm" style="background:rgba(37,211,102,0.15); border-color:#25d366; color:#4ade80; font-weight:600;" title="Simulasikan Chat WA Fonnte Masuk">
         📲 Uji Webhook Fonnte
       </button>
@@ -5257,8 +5337,41 @@
     }
 
 
+    // =========================================================
+    // FOXE FLOW / CRM — EXECUTIVE DUAL-THEME CONTROLLER
+    // =========================================================
+    function applyFoxeTheme(theme) {
+      const finalTheme = theme === "light" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", finalTheme);
+      try {
+        localStorage.setItem("foxe_studio_theme", finalTheme);
+        sessionStorage.setItem("foxe_studio_theme", finalTheme);
+      } catch(e) {}
+
+      const btn = document.getElementById("btnThemeFlow");
+      if (btn) {
+        btn.innerHTML = finalTheme === "dark" ? "🌙 Dark" : "☀️ Light";
+      }
+    }
+
+    function toggleFoxeTheme() {
+      const cur = document.documentElement.getAttribute("data-theme") || "dark";
+      const next = cur === "dark" ? "light" : "dark";
+      applyFoxeTheme(next);
+    }
+
     // Call loadLeadsData, loadStudioData & setup on start
     window.addEventListener('DOMContentLoaded', async () => {
+      // Initialize Theme
+      let currentTheme = "dark";
+      try {
+        currentTheme = localStorage.getItem("foxe_studio_theme") || sessionStorage.getItem("foxe_studio_theme") || "dark";
+      } catch(e) {}
+      applyFoxeTheme(currentTheme);
+
+      const btnTheme = document.getElementById("btnThemeFlow");
+      if (btnTheme) btnTheme.onclick = () => toggleFoxeTheme();
+
       setupPinLockHandlers();
       await loadLeadsData();
       await loadStudioData();

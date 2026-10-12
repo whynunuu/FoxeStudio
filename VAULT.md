@@ -212,5 +212,19 @@ Unrealized Omzet               Rp 104.625.000
   4. Jalankan `git add`, `git commit`, dan `git push origin main`.
   5. Instruksikan owner untuk melakukan **Hard Refresh** (`Ctrl + F5` / `Ctrl + Shift + R` di PC atau tutup tab buka baru di HP).
 
+---
 
-
+## 16. Spesifikasi Opening Gate Multi-Portal & Sistem Dual-Theme Formal Eksekutif
+- **Opening Gate Multi-Portal**:
+  - Halaman pembuka gerbang sistem terpadu Foxe Studio (`index.html`) menyajikan 2 Option Cards interaktif tanpa membocorkan PIN rahasia:
+    * **Portal A (Foxe Keuangan · Eksekutif)**: Akses Owner & Manajemen Studio (PIN: `363636`). Membuka laporan keuangan, kasir, buku neraca COGS/OPEX, analitik tahunan, dan slip gaji karyawan.
+    * **Portal B (Foxe CRM · Operasional)**: Akses Tim Operasional & Admin WhatsApp (PIN: `112233` di `flow.html`). Membuka pustaka leads prospek WhatsApp Fonnte, AI rekomendasi chat balasan cepat, demand analytics, dan webhook n8n engine.
+  - Dilengkapi tombol universal navigasi kembali `← Kembali ke Pilihan Portal` di setiap keypad screen.
+- **Sistem Dual-Theme Formal Eksekutif (Bebas Efek Cyberpunk)**:
+  - Mengadopsi sistem desain formal modern (*Value Analytics UI*):
+    * **Executive Formal Dark (`[data-theme="dark"]`)**: Kanvas midnight navy-slate (`#0f1322`), kartu permukaan dark slate-indigo (`#181d33`), hairline subtle (`#262e49`), teks putih jernih (`#f8fafc`), dan aksen sapphire/royal blue (`#3b82f6`).
+    * **Executive Crisp Light (`:root`)**: Kanvas soft grey-periwinkle (`#eef2f8`), kartu permukaan pure white (`#ffffff`), hairline lembut (`#e2e8f2`), teks slate gelap kontras tinggi (`#111827`), dan aksen deep royal blue (`#2563eb`).
+  - **Sinkronisasi Otomatis Lintas Portal**:
+    * Pilihan tema disimpan di `localStorage.setItem("foxe_studio_theme", theme)` dan sinkron 100% antara Portal Keuangan (`index.html`) dan Portal CRM (`flow.html`).
+    * Toggle tema interaktif tersedia di Opening Gate (`#btnGateTheme`), sidebar rail (`#themeSwitchPill`), topbar Keuangan (`#btnTheme`), dan topbar CRM (`#btnThemeFlow`).
+    * Script early-load di `<head>` menjamin nol kedipan (*zero flash of unstyled content*).
