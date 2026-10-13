@@ -77379,6 +77379,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261013-2144",
+      "mulai": "2026-10-13T21:44:33.652841+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 249 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 94 pos pengeluaran Neraca, 198 pipeline Okt."
+    },
+    {
       "id": "sy_20261013-2143",
       "mulai": "2026-10-13T21:43:09.415263+00:00",
       "status": "sukses",
@@ -78285,7 +78291,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-13T21:43:09.415263+00:00"
+    "last_sync": "2026-10-13T21:44:33.652841+00:00"
   },
   "neracaDetail": [
     {
@@ -88160,8 +88166,8 @@
         "id": "kp_2",
         "nama": "AMEL",
         "role": "Admin 2",
-        "hariDinilai": 11,
-        "disiplin": 4.64,
+        "hariDinilai": 12,
+        "disiplin": 4.67,
         "akurasi": 4.64,
         "sop": 4.55,
         "client": 4.64,
@@ -88206,7 +88212,8 @@
           5.0,
           5.0,
           5.0,
-          4.0
+          4.0,
+          5.0
         ],
         "akurasi": [
           4.0,
