@@ -53360,6 +53360,32 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_254",
+      "tanggal": "2026-10-14",
+      "client": "Pramuka MAN 1 Banyumas",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-15",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_255",
+      "tanggal": "2026-10-14",
+      "client": "cyntya",
+      "paket": "Single",
+      "tanggalFoto": "2026-10-15",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -77178,7 +77204,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 53160000.0
+        "omzet": 53360000.0
       }
     ]
   },
@@ -77526,6 +77552,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261014-1130",
+      "mulai": "2026-10-14T11:30:18.032877+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 255 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 102 pos pengeluaran Neraca, 205 pipeline Okt."
+    },
     {
       "id": "sy_20261014-1001",
       "mulai": "2026-10-14T10:01:07.167983+00:00",
@@ -78451,7 +78483,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-14T10:01:07.167983+00:00"
+    "last_sync": "2026-10-14T11:30:18.032877+00:00"
   },
   "neracaDetail": [
     {
@@ -79014,16 +79046,16 @@
   "oktoberPipeline": {
     "bulan": "2026-10",
     "totalBookings": 205,
-    "potentialOmzet": 67700000.0,
-    "totalDp": 17800000.0,
+    "potentialOmzet": 67800000.0,
+    "totalDp": 17900000.0,
     "estimateCashIn": 9925000.0,
     "remainingCashIn": 9925000.0,
     "totalPipelineCashIn": 49900000.0,
     "breakdown": {
       "reguler": {
         "sesi": 106,
-        "nilai": 31550000.0,
-        "dp": 8550000.0
+        "nilai": 31650000.0,
+        "dp": 8650000.0
       },
       "wisudaDay1": {
         "sesi": 47,
@@ -79045,8 +79077,8 @@
       },
       "confirmed": {
         "sesi": 34,
-        "nilai": 12625000.0,
-        "dp": 2750000.0,
+        "nilai": 12725000.0,
+        "dp": 2850000.0,
         "cashIn": 9925000.0
       },
       "reschedule": {
@@ -80864,22 +80896,22 @@
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "Cyntia",
-        "paket": "SG",
-        "paketRaw": "SG",
+        "paket": "Single",
+        "paketRaw": "Single",
         "jmlOrang": 1,
-        "harga": 0.0,
+        "harga": 100000.0,
         "admin": "AL",
         "noHp": "",
         "manual": false,
-        "color": "PUTIH",
-        "statusColor": "putih",
+        "color": "HIJAU",
+        "statusColor": "hijau",
         "statusSesi": "confirmed",
         "statusLabel": "Terjadwal",
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
         "dp": 0.0,
-        "sisaPelunasan": 0.0,
+        "sisaPelunasan": 100000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -80894,7 +80926,7 @@
         "jmlOrang": 39,
         "harga": 975000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -80903,8 +80935,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 975000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 875000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -87810,6 +87842,32 @@
         "cash": 0.0,
         "transfer": 10000.0,
         "total": 10000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_254",
+        "tanggal": "2026-10-14",
+        "client": "Pramuka MAN 1 Banyumas",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-15",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_255",
+        "tanggal": "2026-10-14",
+        "client": "cyntya",
+        "paket": "Single",
+        "tanggalFoto": "2026-10-15",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": ""
@@ -147810,22 +147868,22 @@
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "Cyntia",
-        "paket": "SG",
-        "paketRaw": "SG",
+        "paket": "Single",
+        "paketRaw": "Single",
         "jmlOrang": 1,
-        "harga": 0.0,
+        "harga": 100000.0,
         "admin": "AL",
         "noHp": "",
         "manual": false,
-        "color": "PUTIH",
-        "statusColor": "putih",
+        "color": "HIJAU",
+        "statusColor": "hijau",
         "statusSesi": "confirmed",
         "statusLabel": "Terjadwal",
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
         "dp": 0.0,
-        "sisaPelunasan": 0.0,
+        "sisaPelunasan": 100000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -147840,7 +147898,7 @@
         "jmlOrang": 39,
         "harga": 975000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -147849,8 +147907,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 975000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 875000.0,
         "kategori": "Studio Reguler"
       },
       {
