@@ -77838,22 +77838,10 @@
   ],
   "sync": [
     {
-      "id": "sy_20261015-1533",
-      "mulai": "2026-10-15T15:33:18.224497+00:00",
+      "id": "sy_20261016-0914",
+      "mulai": "2026-10-16T02:14:30.418808+00:00",
       "status": "sukses",
       "ringkas": "Integrasi berhasil: 632 order Sep, 272 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 102 pos pengeluaran Neraca, 217 pipeline Okt."
-    },
-    {
-      "id": "sy_20261015-0943",
-      "mulai": "2026-10-15T09:43:13.052410+00:00",
-      "status": "sukses",
-      "ringkas": "Integrasi berhasil: 632 order Sep, 266 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 102 pos pengeluaran Neraca, 212 pipeline Okt."
-    },
-    {
-      "id": "sy_20261015-0611",
-      "mulai": "2026-10-15T06:11:47.852999+00:00",
-      "status": "sukses",
-      "ringkas": "Integrasi berhasil: 632 order Sep, 262 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 102 pos pengeluaran Neraca, 208 pipeline Okt."
     },
     {
       "id": "sy_20261015-1039",
@@ -78810,7 +78798,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-15T15:33:18.224497+00:00"
+    "last_sync": "2026-10-16T02:14:30.418808+00:00"
   },
   "neracaDetail": [
     {
@@ -81569,31 +81557,6 @@
       {
         "id": "sc_bk_87",
         "tgl": "2026-10-17",
-        "waktu": "15:20",
-        "studio": "Studio 1",
-        "studioNama": "Studio 1",
-        "nama": "Reno",
-        "paket": "Graduation",
-        "paketRaw": "Graduation",
-        "jmlOrang": 1,
-        "harga": 350000.0,
-        "admin": "AL",
-        "noHp": "dp 100 calmblue",
-        "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
-        "isReschedule": false,
-        "dp": 100000.0,
-        "sisaPelunasan": 250000.0,
-        "kategori": "Studio Reguler"
-      },
-      {
-        "id": "sc_bk_88",
-        "tgl": "2026-10-17",
         "waktu": "16:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -81617,7 +81580,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_89",
+        "id": "sc_bk_88",
         "tgl": "2026-10-17",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -81642,7 +81605,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_90",
+        "id": "sc_bk_89",
         "tgl": "2026-10-17",
         "waktu": "17:40",
         "studio": "Studio 1",
@@ -81667,7 +81630,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_91",
+        "id": "sc_bk_90",
         "tgl": "2026-10-17",
         "waktu": "18:20",
         "studio": "Studio 1",
@@ -81692,7 +81655,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_92",
+        "id": "sc_bk_91",
         "tgl": "2026-10-17",
         "waktu": "13:20",
         "studio": "Studio 2",
@@ -81717,12 +81680,37 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_93",
+        "id": "sc_bk_92",
         "tgl": "2026-10-17",
         "waktu": "15:00",
         "studio": "Studio 2",
         "studioNama": "Studio 2",
         "nama": "Dhimas Sulthan",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "AL",
+        "noHp": "dp 100 calmblue",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false,
+        "dp": 100000.0,
+        "sisaPelunasan": 250000.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_93",
+        "tgl": "2026-10-17",
+        "waktu": "15:20",
+        "studio": "Studio 2",
+        "studioNama": "Studio 2",
+        "nama": "Reno",
         "paket": "Graduation",
         "paketRaw": "Graduation",
         "jmlOrang": 1,
@@ -149110,31 +149098,6 @@
       {
         "id": "sc_bk_87",
         "tgl": "2026-10-17",
-        "waktu": "15:20",
-        "studio": "Studio 1",
-        "studioNama": "Studio 1",
-        "nama": "Reno",
-        "paket": "Graduation",
-        "paketRaw": "Graduation",
-        "jmlOrang": 1,
-        "harga": 350000.0,
-        "admin": "AL",
-        "noHp": "dp 100 calmblue",
-        "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
-        "isReschedule": false,
-        "dp": 100000.0,
-        "sisaPelunasan": 250000.0,
-        "kategori": "Studio Reguler"
-      },
-      {
-        "id": "sc_bk_88",
-        "tgl": "2026-10-17",
         "waktu": "16:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -149158,7 +149121,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_89",
+        "id": "sc_bk_88",
         "tgl": "2026-10-17",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -149183,7 +149146,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_90",
+        "id": "sc_bk_89",
         "tgl": "2026-10-17",
         "waktu": "17:40",
         "studio": "Studio 1",
@@ -149208,7 +149171,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_91",
+        "id": "sc_bk_90",
         "tgl": "2026-10-17",
         "waktu": "18:20",
         "studio": "Studio 1",
@@ -149233,7 +149196,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_92",
+        "id": "sc_bk_91",
         "tgl": "2026-10-17",
         "waktu": "13:20",
         "studio": "Studio 2",
@@ -149258,12 +149221,37 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_93",
+        "id": "sc_bk_92",
         "tgl": "2026-10-17",
         "waktu": "15:00",
         "studio": "Studio 2",
         "studioNama": "Studio 2",
         "nama": "Dhimas Sulthan",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "AL",
+        "noHp": "dp 100 calmblue",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false,
+        "dp": 100000.0,
+        "sisaPelunasan": 250000.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_93",
+        "tgl": "2026-10-17",
+        "waktu": "15:20",
+        "studio": "Studio 2",
+        "studioNama": "Studio 2",
+        "nama": "Reno",
         "paket": "Graduation",
         "paketRaw": "Graduation",
         "jmlOrang": 1,

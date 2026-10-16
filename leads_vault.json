@@ -665,11 +665,11 @@
     "last_message_at": "2026-09-28 11:15:00",
     "last_customer_msg": "Pricelist wisuda dong kak",
     "last_admin_msg": "Halo kak Anisa! Ini pricelist paket wisuda Foxe Studio ya kak [PDF terkirim]. Ada promo free all soft files kalau booking minggu ini kak.",
-    "summary": "Deal kasir: Single (Lunas)",
+    "summary": "Deal kasir: Photofox (DP)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 200000,
     "follow_up_count": 0,
-    "paket": "Single",
+    "paket": "Photofox",
     "chat_history": [
       {
         "sender": "customer",
