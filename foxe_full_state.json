@@ -53874,9 +53874,9 @@
       "client": "Wiwi",
       "paket": "Graduation Premium",
       "tanggalFoto": "2026-10-17",
-      "cash": 370000.0,
+      "cash": 360000.0,
       "transfer": 0.0,
-      "total": 370000.0,
+      "total": 360000.0,
       "pembayaran": "",
       "admin": "",
       "fotografer": ""
@@ -54004,9 +54004,9 @@
       "client": "Reno",
       "paket": "Graduation",
       "tanggalFoto": "2026-10-17",
-      "cash": 390000.0,
+      "cash": 370000.0,
       "transfer": 0.0,
-      "total": 390000.0,
+      "total": 370000.0,
       "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
@@ -54049,6 +54049,45 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
+    },
+    {
+      "id": "or_307",
+      "tanggal": "2026-10-17",
+      "client": "Lila",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-17",
+      "cash": 0.0,
+      "transfer": 250000.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_308",
+      "tanggal": "2026-10-17",
+      "client": "Attha",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-17",
+      "cash": 250000.0,
+      "transfer": 0.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_309",
+      "tanggal": "2026-10-17",
+      "client": "Fina",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-10-17",
+      "cash": 0.0,
+      "transfer": 250000.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -65772,7 +65811,7 @@
     {
       "id": "cc_2026-10-17",
       "tanggal": "2026-10-17",
-      "nilai": 2720000.0
+      "nilai": 2940000.0
     },
     {
       "id": "cc_2026-10-18",
@@ -66227,8 +66266,8 @@
       "tanggal": "2026-10-17",
       "leads": 0.0,
       "dp": 1.0,
-      "sesiFoto": 11.0,
-      "transaksi": 12.0
+      "sesiFoto": 14.0,
+      "transaksi": 15.0
     }
   ],
   "kpi": [
@@ -77971,7 +78010,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 64045000.0
+        "omzet": 64765000.0
       }
     ]
   },
@@ -78319,6 +78358,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261017-1112",
+      "mulai": "2026-10-17T11:12:04.310803+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 309 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 102 pos pengeluaran Neraca, 231 pipeline Okt."
+    },
     {
       "id": "sy_20261017-0908",
       "mulai": "2026-10-17T09:08:15.013602+00:00",
@@ -79328,7 +79373,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-17T09:08:15.013602+00:00"
+    "last_sync": "2026-10-17T11:12:04.310803+00:00"
   },
   "neracaDetail": [
     {
@@ -79893,8 +79938,8 @@
     "totalBookings": 231,
     "potentialOmzet": 77000000.0,
     "totalDp": 20800000.0,
-    "estimateCashIn": 9075000.0,
-    "remainingCashIn": 9075000.0,
+    "estimateCashIn": 8075000.0,
+    "remainingCashIn": 8075000.0,
     "totalPipelineCashIn": 56200000.0,
     "breakdown": {
       "reguler": {
@@ -79915,21 +79960,21 @@
     },
     "statusBreakdown": {
       "done": {
-        "sesi": 187,
-        "nilai": 61275000.0,
-        "dp": 16700000.0,
-        "cashIn": 44725000.0
+        "sesi": 190,
+        "nilai": 62325000.0,
+        "dp": 17000000.0,
+        "cashIn": 45475000.0
       },
       "confirmed": {
-        "sesi": 34,
-        "nilai": 12125000.0,
-        "dp": 3100000.0,
-        "cashIn": 9075000.0
+        "sesi": 30,
+        "nilai": 10725000.0,
+        "dp": 2700000.0,
+        "cashIn": 8075000.0
       },
       "reschedule": {
-        "sesi": 10,
-        "nilai": 3600000.0,
-        "dp": 1000000.0,
+        "sesi": 11,
+        "nilai": 3950000.0,
+        "dp": 1100000.0,
         "cashIn": 0.0
       }
     },
@@ -84997,12 +85042,12 @@
         "admin": "IN",
         "noHp": "dp 100 calmblue",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 250000.0,
@@ -85022,12 +85067,12 @@
         "admin": "AL",
         "noHp": "dp 100 concrete",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 250000.0,
@@ -85047,13 +85092,13 @@
         "admin": "AL",
         "noHp": "dp 100 wooden",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
+        "color": "ORANGE",
+        "statusColor": "orange",
+        "statusSesi": "reschedule",
+        "statusLabel": "Reschedule / Kendala",
+        "statusBadge": "warn",
         "isDone": false,
-        "isReschedule": false,
+        "isReschedule": true,
         "dp": 100000.0,
         "sisaPelunasan": 250000.0,
         "kategori": "Studio Reguler"
@@ -85072,12 +85117,12 @@
         "admin": "IN",
         "noHp": "dp 100 calmblue",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 250000.0,
@@ -89854,9 +89899,9 @@
         "client": "Wiwi",
         "paket": "Graduation Premium",
         "tanggalFoto": "2026-10-17",
-        "cash": 370000.0,
+        "cash": 360000.0,
         "transfer": 0.0,
-        "total": 370000.0,
+        "total": 360000.0,
         "pembayaran": "",
         "admin": "",
         "fotografer": ""
@@ -89984,9 +90029,9 @@
         "client": "Reno",
         "paket": "Graduation",
         "tanggalFoto": "2026-10-17",
-        "cash": 390000.0,
+        "cash": 370000.0,
         "transfer": 0.0,
-        "total": 390000.0,
+        "total": 370000.0,
         "pembayaran": "Lunas",
         "admin": "INDAH",
         "fotografer": "ADIF"
@@ -90029,6 +90074,45 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": "SAKA"
+      },
+      {
+        "id": "or_307",
+        "tanggal": "2026-10-17",
+        "client": "Lila",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-17",
+        "cash": 0.0,
+        "transfer": 250000.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_308",
+        "tanggal": "2026-10-17",
+        "client": "Attha",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-17",
+        "cash": 250000.0,
+        "transfer": 0.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_309",
+        "tanggal": "2026-10-17",
+        "client": "Fina",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-10-17",
+        "cash": 0.0,
+        "transfer": 250000.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "ADIF"
       }
     ],
     "shifts": [
@@ -90525,7 +90609,7 @@
       {
         "id": "cc_2026-10-17",
         "tanggal": "2026-10-17",
-        "nilai": 2720000.0
+        "nilai": 2940000.0
       },
       {
         "id": "cc_2026-10-18",
@@ -90732,8 +90816,8 @@
         "tanggal": "2026-10-17",
         "leads": 0.0,
         "dp": 1.0,
-        "sesiFoto": 11.0,
-        "transaksi": 12.0
+        "sesiFoto": 14.0,
+        "transaksi": 15.0
       },
       {
         "id": "ld_18",
@@ -153469,12 +153553,12 @@
         "admin": "IN",
         "noHp": "dp 100 calmblue",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 250000.0,
@@ -153494,12 +153578,12 @@
         "admin": "AL",
         "noHp": "dp 100 concrete",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 250000.0,
@@ -153519,13 +153603,13 @@
         "admin": "AL",
         "noHp": "dp 100 wooden",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
+        "color": "ORANGE",
+        "statusColor": "orange",
+        "statusSesi": "reschedule",
+        "statusLabel": "Reschedule / Kendala",
+        "statusBadge": "warn",
         "isDone": false,
-        "isReschedule": false,
+        "isReschedule": true,
         "dp": 100000.0,
         "sisaPelunasan": 250000.0,
         "kategori": "Studio Reguler"
@@ -153544,12 +153628,12 @@
         "admin": "IN",
         "noHp": "dp 100 calmblue",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 250000.0,
