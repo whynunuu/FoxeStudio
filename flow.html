@@ -6900,6 +6900,32 @@
       if (params.get('paket')) {
         setPaketFilter(params.get('paket'));
       }
+
+      // Real-time presence heartbeat to Railway
+      (function initPresenceFlow() {
+        let cid = localStorage.getItem("foxe_device_id");
+        if (!cid) {
+          cid = "dev_" + Math.random().toString(36).substring(2, 9) + "_" + Date.now().toString(36);
+          localStorage.setItem("foxe_device_id", cid);
+        }
+        let tid = sessionStorage.getItem("foxe_tab_id");
+        if (!tid) {
+          tid = "tab_" + Math.random().toString(36).substring(2, 8);
+          sessionStorage.setItem("foxe_tab_id", tid);
+        }
+        function ping() {
+          fetch(`https://foxestudio.up.railway.app/api/presence/ping?cid=${encodeURIComponent(cid)}&tid=${encodeURIComponent(tid)}&p=crm&t=${Date.now()}`, {
+            method: "GET", cache: "no-store"
+          }).catch(() => {});
+        }
+        ping();
+        setInterval(ping, 12000);
+        window.addEventListener("pagehide", () => {
+          if (navigator.sendBeacon) {
+            navigator.sendBeacon(`https://foxestudio.up.railway.app/api/presence/leave?cid=${encodeURIComponent(cid)}&tid=${encodeURIComponent(tid)}`);
+          }
+        });
+      })();
     });
   </script>
 </body>

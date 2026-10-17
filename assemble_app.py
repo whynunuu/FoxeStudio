@@ -216,9 +216,11 @@ html:not([data-theme="dark"]) .brand .brand-img{filter:drop-shadow(0 1px 4px rgb
 .btn.pri{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .btn.pri:hover{background:var(--accent-ink);border-color:var(--accent-ink);color:var(--on-accent)}
 .btn.sm{padding:4px 11px;font-size:12px}
-.btn:disabled{opacity:.5;cursor:not-allowed}
 .presence{display:flex;align-items:center}
 .dot{width:9px;height:9px;border-radius:50%;background:var(--good)}
+.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--good);display:inline-block;box-shadow:0 0 0 0 rgba(16,185,129,0.7);animation:pulseLive 2s infinite ease-in-out}
+@keyframes pulseLive{0%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(16,185,129,0.7)}70%{transform:scale(1.05);box-shadow:0 0 0 5px rgba(16,185,129,0)}100%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+
 
 .view{padding:28px 32px 80px;max-width:1600px;width:100%;margin:0 auto;box-sizing:border-box;min-width:0}
 .view[hidden]{display:none}
@@ -907,7 +909,7 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
         <button class="btn sm" id="btnLock" title="Kunci Dashboard">🔒 Kunci</button>
         <span class="pill neutral" id="tbLive" hidden></span>
         <span class="pill neutral" id="tbUpd" hidden></span>
-        <span class="pill final" id="tbSync">aktif</span>
+        <span class="pill final" id="tbSync" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;" title="Sesi Live: 1 perangkat sedang membuka dashboard"><span class="pulse-dot"></span><span id="tbLiveCount">1 Sesi Live</span></span>
         <div class="btn-group" id="btnGroupUpdate">
           <button class="btn sm" id="btnUpdateData" style="display:inline-flex;align-items:center;gap:5px;font-weight:600;border-color:var(--accent);color:var(--accent);background:var(--surface);" title="Klik untuk Refresh / Perbarui data terbaru ke website">🔄 Update</button>
           <button class="btn sm" id="btnSyncSettings" style="padding:4px 7px;border-left:0;border-color:var(--accent);color:var(--accent);background:var(--surface);" title="Pilihan &amp; Pengaturan Sinkronisasi">▾</button>
@@ -7864,7 +7866,86 @@ setInterval(() => {
 }, 60000);
 
 document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) { fastRefresh(true); checkNewBuild(); }
+  if (!document.hidden) { fastRefresh(true); checkNewBuild(); pingPresence(); }
+});
+
+// ========================================================
+// Real-Time Presence / Live Sesi Indicator (Foxe Studio)
+// ========================================================
+function getFoxeClientId() {
+  let cid = localStorage.getItem("foxe_device_id");
+  if (!cid) {
+    cid = "dev_" + Math.random().toString(36).substring(2, 9) + "_" + Date.now().toString(36);
+    localStorage.setItem("foxe_device_id", cid);
+  }
+  return cid;
+}
+
+function getFoxeTabId() {
+  let tid = sessionStorage.getItem("foxe_tab_id");
+  if (!tid) {
+    tid = "tab_" + Math.random().toString(36).substring(2, 8);
+    sessionStorage.setItem("foxe_tab_id", tid);
+  }
+  return tid;
+}
+
+let liveOnlineUsers = 1;
+let liveOnlineTabs = 1;
+
+function updatePresenceUI(online, tabs) {
+  liveOnlineUsers = Math.max(1, online || 1);
+  liveOnlineTabs = Math.max(1, tabs || 1);
+  const syncPill = document.getElementById("tbSync");
+  const countEl = document.getElementById("tbLiveCount");
+  if (countEl) {
+    countEl.textContent = `${liveOnlineUsers} Sesi Live`;
+  }
+  if (syncPill) {
+    const tabNote = liveOnlineTabs > liveOnlineUsers ? ` (${liveOnlineTabs} tab aktif)` : "";
+    syncPill.title = `Sesi Live: ${liveOnlineUsers} perangkat aktif membuka dashboard${tabNote}. Klik untuk info.`;
+  }
+}
+
+async function pingPresence() {
+  const cid = getFoxeClientId();
+  const tid = getFoxeTabId();
+  try {
+    const res = await fetch(`https://foxestudio.up.railway.app/api/presence/ping?cid=${encodeURIComponent(cid)}&tid=${encodeURIComponent(tid)}&p=dashboard&t=${Date.now()}`, {
+      method: "GET",
+      cache: "no-store",
+      headers: { "Accept": "application/json" }
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && typeof data.online === "number") {
+        updatePresenceUI(data.online, data.tabs);
+      }
+    }
+  } catch (err) {
+    // Offline / network lag: pertahankan status aman
+  }
+}
+
+const syncPill = document.getElementById("tbSync");
+if (syncPill) {
+  syncPill.onclick = () => {
+    const tabNote = liveOnlineTabs > liveOnlineUsers ? ` di ${liveOnlineTabs} tab terbuka` : "";
+    if (typeof showToast === "function") {
+      showToast(`👥 Saat ini ada ${liveOnlineUsers} perangkat${tabNote} yang sedang membuka dashboard Foxe Studio secara bersamaan.`, "ok", 3500);
+    }
+  };
+}
+
+pingPresence();
+setInterval(pingPresence, 12000);
+
+window.addEventListener("pagehide", () => {
+  const cid = getFoxeClientId();
+  const tid = getFoxeTabId();
+  if (navigator.sendBeacon) {
+    navigator.sendBeacon(`https://foxestudio.up.railway.app/api/presence/leave?cid=${encodeURIComponent(cid)}&tid=${encodeURIComponent(tid)}`);
+  }
 });
 </script>
 

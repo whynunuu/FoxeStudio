@@ -181,6 +181,104 @@ def trigger_sync_state_endpoint():
     """
     return sync_state_from_remote()
 
+# ==========================================
+# Real-Time Presence / Live Visitor Tracker
+# ==========================================
+ACTIVE_PRESENCE = {}  # client_id -> {"last_seen": float, "tabs": set, "page": str}
+PRESENCE_TIMEOUT = 35  # detik batas cut-off tidak aktif
+
+def prune_expired_presence():
+    now = time.time()
+    expired = [cid for cid, data in list(ACTIVE_PRESENCE.items()) if now - data.get("last_seen", 0) > PRESENCE_TIMEOUT]
+    for cid in expired:
+        ACTIVE_PRESENCE.pop(cid, None)
+
+@app.api_route("/api/presence/ping", methods=["GET", "POST"])
+async def presence_ping_endpoint(request: Request, cid: Optional[str] = None, tid: Optional[str] = None, p: Optional[str] = "dashboard"):
+    """Mencatat heartbeat sesi live website dan mengembalikan jumlah perangkat aktif."""
+    prune_expired_presence()
+    now = time.time()
+
+    client_id = cid or request.query_params.get("cid")
+    tab_id = tid or request.query_params.get("tid")
+    page = p or request.query_params.get("p", "dashboard")
+
+    if not client_id and request.method == "POST":
+        try:
+            body = await request.json()
+            if isinstance(body, dict):
+                client_id = client_id or body.get("cid") or body.get("client_id")
+                tab_id = tab_id or body.get("tid") or body.get("tab_id")
+                page = page or body.get("p") or body.get("page", "dashboard")
+        except Exception:
+            pass
+
+    client_id = (client_id or f"anon_{request.client.host if request.client else 'client'}").strip()
+    tab_id = (tab_id or "tab_1").strip()
+
+    if client_id not in ACTIVE_PRESENCE:
+        ACTIVE_PRESENCE[client_id] = {"last_seen": now, "tabs": {tab_id}, "page": page}
+    else:
+        ACTIVE_PRESENCE[client_id]["last_seen"] = now
+        ACTIVE_PRESENCE[client_id]["tabs"].add(tab_id)
+        ACTIVE_PRESENCE[client_id]["page"] = page
+
+    total_devices = len(ACTIVE_PRESENCE)
+    total_tabs = sum(len(v.get("tabs", [])) for v in ACTIVE_PRESENCE.values())
+
+    return {
+        "status": "ok",
+        "online": max(1, total_devices),
+        "tabs": max(1, total_tabs),
+        "timestamp": int(now)
+    }
+
+@app.api_route("/api/presence/leave", methods=["GET", "POST"])
+async def presence_leave_endpoint(request: Request, cid: Optional[str] = None, tid: Optional[str] = None):
+    """Menghapus tab/perangkat yang ditutup secara instan."""
+    now = time.time()
+    client_id = cid or request.query_params.get("cid")
+    tab_id = tid or request.query_params.get("tid")
+
+    if not client_id and request.method == "POST":
+        try:
+            body = await request.json()
+            if isinstance(body, dict):
+                client_id = client_id or body.get("cid") or body.get("client_id")
+                tab_id = tab_id or body.get("tid") or body.get("tab_id")
+        except Exception:
+            pass
+
+    if client_id and client_id in ACTIVE_PRESENCE:
+        if tab_id and tab_id in ACTIVE_PRESENCE[client_id]["tabs"]:
+            ACTIVE_PRESENCE[client_id]["tabs"].discard(tab_id)
+        if not ACTIVE_PRESENCE[client_id]["tabs"]:
+            ACTIVE_PRESENCE.pop(client_id, None)
+
+    prune_expired_presence()
+    total_devices = len(ACTIVE_PRESENCE)
+    total_tabs = sum(len(v.get("tabs", [])) for v in ACTIVE_PRESENCE.values())
+
+    return {
+        "status": "ok",
+        "online": max(0, total_devices),
+        "tabs": max(0, total_tabs)
+    }
+
+@app.get("/api/presence")
+def get_presence_endpoint():
+    """Mengambil status jumlah perangkat online saat ini."""
+    prune_expired_presence()
+    total_devices = len(ACTIVE_PRESENCE)
+    total_tabs = sum(len(v.get("tabs", [])) for v in ACTIVE_PRESENCE.values())
+    return {
+        "status": "ok",
+        "online": max(1, total_devices),
+        "tabs": max(1, total_tabs),
+        "timestamp": int(time.time())
+    }
+
+
 @app.get("/webhook")
 @app.get("/webhook/whatsapp")
 @app.get("/webhook/fonnte")
