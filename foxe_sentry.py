@@ -53,7 +53,9 @@ LIVE_URL = "https://whynunuu.github.io/FoxeStudio/"
 # Master Roster Kru Dikenal Foxe
 KNOWN_CREW_ROSTER = {
     "AMEL", "NUNU", "VINA", "NABILA", "FAUZAN", "FARID", "DWI", "BAGAS",
-    "RIFKY", "REZA", "DIMAS", "KASIR", "ADMIN", "OWNER"
+    "RIFKY", "REZA", "DIMAS", "KASIR", "ADMIN", "OWNER",
+    "SAKA", "ADDEL", "FADEL", "ADIF", "HANIF", "INDAH", "PENTIL",
+    "FAME", "FAME/VERO", "VERO", "AIZ", "FOXE TO FOLX"
 }
 
 
@@ -73,7 +75,8 @@ class FoxeSentry:
     # CHECKPOINT 1: Ingestion & Raw Excel Files Integrity
     # =========================================================================
     def check_cp1_files_integrity(self):
-        self.log("CP-1", "Memeriksa integritas 7 File Operasional Resmi...")
+        total_req = len(REQUIRED_OPERATIONAL_FILES)
+        self.log("CP-1", f"Memeriksa integritas {total_req} File Operasional Resmi...")
         import openpyxl
 
         valid_files = 0
@@ -119,10 +122,10 @@ class FoxeSentry:
                     "action": "Pastikan file tidak terkunci oleh Excel desktop dan format xlsx/xlsm valid."
                 })
 
-        if valid_files == len(REQUIRED_OPERATIONAL_FILES):
-            self.passed_checks.append(f"Ingestion: 7 File Operasional GDrive Lengkap & Terbaca (100%)")
+        if valid_files == total_req:
+            self.passed_checks.append(f"Ingestion: {total_req} File Operasional GDrive Lengkap & Terbaca (100%)")
         elif valid_files > 0:
-            self.passed_checks.append(f"Ingestion: {valid_files}/7 File Operasional GDrive Terbaca")
+            self.passed_checks.append(f"Ingestion: {valid_files}/{total_req} File Operasional GDrive Terbaca")
 
     # =========================================================================
     # CHECKPOINT 2: State JSON & Schema Integrity
@@ -326,13 +329,16 @@ class FoxeSentry:
 
         # 3. Unknown Crew Detection (Roster Sentry)
         shifts = state.get("shifts", [])
+        seen_unknown = set()
         for sh in shifts:
             nama = str(sh.get("nama", "")).strip().upper()
-            if nama and nama not in KNOWN_CREW_ROSTER and (sh.get("total_shift", 0) or 0) > 0:
+            slot_val = sh.get("slot") if sh.get("slot") is not None else sh.get("total_shift", 0)
+            if nama and nama not in KNOWN_CREW_ROSTER and (slot_val or 0) > 0 and nama not in seen_unknown:
+                seen_unknown.add(nama)
                 self.warnings.append({
                     "cp": "CP-4 (Roster Kru)",
                     "type": "NAMA KRU BARU TERDETEKSI",
-                    "desc": f"Kru '{nama}' aktif memiliki shift ({sh.get('total_shift')} shift) tapi belum ada di master roster.",
+                    "desc": f"Kru '{nama}' aktif memiliki shift tapi belum ada di master roster.",
                     "action": "Tambahkan kru ke master gaji jika merupakan anggota tim resmi baru."
                 })
 
@@ -407,7 +413,7 @@ class FoxeSentry:
         cp5_stat = "FAIL" if any(e["cp"].startswith("CP-5") for e in self.critical_errors) else "PASS"
 
         items = [
-            ("01. Ingestion 7 File GDrive", cp1_stat),
+            ("01. Ingestion 11 File GDrive", cp1_stat),
             ("02. Skema State JSON", cp2_stat),
             ("03. Kasir September", cp3_stat),
             ("04. Kasir Oktober", cp3_stat),

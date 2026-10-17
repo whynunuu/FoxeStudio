@@ -373,6 +373,7 @@ def parse_october_pipeline(file_default="file2_okt.xlsx", file_w1="file_wisuda_3
     b_w2 = parse_wisuda_schedule(file_w2, "2026-10-04", start_id=len(b_w1)+1)
     
     all_okt = b_reg + b_w1 + b_w2
+    all_okt.sort(key=lambda b: (str(b.get("tgl") or ""), str(b.get("waktu") or ""), str(b.get("id") or "")))
     total_val = sum(b.get("harga", 0.0) for b in all_okt)
     total_dp = sum(b.get("dp", 0.0) for b in all_okt)
     estimate_cash_in = max(0.0, total_val - total_dp)

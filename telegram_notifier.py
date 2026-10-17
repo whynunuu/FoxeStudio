@@ -15,18 +15,20 @@ import urllib.parse
 import sys
 import datetime
 import re
+import html
 from collections import defaultdict, Counter
 
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
 DEFAULT_TOKEN = "8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s"
+DEFAULT_CHAT_ID = 1608969830
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "telegram_config.json")
 
 def load_config():
     token = os.environ.get("TELEGRAM_BOT_TOKEN")
     chat_id_env = os.environ.get("TELEGRAM_CHAT_ID")
-    chat_id = int(chat_id_env) if chat_id_env and chat_id_env.isdigit() else None
+    chat_id = int(chat_id_env) if chat_id_env and chat_id_env.lstrip("-").isdigit() else None
 
     cfg = {}
     if os.path.exists(CONFIG_FILE):
@@ -37,7 +39,7 @@ def load_config():
             pass
     return {
         "token": token or cfg.get("token", DEFAULT_TOKEN),
-        "chat_id": chat_id or cfg.get("chat_id")
+        "chat_id": chat_id or cfg.get("chat_id") or DEFAULT_CHAT_ID
     }
 
 def save_config(cfg):
@@ -340,8 +342,8 @@ def build_summary_message(state, bulan=None):
     if tomorrow_bookings:
         limit_b = 12
         for idx, b in enumerate(tomorrow_bookings[:limit_b], 1):
-            nama = b.get("nama", "Klien")
-            paket = b.get("paket") or b.get("paketRaw") or "Sesi Foto"
+            nama = html.escape(str(b.get("nama", "Klien")))
+            paket = html.escape(str(b.get("paket") or b.get("paketRaw") or "Sesi Foto"))
             nohp = str(b.get("noHp", "")).lower()
             if "lunas" in nohp:
                 status = "Lunas"
@@ -353,9 +355,9 @@ def build_summary_message(state, bulan=None):
             
             adm_code = str(b.get("admin", "")).strip().upper()
             admin_map = {"IN": "INDAH", "AM": "AMEL", "AD": "ADDEL", "AL": "ADEL", "AMEL": "AMEL", "INDAH": "INDAH", "ADDEL": "ADDEL"}
-            adm_name = admin_map.get(adm_code, adm_code) if adm_code else "-"
-            waktu = b.get("waktu", "")
-            studio = b.get("studio", "") or b.get("studioNama", "")
+            adm_name = html.escape(str(admin_map.get(adm_code, adm_code) if adm_code else "-"))
+            waktu = html.escape(str(b.get("waktu", "")))
+            studio = html.escape(str(b.get("studio", "") or b.get("studioNama", "")))
             extra_info = f" | {waktu} @ {studio}" if waktu and studio else ""
             booking_lines.append(f"{idx}. <b>{nama}</b> | {paket} ({status} | Adm: {adm_name}{extra_info})")
         if len(tomorrow_bookings) > limit_b:
@@ -379,7 +381,7 @@ def build_summary_message(state, bulan=None):
             f"• <b>Jumat, 03 Okt</b> : <b>{len(w_d1)} Sesi Foto</b> (5 Backdrop Wisuda)\n"
             f"• <b>Sabtu, 04 Okt</b> : <b>{len(w_d2)} Sesi Foto</b> (5 Backdrop Wisuda)\n"
             f"• <b>Total Gelombang</b> : <b>{len(w_d1) + len(w_d2)} Sesi Terdaftar</b> (Potensi Kas: Rp 48,65 jt)\n"
-            f"• <b>Kesiapan Roster</b> : Siaga 5 Fotografer & Asisten per hari.\n"
+            f"• <b>Kesiapan Roster</b> : Siaga 5 Fotografer &amp; Asisten per hari.\n"
         )
     else:
         # 2. Jika event sebelumnya sudah lewat (Expired), cari momentum marketing terdekat berikutnya yang AKTIF (dalam jendela H-10)
@@ -400,10 +402,10 @@ def build_summary_message(state, bulan=None):
                 countdown_str = ""
 
             if 0 <= days_diff <= 10:
-                ev_action = next_ev.get("action", "EVENT")
-                ev_momentum = next_ev.get("momentum", "Agenda Marketing")
-                ev_paket = next_ev.get("paket", "Paket Studio")
-                ev_alasan = next_ev.get("alasan", "")
+                ev_action = html.escape(str(next_ev.get("action", "EVENT")))
+                ev_momentum = html.escape(str(next_ev.get("momentum", "Agenda Marketing")))
+                ev_paket = html.escape(str(next_ev.get("paket", "Paket Studio")))
+                ev_alasan = str(next_ev.get("alasan", ""))
                 badge_icon = "📢" if ev_action == "BOOST" else "🎯"
                 event_reminder_block = (
                     f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
@@ -413,7 +415,7 @@ def build_summary_message(state, bulan=None):
                     f"• <b>Aksi Ads</b> : {ev_action} ({ev_paket})\n"
                 )
                 if ev_alasan:
-                    short_alasan = ev_alasan[:85] + "..." if len(ev_alasan) > 85 else ev_alasan
+                    short_alasan = html.escape(ev_alasan[:85] + "..." if len(ev_alasan) > 85 else ev_alasan)
                     event_reminder_block += f"• <i>Catatan</i> : {short_alasan}\n"
 
     outcome_alert_block = ""
@@ -424,7 +426,7 @@ def build_summary_message(state, bulan=None):
             f"• <b>Total Omzet</b>  : {rp(grand_total)}\n"
             f"• <b>Total Beban</b>  : {rp(outcome_tot)} (COGS {rp(cogs_tot)} + OPEX {rp(opex_tot)})\n"
             f"• <b>Estimasi Nett</b> : {rp(nett_profit)}\n"
-            f"<i>Perhatian: Pengeluaran operasional studio telah menyerap ≥ 45% omzet. Segera perketat anggaran dan audit pos belanja COGS & OPEX!</i>\n\n"
+            f"<i>Perhatian: Pengeluaran operasional studio telah menyerap ≥ 45% omzet. Segera perketat anggaran dan audit pos belanja COGS &amp; OPEX!</i>\n\n"
             f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
         )
 
@@ -433,7 +435,7 @@ def build_summary_message(state, bulan=None):
 
     full_msg = (
         f"{outcome_alert_block}"
-        f"<pre>{table_block}</pre>\n\n"
+        f"<pre>{html.escape(table_block)}</pre>\n\n"
         f"🎯 <b>LEADS (s.d. {cutoff_day} {month_short}):</b>\n"
         f"• Leads   : <b>{int(total_leads)}</b>\n"
         f"• DP      : <b>{int(total_dp)}</b>\n"
@@ -447,7 +449,7 @@ def build_summary_message(state, bulan=None):
         f"Total Jadwal Besok: <b>{total_klien_besok} Klien</b>\n\n"
         f"{event_reminder_block}"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"📌 <i>Sumber: Foxe Studio — Schedule & Log Order {month_label.title()}.xlsm</i>\n"
+        f"📌 <i>Sumber: Foxe Studio — Schedule &amp; Log Order {month_label.title()}.xlsm</i>\n"
         f"🕒 <i>Last Updated: {now_str}</i>\n"
         f"👉 <a href=\"https://whynunuu.github.io/FoxeStudio/\"><b>Buka Dashboard Live Foxe Studio</b></a>"
     )

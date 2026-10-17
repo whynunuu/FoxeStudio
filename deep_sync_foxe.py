@@ -179,8 +179,9 @@ def run_integration():
         b_wisuda_sept = sept_wisuda.get("bookings", [])
         print(f"[OK] Wisuda September terurai: {len(b_wisuda_sept)} sesi booking (UIN: {sept_wisuda['breakdown']['uin_day1']['sesi']+sept_wisuda['breakdown']['uin_day2']['sesi']}, UNSOED: {sept_wisuda['breakdown']['unsoed_day1']['sesi']+sept_wisuda['breakdown']['unsoed_day2']['sesi']}).")
 
-        # Gabungkan ke bookings resmi September
+        # Gabungkan ke bookings resmi September & urutkan berdasarkan tanggal dan waktu
         res_f2_bookings = res_f2_bookings + b_wisuda_sept
+        res_f2_bookings.sort(key=lambda b: (str(b.get("tgl") or ""), str(b.get("waktu") or ""), str(b.get("id") or "")))
         print(f"[OK] Total Jadwal Terpadu September: {len(res_f2_bookings)} sesi booking.")
 
         # STEP 7: Jalankan Parser File Neraca (COGS, OPEX, Log Debit Kredit & Gaji Karyawan)

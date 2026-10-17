@@ -2322,14 +2322,14 @@ function vDash(R){
   <div class="two">
     <div class="card"><h3>Rekonsiliasi kas harian</h3>
       <p class="tiny muted" style="margin-bottom:10px">Kolom Cash pada transaksi dibandingkan baris kontrol “Pendapatan Tunai” yang dicatat admin tiap hari.</p>
-      <div class="tw"><table><thead><tr><th>Tgl</th><th class="n">Cash transaksi</th><th class="n">Kontrol kas</th><th class="n">Selisih</th></tr></thead><tbody>
+      <div class="tw scrollable" style="max-height:420px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr><th>Tgl</th><th class="n">Cash transaksi</th><th class="n">Kontrol kas</th><th class="n">Selisih</th></tr></thead><tbody>
       ${R.rekon.map(r=>`<tr><td class="mono">${r.d}</td><td class="n">${rp(r.cash)}</td>
         <td class="n">${r.ctrl===null?'<span class="muted">—</span>':rp(r.ctrl)}</td>
         <td class="n" style="color:${r.selisih?'var(--crit)':'var(--muted)'}">${r.selisih===null?"—":(r.selisih?rp(r.selisih):"cocok")}</td></tr>`).join("")}
-      <tr class="total"><td>Total</td><td class="n">${rp(R.cash)}</td>
+      </tbody><tfoot><tr class="total"><td>Total</td><td class="n">${rp(R.cash)}</td>
         <td class="n">${rp(R.rekon.reduce((s,r)=>s+(r.ctrl||0),0))}</td>
         <td class="n">${R.rekonBeda.length?R.rekonBeda.length+" hari beda":"cocok"}</td></tr>
-      </tbody></table></div></div>
+      </tfoot></table></div></div>
     <div class="card"><h3>Metrik monitoring</h3>
       <div class="tw"><table><tbody>
         ${[["Jumlah transaksi",num(R.tx)],["Transaksi uang masuk",num(R.txPaid)],["Transaksi Rp0",num(R.rp0)],
@@ -3107,7 +3107,7 @@ function kartuPaket(R){
     </div>
 
     <h4 class="eyebrow" style="margin:16px 0 7px">A · Per tanggal bayar — uang masuk</h4>
-    <div class="tw"><table><thead><tr><th>Tgl</th><th class="n">Uang masuk</th><th class="n">Baris</th>
+    <div class="tw scrollable" style="max-height:420px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr><th>Tgl</th><th class="n">Uang masuk</th><th class="n">Baris</th>
       <th class="n">Rata-rata</th><th class="n">Lunas</th><th class="n">DP</th><th class="n">Pelunasan</th>
       <th class="n">Nilai DP</th></tr></thead><tbody>
       ${R.days.filter(d=>d.berjalan).map(d=>`<tr>
@@ -3131,7 +3131,7 @@ function kartuPaket(R){
     </table></div>
 
     <h4 class="eyebrow" style="margin:20px 0 7px">B · Per tanggal foto — nilai paket utuh</h4>
-    <div class="tw"><table><thead><tr><th>Tgl foto</th><th class="n">Nilai paket</th><th class="n">Paket</th>
+    <div class="tw scrollable" style="max-height:420px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr><th>Tgl foto</th><th class="n">Nilai paket</th><th class="n">Paket</th>
       <th class="n">Rata-rata</th><th class="n">Pakai DP</th><th>Status</th></tr></thead><tbody>
       ${R.sesi.length?R.sesi.map(s=>`<tr${s.lewat?"":' style="opacity:.6"'}>
         <td class="mono">${s.d} <span class="muted tiny">${s.hari}</span></td>
@@ -4248,14 +4248,17 @@ function vEst(R){
 
   if (isOkt && okp) {
     const oktLog = S.oktoberLogOrder;
-    const oktOrders = (oktLog && oktLog.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
+    const rawOktOrders = (oktLog && oktLog.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
+    const oktOrders = [...rawOktOrders].sort((a, b) => String(a.tanggal || "").localeCompare(String(b.tanggal || "")) || String(a.id || "").localeCompare(String(b.id || "")));
     const oktShifts = (oktLog && oktLog.shifts) || S.shifts.filter(s => s.tanggal && s.tanggal.startsWith("2026-10-"));
     const oktOmzetLive = oktOrders.reduce((s, o) => s + dnum(o.total), 0);
     const oktCashLive = oktOrders.reduce((s, o) => s + dnum(o.cash), 0);
     const oktTransferLive = oktOrders.reduce((s, o) => s + dnum(o.transfer), 0);
-    const doneBookings = okp.bookings.filter(b => b.statusColor === 'biru' || b.isDone);
-    const orangeBookings = okp.bookings.filter(b => b.statusColor === 'orange' || b.isReschedule);
-    const confirmedBookings = okp.bookings.filter(b => b.statusColor !== 'biru' && b.statusColor !== 'orange' && !b.isReschedule && !b.isDone);
+
+    const sortBkChrono = (arr) => [...arr].sort((a, b) => String(a.tgl || "").localeCompare(String(b.tgl || "")) || String(a.waktu || "").localeCompare(String(b.waktu || "")));
+    const doneBookings = sortBkChrono(okp.bookings.filter(b => b.statusColor === 'biru' || b.isDone));
+    const orangeBookings = sortBkChrono(okp.bookings.filter(b => b.statusColor === 'orange' || b.isReschedule));
+    const confirmedBookings = sortBkChrono(okp.bookings.filter(b => b.statusColor !== 'biru' && b.statusColor !== 'orange' && !b.isReschedule && !b.isDone));
 
     const totDoneNilai = doneBookings.reduce((s, b) => s + (b.harga || 0), 0);
     const totDoneDp = doneBookings.reduce((s, b) => s + (b.dp || 0), 0);
@@ -4271,6 +4274,51 @@ function vEst(R){
       const bDp = (b.dp != null && b.dp > 0) ? b.dp : 100000;
       return s + Math.max(0, (b.harga || 0) - bDp);
     }, 0);
+
+    // Bangun Rekap Tanggalan Urut & Ringkas 01 s.d. 31 Oktober 2026
+    const cutoffOkt = (oktLog && oktLog.cutoff) || R.c.cutoff || "2026-10-16";
+    let cumOkt = 0;
+    const oktDailyRows = R.days.map(d => {
+      const dOrders = oktOrders.filter(o => o.tanggal === d.ds);
+      const dCash = dOrders.reduce((s, o) => s + dnum(o.cash), 0);
+      const dTransfer = dOrders.reduce((s, o) => s + dnum(o.transfer), 0);
+      const dRealized = dOrders.reduce((s, o) => s + dnum(o.total), 0);
+      const dAdmins = [...new Set(dOrders.map(o => o.admin || "AMEL"))].join(", ");
+
+      const dBks = okp.bookings.filter(b => b.tgl === d.ds);
+      const dDone = dBks.filter(b => b.statusColor === 'biru' || b.isDone).length;
+      const dConfBks = dBks.filter(b => b.statusColor !== 'biru' && b.statusColor !== 'orange' && !b.isDone && !b.isReschedule);
+      const dConf = dConfBks.length;
+      const dOrange = dBks.filter(b => b.statusColor === 'orange' || b.isReschedule).length;
+      const dEstPelunasan = dConfBks.reduce((s, b) => s + dnum(b.sisaPelunasan), 0);
+      const dNilaiJadwal = dBks.filter(b => b.statusColor !== 'orange' && !b.isReschedule).reduce((s, b) => s + dnum(b.harga), 0);
+
+      const isPastOrToday = d.ds <= cutoffOkt;
+      const netDayVal = isPastOrToday ? (dRealized + dEstPelunasan) : dEstPelunasan;
+      cumOkt += netDayVal;
+
+      return {
+        ...d,
+        isPastOrToday,
+        txCount: dOrders.length,
+        cash: dCash,
+        transfer: dTransfer,
+        realized: dRealized,
+        admins: dAdmins,
+        sesiTotal: dBks.length,
+        sesiValid: dDone + dConf,
+        doneCount: dDone,
+        confCount: dConf,
+        orangeCount: dOrange,
+        nilaiJadwal: dNilaiJadwal,
+        estPelunasan: dEstPelunasan,
+        netDayVal,
+        cum: cumOkt,
+        hasActivity: dOrders.length > 0 || dBks.length > 0
+      };
+    });
+    const maxOktDayVal = Math.max(1, ...oktDailyRows.map(r => Math.max(r.realized, r.estPelunasan, r.netDayVal)));
+    const oktOrderDays = oktDailyRows.filter(r => r.txCount > 0);
 
     return `
     ${switcherHtml}
@@ -4310,6 +4358,75 @@ function vEst(R){
       </div>
     </div>
 
+    <!-- KARTU BARU: REKAP HARIAN PER TANGGAL (TANGGALAN URUT & RINGKAS 01-31 OKT) -->
+    <div class="card" id="cardOktDailySchedule" style="margin-bottom:16px;border-left:3px solid var(--good);background:color-mix(in srgb,var(--good) 2%,var(--surface));">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+        <div>
+          <h3 style="margin:0;font-size:16px;display:flex;align-items:center;gap:8px;">
+            📅 Rekap Harian per Tanggal (Tanggalan Urut · 01 s.d. 31 Okt 2026)
+          </h3>
+          <span class="eyebrow" id="oktDailySub">Ringkasan urut per tanggal: realisasi kasir (Log Order) + jadwal sesi foto &amp; estimasi pelunasan harian</span>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+          <div class="seg" id="segOktDailyFilter">
+            <button class="btn sm pri" data-dfilter="all" style="padding:4px 10px;font-size:11px;">Semua (31 Hari)</button>
+            <button class="btn sm" data-dfilter="active" style="padding:4px 10px;font-size:11px;">Hari Aktif (${oktDailyRows.filter(r=>r.hasActivity).length})</button>
+            <button class="btn sm" data-dfilter="realized" style="padding:4px 10px;font-size:11px;">s.d. Cut-Off (${oktDailyRows.filter(r=>r.isPastOrToday).length})</button>
+            <button class="btn sm" data-dfilter="future" style="padding:4px 10px;font-size:11px;">Pipeline H+1 (${oktDailyRows.filter(r=>!r.isPastOrToday).length})</button>
+          </div>
+        </div>
+      </div>
+      <div class="tw scrollable" style="max-height:460px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;">
+        <table id="tblOktDaily">
+          <thead style="position:sticky;top:0;z-index:3;background:var(--surface2);">
+            <tr>
+              <th>Tanggal</th>
+              <th>Hari</th>
+              <th class="n">Order Kasir</th>
+              <th class="n">Realisasi Kasir</th>
+              <th class="n">Sesi Schedule</th>
+              <th>Rincian Sesi</th>
+              <th class="n">Sisa Pelunasan (🟢)</th>
+              <th class="n">Progresif Kumulatif</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${oktDailyRows.map(r => {
+              const badges = [];
+              if (r.doneCount > 0) badges.push(`<span class="pill crit" style="font-size:9.5px;padding:1px 6px;">🔵 ${r.doneCount}</span>`);
+              if (r.confCount > 0) badges.push(`<span class="pill prog" style="font-size:9.5px;padding:1px 6px;">🟢 ${r.confCount}</span>`);
+              if (r.orangeCount > 0) badges.push(`<span class="pill warn" style="font-size:9.5px;padding:1px 6px;">🟠 ${r.orangeCount}</span>`);
+              return `
+              <tr class="okt-daily-row ${r.isPastOrToday ? '' : 'future'}" data-active="${r.hasActivity ? '1' : '0'}" data-past="${r.isPastOrToday ? '1' : '0'}">
+                <td class="mono"><b>2026-10-${r.d}</b></td>
+                <td>${r.hari}</td>
+                <td class="n">${r.txCount ? `${num(r.txCount)} tx` : '<span class="muted">—</span>'}</td>
+                <td class="n heat">${r.realized ? `<i style="background:var(--accent);width:${(r.realized / maxOktDayVal * 100).toFixed(1)}%"></i><b>${rp(r.realized)}</b>` : '<span class="muted">—</span>'}</td>
+                <td class="n">${r.sesiTotal ? `<b>${r.sesiTotal}</b> sesi` : '<span class="muted">—</span>'}</td>
+                <td>${badges.length ? `<div style="display:flex;gap:4px;flex-wrap:wrap;">${badges.join("")}</div>` : '<span class="muted">—</span>'}</td>
+                <td class="n" style="color:var(--good);font-weight:600;">${r.estPelunasan ? rp(r.estPelunasan) : '<span class="muted">—</span>'}</td>
+                <td class="n mono" style="color:var(--accent-ink);font-weight:600;">${rp(r.cum)}</td>
+                <td><span class="pill ${r.isPastOrToday ? 'final' : (r.confCount > 0 ? 'prog' : 'neutral')}" style="font-size:10px;">${r.isPastOrToday ? 'REALIZED' : (r.confCount > 0 ? 'PIPELINE' : '—')}</span></td>
+              </tr>`;
+            }).join("")}
+          </tbody>
+          <tfoot>
+            <tr class="total">
+              <td colspan="2">Total 1–31 Oktober 2026</td>
+              <td class="n">${num(oktOrders.length)} tx</td>
+              <td class="n">${rp(oktOmzetLive)}</td>
+              <td class="n">${num(okp.totalBookings)} sesi</td>
+              <td><span class="tiny">🔵 ${doneBookings.length} · 🟢 ${confirmedBookings.length} · 🟠 ${orangeBookings.length}</span></td>
+              <td class="n" style="color:var(--good);font-weight:700;">${rp(totConfPelunasan)}</td>
+              <td class="n mono" style="font-weight:800;">${rp(oktOmzetLive + totConfPelunasan)}</td>
+              <td><span class="pill good" style="font-size:10px;">Est. Akhir Bulan</span></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
     <!-- Card Realisasi Live Hari Ini -->
     <div class="card" id="cardOktLiveLog" style="margin-bottom:16px;border-left:3px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
@@ -4321,11 +4438,65 @@ function vEst(R){
           <span class="eyebrow">Data riil pembukuan kasir &amp; absensi shift kru s.d. cut-off hari ini (file1_okt.xlsm)</span>
         </div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <div class="seg" id="segOktLogMode">
+            <button class="btn sm pri" data-lmode="daily" style="padding:4px 10px;font-size:11px;font-weight:600;">📅 Ringkas per Tanggal (${oktOrderDays.length} Hari)</button>
+            <button class="btn sm" data-lmode="detail" style="padding:4px 10px;font-size:11px;font-weight:600;">📋 Rincian Semua Order (${oktOrders.length} Tx)</button>
+          </div>
           <span class="pill crit" style="font-size:11px;">${oktOrders.length} Order Realized · ${rp(oktOmzetLive)}</span>
           <span class="pill info" style="font-size:11px;">${oktShifts.length} Shift Kru</span>
         </div>
       </div>
-      <div class="tw scrollable" style="max-height:460px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;">
+
+      <!-- Mode 1: Ringkas per Tanggal (Default) -->
+      <div id="wrapOktLogDaily" class="tw scrollable" style="max-height:460px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;">
+        <table>
+          <thead style="position:sticky;top:0;z-index:3;background:var(--surface2);">
+            <tr>
+              <th>Tanggal</th>
+              <th>Hari</th>
+              <th class="n">Jml Order</th>
+              <th class="n">Cash</th>
+              <th class="n">Transfer</th>
+              <th class="n">Total Omzet Harian</th>
+              <th class="n">Kumulatif Realized</th>
+              <th>Admin Bertugas</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${oktOrderDays.length ? (() => {
+              let runCum = 0;
+              return oktOrderDays.map(r => {
+                runCum += r.realized;
+                return `
+                <tr>
+                  <td class="mono"><b>2026-10-${r.d}</b></td>
+                  <td>${r.hari}</td>
+                  <td class="n"><b>${num(r.txCount)}</b> order</td>
+                  <td class="n">${r.cash ? rp(r.cash) : "—"}</td>
+                  <td class="n" style="color:var(--good);font-weight:600;">${r.transfer ? rp(r.transfer) : "—"}</td>
+                  <td class="n mono" style="font-weight:700;">${rp(r.realized)}</td>
+                  <td class="n mono" style="color:var(--accent-ink);">${rp(runCum)}</td>
+                  <td><b>${esc(r.admins || "AMEL")}</b></td>
+                </tr>`;
+              }).join("");
+            })() : '<tr><td colspan="8" class="empty">Belum ada transaksi di Log Order Oktober.</td></tr>'}
+          </tbody>
+          ${oktOrderDays.length ? `<tfoot>
+            <tr class="total">
+              <td colspan="2">Total Realisasi Live (${oktOrderDays.length} Hari Aktif)</td>
+              <td class="n">${num(oktOrders.length)} order</td>
+              <td class="n">${rp(oktCashLive)}</td>
+              <td class="n" style="color:var(--good);font-weight:600;">${rp(oktTransferLive)}</td>
+              <td class="n mono" style="font-weight:700;">${rp(oktOmzetLive)}</td>
+              <td class="n mono" style="font-weight:700;">${rp(oktOmzetLive)}</td>
+              <td></td>
+            </tr>
+          </tfoot>` : ''}
+        </table>
+      </div>
+
+      <!-- Mode 2: Rincian Semua Order (284 Transaksi) -->
+      <div id="wrapOktLogDetail" class="tw scrollable" style="display:none;max-height:460px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;">
         <table>
           <thead style="position:sticky;top:0;z-index:3;background:var(--surface2);">
             <tr>
@@ -4350,7 +4521,7 @@ function vEst(R){
                 <td class="n">${o.cash ? rp(o.cash) : "—"}</td>
                 <td class="n" style="color:var(--good);font-weight:600;">${o.transfer ? rp(o.transfer) : "—"}</td>
                 <td class="n mono" style="font-weight:700;">${rp(o.total)}</td>
-                <td><span class="pill prog" style="font-size:11px;">DP Masuk</span></td>
+                <td><span class="pill ${dnum(o.total) >= 250000 ? 'final' : 'prog'}" style="font-size:11px;">${dnum(o.total) >= 250000 ? 'Lunas/Pelunasan' : 'DP Masuk'}</span></td>
                 <td><b>${esc(o.admin || "AMEL")}</b></td>
               </tr>
             `).join("") : '<tr><td colspan="9" class="empty">Belum ada transaksi di Log Order Oktober.</td></tr>'}
@@ -4358,9 +4529,9 @@ function vEst(R){
           ${oktOrders.length ? `<tfoot>
             <tr class="total">
               <td colspan="4">Total Realisasi Live (${oktOrders.length} Order)</td>
-              <td class="n">${rp(oktOrders.reduce((s,o)=>s+dnum(o.cash),0))}</td>
-              <td class="n" style="color:var(--good);font-weight:600;">${rp(oktOrders.reduce((s,o)=>s+dnum(o.transfer),0))}</td>
-              <td class="n mono" style="font-weight:700;">${rp(oktOrders.reduce((s,o)=>s+dnum(o.total),0))}</td>
+              <td class="n">${rp(oktCashLive)}</td>
+              <td class="n" style="color:var(--good);font-weight:600;">${rp(oktTransferLive)}</td>
+              <td class="n mono" style="font-weight:700;">${rp(oktOmzetLive)}</td>
               <td colspan="2"></td>
             </tr>
           </tfoot>` : ''}
@@ -4822,7 +4993,7 @@ function vEst(R){
     `;
   }
 
-  // Fallback / September 2026
+  // Fallback / September 2026 & Arsip Historis
   if(!B) return `
   ${switcherHtml}
   <div class="vhead"><div><div class="eyebrow">Forward-looking</div><h2>Estimasi Omzet</h2></div>
@@ -4836,8 +5007,9 @@ function vEst(R){
   const doneVal = B.doneTot > 0 ? B.doneTot : (doneCount * 350000);
   const successRate = B.bk.length > 0 ? (100 - (B.wasteBks.length / B.bk.length * 100)).toFixed(1) : 100;
 
+  const sortedWasteBks = [...B.wasteBks].sort((a,b)=>String(a.tgl||"").localeCompare(String(b.tgl||""))||String(a.waktu||"").localeCompare(String(b.waktu||"")));
   const wastePkgMap = {};
-  B.wasteBks.forEach(b => {
+  sortedWasteBks.forEach(b => {
     const p = b.paketRaw || b.paket || "Lainnya";
     wastePkgMap[p] = (wastePkgMap[p] || 0) + 1;
   });
@@ -4854,11 +5026,11 @@ function vEst(R){
     <div class="stat"><span class="k">Selesai / Hadir (🔵)</span><span class="v sm" style="color:var(--good);">${rp(doneVal)}</span>
       <span class="m">${doneCount} sesi foto terlaksana</span></div>
     <div class="stat"><span class="k">Waste / Batal Sesi (🟠)</span><span class="v sm" style="color:var(--warn);">${rp(B.wasteTot)}</span>
-      <span class="m">${B.wasteBks.length} sesi batal (sisa ${rp(B.wasteLost)} hilang)</span></div>
+      <span class="m">${sortedWasteBks.length} sesi batal (sisa ${rp(B.wasteLost)} hilang)</span></div>
     <div class="stat"><span class="k">DP Waste Diamankan</span><span class="v sm" style="color:var(--accent);">${rp(B.wasteDp)}</span>
       <span class="m">non-refundable di kas studio</span></div>
     <div class="stat"><span class="k">Tingkat Keberhasilan Sesi</span><span class="v sm" style="color:var(--good);">${successRate}%</span>
-      <span class="m">hanya ${pct(B.bk.length ? B.wasteBks.length / B.bk.length : 0)} batal</span></div>
+      <span class="m">hanya ${pct(B.bk.length ? sortedWasteBks.length / B.bk.length : 0)} batal</span></div>
   </div>
 
   <!-- Card Audit Booking Batal & Reschedule (Waste) -->
@@ -4866,7 +5038,7 @@ function vEst(R){
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
       <div>
         <h3 style="margin:0;font-size:16px;">Audit Booking Batal &amp; Reschedule (Waste) · ${mn} ${yr}</h3>
-        <span class="eyebrow">${B.wasteBks.length} sesi booking berwarna orange yang dibatalkan / gagal sesi</span>
+        <span class="eyebrow">${sortedWasteBks.length} sesi booking berwarna orange yang dibatalkan / gagal sesi</span>
       </div>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
         <span class="pill warn" style="font-size:11px;">Nilai Paket Batal: ${rp(B.wasteTot)}</span>
@@ -4891,7 +5063,7 @@ function vEst(R){
           </tr>
         </thead>
         <tbody>
-          ${B.wasteBks.length ? B.wasteBks.map(b => `
+          ${sortedWasteBks.length ? sortedWasteBks.map(b => `
             <tr>
               <td class="mono">${b.tgl}</td>
               <td class="mono muted">${esc(b.waktu || "—")}</td>
@@ -4906,9 +5078,9 @@ function vEst(R){
             </tr>
           `).join("") : '<tr><td colspan="10" class="empty">Tidak ada booking batal/reschedule (waste) di bulan ini.</td></tr>'}
         </tbody>
-        ${B.wasteBks.length ? `<tfoot>
+        ${sortedWasteBks.length ? `<tfoot>
           <tr class="total">
-            <td colspan="6">Total Batal / Reschedule (${B.wasteBks.length} sesi)</td>
+            <td colspan="6">Total Batal / Reschedule (${sortedWasteBks.length} sesi)</td>
             <td class="n">${rp(B.wasteTot)}</td>
             <td class="n" style="color:var(--good);">${rp(B.wasteDp)}</td>
             <td class="n" style="color:var(--crit);font-weight:700;">${rp(B.wasteLost)}</td>
@@ -4918,7 +5090,7 @@ function vEst(R){
       </table>
     </div>
     <div class="note warn" style="margin-top:10px;font-size:12px;">
-      <b>Insight Audit:</b> ${B.wasteBks.length > 0 ? `Tercatat ${B.wasteBks.length} sesi batal di bulan ${mn} ${topWastePkgs ? '(' + topWastePkgs + ')' : ''}. Uang DP sebesar <b>${rp(B.wasteDp)}</b> tetap aman di kas studio karena non-refundable, namun studio kehilangan potensi pelunasan kas masuk sebesar <b>${rp(B.wasteLost)}</b>.` : `Sempurna! Tidak ada booking batal atau reschedule di bulan ${mn}. Seluruh sesi terlaksana dengan baik.`}
+      <b>Insight Audit:</b> ${sortedWasteBks.length > 0 ? `Tercatat ${sortedWasteBks.length} sesi batal di bulan ${mn} ${topWastePkgs ? '(' + topWastePkgs + ')' : ''}. Uang DP sebesar <b>${rp(B.wasteDp)}</b> tetap aman di kas studio karena non-refundable, namun studio kehilangan potensi pelunasan kas masuk sebesar <b>${rp(B.wasteLost)}</b>.` : `Sempurna! Tidak ada booking batal atau reschedule di bulan ${mn}. Seluruh sesi terlaksana dengan baik.`}
     </div>
   </div>
 
@@ -4945,21 +5117,39 @@ function vEst(R){
       </tbody></table></div></div>
   </div>
 
-  <div class="tw" style="margin-bottom:14px"><table><thead><tr><th>Tanggal</th><th>Hari</th>
-    <th class="n">Booking</th><th class="n">Cash in</th><th class="n">Kumulatif</th>
-    <th>Sumber</th><th>Status</th><th class="n">Belum masuk</th></tr></thead><tbody>
-    ${B.perTgl.map(t=>`<tr class="${t.berjalan?"":"future"}">
-      <td class="mono">${t.d}</td><td>${t.hari}</td>
-      <td class="n">${t.booking||'<span class="muted">—</span>'}</td>
-      <td class="n heat">${t.nilai?`<i style="background:var(--${t.berjalan?"cash":"accent"});width:${(t.nilai/maxN*100).toFixed(1)}%"></i>${rp(t.nilai)}`:'<span class="muted">—</span>'}</td>
-      <td class="n">${rp(t.cum)}</td>
-      <td class="tiny muted">${t.sumber}</td>
-      <td><span class="pill ${t.berjalan?"final":(t.booking?"prog":"neutral")}">${t.booking||t.berjalan?t.status:"—"}</span></td>
-      <td class="n">${t.future?rp(t.future):'<span class="muted">—</span>'}</td></tr>`).join("")}
-    <tr class="total"><td colspan="2">Total</td><td class="n">${num(B.bk.length)}</td>
-      <td class="n">${rp(B.total)}</td><td class="n">${rp(B.total)}</td>
-      <td colspan="2" class="tiny">Log Order + Schedule</td><td class="n">${rp(B.estimasi)}</td></tr>
-  </tbody></table></div>
+  <div class="card" style="margin-bottom:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+      <div>
+        <h3 style="margin:0;">📅 Rekap Harian per Tanggal (Tanggalan Urut · 01 s.d. ${R.dim} ${mn} ${yr})</h3>
+        <span class="tiny muted">Ringkasan urut per tanggal: booking sesi, cash in terealisasi, dan kumulatif bulanan</span>
+      </div>
+      <span class="pill final" style="font-size:10.5px;">${R.dim} Hari Terdata</span>
+    </div>
+    <div class="tw scrollable" style="max-height:480px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;">
+      <table>
+        <thead style="position:sticky;top:0;z-index:3;background:var(--surface2);">
+          <tr><th>Tanggal</th><th>Hari</th>
+          <th class="n">Booking</th><th class="n">Cash in</th><th class="n">Kumulatif</th>
+          <th>Sumber</th><th>Status</th><th class="n">Belum masuk</th></tr>
+        </thead>
+        <tbody>
+          ${B.perTgl.map(t=>`<tr class="${t.berjalan?"":"future"}">
+            <td class="mono"><b>${R.c.bulan}-${t.d}</b></td><td>${t.hari}</td>
+            <td class="n">${t.booking||'<span class="muted">—</span>'}</td>
+            <td class="n heat">${t.nilai?`<i style="background:var(--${t.berjalan?"cash":"accent"});width:${(t.nilai/maxN*100).toFixed(1)}%"></i>${rp(t.nilai)}`:'<span class="muted">—</span>'}</td>
+            <td class="n">${rp(t.cum)}</td>
+            <td class="tiny muted">${t.sumber}</td>
+            <td><span class="pill ${t.berjalan?"final":(t.booking?"prog":"neutral")}">${t.booking||t.berjalan?t.status:"—"}</span></td>
+            <td class="n">${t.future?rp(t.future):'<span class="muted">—</span>'}</td></tr>`).join("")}
+        </tbody>
+        <tfoot>
+          <tr class="total"><td colspan="2">Total ${mn} ${yr}</td><td class="n">${num(B.bk.length)}</td>
+            <td class="n">${rp(B.total)}</td><td class="n">${rp(B.total)}</td>
+            <td colspan="2" class="tiny">Log Order + Schedule</td><td class="n">${rp(B.estimasi)}</td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
 
   <div class="card" style="margin-bottom:14px">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
@@ -4969,7 +5159,7 @@ function vEst(R){
       </div>
       <div style="display:flex;gap:6px;align-items:center;">
         <span class="pill good" style="font-size:10.5px;">🔵 Hadir: ${doneCount} sesi</span>
-        <span class="pill warn" style="font-size:10.5px;">🟠 Batal/Waste: ${B.wasteBks.length} sesi</span>
+        <span class="pill warn" style="font-size:10.5px;">🟠 Batal/Waste: ${sortedWasteBks.length} sesi</span>
       </div>
     </div>
     <div class="tw scrollable" style="max-height:480px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;">
@@ -4988,12 +5178,12 @@ function vEst(R){
           </tr>
         </thead>
         <tbody>
-          ${(B.fut.length > 0 ? B.fut : B.bk).sort((a,b)=>a.tgl<b.tgl?-1:a.tgl>b.tgl?1:(a.waktu||"")<(b.waktu||"")?-1:1).map(b=>{
+          ${[...(B.fut.length > 0 ? B.fut : B.bk)].sort((a,b)=>a.tgl<b.tgl?-1:a.tgl>b.tgl?1:(a.waktu||"")<(b.waktu||"")?-1:1).map(b=>{
             const isOrange = b.statusColor === "orange" || b.isReschedule;
             const isDone = b.statusColor === "biru" || b.isDone;
             return `
             <tr style="${isOrange ? 'background:color-mix(in srgb,var(--warn) 6%,transparent);' : ''}">
-              <td class="mono">${b.tgl.slice(8)}</td>
+              <td class="mono">${b.tgl}</td>
               <td class="mono muted">${esc(b.waktu||"—")}</td>
               <td><span class="pill ${isOrange ? 'warn' : (isDone ? 'crit' : 'prog')}" style="font-size:9.5px;padding:1px 6px;">${isOrange ? '🟠 Batal/Reschedule' : (isDone ? '🔵 Hadir/Selesai' : '🟢 Terjadwal')}</span></td>
               <td><b>${esc(b.nama)}</b></td>
@@ -5527,7 +5717,7 @@ function vSet(R){
         </tbody>
       </table>
     </div>
-  </div>div>`;
+  </div>`;
 }
 
 /* ============================ modal konfirmasi universal ============================ */
@@ -6044,6 +6234,51 @@ function wire(R){
       };
     }
   });
+
+  // Filter Tanggalan Urut 01-31 Okt (#segOktDailyFilter)
+  const segDailyF = document.getElementById("segOktDailyFilter");
+  if (segDailyF) {
+    segDailyF.querySelectorAll("button[data-dfilter]").forEach(btn => {
+      btn.onclick = () => {
+        segDailyF.querySelectorAll("button").forEach(b => b.classList.remove("pri"));
+        btn.classList.add("pri");
+        const df = btn.dataset.dfilter;
+        const rows = document.querySelectorAll("#tblOktDaily .okt-daily-row");
+        let vis = 0;
+        rows.forEach(r => {
+          let show = true;
+          if (df === "active") show = r.dataset.active === "1";
+          else if (df === "realized") show = r.dataset.past === "1";
+          else if (df === "future") show = r.dataset.past === "0";
+          r.style.display = show ? "" : "none";
+          if (show) vis++;
+        });
+        const subEl = document.getElementById("oktDailySub");
+        if (subEl) subEl.textContent = `Menampilkan ${vis} tanggal urut (${btn.textContent.trim()})`;
+      };
+    });
+  }
+
+  // Switcher Mode Ringkas per Tanggal vs Rincian Semua Order di Log Order Oktober (#segOktLogMode)
+  const segLogMode = document.getElementById("segOktLogMode");
+  const wrapLogDaily = document.getElementById("wrapOktLogDaily");
+  const wrapLogDetail = document.getElementById("wrapOktLogDetail");
+  if (segLogMode) {
+    segLogMode.querySelectorAll("button[data-lmode]").forEach(btn => {
+      btn.onclick = () => {
+        segLogMode.querySelectorAll("button").forEach(b => b.classList.remove("pri"));
+        btn.classList.add("pri");
+        const mode = btn.dataset.lmode;
+        if (mode === "daily") {
+          if (wrapLogDaily) wrapLogDaily.style.display = "";
+          if (wrapLogDetail) wrapLogDetail.style.display = "none";
+        } else {
+          if (wrapLogDaily) wrapLogDaily.style.display = "none";
+          if (wrapLogDetail) wrapLogDetail.style.display = "";
+        }
+      };
+    });
+  }
 
   // Tab Switcher Pemisahan Sesi (Terjadwal vs Selesai vs Kedua Tabel)
   const segSplit = document.getElementById("segOktSplit");
@@ -7318,9 +7553,10 @@ function closeSyncModal() {
 }
 
 async function fastRefresh(silent = false) {
+  if (silent && isLockedState) return false;
   const btn = document.getElementById("btnUpdateData");
   const originalHtml = btn ? btn.innerHTML : "🔄 Update";
-  if (btn) { btn.innerHTML = "⏳ Refresh..."; btn.disabled = true; }
+  if (!silent && btn) { btn.innerHTML = "⏳ Refresh..."; btn.disabled = true; }
 
   try {
     const fetchUrl = (window.location.protocol === "file:")
@@ -7332,24 +7568,31 @@ async function fastRefresh(silent = false) {
     
     const curSyncId = (S.sync && S.sync[0] && S.sync[0].id) || "";
     const newSyncId = (latest.sync && latest.sync[0] && latest.sync[0].id) || "";
-    
-    S = latest;
-    localStorage.setItem("foxe_studio_keuangan_state", JSON.stringify(S));
-    localStorage.setItem("foxe_studio_keuangan_sync_id", newSyncId || "sync_" + Date.now());
-    render();
+    const curOktLen = (S.oktoberLogOrder && S.oktoberLogOrder.orders && S.oktoberLogOrder.orders.length) || 0;
+    const newOktLen = (latest.oktoberLogOrder && latest.oktoberLogOrder.orders && latest.oktoberLogOrder.orders.length) || 0;
+    const curBkLen = (S.oktoberPipeline && S.oktoberPipeline.totalBookings) || 0;
+    const newBkLen = (latest.oktoberPipeline && latest.oktoberPipeline.totalBookings) || 0;
+    const hasChanged = !silent || (newSyncId !== curSyncId) || (newOktLen !== curOktLen) || (newBkLen !== curBkLen);
+
+    if (hasChanged) {
+      S = latest;
+      localStorage.setItem("foxe_studio_keuangan_state", JSON.stringify(S));
+      localStorage.setItem("foxe_studio_keuangan_sync_id", newSyncId || "sync_" + Date.now());
+      if (!isLockedState) render();
+    }
 
     if (!silent) {
       const ok = syncSukses();
       const jam = ok ? wibParts(ok.mulai).jam : "";
       showToast("✅ Data tampilan berhasil diperbarui!" + (jam ? ` (Update ${jam} WIB)` : ""));
+      closeSyncModal();
     }
-    closeSyncModal();
     return true;
   } catch (err) {
     if (!silent) showToast("⚠️ " + err.message, "err");
     return false;
   } finally {
-    if (btn) {
+    if (!silent && btn) {
       btn.innerHTML = "✅ Terkini";
       setTimeout(() => { btn.innerHTML = originalHtml; btn.disabled = false; }, 1800);
     }
