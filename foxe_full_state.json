@@ -54114,6 +54114,19 @@
       "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
+    },
+    {
+      "id": "or_312",
+      "tanggal": "2026-10-18",
+      "client": "Musang Titut",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-19",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -60824,6 +60837,18 @@
       "tanggal": "2026-10-17",
       "nama": "SAKA",
       "slot": 1
+    },
+    {
+      "id": "sh_69",
+      "tanggal": "2026-10-18",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_70",
+      "tanggal": "2026-10-18",
+      "nama": "ADIF",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -66294,6 +66319,14 @@
       "dp": 4.0,
       "sesiFoto": 21.0,
       "transaksi": 25.0
+    },
+    {
+      "id": "ld_18",
+      "tanggal": "2026-10-18",
+      "leads": 0.0,
+      "dp": 1.0,
+      "sesiFoto": 0.0,
+      "transaksi": 1.0
     }
   ],
   "kpi": [
@@ -78036,7 +78069,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 65255000.0
+        "omzet": 65355000.0
       }
     ]
   },
@@ -78384,6 +78417,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261018-0258",
+      "mulai": "2026-10-18T02:58:33.876942+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 312 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 102 pos pengeluaran Neraca, 229 pipeline Okt."
+    },
     {
       "id": "sy_20261017-1430",
       "mulai": "2026-10-17T14:30:13.626956+00:00",
@@ -79417,7 +79456,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-17T14:30:13.626956+00:00"
+    "last_sync": "2026-10-18T02:58:33.876942+00:00"
   },
   "neracaDetail": [
     {
@@ -79981,15 +80020,15 @@
     "bulan": "2026-10",
     "totalBookings": 229,
     "potentialOmzet": 75900000.0,
-    "totalDp": 20700000.0,
-    "estimateCashIn": 6875000.0,
-    "remainingCashIn": 6875000.0,
-    "totalPipelineCashIn": 55200000.0,
+    "totalDp": 20800000.0,
+    "estimateCashIn": 6775000.0,
+    "remainingCashIn": 6775000.0,
+    "totalPipelineCashIn": 55100000.0,
     "breakdown": {
       "reguler": {
         "sesi": 130,
         "nilai": 39750000.0,
-        "dp": 11450000.0
+        "dp": 11550000.0
       },
       "wisudaDay1": {
         "sesi": 47,
@@ -80012,8 +80051,8 @@
       "confirmed": {
         "sesi": 27,
         "nilai": 9175000.0,
-        "dp": 2350000.0,
-        "cashIn": 6875000.0
+        "dp": 2450000.0,
+        "cashIn": 6775000.0
       },
       "reschedule": {
         "sesi": 11,
@@ -85359,7 +85398,7 @@
         "jmlOrang": 10,
         "harga": 250000.0,
         "admin": "IN",
-        "noHp": "",
+        "noHp": "dp 100",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -85368,8 +85407,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 250000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 150000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -90133,6 +90172,19 @@
         "pembayaran": "Lunas",
         "admin": "INDAH",
         "fotografer": "ADIF"
+      },
+      {
+        "id": "or_312",
+        "tanggal": "2026-10-18",
+        "client": "Musang Titut",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-19",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -90543,6 +90595,18 @@
         "tanggal": "2026-10-17",
         "nama": "SAKA",
         "slot": 1
+      },
+      {
+        "id": "sh_69",
+        "tanggal": "2026-10-18",
+        "nama": "AMEL",
+        "slot": 1
+      },
+      {
+        "id": "sh_70",
+        "tanggal": "2026-10-18",
+        "nama": "ADIF",
+        "slot": 1
       }
     ],
     "cashControl": [
@@ -90843,9 +90907,9 @@
         "id": "ld_18",
         "tanggal": "2026-10-18",
         "leads": 0.0,
-        "dp": 0.0,
+        "dp": 1.0,
         "sesiFoto": 0.0,
-        "transaksi": 0.0
+        "transaksi": 1.0
       },
       {
         "id": "ld_19",
@@ -91372,8 +91436,8 @@
         ]
       }
     },
-    "cutoff": "2026-10-17",
-    "hariBerjalan": 17
+    "cutoff": "2026-10-18",
+    "hariBerjalan": 18
   },
   "adsByMonth": {
     "2026-09": {
@@ -94095,18 +94159,18 @@
           "row_idx": 10,
           "nama": "Adif",
           "job": "Fotografer",
-          "q": 18.0,
+          "q": 19.0,
           "q_raw": 0.0,
-          "actual_shift": 18,
+          "actual_shift": 19,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 720000.0,
+          "total_gaji": 760000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 720000.0,
+          "thp": 760000.0,
           "status": "Draft"
         },
         {
@@ -94133,18 +94197,18 @@
           "row_idx": 14,
           "nama": "Amel",
           "job": "Admin",
-          "q": 17.0,
+          "q": 18.0,
           "q_raw": 0.0,
-          "actual_shift": 17,
+          "actual_shift": 18,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 680000.0,
+          "total_gaji": 720000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 680000.0,
+          "thp": 720000.0,
           "status": "Draft"
         },
         {
@@ -94320,13 +94384,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 10870000.0,
+        "total_gaji": 10950000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 10870000.0,
+        "grand_total_thp": 10950000.0,
         "total_karyawan": 12
       }
     },
@@ -104268,18 +104332,18 @@
         "row_idx": 10,
         "nama": "Adif",
         "job": "Fotografer",
-        "q": 18.0,
+        "q": 19.0,
         "q_raw": 0.0,
-        "actual_shift": 18,
+        "actual_shift": 19,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 720000.0,
+        "total_gaji": 760000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 720000.0,
+        "thp": 760000.0,
         "status": "Draft"
       },
       {
@@ -104306,18 +104370,18 @@
         "row_idx": 14,
         "nama": "Amel",
         "job": "Admin",
-        "q": 17.0,
+        "q": 18.0,
         "q_raw": 0.0,
-        "actual_shift": 17,
+        "actual_shift": 18,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 680000.0,
+        "total_gaji": 720000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 680000.0,
+        "thp": 720000.0,
         "status": "Draft"
       },
       {
@@ -153866,7 +153930,7 @@
         "jmlOrang": 10,
         "harga": 250000.0,
         "admin": "IN",
-        "noHp": "",
+        "noHp": "dp 100",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -153875,8 +153939,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 250000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 150000.0,
         "kategori": "Studio Reguler"
       },
       {
