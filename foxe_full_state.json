@@ -54127,6 +54127,32 @@
       "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_313",
+      "tanggal": "2026-10-18",
+      "client": "Belita",
+      "paket": "Couple B",
+      "tanggalFoto": "2026-10-18",
+      "cash": 0.0,
+      "transfer": 0.0,
+      "total": 0.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_314",
+      "tanggal": "2026-10-18",
+      "client": "Vega",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-18",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -66325,8 +66351,8 @@
       "tanggal": "2026-10-18",
       "leads": 0.0,
       "dp": 1.0,
-      "sesiFoto": 0.0,
-      "transaksi": 1.0
+      "sesiFoto": 2.0,
+      "transaksi": 3.0
     }
   ],
   "kpi": [
@@ -78069,7 +78095,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 65355000.0
+        "omzet": 65455000.0
       }
     ]
   },
@@ -78417,6 +78443,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261018-0538",
+      "mulai": "2026-10-18T05:38:54.537757+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 314 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 102 pos pengeluaran Neraca, 229 pipeline Okt."
+    },
     {
       "id": "sy_20261018-0258",
       "mulai": "2026-10-18T02:58:33.876942+00:00",
@@ -79456,7 +79488,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-18T02:58:33.876942+00:00"
+    "last_sync": "2026-10-18T05:38:54.537757+00:00"
   },
   "neracaDetail": [
     {
@@ -80020,15 +80052,15 @@
     "bulan": "2026-10",
     "totalBookings": 229,
     "potentialOmzet": 75900000.0,
-    "totalDp": 20800000.0,
-    "estimateCashIn": 6775000.0,
-    "remainingCashIn": 6775000.0,
-    "totalPipelineCashIn": 55100000.0,
+    "totalDp": 20750000.0,
+    "estimateCashIn": 6675000.0,
+    "remainingCashIn": 6675000.0,
+    "totalPipelineCashIn": 55150000.0,
     "breakdown": {
       "reguler": {
         "sesi": 130,
         "nilai": 39750000.0,
-        "dp": 11550000.0
+        "dp": 11500000.0
       },
       "wisudaDay1": {
         "sesi": 47,
@@ -80043,16 +80075,16 @@
     },
     "statusBreakdown": {
       "done": {
-        "sesi": 191,
-        "nilai": 62775000.0,
-        "dp": 17250000.0,
-        "cashIn": 45675000.0
+        "sesi": 193,
+        "nilai": 63025000.0,
+        "dp": 17400000.0,
+        "cashIn": 45775000.0
       },
       "confirmed": {
-        "sesi": 27,
-        "nilai": 9175000.0,
-        "dp": 2450000.0,
-        "cashIn": 6775000.0
+        "sesi": 25,
+        "nilai": 8925000.0,
+        "dp": 2250000.0,
+        "cashIn": 6675000.0
       },
       "reschedule": {
         "sesi": 11,
@@ -85223,16 +85255,16 @@
         "jmlOrang": 1,
         "harga": 50000.0,
         "admin": "IN",
-        "noHp": "dp 100",
+        "noHp": "Lunas",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
-        "dp": 100000.0,
+        "dp": 50000.0,
         "sisaPelunasan": 0.0,
         "kategori": "Studio Reguler"
       },
@@ -85250,12 +85282,12 @@
         "admin": "IN",
         "noHp": "dp 100 lmbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 100000.0,
@@ -90185,6 +90217,32 @@
         "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_313",
+        "tanggal": "2026-10-18",
+        "client": "Belita",
+        "paket": "Couple B",
+        "tanggalFoto": "2026-10-18",
+        "cash": 0.0,
+        "transfer": 0.0,
+        "total": 0.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_314",
+        "tanggal": "2026-10-18",
+        "client": "Vega",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-18",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
       }
     ],
     "shifts": [
@@ -90908,8 +90966,8 @@
         "tanggal": "2026-10-18",
         "leads": 0.0,
         "dp": 1.0,
-        "sesiFoto": 0.0,
-        "transaksi": 1.0
+        "sesiFoto": 2.0,
+        "transaksi": 3.0
       },
       {
         "id": "ld_19",
@@ -153755,16 +153813,16 @@
         "jmlOrang": 1,
         "harga": 50000.0,
         "admin": "IN",
-        "noHp": "dp 100",
+        "noHp": "Lunas",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
-        "dp": 100000.0,
+        "dp": 50000.0,
         "sisaPelunasan": 0.0,
         "kategori": "Studio Reguler"
       },
@@ -153782,12 +153840,12 @@
         "admin": "IN",
         "noHp": "dp 100 lmbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 100000.0,
