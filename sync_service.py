@@ -19,7 +19,7 @@ from deep_sync_foxe import run_integration
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 SYNC_FILES = [
-    "foxe_full_state.json", "index.html", "file1.xlsm", "file1_okt.xlsm",
+    "foxe_full_state.json", "index.html", "leads_vault.json", "file1.xlsm", "file1_okt.xlsm",
     "file2.xlsx", "file_neraca.xlsx", "file2_okt.xlsx", "file_wisuda_3okt.xlsx",
     "file_wisuda_4okt.xlsx", "file_wisuda_uin_1sep.xlsx", "file_wisuda_uin_2sep.xlsx",
     "file_wisuda_unsoed_8sep.xlsx", "file_wisuda_unsoed_9sep.xlsx"
