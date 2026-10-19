@@ -9,11 +9,41 @@ Menjalankan 'deep_sync_foxe.py' secara otomatis:
 =============================================================================
 """
 
+import os
 import sys
 import time
 import argparse
 import datetime
+import subprocess
 from deep_sync_foxe import run_integration
+
+REPO_DIR = os.path.dirname(os.path.abspath(__file__))
+SYNC_FILES = [
+    "foxe_full_state.json", "index.html", "file1.xlsm", "file1_okt.xlsm",
+    "file2.xlsx", "file_neraca.xlsx", "file2_okt.xlsx", "file_wisuda_3okt.xlsx",
+    "file_wisuda_4okt.xlsx", "file_wisuda_uin_1sep.xlsx", "file_wisuda_uin_2sep.xlsx",
+    "file_wisuda_unsoed_8sep.xlsx", "file_wisuda_unsoed_9sep.xlsx"
+]
+
+def run_integration_with_git():
+    try:
+        subprocess.run(["git", "checkout", "--"] + SYNC_FILES, cwd=REPO_DIR, check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["git", "pull", "--rebase", "-X", "theirs", "origin", "main"], cwd=REPO_DIR, check=False)
+    except Exception as e:
+        print(f"[WARN] Git pull sebelum sync dilewati: {e}")
+
+    run_integration()
+
+    try:
+        subprocess.run(["git", "add"] + SYNC_FILES, cwd=REPO_DIR, check=False)
+        diff_res = subprocess.run(["git", "diff", "--staged", "--quiet"], cwd=REPO_DIR)
+        if diff_res.returncode != 0:
+            subprocess.run(["git", "commit", "-m", "Auto-sync Google Drive (Local Service) [skip ci]"], cwd=REPO_DIR, check=False)
+            subprocess.run(["git", "pull", "--rebase", "-X", "theirs", "origin", "main"], cwd=REPO_DIR, check=False)
+            subprocess.run(["git", "push", "origin", "main"], cwd=REPO_DIR, check=False)
+            print("[OK] Perubahan state lokal berhasil di-push ke origin/main.")
+    except Exception as e:
+        print(f"[WARN] Git push setelah sync gagal: {e}")
 
 def get_seconds_until_target(target_hour=9, target_minute=0):
     now = datetime.datetime.now()
@@ -45,7 +75,7 @@ def start_daily_service(target_time_str="09:00"):
         iteration += 1
         print(f"\n--- [EKSEKUSI HARIAN #{iteration}] Mulai Sinkronisasi: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} ---")
         try:
-            run_integration()
+            run_integration_with_git()
             print(f"[OK] Sinkronisasi harian #{iteration} berhasil.")
         except Exception as e:
             print(f"[ERROR] Sinkronisasi harian #{iteration} gagal: {e}", file=sys.stderr)
@@ -61,7 +91,7 @@ def start_interval_service(interval_seconds=900, run_once=False):
         iteration += 1
         print(f"\n--- [ITERASI #{iteration}] Mulai Sinkronisasi: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} ---")
         try:
-            run_integration()
+            run_integration_with_git()
             print(f"[OK] Iterasi #{iteration} berhasil.")
         except Exception as e:
             print(f"[ERROR] Iterasi #{iteration} gagal: {e}", file=sys.stderr)
@@ -83,7 +113,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.once:
-        run_integration()
+        run_integration_with_git()
     elif args.interval:
         start_interval_service(interval_seconds=args.interval)
     else:
