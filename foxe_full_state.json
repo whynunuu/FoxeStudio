@@ -54400,6 +54400,19 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_334",
+      "tanggal": "2026-10-19",
+      "client": "Have",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-01",
+      "cash": 75000.0,
+      "transfer": 0.0,
+      "total": 75000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
     }
   ],
   "shifts": [
@@ -66205,7 +66218,7 @@
     {
       "id": "cc_2026-10-19",
       "tanggal": "2026-10-19",
-      "nilai": 295000.0
+      "nilai": 370000.0
     },
     {
       "id": "cc_2026-10-20",
@@ -66666,8 +66679,8 @@
       "tanggal": "2026-10-19",
       "leads": 0.0,
       "dp": 3.0,
-      "sesiFoto": 7.0,
-      "transaksi": 10.0
+      "sesiFoto": 8.0,
+      "transaksi": 11.0
     }
   ],
   "kpi": [
@@ -78410,7 +78423,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 69640000.0
+        "omzet": 69715000.0
       }
     ]
   },
@@ -78758,6 +78771,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261019-1102",
+      "mulai": "2026-10-19T11:02:15.285620+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 334 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 104 pos pengeluaran Neraca, 237 pipeline Okt."
+    },
     {
       "id": "sy_20261019-1038",
       "mulai": "2026-10-19T10:38:49.038492+00:00",
@@ -79839,7 +79858,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-19T10:38:49.038492+00:00"
+    "last_sync": "2026-10-19T11:02:15.285620+00:00"
   },
   "neracaDetail": [
     {
@@ -91041,6 +91060,19 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_334",
+        "tanggal": "2026-10-19",
+        "client": "Have",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-01",
+        "cash": 75000.0,
+        "transfer": 0.0,
+        "total": 75000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
       }
     ],
     "shifts": [
@@ -91601,7 +91633,7 @@
       {
         "id": "cc_2026-10-19",
         "tanggal": "2026-10-19",
-        "nilai": 295000.0
+        "nilai": 370000.0
       },
       {
         "id": "cc_2026-10-20",
@@ -91814,8 +91846,8 @@
         "tanggal": "2026-10-19",
         "leads": 0.0,
         "dp": 3.0,
-        "sesiFoto": 7.0,
-        "transaksi": 10.0
+        "sesiFoto": 8.0,
+        "transaksi": 11.0
       },
       {
         "id": "ld_20",
