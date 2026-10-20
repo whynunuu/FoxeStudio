@@ -54446,8 +54446,8 @@
       "client": "Teater proses",
       "paket": "Large Group",
       "tanggalFoto": "2026-10-19",
-      "cash": 0.0,
-      "transfer": 250000.0,
+      "cash": 250000.0,
+      "transfer": 0.0,
       "total": 250000.0,
       "pembayaran": "Lunas",
       "admin": "AMEL",
@@ -54517,6 +54517,58 @@
       "pembayaran": "DP",
       "admin": "DIP",
       "fotografer": ""
+    },
+    {
+      "id": "or_343",
+      "tanggal": "2026-10-20",
+      "client": "Akmal",
+      "paket": "Single",
+      "tanggalFoto": "2026-10-20",
+      "cash": 100000.0,
+      "transfer": 0.0,
+      "total": 100000.0,
+      "pembayaran": "Lunas",
+      "admin": "DIP",
+      "fotografer": ""
+    },
+    {
+      "id": "or_344",
+      "tanggal": "2026-10-20",
+      "client": "vlora",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-22",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "DIP",
+      "fotografer": ""
+    },
+    {
+      "id": "or_345",
+      "tanggal": "2026-10-20",
+      "client": "kkg kelompok 1",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-20",
+      "cash": 0.0,
+      "transfer": 250000.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_346",
+      "tanggal": "2026-10-20",
+      "client": "Putri",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-20",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -61281,6 +61333,24 @@
       "tanggal": "2026-10-20",
       "nama": "INDAH",
       "slot": 1
+    },
+    {
+      "id": "sh_78",
+      "tanggal": "2026-10-20",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_79",
+      "tanggal": "2026-10-20",
+      "nama": "ADIF",
+      "slot": 1
+    },
+    {
+      "id": "sh_80",
+      "tanggal": "2026-10-20",
+      "nama": "SAKA",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -66322,12 +66392,12 @@
     {
       "id": "cc_2026-10-19",
       "tanggal": "2026-10-19",
-      "nilai": 420000.0
+      "nilai": 670000.0
     },
     {
       "id": "cc_2026-10-20",
       "tanggal": "2026-10-20",
-      "nilai": 0.0
+      "nilai": 100000.0
     },
     {
       "id": "cc_2026-10-21",
@@ -66790,9 +66860,9 @@
       "id": "ld_20",
       "tanggal": "2026-10-20",
       "leads": 0.0,
-      "dp": 2.0,
-      "sesiFoto": 0.0,
-      "transaksi": 2.0
+      "dp": 3.0,
+      "sesiFoto": 3.0,
+      "transaksi": 6.0
     }
   ],
   "kpi": [
@@ -78535,7 +78605,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 70865000.0
+        "omzet": 71415000.0
       }
     ]
   },
@@ -78883,6 +78953,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261020-0955",
+      "mulai": "2026-10-20T09:55:31.976496+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 346 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 104 pos pengeluaran Neraca, 241 pipeline Okt."
+    },
     {
       "id": "sy_20261020-0644",
       "mulai": "2026-10-20T06:44:09.164591+00:00",
@@ -79988,7 +80064,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-20T06:44:09.164591+00:00"
+    "last_sync": "2026-10-20T09:55:31.976496+00:00"
   },
   "neracaDetail": [
     {
@@ -80550,16 +80626,16 @@
   },
   "oktoberPipeline": {
     "bulan": "2026-10",
-    "totalBookings": 242,
+    "totalBookings": 241,
     "potentialOmzet": 79850000.0,
-    "totalDp": 22100000.0,
+    "totalDp": 22000000.0,
     "estimateCashIn": 5925000.0,
     "remainingCashIn": 5925000.0,
-    "totalPipelineCashIn": 57750000.0,
+    "totalPipelineCashIn": 57850000.0,
     "breakdown": {
       "reguler": {
         "sesi": 143,
-        "nilai": 43700000.0,
+        "nilai": 44050000.0,
         "dp": 12850000.0
       },
       "wisudaDay1": {
@@ -80568,22 +80644,22 @@
         "dp": 4600000.0
       },
       "wisudaDay2": {
-        "sesi": 52,
-        "nilai": 18500000.0,
-        "dp": 4650000.0
+        "sesi": 51,
+        "nilai": 18150000.0,
+        "dp": 4550000.0
       }
     },
     "statusBreakdown": {
       "done": {
-        "sesi": 207,
-        "nilai": 67925000.0,
-        "dp": 18950000.0,
-        "cashIn": 49125000.0
+        "sesi": 209,
+        "nilai": 68125000.0,
+        "dp": 19050000.0,
+        "cashIn": 49225000.0
       },
       "confirmed": {
-        "sesi": 24,
-        "nilai": 7975000.0,
-        "dp": 2050000.0,
+        "sesi": 21,
+        "nilai": 7775000.0,
+        "dp": 1850000.0,
         "cashIn": 5925000.0
       },
       "reschedule": {
@@ -82639,32 +82715,6 @@
       {
         "id": "sc_wisuda_2026-10-04_68",
         "tgl": "2026-10-04",
-        "waktu": "13:40",
-        "studio": "Wisuda UMP (CALMBLUE)",
-        "studioNama": "Spot CALMBLUE",
-        "spot": "CALMBLUE",
-        "nama": "Fitri Diana",
-        "paket": "Graduation",
-        "paketRaw": "Graduation",
-        "jmlOrang": 1,
-        "harga": 350000.0,
-        "dp": 100000.0,
-        "sisaPelunasan": 250000.0,
-        "admin": "IN",
-        "noHp": "dp 100",
-        "manual": false,
-        "kategori": "Wisuda UMP",
-        "color": "BIRU",
-        "statusColor": "biru",
-        "statusSesi": "done",
-        "statusLabel": "Selesai / Hadir",
-        "statusBadge": "crit",
-        "isDone": true,
-        "isReschedule": false
-      },
-      {
-        "id": "sc_wisuda_2026-10-04_69",
-        "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda UMP (LIMBO)",
         "studioNama": "Spot LIMBO",
@@ -82689,7 +82739,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_70",
+        "id": "sc_wisuda_2026-10-04_69",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda UMP (CONCRETE)",
@@ -82715,7 +82765,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_71",
+        "id": "sc_wisuda_2026-10-04_70",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda UMP (DIPAN)",
@@ -82741,7 +82791,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_72",
+        "id": "sc_wisuda_2026-10-04_71",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda UMP (CALMBLUE)",
@@ -82767,7 +82817,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_73",
+        "id": "sc_wisuda_2026-10-04_72",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda UMP (LIMBO)",
@@ -82793,7 +82843,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_74",
+        "id": "sc_wisuda_2026-10-04_73",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda UMP (WOODEN)",
@@ -82819,7 +82869,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_75",
+        "id": "sc_wisuda_2026-10-04_74",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda UMP (DIPAN)",
@@ -82845,7 +82895,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_76",
+        "id": "sc_wisuda_2026-10-04_75",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda UMP (WOODEN)",
@@ -82871,7 +82921,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_77",
+        "id": "sc_wisuda_2026-10-04_76",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda UMP (CONCRETE)",
@@ -82897,7 +82947,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_78",
+        "id": "sc_wisuda_2026-10-04_77",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda UMP (DIPAN)",
@@ -82923,7 +82973,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_79",
+        "id": "sc_wisuda_2026-10-04_78",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda UMP (CALMBLUE)",
@@ -82949,7 +82999,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_80",
+        "id": "sc_wisuda_2026-10-04_79",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda UMP (WOODEN)",
@@ -82975,7 +83025,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_81",
+        "id": "sc_wisuda_2026-10-04_80",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda UMP (CONCRETE)",
@@ -83001,13 +83051,13 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_82",
+        "id": "sc_wisuda_2026-10-04_81",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda UMP (DIPAN)",
         "studioNama": "Spot DIPAN",
         "spot": "DIPAN",
-        "nama": "Fadlah Faqih Mashobih",
+        "nama": "Fadlan Faqih",
         "paket": "Graduation",
         "paketRaw": "Graduation",
         "jmlOrang": 1,
@@ -83027,7 +83077,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_83",
+        "id": "sc_wisuda_2026-10-04_82",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda UMP (CALMBLUE)",
@@ -83053,7 +83103,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_84",
+        "id": "sc_wisuda_2026-10-04_83",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda UMP (LIMBO)",
@@ -83079,7 +83129,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_85",
+        "id": "sc_wisuda_2026-10-04_84",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda UMP (WOODEN)",
@@ -83105,7 +83155,7 @@
         "isReschedule": true
       },
       {
-        "id": "sc_wisuda_2026-10-04_86",
+        "id": "sc_wisuda_2026-10-04_85",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda UMP (CONCRETE)",
@@ -83131,7 +83181,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_87",
+        "id": "sc_wisuda_2026-10-04_86",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda UMP (CALMBLUE)",
@@ -83157,7 +83207,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_88",
+        "id": "sc_wisuda_2026-10-04_87",
         "tgl": "2026-10-04",
         "waktu": "15:40",
         "studio": "Wisuda UMP (LIMBO)",
@@ -83183,7 +83233,7 @@
         "isReschedule": true
       },
       {
-        "id": "sc_wisuda_2026-10-04_89",
+        "id": "sc_wisuda_2026-10-04_88",
         "tgl": "2026-10-04",
         "waktu": "15:40",
         "studio": "Wisuda UMP (WOODEN)",
@@ -83209,7 +83259,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_90",
+        "id": "sc_wisuda_2026-10-04_89",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda UMP (LIMBO)",
@@ -83235,7 +83285,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_91",
+        "id": "sc_wisuda_2026-10-04_90",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda UMP (CONCRETE)",
@@ -83261,7 +83311,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_92",
+        "id": "sc_wisuda_2026-10-04_91",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda UMP (DIPAN)",
@@ -83287,7 +83337,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_93",
+        "id": "sc_wisuda_2026-10-04_92",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda UMP (CALMBLUE)",
@@ -83313,7 +83363,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_94",
+        "id": "sc_wisuda_2026-10-04_93",
         "tgl": "2026-10-04",
         "waktu": "16:20",
         "studio": "Wisuda UMP (LIMBO)",
@@ -83339,7 +83389,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_95",
+        "id": "sc_wisuda_2026-10-04_94",
         "tgl": "2026-10-04",
         "waktu": "16:20",
         "studio": "Wisuda UMP (WOODEN)",
@@ -83365,7 +83415,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_96",
+        "id": "sc_wisuda_2026-10-04_95",
         "tgl": "2026-10-04",
         "waktu": "16:20",
         "studio": "Wisuda UMP (CONCRETE)",
@@ -83391,7 +83441,7 @@
         "isReschedule": true
       },
       {
-        "id": "sc_wisuda_2026-10-04_97",
+        "id": "sc_wisuda_2026-10-04_96",
         "tgl": "2026-10-04",
         "waktu": "16:40",
         "studio": "Wisuda UMP (LIMBO)",
@@ -83417,7 +83467,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_98",
+        "id": "sc_wisuda_2026-10-04_97",
         "tgl": "2026-10-04",
         "waktu": "16:40",
         "studio": "Wisuda UMP (CALMBLUE)",
@@ -83443,7 +83493,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_99",
+        "id": "sc_wisuda_2026-10-04_98",
         "tgl": "2026-10-04",
         "waktu": "17:00",
         "studio": "Wisuda UMP (DIPAN)",
@@ -86157,12 +86207,12 @@
         "admin": "AL",
         "noHp": "dp 100calblue",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 250000.0,
@@ -86182,12 +86232,12 @@
         "admin": "DIP",
         "noHp": "OTS",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 0.0,
         "sisaPelunasan": 0.0,
@@ -86207,12 +86257,12 @@
         "admin": "AL",
         "noHp": "dp 100 concrete",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 100000.0,
@@ -86271,7 +86321,7 @@
       {
         "id": "sc_bk_125",
         "tgl": "2026-10-20",
-        "waktu": "19:40",
+        "waktu": "20:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "PIT S3 2026",
@@ -86425,10 +86475,10 @@
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "vlora",
-        "paket": "LG",
-        "paketRaw": "LG",
-        "jmlOrang": 1,
-        "harga": 0.0,
+        "paket": "Large Group",
+        "paketRaw": "LG 14",
+        "jmlOrang": 14,
+        "harga": 350000.0,
         "admin": "",
         "noHp": "",
         "manual": false,
@@ -86440,7 +86490,7 @@
         "isDone": false,
         "isReschedule": false,
         "dp": 0.0,
-        "sisaPelunasan": 0.0,
+        "sisaPelunasan": 350000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -91361,8 +91411,8 @@
         "client": "Teater proses",
         "paket": "Large Group",
         "tanggalFoto": "2026-10-19",
-        "cash": 0.0,
-        "transfer": 250000.0,
+        "cash": 250000.0,
+        "transfer": 0.0,
         "total": 250000.0,
         "pembayaran": "Lunas",
         "admin": "AMEL",
@@ -91432,6 +91482,58 @@
         "pembayaran": "DP",
         "admin": "DIP",
         "fotografer": ""
+      },
+      {
+        "id": "or_343",
+        "tanggal": "2026-10-20",
+        "client": "Akmal",
+        "paket": "Single",
+        "tanggalFoto": "2026-10-20",
+        "cash": 100000.0,
+        "transfer": 0.0,
+        "total": 100000.0,
+        "pembayaran": "Lunas",
+        "admin": "DIP",
+        "fotografer": ""
+      },
+      {
+        "id": "or_344",
+        "tanggal": "2026-10-20",
+        "client": "vlora",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-22",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "DIP",
+        "fotografer": ""
+      },
+      {
+        "id": "or_345",
+        "tanggal": "2026-10-20",
+        "client": "kkg kelompok 1",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-20",
+        "cash": 0.0,
+        "transfer": 250000.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_346",
+        "tanggal": "2026-10-20",
+        "client": "Putri",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-20",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
       }
     ],
     "shifts": [
@@ -91896,6 +91998,24 @@
         "tanggal": "2026-10-20",
         "nama": "INDAH",
         "slot": 1
+      },
+      {
+        "id": "sh_78",
+        "tanggal": "2026-10-20",
+        "nama": "AMEL",
+        "slot": 1
+      },
+      {
+        "id": "sh_79",
+        "tanggal": "2026-10-20",
+        "nama": "ADIF",
+        "slot": 1
+      },
+      {
+        "id": "sh_80",
+        "tanggal": "2026-10-20",
+        "nama": "SAKA",
+        "slot": 1
       }
     ],
     "cashControl": [
@@ -91992,12 +92112,12 @@
       {
         "id": "cc_2026-10-19",
         "tanggal": "2026-10-19",
-        "nilai": 420000.0
+        "nilai": 670000.0
       },
       {
         "id": "cc_2026-10-20",
         "tanggal": "2026-10-20",
-        "nilai": 0.0
+        "nilai": 100000.0
       },
       {
         "id": "cc_2026-10-21",
@@ -92212,9 +92332,9 @@
         "id": "ld_20",
         "tanggal": "2026-10-20",
         "leads": 0.0,
-        "dp": 2.0,
-        "sesiFoto": 0.0,
-        "transaksi": 2.0
+        "dp": 3.0,
+        "sesiFoto": 3.0,
+        "transaksi": 6.0
       },
       {
         "id": "ld_21",
@@ -95510,18 +95630,18 @@
           "row_idx": 10,
           "nama": "Adif",
           "job": "Fotografer",
-          "q": 20.0,
+          "q": 21.0,
           "q_raw": 0.0,
-          "actual_shift": 20,
+          "actual_shift": 21,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 800000.0,
+          "total_gaji": 840000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 800000.0,
+          "thp": 840000.0,
           "status": "Draft"
         },
         {
@@ -95529,25 +95649,6 @@
           "row_idx": 12,
           "nama": "Saka",
           "job": "Fotografer",
-          "q": 18.0,
-          "q_raw": 0.0,
-          "actual_shift": 18,
-          "cost": 40000.0,
-          "is_fixed": false,
-          "total_gaji": 720000.0,
-          "bonus_kpi": 0.0,
-          "additional": 0.0,
-          "bonus": 0.0,
-          "hukuman": 0.0,
-          "bon": 0.0,
-          "thp": 720000.0,
-          "status": "Draft"
-        },
-        {
-          "id": "pay_3",
-          "row_idx": 14,
-          "nama": "Amel",
-          "job": "Admin",
           "q": 19.0,
           "q_raw": 0.0,
           "actual_shift": 19,
@@ -95560,6 +95661,25 @@
           "hukuman": 0.0,
           "bon": 0.0,
           "thp": 760000.0,
+          "status": "Draft"
+        },
+        {
+          "id": "pay_3",
+          "row_idx": 14,
+          "nama": "Amel",
+          "job": "Admin",
+          "q": 20.0,
+          "q_raw": 0.0,
+          "actual_shift": 20,
+          "cost": 40000.0,
+          "is_fixed": false,
+          "total_gaji": 800000.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
+          "bonus": 0.0,
+          "hukuman": 0.0,
+          "bon": 0.0,
+          "thp": 800000.0,
           "status": "Draft"
         },
         {
@@ -95735,13 +95855,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 11230000.0,
+        "total_gaji": 11350000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 11230000.0,
+        "grand_total_thp": 11350000.0,
         "total_karyawan": 12
       }
     },
@@ -105683,18 +105803,18 @@
         "row_idx": 10,
         "nama": "Adif",
         "job": "Fotografer",
-        "q": 20.0,
+        "q": 21.0,
         "q_raw": 0.0,
-        "actual_shift": 20,
+        "actual_shift": 21,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 800000.0,
+        "total_gaji": 840000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 800000.0,
+        "thp": 840000.0,
         "status": "Draft"
       },
       {
@@ -105702,25 +105822,6 @@
         "row_idx": 12,
         "nama": "Saka",
         "job": "Fotografer",
-        "q": 18.0,
-        "q_raw": 0.0,
-        "actual_shift": 18,
-        "cost": 40000.0,
-        "is_fixed": false,
-        "total_gaji": 720000.0,
-        "bonus_kpi": 0.0,
-        "additional": 0.0,
-        "bonus": 0.0,
-        "hukuman": 0.0,
-        "bon": 0.0,
-        "thp": 720000.0,
-        "status": "Draft"
-      },
-      {
-        "id": "pay_3",
-        "row_idx": 14,
-        "nama": "Amel",
-        "job": "Admin",
         "q": 19.0,
         "q_raw": 0.0,
         "actual_shift": 19,
@@ -105733,6 +105834,25 @@
         "hukuman": 0.0,
         "bon": 0.0,
         "thp": 760000.0,
+        "status": "Draft"
+      },
+      {
+        "id": "pay_3",
+        "row_idx": 14,
+        "nama": "Amel",
+        "job": "Admin",
+        "q": 20.0,
+        "q_raw": 0.0,
+        "actual_shift": 20,
+        "cost": 40000.0,
+        "is_fixed": false,
+        "total_gaji": 800000.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
+        "bonus": 0.0,
+        "hukuman": 0.0,
+        "bon": 0.0,
+        "thp": 800000.0,
         "status": "Draft"
       },
       {
@@ -151990,32 +152110,6 @@
       {
         "id": "sc_wisuda_2026-10-04_68",
         "tgl": "2026-10-04",
-        "waktu": "13:40",
-        "studio": "Wisuda UMP (CALMBLUE)",
-        "studioNama": "Spot CALMBLUE",
-        "spot": "CALMBLUE",
-        "nama": "Fitri Diana",
-        "paket": "Graduation",
-        "paketRaw": "Graduation",
-        "jmlOrang": 1,
-        "harga": 350000.0,
-        "dp": 100000.0,
-        "sisaPelunasan": 250000.0,
-        "admin": "IN",
-        "noHp": "dp 100",
-        "manual": false,
-        "kategori": "Wisuda UMP",
-        "color": "BIRU",
-        "statusColor": "biru",
-        "statusSesi": "done",
-        "statusLabel": "Selesai / Hadir",
-        "statusBadge": "crit",
-        "isDone": true,
-        "isReschedule": false
-      },
-      {
-        "id": "sc_wisuda_2026-10-04_69",
-        "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda UMP (LIMBO)",
         "studioNama": "Spot LIMBO",
@@ -152040,7 +152134,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_70",
+        "id": "sc_wisuda_2026-10-04_69",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda UMP (CONCRETE)",
@@ -152066,7 +152160,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_71",
+        "id": "sc_wisuda_2026-10-04_70",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda UMP (DIPAN)",
@@ -152092,7 +152186,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_72",
+        "id": "sc_wisuda_2026-10-04_71",
         "tgl": "2026-10-04",
         "waktu": "14:00",
         "studio": "Wisuda UMP (CALMBLUE)",
@@ -152118,7 +152212,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_73",
+        "id": "sc_wisuda_2026-10-04_72",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda UMP (LIMBO)",
@@ -152144,7 +152238,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_74",
+        "id": "sc_wisuda_2026-10-04_73",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda UMP (WOODEN)",
@@ -152170,7 +152264,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_75",
+        "id": "sc_wisuda_2026-10-04_74",
         "tgl": "2026-10-04",
         "waktu": "14:20",
         "studio": "Wisuda UMP (DIPAN)",
@@ -152196,7 +152290,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_76",
+        "id": "sc_wisuda_2026-10-04_75",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda UMP (WOODEN)",
@@ -152222,7 +152316,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_77",
+        "id": "sc_wisuda_2026-10-04_76",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda UMP (CONCRETE)",
@@ -152248,7 +152342,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_78",
+        "id": "sc_wisuda_2026-10-04_77",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda UMP (DIPAN)",
@@ -152274,7 +152368,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_79",
+        "id": "sc_wisuda_2026-10-04_78",
         "tgl": "2026-10-04",
         "waktu": "14:40",
         "studio": "Wisuda UMP (CALMBLUE)",
@@ -152300,7 +152394,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_80",
+        "id": "sc_wisuda_2026-10-04_79",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda UMP (WOODEN)",
@@ -152326,7 +152420,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_81",
+        "id": "sc_wisuda_2026-10-04_80",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda UMP (CONCRETE)",
@@ -152352,13 +152446,13 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_82",
+        "id": "sc_wisuda_2026-10-04_81",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda UMP (DIPAN)",
         "studioNama": "Spot DIPAN",
         "spot": "DIPAN",
-        "nama": "Fadlah Faqih Mashobih",
+        "nama": "Fadlan Faqih",
         "paket": "Graduation",
         "paketRaw": "Graduation",
         "jmlOrang": 1,
@@ -152378,7 +152472,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_83",
+        "id": "sc_wisuda_2026-10-04_82",
         "tgl": "2026-10-04",
         "waktu": "15:00",
         "studio": "Wisuda UMP (CALMBLUE)",
@@ -152404,7 +152498,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_84",
+        "id": "sc_wisuda_2026-10-04_83",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda UMP (LIMBO)",
@@ -152430,7 +152524,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_85",
+        "id": "sc_wisuda_2026-10-04_84",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda UMP (WOODEN)",
@@ -152456,7 +152550,7 @@
         "isReschedule": true
       },
       {
-        "id": "sc_wisuda_2026-10-04_86",
+        "id": "sc_wisuda_2026-10-04_85",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda UMP (CONCRETE)",
@@ -152482,7 +152576,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_87",
+        "id": "sc_wisuda_2026-10-04_86",
         "tgl": "2026-10-04",
         "waktu": "15:20",
         "studio": "Wisuda UMP (CALMBLUE)",
@@ -152508,7 +152602,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_88",
+        "id": "sc_wisuda_2026-10-04_87",
         "tgl": "2026-10-04",
         "waktu": "15:40",
         "studio": "Wisuda UMP (LIMBO)",
@@ -152534,7 +152628,7 @@
         "isReschedule": true
       },
       {
-        "id": "sc_wisuda_2026-10-04_89",
+        "id": "sc_wisuda_2026-10-04_88",
         "tgl": "2026-10-04",
         "waktu": "15:40",
         "studio": "Wisuda UMP (WOODEN)",
@@ -152560,7 +152654,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_90",
+        "id": "sc_wisuda_2026-10-04_89",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda UMP (LIMBO)",
@@ -152586,7 +152680,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_91",
+        "id": "sc_wisuda_2026-10-04_90",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda UMP (CONCRETE)",
@@ -152612,7 +152706,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_92",
+        "id": "sc_wisuda_2026-10-04_91",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda UMP (DIPAN)",
@@ -152638,7 +152732,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_93",
+        "id": "sc_wisuda_2026-10-04_92",
         "tgl": "2026-10-04",
         "waktu": "16:00",
         "studio": "Wisuda UMP (CALMBLUE)",
@@ -152664,7 +152758,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_94",
+        "id": "sc_wisuda_2026-10-04_93",
         "tgl": "2026-10-04",
         "waktu": "16:20",
         "studio": "Wisuda UMP (LIMBO)",
@@ -152690,7 +152784,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_95",
+        "id": "sc_wisuda_2026-10-04_94",
         "tgl": "2026-10-04",
         "waktu": "16:20",
         "studio": "Wisuda UMP (WOODEN)",
@@ -152716,7 +152810,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_96",
+        "id": "sc_wisuda_2026-10-04_95",
         "tgl": "2026-10-04",
         "waktu": "16:20",
         "studio": "Wisuda UMP (CONCRETE)",
@@ -152742,7 +152836,7 @@
         "isReschedule": true
       },
       {
-        "id": "sc_wisuda_2026-10-04_97",
+        "id": "sc_wisuda_2026-10-04_96",
         "tgl": "2026-10-04",
         "waktu": "16:40",
         "studio": "Wisuda UMP (LIMBO)",
@@ -152768,7 +152862,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_98",
+        "id": "sc_wisuda_2026-10-04_97",
         "tgl": "2026-10-04",
         "waktu": "16:40",
         "studio": "Wisuda UMP (CALMBLUE)",
@@ -152794,7 +152888,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_wisuda_2026-10-04_99",
+        "id": "sc_wisuda_2026-10-04_98",
         "tgl": "2026-10-04",
         "waktu": "17:00",
         "studio": "Wisuda UMP (DIPAN)",
@@ -155508,12 +155602,12 @@
         "admin": "AL",
         "noHp": "dp 100calblue",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 250000.0,
@@ -155533,12 +155627,12 @@
         "admin": "DIP",
         "noHp": "OTS",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 0.0,
         "sisaPelunasan": 0.0,
@@ -155558,12 +155652,12 @@
         "admin": "AL",
         "noHp": "dp 100 concrete",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 100000.0,
@@ -155622,7 +155716,7 @@
       {
         "id": "sc_bk_125",
         "tgl": "2026-10-20",
-        "waktu": "19:40",
+        "waktu": "20:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "PIT S3 2026",
@@ -155776,10 +155870,10 @@
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "vlora",
-        "paket": "LG",
-        "paketRaw": "LG",
-        "jmlOrang": 1,
-        "harga": 0.0,
+        "paket": "Large Group",
+        "paketRaw": "LG 14",
+        "jmlOrang": 14,
+        "harga": 350000.0,
         "admin": "",
         "noHp": "",
         "manual": false,
@@ -155791,7 +155885,7 @@
         "isDone": false,
         "isReschedule": false,
         "dp": 0.0,
-        "sisaPelunasan": 0.0,
+        "sisaPelunasan": 350000.0,
         "kategori": "Studio Reguler"
       },
       {
