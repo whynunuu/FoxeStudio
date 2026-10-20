@@ -54634,6 +54634,19 @@
       "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_352",
+      "tanggal": "2026-10-20",
+      "client": "PIT S3 2026",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-20",
+      "cash": 0.0,
+      "transfer": 0.0,
+      "total": 0.0,
+      "pembayaran": "",
+      "admin": "",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -66924,7 +66937,7 @@
     {
       "id": "ld_20",
       "tanggal": "2026-10-20",
-      "leads": 0.0,
+      "leads": 20.0,
       "dp": 6.0,
       "sesiFoto": 5.0,
       "transaksi": 11.0
@@ -79019,6 +79032,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261020-1536",
+      "mulai": "2026-10-20T15:36:55.671344+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 352 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 104 pos pengeluaran Neraca, 243 pipeline Okt."
+    },
+    {
       "id": "sy_20261020-1340",
       "mulai": "2026-10-20T13:40:14.080193+00:00",
       "status": "sukses",
@@ -80135,7 +80154,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-20T13:40:14.080193+00:00"
+    "last_sync": "2026-10-20T15:36:55.671344+00:00"
   },
   "neracaDetail": [
     {
@@ -80700,8 +80719,8 @@
     "totalBookings": 243,
     "potentialOmzet": 80925000.0,
     "totalDp": 22200000.0,
-    "estimateCashIn": 6500000.0,
-    "remainingCashIn": 6500000.0,
+    "estimateCashIn": 6125000.0,
+    "remainingCashIn": 6125000.0,
     "totalPipelineCashIn": 58725000.0,
     "breakdown": {
       "reguler": {
@@ -80722,16 +80741,16 @@
     },
     "statusBreakdown": {
       "done": {
-        "sesi": 211,
-        "nilai": 68625000.0,
-        "dp": 19250000.0,
-        "cashIn": 49525000.0
+        "sesi": 212,
+        "nilai": 69100000.0,
+        "dp": 19350000.0,
+        "cashIn": 49900000.0
       },
       "confirmed": {
-        "sesi": 21,
-        "nilai": 8350000.0,
-        "dp": 1850000.0,
-        "cashIn": 6500000.0
+        "sesi": 20,
+        "nilai": 7875000.0,
+        "dp": 1750000.0,
+        "cashIn": 6125000.0
       },
       "reschedule": {
         "sesi": 11,
@@ -86403,12 +86422,12 @@
         "admin": "AL",
         "noHp": "dp 100",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 375000.0,
@@ -91720,6 +91739,19 @@
         "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_352",
+        "tanggal": "2026-10-20",
+        "client": "PIT S3 2026",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-20",
+        "cash": 0.0,
+        "transfer": 0.0,
+        "total": 0.0,
+        "pembayaran": "",
+        "admin": "",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -92517,7 +92549,7 @@
       {
         "id": "ld_20",
         "tanggal": "2026-10-20",
-        "leads": 0.0,
+        "leads": 20.0,
         "dp": 6.0,
         "sesiFoto": 5.0,
         "transaksi": 11.0
@@ -155913,12 +155945,12 @@
         "admin": "AL",
         "noHp": "dp 100",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 375000.0,
