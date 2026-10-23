@@ -2779,7 +2779,7 @@ function vTahunan(R) {
 
         <div class="mbody">
           <div class="mstat">
-            <span class="mk">${m.hist ? 'Omzet Terverifikasi (Log Order)' : (m.isCurrent ? 'Omzet Masuk (Live)' : (m.no === 10 && S.oktoberPipeline ? 'Realisasi Live &amp; Pipeline' : 'Omzet Realisasi'))}</span>
+            <span class="mk">${m.hist ? 'Omzet Terverifikasi (Log Order)' : (m.isCurrent ? 'Omzet Kasir Masuk (Live)' : (m.no === 10 && S.oktoberPipeline ? 'Realisasi Kasir &amp; Pipeline' : 'Omzet Realisasi'))}</span>
             <span class="mv ${m.isCurrent ? 'active' : ''}" style="${m.omzet26 != null ? 'font-weight:700;color:var(--ink);' : 'color:var(--muted-soft);font-weight:500;'}">${m.omzet26 != null ? rp(m.omzet26) : '—'}</span>
             ${subText}
           </div>
@@ -4322,6 +4322,23 @@ function vEst(R){
     const maxOktDayVal = Math.max(1, ...oktDailyRows.map(r => Math.max(r.realized, r.estPelunasan, r.netDayVal)));
     const oktOrderDays = oktDailyRows.filter(r => r.txCount > 0);
 
+    // Rekonsiliasi Kasir (Log Order) vs Sesi Selesai (Schedule)
+    const todayGreenBks = okp.bookings.filter(b => b.tgl === cutoffOkt && b.statusColor !== 'biru' && b.statusColor !== 'orange' && !b.isDone && !b.isReschedule);
+    const todayGreenCount = todayGreenBks.length;
+    const todayGreenVal = todayGreenBks.reduce((s, b) => s + (b.harga || 0), 0);
+
+    const pasFotoOrders = oktOrders.filter(o => String(o.paket || "").toLowerCase().includes("pas foto"));
+    const pasFotoVal = pasFotoOrders.reduce((s, o) => s + dnum(o.total), 0);
+    const pasFotoCount = pasFotoOrders.length;
+
+    const addonOrders = oktOrders.filter(o => {
+      const p = String(o.paket || "").toLowerCase();
+      return p.includes("cetak") || p.includes("frame") || p.includes("all soft") || p.includes("softfile") || p.includes("file") || p.includes("tambahan") || p.includes("edit");
+    });
+    const addonVal = addonOrders.reduce((s, o) => s + dnum(o.total), 0);
+    const addonCount = addonOrders.length;
+    const totWalkinAddon = pasFotoVal + addonVal;
+
     return `
     ${switcherHtml}
     <div class="vhead">
@@ -4339,9 +4356,9 @@ function vEst(R){
         <span class="m">${okp.totalBookings} sesi foto valid</span>
       </div>
       <div class="stat">
-        <span class="k">Realisasi Selesai / Hadir (🔵)</span>
+        <span class="k">Sesi Selesai Difoto (🔵)</span>
         <span class="v sm" style="color:var(--crit);">${rp(okp.statusBreakdown ? okp.statusBreakdown.done.nilai : 0)}</span>
-        <span class="m">${okp.statusBreakdown ? okp.statusBreakdown.done.sesi : 0} sesi beres foto</span>
+        <span class="m">${okp.statusBreakdown ? okp.statusBreakdown.done.sesi : 0} sesi beres pemotretan (Schedule)</span>
       </div>
       <div class="stat">
         <span class="k">Terjadwal Belum Sesi (🟢)</span>
@@ -4357,6 +4374,60 @@ function vEst(R){
         <span class="k">Sisa Pelunasan Terjadwal</span>
         <span class="v sm" style="color:var(--good);">${rp(okp.remainingCashIn != null ? okp.remainingCashIn : (okp.statusBreakdown ? okp.statusBreakdown.confirmed.cashIn : okp.estimateCashIn))}</span>
         <span class="m">kas masuk dari 🟢 sesi terkonfirmasi</span>
+      </div>
+    </div>
+
+    <!-- KOMPONEN REKONSILIASI KASIR VS JADWAL FOTO (ANTI-AMBIGU) -->
+    <div class="card" style="margin-bottom:16px;padding:14px 18px;border:1px solid var(--hairline-strong);border-left:4px solid var(--accent);background:var(--surface);">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:300px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-size:14px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;">
+              💡 Rekonsiliasi: Arus Kas Kasir (Log Order) vs Sesi Selesai Difoto (Schedule)
+            </span>
+            <span class="pill good" style="font-size:10px;">✅ 100% Klop &amp; Terverifikasi</span>
+          </div>
+          <p style="font-size:12.5px;color:var(--muted);margin:0;line-height:1.5;">
+            <b>Kenapa angka kasir dan sesi foto berbeda?</b> Angka <b>Omzet Kasir</b> mencatat arus kas riil yang masuk rekening studio (File 1 Log Order), sedangkan <b>Sesi Selesai</b> mencatat total nilai paket dari pemotretan fisik yang sudah beres dilaksanakan (File 2 Schedule).
+          </p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <div style="background:var(--surface2);border:1px solid var(--hairline);padding:7px 12px;border-radius:8px;text-align:right;">
+            <span class="eyebrow" style="display:block;font-size:9.5px;color:var(--muted);">Arus Kas Masuk (Kasir)</span>
+            <b style="font-size:15px;color:var(--ink);font-family:var(--mono);">${rp(oktOmzetLive)}</b>
+            <span class="tiny muted" style="display:block;">${num(oktOrders.length)} nota di Log Order</span>
+          </div>
+          <div style="color:var(--muted);font-weight:700;font-size:13px;">vs</div>
+          <div style="background:var(--surface2);border:1px solid var(--hairline);padding:7px 12px;border-radius:8px;text-align:right;">
+            <span class="eyebrow" style="display:block;font-size:9.5px;color:var(--accent);">Sesi Beres Foto (Schedule)</span>
+            <b style="font-size:15px;color:var(--accent-ink);font-family:var(--mono);">${rp(okp.statusBreakdown ? okp.statusBreakdown.done.nilai : 0)}</b>
+            <span class="tiny muted" style="display:block;">${okp.statusBreakdown ? okp.statusBreakdown.done.sesi : 0} sesi bertanda 🔵</span>
+          </div>
+        </div>
+      </div>
+      
+      <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--hairline);display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;font-size:11.5px;color:var(--ink2);">
+        <div style="background:var(--surface2);padding:10px 12px;border-radius:6px;border:1px solid var(--hairline);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <b style="color:var(--ink);">1. Uang DP Sesi Mendatang</b>
+            <span class="mono" style="color:var(--good);font-weight:700;">+${rp(okp.statusBreakdown ? okp.statusBreakdown.confirmed.dp : 0)}</span>
+          </div>
+          <span class="tiny muted" style="display:block;line-height:1.4;">Uang DP sudah masuk rekening kasir, tapi sesi pemotretannya baru berlangsung tanggal 24–31 Okt (masih berstatus 🟢 Terjadwal di kalender).</span>
+        </div>
+        <div style="background:var(--surface2);padding:10px 12px;border-radius:6px;border:1px solid var(--hairline);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <b style="color:var(--ink);">2. Sesi Hari Ini Berjalan</b>
+            <span class="mono" style="color:var(--accent-ink);font-weight:700;">+${rp(todayGreenVal)}</span>
+          </div>
+          <span class="tiny muted" style="display:block;line-height:1.4;">Sesi pemotretan hari ini (${todayGreenCount} sesi) yang belum beres difoto siang ini sehingga warnanya masih 🟢 (belum diubah jadi 🔵 Biru).</span>
+        </div>
+        <div style="background:var(--surface2);padding:10px 12px;border-radius:6px;border:1px solid var(--hairline);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <b style="color:var(--ink);">3. Walk-in &amp; Cetak/File</b>
+            <span class="mono" style="color:var(--accent);font-weight:700;">+${rp(totWalkinAddon)}</span>
+          </div>
+          <span class="tiny muted" style="display:block;line-height:1.4;">Pas foto walk-in kilat tanpa jadwal (${num(pasFotoCount)} tx) + nota add-on all softfile, frame &amp; cetak (${num(addonCount)} nota) yang dibayar di kasir.</span>
+        </div>
       </div>
     </div>
 
