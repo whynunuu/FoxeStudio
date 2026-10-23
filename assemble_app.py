@@ -1191,7 +1191,8 @@ let S = (() => {
       if (parsed) {
         if (!parsed.auditLog || !parsed.auditLog.length) parsed.auditLog = INITIAL_STATE.auditLog || [];
         if (!parsed.accessLog || !parsed.accessLog.length) parsed.accessLog = INITIAL_STATE.accessLog || [];
-        if (!parsed.multiyearArsip && INITIAL_STATE.multiyearArsip) parsed.multiyearArsip = INITIAL_STATE.multiyearArsip;
+        // Selalu perbarui multiyearArsip dari INITIAL_STATE agar mutasi COGS/OPEX multi-tahun selalu real-time
+        parsed.multiyearArsip = INITIAL_STATE.multiyearArsip;
       }
       if (parsed && parsed.orders && parsed.orders.length > 0 && parsed.config && parsed.config.cutoff === INITIAL_STATE.config.cutoff && (parsed.expenses || []).length === (INITIAL_STATE.expenses || []).length && (parsed.neracaDetail || []).length === (INITIAL_STATE.neracaDetail || []).length) {
         return parsed;
@@ -3248,20 +3249,33 @@ function vTahunan(R) {
 /* ============================ LEMARI ARSIP (2022 - 2026) ============================ */
 
 window.selectArsipYear = function(y) {
-  arsipYear = y;
-  if (y === "2026" && arsipMonth > 10) {
+  arsipYear = String(y);
+  if (arsipYear === "2026" && Number(arsipMonth) > 10) {
     arsipMonth = 10;
   }
   render();
+  if (typeof showToast === "function") {
+    showToast(`📁 Beralih ke Arsip Finansial Tahun ${arsipYear}`, "ok", 2000);
+  }
 };
 
 window.selectArsipMonth = function(m) {
-  arsipMonth = m;
+  arsipMonth = Number(m);
   render();
+  const mNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+  const mLabel = mNames[arsipMonth - 1] || ("Bulan " + arsipMonth);
+  if (typeof showToast === "function") {
+    showToast(`📂 Menampilkan Pembukuan & Neraca: ${mLabel} ${arsipYear}`, "ok", 2500);
+  }
   setTimeout(() => {
     const el = document.getElementById("arsipMonthDetailCard");
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 40);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      el.style.outline = "2px solid var(--accent)";
+      el.style.outlineOffset = "4px";
+      setTimeout(() => { if (el) { el.style.outline = ""; el.style.outlineOffset = ""; } }, 1500);
+    }
+  }, 50);
 };
 
 window.exportArsipCSV = function(yr) {
@@ -3421,7 +3435,7 @@ function chartArsipYoY(months, yr, yearsObj) {
     const cx = PL + step * i + step / 2;
     const yC = yy(d.curVal);
     const yP = yy(d.prevVal);
-    const isAct = (d.month === arsipMonth);
+    const isAct = (Number(d.month) === Number(arsipMonth));
     const isUp = d.delta >= 0;
     const deltaColor = isUp ? "var(--good)" : "var(--crit)";
 
@@ -3429,9 +3443,9 @@ function chartArsipYoY(months, yr, yearsObj) {
       dots += `<line x1="${cx}" y1="${bottomY}" x2="${cx}" y2="${Math.min(yC, yP) - 24}" stroke="var(--accent)" stroke-width="1.6" stroke-dasharray="3 3"/>`;
     }
 
-    dots += `<circle cx="${cx.toFixed(1)}" cy="${yP.toFixed(1)}" r="${isAct ? 4 : 3}" fill="var(--surface)" stroke="var(--muted)" stroke-width="${isAct ? 2 : 1.2}" stroke-dasharray="2 2"/>`;
-    dots += `<circle cx="${cx.toFixed(1)}" cy="${yC.toFixed(1)}" r="${isAct ? 6 : 4}" fill="${isAct ? 'var(--accent)' : 'var(--surface)'}" stroke="var(--accent)" stroke-width="${isAct ? 2.5 : 2}"/>`;
-    dots += `<text x="${cx.toFixed(1)}" y="${bottomY + 16}" text-anchor="middle" font-size="10" font-family="Inter,sans-serif" font-weight="${isAct ? 700 : 500}" fill="${isAct ? 'var(--accent)' : 'var(--muted)'}">${d.name.slice(0,3)}</text>`;
+    dots += `<circle cx="${cx.toFixed(1)}" cy="${yP.toFixed(1)}" r="${isAct ? 4 : 3}" fill="var(--surface)" stroke="var(--muted)" stroke-width="${isAct ? 2 : 1.2}" stroke-dasharray="2 2" onclick="selectArsipMonth(${d.month});" style="cursor:pointer;" title="Klik untuk lihat rincian ${d.name} ${yr}"/>`;
+    dots += `<circle cx="${cx.toFixed(1)}" cy="${yC.toFixed(1)}" r="${isAct ? 6 : 4}" fill="${isAct ? 'var(--accent)' : 'var(--surface)'}" stroke="var(--accent)" stroke-width="${isAct ? 2.5 : 2}" onclick="selectArsipMonth(${d.month});" style="cursor:pointer;" title="Klik untuk lihat rincian ${d.name} ${yr}"/>`;
+    dots += `<text x="${cx.toFixed(1)}" y="${bottomY + 16}" text-anchor="middle" font-size="10" font-family="Inter,sans-serif" font-weight="${isAct ? 700 : 500}" fill="${isAct ? 'var(--accent)' : 'var(--muted)'}" onclick="selectArsipMonth(${d.month});" style="cursor:pointer;" title="Klik untuk lihat rincian ${d.name} ${yr}">${d.name.slice(0,3)}</text>`;
 
     const bW = 54;
     const bH = 22;
@@ -3581,17 +3595,17 @@ function chartArsipAds(months, yr, yearsObj) {
     const cx = PL + step * i + step / 2;
     const yC = yy(d.curVal);
     const yP = yy(d.prevVal);
-    const isAct = (d.month === arsipMonth);
+    const isAct = (Number(d.month) === Number(arsipMonth));
 
     if (isAct) {
       dots += `<line x1="${cx}" y1="${bottomY}" x2="${cx}" y2="${yC - 20}" stroke="var(--warn)" stroke-width="1.6" stroke-dasharray="3 3"/>`;
     }
 
     if (prevMonths) {
-      dots += `<circle cx="${cx.toFixed(1)}" cy="${yP.toFixed(1)}" r="${isAct ? 3.5 : 2.5}" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="2 2"/>`;
+      dots += `<circle cx="${cx.toFixed(1)}" cy="${yP.toFixed(1)}" r="${isAct ? 3.5 : 2.5}" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="2 2" onclick="selectArsipMonth(${d.month});" style="cursor:pointer;" title="Klik untuk lihat rincian ${d.name} ${yr}"/>`;
     }
-    dots += `<circle cx="${cx.toFixed(1)}" cy="${yC.toFixed(1)}" r="${isAct ? 5.5 : 3.5}" fill="${isAct ? 'var(--warn)' : 'var(--surface)'}" stroke="var(--warn)" stroke-width="${isAct ? 2.5 : 2}"/>`;
-    dots += `<text x="${cx.toFixed(1)}" y="${bottomY + 16}" text-anchor="middle" font-size="10" font-family="Inter,sans-serif" font-weight="${isAct ? 700 : 500}" fill="${isAct ? 'var(--warn)' : 'var(--muted)'}">${d.name.slice(0,3)}</text>`;
+    dots += `<circle cx="${cx.toFixed(1)}" cy="${yC.toFixed(1)}" r="${isAct ? 5.5 : 3.5}" fill="${isAct ? 'var(--warn)' : 'var(--surface)'}" stroke="var(--warn)" stroke-width="${isAct ? 2.5 : 2}" onclick="selectArsipMonth(${d.month});" style="cursor:pointer;" title="Klik untuk lihat rincian ${d.name} ${yr}"/>`;
+    dots += `<text x="${cx.toFixed(1)}" y="${bottomY + 16}" text-anchor="middle" font-size="10" font-family="Inter,sans-serif" font-weight="${isAct ? 700 : 500}" fill="${isAct ? 'var(--warn)' : 'var(--muted)'}" onclick="selectArsipMonth(${d.month});" style="cursor:pointer;" title="Klik untuk lihat rincian ${d.name} ${yr}">${d.name.slice(0,3)}</text>`;
 
     if (d.curVal > 0) {
       const bW = 46;
@@ -3683,7 +3697,7 @@ function vArsip(R) {
   const curY = yearsObj[arsipYear] || {omzet:0, cash:0, transfer:0, outcome:0, nettProfit:0, margin:0, months:[]};
   const mList = curY.months || [];
   
-  let selM = mList.find(m => m.month === arsipMonth);
+  let selM = mList.find(m => Number(m.month) === Number(arsipMonth));
   if (!selM) {
     selM = mList[0] || {omzet:0, cash:0, transfer:0, outcome:0, nettProfit:0, margin:0, daily:[], expenses:[]};
     arsipMonth = selM.month || 1;
@@ -3852,12 +3866,12 @@ function vArsip(R) {
     </div>
     <div class="mgrid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:12px;">
       ${mList.map(m => {
-        const isSel = (m.month === arsipMonth);
+        const isSel = (Number(m.month) === Number(arsipMonth));
         return `
         <div class="arsip-month-card ${isSel ? 'active-month' : ''}" onclick="selectArsipMonth(${m.month});" style="cursor:pointer;padding:16px 18px;border-radius:12px;background:var(--surface);border:${isSel ? '2px solid var(--accent)' : '1px solid var(--hairline)'};box-shadow:${isSel ? '0 0 16px color-mix(in srgb,var(--accent) 30%,transparent)' : 'none'};transition:all .15s ease;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
             <b style="font-size:15px;color:${isSel ? 'var(--accent)' : 'var(--ink)'};">${m.name}</b>
-            <span class="pill ${isSel ? 'prog' : 'neutral'}" style="font-size:10.5px;">${isSel ? '● Terbuka' : (m.status || (m.omzet > 0 ? 'Tercatat' : '—'))}</span>
+            <span class="pill ${isSel ? 'prog' : 'neutral'}" style="font-size:10.5px;">${isSel ? '● Sedang Dibuka' : (m.status || (m.omzet > 0 ? 'Tercatat' : '—'))}</span>
           </div>
           <div class="mono" style="font-size:19px;font-weight:700;color:var(--ink);margin-bottom:4px;">${rp(m.omzet)}</div>
           <div style="font-size:11.5px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:4px;">
@@ -3875,6 +3889,9 @@ function vArsip(R) {
             <span class="tiny muted">Laba Bersih:</span>
             <b class="mono" style="color:var(--good);">${rp(m.nettProfit)}</b>
           </div>
+          <button class="btn sm ${isSel ? 'pri' : 'sub'}" style="width:100%;margin-top:10px;font-size:12px;font-weight:700;display:flex;justify-content:center;align-items:center;gap:6px;padding:6px 10px;">
+            ${isSel ? '📂 Sedang Terbuka di Bawah ➔' : '🔍 Buka COGS, OPEX &amp; Kasir ➔'}
+          </button>
         </div>`;
       }).join("")}
     </div>
@@ -3890,7 +3907,7 @@ function vArsip(R) {
       <!-- Month Quick Picker Pills -->
       <div style="display:flex;gap:4px;flex-wrap:wrap;">
         ${mList.map(m => `
-          <button class="btn sm ${m.month === arsipMonth ? 'pri' : ''}" style="padding:4px 9px;font-size:11.5px;" onclick="selectArsipMonth(${m.month});">${m.name.slice(0,3)}</button>
+          <button class="btn sm ${Number(m.month) === Number(arsipMonth) ? 'pri' : ''}" style="padding:4px 9px;font-size:11.5px;font-weight:600;" onclick="selectArsipMonth(${m.month});">${m.name.slice(0,3)}</button>
         `).join("")}
       </div>
     </div>

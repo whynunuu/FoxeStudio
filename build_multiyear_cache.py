@@ -181,57 +181,57 @@ def parse_sheet(ws, year_num, month_num):
     if omzet == 0 and (cash + transfer) > 0:
         omzet = cash + transfer
 
-    # Parse expenses (cols P..U, rows 11..120)
+    # Parse expenses (cols P..U, rows 11..135)
     expenses = []
     tot_cogs = 0.0
     tot_opex = 0.0
     
-    current_day = None
+    current_day = 1
     for r in range(11, 150):
+        # Stop condition: total formula or row label
+        cell_formula = str(ws.cell(r, 18).value or "")
+        if cell_formula.startswith('=SUM') and (':' in cell_formula or '+' in cell_formula):
+            break
+            
         p_val = ws.cell(r, 16).value # Col P: Tgl
         if p_val is not None:
             try:
-                current_day = int(float(str(p_val).strip()))
+                d = int(float(str(p_val).strip()))
+                if 1 <= d <= 31:
+                    current_day = d
             except:
                 pass
                 
         out_val = clean_num(ws.cell(r, 18).value) # Col R: Saldo Keluar
-        desc_val = ws.cell(r, 21).value # Col U: Keterangan Keluar
-        if desc_val is None:
-            # Fallback check col T or Q
-            desc_val = ws.cell(r, 20).value or ws.cell(r, 17).value
-            
+        desc_val = ws.cell(r, 21).value or ws.cell(r, 20).value or ws.cell(r, 17).value
         desc_str = str(desc_val or "").strip()
         
-        # Stop condition
-        if not desc_str and out_val == 0.0 and p_val is None:
-            # If 3 consecutive rows are empty, break
-            empty_count = 0
-            for peek in range(r, min(r + 4, 150)):
-                if not ws.cell(peek, 18).value and not ws.cell(peek, 21).value:
-                    empty_count += 1
-            if empty_count >= 3:
-                break
-                
-        if out_val > 0 or desc_str:
-            jenis, kat = classify_expense(desc_str)
-            tgl_iso = f"{year_num:04d}-{month_num:02d}-{current_day:02d}" if current_day else f"{year_num:04d}-{month_num:02d}-01"
-            expenses.append({
-                "tgl": tgl_iso,
-                "day": current_day or 1,
-                "desc": desc_str or "Pengeluaran Operasional",
-                "jenis": jenis,
-                "kategori": kat,
-                "nilai": out_val
-            })
-            if jenis == "COGS":
-                tot_cogs += out_val
-            elif jenis == "OPEX":
-                tot_opex += out_val
-                
+        if out_val == 0.0 and not desc_str:
+            continue
+        if desc_str.lower() in ['saldo keluar', 'keterangan', 'detail', 'nominal']:
+            continue
+        if any(w in desc_str.lower() for w in ['bon manajemen', 'alas', 'folx', 'tambahan / balik', 'refund out']):
+            continue
+            
+        jenis, kat = classify_expense(desc_str)
+        tgl_iso = f"{year_num:04d}-{month_num:02d}-{current_day:02d}"
+        expenses.append({
+            "tgl": tgl_iso,
+            "day": current_day,
+            "desc": desc_str or "Pengeluaran Operasional",
+            "jenis": jenis,
+            "kategori": kat,
+            "nilai": round(out_val)
+        })
+        if jenis == "COGS":
+            tot_cogs += out_val
+        elif jenis == "OPEX":
+            tot_opex += out_val
+            
     outcome = tot_cogs + tot_opex
     nett_profit = omzet - outcome
     margin = (nett_profit / omzet * 100.0) if omzet > 0 else 0.0
+    ads = sum(e["nilai"] for e in expenses if e.get("kategori") == "Marketing / Ads / KOL" or "ads" in e.get("desc", "").lower() or "iklan" in e.get("desc", "").lower())
     
     return {
         "month": month_num,
@@ -244,6 +244,7 @@ def parse_sheet(ws, year_num, month_num):
         "outcome": round(outcome),
         "nettProfit": round(nett_profit),
         "margin": round(margin, 2),
+        "ads": round(ads),
         "daily": daily,
         "expenses": expenses
     }
