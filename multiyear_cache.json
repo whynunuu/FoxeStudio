@@ -34457,11 +34457,11 @@
       "omzet": 893303450,
       "cash": 270846000,
       "transfer": 551742450,
-      "cogs": 134283000,
-      "opex": 197103584,
-      "outcome": 331386584,
-      "nettProfit": 561916866,
-      "margin": 62.9,
+      "cogs": 134229500,
+      "opex": 202388887,
+      "outcome": 336618387,
+      "nettProfit": 556685063,
+      "margin": 62.32,
       "months": [
         {
           "month": 1,
@@ -34474,8 +34474,571 @@
           "outcome": 26819566,
           "nettProfit": 22350434,
           "margin": 45.46,
-          "daily": [],
-          "expenses": [],
+          "daily": [
+            {
+              "tgl": "2026-01-01",
+              "day": 1,
+              "cash": 350000,
+              "transfer": 990000,
+              "total": 1340000
+            },
+            {
+              "tgl": "2026-01-02",
+              "day": 2,
+              "cash": 475000,
+              "transfer": 1475000,
+              "total": 1950000
+            },
+            {
+              "tgl": "2026-01-03",
+              "day": 3,
+              "cash": 275000,
+              "transfer": 420000,
+              "total": 695000
+            },
+            {
+              "tgl": "2026-01-04",
+              "day": 4,
+              "cash": 225000,
+              "transfer": 635000,
+              "total": 860000
+            },
+            {
+              "tgl": "2026-01-05",
+              "day": 5,
+              "cash": 2050000,
+              "transfer": 1595000,
+              "total": 3645000
+            },
+            {
+              "tgl": "2026-01-06",
+              "day": 6,
+              "cash": 250000,
+              "transfer": 520000,
+              "total": 770000
+            },
+            {
+              "tgl": "2026-01-07",
+              "day": 7,
+              "cash": 0,
+              "transfer": 50000,
+              "total": 50000
+            },
+            {
+              "tgl": "2026-01-08",
+              "day": 8,
+              "cash": 0,
+              "transfer": 1070000,
+              "total": 1070000
+            },
+            {
+              "tgl": "2026-01-09",
+              "day": 9,
+              "cash": 300000,
+              "transfer": 1620000,
+              "total": 1920000
+            },
+            {
+              "tgl": "2026-01-10",
+              "day": 10,
+              "cash": 4150000,
+              "transfer": 1650000,
+              "total": 5800000
+            },
+            {
+              "tgl": "2026-01-11",
+              "day": 11,
+              "cash": 0,
+              "transfer": 1470000,
+              "total": 1470000
+            },
+            {
+              "tgl": "2026-01-12",
+              "day": 12,
+              "cash": 100000,
+              "transfer": 735000,
+              "total": 835000
+            },
+            {
+              "tgl": "2026-01-13",
+              "day": 13,
+              "cash": 0,
+              "transfer": 535000,
+              "total": 535000
+            },
+            {
+              "tgl": "2026-01-14",
+              "day": 14,
+              "cash": 300000,
+              "transfer": 650000,
+              "total": 950000
+            },
+            {
+              "tgl": "2026-01-15",
+              "day": 15,
+              "cash": 0,
+              "transfer": 675000,
+              "total": 675000
+            },
+            {
+              "tgl": "2026-01-16",
+              "day": 16,
+              "cash": 1875000,
+              "transfer": 1640000,
+              "total": 3515000
+            },
+            {
+              "tgl": "2026-01-17",
+              "day": 17,
+              "cash": 740000,
+              "transfer": 1200000,
+              "total": 1940000
+            },
+            {
+              "tgl": "2026-01-18",
+              "day": 18,
+              "cash": 775000,
+              "transfer": 1075000,
+              "total": 1850000
+            },
+            {
+              "tgl": "2026-01-19",
+              "day": 19,
+              "cash": 0,
+              "transfer": 775000,
+              "total": 775000
+            },
+            {
+              "tgl": "2026-01-20",
+              "day": 20,
+              "cash": 0,
+              "transfer": 625000,
+              "total": 625000
+            },
+            {
+              "tgl": "2026-01-21",
+              "day": 21,
+              "cash": 0,
+              "transfer": 525000,
+              "total": 525000
+            },
+            {
+              "tgl": "2026-01-22",
+              "day": 22,
+              "cash": 0,
+              "transfer": 875000,
+              "total": 875000
+            },
+            {
+              "tgl": "2026-01-23",
+              "day": 23,
+              "cash": 100000,
+              "transfer": 675000,
+              "total": 775000
+            },
+            {
+              "tgl": "2026-01-24",
+              "day": 24,
+              "cash": 175000,
+              "transfer": 1075000,
+              "total": 1250000
+            },
+            {
+              "tgl": "2026-01-25",
+              "day": 25,
+              "cash": 50000,
+              "transfer": 1250000,
+              "total": 1300000
+            },
+            {
+              "tgl": "2026-01-26",
+              "day": 26,
+              "cash": 875000,
+              "transfer": 870000,
+              "total": 1745000
+            },
+            {
+              "tgl": "2026-01-27",
+              "day": 27,
+              "cash": 1925000,
+              "transfer": 1525000,
+              "total": 3450000
+            },
+            {
+              "tgl": "2026-01-28",
+              "day": 28,
+              "cash": 0,
+              "transfer": 900000,
+              "total": 900000
+            },
+            {
+              "tgl": "2026-01-29",
+              "day": 29,
+              "cash": 575000,
+              "transfer": 1025000,
+              "total": 1600000
+            },
+            {
+              "tgl": "2026-01-30",
+              "day": 30,
+              "cash": 0,
+              "transfer": 2275000,
+              "total": 2275000
+            },
+            {
+              "tgl": "2026-01-31",
+              "day": 31,
+              "cash": 950000,
+              "transfer": 2255000,
+              "total": 3205000
+            }
+          ],
+          "expenses": [
+            {
+              "tgl": "2026-01-01",
+              "day": 1,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-01-02",
+              "day": 2,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-01-02",
+              "day": 2,
+              "desc": "Wifi",
+              "jenis": "OPEX",
+              "kategori": "Internet & Telekomunikasi",
+              "nilai": 730000
+            },
+            {
+              "tgl": "2026-01-02",
+              "day": 2,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-01-03",
+              "day": 3,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 613000
+            },
+            {
+              "tgl": "2026-01-04",
+              "day": 4,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-01-04",
+              "day": 4,
+              "desc": "DOP Paralon",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 50000
+            },
+            {
+              "tgl": "2026-01-06",
+              "day": 6,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1645500
+            },
+            {
+              "tgl": "2026-01-07",
+              "day": 7,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-01-07",
+              "day": 7,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 317500
+            },
+            {
+              "tgl": "2026-01-08",
+              "day": 8,
+              "desc": "Bensin",
+              "jenis": "OPEX",
+              "kategori": "Transport & Operasional Lapangan",
+              "nilai": 70000
+            },
+            {
+              "tgl": "2026-01-08",
+              "day": 8,
+              "desc": "Wd Cleaner",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 38500
+            },
+            {
+              "tgl": "2026-01-11",
+              "day": 11,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 195858
+            },
+            {
+              "tgl": "2026-01-11",
+              "day": 11,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 312858
+            },
+            {
+              "tgl": "2026-01-12",
+              "day": 12,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1576000
+            },
+            {
+              "tgl": "2026-01-12",
+              "day": 12,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-01-13",
+              "day": 13,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-01-14",
+              "day": 14,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-01-14",
+              "day": 14,
+              "desc": "Dop Paralon",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 110000
+            },
+            {
+              "tgl": "2026-01-15",
+              "day": 15,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 525000
+            },
+            {
+              "tgl": "2026-01-15",
+              "day": 15,
+              "desc": "Biaya Admin",
+              "jenis": "OPEX",
+              "kategori": "Biaya Admin Bank & Finansial",
+              "nilai": 14000
+            },
+            {
+              "tgl": "2026-01-16",
+              "day": 16,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-01-17",
+              "day": 17,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-01-17",
+              "day": 17,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 24000
+            },
+            {
+              "tgl": "2026-01-18",
+              "day": 18,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 494500
+            },
+            {
+              "tgl": "2026-01-20",
+              "day": 20,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 155000
+            },
+            {
+              "tgl": "2026-01-21",
+              "day": 21,
+              "desc": "StokPlastik/kresek",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 76000
+            },
+            {
+              "tgl": "2026-01-22",
+              "day": 22,
+              "desc": "Lampu Spotlight ww",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 200000
+            },
+            {
+              "tgl": "2026-01-23",
+              "day": 23,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-01-24",
+              "day": 24,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 155000
+            },
+            {
+              "tgl": "2026-01-25",
+              "day": 25,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 987000
+            },
+            {
+              "tgl": "2026-01-26",
+              "day": 26,
+              "desc": "Cardrider",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 35000
+            },
+            {
+              "tgl": "2026-01-27",
+              "day": 27,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-01-28",
+              "day": 28,
+              "desc": "Add Edit",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 100000
+            },
+            {
+              "tgl": "2026-01-29",
+              "day": 29,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 406000
+            },
+            {
+              "tgl": "2026-01-29",
+              "day": 29,
+              "desc": "Gojek",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 19000
+            },
+            {
+              "tgl": "2026-01-30",
+              "day": 30,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1445000
+            },
+            {
+              "tgl": "2026-01-30",
+              "day": 30,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 630000
+            },
+            {
+              "tgl": "2026-01-31",
+              "day": 31,
+              "desc": "Bundling Lia",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 450000
+            },
+            {
+              "tgl": "2026-01-31",
+              "day": 31,
+              "desc": "Bon",
+              "jenis": "NON-P&L",
+              "kategori": "Prive / Owner Draw",
+              "nilai": 4242000
+            },
+            {
+              "tgl": "2026-01-31",
+              "day": 31,
+              "desc": "Gaji Karyawan",
+              "jenis": "OPEX",
+              "kategori": "Gaji Admin & Fotografer",
+              "nilai": 8758000
+            },
+            {
+              "tgl": "2026-01-31",
+              "day": 31,
+              "desc": "Pajak",
+              "jenis": "OPEX",
+              "kategori": "Pajak & Perizinan",
+              "nilai": 245850
+            },
+            {
+              "tgl": "2026-01-31",
+              "day": 31,
+              "desc": "Amal",
+              "jenis": "BIAYA LAINNYA",
+              "kategori": "Amal & Sosial",
+              "nilai": 737550
+            }
+          ],
           "ads": 1500000,
           "adsRatio": 3.05
         },
@@ -34490,8 +35053,647 @@
           "outcome": 31695199,
           "nettProfit": 31579801,
           "margin": 49.91,
-          "daily": [],
-          "expenses": [],
+          "daily": [
+            {
+              "tgl": "2026-02-01",
+              "day": 1,
+              "cash": 1570000,
+              "transfer": 2090000,
+              "total": 3660000
+            },
+            {
+              "tgl": "2026-02-02",
+              "day": 2,
+              "cash": 0,
+              "transfer": 925000,
+              "total": 925000
+            },
+            {
+              "tgl": "2026-02-03",
+              "day": 3,
+              "cash": 100000,
+              "transfer": 100000,
+              "total": 200000
+            },
+            {
+              "tgl": "2026-02-04",
+              "day": 4,
+              "cash": 200000,
+              "transfer": 1700000,
+              "total": 1900000
+            },
+            {
+              "tgl": "2026-02-05",
+              "day": 5,
+              "cash": 1175000,
+              "transfer": 700000,
+              "total": 1875000
+            },
+            {
+              "tgl": "2026-02-06",
+              "day": 6,
+              "cash": 700000,
+              "transfer": 1250000,
+              "total": 1950000
+            },
+            {
+              "tgl": "2026-02-07",
+              "day": 7,
+              "cash": 1690000,
+              "transfer": 2400000,
+              "total": 4090000
+            },
+            {
+              "tgl": "2026-02-08",
+              "day": 8,
+              "cash": 2455000,
+              "transfer": 1050000,
+              "total": 3505000
+            },
+            {
+              "tgl": "2026-02-09",
+              "day": 9,
+              "cash": 100000,
+              "transfer": 1220000,
+              "total": 1320000
+            },
+            {
+              "tgl": "2026-02-10",
+              "day": 10,
+              "cash": 1010000,
+              "transfer": 3170000,
+              "total": 4180000
+            },
+            {
+              "tgl": "2026-02-11",
+              "day": 11,
+              "cash": 750000,
+              "transfer": 1175000,
+              "total": 1925000
+            },
+            {
+              "tgl": "2026-02-12",
+              "day": 12,
+              "cash": 325000,
+              "transfer": 900000,
+              "total": 1225000
+            },
+            {
+              "tgl": "2026-02-13",
+              "day": 13,
+              "cash": 1175000,
+              "transfer": 2100000,
+              "total": 3275000
+            },
+            {
+              "tgl": "2026-02-14",
+              "day": 14,
+              "cash": 7040000,
+              "transfer": 4565000,
+              "total": 11605000
+            },
+            {
+              "tgl": "2026-02-15",
+              "day": 15,
+              "cash": 1300000,
+              "transfer": 1535000,
+              "total": 2835000
+            },
+            {
+              "tgl": "2026-02-16",
+              "day": 16,
+              "cash": 1750000,
+              "transfer": 1105000,
+              "total": 2855000
+            },
+            {
+              "tgl": "2026-02-17",
+              "day": 17,
+              "cash": 1900000,
+              "transfer": 475000,
+              "total": 2375000
+            },
+            {
+              "tgl": "2026-02-18",
+              "day": 18,
+              "cash": 0,
+              "transfer": 800000,
+              "total": 800000
+            },
+            {
+              "tgl": "2026-02-20",
+              "day": 20,
+              "cash": 0,
+              "transfer": 907500,
+              "total": 907500
+            },
+            {
+              "tgl": "2026-02-21",
+              "day": 21,
+              "cash": 652500,
+              "transfer": 1285000,
+              "total": 1937500
+            },
+            {
+              "tgl": "2026-02-22",
+              "day": 22,
+              "cash": 135000,
+              "transfer": 737500,
+              "total": 872500
+            },
+            {
+              "tgl": "2026-02-23",
+              "day": 23,
+              "cash": 1157000,
+              "transfer": 1220500,
+              "total": 2377500
+            },
+            {
+              "tgl": "2026-02-24",
+              "day": 24,
+              "cash": 0,
+              "transfer": 1180000,
+              "total": 1180000
+            },
+            {
+              "tgl": "2026-02-25",
+              "day": 25,
+              "cash": 0,
+              "transfer": 735000,
+              "total": 735000
+            },
+            {
+              "tgl": "2026-02-26",
+              "day": 26,
+              "cash": 125000,
+              "transfer": 890000,
+              "total": 1015000
+            },
+            {
+              "tgl": "2026-02-27",
+              "day": 27,
+              "cash": 902500,
+              "transfer": 535000,
+              "total": 1437500
+            },
+            {
+              "tgl": "2026-02-28",
+              "day": 28,
+              "cash": 1175000,
+              "transfer": 1137500,
+              "total": 2312500
+            }
+          ],
+          "expenses": [
+            {
+              "tgl": "2026-02-01",
+              "day": 1,
+              "desc": "Wifi",
+              "jenis": "OPEX",
+              "kategori": "Internet & Telekomunikasi",
+              "nilai": 730000
+            },
+            {
+              "tgl": "2026-02-01",
+              "day": 1,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-02-02",
+              "day": 2,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-02-02",
+              "day": 2,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 952500
+            },
+            {
+              "tgl": "2026-02-03",
+              "day": 3,
+              "desc": "Bensin",
+              "jenis": "OPEX",
+              "kategori": "Transport & Operasional Lapangan",
+              "nilai": 50000
+            },
+            {
+              "tgl": "2026-02-03",
+              "day": 3,
+              "desc": "Stiky Noted",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 30000
+            },
+            {
+              "tgl": "2026-02-03",
+              "day": 3,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 312858
+            },
+            {
+              "tgl": "2026-02-04",
+              "day": 4,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-02-04",
+              "day": 4,
+              "desc": "Papan Reflektor",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 92500
+            },
+            {
+              "tgl": "2026-02-04",
+              "day": 4,
+              "desc": "Batre AA",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 43000
+            },
+            {
+              "tgl": "2026-02-05",
+              "day": 5,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 312858
+            },
+            {
+              "tgl": "2026-02-05",
+              "day": 5,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 195858
+            },
+            {
+              "tgl": "2026-02-07",
+              "day": 7,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-02-07",
+              "day": 7,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 759000
+            },
+            {
+              "tgl": "2026-02-08",
+              "day": 8,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 24000
+            },
+            {
+              "tgl": "2026-02-08",
+              "day": 8,
+              "desc": "Cat Limbo 2pcs",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 310000
+            },
+            {
+              "tgl": "2026-02-10",
+              "day": 10,
+              "desc": "Servis Cam A7rII new",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 900000
+            },
+            {
+              "tgl": "2026-02-10",
+              "day": 10,
+              "desc": "Servis Cam A7rII old",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 250000
+            },
+            {
+              "tgl": "2026-02-10",
+              "day": 10,
+              "desc": "Card Diskon Foxe",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 25000
+            },
+            {
+              "tgl": "2026-02-11",
+              "day": 11,
+              "desc": "Bensin",
+              "jenis": "OPEX",
+              "kategori": "Transport & Operasional Lapangan",
+              "nilai": 50000
+            },
+            {
+              "tgl": "2026-02-11",
+              "day": 11,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-02-11",
+              "day": 11,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 155000
+            },
+            {
+              "tgl": "2026-02-12",
+              "day": 12,
+              "desc": "Pengharum Ruangan",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 42000
+            },
+            {
+              "tgl": "2026-02-12",
+              "day": 12,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1417000
+            },
+            {
+              "tgl": "2026-02-12",
+              "day": 12,
+              "desc": "Sponsor SPM",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 251250
+            },
+            {
+              "tgl": "2026-02-13",
+              "day": 13,
+              "desc": "Makan WIsuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 112000
+            },
+            {
+              "tgl": "2026-02-13",
+              "day": 13,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-02-13",
+              "day": 13,
+              "desc": "Servis PC admin",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 150000
+            },
+            {
+              "tgl": "2026-02-14",
+              "day": 14,
+              "desc": "Spray FOAM",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 115000
+            },
+            {
+              "tgl": "2026-02-14",
+              "day": 14,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-02-14",
+              "day": 14,
+              "desc": "Papan Open Close",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 87700
+            },
+            {
+              "tgl": "2026-02-14",
+              "day": 14,
+              "desc": "Makan WIsuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 163000
+            },
+            {
+              "tgl": "2026-02-15",
+              "day": 15,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-02-15",
+              "day": 15,
+              "desc": "Sewa Body Cam & vero",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 250000
+            },
+            {
+              "tgl": "2026-02-15",
+              "day": 15,
+              "desc": "Sewa Triger & Lensa",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 264000
+            },
+            {
+              "tgl": "2026-02-16",
+              "day": 16,
+              "desc": "Serv AcDipan & Air Curtain",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 190000
+            },
+            {
+              "tgl": "2026-02-16",
+              "day": 16,
+              "desc": "Pdam",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 126300
+            },
+            {
+              "tgl": "2026-02-16",
+              "day": 16,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 155000
+            },
+            {
+              "tgl": "2026-02-17",
+              "day": 17,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 630000
+            },
+            {
+              "tgl": "2026-02-18",
+              "day": 18,
+              "desc": "Modul Ac Studio Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 250000
+            },
+            {
+              "tgl": "2026-02-18",
+              "day": 18,
+              "desc": "Cable Duck",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 40000
+            },
+            {
+              "tgl": "2026-02-18",
+              "day": 18,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-02-20",
+              "day": 20,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-02-21",
+              "day": 21,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 3652500
+            },
+            {
+              "tgl": "2026-02-23",
+              "day": 23,
+              "desc": "StikyNote Atk",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 60000
+            },
+            {
+              "tgl": "2026-02-25",
+              "day": 25,
+              "desc": "Liquid & Cage",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 90000
+            },
+            {
+              "tgl": "2026-02-25",
+              "day": 25,
+              "desc": "Liquid 5Ltr",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 135500
+            },
+            {
+              "tgl": "2026-02-26",
+              "day": 26,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-02-26",
+              "day": 26,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 406000
+            },
+            {
+              "tgl": "2026-02-27",
+              "day": 27,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1347500
+            },
+            {
+              "tgl": "2026-02-27",
+              "day": 27,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 155000
+            },
+            {
+              "tgl": "2026-02-28",
+              "day": 28,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 490000
+            },
+            {
+              "tgl": "2026-02-28",
+              "day": 28,
+              "desc": "Bon",
+              "jenis": "NON-P&L",
+              "kategori": "Prive / Owner Draw",
+              "nilai": 3927500
+            },
+            {
+              "tgl": "2026-02-28",
+              "day": 28,
+              "desc": "Gaji Karyawan",
+              "jenis": "OPEX",
+              "kategori": "Gaji Admin & Fotografer",
+              "nilai": 8697500
+            },
+            {
+              "tgl": "2026-02-28",
+              "day": 28,
+              "desc": "Pajak",
+              "jenis": "OPEX",
+              "kategori": "Pajak & Perizinan",
+              "nilai": 316375
+            },
+            {
+              "tgl": "2026-02-28",
+              "day": 28,
+              "desc": "Amal",
+              "jenis": "BIAYA LAINNYA",
+              "kategori": "Amal & Sosial",
+              "nilai": 949125
+            }
+          ],
           "ads": 2000000,
           "adsRatio": 3.16
         },
@@ -34506,8 +35708,661 @@
           "outcome": 36783478,
           "nettProfit": 57532022,
           "margin": 61.0,
-          "daily": [],
-          "expenses": [],
+          "daily": [
+            {
+              "tgl": "2026-03-01",
+              "day": 1,
+              "cash": 247500,
+              "transfer": 1333000,
+              "total": 1580500
+            },
+            {
+              "tgl": "2026-03-02",
+              "day": 2,
+              "cash": 417500,
+              "transfer": 907500,
+              "total": 1325000
+            },
+            {
+              "tgl": "2026-03-03",
+              "day": 3,
+              "cash": 215000,
+              "transfer": 1450000,
+              "total": 1665000
+            },
+            {
+              "tgl": "2026-03-04",
+              "day": 4,
+              "cash": 0,
+              "transfer": 1497500,
+              "total": 1497500
+            },
+            {
+              "tgl": "2026-03-05",
+              "day": 5,
+              "cash": 250000,
+              "transfer": 1507500,
+              "total": 1757500
+            },
+            {
+              "tgl": "2026-03-06",
+              "day": 6,
+              "cash": 0,
+              "transfer": 790000,
+              "total": 790000
+            },
+            {
+              "tgl": "2026-03-07",
+              "day": 7,
+              "cash": 930000,
+              "transfer": 1325000,
+              "total": 2255000
+            },
+            {
+              "tgl": "2026-03-08",
+              "day": 8,
+              "cash": 50000,
+              "transfer": 4950000,
+              "total": 5000000
+            },
+            {
+              "tgl": "2026-03-09",
+              "day": 9,
+              "cash": 0,
+              "transfer": 1695000,
+              "total": 1695000
+            },
+            {
+              "tgl": "2026-03-10",
+              "day": 10,
+              "cash": 0,
+              "transfer": 1475000,
+              "total": 1475000
+            },
+            {
+              "tgl": "2026-03-11",
+              "day": 11,
+              "cash": 350000,
+              "transfer": 1910000,
+              "total": 2260000
+            },
+            {
+              "tgl": "2026-03-12",
+              "day": 12,
+              "cash": 0,
+              "transfer": 1175000,
+              "total": 1175000
+            },
+            {
+              "tgl": "2026-03-13",
+              "day": 13,
+              "cash": 0,
+              "transfer": 1950000,
+              "total": 1950000
+            },
+            {
+              "tgl": "2026-03-14",
+              "day": 14,
+              "cash": 400000,
+              "transfer": 3690000,
+              "total": 4090000
+            },
+            {
+              "tgl": "2026-03-15",
+              "day": 15,
+              "cash": 1850000,
+              "transfer": 2275000,
+              "total": 4125000
+            },
+            {
+              "tgl": "2026-03-16",
+              "day": 16,
+              "cash": 600000,
+              "transfer": 1975000,
+              "total": 2575000
+            },
+            {
+              "tgl": "2026-03-17",
+              "day": 17,
+              "cash": 1100000,
+              "transfer": 1470000,
+              "total": 2570000
+            },
+            {
+              "tgl": "2026-03-18",
+              "day": 18,
+              "cash": 835000,
+              "transfer": 4480000,
+              "total": 5315000
+            },
+            {
+              "tgl": "2026-03-19",
+              "day": 19,
+              "cash": 860000,
+              "transfer": 2670000,
+              "total": 3530000
+            },
+            {
+              "tgl": "2026-03-22",
+              "day": 22,
+              "cash": 0,
+              "transfer": 3950000,
+              "total": 3950000
+            },
+            {
+              "tgl": "2026-03-23",
+              "day": 23,
+              "cash": 1510000,
+              "transfer": 4320000,
+              "total": 5830000
+            },
+            {
+              "tgl": "2026-03-24",
+              "day": 24,
+              "cash": 2020000,
+              "transfer": 5045000,
+              "total": 7065000
+            },
+            {
+              "tgl": "2026-03-25",
+              "day": 25,
+              "cash": 1930000,
+              "transfer": 1080000,
+              "total": 3010000
+            },
+            {
+              "tgl": "2026-03-26",
+              "day": 26,
+              "cash": 1655000,
+              "transfer": 1210000,
+              "total": 2865000
+            },
+            {
+              "tgl": "2026-03-27",
+              "day": 27,
+              "cash": 425000,
+              "transfer": 650000,
+              "total": 1075000
+            },
+            {
+              "tgl": "2026-03-28",
+              "day": 28,
+              "cash": 1745000,
+              "transfer": 2510000,
+              "total": 4255000
+            },
+            {
+              "tgl": "2026-03-29",
+              "day": 29,
+              "cash": 250000,
+              "transfer": 1620000,
+              "total": 1870000
+            },
+            {
+              "tgl": "2026-03-30",
+              "day": 30,
+              "cash": 700000,
+              "transfer": 1600000,
+              "total": 2300000
+            },
+            {
+              "tgl": "2026-03-31",
+              "day": 31,
+              "cash": 6640000,
+              "transfer": 8825000,
+              "total": 15465000
+            }
+          ],
+          "expenses": [
+            {
+              "tgl": "2026-03-01",
+              "day": 1,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-03-01",
+              "day": 1,
+              "desc": "Wifi",
+              "jenis": "OPEX",
+              "kategori": "Internet & Telekomunikasi",
+              "nilai": 730000
+            },
+            {
+              "tgl": "2026-03-02",
+              "day": 2,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-03-02",
+              "day": 2,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 40000
+            },
+            {
+              "tgl": "2026-03-04",
+              "day": 4,
+              "desc": "Service Ac",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 180000
+            },
+            {
+              "tgl": "2026-03-05",
+              "day": 5,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-03-05",
+              "day": 5,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-03-06",
+              "day": 6,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1299500
+            },
+            {
+              "tgl": "2026-03-07",
+              "day": 7,
+              "desc": "Duckhead mac",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 129600
+            },
+            {
+              "tgl": "2026-03-08",
+              "day": 8,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-03-08",
+              "day": 8,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 24000
+            },
+            {
+              "tgl": "2026-03-09",
+              "day": 9,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-03-09",
+              "day": 9,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 155000
+            },
+            {
+              "tgl": "2026-03-10",
+              "day": 10,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315500
+            },
+            {
+              "tgl": "2026-03-11",
+              "day": 11,
+              "desc": "Serv AC",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 375000
+            },
+            {
+              "tgl": "2026-03-11",
+              "day": 11,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-03-11",
+              "day": 11,
+              "desc": "Atk admin",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 40000
+            },
+            {
+              "tgl": "2026-03-12",
+              "day": 12,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315500
+            },
+            {
+              "tgl": "2026-03-13",
+              "day": 13,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-03-13",
+              "day": 13,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-03-14",
+              "day": 14,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 825500
+            },
+            {
+              "tgl": "2026-03-14",
+              "day": 14,
+              "desc": "Batre AA",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 57000
+            },
+            {
+              "tgl": "2026-03-15",
+              "day": 15,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 560000
+            },
+            {
+              "tgl": "2026-03-16",
+              "day": 16,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-03-16",
+              "day": 16,
+              "desc": "Batre AA",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 57000
+            },
+            {
+              "tgl": "2026-03-18",
+              "day": 18,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-03-19",
+              "day": 19,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-03-22",
+              "day": 22,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-03-22",
+              "day": 22,
+              "desc": "Shift Hari Raya",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 300000
+            },
+            {
+              "tgl": "2026-03-23",
+              "day": 23,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 2733500
+            },
+            {
+              "tgl": "2026-03-23",
+              "day": 23,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-03-23",
+              "day": 23,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-03-24",
+              "day": 24,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-03-25",
+              "day": 25,
+              "desc": "Cleaner Kit",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 35000
+            },
+            {
+              "tgl": "2026-03-25",
+              "day": 25,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1634000
+            },
+            {
+              "tgl": "2026-03-26",
+              "day": 26,
+              "desc": "Servis Ac",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 360000
+            },
+            {
+              "tgl": "2026-03-26",
+              "day": 26,
+              "desc": "Cuci Sofa",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 215100
+            },
+            {
+              "tgl": "2026-03-26",
+              "day": 26,
+              "desc": "Plastik Kresek",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 102000
+            },
+            {
+              "tgl": "2026-03-28",
+              "day": 28,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1466000
+            },
+            {
+              "tgl": "2026-03-29",
+              "day": 29,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 155000
+            },
+            {
+              "tgl": "2026-03-29",
+              "day": 29,
+              "desc": "Baygon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 67000
+            },
+            {
+              "tgl": "2026-03-29",
+              "day": 29,
+              "desc": "Add Edit",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 395000
+            },
+            {
+              "tgl": "2026-03-30",
+              "day": 30,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 403000
+            },
+            {
+              "tgl": "2026-03-30",
+              "day": 30,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-03-30",
+              "day": 30,
+              "desc": "Makan Wisuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 140000
+            },
+            {
+              "tgl": "2026-03-31",
+              "day": 31,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 2305000
+            },
+            {
+              "tgl": "2026-03-31",
+              "day": 31,
+              "desc": "Charger Admin",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 55000
+            },
+            {
+              "tgl": "2026-03-31",
+              "day": 31,
+              "desc": "Makan Malam Wisuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 205000
+            },
+            {
+              "tgl": "2026-03-31",
+              "day": 31,
+              "desc": "Jijang Runner",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 100000
+            },
+            {
+              "tgl": "2026-03-31",
+              "day": 31,
+              "desc": "Bensin",
+              "jenis": "OPEX",
+              "kategori": "Transport & Operasional Lapangan",
+              "nilai": 60000
+            },
+            {
+              "tgl": "2026-03-31",
+              "day": 31,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 560000
+            },
+            {
+              "tgl": "2026-03-31",
+              "day": 31,
+              "desc": "Rent Body , Lensa , Triger",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 733000
+            },
+            {
+              "tgl": "2026-03-31",
+              "day": 31,
+              "desc": "Bon",
+              "jenis": "NON-P&L",
+              "kategori": "Prive / Owner Draw",
+              "nilai": 3830800
+            },
+            {
+              "tgl": "2026-03-31",
+              "day": 31,
+              "desc": "Gaji Karyawan",
+              "jenis": "OPEX",
+              "kategori": "Gaji Admin & Fotografer",
+              "nilai": 9714200
+            },
+            {
+              "tgl": "2026-03-31",
+              "day": 31,
+              "desc": "Pajak",
+              "jenis": "OPEX",
+              "kategori": "Pajak & Perizinan",
+              "nilai": 471078
+            },
+            {
+              "tgl": "2026-03-31",
+              "day": 31,
+              "desc": "Amal",
+              "jenis": "BIAYA LAINNYA",
+              "kategori": "Amal & Sosial",
+              "nilai": 1413232
+            }
+          ],
           "ads": 2000000,
           "adsRatio": 2.12
         },
@@ -34522,8 +36377,692 @@
           "outcome": 36248958,
           "nettProfit": 28343042,
           "margin": 43.88,
-          "daily": [],
-          "expenses": [],
+          "daily": [
+            {
+              "tgl": "2026-04-01",
+              "day": 1,
+              "cash": 1375000,
+              "transfer": 2165000,
+              "total": 3540000
+            },
+            {
+              "tgl": "2026-04-02",
+              "day": 2,
+              "cash": 175000,
+              "transfer": 800000,
+              "total": 975000
+            },
+            {
+              "tgl": "2026-04-03",
+              "day": 3,
+              "cash": 500000,
+              "transfer": 3505000,
+              "total": 4005000
+            },
+            {
+              "tgl": "2026-04-04",
+              "day": 4,
+              "cash": 1250000,
+              "transfer": 2115000,
+              "total": 3365000
+            },
+            {
+              "tgl": "2026-04-05",
+              "day": 5,
+              "cash": 375000,
+              "transfer": 1162000,
+              "total": 1537000
+            },
+            {
+              "tgl": "2026-04-06",
+              "day": 6,
+              "cash": 100000,
+              "transfer": 1500000,
+              "total": 1600000
+            },
+            {
+              "tgl": "2026-04-07",
+              "day": 7,
+              "cash": 1065000,
+              "transfer": 200000,
+              "total": 1265000
+            },
+            {
+              "tgl": "2026-04-08",
+              "day": 8,
+              "cash": 400000,
+              "transfer": 425000,
+              "total": 825000
+            },
+            {
+              "tgl": "2026-04-09",
+              "day": 9,
+              "cash": 0,
+              "transfer": 1525000,
+              "total": 1525000
+            },
+            {
+              "tgl": "2026-04-10",
+              "day": 10,
+              "cash": 1386000,
+              "transfer": 1469000,
+              "total": 2855000
+            },
+            {
+              "tgl": "2026-04-11",
+              "day": 11,
+              "cash": 725000,
+              "transfer": 1940000,
+              "total": 2665000
+            },
+            {
+              "tgl": "2026-04-12",
+              "day": 12,
+              "cash": 1805000,
+              "transfer": 825000,
+              "total": 2630000
+            },
+            {
+              "tgl": "2026-04-13",
+              "day": 13,
+              "cash": 500000,
+              "transfer": 910000,
+              "total": 1410000
+            },
+            {
+              "tgl": "2026-04-14",
+              "day": 14,
+              "cash": 0,
+              "transfer": 700000,
+              "total": 700000
+            },
+            {
+              "tgl": "2026-04-15",
+              "day": 15,
+              "cash": 1580000,
+              "transfer": 2780000,
+              "total": 4360000
+            },
+            {
+              "tgl": "2026-04-16",
+              "day": 16,
+              "cash": 1495000,
+              "transfer": 1495000,
+              "total": 2990000
+            },
+            {
+              "tgl": "2026-04-17",
+              "day": 17,
+              "cash": 600000,
+              "transfer": 2650000,
+              "total": 3250000
+            },
+            {
+              "tgl": "2026-04-18",
+              "day": 18,
+              "cash": 2475000,
+              "transfer": 750000,
+              "total": 3225000
+            },
+            {
+              "tgl": "2026-04-19",
+              "day": 19,
+              "cash": 0,
+              "transfer": 1715000,
+              "total": 1715000
+            },
+            {
+              "tgl": "2026-04-20",
+              "day": 20,
+              "cash": 775000,
+              "transfer": 1400000,
+              "total": 2175000
+            },
+            {
+              "tgl": "2026-04-21",
+              "day": 21,
+              "cash": 940000,
+              "transfer": 400000,
+              "total": 1340000
+            },
+            {
+              "tgl": "2026-04-22",
+              "day": 22,
+              "cash": 625000,
+              "transfer": 1855000,
+              "total": 2480000
+            },
+            {
+              "tgl": "2026-04-23",
+              "day": 23,
+              "cash": 0,
+              "transfer": 170000,
+              "total": 170000
+            },
+            {
+              "tgl": "2026-04-24",
+              "day": 24,
+              "cash": 0,
+              "transfer": 1025000,
+              "total": 1025000
+            },
+            {
+              "tgl": "2026-04-25",
+              "day": 25,
+              "cash": 500000,
+              "transfer": 2000000,
+              "total": 2500000
+            },
+            {
+              "tgl": "2026-04-26",
+              "day": 26,
+              "cash": 1060000,
+              "transfer": 1600000,
+              "total": 2660000
+            },
+            {
+              "tgl": "2026-04-27",
+              "day": 27,
+              "cash": 400000,
+              "transfer": 1070000,
+              "total": 1470000
+            },
+            {
+              "tgl": "2026-04-28",
+              "day": 28,
+              "cash": 350000,
+              "transfer": 1725000,
+              "total": 2075000
+            },
+            {
+              "tgl": "2026-04-29",
+              "day": 29,
+              "cash": 150000,
+              "transfer": 2200000,
+              "total": 2350000
+            },
+            {
+              "tgl": "2026-04-30",
+              "day": 30,
+              "cash": 500000,
+              "transfer": 1410000,
+              "total": 1910000
+            }
+          ],
+          "expenses": [
+            {
+              "tgl": "2026-04-01",
+              "day": 1,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-04-01",
+              "day": 1,
+              "desc": "Wifi",
+              "jenis": "OPEX",
+              "kategori": "Internet & Telekomunikasi",
+              "nilai": 730000
+            },
+            {
+              "tgl": "2026-04-01",
+              "day": 1,
+              "desc": "Paralon",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 110000
+            },
+            {
+              "tgl": "2026-04-02",
+              "day": 2,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-04-02",
+              "day": 2,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 24000
+            },
+            {
+              "tgl": "2026-04-02",
+              "day": 2,
+              "desc": "Parfum Ruangan",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 13000
+            },
+            {
+              "tgl": "2026-04-03",
+              "day": 3,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-04-03",
+              "day": 3,
+              "desc": "Bundling Lia Mua",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 450000
+            },
+            {
+              "tgl": "2026-04-03",
+              "day": 3,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-04-04",
+              "day": 4,
+              "desc": "Add Packing",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 92000
+            },
+            {
+              "tgl": "2026-04-04",
+              "day": 4,
+              "desc": "Pdam",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 320750
+            },
+            {
+              "tgl": "2026-04-05",
+              "day": 5,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 157500
+            },
+            {
+              "tgl": "2026-04-05",
+              "day": 5,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-04-06",
+              "day": 6,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-04-06",
+              "day": 6,
+              "desc": "Kuota Admin",
+              "jenis": "OPEX",
+              "kategori": "Internet & Telekomunikasi",
+              "nilai": 100000
+            },
+            {
+              "tgl": "2026-04-07",
+              "day": 7,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-04-07",
+              "day": 7,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 2754000
+            },
+            {
+              "tgl": "2026-04-08",
+              "day": 8,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-04-08",
+              "day": 8,
+              "desc": "Servis Genset",
+              "jenis": "OPEX",
+              "kategori": "Transport & Operasional Lapangan",
+              "nilai": 405000
+            },
+            {
+              "tgl": "2026-04-08",
+              "day": 8,
+              "desc": "Servis Ac",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 290000
+            },
+            {
+              "tgl": "2026-04-10",
+              "day": 10,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-04-10",
+              "day": 10,
+              "desc": "Lampu 5watt",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 97760
+            },
+            {
+              "tgl": "2026-04-11",
+              "day": 11,
+              "desc": "Paket",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 7500
+            },
+            {
+              "tgl": "2026-04-11",
+              "day": 11,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 2264600
+            },
+            {
+              "tgl": "2026-04-12",
+              "day": 12,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-04-12",
+              "day": 12,
+              "desc": "Listik",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-04-13",
+              "day": 13,
+              "desc": "Bensin",
+              "jenis": "OPEX",
+              "kategori": "Transport & Operasional Lapangan",
+              "nilai": 70000
+            },
+            {
+              "tgl": "2026-04-13",
+              "day": 13,
+              "desc": "Dop Paralon",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 55000
+            },
+            {
+              "tgl": "2026-04-13",
+              "day": 13,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 32000
+            },
+            {
+              "tgl": "2026-04-14",
+              "day": 14,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 988900
+            },
+            {
+              "tgl": "2026-04-14",
+              "day": 14,
+              "desc": "Amplop Packing",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 63000
+            },
+            {
+              "tgl": "2026-04-15",
+              "day": 15,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 560000
+            },
+            {
+              "tgl": "2026-04-15",
+              "day": 15,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-04-16",
+              "day": 16,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 157500
+            },
+            {
+              "tgl": "2026-04-17",
+              "day": 17,
+              "desc": "Biaya Admin",
+              "jenis": "OPEX",
+              "kategori": "Biaya Admin Bank & Finansial",
+              "nilai": 14000
+            },
+            {
+              "tgl": "2026-04-17",
+              "day": 17,
+              "desc": "Bundling LIA Prewed",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 450000
+            },
+            {
+              "tgl": "2026-04-18",
+              "day": 18,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-04-19",
+              "day": 19,
+              "desc": "Gosend",
+              "jenis": "OPEX",
+              "kategori": "Pengiriman & Logistik",
+              "nilai": 20000
+            },
+            {
+              "tgl": "2026-04-20",
+              "day": 20,
+              "desc": "Parfum Ruangan",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 22000
+            },
+            {
+              "tgl": "2026-04-20",
+              "day": 20,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1519000
+            },
+            {
+              "tgl": "2026-04-21",
+              "day": 21,
+              "desc": "Plastik Packing",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 110000
+            },
+            {
+              "tgl": "2026-04-21",
+              "day": 21,
+              "desc": "Gosend",
+              "jenis": "OPEX",
+              "kategori": "Pengiriman & Logistik",
+              "nilai": 25000
+            },
+            {
+              "tgl": "2026-04-22",
+              "day": 22,
+              "desc": "Batre A2",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 98500
+            },
+            {
+              "tgl": "2026-04-23",
+              "day": 23,
+              "desc": "Pdam",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 418457
+            },
+            {
+              "tgl": "2026-04-25",
+              "day": 25,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1639000
+            },
+            {
+              "tgl": "2026-04-25",
+              "day": 25,
+              "desc": "Plastik Kresek Packing",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 108000
+            },
+            {
+              "tgl": "2026-04-26",
+              "day": 26,
+              "desc": "Serv Lens 24/70",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 1750000
+            },
+            {
+              "tgl": "2026-04-26",
+              "day": 26,
+              "desc": "Serv Body A7 Mark II",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-04-27",
+              "day": 27,
+              "desc": "Drum Fan Exhaust",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 1708231
+            },
+            {
+              "tgl": "2026-04-27",
+              "day": 27,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 24000
+            },
+            {
+              "tgl": "2026-04-28",
+              "day": 28,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 952500
+            },
+            {
+              "tgl": "2026-04-28",
+              "day": 28,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 403000
+            },
+            {
+              "tgl": "2026-04-29",
+              "day": 29,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 560000
+            },
+            {
+              "tgl": "2026-04-30",
+              "day": 30,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 524000
+            },
+            {
+              "tgl": "2026-04-30",
+              "day": 30,
+              "desc": "Add Edit",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 220000
+            },
+            {
+              "tgl": "2026-04-30",
+              "day": 30,
+              "desc": "Bon",
+              "jenis": "NON-P&L",
+              "kategori": "Prive / Owner Draw",
+              "nilai": 5276200
+            },
+            {
+              "tgl": "2026-04-30",
+              "day": 30,
+              "desc": "Gaji Karyawan",
+              "jenis": "OPEX",
+              "kategori": "Gaji Admin & Fotografer",
+              "nilai": 7963800
+            },
+            {
+              "tgl": "2026-04-30",
+              "day": 30,
+              "desc": "Pajak",
+              "jenis": "OPEX",
+              "kategori": "Pajak & Perizinan",
+              "nilai": 322960
+            },
+            {
+              "tgl": "2026-04-30",
+              "day": 30,
+              "desc": "Amal",
+              "jenis": "BIAYA LAINNYA",
+              "kategori": "Amal & Sosial",
+              "nilai": 968880
+            }
+          ],
           "ads": 2000000,
           "adsRatio": 3.1
         },
@@ -34538,8 +37077,564 @@
           "outcome": 29744840,
           "nettProfit": 46859660,
           "margin": 61.17,
-          "daily": [],
-          "expenses": [],
+          "daily": [
+            {
+              "tgl": "2026-05-01",
+              "day": 1,
+              "cash": 150000,
+              "transfer": 3175000,
+              "total": 3325000
+            },
+            {
+              "tgl": "2026-05-02",
+              "day": 2,
+              "cash": 2295000,
+              "transfer": 1281000,
+              "total": 3576000
+            },
+            {
+              "tgl": "2026-05-03",
+              "day": 3,
+              "cash": 50000,
+              "transfer": 1434500,
+              "total": 1484500
+            },
+            {
+              "tgl": "2026-05-04",
+              "day": 4,
+              "cash": 0,
+              "transfer": 500000,
+              "total": 500000
+            },
+            {
+              "tgl": "2026-05-05",
+              "day": 5,
+              "cash": 1425000,
+              "transfer": 1950000,
+              "total": 3375000
+            },
+            {
+              "tgl": "2026-05-06",
+              "day": 6,
+              "cash": 500000,
+              "transfer": 1900000,
+              "total": 2400000
+            },
+            {
+              "tgl": "2026-05-07",
+              "day": 7,
+              "cash": 650000,
+              "transfer": 1620000,
+              "total": 2270000
+            },
+            {
+              "tgl": "2026-05-08",
+              "day": 8,
+              "cash": 1250000,
+              "transfer": 1625000,
+              "total": 2875000
+            },
+            {
+              "tgl": "2026-05-09",
+              "day": 9,
+              "cash": 2075000,
+              "transfer": 2745000,
+              "total": 4820000
+            },
+            {
+              "tgl": "2026-05-10",
+              "day": 10,
+              "cash": 1658000,
+              "transfer": 1906000,
+              "total": 3564000
+            },
+            {
+              "tgl": "2026-05-11",
+              "day": 11,
+              "cash": 400000,
+              "transfer": 895000,
+              "total": 1295000
+            },
+            {
+              "tgl": "2026-05-12",
+              "day": 12,
+              "cash": 325000,
+              "transfer": 2285000,
+              "total": 2610000
+            },
+            {
+              "tgl": "2026-05-13",
+              "day": 13,
+              "cash": 800000,
+              "transfer": 1505000,
+              "total": 2305000
+            },
+            {
+              "tgl": "2026-05-14",
+              "day": 14,
+              "cash": 1350000,
+              "transfer": 3050000,
+              "total": 4400000
+            },
+            {
+              "tgl": "2026-05-15",
+              "day": 15,
+              "cash": 875000,
+              "transfer": 2170000,
+              "total": 3045000
+            },
+            {
+              "tgl": "2026-05-16",
+              "day": 16,
+              "cash": 450000,
+              "transfer": 1005000,
+              "total": 1455000
+            },
+            {
+              "tgl": "2026-05-17",
+              "day": 17,
+              "cash": 745000,
+              "transfer": 1275000,
+              "total": 2020000
+            },
+            {
+              "tgl": "2026-05-18",
+              "day": 18,
+              "cash": 50000,
+              "transfer": 1275000,
+              "total": 1325000
+            },
+            {
+              "tgl": "2026-05-19",
+              "day": 19,
+              "cash": 275000,
+              "transfer": 1350000,
+              "total": 1625000
+            },
+            {
+              "tgl": "2026-05-20",
+              "day": 20,
+              "cash": 0,
+              "transfer": 1050000,
+              "total": 1050000
+            },
+            {
+              "tgl": "2026-05-21",
+              "day": 21,
+              "cash": 1450000,
+              "transfer": 2510000,
+              "total": 3960000
+            },
+            {
+              "tgl": "2026-05-22",
+              "day": 22,
+              "cash": 625000,
+              "transfer": 2260000,
+              "total": 2885000
+            },
+            {
+              "tgl": "2026-05-23",
+              "day": 23,
+              "cash": 1550000,
+              "transfer": 3085000,
+              "total": 4635000
+            },
+            {
+              "tgl": "2026-05-24",
+              "day": 24,
+              "cash": 1255000,
+              "transfer": 2120000,
+              "total": 3375000
+            },
+            {
+              "tgl": "2026-05-25",
+              "day": 25,
+              "cash": 500000,
+              "transfer": 950000,
+              "total": 1450000
+            },
+            {
+              "tgl": "2026-05-26",
+              "day": 26,
+              "cash": 0,
+              "transfer": 1180000,
+              "total": 1180000
+            },
+            {
+              "tgl": "2026-05-28",
+              "day": 28,
+              "cash": 0,
+              "transfer": 2775000,
+              "total": 2775000
+            },
+            {
+              "tgl": "2026-05-29",
+              "day": 29,
+              "cash": 1350000,
+              "transfer": 1725000,
+              "total": 3075000
+            },
+            {
+              "tgl": "2026-05-30",
+              "day": 30,
+              "cash": 1150000,
+              "transfer": 550000,
+              "total": 1700000
+            },
+            {
+              "tgl": "2026-05-31",
+              "day": 31,
+              "cash": 250000,
+              "transfer": 2000000,
+              "total": 2250000
+            }
+          ],
+          "expenses": [
+            {
+              "tgl": "2026-05-01",
+              "day": 1,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 502500
+            },
+            {
+              "tgl": "2026-05-01",
+              "day": 1,
+              "desc": "Wifi",
+              "jenis": "OPEX",
+              "kategori": "Internet & Telekomunikasi",
+              "nilai": 732500
+            },
+            {
+              "tgl": "2026-05-01",
+              "day": 1,
+              "desc": "Atk",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 40000
+            },
+            {
+              "tgl": "2026-05-02",
+              "day": 2,
+              "desc": "Frame Exhaust",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 325500
+            },
+            {
+              "tgl": "2026-05-02",
+              "day": 2,
+              "desc": "Paralon Dop",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 102000
+            },
+            {
+              "tgl": "2026-05-02",
+              "day": 2,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-05-03",
+              "day": 3,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-05-03",
+              "day": 3,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-05-03",
+              "day": 3,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-05-04",
+              "day": 4,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 502500
+            },
+            {
+              "tgl": "2026-05-07",
+              "day": 7,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-05-07",
+              "day": 7,
+              "desc": "Pemasangan Exhaust",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 550000
+            },
+            {
+              "tgl": "2026-05-08",
+              "day": 8,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1468500
+            },
+            {
+              "tgl": "2026-05-08",
+              "day": 8,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-05-10",
+              "day": 10,
+              "desc": "T Colokan",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 37000
+            },
+            {
+              "tgl": "2026-05-11",
+              "day": 11,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-05-13",
+              "day": 13,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 24000
+            },
+            {
+              "tgl": "2026-05-13",
+              "day": 13,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1274000
+            },
+            {
+              "tgl": "2026-05-14",
+              "day": 14,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-05-14",
+              "day": 14,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 1000000
+            },
+            {
+              "tgl": "2026-05-15",
+              "day": 15,
+              "desc": "Biaya Admin",
+              "jenis": "OPEX",
+              "kategori": "Biaya Admin Bank & Finansial",
+              "nilai": 14000
+            },
+            {
+              "tgl": "2026-05-15",
+              "day": 15,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 560000
+            },
+            {
+              "tgl": "2026-05-15",
+              "day": 15,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 170500
+            },
+            {
+              "tgl": "2026-05-16",
+              "day": 16,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-05-16",
+              "day": 16,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1337500
+            },
+            {
+              "tgl": "2026-05-17",
+              "day": 17,
+              "desc": "PDAM",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 264682
+            },
+            {
+              "tgl": "2026-05-17",
+              "day": 17,
+              "desc": "Parfum Ruangan",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 44000
+            },
+            {
+              "tgl": "2026-05-22",
+              "day": 22,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 403000
+            },
+            {
+              "tgl": "2026-05-23",
+              "day": 23,
+              "desc": "Spidol",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 20000
+            },
+            {
+              "tgl": "2026-05-24",
+              "day": 24,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1648000
+            },
+            {
+              "tgl": "2026-05-24",
+              "day": 24,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 154000
+            },
+            {
+              "tgl": "2026-05-25",
+              "day": 25,
+              "desc": "Tripod",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 900000
+            },
+            {
+              "tgl": "2026-05-25",
+              "day": 25,
+              "desc": "Memory Extreme 4K",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 600000
+            },
+            {
+              "tgl": "2026-05-25",
+              "day": 25,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-05-30",
+              "day": 30,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1609500
+            },
+            {
+              "tgl": "2026-05-30",
+              "day": 30,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-05-30",
+              "day": 30,
+              "desc": "Add Edit",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 100000
+            },
+            {
+              "tgl": "2026-05-31",
+              "day": 31,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 595000
+            },
+            {
+              "tgl": "2026-05-31",
+              "day": 31,
+              "desc": "Cuci Karpet",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 60000
+            },
+            {
+              "tgl": "2026-05-31",
+              "day": 31,
+              "desc": "Bon",
+              "jenis": "NON-P&L",
+              "kategori": "Prive / Owner Draw",
+              "nilai": 4712000
+            },
+            {
+              "tgl": "2026-05-31",
+              "day": 31,
+              "desc": "Gaji Karyawan",
+              "jenis": "OPEX",
+              "kategori": "Gaji Admin & Fotografer",
+              "nilai": 8453000
+            },
+            {
+              "tgl": "2026-05-31",
+              "day": 31,
+              "desc": "Pajak",
+              "jenis": "OPEX",
+              "kategori": "Pajak & Perizinan",
+              "nilai": 383158
+            },
+            {
+              "tgl": "2026-05-31",
+              "day": 31,
+              "desc": "Amal",
+              "jenis": "BIAYA LAINNYA",
+              "kategori": "Amal & Sosial",
+              "nilai": 1149472
+            }
+          ],
           "ads": 2005000,
           "adsRatio": 2.62
         },
@@ -34554,8 +37649,796 @@
           "outcome": 47178625,
           "nettProfit": 75576375,
           "margin": 61.57,
-          "daily": [],
-          "expenses": [],
+          "daily": [
+            {
+              "tgl": "2026-06-01",
+              "day": 1,
+              "cash": 400000,
+              "transfer": 1575000,
+              "total": 1975000
+            },
+            {
+              "tgl": "2026-06-02",
+              "day": 2,
+              "cash": 500000,
+              "transfer": 2450000,
+              "total": 2950000
+            },
+            {
+              "tgl": "2026-06-03",
+              "day": 3,
+              "cash": 2790000,
+              "transfer": 2250000,
+              "total": 5040000
+            },
+            {
+              "tgl": "2026-06-04",
+              "day": 4,
+              "cash": 1950000,
+              "transfer": 2950000,
+              "total": 4900000
+            },
+            {
+              "tgl": "2026-06-05",
+              "day": 5,
+              "cash": 1150000,
+              "transfer": 2385000,
+              "total": 3535000
+            },
+            {
+              "tgl": "2026-06-06",
+              "day": 6,
+              "cash": 2705000,
+              "transfer": 2280000,
+              "total": 4985000
+            },
+            {
+              "tgl": "2026-06-07",
+              "day": 7,
+              "cash": 450000,
+              "transfer": 4000000,
+              "total": 4450000
+            },
+            {
+              "tgl": "2026-06-08",
+              "day": 8,
+              "cash": 2500000,
+              "transfer": 1825000,
+              "total": 4325000
+            },
+            {
+              "tgl": "2026-06-09",
+              "day": 9,
+              "cash": 3860000,
+              "transfer": 2690000,
+              "total": 6550000
+            },
+            {
+              "tgl": "2026-06-10",
+              "day": 10,
+              "cash": 775000,
+              "transfer": 2345000,
+              "total": 3120000
+            },
+            {
+              "tgl": "2026-06-11",
+              "day": 11,
+              "cash": 1475000,
+              "transfer": 2070000,
+              "total": 3545000
+            },
+            {
+              "tgl": "2026-06-12",
+              "day": 12,
+              "cash": 900000,
+              "transfer": 2500000,
+              "total": 3400000
+            },
+            {
+              "tgl": "2026-06-13",
+              "day": 13,
+              "cash": 250000,
+              "transfer": 3170000,
+              "total": 3420000
+            },
+            {
+              "tgl": "2026-06-14",
+              "day": 14,
+              "cash": 1425000,
+              "transfer": 1200000,
+              "total": 2625000
+            },
+            {
+              "tgl": "2026-06-15",
+              "day": 15,
+              "cash": 650000,
+              "transfer": 2375000,
+              "total": 3025000
+            },
+            {
+              "tgl": "2026-06-16",
+              "day": 16,
+              "cash": 1225000,
+              "transfer": 3845000,
+              "total": 5070000
+            },
+            {
+              "tgl": "2026-06-17",
+              "day": 17,
+              "cash": 4190000,
+              "transfer": 5050000,
+              "total": 9240000
+            },
+            {
+              "tgl": "2026-06-18",
+              "day": 18,
+              "cash": 1945000,
+              "transfer": 5640000,
+              "total": 7585000
+            },
+            {
+              "tgl": "2026-06-19",
+              "day": 19,
+              "cash": 3735000,
+              "transfer": 2815000,
+              "total": 6550000
+            },
+            {
+              "tgl": "2026-06-20",
+              "day": 20,
+              "cash": 2300000,
+              "transfer": 1900000,
+              "total": 4200000
+            },
+            {
+              "tgl": "2026-06-21",
+              "day": 21,
+              "cash": 3045000,
+              "transfer": 1575000,
+              "total": 4620000
+            },
+            {
+              "tgl": "2026-06-22",
+              "day": 22,
+              "cash": 2250000,
+              "transfer": 2325000,
+              "total": 4575000
+            },
+            {
+              "tgl": "2026-06-23",
+              "day": 23,
+              "cash": 475000,
+              "transfer": 600000,
+              "total": 1075000
+            },
+            {
+              "tgl": "2026-06-24",
+              "day": 24,
+              "cash": 1300000,
+              "transfer": 2220000,
+              "total": 3520000
+            },
+            {
+              "tgl": "2026-06-25",
+              "day": 25,
+              "cash": 2200000,
+              "transfer": 2565000,
+              "total": 4765000
+            },
+            {
+              "tgl": "2026-06-26",
+              "day": 26,
+              "cash": 0,
+              "transfer": 1840000,
+              "total": 1840000
+            },
+            {
+              "tgl": "2026-06-27",
+              "day": 27,
+              "cash": 75000,
+              "transfer": 1125000,
+              "total": 1200000
+            },
+            {
+              "tgl": "2026-06-28",
+              "day": 28,
+              "cash": 1350000,
+              "transfer": 2120000,
+              "total": 3470000
+            },
+            {
+              "tgl": "2026-06-29",
+              "day": 29,
+              "cash": 1525000,
+              "transfer": 1450000,
+              "total": 2975000
+            },
+            {
+              "tgl": "2026-06-30",
+              "day": 30,
+              "cash": 2225000,
+              "transfer": 2000000,
+              "total": 4225000
+            }
+          ],
+          "expenses": [
+            {
+              "tgl": "2026-06-01",
+              "day": 1,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-06-01",
+              "day": 1,
+              "desc": "Wifi",
+              "jenis": "OPEX",
+              "kategori": "Internet & Telekomunikasi",
+              "nilai": 730000
+            },
+            {
+              "tgl": "2026-06-02",
+              "day": 2,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-06-02",
+              "day": 2,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-06-03",
+              "day": 3,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-06-03",
+              "day": 3,
+              "desc": "Gosend",
+              "jenis": "OPEX",
+              "kategori": "Pengiriman & Logistik",
+              "nilai": 10000
+            },
+            {
+              "tgl": "2026-06-04",
+              "day": 4,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 502500
+            },
+            {
+              "tgl": "2026-06-04",
+              "day": 4,
+              "desc": "Batre AA",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 90000
+            },
+            {
+              "tgl": "2026-06-05",
+              "day": 5,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-06-05",
+              "day": 5,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-06-06",
+              "day": 6,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 154000
+            },
+            {
+              "tgl": "2026-06-06",
+              "day": 6,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1672000
+            },
+            {
+              "tgl": "2026-06-07",
+              "day": 7,
+              "desc": "Lakban",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 30000
+            },
+            {
+              "tgl": "2026-06-08",
+              "day": 8,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-06-08",
+              "day": 8,
+              "desc": "Tutuy Sarapan",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 100000
+            },
+            {
+              "tgl": "2026-06-08",
+              "day": 8,
+              "desc": "VeroPrewed",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 100000
+            },
+            {
+              "tgl": "2026-06-09",
+              "day": 9,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-06-09",
+              "day": 9,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-06-09",
+              "day": 9,
+              "desc": "Battre Np50",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 36000
+            },
+            {
+              "tgl": "2026-06-10",
+              "day": 10,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-06-11",
+              "day": 11,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1785500
+            },
+            {
+              "tgl": "2026-06-12",
+              "day": 12,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 170000
+            },
+            {
+              "tgl": "2026-06-12",
+              "day": 12,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-06-13",
+              "day": 13,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-06-13",
+              "day": 13,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1634500
+            },
+            {
+              "tgl": "2026-06-14",
+              "day": 14,
+              "desc": "PDAM",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 393495
+            },
+            {
+              "tgl": "2026-06-14",
+              "day": 14,
+              "desc": "Biaya Admin",
+              "jenis": "OPEX",
+              "kategori": "Biaya Admin Bank & Finansial",
+              "nilai": 14000
+            },
+            {
+              "tgl": "2026-06-15",
+              "day": 15,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 560000
+            },
+            {
+              "tgl": "2026-06-15",
+              "day": 15,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-06-15",
+              "day": 15,
+              "desc": "Batre",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 41000
+            },
+            {
+              "tgl": "2026-06-16",
+              "day": 16,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-06-16",
+              "day": 16,
+              "desc": "Harddisk",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 1620000
+            },
+            {
+              "tgl": "2026-06-16",
+              "day": 16,
+              "desc": "Makan Wisuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 139500
+            },
+            {
+              "tgl": "2026-06-17",
+              "day": 17,
+              "desc": "Serv Ac",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 270000
+            },
+            {
+              "tgl": "2026-06-17",
+              "day": 17,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-06-17",
+              "day": 17,
+              "desc": "Rent Body Cam + Vero",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 200000
+            },
+            {
+              "tgl": "2026-06-17",
+              "day": 17,
+              "desc": "Makan Wisuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 145000
+            },
+            {
+              "tgl": "2026-06-18",
+              "day": 18,
+              "desc": "Makan Wisuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 148000
+            },
+            {
+              "tgl": "2026-06-18",
+              "day": 18,
+              "desc": "Sewa KOI",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 405000
+            },
+            {
+              "tgl": "2026-06-18",
+              "day": 18,
+              "desc": "Makan Wisuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 126000
+            },
+            {
+              "tgl": "2026-06-18",
+              "day": 18,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-06-19",
+              "day": 19,
+              "desc": "Rent Body Cam + Vero",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 200000
+            },
+            {
+              "tgl": "2026-06-19",
+              "day": 19,
+              "desc": "Serv Ac",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 250000
+            },
+            {
+              "tgl": "2026-06-20",
+              "day": 20,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-06-21",
+              "day": 21,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 2558500
+            },
+            {
+              "tgl": "2026-06-22",
+              "day": 22,
+              "desc": "Lampu Taman",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 135000
+            },
+            {
+              "tgl": "2026-06-22",
+              "day": 22,
+              "desc": "LampuSpot",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 90240
+            },
+            {
+              "tgl": "2026-06-22",
+              "day": 22,
+              "desc": "Colokan T",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 50000
+            },
+            {
+              "tgl": "2026-06-23",
+              "day": 23,
+              "desc": "Lakban Kertas",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 20750
+            },
+            {
+              "tgl": "2026-06-23",
+              "day": 23,
+              "desc": "Baygon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 56000
+            },
+            {
+              "tgl": "2026-06-23",
+              "day": 23,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1440000
+            },
+            {
+              "tgl": "2026-06-24",
+              "day": 24,
+              "desc": "Pledge",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 26000
+            },
+            {
+              "tgl": "2026-06-24",
+              "day": 24,
+              "desc": "Amplop Packing",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 80000
+            },
+            {
+              "tgl": "2026-06-24",
+              "day": 24,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-06-25",
+              "day": 25,
+              "desc": "Lakban, Stiky Notes",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 73000
+            },
+            {
+              "tgl": "2026-06-25",
+              "day": 25,
+              "desc": "Dop Paralon",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 50000
+            },
+            {
+              "tgl": "2026-06-25",
+              "day": 25,
+              "desc": "Plastik Kresek",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 111000
+            },
+            {
+              "tgl": "2026-06-26",
+              "day": 26,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 203000
+            },
+            {
+              "tgl": "2026-06-26",
+              "day": 26,
+              "desc": "Paralon Packing",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 112000
+            },
+            {
+              "tgl": "2026-06-26",
+              "day": 26,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 3750000
+            },
+            {
+              "tgl": "2026-06-27",
+              "day": 27,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 313000
+            },
+            {
+              "tgl": "2026-06-29",
+              "day": 29,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 203000
+            },
+            {
+              "tgl": "2026-06-29",
+              "day": 29,
+              "desc": "Lampu Downlight",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 200100
+            },
+            {
+              "tgl": "2026-06-29",
+              "day": 29,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 154000
+            },
+            {
+              "tgl": "2026-06-30",
+              "day": 30,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 2550000
+            },
+            {
+              "tgl": "2026-06-30",
+              "day": 30,
+              "desc": "Add Edit",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 300000
+            },
+            {
+              "tgl": "2026-06-30",
+              "day": 30,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1350000
+            },
+            {
+              "tgl": "2026-06-30",
+              "day": 30,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 560000
+            },
+            {
+              "tgl": "2026-06-30",
+              "day": 30,
+              "desc": "Bon",
+              "jenis": "NON-P&L",
+              "kategori": "Prive / Owner Draw",
+              "nilai": 5125900
+            },
+            {
+              "tgl": "2026-06-30",
+              "day": 30,
+              "desc": "Gaji Karyawan",
+              "jenis": "OPEX",
+              "kategori": "Gaji Admin & Fotografer",
+              "nilai": 11350765
+            },
+            {
+              "tgl": "2026-06-30",
+              "day": 30,
+              "desc": "Pajak",
+              "jenis": "OPEX",
+              "kategori": "Pajak & Perizinan",
+              "nilai": 613775
+            },
+            {
+              "tgl": "2026-06-30",
+              "day": 30,
+              "desc": "Amal",
+              "jenis": "BIAYA LAINNYA",
+              "kategori": "Amal & Sosial",
+              "nilai": 1841325
+            }
+          ],
           "ads": 2002500,
           "adsRatio": 1.63
         },
@@ -34570,8 +38453,547 @@
           "outcome": 27838905,
           "nettProfit": 37542095,
           "margin": 57.42,
-          "daily": [],
-          "expenses": [],
+          "daily": [
+            {
+              "tgl": "2026-07-01",
+              "day": 1,
+              "cash": 1225000,
+              "transfer": 2340000,
+              "total": 3565000
+            },
+            {
+              "tgl": "2026-07-02",
+              "day": 2,
+              "cash": 2050000,
+              "transfer": 1400000,
+              "total": 3450000
+            },
+            {
+              "tgl": "2026-07-03",
+              "day": 3,
+              "cash": 750000,
+              "transfer": 1275000,
+              "total": 2025000
+            },
+            {
+              "tgl": "2026-07-04",
+              "day": 4,
+              "cash": 550000,
+              "transfer": 3345000,
+              "total": 3895000
+            },
+            {
+              "tgl": "2026-07-05",
+              "day": 5,
+              "cash": 2025000,
+              "transfer": 775000,
+              "total": 2800000
+            },
+            {
+              "tgl": "2026-07-06",
+              "day": 6,
+              "cash": 1150000,
+              "transfer": 1050000,
+              "total": 2200000
+            },
+            {
+              "tgl": "2026-07-07",
+              "day": 7,
+              "cash": 100000,
+              "transfer": 1755000,
+              "total": 1855000
+            },
+            {
+              "tgl": "2026-07-08",
+              "day": 8,
+              "cash": 1025000,
+              "transfer": 1425000,
+              "total": 2450000
+            },
+            {
+              "tgl": "2026-07-09",
+              "day": 9,
+              "cash": 1530000,
+              "transfer": 450000,
+              "total": 1980000
+            },
+            {
+              "tgl": "2026-07-10",
+              "day": 10,
+              "cash": 1025000,
+              "transfer": 1450000,
+              "total": 2475000
+            },
+            {
+              "tgl": "2026-07-11",
+              "day": 11,
+              "cash": 2325000,
+              "transfer": 856000,
+              "total": 3181000
+            },
+            {
+              "tgl": "2026-07-12",
+              "day": 12,
+              "cash": 1150000,
+              "transfer": 2925000,
+              "total": 4075000
+            },
+            {
+              "tgl": "2026-07-13",
+              "day": 13,
+              "cash": 1825000,
+              "transfer": 1075000,
+              "total": 2900000
+            },
+            {
+              "tgl": "2026-07-14",
+              "day": 14,
+              "cash": 990000,
+              "transfer": 635000,
+              "total": 1625000
+            },
+            {
+              "tgl": "2026-07-15",
+              "day": 15,
+              "cash": 0,
+              "transfer": 645000,
+              "total": 645000
+            },
+            {
+              "tgl": "2026-07-16",
+              "day": 16,
+              "cash": 200000,
+              "transfer": 900000,
+              "total": 1100000
+            },
+            {
+              "tgl": "2026-07-17",
+              "day": 17,
+              "cash": 75000,
+              "transfer": 795000,
+              "total": 870000
+            },
+            {
+              "tgl": "2026-07-18",
+              "day": 18,
+              "cash": 650000,
+              "transfer": 1000000,
+              "total": 1650000
+            },
+            {
+              "tgl": "2026-07-19",
+              "day": 19,
+              "cash": 1550000,
+              "transfer": 1625000,
+              "total": 3175000
+            },
+            {
+              "tgl": "2026-07-20",
+              "day": 20,
+              "cash": 300000,
+              "transfer": 1400000,
+              "total": 1700000
+            },
+            {
+              "tgl": "2026-07-21",
+              "day": 21,
+              "cash": 1050000,
+              "transfer": 650000,
+              "total": 1700000
+            },
+            {
+              "tgl": "2026-07-22",
+              "day": 22,
+              "cash": 0,
+              "transfer": 1600000,
+              "total": 1600000
+            },
+            {
+              "tgl": "2026-07-23",
+              "day": 23,
+              "cash": 900000,
+              "transfer": 750000,
+              "total": 1650000
+            },
+            {
+              "tgl": "2026-07-24",
+              "day": 24,
+              "cash": 1225000,
+              "transfer": 650000,
+              "total": 1875000
+            },
+            {
+              "tgl": "2026-07-25",
+              "day": 25,
+              "cash": 500000,
+              "transfer": 1125000,
+              "total": 1625000
+            },
+            {
+              "tgl": "2026-07-26",
+              "day": 26,
+              "cash": 450000,
+              "transfer": 2205000,
+              "total": 2655000
+            },
+            {
+              "tgl": "2026-07-27",
+              "day": 27,
+              "cash": 250000,
+              "transfer": 550000,
+              "total": 800000
+            },
+            {
+              "tgl": "2026-07-28",
+              "day": 28,
+              "cash": 425000,
+              "transfer": 1100000,
+              "total": 1525000
+            },
+            {
+              "tgl": "2026-07-29",
+              "day": 29,
+              "cash": 250000,
+              "transfer": 800000,
+              "total": 1050000
+            },
+            {
+              "tgl": "2026-07-30",
+              "day": 30,
+              "cash": 100000,
+              "transfer": 1100000,
+              "total": 1200000
+            },
+            {
+              "tgl": "2026-07-31",
+              "day": 31,
+              "cash": 1125000,
+              "transfer": 960000,
+              "total": 2085000
+            }
+          ],
+          "expenses": [
+            {
+              "tgl": "2026-09-01",
+              "day": 1,
+              "desc": "Wifi",
+              "jenis": "OPEX",
+              "kategori": "Internet & Telekomunikasi",
+              "nilai": 730000
+            },
+            {
+              "tgl": "2026-09-01",
+              "day": 1,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-09-01",
+              "day": 1,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 203000
+            },
+            {
+              "tgl": "2026-09-02",
+              "day": 2,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-09-02",
+              "day": 2,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-09-02",
+              "day": 2,
+              "desc": "Tutup Closet",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 95000
+            },
+            {
+              "tgl": "2026-09-03",
+              "day": 3,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 154000
+            },
+            {
+              "tgl": "2026-09-03",
+              "day": 3,
+              "desc": "Lakban + Dop 2pcs",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 17500
+            },
+            {
+              "tgl": "2026-09-04",
+              "day": 4,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1655500
+            },
+            {
+              "tgl": "2026-09-07",
+              "day": 7,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-09-08",
+              "day": 8,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-09-10",
+              "day": 10,
+              "desc": "Bensin Genset",
+              "jenis": "OPEX",
+              "kategori": "Transport & Operasional Lapangan",
+              "nilai": 100000
+            },
+            {
+              "tgl": "2026-09-10",
+              "day": 10,
+              "desc": "Serv Air Curtain",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 275000
+            },
+            {
+              "tgl": "2026-09-11",
+              "day": 11,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-09-12",
+              "day": 12,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-09-12",
+              "day": 12,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-09-12",
+              "day": 12,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 17000
+            },
+            {
+              "tgl": "2026-09-13",
+              "day": 13,
+              "desc": "Cuci Sofa 3pcs",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 450000
+            },
+            {
+              "tgl": "2026-09-13",
+              "day": 13,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-09-13",
+              "day": 13,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-09-15",
+              "day": 15,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 595000
+            },
+            {
+              "tgl": "2026-09-17",
+              "day": 17,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1378000
+            },
+            {
+              "tgl": "2026-09-18",
+              "day": 18,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-09-19",
+              "day": 19,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1833000
+            },
+            {
+              "tgl": "2026-09-21",
+              "day": 21,
+              "desc": "Iuran 17 Agustusan",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 150000
+            },
+            {
+              "tgl": "2026-09-21",
+              "day": 21,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-09-22",
+              "day": 22,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-09-24",
+              "day": 24,
+              "desc": "Pewangi Ruangan",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 40000
+            },
+            {
+              "tgl": "2026-09-26",
+              "day": 26,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1807000
+            },
+            {
+              "tgl": "2026-09-27",
+              "day": 27,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 154000
+            },
+            {
+              "tgl": "2026-09-27",
+              "day": 27,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-09-28",
+              "day": 28,
+              "desc": "Baygon obat nyamuk",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 35000
+            },
+            {
+              "tgl": "2026-09-30",
+              "day": 30,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1169500
+            },
+            {
+              "tgl": "2026-09-30",
+              "day": 30,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 203000
+            },
+            {
+              "tgl": "2026-09-31",
+              "day": 31,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 595000
+            },
+            {
+              "tgl": "2026-09-31",
+              "day": 31,
+              "desc": "Add Edit",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 100000
+            },
+            {
+              "tgl": "2026-09-31",
+              "day": 31,
+              "desc": "Bon",
+              "jenis": "NON-P&L",
+              "kategori": "Prive / Owner Draw",
+              "nilai": 4110500
+            },
+            {
+              "tgl": "2026-09-31",
+              "day": 31,
+              "desc": "Gaji Karyawan",
+              "jenis": "OPEX",
+              "kategori": "Gaji Admin & Fotografer",
+              "nilai": 9319500
+            },
+            {
+              "tgl": "2026-09-31",
+              "day": 31,
+              "desc": "Pajak",
+              "jenis": "OPEX",
+              "kategori": "Pajak & Perizinan",
+              "nilai": 326905
+            },
+            {
+              "tgl": "2026-09-31",
+              "day": 31,
+              "desc": "Amal",
+              "jenis": "BIAYA LAINNYA",
+              "kategori": "Amal & Sosial",
+              "nilai": 980715
+            }
+          ],
           "ads": 1500000,
           "adsRatio": 2.29
         },
@@ -34586,8 +39008,699 @@
           "outcome": 37442679,
           "nettProfit": 50437771,
           "margin": 57.39,
-          "daily": [],
-          "expenses": [],
+          "daily": [
+            {
+              "tgl": "2026-08-01",
+              "day": 1,
+              "cash": 725000,
+              "transfer": 2150000,
+              "total": 2875000
+            },
+            {
+              "tgl": "2026-08-02",
+              "day": 2,
+              "cash": 2375000,
+              "transfer": 3505000,
+              "total": 5880000
+            },
+            {
+              "tgl": "2026-08-03",
+              "day": 3,
+              "cash": 100000,
+              "transfer": 375000,
+              "total": 475000
+            },
+            {
+              "tgl": "2026-08-04",
+              "day": 4,
+              "cash": 10000,
+              "transfer": 1745000,
+              "total": 1755000
+            },
+            {
+              "tgl": "2026-08-05",
+              "day": 5,
+              "cash": 0,
+              "transfer": 1140000,
+              "total": 1140000
+            },
+            {
+              "tgl": "2026-08-06",
+              "day": 6,
+              "cash": 850000,
+              "transfer": 650000,
+              "total": 1500000
+            },
+            {
+              "tgl": "2026-08-07",
+              "day": 7,
+              "cash": 850000,
+              "transfer": 1640000,
+              "total": 2490000
+            },
+            {
+              "tgl": "2026-08-08",
+              "day": 8,
+              "cash": 300000,
+              "transfer": 1505000,
+              "total": 1805000
+            },
+            {
+              "tgl": "2026-08-09",
+              "day": 9,
+              "cash": 2755000,
+              "transfer": 3025000,
+              "total": 5780000
+            },
+            {
+              "tgl": "2026-08-10",
+              "day": 10,
+              "cash": 260000,
+              "transfer": 1450000,
+              "total": 1710000
+            },
+            {
+              "tgl": "2026-08-11",
+              "day": 11,
+              "cash": 850000,
+              "transfer": 2250000,
+              "total": 3100000
+            },
+            {
+              "tgl": "2026-08-12",
+              "day": 12,
+              "cash": 200000,
+              "transfer": 2900000,
+              "total": 3100000
+            },
+            {
+              "tgl": "2026-08-13",
+              "day": 13,
+              "cash": 0,
+              "transfer": 2550000,
+              "total": 2550000
+            },
+            {
+              "tgl": "2026-08-14",
+              "day": 14,
+              "cash": 290000,
+              "transfer": 1185450,
+              "total": 1475450
+            },
+            {
+              "tgl": "2026-08-15",
+              "day": 15,
+              "cash": 600000,
+              "transfer": 2945000,
+              "total": 3545000
+            },
+            {
+              "tgl": "2026-08-16",
+              "day": 16,
+              "cash": 250000,
+              "transfer": 1300000,
+              "total": 1550000
+            },
+            {
+              "tgl": "2026-08-17",
+              "day": 17,
+              "cash": 625000,
+              "transfer": 3100000,
+              "total": 3725000
+            },
+            {
+              "tgl": "2026-08-18",
+              "day": 18,
+              "cash": 100000,
+              "transfer": 1275000,
+              "total": 1375000
+            },
+            {
+              "tgl": "2026-08-19",
+              "day": 19,
+              "cash": 300000,
+              "transfer": 1000000,
+              "total": 1300000
+            },
+            {
+              "tgl": "2026-08-20",
+              "day": 20,
+              "cash": 125000,
+              "transfer": 2175000,
+              "total": 2300000
+            },
+            {
+              "tgl": "2026-08-21",
+              "day": 21,
+              "cash": 400000,
+              "transfer": 1400000,
+              "total": 1800000
+            },
+            {
+              "tgl": "2026-08-22",
+              "day": 22,
+              "cash": 635000,
+              "transfer": 2310000,
+              "total": 2945000
+            },
+            {
+              "tgl": "2026-08-23",
+              "day": 23,
+              "cash": 475000,
+              "transfer": 3900000,
+              "total": 4375000
+            },
+            {
+              "tgl": "2026-08-24",
+              "day": 24,
+              "cash": 1500000,
+              "transfer": 2980000,
+              "total": 4480000
+            },
+            {
+              "tgl": "2026-08-25",
+              "day": 25,
+              "cash": 735000,
+              "transfer": 2585000,
+              "total": 3320000
+            },
+            {
+              "tgl": "2026-08-26",
+              "day": 26,
+              "cash": 0,
+              "transfer": 2570000,
+              "total": 2570000
+            },
+            {
+              "tgl": "2026-08-27",
+              "day": 27,
+              "cash": 1000000,
+              "transfer": 3385000,
+              "total": 4385000
+            },
+            {
+              "tgl": "2026-08-28",
+              "day": 28,
+              "cash": 725000,
+              "transfer": 2800000,
+              "total": 3525000
+            },
+            {
+              "tgl": "2026-08-29",
+              "day": 29,
+              "cash": 800000,
+              "transfer": 2780000,
+              "total": 3580000
+            },
+            {
+              "tgl": "2026-08-30",
+              "day": 30,
+              "cash": 450000,
+              "transfer": 2745000,
+              "total": 3195000
+            },
+            {
+              "tgl": "2026-08-31",
+              "day": 31,
+              "cash": 125000,
+              "transfer": 4150000,
+              "total": 4275000
+            }
+          ],
+          "expenses": [
+            {
+              "tgl": "2026-08-01",
+              "day": 1,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-08-02",
+              "day": 2,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-08-02",
+              "day": 2,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-08-02",
+              "day": 2,
+              "desc": "Pdam",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 383210
+            },
+            {
+              "tgl": "2026-08-03",
+              "day": 3,
+              "desc": "Wifi",
+              "jenis": "OPEX",
+              "kategori": "Internet & Telekomunikasi",
+              "nilai": 730000
+            },
+            {
+              "tgl": "2026-08-03",
+              "day": 3,
+              "desc": "Gosend",
+              "jenis": "OPEX",
+              "kategori": "Pengiriman & Logistik",
+              "nilai": 40000
+            },
+            {
+              "tgl": "2026-08-03",
+              "day": 3,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-08-04",
+              "day": 4,
+              "desc": "TC Protektor",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 41760
+            },
+            {
+              "tgl": "2026-08-04",
+              "day": 4,
+              "desc": "Cat Abu Abu",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 516000
+            },
+            {
+              "tgl": "2026-08-04",
+              "day": 4,
+              "desc": "Biaya Admin",
+              "jenis": "OPEX",
+              "kategori": "Biaya Admin Bank & Finansial",
+              "nilai": 14000
+            },
+            {
+              "tgl": "2026-08-05",
+              "day": 5,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-08-05",
+              "day": 5,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-08-10",
+              "day": 10,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-08-10",
+              "day": 10,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1539000
+            },
+            {
+              "tgl": "2026-08-10",
+              "day": 10,
+              "desc": "Maintanance Cat Abu",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 275000
+            },
+            {
+              "tgl": "2026-08-11",
+              "day": 11,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-08-11",
+              "day": 11,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-08-11",
+              "day": 11,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-08-12",
+              "day": 12,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-08-12",
+              "day": 12,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315000
+            },
+            {
+              "tgl": "2026-08-12",
+              "day": 12,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 154000
+            },
+            {
+              "tgl": "2026-08-13",
+              "day": 13,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-08-14",
+              "day": 14,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1014500
+            },
+            {
+              "tgl": "2026-08-15",
+              "day": 15,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 525000
+            },
+            {
+              "tgl": "2026-08-16",
+              "day": 16,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-08-17",
+              "day": 17,
+              "desc": "Vape Obatnyamuk",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 38000
+            },
+            {
+              "tgl": "2026-08-17",
+              "day": 17,
+              "desc": "Kresek Packing",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 39000
+            },
+            {
+              "tgl": "2026-08-17",
+              "day": 17,
+              "desc": "Sticky note, Lakban",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 41000
+            },
+            {
+              "tgl": "2026-08-18",
+              "day": 18,
+              "desc": "Tempat Sampah",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 122500
+            },
+            {
+              "tgl": "2026-08-18",
+              "day": 18,
+              "desc": "Aya Refund",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 25000
+            },
+            {
+              "tgl": "2026-08-19",
+              "day": 19,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-08-19",
+              "day": 19,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-08-20",
+              "day": 20,
+              "desc": "Ac St Dipan + Ruang Kaca",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 480000
+            },
+            {
+              "tgl": "2026-08-20",
+              "day": 20,
+              "desc": "Pdam",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 388352
+            },
+            {
+              "tgl": "2026-08-20",
+              "day": 20,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-08-21",
+              "day": 21,
+              "desc": "Iuran Hut Ri Kelurahan",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 100000
+            },
+            {
+              "tgl": "2026-08-21",
+              "day": 21,
+              "desc": "Nanang Kipas",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 150000
+            },
+            {
+              "tgl": "2026-08-21",
+              "day": 21,
+              "desc": "Kabel , Las Plat Dudukan",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 225000
+            },
+            {
+              "tgl": "2026-08-22",
+              "day": 22,
+              "desc": "Cetak Voucher",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 88000
+            },
+            {
+              "tgl": "2026-08-22",
+              "day": 22,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-08-22",
+              "day": 22,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1967500
+            },
+            {
+              "tgl": "2026-08-24",
+              "day": 24,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1494000
+            },
+            {
+              "tgl": "2026-08-26",
+              "day": 26,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-08-27",
+              "day": 27,
+              "desc": "Listriik",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 406000
+            },
+            {
+              "tgl": "2026-08-27",
+              "day": 27,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-08-27",
+              "day": 27,
+              "desc": "Bensin",
+              "jenis": "OPEX",
+              "kategori": "Transport & Operasional Lapangan",
+              "nilai": 100000
+            },
+            {
+              "tgl": "2026-08-28",
+              "day": 28,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-08-28",
+              "day": 28,
+              "desc": "Amplop C",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 100000
+            },
+            {
+              "tgl": "2026-08-29",
+              "day": 29,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 2300000
+            },
+            {
+              "tgl": "2026-08-30",
+              "day": 30,
+              "desc": "Maintanance Kursi Rotan",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 550000
+            },
+            {
+              "tgl": "2026-08-30",
+              "day": 30,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1504000
+            },
+            {
+              "tgl": "2026-08-31",
+              "day": 31,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 154000
+            },
+            {
+              "tgl": "2026-08-31",
+              "day": 31,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 595000
+            },
+            {
+              "tgl": "2026-08-31",
+              "day": 31,
+              "desc": "Batre AA",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 39000
+            },
+            {
+              "tgl": "2026-08-31",
+              "day": 31,
+              "desc": "Add Edit",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 290000
+            },
+            {
+              "tgl": "2026-08-31",
+              "day": 31,
+              "desc": "Bon",
+              "jenis": "NON-P&L",
+              "kategori": "Prive / Owner Draw",
+              "nilai": 3882500
+            },
+            {
+              "tgl": "2026-08-31",
+              "day": 31,
+              "desc": "Gaji Karyawan",
+              "jenis": "OPEX",
+              "kategori": "Gaji Admin & Fotografer",
+              "nilai": 10222457
+            },
+            {
+              "tgl": "2026-08-31",
+              "day": 31,
+              "desc": "Pajak",
+              "jenis": "OPEX",
+              "kategori": "Pajak & Perizinan",
+              "nilai": 439400
+            },
+            {
+              "tgl": "2026-08-31",
+              "day": 31,
+              "desc": "Amal",
+              "jenis": "BIAYA LAINNYA",
+              "kategori": "Amal & Sosial",
+              "nilai": 1318200
+            }
+          ],
           "ads": 3500000,
           "adsRatio": 3.98
         },
@@ -34597,13 +39710,769 @@
           "omzet": 188730000,
           "cash": 34475000,
           "transfer": 83540000,
-          "cogs": 23221500,
-          "opex": 21144209,
-          "outcome": 44365709,
-          "nettProfit": 144364291,
-          "margin": 76.49,
-          "daily": [],
-          "expenses": [],
+          "cogs": 23168000,
+          "opex": 26429512,
+          "outcome": 49597512,
+          "nettProfit": 139132488,
+          "margin": 73.72,
+          "daily": [
+            {
+              "tgl": "2026-09-01",
+              "day": 1,
+              "cash": 1780000,
+              "transfer": 6110000,
+              "total": 7890000
+            },
+            {
+              "tgl": "2026-09-02",
+              "day": 2,
+              "cash": 4880000,
+              "transfer": 5620000,
+              "total": 10500000
+            },
+            {
+              "tgl": "2026-09-03",
+              "day": 3,
+              "cash": 100000,
+              "transfer": 6400000,
+              "total": 6500000
+            },
+            {
+              "tgl": "2026-09-04",
+              "day": 4,
+              "cash": 500000,
+              "transfer": 2800000,
+              "total": 3300000
+            },
+            {
+              "tgl": "2026-09-05",
+              "day": 5,
+              "cash": 1205000,
+              "transfer": 1765000,
+              "total": 2970000
+            },
+            {
+              "tgl": "2026-09-06",
+              "day": 6,
+              "cash": 175000,
+              "transfer": 3225000,
+              "total": 3400000
+            },
+            {
+              "tgl": "2026-09-07",
+              "day": 7,
+              "cash": 705000,
+              "transfer": 1375000,
+              "total": 2080000
+            },
+            {
+              "tgl": "2026-09-08",
+              "day": 8,
+              "cash": 5090000,
+              "transfer": 9195000,
+              "total": 14285000
+            },
+            {
+              "tgl": "2026-09-09",
+              "day": 9,
+              "cash": 3910000,
+              "transfer": 6275000,
+              "total": 10185000
+            },
+            {
+              "tgl": "2026-09-10",
+              "day": 10,
+              "cash": 175000,
+              "transfer": 2570000,
+              "total": 2745000
+            },
+            {
+              "tgl": "2026-09-11",
+              "day": 11,
+              "cash": 650000,
+              "transfer": 2800000,
+              "total": 3450000
+            },
+            {
+              "tgl": "2026-09-12",
+              "day": 12,
+              "cash": 750000,
+              "transfer": 2250000,
+              "total": 3000000
+            },
+            {
+              "tgl": "2026-09-13",
+              "day": 13,
+              "cash": 1255000,
+              "transfer": 2450000,
+              "total": 3705000
+            },
+            {
+              "tgl": "2026-09-14",
+              "day": 14,
+              "cash": 2290000,
+              "transfer": 995000,
+              "total": 3285000
+            },
+            {
+              "tgl": "2026-09-15",
+              "day": 15,
+              "cash": 475000,
+              "transfer": 2425000,
+              "total": 2900000
+            },
+            {
+              "tgl": "2026-09-16",
+              "day": 16,
+              "cash": 650000,
+              "transfer": 1315000,
+              "total": 1965000
+            },
+            {
+              "tgl": "2026-09-17",
+              "day": 17,
+              "cash": 0,
+              "transfer": 1675000,
+              "total": 1675000
+            },
+            {
+              "tgl": "2026-09-18",
+              "day": 18,
+              "cash": 400000,
+              "transfer": 2125000,
+              "total": 2525000
+            },
+            {
+              "tgl": "2026-09-19",
+              "day": 19,
+              "cash": 2410000,
+              "transfer": 2395000,
+              "total": 4805000
+            },
+            {
+              "tgl": "2026-09-20",
+              "day": 20,
+              "cash": 825000,
+              "transfer": 1925000,
+              "total": 2750000
+            },
+            {
+              "tgl": "2026-09-21",
+              "day": 21,
+              "cash": 490000,
+              "transfer": 600000,
+              "total": 1090000
+            },
+            {
+              "tgl": "2026-09-22",
+              "day": 22,
+              "cash": 2840000,
+              "transfer": 3780000,
+              "total": 6620000
+            },
+            {
+              "tgl": "2026-09-23",
+              "day": 23,
+              "cash": 325000,
+              "transfer": 2050000,
+              "total": 2375000
+            },
+            {
+              "tgl": "2026-09-24",
+              "day": 24,
+              "cash": 250000,
+              "transfer": 1525000,
+              "total": 1775000
+            },
+            {
+              "tgl": "2026-09-25",
+              "day": 25,
+              "cash": 400000,
+              "transfer": 850000,
+              "total": 1250000
+            },
+            {
+              "tgl": "2026-09-26",
+              "day": 26,
+              "cash": 250000,
+              "transfer": 2205000,
+              "total": 2455000
+            },
+            {
+              "tgl": "2026-09-27",
+              "day": 27,
+              "cash": 725000,
+              "transfer": 1750000,
+              "total": 2475000
+            },
+            {
+              "tgl": "2026-09-28",
+              "day": 28,
+              "cash": 250000,
+              "transfer": 1555000,
+              "total": 1805000
+            },
+            {
+              "tgl": "2026-09-29",
+              "day": 29,
+              "cash": 50000,
+              "transfer": 1445000,
+              "total": 1495000
+            },
+            {
+              "tgl": "2026-09-30",
+              "day": 30,
+              "cash": 670000,
+              "transfer": 2090000,
+              "total": 2760000
+            }
+          ],
+          "expenses": [
+            {
+              "tgl": "2026-09-01",
+              "day": 1,
+              "desc": "Wifi",
+              "jenis": "OPEX",
+              "kategori": "Internet & Telekomunikasi",
+              "nilai": 730000
+            },
+            {
+              "tgl": "2026-09-01",
+              "day": 1,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-09-01",
+              "day": 1,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-09-02",
+              "day": 2,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-09-02",
+              "day": 2,
+              "desc": "Makan Wisuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 240000
+            },
+            {
+              "tgl": "2026-09-02",
+              "day": 2,
+              "desc": "Parfum Ruangan",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 67000
+            },
+            {
+              "tgl": "2026-09-03",
+              "day": 3,
+              "desc": "Makan Wisuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 155000
+            },
+            {
+              "tgl": "2026-09-03",
+              "day": 3,
+              "desc": "Sewa Batrei",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 108000
+            },
+            {
+              "tgl": "2026-09-03",
+              "day": 3,
+              "desc": "Makan Wisuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 170000
+            },
+            {
+              "tgl": "2026-09-04",
+              "day": 4,
+              "desc": "Vero Freelance + Camera",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 300000
+            },
+            {
+              "tgl": "2026-09-04",
+              "day": 4,
+              "desc": "Addell Freelance",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 200000
+            },
+            {
+              "tgl": "2026-09-04",
+              "day": 4,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-09-05",
+              "day": 5,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315500
+            },
+            {
+              "tgl": "2026-09-05",
+              "day": 5,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 618500
+            },
+            {
+              "tgl": "2026-09-05",
+              "day": 5,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-09-06",
+              "day": 6,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1521500
+            },
+            {
+              "tgl": "2026-09-06",
+              "day": 6,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 1000000
+            },
+            {
+              "tgl": "2026-09-06",
+              "day": 6,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 160000
+            },
+            {
+              "tgl": "2026-09-07",
+              "day": 7,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-09-07",
+              "day": 7,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-09-07",
+              "day": 7,
+              "desc": "Batrei AA",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 70000
+            },
+            {
+              "tgl": "2026-09-08",
+              "day": 8,
+              "desc": "Makan Wisuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 125000
+            },
+            {
+              "tgl": "2026-09-08",
+              "day": 8,
+              "desc": "Makan Malem Wisuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 220000
+            },
+            {
+              "tgl": "2026-09-08",
+              "day": 8,
+              "desc": "Rent Equipment Wisuda",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 252000
+            },
+            {
+              "tgl": "2026-09-09",
+              "day": 9,
+              "desc": "Rent Batrei",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 110000
+            },
+            {
+              "tgl": "2026-09-09",
+              "day": 9,
+              "desc": "Makan Wisuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 125000
+            },
+            {
+              "tgl": "2026-09-09",
+              "day": 9,
+              "desc": "Rent Equipment Wisuda",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 684000
+            },
+            {
+              "tgl": "2026-09-10",
+              "day": 10,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-09-10",
+              "day": 10,
+              "desc": "Makan Malem Wisuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 170000
+            },
+            {
+              "tgl": "2026-09-10",
+              "day": 10,
+              "desc": "Addell Freelance",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 200000
+            },
+            {
+              "tgl": "2026-09-11",
+              "day": 11,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-09-11",
+              "day": 11,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-09-12",
+              "day": 12,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-09-12",
+              "day": 12,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-09-13",
+              "day": 13,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 3537000
+            },
+            {
+              "tgl": "2026-09-14",
+              "day": 14,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-09-15",
+              "day": 15,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 560000
+            },
+            {
+              "tgl": "2026-09-15",
+              "day": 15,
+              "desc": "Abror Fg Freelance",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 250000
+            },
+            {
+              "tgl": "2026-09-15",
+              "day": 15,
+              "desc": "Vero Fg Freelance",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 150000
+            },
+            {
+              "tgl": "2026-09-16",
+              "day": 16,
+              "desc": "Dop Paralon",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 112000
+            },
+            {
+              "tgl": "2026-09-16",
+              "day": 16,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 16000
+            },
+            {
+              "tgl": "2026-09-16",
+              "day": 16,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-09-17",
+              "day": 17,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 154000
+            },
+            {
+              "tgl": "2026-09-17",
+              "day": 17,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 2342500
+            },
+            {
+              "tgl": "2026-09-18",
+              "day": 18,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-09-18",
+              "day": 18,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 160000
+            },
+            {
+              "tgl": "2026-09-19",
+              "day": 19,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 2626000
+            },
+            {
+              "tgl": "2026-09-19",
+              "day": 19,
+              "desc": "Batrei",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 20000
+            },
+            {
+              "tgl": "2026-09-22",
+              "day": 22,
+              "desc": "Batre Np",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 19000
+            },
+            {
+              "tgl": "2026-09-22",
+              "day": 22,
+              "desc": "Baygon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 45000
+            },
+            {
+              "tgl": "2026-09-22",
+              "day": 22,
+              "desc": "Subs Claude",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 452500
+            },
+            {
+              "tgl": "2026-09-23",
+              "day": 23,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-09-24",
+              "day": 24,
+              "desc": "Kabel HDMI",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 45000
+            },
+            {
+              "tgl": "2026-09-25",
+              "day": 25,
+              "desc": "Serv PC",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 125000
+            },
+            {
+              "tgl": "2026-09-25",
+              "day": 25,
+              "desc": "Admin Rekening",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 14000
+            },
+            {
+              "tgl": "2026-09-26",
+              "day": 26,
+              "desc": "Lakban & Stiky Notes",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 72000
+            },
+            {
+              "tgl": "2026-09-26",
+              "day": 26,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 403000
+            },
+            {
+              "tgl": "2026-09-27",
+              "day": 27,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 3099000
+            },
+            {
+              "tgl": "2026-09-27",
+              "day": 27,
+              "desc": "Dop Paralon",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 112000
+            },
+            {
+              "tgl": "2026-09-28",
+              "day": 28,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-09-28",
+              "day": 28,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1809000
+            },
+            {
+              "tgl": "2026-09-29",
+              "day": 29,
+              "desc": "Serv Ac",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 600000
+            },
+            {
+              "tgl": "2026-09-30",
+              "day": 30,
+              "desc": "PDAM",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 506630
+            },
+            {
+              "tgl": "2026-09-30",
+              "day": 30,
+              "desc": "Ruslan",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 560000
+            },
+            {
+              "tgl": "2026-09-30",
+              "day": 30,
+              "desc": "Bon",
+              "jenis": "NON-P&L",
+              "kategori": "Prive / Owner Draw",
+              "nilai": 3314000
+            },
+            {
+              "tgl": "2026-09-30",
+              "day": 30,
+              "desc": "Gaji Karyawan",
+              "jenis": "OPEX",
+              "kategori": "Gaji Admin & Fotografer",
+              "nilai": 12901307
+            },
+            {
+              "tgl": "2026-09-30",
+              "day": 30,
+              "desc": "Pajak",
+              "jenis": "OPEX",
+              "kategori": "Pajak & Perizinan",
+              "nilai": 590075
+            },
+            {
+              "tgl": "2026-09-30",
+              "day": 30,
+              "desc": "Amal",
+              "jenis": "BIAYA LAINNYA",
+              "kategori": "Amal & Sosial",
+              "nilai": 1770225
+            }
+          ],
           "ads": 4000000,
           "adsRatio": 2.12
         },
@@ -34619,8 +40488,467 @@
           "nettProfit": 67331375,
           "margin": 83.54,
           "status": "Live MTD",
-          "daily": [],
-          "expenses": [],
+          "daily": [
+            {
+              "tgl": "2026-10-01",
+              "day": 1,
+              "cash": 405000,
+              "transfer": 1520000,
+              "total": 1925000
+            },
+            {
+              "tgl": "2026-10-02",
+              "day": 2,
+              "cash": 75000,
+              "transfer": 1140000,
+              "total": 1215000
+            },
+            {
+              "tgl": "2026-10-03",
+              "day": 3,
+              "cash": 4890000,
+              "transfer": 8140000,
+              "total": 13030000
+            },
+            {
+              "tgl": "2026-10-04",
+              "day": 4,
+              "cash": 8380000,
+              "transfer": 8420000,
+              "total": 16800000
+            },
+            {
+              "tgl": "2026-10-05",
+              "day": 5,
+              "cash": 0,
+              "transfer": 1075000,
+              "total": 1075000
+            },
+            {
+              "tgl": "2026-10-06",
+              "day": 6,
+              "cash": 1230000,
+              "transfer": 2495000,
+              "total": 3725000
+            },
+            {
+              "tgl": "2026-10-07",
+              "day": 7,
+              "cash": 125000,
+              "transfer": 1450000,
+              "total": 1575000
+            },
+            {
+              "tgl": "2026-10-08",
+              "day": 8,
+              "cash": 400000,
+              "transfer": 2360000,
+              "total": 2760000
+            },
+            {
+              "tgl": "2026-10-09",
+              "day": 9,
+              "cash": 200000,
+              "transfer": 1930000,
+              "total": 2130000
+            },
+            {
+              "tgl": "2026-10-10",
+              "day": 10,
+              "cash": 250000,
+              "transfer": 2015000,
+              "total": 2265000
+            },
+            {
+              "tgl": "2026-10-11",
+              "day": 11,
+              "cash": 1335000,
+              "transfer": 2450000,
+              "total": 3785000
+            },
+            {
+              "tgl": "2026-10-12",
+              "day": 12,
+              "cash": 400000,
+              "transfer": 1070000,
+              "total": 1470000
+            },
+            {
+              "tgl": "2026-10-13",
+              "day": 13,
+              "cash": 525000,
+              "transfer": 570000,
+              "total": 1095000
+            },
+            {
+              "tgl": "2026-10-14",
+              "day": 14,
+              "cash": 150000,
+              "transfer": 660000,
+              "total": 810000
+            },
+            {
+              "tgl": "2026-10-15",
+              "day": 15,
+              "cash": 1075000,
+              "transfer": 1325000,
+              "total": 2400000
+            },
+            {
+              "tgl": "2026-10-16",
+              "day": 16,
+              "cash": 800000,
+              "transfer": 1750000,
+              "total": 2550000
+            },
+            {
+              "tgl": "2026-10-17",
+              "day": 17,
+              "cash": 2940000,
+              "transfer": 3705000,
+              "total": 6645000
+            },
+            {
+              "tgl": "2026-10-18",
+              "day": 18,
+              "cash": 1950000,
+              "transfer": 775000,
+              "total": 2725000
+            },
+            {
+              "tgl": "2026-10-19",
+              "day": 19,
+              "cash": 670000,
+              "transfer": 2015000,
+              "total": 2685000
+            },
+            {
+              "tgl": "2026-10-20",
+              "day": 20,
+              "cash": 225000,
+              "transfer": 1150000,
+              "total": 1375000
+            },
+            {
+              "tgl": "2026-10-21",
+              "day": 21,
+              "cash": 875000,
+              "transfer": 2410000,
+              "total": 3285000
+            },
+            {
+              "tgl": "2026-10-22",
+              "day": 22,
+              "cash": 1230000,
+              "transfer": 3095000,
+              "total": 4325000
+            },
+            {
+              "tgl": "2026-10-23",
+              "day": 23,
+              "cash": 0,
+              "transfer": 950000,
+              "total": 950000
+            }
+          ],
+          "expenses": [
+            {
+              "tgl": "2026-10-01",
+              "day": 1,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-10-01",
+              "day": 1,
+              "desc": "Reveral Indah",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 175000
+            },
+            {
+              "tgl": "2026-10-01",
+              "day": 1,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-10-02",
+              "day": 2,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-10-02",
+              "day": 2,
+              "desc": "Biaya Admin",
+              "jenis": "OPEX",
+              "kategori": "Biaya Admin Bank & Finansial",
+              "nilai": 14000
+            },
+            {
+              "tgl": "2026-10-02",
+              "day": 2,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 154000
+            },
+            {
+              "tgl": "2026-10-03",
+              "day": 3,
+              "desc": "Wifi",
+              "jenis": "OPEX",
+              "kategori": "Internet & Telekomunikasi",
+              "nilai": 730000
+            },
+            {
+              "tgl": "2026-10-03",
+              "day": 3,
+              "desc": "Bensin",
+              "jenis": "OPEX",
+              "kategori": "Transport & Operasional Lapangan",
+              "nilai": 75000
+            },
+            {
+              "tgl": "2026-10-03",
+              "day": 3,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-10-03",
+              "day": 3,
+              "desc": "Makan WIsuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 153000
+            },
+            {
+              "tgl": "2026-10-04",
+              "day": 4,
+              "desc": "Vero Frellance + Kamera",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 250000
+            },
+            {
+              "tgl": "2026-10-04",
+              "day": 4,
+              "desc": "Rent Equipment WIsuda",
+              "jenis": "COGS",
+              "kategori": "Outsource / Freelancer & Vendor",
+              "nilai": 972000
+            },
+            {
+              "tgl": "2026-10-04",
+              "day": 4,
+              "desc": "Rent Trigeer",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 50000
+            },
+            {
+              "tgl": "2026-10-05",
+              "day": 5,
+              "desc": "Makan WIsuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 255000
+            },
+            {
+              "tgl": "2026-10-05",
+              "day": 5,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 15000
+            },
+            {
+              "tgl": "2026-10-05",
+              "day": 5,
+              "desc": "Batrei Rent",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 110000
+            },
+            {
+              "tgl": "2026-10-06",
+              "day": 6,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-10-06",
+              "day": 6,
+              "desc": "Makan WIsuda",
+              "jenis": "OPEX",
+              "kategori": "Konsumsi Crew",
+              "nilai": 190000
+            },
+            {
+              "tgl": "2026-10-07",
+              "day": 7,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 315500
+            },
+            {
+              "tgl": "2026-10-07",
+              "day": 7,
+              "desc": "Adobe",
+              "jenis": "OPEX",
+              "kategori": "Software / Subscription",
+              "nilai": 628500
+            },
+            {
+              "tgl": "2026-10-07",
+              "day": 7,
+              "desc": "Rent Batrei",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 15000
+            },
+            {
+              "tgl": "2026-10-08",
+              "day": 8,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-10-08",
+              "day": 8,
+              "desc": "Addel Admin",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 200000
+            },
+            {
+              "tgl": "2026-10-08",
+              "day": 8,
+              "desc": "Batrei",
+              "jenis": "COGS",
+              "kategori": "Properti / Consumable Sesi",
+              "nilai": 50000
+            },
+            {
+              "tgl": "2026-10-09",
+              "day": 9,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 12000
+            },
+            {
+              "tgl": "2026-10-09",
+              "day": 9,
+              "desc": "gunting & pengharum",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 46000
+            },
+            {
+              "tgl": "2026-10-11",
+              "day": 11,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-10-11",
+              "day": 11,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1856000
+            },
+            {
+              "tgl": "2026-10-11",
+              "day": 11,
+              "desc": "Dop Paralon",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 55000
+            },
+            {
+              "tgl": "2026-10-12",
+              "day": 12,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-10-12",
+              "day": 12,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-10-15",
+              "day": 15,
+              "desc": "Cat Limbo",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 154000
+            },
+            {
+              "tgl": "2026-10-15",
+              "day": 15,
+              "desc": "Galon",
+              "jenis": "OPEX",
+              "kategori": "Office & Cleaning Supplies",
+              "nilai": 8000
+            },
+            {
+              "tgl": "2026-10-16",
+              "day": 16,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
+              "tgl": "2026-10-21",
+              "day": 21,
+              "desc": "Bon",
+              "jenis": "NON-P&L",
+              "kategori": "Prive / Owner Draw",
+              "nilai": 2109200
+            },
+            {
+              "tgl": "2026-10-21",
+              "day": 21,
+              "desc": "Pajak",
+              "jenis": "OPEX",
+              "kategori": "Pajak & Perizinan",
+              "nilai": 376625
+            },
+            {
+              "tgl": "2026-10-21",
+              "day": 21,
+              "desc": "Amal",
+              "jenis": "BIAYA LAINNYA",
+              "kategori": "Amal & Sosial",
+              "nilai": 1129875
+            }
+          ],
           "ads": 1500000,
           "adsRatio": 1.86
         },

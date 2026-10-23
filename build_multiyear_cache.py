@@ -333,27 +333,94 @@ def main():
     y26_nett = 0
 
     hist_cache = {}
+    ho_orders = []
     if os.path.exists("historical_cache.json"):
         with open("historical_cache.json", "r", encoding="utf-8") as f:
-            hist_cache = json.load(f).get("historicalMonths", {})
+            hc_data = json.load(f)
+            hist_cache = hc_data.get("historicalMonths", {})
+            ho_orders = hc_data.get("historicalOrders", [])
             
     full_state = {}
     if os.path.exists("foxe_full_state.json"):
         with open("foxe_full_state.json", "r", encoding="utf-8") as f:
             full_state = json.load(f)
 
-    # Jan - Aug from historical_cache
+    nb_data = full_state.get("neracaByMonth", {})
+    sep_orders = full_state.get("orders", [])
+    okt_orders = full_state.get("oktoberLogOrder", {}).get("orders", [])
+
+    def build_daily_from_orders(orders_list, iso_prefix):
+        days_map = {}
+        for o in orders_list:
+            t = str(o.get("tanggal", ""))
+            if not t.startswith(iso_prefix):
+                continue
+            parts = t.split("-")
+            d = int(parts[2]) if len(parts) == 3 and parts[2].isdigit() else 1
+            if d not in days_map:
+                days_map[d] = {"cash": 0.0, "transfer": 0.0, "total": 0.0}
+            c = float(clean_num(o.get("cash", 0)))
+            tr = float(clean_num(o.get("transfer", 0)))
+            tot = float(clean_num(o.get("total", 0)))
+            if tot == 0.0 and (c + tr) > 0:
+                tot = c + tr
+            days_map[d]["cash"] += c
+            days_map[d]["transfer"] += tr
+            days_map[d]["total"] += tot
+        
+        daily_res = []
+        for d in sorted(days_map.keys()):
+            daily_res.append({
+                "tgl": f"{iso_prefix}-{d:02d}",
+                "day": d,
+                "cash": round(days_map[d]["cash"]),
+                "transfer": round(days_map[d]["transfer"]),
+                "total": round(days_map[d]["total"])
+            })
+        return daily_res
+
+    def norm_expenses_list(raw_list, iso_prefix):
+        norm = []
+        for e in raw_list:
+            tgl = str(e.get("tanggal") or e.get("tgl") or f"{iso_prefix}-01")
+            parts = tgl.split("-")
+            d = int(parts[2]) if len(parts) == 3 and parts[2].isdigit() else 1
+            desc = str(e.get("deskripsi") or e.get("desc") or "Pengeluaran").strip()
+            jenis = str(e.get("jenis") or "OPEX").strip().upper()
+            kat = str(e.get("kategori") or "Lainnya").strip()
+            val = round(clean_num(e.get("nilai", 0)))
+            norm.append({
+                "tgl": tgl,
+                "day": d,
+                "desc": desc,
+                "jenis": jenis,
+                "kategori": kat,
+                "nilai": val
+            })
+        return norm
+
+    # Jan - Aug from historical_cache & neracaByMonth
     for m in range(1, 9):
         m_str = str(m)
+        iso = f"2026-{m:02d}"
         hm = hist_cache.get(m_str, {})
         omz = round(clean_num(hm.get("omzet", 0)))
         c = round(clean_num(hm.get("cash", 0)))
         t = round(clean_num(hm.get("transfer", 0)))
-        cg = round(clean_num(hm.get("cogs", 0)))
-        op = round(clean_num(hm.get("opex", 0)))
+        
+        raw_exp = nb_data.get(iso, {}).get("expenses", [])
+        m_exp = norm_expenses_list(raw_exp, iso)
+        cg = round(sum(e["nilai"] for e in m_exp if e["jenis"] == "COGS"))
+        op = round(sum(e["nilai"] for e in m_exp if e["jenis"] == "OPEX"))
+        if cg == 0 and clean_num(hm.get("cogs", 0)) > 0:
+            cg = round(clean_num(hm.get("cogs", 0)))
+        if op == 0 and clean_num(hm.get("opex", 0)) > 0:
+            op = round(clean_num(hm.get("opex", 0)))
+            
         outc = cg + op
         nt = omz - outc
         mg = (nt / omz * 100.0) if omz > 0 else 0.0
+        ads = sum(e["nilai"] for e in m_exp if e.get("kategori") == "Marketing / Ads / KOL" or "ads" in e.get("desc", "").lower() or "iklan" in e.get("desc", "").lower())
         
         y26_months.append({
             "month": m,
@@ -366,8 +433,9 @@ def main():
             "outcome": outc,
             "nettProfit": nt,
             "margin": round(mg, 2),
-            "daily": [],
-            "expenses": []
+            "ads": ads,
+            "daily": build_daily_from_orders(ho_orders, iso),
+            "expenses": m_exp
         })
         y26_omzet += omz
         y26_cash += c
@@ -378,17 +446,18 @@ def main():
         y26_nett += nt
 
     # Sept 2026 from full_state
-    # Check if September in neracaByMonth or summary
-    sep_data = full_state.get("neracaByMonth", {}).get("2026-09", {})
-    sep_omz = round(clean_num(full_state.get("omzet", 188730000))) # or from full_state
-    sep_orders = full_state.get("orders", [])
+    sep_iso = "2026-09"
+    sep_omz = round(clean_num(full_state.get("omzet", 188730000)))
     sep_c = round(sum(clean_num(o.get("cash", 0)) for o in sep_orders if str(o.get("tanggal", "")).startswith("2026-09")))
     sep_t = round(sum(clean_num(o.get("transfer", 0)) for o in sep_orders if str(o.get("tanggal", "")).startswith("2026-09")))
-    sep_cg = round(clean_num(full_state.get("totalCogs", 23221500)))
-    sep_op = round(clean_num(full_state.get("totalOpex", 21144209)))
+    sep_raw_exp = nb_data.get(sep_iso, {}).get("expenses", [])
+    sep_exp = norm_expenses_list(sep_raw_exp, sep_iso)
+    sep_cg = round(sum(e["nilai"] for e in sep_exp if e["jenis"] == "COGS"))
+    sep_op = round(sum(e["nilai"] for e in sep_exp if e["jenis"] == "OPEX"))
     sep_outc = sep_cg + sep_op
     sep_nt = sep_omz - sep_outc
     sep_mg = (sep_nt / sep_omz * 100.0) if sep_omz > 0 else 0.0
+    sep_ads = sum(e["nilai"] for e in sep_exp if e.get("kategori") == "Marketing / Ads / KOL" or "ads" in e.get("desc", "").lower() or "iklan" in e.get("desc", "").lower())
 
     y26_months.append({
         "month": 9,
@@ -401,8 +470,9 @@ def main():
         "outcome": sep_outc,
         "nettProfit": sep_nt,
         "margin": round(sep_mg, 2),
-        "daily": [],
-        "expenses": []
+        "ads": sep_ads,
+        "daily": build_daily_from_orders(sep_orders, sep_iso),
+        "expenses": sep_exp
     })
     y26_omzet += sep_omz
     y26_cash += sep_c
@@ -413,16 +483,18 @@ def main():
     y26_nett += sep_nt
 
     # Oct 2026 Live
-    okt_orders = full_state.get("oktoberLogOrder", {}).get("orders", [])
+    okt_iso = "2026-10"
     okt_omz = round(sum(clean_num(o.get("total", 0)) for o in okt_orders))
     okt_c = round(sum(clean_num(o.get("cash", 0)) for o in okt_orders))
     okt_t = round(sum(clean_num(o.get("transfer", 0)) for o in okt_orders))
-    okt_exp = full_state.get("neracaByMonth", {}).get("2026-10", {}).get("expenses", [])
-    okt_cg = round(sum(clean_num(e.get("nilai", 0)) for e in okt_exp if e.get("jenis") == "COGS"))
-    okt_op = round(sum(clean_num(e.get("nilai", 0)) for e in okt_exp if e.get("jenis") == "OPEX"))
+    okt_raw_exp = nb_data.get(okt_iso, {}).get("expenses", [])
+    okt_exp = norm_expenses_list(okt_raw_exp, okt_iso)
+    okt_cg = round(sum(e["nilai"] for e in okt_exp if e["jenis"] == "COGS"))
+    okt_op = round(sum(e["nilai"] for e in okt_exp if e["jenis"] == "OPEX"))
     okt_outc = okt_cg + okt_op
     okt_nt = okt_omz - okt_outc
     okt_mg = (okt_nt / okt_omz * 100.0) if okt_omz > 0 else 0.0
+    okt_ads = sum(e["nilai"] for e in okt_exp if e.get("kategori") == "Marketing / Ads / KOL" or "ads" in e.get("desc", "").lower() or "iklan" in e.get("desc", "").lower())
 
     y26_months.append({
         "month": 10,
@@ -436,8 +508,9 @@ def main():
         "nettProfit": okt_nt,
         "margin": round(okt_mg, 2),
         "status": "Live MTD",
-        "daily": [],
-        "expenses": []
+        "ads": okt_ads,
+        "daily": build_daily_from_orders(okt_orders, okt_iso),
+        "expenses": okt_exp
     })
     y26_omzet += okt_omz
     y26_cash += okt_c

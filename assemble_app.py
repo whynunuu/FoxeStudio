@@ -1237,7 +1237,7 @@ function saveLocal() {
 }
 
 let activeMonth = "2026-10";
-let db=null,downloads=null,room=null,view="tahunan",estMonth=10,adsFilter="ALL",adsQ="",arsipYear="2026",arsipMonth=10;
+let db=null,downloads=null,room=null,view="tahunan",estMonth=10,adsFilter="ALL",adsQ="",arsipYear="2026",arsipMonth=10,arsipExpTab="all",arsipExpSearch="";
 window.go = function(v){ view=v; render(); window.scrollTo({top:0,behavior:"smooth"}); };
 
 function nkey(s){
@@ -3268,6 +3268,59 @@ window.exportArsipCSV = function(yr) {
   if (typeof showToast === "function") showToast(`Rekapitulasi Tahun ${yr} berhasil diexport ke CSV.`, "ok");
 };
 
+window.exportArsipMonthExpensesCSV = function(yr, mNum) {
+  const cur = (S.multiyearArsip && S.multiyearArsip.years && S.multiyearArsip.years[yr]);
+  if (!cur || !cur.months) {
+    if (typeof showToast === "function") showToast("Data belum tersedia", "warn");
+    return;
+  }
+  const m = cur.months.find(x => x.month === mNum);
+  if (!m || !m.expenses || !m.expenses.length) {
+    if (typeof showToast === "function") showToast(`Tidak ada rincian belanja tercatat di ${m ? m.name : 'bulan ini'}.`, "warn");
+    return;
+  }
+  let rows = ["Tanggal,Deskripsi,Kategori,Jenis,Nilai (Rp)"];
+  m.expenses.forEach(e => {
+    const d = (e.desc || "").replace(/"/g, '""');
+    const k = (e.kategori || "").replace(/"/g, '""');
+    rows.push(`"${e.tgl}","${d}","${k}","${e.jenis}",${e.nilai}`);
+  });
+  let csv = rows.join(String.fromCharCode(10));
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `FoxeStudio_Beban_Neraca_${yr}_${m.name}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  if (typeof showToast === "function") showToast(`Rincian COGS & OPEX ${m.name} ${yr} berhasil diexport ke CSV.`, "ok");
+};
+
+window.filterArsipExpenses = function() {
+  const input = document.getElementById("arsipExpSearchInput");
+  const q = (input ? input.value : "").toLowerCase().trim();
+  const rows = document.querySelectorAll("#tblArsipExp tbody tr.exp-row");
+  let visCount = 0;
+  let visTotal = 0;
+  rows.forEach(r => {
+    const text = (r.getAttribute("data-search") || "").toLowerCase();
+    const match = (!q || text.includes(q));
+    if (match) {
+      r.style.display = "";
+      visCount++;
+      visTotal += parseFloat(r.getAttribute("data-nilai") || "0");
+    } else {
+      r.style.display = "none";
+    }
+  });
+  const foot = document.getElementById("arsipExpFootSum");
+  if (foot) foot.innerText = rp(visTotal);
+  const cnt = document.getElementById("arsipExpFootCount");
+  if (cnt) cnt.innerText = visCount + " pos";
+};
+
+
 function chartArsipYoY(months, yr, yearsObj) {
   const W = 880, H2 = 300, PL = 64, PR = 40, PT = 55, PB = 40;
   const prevYrStr = String(parseInt(yr, 10) - 1);
@@ -3622,6 +3675,35 @@ function vArsip(R) {
   const cashRatio = curY.omzet > 0 ? (curY.cash / curY.omzet * 100) : 0;
   const trfRatio = curY.omzet > 0 ? (curY.transfer / curY.omzet * 100) : 0;
 
+  // Selected month calculations
+  const cogsRatio = selM.omzet > 0 ? ((selM.cogs / selM.omzet) * 100).toFixed(1) : "0.0";
+  const opexRatio = selM.omzet > 0 ? ((selM.opex / selM.omzet) * 100).toFixed(1) : "0.0";
+  const costRatio = selM.omzet > 0 ? ((selM.outcome / selM.omzet) * 100).toFixed(1) : "0.0";
+  
+  const allExp = selM.expenses || [];
+  const cogsExp = allExp.filter(e => (e.jenis || "").toUpperCase() === "COGS");
+  const opexExp = allExp.filter(e => (e.jenis || "").toUpperCase() === "OPEX");
+
+  // Category aggregations for the selected month
+  const cogsByCat = {};
+  cogsExp.forEach(e => {
+    const k = e.kategori || "COGS Lainnya";
+    cogsByCat[k] = (cogsByCat[k] || 0) + (e.nilai || 0);
+  });
+  const topCogsCats = Object.entries(cogsByCat).sort((a,b) => b[1] - a[1]);
+
+  const opexByCat = {};
+  opexExp.forEach(e => {
+    const k = e.kategori || "OPEX Lainnya";
+    opexByCat[k] = (opexByCat[k] || 0) + (e.nilai || 0);
+  });
+  const topOpexCats = Object.entries(opexByCat).sort((a,b) => b[1] - a[1]);
+
+  let activeExpList = allExp;
+  if (arsipExpTab === "cogs") activeExpList = cogsExp;
+  else if (arsipExpTab === "opex") activeExpList = opexExp;
+  const activeExpTotal = activeExpList.reduce((acc, e) => acc + (e.nilai || 0), 0);
+
   // 5-Year Growth summary for quick bar
   const summary5 = yearKeys.map(yk => {
     const yData = yearsObj[yk] || {};
@@ -3744,7 +3826,6 @@ function vArsip(R) {
     ${chartArsipAds(mList, arsipYear, yearsObj)}
   </div>
 
-
   <!-- 12 MAP BULAN INTERAKTIF (.mgrid) -->
   <div style="margin-bottom:20px;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
@@ -3761,11 +3842,17 @@ function vArsip(R) {
             <span class="pill ${isSel ? 'prog' : 'neutral'}" style="font-size:10.5px;">${isSel ? '● Terbuka' : (m.status || (m.omzet > 0 ? 'Tercatat' : '—'))}</span>
           </div>
           <div class="mono" style="font-size:19px;font-weight:700;color:var(--ink);margin-bottom:4px;">${rp(m.omzet)}</div>
-          <div style="font-size:11.5px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px;">
+          <div style="font-size:11.5px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:4px;">
             <span>Cash: ${rp(m.cash)}</span>
             <span>Trf: ${rp(m.transfer)}</span>
           </div>
-          <div style="font-size:11px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px;"><span>Ads Iklan:</span><b class="mono" style="color:var(--warn);">${m.ads ? rp(m.ads) : "—"}</b></div>
+          <div style="font-size:11px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:4px;">
+            <span>COGS: <b class="mono" style="color:var(--accent-ink);">${rp(m.cogs)}</b></span>
+            <span>OPEX: <b class="mono" style="color:var(--crit);">${rp(m.opex)}</b></span>
+          </div>
+          <div style="font-size:11px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px;">
+            <span>Ads Iklan:</span><b class="mono" style="color:var(--warn);">${m.ads ? rp(m.ads) : "—"}</b>
+          </div>
           <div style="border-top:1px dashed var(--hairline);padding-top:6px;display:flex;justify-content:space-between;align-items:center;font-size:11.5px;">
             <span class="tiny muted">Laba Bersih:</span>
             <b class="mono" style="color:var(--good);">${rp(m.nettProfit)}</b>
@@ -3787,6 +3874,85 @@ function vArsip(R) {
         ${mList.map(m => `
           <button class="btn sm ${m.month === arsipMonth ? 'pri' : ''}" style="padding:4px 9px;font-size:11.5px;" onclick="arsipMonth=${m.month};render();">${m.name.slice(0,3)}</button>
         `).join("")}
+      </div>
+    </div>
+
+    <!-- 4 KARTU METRIK KEUANGAN BULAN TERPILIH -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:16px;">
+      <!-- Omzet -->
+      <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:10px;padding:14px 16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span class="tiny muted" style="text-transform:uppercase;font-weight:700;letter-spacing:0.5px;">Omzet Kasir Masuk</span>
+          <span class="pill prog" style="font-size:10px;padding:2px 7px;">${selM.name} ${arsipYear}</span>
+        </div>
+        <div class="mono" style="font-size:22px;font-weight:700;color:var(--accent);margin:6px 0 4px;">${rp(selM.omzet)}</div>
+        <div class="tiny muted">Cash: <span class="mono" style="color:var(--ink);">${rp(selM.cash)}</span> · Trf: <span class="mono" style="color:var(--ink);">${rp(selM.transfer)}</span></div>
+      </div>
+
+      <!-- COGS -->
+      <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:10px;padding:14px 16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span class="tiny muted" style="text-transform:uppercase;font-weight:700;letter-spacing:0.5px;">Beban Pokok (COGS)</span>
+          <span class="pill prog" style="font-size:10px;padding:2px 7px;background:rgba(56,189,248,0.12);color:var(--accent-ink);border-color:rgba(56,189,248,0.3);">${cogsRatio}% Omzet</span>
+        </div>
+        <div class="mono" style="font-size:22px;font-weight:700;color:var(--ink);margin:6px 0 4px;">${rp(selM.cogs)}</div>
+        <div class="tiny muted">${cogsExp.length} pos produksi (Cetak, Frame, Outsource)</div>
+      </div>
+
+      <!-- OPEX -->
+      <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:10px;padding:14px 16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span class="tiny muted" style="text-transform:uppercase;font-weight:700;letter-spacing:0.5px;">Beban Operasional (OPEX)</span>
+          <span class="pill crit" style="font-size:10px;padding:2px 7px;">${opexRatio}% Omzet</span>
+        </div>
+        <div class="mono" style="font-size:22px;font-weight:700;color:var(--crit);margin:6px 0 4px;">${rp(selM.opex)}</div>
+        <div class="tiny muted">${opexExp.length} pos operasional (Ads, Listrik, Maintenance)</div>
+      </div>
+
+      <!-- Laba Bersih -->
+      <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:10px;padding:14px 16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span class="tiny muted" style="text-transform:uppercase;font-weight:700;letter-spacing:0.5px;">Laba Bersih (Nett)</span>
+          <span class="pill ${selM.margin >= 40 ? 'good' : (selM.margin >= 20 ? 'prog' : 'crit')}" style="font-size:10px;padding:2px 7px;">${selM.margin.toFixed(1)}% Nett Margin</span>
+        </div>
+        <div class="mono" style="font-size:22px;font-weight:700;color:var(--good);margin:6px 0 4px;">${rp(selM.nettProfit)}</div>
+        <div class="tiny muted">Total Keluar: <span class="mono" style="color:var(--crit);">${rp(selM.outcome)}</span> (${costRatio}%)</div>
+      </div>
+    </div>
+
+    <!-- STRIP REKAP KATEGORI BEBAN (COGS & OPEX) -->
+    <div style="background:var(--surface);border:1px solid var(--hairline);border-radius:10px;padding:12px 16px;margin-bottom:18px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;">
+        <!-- Top COGS -->
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <span class="tiny muted" style="font-weight:700;text-transform:uppercase;color:var(--accent-ink);">📦 SUB-REKAP KATEGORI COGS (${selM.name}):</span>
+            <b class="mono" style="font-size:12px;color:var(--ink);">${rp(selM.cogs)}</b>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            ${topCogsCats.length ? topCogsCats.map(([k, v]) => `
+              <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;background:var(--surface2);padding:4px 8px;border-radius:6px;border:1px solid var(--hairline);">
+                <span style="color:var(--ink2);">${esc(k)}</span>
+                <b class="mono" style="color:var(--accent-ink);">${rp(v)}</b>
+              </span>
+            `).join("") : '<span class="tiny muted">— Tidak ada pos COGS</span>'}
+          </div>
+        </div>
+        <!-- Top OPEX -->
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <span class="tiny muted" style="font-weight:700;text-transform:uppercase;color:var(--crit);">🏢 SUB-REKAP KATEGORI OPEX (${selM.name}):</span>
+            <b class="mono" style="font-size:12px;color:var(--crit);">${rp(selM.opex)}</b>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            ${topOpexCats.length ? topOpexCats.map(([k, v]) => `
+              <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;background:var(--surface2);padding:4px 8px;border-radius:6px;border:1px solid var(--hairline);">
+                <span style="color:var(--ink2);">${esc(k)}</span>
+                <b class="mono" style="color:var(--crit);">${rp(v)}</b>
+              </span>
+            `).join("") : '<span class="tiny muted">— Tidak ada pos OPEX</span>'}
+          </div>
+        </div>
       </div>
     </div>
 
@@ -3834,12 +4000,26 @@ function vArsip(R) {
 
       <!-- SISI KANAN: BUKU DETAIL BEBAN NERACA -->
       <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:10px;padding:16px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h4 style="margin:0;font-size:14px;color:var(--ink);">Buku Pengeluaran Neraca (COGS &amp; OPEX)</h4>
-          <span class="tiny muted">${(selM.expenses || []).length} pos belanja</span>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+          <div>
+            <h4 style="margin:0;font-size:14px;color:var(--ink);">Buku Pengeluaran Neraca (COGS &amp; OPEX)</h4>
+            <span class="tiny muted" id="arsipExpFootCount">${activeExpList.length} pos belanja</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+            <!-- Filter Tabs -->
+            <div class="seg" style="display:inline-flex;gap:3px;">
+              <button class="btn sm ${arsipExpTab === 'all' ? 'pri' : ''}" style="font-size:11px;padding:3px 8px;" onclick="arsipExpTab='all';render();">Semua (${allExp.length})</button>
+              <button class="btn sm ${arsipExpTab === 'cogs' ? 'pri' : ''}" style="font-size:11px;padding:3px 8px;" onclick="arsipExpTab='cogs';render();">COGS (${cogsExp.length})</button>
+              <button class="btn sm ${arsipExpTab === 'opex' ? 'pri' : ''}" style="font-size:11px;padding:3px 8px;" onclick="arsipExpTab='opex';render();">OPEX (${opexExp.length})</button>
+            </div>
+            <!-- Instant Search -->
+            <input type="text" id="arsipExpSearchInput" placeholder="🔍 Cari..." value="${esc(arsipExpSearch)}" oninput="arsipExpSearch=this.value;filterArsipExpenses();" style="background:var(--surface);border:1px solid var(--hairline);color:var(--ink);padding:3px 8px;border-radius:6px;font-size:11.5px;width:110px;">
+            <!-- Export CSV -->
+            <button class="btn sm" onclick="exportArsipMonthExpensesCSV('${arsipYear}', ${selM.month})" title="Export rincian belanja ${selM.name} ${arsipYear} ke CSV" style="padding:3px 7px;font-size:11px;">📥 CSV</button>
+          </div>
         </div>
         <div class="tw scrollable" style="max-height:460px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;background:var(--surface);">
-          <table>
+          <table id="tblArsipExp">
             <thead style="position:sticky;top:0;z-index:2;background:var(--surface3);">
               <tr>
                 <th>Tgl</th>
@@ -3849,27 +4029,29 @@ function vArsip(R) {
               </tr>
             </thead>
             <tbody>
-              ${(selM.expenses && selM.expenses.length) ? selM.expenses.map(e => `
-                <tr>
+              ${(activeExpList && activeExpList.length) ? activeExpList.map(e => `
+                <tr class="exp-row" data-jenis="${esc(e.jenis || '')}" data-nilai="${e.nilai || 0}" data-search="${esc((e.desc + ' ' + (e.kategori || '') + ' ' + (e.tgl || '')).toLowerCase())}">
                   <td class="mono" style="font-size:11.5px;">${e.tgl}</td>
                   <td>
-                    <div style="font-weight:500;">${esc(e.desc)}</div>
+                    <div style="font-weight:500;color:var(--ink);">${esc(e.desc)}</div>
                     <div class="tiny muted">${esc(e.kategori || "")}</div>
                   </td>
                   <td>
-                    <span class="pill ${e.jenis === 'COGS' ? 'prog' : 'neutral'}" style="font-size:10.5px;padding:2px 7px;">${e.jenis}</span>
+                    <span class="pill ${e.jenis === 'COGS' ? 'prog' : 'neutral'}" style="font-size:10.5px;padding:2px 7px;${e.jenis === 'OPEX' ? 'background:rgba(239,68,68,0.12);color:var(--crit);border-color:rgba(239,68,68,0.3);' : ''}">${e.jenis}</span>
                   </td>
-                  <td class="n mono" style="color:var(--crit);">${rp(e.nilai)}</td>
+                  <td class="n mono" style="color:var(--crit);font-weight:600;">${rp(e.nilai)}</td>
                 </tr>
               `).join("") : `
                 <tr><td colspan="4"><div class="empty">Tidak ada rincian belanja operasional tercatat.</div></td></tr>
               `}
             </tbody>
-            ${(selM.expenses && selM.expenses.length) ? `
+            ${(activeExpList && activeExpList.length) ? `
             <tfoot>
               <tr class="total">
-                <td colspan="3">Total Pengeluaran (COGS: ${rp(selM.cogs)} + OPEX: ${rp(selM.opex)})</td>
-                <td class="n" style="font-weight:700;color:var(--crit);">${rp(selM.outcome)}</td>
+                <td colspan="3">
+                  <span>Total Pengeluaran Ditampilkan</span>
+                </td>
+                <td class="n" style="font-weight:700;color:var(--crit);font-size:13.5px;" id="arsipExpFootSum">${rp(activeExpTotal)}</td>
               </tr>
             </tfoot>` : ''}
           </table>
