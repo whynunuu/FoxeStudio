@@ -1191,6 +1191,7 @@ let S = (() => {
       if (parsed) {
         if (!parsed.auditLog || !parsed.auditLog.length) parsed.auditLog = INITIAL_STATE.auditLog || [];
         if (!parsed.accessLog || !parsed.accessLog.length) parsed.accessLog = INITIAL_STATE.accessLog || [];
+        if (!parsed.multiyearArsip && INITIAL_STATE.multiyearArsip) parsed.multiyearArsip = INITIAL_STATE.multiyearArsip;
       }
       if (parsed && parsed.orders && parsed.orders.length > 0 && parsed.config && parsed.config.cutoff === INITIAL_STATE.config.cutoff && (parsed.expenses || []).length === (INITIAL_STATE.expenses || []).length && (parsed.neracaDetail || []).length === (INITIAL_STATE.neracaDetail || []).length) {
         return parsed;
@@ -2472,8 +2473,8 @@ function chartTahunanSeasonality(months, yr, avg25) {
   });
 
   // Build smooth Bézier spline paths (Ref Photo 2)
-  const spline25 = buildSplinePath(ptsSeason, 0.22);
-  const area25 = `${spline25} L ${ptsSeason[ptsSeason.length - 1].x.toFixed(1)},${bottomY.toFixed(1)} L ${ptsSeason[0].x.toFixed(1)},${bottomY.toFixed(1)} Z`;
+  const spline25 = ptsSeason.length ? buildSplinePath(ptsSeason, 0.22) : "";
+  const area25 = (ptsSeason.length && spline25) ? `${spline25} L ${ptsSeason[ptsSeason.length - 1].x.toFixed(1)},${bottomY.toFixed(1)} L ${ptsSeason[0].x.toFixed(1)},${bottomY.toFixed(1)} Z` : "";
 
   const svgDefs = `
   <defs>
@@ -3308,11 +3309,11 @@ function chartArsipYear(months, yr) {
     return d.join(" ");
   };
 
-  const lineOmzet = buildSplinePath(ptsOmzet);
-  const areaOmzet = `${lineOmzet} L ${ptsOmzet[ptsOmzet.length-1].x.toFixed(1)},${bottomY} L ${ptsOmzet[0].x.toFixed(1)},${bottomY} Z`;
+  const lineOmzet = ptsOmzet.length ? buildSplinePath(ptsOmzet) : "";
+  const areaOmzet = (ptsOmzet.length && lineOmzet) ? `${lineOmzet} L ${ptsOmzet[ptsOmzet.length-1].x.toFixed(1)},${bottomY} L ${ptsOmzet[0].x.toFixed(1)},${bottomY} Z` : "";
 
-  const lineOut = buildSplinePath(ptsOutflow);
-  const areaOut = `${lineOut} L ${ptsOutflow[ptsOutflow.length-1].x.toFixed(1)},${bottomY} L ${ptsOutflow[0].x.toFixed(1)},${bottomY} Z`;
+  const lineOut = ptsOutflow.length ? buildSplinePath(ptsOutflow) : "";
+  const areaOut = (ptsOutflow.length && lineOut) ? `${lineOut} L ${ptsOutflow[ptsOutflow.length-1].x.toFixed(1)},${bottomY} L ${ptsOutflow[0].x.toFixed(1)},${bottomY} Z` : "";
 
   let dots = "";
   months.forEach((m, i) => {
@@ -3357,6 +3358,9 @@ function chartArsipYear(months, yr) {
 }
 
 function vArsip(R) {
+  if (!S.multiyearArsip && typeof INITIAL_STATE !== "undefined" && INITIAL_STATE.multiyearArsip) {
+    S.multiyearArsip = INITIAL_STATE.multiyearArsip;
+  }
   const arsipData = S.multiyearArsip || {};
   const yearsObj = arsipData.years || {};
   const yearKeys = ["2022", "2023", "2024", "2025", "2026"];

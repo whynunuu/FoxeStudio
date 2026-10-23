@@ -79683,10 +79683,10 @@
   ],
   "sync": [
     {
-      "id": "sy_20261023-0726",
+      "id": "sy_20261023-1640",
       "mulai": "2026-10-23T07:26:47.981300+00:00",
       "status": "sukses",
-      "ringkas": "Integrasi berhasil: 632 order Sep, 394 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 105 pos pengeluaran Neraca, 262 pipeline Okt."
+      "ringkas": "Pembaruan arsitektur Lemari Arsip 5 Tahun (2022-2026) dan perbaikan cache guard."
     },
     {
       "id": "sy_20261023-0616",
