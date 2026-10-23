@@ -3268,25 +3268,45 @@ window.exportArsipCSV = function(yr) {
   if (typeof showToast === "function") showToast(`Rekapitulasi Tahun ${yr} berhasil diexport ke CSV.`, "ok");
 };
 
-function chartArsipYear(months, yr) {
-  const W = 860, H2 = 250, PL = 64, PR = 40, PT = 35, PB = 35;
-  const maxO = Math.max(1, ...months.map(m => Math.max(dnum(m.omzet), dnum(m.outcome)))) * 1.15;
-  const iw = W - PL - PR, ih = H2 - PT - PB, step = iw / 12;
-  const bottomY = H2 - PB;
-  const yy = v => PT + ih - (v / maxO) * ih;
+function chartArsipYoY(months, yr, yearsObj) {
+  const W = 880, H2 = 300, PL = 64, PR = 40, PT = 55, PB = 40;
+  const prevYrStr = String(parseInt(yr, 10) - 1);
+  const prevData = (yearsObj && yearsObj[prevYrStr]) || null;
+  const prevMonths = prevData ? (prevData.months || []) : null;
 
-  const ptsOmzet = [];
-  const ptsOutflow = [];
+  const curAvg = months.reduce((s, m) => s + dnum(m.omzet), 0) / (yr === "2026" ? 10 : 12);
+
+  const ptsCur = [];
+  const ptsPrev = [];
+  const deltas = [];
 
   months.forEach((m, i) => {
+    const curVal = dnum(m.omzet);
+    let prevVal = 0;
+    if (prevMonths && prevMonths[i]) {
+      prevVal = dnum(prevMonths[i].omzet);
+    } else {
+      prevVal = curAvg;
+    }
+    const delta = curVal - prevVal;
+    const pct = prevVal > 0 ? (delta / prevVal * 100) : 0;
+    deltas.push({ delta, pct, curVal, prevVal, month: m.month, name: m.name });
+  });
+
+  const maxVal = Math.max(1, ...deltas.flatMap(d => [d.curVal, d.prevVal])) * 1.18;
+  const iw = W - PL - PR, ih = H2 - PT - PB, step = iw / 12;
+  const bottomY = H2 - PB;
+  const yy = v => PT + ih - (v / maxVal) * ih;
+
+  deltas.forEach((d, i) => {
     const cx = PL + step * i + step / 2;
-    ptsOmzet.push({x: cx, y: yy(m.omzet || 0)});
-    ptsOutflow.push({x: cx, y: yy(m.outcome || 0)});
+    ptsCur.push({ x: cx, y: yy(d.curVal), val: d.curVal, delta: d.delta, pct: d.pct });
+    ptsPrev.push({ x: cx, y: yy(d.prevVal), val: d.prevVal });
   });
 
   let g = "";
   for (let i = 0; i <= 4; i++) {
-    const v = maxO * i / 4, y = yy(v);
+    const v = maxVal * i / 4, y = yy(v);
     g += `<line x1="${PL}" y1="${y.toFixed(1)}" x2="${W - PR}" y2="${y.toFixed(1)}" stroke="var(--grid)" stroke-width="0.8"/>
     <text x="${PL - 8}" y="${(y + 3.5).toFixed(1)}" text-anchor="end" font-size="9.5" font-family="JetBrains Mono,monospace" fill="var(--muted)">${v >= 1e6 ? (v / 1e6).toFixed(0) + "jt" : num(v)}</text>`;
   }
@@ -3309,53 +3329,120 @@ function chartArsipYear(months, yr) {
     return d.join(" ");
   };
 
-  const lineOmzet = ptsOmzet.length ? buildSplinePath(ptsOmzet) : "";
-  const areaOmzet = (ptsOmzet.length && lineOmzet) ? `${lineOmzet} L ${ptsOmzet[ptsOmzet.length-1].x.toFixed(1)},${bottomY} L ${ptsOmzet[0].x.toFixed(1)},${bottomY} Z` : "";
+  const lineCur = ptsCur.length ? buildSplinePath(ptsCur) : "";
+  const linePrev = ptsPrev.length ? buildSplinePath(ptsPrev) : "";
 
-  const lineOut = ptsOutflow.length ? buildSplinePath(ptsOutflow) : "";
-  const areaOut = (ptsOutflow.length && lineOut) ? `${lineOut} L ${ptsOutflow[ptsOutflow.length-1].x.toFixed(1)},${bottomY} L ${ptsOutflow[0].x.toFixed(1)},${bottomY} Z` : "";
+  let spreadGaps = "";
+  for (let i = 0; i < ptsCur.length - 1; i++) {
+    const pC1 = ptsCur[i], pC2 = ptsCur[i + 1];
+    const pP1 = ptsPrev[i], pP2 = ptsPrev[i + 1];
+    const isSurplus = ((pC1.y + pC2.y) / 2) <= ((pP1.y + pP2.y) / 2);
+    const fillColor = isSurplus ? "rgba(16, 185, 129, 0.18)" : "rgba(244, 63, 94, 0.16)";
+    const strokeColor = isSurplus ? "rgba(16, 185, 129, 0.45)" : "rgba(244, 63, 94, 0.45)";
+    const poly = `${pC1.x.toFixed(1)},${pC1.y.toFixed(1)} ${pC2.x.toFixed(1)},${pC2.y.toFixed(1)} ${pP2.x.toFixed(1)},${pP2.y.toFixed(1)} ${pP1.x.toFixed(1)},${pP1.y.toFixed(1)}`;
+    spreadGaps += `<polygon points="${poly}" fill="${fillColor}" stroke="${strokeColor}" stroke-width="0.5"/>`;
+  }
 
   let dots = "";
-  months.forEach((m, i) => {
+  let callouts = "";
+
+  deltas.forEach((d, i) => {
     const cx = PL + step * i + step / 2;
-    const yo = yy(m.omzet || 0);
-    const yb = yy(m.outcome || 0);
-    const isAct = (m.month === arsipMonth);
-    dots += `
-    <line x1="${cx}" y1="${bottomY}" x2="${cx}" y2="${Math.min(yo, yb)}" stroke="${isAct?'var(--accent)':'var(--grid)'}" stroke-dasharray="${isAct?'none':'2 3'}" stroke-width="${isAct?1.5:0.8}" opacity="${isAct?0.9:0.4}"/>
-    <circle cx="${cx}" cy="${yo}" r="${isAct?5:3.5}" fill="var(--surface)" stroke="var(--accent)" stroke-width="${isAct?2.5:1.8}"/>
-    <circle cx="${cx}" cy="${yb}" r="${isAct?4.5:3}" fill="var(--surface)" stroke="var(--crit)" stroke-width="${isAct?2:1.5}"/>
-    <text x="${cx}" y="${bottomY + 16}" text-anchor="middle" font-size="10" font-family="Inter,sans-serif" font-weight="${isAct?700:500}" fill="${isAct?'var(--accent)':'var(--muted)'}">${m.name.slice(0,3)}</text>
-    `;
+    const yC = yy(d.curVal);
+    const yP = yy(d.prevVal);
+    const isAct = (d.month === arsipMonth);
+    const isUp = d.delta >= 0;
+    const deltaColor = isUp ? "var(--good)" : "var(--crit)";
+
+    if (isAct) {
+      dots += `<line x1="${cx}" y1="${bottomY}" x2="${cx}" y2="${Math.min(yC, yP) - 24}" stroke="var(--accent)" stroke-width="1.6" stroke-dasharray="3 3"/>`;
+    }
+
+    dots += `<circle cx="${cx.toFixed(1)}" cy="${yP.toFixed(1)}" r="${isAct ? 4 : 3}" fill="var(--surface)" stroke="var(--muted)" stroke-width="${isAct ? 2 : 1.2}" stroke-dasharray="2 2"/>`;
+    dots += `<circle cx="${cx.toFixed(1)}" cy="${yC.toFixed(1)}" r="${isAct ? 6 : 4}" fill="${isAct ? 'var(--accent)' : 'var(--surface)'}" stroke="var(--accent)" stroke-width="${isAct ? 2.5 : 2}"/>`;
+    dots += `<text x="${cx.toFixed(1)}" y="${bottomY + 16}" text-anchor="middle" font-size="10" font-family="Inter,sans-serif" font-weight="${isAct ? 700 : 500}" fill="${isAct ? 'var(--accent)' : 'var(--muted)'}">${d.name.slice(0,3)}</text>`;
+
+    const bW = 54;
+    const bH = 22;
+    const topY = Math.min(yC, yP) - bH - 8;
+    const sign = isUp ? "▲ +" : "▼ ";
+    const pctStr = `${sign}${Math.abs(d.pct).toFixed(0)}%`;
+    const nomStr = d.delta >= 0 ? `+${(d.delta/1e6).toFixed(1)}jt` : `${(d.delta/1e6).toFixed(1)}jt`;
+
+    callouts += `
+    <g class="callout-delta" style="pointer-events:none;">
+      <rect x="${(cx - bW / 2).toFixed(1)}" y="${topY.toFixed(1)}" width="${bW}" height="${bH}" rx="5" fill="var(--surface)" stroke="${deltaColor}" stroke-width="${isAct ? 1.6 : 1}" filter="drop-shadow(0 2px 6px rgba(0,0,0,0.25))"/>
+      <text x="${cx.toFixed(1)}" y="${(topY + 11).toFixed(1)}" text-anchor="middle" font-size="8.5" font-family="JetBrains Mono,monospace" font-weight="700" fill="${deltaColor}">${pctStr}</text>
+      <text x="${cx.toFixed(1)}" y="${(topY + 19).toFixed(1)}" text-anchor="middle" font-size="7.5" font-family="JetBrains Mono,monospace" font-weight="500" fill="var(--muted)">${nomStr}</text>
+    </g>`;
   });
+
+  const totCur = deltas.reduce((s, d) => s + d.curVal, 0);
+  const totPrev = deltas.reduce((s, d) => s + d.prevVal, 0);
+  const netDelta = totCur - totPrev;
+  const netPct = totPrev > 0 ? (netDelta / totPrev * 100) : 0;
+  
+  const sortedByDelta = [...deltas].sort((a, b) => b.delta - a.delta);
+  const topMonth = sortedByDelta[0];
+  const lowestMonth = sortedByDelta[sortedByDelta.length - 1];
 
   return `
   <div style="width:100%;overflow-x:auto;">
-    <svg viewBox="0 0 ${W} ${H2}" style="width:100%;height:auto;min-width:680px;display:block;">
-      <defs>
-        <linearGradient id="gradArsipOmzet" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.32"/>
-          <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.01"/>
-        </linearGradient>
-        <linearGradient id="gradArsipOut" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="var(--crit)" stop-opacity="0.22"/>
-          <stop offset="100%" stop-color="var(--crit)" stop-opacity="0.01"/>
-        </linearGradient>
-      </defs>
+    <svg viewBox="0 0 ${W} ${H2}" style="width:100%;height:auto;min-width:720px;display:block;">
       ${g}
-      <path d="${areaOmzet}" fill="url(#gradArsipOmzet)"/>
-      <path d="${lineOmzet}" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
-      <path d="${areaOut}" fill="url(#gradArsipOut)"/>
-      <path d="${lineOut}" fill="none" stroke="var(--crit)" stroke-width="1.8" stroke-dasharray="4 3"/>
+      ${spreadGaps}
+      <path d="${linePrev}" fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-dasharray="4 4" opacity="0.75"/>
+      <path d="${lineCur}" fill="none" stroke="var(--accent)" stroke-width="2.6"/>
       ${dots}
+      ${callouts}
     </svg>
   </div>
-  <div style="display:flex;justify-content:center;gap:20px;margin-top:10px;font-size:12px;">
-    <span style="display:inline-flex;align-items:center;gap:6px;"><i style="width:12px;height:3px;background:var(--accent);display:inline-block;border-radius:2px;"></i> <b>Omzet Kas Masuk</b></span>
-    <span style="display:inline-flex;align-items:center;gap:6px;"><i style="width:12px;height:3px;background:var(--crit);display:inline-block;border-radius:2px;"></i> <b>Total Beban (COGS + OPEX)</b></span>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--hairline);font-size:12px;">
+    <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
+      <span style="display:inline-flex;align-items:center;gap:6px;">
+        <i style="width:14px;height:3px;background:var(--accent);display:inline-block;border-radius:2px;"></i>
+        <b>Tahun ${yr} (Tahun Aktif)</b>
+      </span>
+      <span style="display:inline-flex;align-items:center;gap:6px;">
+        <i style="width:14px;height:2px;border-top:2px dashed var(--muted);display:inline-block;"></i>
+        <span class="muted">${prevYrStr ? `Acuan Tahun ${prevYrStr}` : 'Rata-rata Bulanan (Baseline)'}</span>
+      </span>
+      <span style="display:inline-flex;align-items:center;gap:6px;">
+        <i style="width:10px;height:10px;background:rgba(16, 185, 129, 0.4);border:1px solid var(--good);display:inline-block;border-radius:2px;"></i>
+        <span style="color:var(--good);font-weight:600;">Surplus / Naik (+)</span>
+      </span>
+      <span style="display:inline-flex;align-items:center;gap:6px;">
+        <i style="width:10px;height:10px;background:rgba(244, 63, 94, 0.35);border:1px solid var(--crit);display:inline-block;border-radius:2px;"></i>
+        <span style="color:var(--crit);font-weight:600;">Defisit / Turun (-)</span>
+      </span>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));gap:10px;margin-top:12px;">
+    <div style="background:var(--surface2);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
+      <span class="tiny muted" style="display:block;">Akumulasi Delta Omzet</span>
+      <b class="mono" style="font-size:15px;color:${netDelta >= 0 ? 'var(--good)' : 'var(--crit)'};">
+        ${netDelta >= 0 ? '+' : ''}${rp(netDelta)} (${netPct >= 0 ? '+' : ''}${netPct.toFixed(1)}%)
+      </b>
+      <span class="tiny muted" style="display:block;margin-top:2px;">vs ${prevYrStr ? `Tahun ${prevYrStr}` : 'Baseline 2022'}</span>
+    </div>
+    <div style="background:var(--surface2);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
+      <span class="tiny muted" style="display:block;">Bulan Lonjakan Tertinggi (Top Growth)</span>
+      <b style="font-size:14px;color:var(--good);">${topMonth.name}</b>
+      <span class="mono tiny" style="color:var(--good);display:block;">+${rp(topMonth.delta)} (+${topMonth.pct.toFixed(1)}%)</span>
+    </div>
+    <div style="background:var(--surface2);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
+      <span class="tiny muted" style="display:block;">Bulan Tantangan (Lowest Delta)</span>
+      <b style="font-size:14px;color:${lowestMonth.delta >= 0 ? 'var(--good)' : 'var(--crit)'};">${lowestMonth.name}</b>
+      <span class="mono tiny" style="color:${lowestMonth.delta >= 0 ? 'var(--good)' : 'var(--crit)'};display:block;">
+        ${lowestMonth.delta >= 0 ? '+' : ''}${rp(lowestMonth.delta)} (${lowestMonth.pct >= 0 ? '+' : ''}${lowestMonth.pct.toFixed(1)}%)
+      </span>
+    </div>
   </div>
   `;
 }
+
 
 function vArsip(R) {
   if (!S.multiyearArsip && typeof INITIAL_STATE !== "undefined" && INITIAL_STATE.multiyearArsip) {
@@ -3477,11 +3564,17 @@ function vArsip(R) {
     </div>
   </div>
 
-  <!-- GRAFIK TREN 12 BULAN TAHUN TERPILIH -->
+  <!-- GRAFIK KOMPARASI TAHUNAN & DELTA (YoY) -->
   <div class="card" style="margin-bottom:20px;">
-    <h3>Tren 12 Bulan — Tahun ${arsipYear} <span class="eyebrow">Uang Masuk vs Pengeluaran</span></h3>
-    <p class="tiny muted" style="margin-bottom:12px;">Visualisasi fluktuasi omzet kasir (biru) dan beban operasional (merah) dari bulan Januari sampai Desember ${arsipYear}.</p>
-    ${chartArsipYear(mList, arsipYear)}
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:6px;">
+      <div>
+        <div class="eyebrow" style="color:var(--accent);">KURVA KOMPARASI TAHUNAN &amp; SPREAD DELTA (YoY)</div>
+        <h3 style="margin:2px 0 0;">Tren Omzet &amp; Delta — Tahun ${arsipYear} ${arsipYear === '2022' ? '(Baseline Awal)' : `vs ${parseInt(arsipYear,10)-1}`}</h3>
+      </div>
+      <span class="pill prog" style="font-size:11px;">Analisis Pertumbuhan YoY</span>
+    </div>
+    <p class="tiny muted" style="margin-bottom:14px;">Kurva omzet tahun ${arsipYear} (garis biru solid) dibandingkan dengan tahun ${arsipYear === '2022' ? 'rata-rata studio' : `${parseInt(arsipYear,10)-1}`} (garis putus-putus), dilengkapi arsiran area delta surplus/defisit dan floating badge persentase pertumbuhan bulanan.</p>
+    ${chartArsipYoY(mList, arsipYear, yearsObj)}
   </div>
 
   <!-- 12 MAP BULAN INTERAKTIF (.mgrid) -->
