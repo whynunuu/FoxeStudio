@@ -3730,6 +3730,8 @@ function vArsip(R) {
     opexByCat[k] = (opexByCat[k] || 0) + (e.nilai || 0);
   });
   const topOpexCats = Object.entries(opexByCat).sort((a,b) => b[1] - a[1]);
+  const rekapCogs = (selM.rekapItems || []).filter(i => i.jenis === "COGS");
+  const rekapOpex = (selM.rekapItems || []).filter(i => i.jenis === "OPEX");
 
   let activeExpList = allExp;
   if (arsipExpTab === "cogs") activeExpList = cogsExp;
@@ -3956,40 +3958,77 @@ function vArsip(R) {
     </div>
 
     <!-- STRIP REKAP KATEGORI BEBAN (COGS & OPEX) -->
-    <div style="background:var(--surface);border:1px solid var(--hairline);border-radius:10px;padding:12px 16px;margin-bottom:18px;">
+    <div style="background:var(--surface);border:1px solid var(--hairline);border-radius:10px;padding:12px 16px;margin-bottom:14px;">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;">
         <!-- Top COGS -->
         <div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-            <span class="tiny muted" style="font-weight:700;text-transform:uppercase;color:var(--accent-ink);">📦 SUB-REKAP KATEGORI COGS (${selM.name}):</span>
+            <span class="tiny muted" style="font-weight:700;text-transform:uppercase;color:var(--accent-ink);">📦 REKAP BEBAN POKOK (COGS) — ${selM.name}:</span>
             <b class="mono" style="font-size:12px;color:var(--ink);">${rp(selM.cogs)}</b>
           </div>
           <div style="display:flex;gap:6px;flex-wrap:wrap;">
-            ${topCogsCats.length ? topCogsCats.map(([k, v]) => `
+            ${rekapCogs.length ? rekapCogs.map(i => `
+              <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;background:var(--surface2);padding:4px 8px;border-radius:6px;border:1px solid var(--hairline);">
+                <span style="color:var(--ink2);">${esc(i.pos)}</span>
+                <b class="mono" style="color:var(--accent-ink);">${rp(i.nominal)}</b>
+              </span>
+            `).join("") : (topCogsCats.length ? topCogsCats.map(([k, v]) => `
               <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;background:var(--surface2);padding:4px 8px;border-radius:6px;border:1px solid var(--hairline);">
                 <span style="color:var(--ink2);">${esc(k)}</span>
                 <b class="mono" style="color:var(--accent-ink);">${rp(v)}</b>
               </span>
-            `).join("") : '<span class="tiny muted">— Tidak ada pos COGS</span>'}
+            `).join("") : '<span class="tiny muted">— Tidak ada pos COGS</span>')}
           </div>
         </div>
         <!-- Top OPEX -->
         <div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-            <span class="tiny muted" style="font-weight:700;text-transform:uppercase;color:var(--crit);">🏢 SUB-REKAP KATEGORI OPEX (${selM.name}):</span>
+            <span class="tiny muted" style="font-weight:700;text-transform:uppercase;color:var(--crit);">🏢 REKAP BEBAN OPERASIONAL (OPEX) — ${selM.name}:</span>
             <b class="mono" style="font-size:12px;color:var(--crit);">${rp(selM.opex)}</b>
           </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap;">
-            ${topOpexCats.length ? topOpexCats.map(([k, v]) => `
+          <div style="display:flex;gap:6px;flex-wrap:wrap;max-height:120px;overflow-y:auto;">
+            ${rekapOpex.length ? rekapOpex.map(i => `
+              <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;background:var(--surface2);padding:4px 8px;border-radius:6px;border:1px solid var(--hairline);">
+                <span style="color:var(--ink2);">${esc(i.pos)}</span>
+                <b class="mono" style="color:var(--crit);">${rp(i.nominal)}</b>
+              </span>
+            `).join("") : (topOpexCats.length ? topOpexCats.map(([k, v]) => `
               <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;background:var(--surface2);padding:4px 8px;border-radius:6px;border:1px solid var(--hairline);">
                 <span style="color:var(--ink2);">${esc(k)}</span>
                 <b class="mono" style="color:var(--crit);">${rp(v)}</b>
               </span>
-            `).join("") : '<span class="tiny muted">— Tidak ada pos OPEX</span>'}
+            `).join("") : '<span class="tiny muted">— Tidak ada pos OPEX</span>')}
           </div>
         </div>
       </div>
     </div>
+
+    <!-- STRIP PEMBAGIAN LABA BERSIH RESMI (KALKULASI OWNER STUDIO) -->
+    ${(selM.pembagian && selM.pembagian.investor > 0) ? `
+    <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:10px;padding:12px 16px;margin-bottom:18px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+        <span class="eyebrow" style="color:var(--good);font-weight:700;">💰 PEMBAGIAN LABA BERSIH RESMI (KALKULASI OWNER · ${selM.name} ${arsipYear})</span>
+        <span class="pill good" style="font-size:10.5px;padding:2px 8px;">Dividen: 70% Investor · 15% Modal · 5% Tabungan · 10% GM</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
+        <div style="background:var(--surface);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
+          <div class="tiny muted">Investor (70%)</div>
+          <div class="mono" style="font-size:17px;font-weight:700;color:var(--good);margin-top:2px;">${rp(selM.pembagian.investor)}</div>
+        </div>
+        <div style="background:var(--surface);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
+          <div class="tiny muted">Cadangan Modal (15%)</div>
+          <div class="mono" style="font-size:17px;font-weight:700;color:var(--accent);margin-top:2px;">${rp(selM.pembagian.modal)}</div>
+        </div>
+        <div style="background:var(--surface);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
+          <div class="tiny muted">Tabungan Studio (5%)</div>
+          <div class="mono" style="font-size:17px;font-weight:700;color:var(--ink);margin-top:2px;">${rp(selM.pembagian.tabungan)}</div>
+        </div>
+        <div style="background:var(--surface);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
+          <div class="tiny muted">General Manager (10%)</div>
+          <div class="mono" style="font-size:17px;font-weight:700;color:var(--warn);margin-top:2px;">${rp(selM.pembagian.gm)}</div>
+        </div>
+      </div>
+    </div>` : ''}
 
     <div class="two" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px;">
       <!-- SISI KIRI: BUKU KASIR HARIAN -->
