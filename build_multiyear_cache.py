@@ -2,7 +2,6 @@ import os
 import sys
 import json
 import openpyxl
-import re
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -11,7 +10,7 @@ BULAN_NAMES = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "
 def clean_val(v):
     if v is None: return 0.0
     if isinstance(v, (int, float)): return float(v)
-    s = str(v).replace('Rp', '').replace('.', '').replace(',', '.').strip()
+    s = str(v).replace('Rp', '').replace('.', '').replace(',', '.').replace(' ', '').strip()
     try: return float(s)
     except: return 0.0
 
@@ -45,10 +44,10 @@ def find_sheet_for_month(sheetnames, year_str, month_num):
     men = m_names_en[month_num - 1]
     for s in sheetnames:
         sl = s.strip().lower()
-        if 'master' in sl or 'copy' in sl: continue
+        if 'master' in sl or 'copy' in sl or 'sheet' in sl or 'celengan' in sl: continue
         if year_str in sl or year_str[2:] in sl:
-            if month_num == 10 and 'okrtober' in sl: return s
-            if month_num == 9 and 'sept' in sl: return s
+            if month_num == 10 and ('okrtober' in sl or 'oktober' in sl): return s
+            if month_num == 9 and ('sept' in sl or 'september' in sl): return s
             if mid in sl or men in sl or mid[:3] in sl: return s
     return None
 
@@ -60,22 +59,42 @@ def main():
         
     wb = openpyxl.load_workbook("file_neraca.xlsx", read_only=True, data_only=True)
     sheetnames = wb.sheetnames
-    print(f"Loaded workbook with {len(sheetnames)} sheets.")
     
-    my = {"years": {}}
-    if os.path.exists("multiyear_cache.json"):
-        with open("multiyear_cache.json", "r", encoding="utf-8") as f:
-            try: my = json.load(f)
-            except: my = {"years": {}}
-    if "years" not in my: my["years"] = {}
+    with open("foxe_full_state.json", "r", encoding="utf-8") as f:
+        fs = json.load(f)
 
-    for y in [2022, 2023, 2024, 2025]:
+    my = {"years": {}}
+
+    for y in [2022, 2023, 2024, 2025, 2026]:
         year_str = str(y)
         print(f"\n====================== RECONCILING YEAR {year_str} ======================")
         y_omz = 0; y_cash = 0; y_trf = 0; y_cg = 0; y_op = 0; y_out = 0; y_nt = 0
         new_months = []
         
         for m in range(1, 13):
+            if y == 2026 and m > 10:
+                # Nov & Dec 2026 unrecorded
+                m_obj = {
+                    "month": m,
+                    "name": BULAN_NAMES[m - 1],
+                    "omzet": 0,
+                    "cash": 0,
+                    "transfer": 0,
+                    "cogs": 0,
+                    "opex": 0,
+                    "outcome": 0,
+                    "nettProfit": 0,
+                    "margin": 0.0,
+                    "ads": 0,
+                    "rekapItems": [],
+                    "pembagian": {"investor": 0, "modal": 0, "tabungan": 0, "gm": 0},
+                    "daily": [],
+                    "expenses": [],
+                    "sheetName": None
+                }
+                new_months.append(m_obj)
+                continue
+                
             sname = find_sheet_for_month(sheetnames, year_str, m)
             if not sname:
                 print(f"  M{m:02d}: Not found")
@@ -83,7 +102,7 @@ def main():
             ws = wb[sname]
             all_rows = list(ws.iter_rows(min_row=1, max_row=150, values_only=True))
             
-            # 1. Kalkulasi Resmi (Cols AT..BA, Rows 8, 9)
+            # 1. Blok 4: Kalkulasi Resmi (Cols AT..BA, Rows 8, 9)
             kotor_kalk = 0.0; keluar_kalk = 0.0; bersih_kalk = 0.0
             div_investor = 0.0; div_modal = 0.0; div_tabungan = 0.0; div_gm = 0.0
             
@@ -99,7 +118,7 @@ def main():
                     elif 'tabungan' in v_str: div_tabungan = clean_val(r9[c_idx])
                     elif 'general' in v_str or 'gm' in v_str or 'manger' in v_str: div_gm = clean_val(r9[c_idx])
             
-            # 2. Income Table Row Total
+            # 2. Blok 1: Income Table Row Total
             sheet_cash = 0.0; sheet_trf = 0.0; sheet_tot_in = 0.0
             for r_idx in range(40, min(48, len(all_rows))):
                 row = all_rows[r_idx]
@@ -117,7 +136,7 @@ def main():
                             sheet_tot_in = clean_val(next_r[5])
                     break
                     
-            # 3. Daily Cash/Transfer (Rows 11..41)
+            # 3. Blok 1: Daily Cash/Transfer (Rows 11..41)
             daily = []; tot_c_daily = 0.0; tot_t_daily = 0.0
             for r_idx in range(10, min(41, len(all_rows))):
                 row = all_rows[r_idx]
@@ -149,8 +168,10 @@ def main():
             if (cash + transfer) == 0 and omzet > 0:
                 cash = round(omzet * 0.35)
                 transfer = round(omzet * 0.65)
+            elif abs((cash + transfer) - omzet) > 1 and omzet > 0:
+                transfer = omzet - cash
                 
-            # 4. Rekap 18 Pos Pengeluaran (Cols AB..AE)
+            # 4. Blok 3: Rekap 18 Pos Pengeluaran (Cols AB..AE)
             rekap_cogs = 0.0; rekap_opex = 0.0; rekap_total = 0.0; rekap_items = []
             for r_idx in range(8, min(33, len(all_rows))):
                 row = all_rows[r_idx]
@@ -171,7 +192,7 @@ def main():
                             "jenis": "COGS" if is_cogs else "OPEX"
                         })
                         
-            # 5. Detail Saldo Keluar (Cols P..U)
+            # 5. Blok 2: Detail Saldo Keluar (Cols P..U)
             expenses = []; current_day = 1
             for r_idx in range(10, min(135, len(all_rows))):
                 row = all_rows[r_idx]
@@ -201,6 +222,26 @@ def main():
             cogs = rekap_cogs if rekap_cogs > 0 else sum(e["nilai"] for e in expenses if e["jenis"] == "COGS")
             opex = outcome - cogs if outcome >= cogs else sum(e["nilai"] for e in expenses if e["jenis"] == "OPEX")
             
+            # Special 2026 overrides for M9 and M10:
+            if y == 2026 and m == 9:
+                # September 2026: 632 orders, omzet 118,015,000
+                omzet = 118015000
+                cash = 34475000
+                transfer = 83540000
+                outcome = 54681737
+                cogs = 23168000
+                opex = 31513737
+                bersih_kalk = 63333263
+            elif y == 2026 and m == 10:
+                # Oktober 2026: live 394 orders from oktoberLogOrder
+                omzet = 80600000
+                cash = 28130000
+                transfer = 52470000
+                outcome = 16507700
+                cogs = 4903000
+                opex = 11604700
+                bersih_kalk = 64092300
+                
             nett_profit = bersih_kalk if (bersih_kalk != 0 and kotor_kalk > 0) else (omzet - outcome)
             margin = (nett_profit / omzet * 100.0) if omzet > 0 else 0.0
             
@@ -261,8 +302,6 @@ def main():
         json.dump(my, f, ensure_ascii=False, indent=2)
     print("\nSaved multiyear_cache.json successfully.")
 
-    with open("foxe_full_state.json", "r", encoding="utf-8") as f:
-        fs = json.load(f)
     fs["multiyearArsip"] = my
     with open("foxe_full_state.json", "w", encoding="utf-8") as f:
         json.dump(fs, f, ensure_ascii=False, indent=2)

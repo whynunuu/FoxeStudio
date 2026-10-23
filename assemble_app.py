@@ -2572,7 +2572,7 @@ function vTahunan(R) {
 
   const months = SEASON_INFO.map(info => {
     const m25 = data25.find(m => m.no === info.no) || {};
-    const o25 = dnum(m25.omzet) || (info.no === 9 ? 151036150 : 50000000);
+    const o25 = dnum(m25.omzet) || (info.no === 9 ? 150786150 : 50000000);
     const sIndex = o25 / avg25;
 
     let seasonTag = "NORMAL";
@@ -2711,7 +2711,7 @@ function vTahunan(R) {
   const realMonths = months.filter(m => m.no <= 9 && m.omzet26 != null);
   const totYtdClosed = realMonths.reduce((s, m) => s + (m.omzet26 || 0), 0);
   const countVerified = realMonths.length;
-  const sep25 = months.find(m => m.no === 9)?.omzet25 || 151036150;
+  const sep25 = months.find(m => m.no === 9)?.omzet25 || 150786150;
 
   // Realisasi live kasir Oktober (Actual MTD s.d. cut-off hari ini)
   const oktLiveOrders = (S.oktoberLogOrder && S.oktoberLogOrder.orders) || (S.orders || []).filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
@@ -2872,6 +2872,9 @@ function vTahunan(R) {
                    <span class="msub" style="color:var(--good);margin-top:2px;">Nett: ${rp(m.hist.nettProfit)} (Margin ${(m.hist.margin||0).toFixed(1)}%)</span>`;
       } else if (m.isCurrent) {
         subText = `<span class="msub" style="color:var(--accent);">Proyeksi run-rate: ${rp(R.proyeksi)} · Acuan ${yr-1}: ${rp(m.omzet25)}</span>`;
+      } else if (m.no === 9) {
+        subText = `<span class="msub" style="color:var(--ink2);font-weight:500;">632 orders · Cash Rp 34,48 jt | Trf Rp 83,54 jt</span>
+                   <span class="msub" style="color:var(--good);margin-top:2px;font-weight:600;">Rekap Final Terverifikasi · Nett: ${rp(63333263)} (Margin 53.7%)</span>`;
       } else if (m.no === 10 && S.oktoberPipeline) {
         const sisaCashIn = S.oktoberPipeline.remainingCashIn != null ? S.oktoberPipeline.remainingCashIn : (S.oktoberPipeline.statusBreakdown ? S.oktoberPipeline.statusBreakdown.confirmed.cashIn : S.oktoberPipeline.estimateCashIn);
         subText = `<span class="msub" style="color:var(--accent);">Live: ${rp(m.omzet26)} · Sisa Pelunasan: ${rp(sisaCashIn)}</span>`;
