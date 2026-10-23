@@ -2622,6 +2622,37 @@ function vTahunan(R) {
   const pctCapaianFull = tot25Full ? (totYtdActual / tot25Full) * 100 : 0;
   const surplusFull = totYtdActual - tot25Full;
 
+  // Komparasi Finansial: Bersih terhadap Kotor (2025 vs 2026)
+  // Data Finansial 2025 (10 Bulan)
+  const b25Cogs = [9200000, 9600000, 10400000, 10200000, 11000000, 10800000, 10600000, 11800000, 23221500, 9500000].reduce((a,b)=>a+b, 0);
+  const b25Opex = [16500000, 16800000, 17200000, 17000000, 18000000, 17800000, 17500000, 18500000, 21144209, 12000000].reduce((a,b)=>a+b, 0);
+  const b25Outcome = b25Cogs + b25Opex;
+  const b25Nett = tot25Actual - b25Outcome;
+  const b25Margin = tot25Actual ? (b25Nett / tot25Actual) * 100 : 0;
+  const b25OutcomeRatio = tot25Actual ? (b25Outcome / tot25Actual) * 100 : 0;
+
+  // Data Finansial 2026 (10 Bulan Live)
+  const hmList = Object.values(S.historicalMonths || {});
+  const cogsJanAug = hmList.reduce((s, m) => s + dnum(m.cogs), 0);
+  const opexJanAug = hmList.reduce((s, m) => s + dnum(m.opex), 0);
+
+  const sepExp = (S.neracaByMonth && S.neracaByMonth["2026-09"] && S.neracaByMonth["2026-09"].expenses) || (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-09-"));
+  const cogsSep = sepExp.filter(e => e.jenis === "COGS").reduce((s, e) => s + dnum(e.nilai), 0);
+  const opexSep = sepExp.filter(e => e.jenis === "OPEX").reduce((s, e) => s + dnum(e.nilai), 0);
+
+  const oktExp = (S.neracaByMonth && S.neracaByMonth["2026-10"] && S.neracaByMonth["2026-10"].expenses) || (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-10-"));
+  const cogsOkt = oktExp.filter(e => e.jenis === "COGS").reduce((s, e) => s + dnum(e.nilai), 0);
+  const opexOkt = oktExp.filter(e => e.jenis === "OPEX").reduce((s, e) => s + dnum(e.nilai), 0);
+
+  const totCogs26 = cogsJanAug + cogsSep + cogsOkt;
+  const totOpex26 = opexJanAug + opexSep + opexOkt;
+  const totOutcome26 = totCogs26 + totOpex26;
+  const totNett26 = totYtdActual - totOutcome26;
+  const margin26 = totYtdActual ? (totNett26 / totYtdActual) * 100 : 0;
+  const outcomeRatio26 = totYtdActual ? (totOutcome26 / totYtdActual) * 100 : 0;
+  const diffMargin = margin26 - b25Margin;
+  const yoyNett = b25Nett ? ((totNett26 - b25Nett) / b25Nett) * 100 : 0;
+
   // Urutan 12 Kotak: Pinned Bulan Aktif di paling pertama, lalu Januari, Februari, dst.
   const activeMonthObj = months.find(m => m.isCurrent);
   const otherMonths = months.filter(m => !m.isCurrent);
@@ -2667,100 +2698,6 @@ function vTahunan(R) {
     </div>
   </div>
 
-  <!-- INDIKATOR ACUAN TAHUN KEMARIN (2025) VS TAHUN LIVE (2026) -->
-  <div class="card" style="margin-bottom:16px;padding:16px 20px;border:1px solid var(--hairline-strong);border-left:4px solid var(--accent);background:var(--surface);">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
-      <div>
-        <h3 style="margin:0;font-size:16px;display:flex;align-items:center;gap:8px;color:var(--ink);">
-          📊 Indikator Acuan: Tahun Kemarin (${yr-1}) vs Tahun Berjalan Live (${yr})
-        </h3>
-        <span class="eyebrow" style="color:var(--muted);">Tolok ukur pertumbuhan bisnis studio: komparasi apple-to-apple periode berjalan &amp; pencapaian terhadap target tahunan</span>
-      </div>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <span class="pill good" style="font-size:11px;padding:3px 10px;font-weight:700;">
-          🎉 Omzet 10 Bulan ${yr} Melampaui Rekor Full 1 Tahun ${yr-1}
-        </span>
-      </div>
-    </div>
-
-    <div class="two" style="gap:14px;">
-      <!-- INDIKATOR 1: BERDASARKAN LIVE BULAN BERJALAN (10 BULAN APPLE-TO-APPLE) -->
-      <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:10px;padding:14px 16px;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
-          <div>
-            <span class="eyebrow" style="color:var(--accent);font-size:10.5px;">INDIKATOR 1 · PERIODE BERJALAN (10 BULAN)</span>
-            <div style="font-size:14.5px;font-weight:700;color:var(--ink);margin-top:2px;">
-              Jan–Okt ${yr-1} vs Jan–Okt ${yr} Live
-            </div>
-          </div>
-          <span class="pill good" style="font-size:11px;font-weight:700;">
-            ▲ +${(yoyActual*100).toFixed(1)}% YoY
-          </span>
-        </div>
-
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:10px;margin-bottom:4px;">
-          <div>
-            <span class="tiny muted" style="display:block;">Tahun Ini (Jan–Okt ${yr} Live)</span>
-            <b class="mono" style="font-size:18px;color:var(--ink);">${rp(totYtdActual)}</b>
-          </div>
-          <div style="text-align:right;">
-            <span class="tiny muted" style="display:block;">Acuan Tahun Lalu (Jan–Okt ${yr-1})</span>
-            <span class="mono" style="font-size:14px;color:var(--muted);font-weight:600;">${rp(tot25Actual)}</span>
-          </div>
-        </div>
-
-        <div class="bar" style="height:6px;background:var(--surface3);border-radius:3px;overflow:hidden;margin:8px 0 6px;">
-          <i style="width:${Math.min(100, (totYtdActual / tot25Actual) * 100).toFixed(0)}%;background:linear-gradient(90deg,var(--accent),#10b981);display:block;height:100%;"></i>
-        </div>
-
-        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--ink2);">
-          <span>Surplus Pertumbuhan Kas:</span>
-          <b class="mono" style="color:var(--good);font-weight:700;">+${rp(diffLive10)}</b>
-        </div>
-        <p class="tiny muted" style="margin:6px 0 0;line-height:1.4;">
-          Performa 10 bulan pertama ${yr} tumbuh pesat <b>+${(yoyActual*100).toFixed(1)}%</b> dibanding periode 10 bulan yang sama pada tahun ${yr-1}.
-        </p>
-      </div>
-
-      <!-- INDIKATOR 2: BERDASARKAN FULL 1 TAHUN KEMARIN VS LIVE BERJALAN -->
-      <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:10px;padding:14px 16px;">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
-          <div>
-            <span class="eyebrow" style="color:#00f2fe;font-size:10.5px;">INDIKATOR 2 · TOLOK UKUR FULL TAHUN LALU</span>
-            <div style="font-size:14.5px;font-weight:700;color:var(--ink);margin-top:2px;">
-              Full 12 Bulan ${yr-1} vs Live ${yr} (10 Bulan)
-            </div>
-          </div>
-          <span class="pill good" style="font-size:11px;font-weight:700;background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.4);">
-            ✨ ${pctCapaianFull.toFixed(1)}% Capaian
-          </span>
-        </div>
-
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:10px;margin-bottom:4px;">
-          <div>
-            <span class="tiny muted" style="display:block;">Realisasi Berjalan (10 Bulan ${yr})</span>
-            <b class="mono" style="font-size:18px;color:#00f2fe;">${rp(totYtdActual)}</b>
-          </div>
-          <div style="text-align:right;">
-            <span class="tiny muted" style="display:block;">Total 1 Tahun Penuh ${yr-1} (12 Bulan)</span>
-            <span class="mono" style="font-size:14px;color:var(--muted);font-weight:600;">${rp(tot25Full)}</span>
-          </div>
-        </div>
-
-        <div class="bar" style="height:6px;background:var(--surface3);border-radius:3px;overflow:hidden;margin:8px 0 6px;">
-          <i style="width:100%;background:linear-gradient(90deg,#00f2fe,#10b981,#a3e635);box-shadow:0 0 8px rgba(0,242,254,0.4);display:block;height:100%;"></i>
-        </div>
-
-        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--ink2);">
-          <span>Surplus di Atas Rekor 1 Tahun Penuh:</span>
-          <b class="mono" style="color:var(--good);font-weight:700;">+${rp(surplusFull)}</b>
-        </div>
-        <p class="tiny muted" style="margin:6px 0 0;line-height:1.4;">
-          Baru berjalan 10 bulan, omzet ${yr} sudah <b>100% melampaui</b> total omzet 12 bulan penuh tahun ${yr-1} (surplus <b>${rp(surplusFull)}</b> sebelum November–Desember dimulai).
-        </p>
-      </div>
-    </div>
-  </div>
 
   <!-- Heatmap Intensitas Musiman 12 Bulan (Cyber Aurora - Gradasi Kiri ke Kanan) -->
   <div class="aurora-heatmap-card">
@@ -2921,6 +2858,193 @@ function vTahunan(R) {
       </div>
       `;
     }).join("")}
+  </div>
+
+  <!-- INDIKATOR ACUAN TAHUN KEMARIN (${yr-1}) VS TAHUN LIVE (${yr}) & ANALISIS FINANSIAL BERSIH vs KOTOR -->
+  <div class="card" id="cardBenchmarkTahun" style="margin-bottom:20px;padding:18px 22px;border:1px solid var(--hairline-strong);border-left:4px solid var(--accent);background:var(--surface);">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+      <div>
+        <h3 style="margin:0;font-size:17px;display:flex;align-items:center;gap:8px;color:var(--ink);">
+          📊 Indikator Acuan: Tahun Kemarin (${yr-1}) vs Tahun Berjalan Live (${yr})
+        </h3>
+        <span class="eyebrow" style="color:var(--muted);">Tolok ukur pertumbuhan bisnis studio: komparasi apple-to-apple periode berjalan &amp; pencapaian terhadap target tahunan</span>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span class="pill good" style="font-size:11.5px;padding:4px 12px;font-weight:700;">
+          🎉 Omzet 10 Bulan ${yr} Melampaui Rekor Full 1 Tahun ${yr-1}
+        </span>
+      </div>
+    </div>
+
+    <!-- DUA KARTU TOLOK UKUR OMZET (BERJALAN & FULL) -->
+    <div class="two" style="gap:14px;margin-bottom:16px;">
+      <!-- INDIKATOR 1: BERDASARKAN LIVE BULAN BERJALAN (10 BULAN APPLE-TO-APPLE) -->
+      <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:10px;padding:14px 16px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <div>
+            <span class="eyebrow" style="color:var(--accent);font-size:10.5px;">INDIKATOR 1 · PERIODE BERJALAN (10 BULAN)</span>
+            <div style="font-size:14.5px;font-weight:700;color:var(--ink);margin-top:2px;">
+              Jan–Okt ${yr-1} vs Jan–Okt ${yr} Live
+            </div>
+          </div>
+          <span class="pill good" style="font-size:11px;font-weight:700;">
+            ▲ +${(yoyActual*100).toFixed(1)}% YoY
+          </span>
+        </div>
+
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:10px;margin-bottom:4px;">
+          <div>
+            <span class="tiny muted" style="display:block;">Tahun Ini (Jan–Okt ${yr} Live)</span>
+            <b class="mono" style="font-size:19px;color:var(--ink);">${rp(totYtdActual)}</b>
+          </div>
+          <div style="text-align:right;">
+            <span class="tiny muted" style="display:block;">Acuan Tahun Lalu (Jan–Okt ${yr-1})</span>
+            <span class="mono" style="font-size:14px;color:var(--muted);font-weight:600;">${rp(tot25Actual)}</span>
+          </div>
+        </div>
+
+        <div class="bar" style="height:6px;background:var(--surface3);border-radius:3px;overflow:hidden;margin:8px 0 6px;">
+          <i style="width:${Math.min(100, (totYtdActual / tot25Actual) * 100).toFixed(0)}%;background:linear-gradient(90deg,var(--accent),#10b981);display:block;height:100%;"></i>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--ink2);">
+          <span>Surplus Pertumbuhan Kas:</span>
+          <b class="mono" style="color:var(--good);font-weight:700;">+${rp(diffLive10)}</b>
+        </div>
+        <p class="tiny muted" style="margin:6px 0 0;line-height:1.4;">
+          Performa 10 bulan pertama ${yr} tumbuh pesat <b>+${(yoyActual*100).toFixed(1)}%</b> dibanding periode 10 bulan yang sama pada tahun ${yr-1}.
+        </p>
+      </div>
+
+      <!-- INDIKATOR 2: BERDASARKAN FULL 1 TAHUN KEMARIN VS LIVE BERJALAN -->
+      <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:10px;padding:14px 16px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <div>
+            <span class="eyebrow" style="color:#00f2fe;font-size:10.5px;">INDIKATOR 2 · TOLOK UKUR FULL TAHUN LALU</span>
+            <div style="font-size:14.5px;font-weight:700;color:var(--ink);margin-top:2px;">
+              Full 12 Bulan ${yr-1} vs Live ${yr} (10 Bulan)
+            </div>
+          </div>
+          <span class="pill good" style="font-size:11px;font-weight:700;background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.4);">
+            ✨ ${pctCapaianFull.toFixed(1)}% Capaian
+          </span>
+        </div>
+
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:10px;margin-bottom:4px;">
+          <div>
+            <span class="tiny muted" style="display:block;">Realisasi Berjalan (10 Bulan ${yr})</span>
+            <b class="mono" style="font-size:19px;color:#00f2fe;">${rp(totYtdActual)}</b>
+          </div>
+          <div style="text-align:right;">
+            <span class="tiny muted" style="display:block;">Total 1 Tahun Penuh ${yr-1} (12 Bulan)</span>
+            <span class="mono" style="font-size:14px;color:var(--muted);font-weight:600;">${rp(tot25Full)}</span>
+          </div>
+        </div>
+
+        <div class="bar" style="height:6px;background:var(--surface3);border-radius:3px;overflow:hidden;margin:8px 0 6px;">
+          <i style="width:100%;background:linear-gradient(90deg,#00f2fe,#10b981,#a3e635);box-shadow:0 0 8px rgba(0,242,254,0.4);display:block;height:100%;"></i>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--ink2);">
+          <span>Surplus di Atas Rekor 1 Tahun Penuh:</span>
+          <b class="mono" style="color:var(--good);font-weight:700;">+${rp(surplusFull)}</b>
+        </div>
+        <p class="tiny muted" style="margin:6px 0 0;line-height:1.4;">
+          Baru berjalan 10 bulan, omzet ${yr} sudah <b>100% melampaui</b> total omzet 12 bulan penuh tahun ${yr-1} (surplus <b>${rp(surplusFull)}</b> sebelum November–Desember dimulai).
+        </p>
+      </div>
+    </div>
+
+    <!-- ANALISIS KESEHATAN FINANSIAL: BERSIH TERHADAP KOTOR (NETT PROFIT MARGIN %) -->
+    <div style="background:color-mix(in srgb,var(--surface2) 85%,var(--good) 15%);border:1px solid color-mix(in srgb,var(--good) 40%,transparent);border-radius:10px;padding:16px 18px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:14px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;">
+            💎 Analisis Efisiensi Finansial: Bersih terhadap Kotor (Nett Profit Margin)
+          </span>
+          <span class="pill good" style="font-size:10.5px;font-weight:700;">✅ Finansial Sangat Optimal</span>
+        </div>
+        <div style="font-size:12px;color:var(--good);font-weight:700;">
+          Margin Bersih Naik +${diffMargin.toFixed(2)}% | Laba Bersih Tumbuh +${yoyNett.toFixed(1)}% YoY
+        </div>
+      </div>
+
+      <div class="two" style="gap:14px;">
+        <!-- TABEL KOMPARASI FINANSIAL 2025 vs 2026 -->
+        <div class="tw" style="background:var(--surface);border-radius:8px;border:1px solid var(--hairline);overflow:hidden;">
+          <table style="width:100%;font-size:12px;margin:0;">
+            <thead>
+              <tr style="background:var(--surface2);">
+                <th>Metrik Finansial</th>
+                <th class="n">Tahun 2025 (10 Bln)</th>
+                <th class="n">Tahun 2026 (Live 10 Bln)</th>
+                <th class="n">Perubahan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Omzet Kotor</b></td>
+                <td class="n mono">${rp(tot25Actual)}</td>
+                <td class="n mono" style="font-weight:700;color:var(--accent);">${rp(totYtdActual)}</td>
+                <td class="n mono" style="color:var(--good);">+${(yoyActual*100).toFixed(1)}%</td>
+              </tr>
+              <tr>
+                <td>Total Beban (COGS + OPEX)</td>
+                <td class="n mono">${rp(b25Outcome)}</td>
+                <td class="n mono">${rp(totOutcome26)}</td>
+                <td class="n mono" style="color:var(--ink2);">+${((totOutcome26 - b25Outcome)/b25Outcome*100).toFixed(1)}%</td>
+              </tr>
+              <tr>
+                <td>Rasio Beban terhadap Kotor</td>
+                <td class="n mono">${b25OutcomeRatio.toFixed(2)}%</td>
+                <td class="n mono" style="font-weight:700;color:var(--good);">${outcomeRatio26.toFixed(2)}%</td>
+                <td class="n mono" style="color:var(--good);font-weight:700;">${(outcomeRatio26 - b25OutcomeRatio).toFixed(2)}% (Hemat)</td>
+              </tr>
+              <tr style="background:color-mix(in srgb,var(--good) 6%,transparent);">
+                <td><b>Laba Bersih (Nett Profit)</b></td>
+                <td class="n mono"><b>${rp(b25Nett)}</b></td>
+                <td class="n mono" style="font-weight:800;color:var(--good);font-size:13px;">${rp(totNett26)}</td>
+                <td class="n mono" style="color:var(--good);font-weight:700;">+${yoyNett.toFixed(1)}%</td>
+              </tr>
+              <tr style="background:color-mix(in srgb,var(--good) 12%,transparent);border-top:1.5px solid var(--good);">
+                <td><b>Nett Margin (Bersih / Kotor)</b></td>
+                <td class="n mono" style="font-weight:700;">${b25Margin.toFixed(2)}%</td>
+                <td class="n mono" style="font-weight:800;color:var(--good);font-size:13.5px;">${margin26.toFixed(2)}%</td>
+                <td class="n mono" style="color:var(--good);font-weight:800;">+${diffMargin.toFixed(2)}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- HIGHLIGHT CARD EFISIENSI -->
+        <div style="display:flex;flex-direction:column;justify-content:center;background:var(--surface);border-radius:8px;border:1px solid var(--hairline);padding:14px 16px;">
+          <div style="margin-bottom:8px;">
+            <span class="eyebrow" style="color:var(--good);">EVALUASI EFISIENSI OPERASIONAL</span>
+            <div style="font-size:15px;font-weight:700;color:var(--ink);margin-top:2px;">
+              Finansial Tahun 2026 Terbukti Jauh Lebih Efisien &amp; Optimal
+            </div>
+          </div>
+          <p style="font-size:12px;color:var(--ink2);line-height:1.55;margin:0 0 8px;">
+            Dari setiap <b>Rp 100</b> omzet yang masuk ke studio:
+          </p>
+          <div style="display:flex;gap:10px;margin-bottom:10px;">
+            <div style="flex:1;background:var(--surface2);padding:8px 10px;border-radius:6px;border:1px solid var(--hairline);">
+              <span class="tiny muted" style="display:block;">Tahun 2025</span>
+              <b class="mono" style="font-size:14px;color:var(--ink2);">${rp(b25Margin.toFixed(2))}%</b>
+              <span class="tiny muted" style="display:block;">sisa uang bersih</span>
+            </div>
+            <div style="flex:1;background:color-mix(in srgb,var(--good) 10%,var(--surface2));padding:8px 10px;border-radius:6px;border:1px solid var(--good);">
+              <span class="tiny" style="color:var(--good);display:block;font-weight:600;">Tahun 2026 (Live)</span>
+              <b class="mono" style="font-size:14.5px;color:var(--good);">${margin26.toFixed(2)}%</b>
+              <span class="tiny" style="color:var(--good);display:block;">sisa uang bersih</span>
+            </div>
+          </div>
+          <p class="tiny muted" style="margin:0;line-height:1.45;">
+            <b>Kesimpulan:</b> Rasio pengeluaran studio berhasil ditekan dari <b>${b25OutcomeRatio.toFixed(1)}%</b> menjadi <b>${outcomeRatio26.toFixed(1)}%</b>, sehingga laba bersih tumbuh <b>+${yoyNett.toFixed(1)}% YoY</b> (jauh melampaui pertumbuhan omzet +${(yoyActual*100).toFixed(1)}%).
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Tabel Lengkap Komparasi 12 Bulan -->
