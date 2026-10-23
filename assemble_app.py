@@ -1929,7 +1929,7 @@ function barlist(items,colorVar,valFmt){
 /* ============================ views ============================ */
 const VIEWS=[
   {id:"tahunan",grp:"Ringkasan",label:"Laporan Tahunan",icon:"📅"},
-  {id:"arsip",grp:"Ringkasan",label:"Lemari Arsip",icon:"🗄️"},
+  {id:"arsip",grp:"Ringkasan",label:"Arsip Tahunan",icon:"🗄️"},
   {id:"dash",grp:"Ringkasan",label:"Dashboard (Bulanan)",icon:"📊"},
   {id:"omzet",grp:"Ringkasan",label:"Omzet Harian",icon:"📈"},
   {id:"target",grp:"Ringkasan",label:"Target & Skenario",icon:"🎯"},
@@ -1951,7 +1951,7 @@ function render(){
     const R=compute();
     if(view === "arsip"){
       document.getElementById("tbPeriod").textContent = `Tahun ${arsipYear}`;
-      document.getElementById("tbCut").textContent = `Lemari Arsip Finansial · Pembukuan Kasir & Neraca Biaya`;
+      document.getElementById("tbCut").textContent = `Arsip Tahunan · Pembukuan Kasir & Neraca Biaya`;
       const st=document.getElementById("tbStatus");
       if(st){ st.textContent = (arsipYear === "2026" ? "Live YTD" : "Arsip Finansial"); st.className = "pill " + (arsipYear === "2026" ? "prog" : "final"); }
     } else if(view === "est" && (estMonth === 10 || R.c.bulan === "2026-10") && S.oktoberPipeline){
@@ -3227,16 +3227,16 @@ function vTahunan(R) {
     ${chartTahunanSeasonality(months, yr, avg25)}
   </div>
 
-  <!-- Shortcut Card Lemari Arsip Finansial (Hybrid Option 3) -->
+  <!-- Shortcut Card Arsip Tahunan Finansial (Hybrid Option 3) -->
   <div class="card" style="margin-bottom:20px;border:1px solid var(--accent);background:linear-gradient(135deg, color-mix(in srgb,var(--accent) 7%,var(--surface)) 0%, var(--surface) 100%);">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
       <div>
-        <div class="eyebrow" style="color:var(--accent);">🗄️ Arsip Finansial Historis 5 Tahun (2022–2026)</div>
-        <h3 style="margin:4px 0 6px;font-size:18px;">Lemari Arsip &amp; Pembukuan Kasir Multi-Tahun</h3>
+        <div class="eyebrow" style="color:var(--accent);">🗄️ Arsip Tahunan Historis 5 Tahun (2022–2026)</div>
+        <h3 style="margin:4px 0 6px;font-size:18px;">Arsip Tahunan &amp; Pembukuan Kasir Multi-Tahun</h3>
         <p class="tiny muted" style="margin:0;max-width:68ch;line-height:1.55;">Tinjau riwayat pembukuan kasir harian (Cash vs Transfer) dan mutasi beban neraca sejak tahun pertama berdiri (2022) hingga skala saat ini. Data tersimpan rapi per tahun tanpa membebani performa sistem.</p>
       </div>
       <button class="btn pri" onclick="go('arsip')" style="display:inline-flex;align-items:center;gap:8px;font-weight:600;padding:10px 18px;">
-        <span>Buka Lemari Arsip</span>
+        <span>Buka Arsip Tahunan</span>
         <span>➔</span>
       </button>
     </div>
@@ -3484,8 +3484,8 @@ function vArsip(R) {
   return `
   <div class="vhead" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;margin-bottom:18px;">
     <div>
-      <div class="eyebrow">🗄️ Multi-Year Financial Vault · 2022 — 2026</div>
-      <h2>Lemari Arsip Finansial Foxe Studio</h2>
+      <div class="eyebrow">🗄️ Multi-Year Financial Vault · Arsip Tahunan 2022 — 2026</div>
+      <h2>Arsip Tahunan Foxe Studio</h2>
       <p>Pusat arsip pembukuan kasir harian (Cash vs Transfer) dan mutasi beban neraca (COGS &amp; OPEX) selama 5 tahun perjalanan studio.</p>
     </div>
     <div style="display:flex;align-items:center;gap:8px;">
