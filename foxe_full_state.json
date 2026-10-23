@@ -55193,32 +55193,6 @@
       "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
-    },
-    {
-      "id": "or_395",
-      "tanggal": "2026-10-23",
-      "client": "Affan",
-      "paket": "Large Group",
-      "tanggalFoto": "2026-10-23",
-      "cash": 1100000.0,
-      "transfer": 0.0,
-      "total": 1100000.0,
-      "pembayaran": "Lunas",
-      "admin": "AMEL",
-      "fotografer": ""
-    },
-    {
-      "id": "or_396",
-      "tanggal": "2026-10-23",
-      "client": "niken",
-      "paket": "Single",
-      "tanggalFoto": "2026-10-23",
-      "cash": 50000.0,
-      "transfer": 0.0,
-      "total": 50000.0,
-      "pembayaran": "Lunas",
-      "admin": "AMEL",
-      "fotografer": ""
     }
   ],
   "shifts": [
@@ -62996,87 +62970,15 @@
     },
     {
       "id": "ex_nrc_35",
-      "tanggal": "2026-10-17",
-      "bulan": "2026-10",
-      "jenis": "COGS",
-      "kategori": "Cetak Foto & Photo Paper",
-      "deskripsi": "Cetakan",
-      "nilai": 1436000.0
-    },
-    {
-      "id": "ex_nrc_36",
-      "tanggal": "2026-10-17",
-      "bulan": "2026-10",
-      "jenis": "COGS",
-      "kategori": "Properti / Consumable Sesi",
-      "deskripsi": "Batrei Rent",
-      "nilai": 40000.0
-    },
-    {
-      "id": "ex_nrc_37",
-      "tanggal": "2026-10-18",
-      "bulan": "2026-10",
-      "jenis": "COGS",
-      "kategori": "Outsource / Freelancer & Vendor",
-      "deskripsi": "Ruslan",
-      "nilai": 595000.0
-    },
-    {
-      "id": "ex_nrc_38",
-      "tanggal": "2026-10-19",
-      "bulan": "2026-10",
-      "jenis": "OPEX",
-      "kategori": "Marketing / Ads / KOL",
-      "deskripsi": "Ads",
-      "nilai": 500000.0
-    },
-    {
-      "id": "ex_nrc_39",
-      "tanggal": "2026-10-20",
-      "bulan": "2026-10",
-      "jenis": "COGS",
-      "kategori": "Cetak Foto & Photo Paper",
-      "deskripsi": "Cetakan",
-      "nilai": 2954000.0
-    },
-    {
-      "id": "ex_nrc_40",
-      "tanggal": "2026-10-20",
-      "bulan": "2026-10",
-      "jenis": "OPEX",
-      "kategori": "Maintenance Studio & Equipment",
-      "deskripsi": "Cat Limbo",
-      "nilai": 154000.0
-    },
-    {
-      "id": "ex_nrc_41",
-      "tanggal": "2026-10-21",
-      "bulan": "2026-10",
-      "jenis": "COGS",
-      "kategori": "Frame / Album / Packaging",
-      "deskripsi": "Frame",
-      "nilai": 950000.0
-    },
-    {
-      "id": "ex_nrc_42",
-      "tanggal": "2026-10-21",
-      "bulan": "2026-10",
-      "jenis": "OPEX",
-      "kategori": "Maintenance Studio & Equipment",
-      "deskripsi": "Cat Limbo",
-      "nilai": 75000.0
-    },
-    {
-      "id": "ex_nrc_43",
       "tanggal": "2026-10-21",
       "bulan": "2026-10",
       "jenis": "NON-P&L",
       "kategori": "Prive / Owner Draw",
       "deskripsi": "Bon",
-      "nilai": 2606200.0
+      "nilai": 2109200.0
     },
     {
-      "id": "ex_nrc_44",
+      "id": "ex_nrc_36",
       "tanggal": "2026-10-21",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -63085,7 +62987,7 @@
       "nilai": 376625.0
     },
     {
-      "id": "ex_nrc_45",
+      "id": "ex_nrc_37",
       "tanggal": "2026-10-21",
       "bulan": "2026-10",
       "jenis": "Biaya Lainnya",
@@ -67215,7 +67117,7 @@
     {
       "id": "cc_2026-10-23",
       "tanggal": "2026-10-23",
-      "nilai": 1150000.0
+      "nilai": 0.0
     },
     {
       "id": "cc_2026-10-24",
@@ -67688,8 +67590,8 @@
       "tanggal": "2026-10-23",
       "leads": 0.0,
       "dp": 6.0,
-      "sesiFoto": 4.0,
-      "transaksi": 10.0
+      "sesiFoto": 2.0,
+      "transaksi": 8.0
     }
   ],
   "kpi": [
@@ -79432,7 +79334,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 81750000.0
+        "omzet": 80600000.0
       }
     ]
   },
@@ -79780,12 +79682,6 @@
     }
   ],
   "sync": [
-    {
-      "id": "sy_20261023-1014",
-      "mulai": "2026-10-23T10:14:10.035738+00:00",
-      "status": "sukses",
-      "ringkas": "Integrasi berhasil: 632 order Sep, 396 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 113 pos pengeluaran Neraca, 263 pipeline Okt."
-    },
     {
       "id": "sy_20261023-1712",
       "mulai": "2026-10-23T07:26:47.981300+00:00",
@@ -80957,7 +80853,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-23T10:14:10.035738+00:00"
+    "last_sync": "2026-10-23T07:26:47.981300+00:00"
   },
   "neracaDetail": [
     {
@@ -81519,15 +81415,15 @@
   },
   "oktoberPipeline": {
     "bulan": "2026-10",
-    "totalBookings": 263,
+    "totalBookings": 262,
     "potentialOmzet": 86200000.0,
     "totalDp": 24150000.0,
-    "estimateCashIn": 1725000.0,
-    "remainingCashIn": 1725000.0,
+    "estimateCashIn": 3075000.0,
+    "remainingCashIn": 3075000.0,
     "totalPipelineCashIn": 62050000.0,
     "breakdown": {
       "reguler": {
-        "sesi": 165,
+        "sesi": 164,
         "nilai": 50400000.0,
         "dp": 15000000.0
       },
@@ -81544,16 +81440,16 @@
     },
     "statusBreakdown": {
       "done": {
-        "sesi": 239,
-        "nilai": 79275000.0,
-        "dp": 22000000.0,
-        "cashIn": 57425000.0
+        "sesi": 236,
+        "nilai": 77625000.0,
+        "dp": 21700000.0,
+        "cashIn": 56075000.0
       },
       "confirmed": {
-        "sesi": 12,
-        "nilai": 2625000.0,
-        "dp": 950000.0,
-        "cashIn": 1725000.0
+        "sesi": 14,
+        "nilai": 4275000.0,
+        "dp": 1250000.0,
+        "cashIn": 3075000.0
       },
       "reschedule": {
         "sesi": 12,
@@ -87875,12 +87771,12 @@
         "admin": "AL",
         "noHp": "dp 100",
         "manual": false,
-        "color": "BIRU",
-        "statusColor": "biru",
-        "statusSesi": "done",
-        "statusLabel": "Selesai / Hadir",
-        "statusBadge": "crit",
-        "isDone": true,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 825000.0,
@@ -87898,14 +87794,14 @@
         "jmlOrang": 1,
         "harga": 100000.0,
         "admin": "IN",
-        "noHp": "limbo lunas",
+        "noHp": "lunas",
         "manual": false,
-        "color": "BIRU",
-        "statusColor": "biru",
-        "statusSesi": "done",
-        "statusLabel": "Selesai / Hadir",
-        "statusBadge": "crit",
-        "isDone": true,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 0.0,
@@ -87925,12 +87821,12 @@
         "admin": "IN",
         "noHp": "dp 100",
         "manual": false,
-        "color": "BIRU",
-        "statusColor": "biru",
-        "statusSesi": "done",
-        "statusLabel": "Selesai / Hadir",
-        "statusBadge": "crit",
-        "isDone": true,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 525000.0,
@@ -87964,31 +87860,6 @@
       {
         "id": "sc_bk_155",
         "tgl": "2026-10-23",
-        "waktu": "18:00",
-        "studio": "Studio 1",
-        "studioNama": "Studio 1",
-        "nama": "dhea",
-        "paket": "pasfoto",
-        "paketRaw": "pasfoto",
-        "jmlOrang": 1,
-        "harga": 0.0,
-        "admin": "FA",
-        "noHp": "",
-        "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
-        "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 0.0,
-        "kategori": "Studio Reguler"
-      },
-      {
-        "id": "sc_bk_156",
-        "tgl": "2026-10-23",
         "waktu": "18:40",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -88012,7 +87883,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_157",
+        "id": "sc_bk_156",
         "tgl": "2026-10-23",
         "waktu": "19:20",
         "studio": "Studio 1",
@@ -88037,7 +87908,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_158",
+        "id": "sc_bk_157",
         "tgl": "2026-10-23",
         "waktu": "20:00",
         "studio": "Studio 1",
@@ -88062,7 +87933,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_159",
+        "id": "sc_bk_158",
         "tgl": "2026-10-24",
         "waktu": "15:40",
         "studio": "Studio 1",
@@ -88087,7 +87958,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_160",
+        "id": "sc_bk_159",
         "tgl": "2026-10-24",
         "waktu": "20:00",
         "studio": "Studio 1",
@@ -88112,7 +87983,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_161",
+        "id": "sc_bk_160",
         "tgl": "2026-10-25",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -88137,7 +88008,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_162",
+        "id": "sc_bk_161",
         "tgl": "2026-10-26",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -88162,7 +88033,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_163",
+        "id": "sc_bk_162",
         "tgl": "2026-10-28",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -88187,7 +88058,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_164",
+        "id": "sc_bk_163",
         "tgl": "2026-10-29",
         "waktu": "15:20",
         "studio": "Studio 1",
@@ -88212,7 +88083,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_165",
+        "id": "sc_bk_164",
         "tgl": "2026-10-31",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -93601,32 +93472,6 @@
         "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
-      },
-      {
-        "id": "or_395",
-        "tanggal": "2026-10-23",
-        "client": "Affan",
-        "paket": "Large Group",
-        "tanggalFoto": "2026-10-23",
-        "cash": 1100000.0,
-        "transfer": 0.0,
-        "total": 1100000.0,
-        "pembayaran": "Lunas",
-        "admin": "AMEL",
-        "fotografer": ""
-      },
-      {
-        "id": "or_396",
-        "tanggal": "2026-10-23",
-        "client": "niken",
-        "paket": "Single",
-        "tanggalFoto": "2026-10-23",
-        "cash": 50000.0,
-        "transfer": 0.0,
-        "total": 50000.0,
-        "pembayaran": "Lunas",
-        "admin": "AMEL",
-        "fotografer": ""
       }
     ],
     "shifts": [
@@ -94297,7 +94142,7 @@
       {
         "id": "cc_2026-10-23",
         "tanggal": "2026-10-23",
-        "nilai": 1150000.0
+        "nilai": 0.0
       },
       {
         "id": "cc_2026-10-24",
@@ -94522,8 +94367,8 @@
         "tanggal": "2026-10-23",
         "leads": 0.0,
         "dp": 6.0,
-        "sesiFoto": 4.0,
-        "transaksi": 10.0
+        "sesiFoto": 2.0,
+        "transaksi": 8.0
       },
       {
         "id": "ld_24",
@@ -97422,87 +97267,15 @@
         },
         {
           "id": "ex_nrc_35",
-          "tanggal": "2026-10-17",
-          "bulan": "2026-10",
-          "jenis": "COGS",
-          "kategori": "Cetak Foto & Photo Paper",
-          "deskripsi": "Cetakan",
-          "nilai": 1436000.0
-        },
-        {
-          "id": "ex_nrc_36",
-          "tanggal": "2026-10-17",
-          "bulan": "2026-10",
-          "jenis": "COGS",
-          "kategori": "Properti / Consumable Sesi",
-          "deskripsi": "Batrei Rent",
-          "nilai": 40000.0
-        },
-        {
-          "id": "ex_nrc_37",
-          "tanggal": "2026-10-18",
-          "bulan": "2026-10",
-          "jenis": "COGS",
-          "kategori": "Outsource / Freelancer & Vendor",
-          "deskripsi": "Ruslan",
-          "nilai": 595000.0
-        },
-        {
-          "id": "ex_nrc_38",
-          "tanggal": "2026-10-19",
-          "bulan": "2026-10",
-          "jenis": "OPEX",
-          "kategori": "Marketing / Ads / KOL",
-          "deskripsi": "Ads",
-          "nilai": 500000.0
-        },
-        {
-          "id": "ex_nrc_39",
-          "tanggal": "2026-10-20",
-          "bulan": "2026-10",
-          "jenis": "COGS",
-          "kategori": "Cetak Foto & Photo Paper",
-          "deskripsi": "Cetakan",
-          "nilai": 2954000.0
-        },
-        {
-          "id": "ex_nrc_40",
-          "tanggal": "2026-10-20",
-          "bulan": "2026-10",
-          "jenis": "OPEX",
-          "kategori": "Maintenance Studio & Equipment",
-          "deskripsi": "Cat Limbo",
-          "nilai": 154000.0
-        },
-        {
-          "id": "ex_nrc_41",
-          "tanggal": "2026-10-21",
-          "bulan": "2026-10",
-          "jenis": "COGS",
-          "kategori": "Frame / Album / Packaging",
-          "deskripsi": "Frame",
-          "nilai": 950000.0
-        },
-        {
-          "id": "ex_nrc_42",
-          "tanggal": "2026-10-21",
-          "bulan": "2026-10",
-          "jenis": "OPEX",
-          "kategori": "Maintenance Studio & Equipment",
-          "deskripsi": "Cat Limbo",
-          "nilai": 75000.0
-        },
-        {
-          "id": "ex_nrc_43",
           "tanggal": "2026-10-21",
           "bulan": "2026-10",
           "jenis": "NON-P&L",
           "kategori": "Prive / Owner Draw",
           "deskripsi": "Bon",
-          "nilai": 2606200.0
+          "nilai": 2109200.0
         },
         {
-          "id": "ex_nrc_44",
+          "id": "ex_nrc_36",
           "tanggal": "2026-10-21",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -97511,7 +97284,7 @@
           "nilai": 376625.0
         },
         {
-          "id": "ex_nrc_45",
+          "id": "ex_nrc_37",
           "tanggal": "2026-10-21",
           "bulan": "2026-10",
           "jenis": "Biaya Lainnya",
@@ -97989,10 +97762,10 @@
           "tanggal_iso": "2026-10-17",
           "first_of_day": true,
           "masuk": 3705000.0,
-          "keluar": 1436000.0,
-          "balance": 47987000.0,
-          "ket_masuk": "Transfer",
-          "ket_keluar": "Cetakan"
+          "keluar": 0.0,
+          "balance": 49423000.0,
+          "ket_masuk": "",
+          "ket_keluar": ""
         },
         {
           "id": "det_nrc_44",
@@ -98000,10 +97773,10 @@
           "tanggal_iso": "2026-10-17",
           "first_of_day": false,
           "masuk": 2940000.0,
-          "keluar": 40000.0,
-          "balance": 50887000.0,
-          "ket_masuk": "Cash",
-          "ket_keluar": "Batrei Rent"
+          "keluar": 0.0,
+          "balance": 52363000.0,
+          "ket_masuk": "",
+          "ket_keluar": ""
         },
         {
           "id": "det_nrc_45",
@@ -98011,10 +97784,10 @@
           "tanggal_iso": "2026-10-18",
           "first_of_day": true,
           "masuk": 775000.0,
-          "keluar": 595000.0,
-          "balance": 51067000.0,
-          "ket_masuk": "Transfer",
-          "ket_keluar": "Ruslan"
+          "keluar": 0.0,
+          "balance": 53138000.0,
+          "ket_masuk": "",
+          "ket_keluar": ""
         },
         {
           "id": "det_nrc_46",
@@ -98023,15 +97796,15 @@
           "first_of_day": false,
           "masuk": 1950000.0,
           "keluar": 0.0,
-          "balance": 53017000.0,
+          "balance": 55088000.0,
           "ket_masuk": "",
           "ket_keluar": ""
         }
       ],
       "summary": {
         "total_masuk": 67980000.0,
-        "total_keluar": 14963000.0,
-        "ending_balance": 53017000.0,
+        "total_keluar": 12892000.0,
+        "ending_balance": 55088000.0,
         "total_rows": 46
       },
       "rosterGaji": [
@@ -158787,12 +158560,12 @@
         "admin": "AL",
         "noHp": "dp 100",
         "manual": false,
-        "color": "BIRU",
-        "statusColor": "biru",
-        "statusSesi": "done",
-        "statusLabel": "Selesai / Hadir",
-        "statusBadge": "crit",
-        "isDone": true,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 825000.0,
@@ -158810,14 +158583,14 @@
         "jmlOrang": 1,
         "harga": 100000.0,
         "admin": "IN",
-        "noHp": "limbo lunas",
+        "noHp": "lunas",
         "manual": false,
-        "color": "BIRU",
-        "statusColor": "biru",
-        "statusSesi": "done",
-        "statusLabel": "Selesai / Hadir",
-        "statusBadge": "crit",
-        "isDone": true,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 0.0,
@@ -158837,12 +158610,12 @@
         "admin": "IN",
         "noHp": "dp 100",
         "manual": false,
-        "color": "BIRU",
-        "statusColor": "biru",
-        "statusSesi": "done",
-        "statusLabel": "Selesai / Hadir",
-        "statusBadge": "crit",
-        "isDone": true,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 525000.0,
@@ -158876,31 +158649,6 @@
       {
         "id": "sc_bk_155",
         "tgl": "2026-10-23",
-        "waktu": "18:00",
-        "studio": "Studio 1",
-        "studioNama": "Studio 1",
-        "nama": "dhea",
-        "paket": "pasfoto",
-        "paketRaw": "pasfoto",
-        "jmlOrang": 1,
-        "harga": 0.0,
-        "admin": "FA",
-        "noHp": "",
-        "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
-        "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 0.0,
-        "kategori": "Studio Reguler"
-      },
-      {
-        "id": "sc_bk_156",
-        "tgl": "2026-10-23",
         "waktu": "18:40",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -158924,7 +158672,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_157",
+        "id": "sc_bk_156",
         "tgl": "2026-10-23",
         "waktu": "19:20",
         "studio": "Studio 1",
@@ -158949,7 +158697,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_158",
+        "id": "sc_bk_157",
         "tgl": "2026-10-23",
         "waktu": "20:00",
         "studio": "Studio 1",
@@ -158974,7 +158722,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_159",
+        "id": "sc_bk_158",
         "tgl": "2026-10-24",
         "waktu": "15:40",
         "studio": "Studio 1",
@@ -158999,7 +158747,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_160",
+        "id": "sc_bk_159",
         "tgl": "2026-10-24",
         "waktu": "20:00",
         "studio": "Studio 1",
@@ -159024,7 +158772,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_161",
+        "id": "sc_bk_160",
         "tgl": "2026-10-25",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -159049,7 +158797,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_162",
+        "id": "sc_bk_161",
         "tgl": "2026-10-26",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -159074,7 +158822,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_163",
+        "id": "sc_bk_162",
         "tgl": "2026-10-28",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -159099,7 +158847,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_164",
+        "id": "sc_bk_163",
         "tgl": "2026-10-29",
         "waktu": "15:20",
         "studio": "Studio 1",
@@ -159124,7 +158872,7 @@
         "kategori": "Studio Reguler"
       },
       {
-        "id": "sc_bk_165",
+        "id": "sc_bk_164",
         "tgl": "2026-10-31",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -159910,7 +159658,9 @@
                 "kategori": "Gaji Admin & Fotografer",
                 "nilai": 4842315.0
               }
-            ]
+            ],
+            "ads": 300000,
+            "adsRatio": 0.76
           },
           {
             "month": 2,
@@ -160545,7 +160295,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 20000.0
               }
-            ]
+            ],
+            "ads": 300000,
+            "adsRatio": 0.64
           },
           {
             "month": 3,
@@ -161436,7 +161188,9 @@
                 "kategori": "Amal & Sosial",
                 "nilai": 1316235.0
               }
-            ]
+            ],
+            "ads": 500000,
+            "adsRatio": 0.57
           },
           {
             "month": 4,
@@ -162071,7 +161825,9 @@
                 "kategori": "Office & Cleaning Supplies",
                 "nilai": 50000.0
               }
-            ]
+            ],
+            "ads": 513000,
+            "adsRatio": 1.61
           },
           {
             "month": 5,
@@ -162746,7 +162502,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 1044500.0
               }
-            ]
+            ],
+            "ads": 513000,
+            "adsRatio": 0.8
           },
           {
             "month": 6,
@@ -163597,7 +163355,9 @@
                 "kategori": "Outsource / Freelancer & Vendor",
                 "nilai": 105000.0
               }
-            ]
+            ],
+            "ads": 613000,
+            "adsRatio": 0.71
           },
           {
             "month": 7,
@@ -164320,7 +164080,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 100000.0
               }
-            ]
+            ],
+            "ads": 513000,
+            "adsRatio": 1.38
           },
           {
             "month": 8,
@@ -165011,7 +164773,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 513000,
+            "adsRatio": 1.52
           },
           {
             "month": 9,
@@ -165974,7 +165738,9 @@
                 "kategori": "Amal & Sosial",
                 "nilai": 1738575.0
               }
-            ]
+            ],
+            "ads": 0,
+            "adsRatio": 0.0
           },
           {
             "month": 10,
@@ -166777,7 +166543,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 300000.0
               }
-            ]
+            ],
+            "ads": 206500,
+            "adsRatio": 0.47
           },
           {
             "month": 11,
@@ -167620,7 +167388,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 255550.0
               }
-            ]
+            ],
+            "ads": 206500,
+            "adsRatio": 0.46
           },
           {
             "month": 12,
@@ -168495,9 +168265,13 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 206500,
+            "adsRatio": 0.28
           }
-        ]
+        ],
+        "ads": 4384500,
+        "adsRatio": 0.62
       },
       "2023": {
         "year": "2023",
@@ -169247,7 +169021,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 335875.0
               }
-            ]
+            ],
+            "ads": 513000,
+            "adsRatio": 0.92
           },
           {
             "month": 2,
@@ -169986,7 +169762,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 306500,
+            "adsRatio": 0.48
           },
           {
             "month": 3,
@@ -170789,7 +170567,9 @@
                 "kategori": "Pengiriman & Logistik",
                 "nilai": 15000.0
               }
-            ]
+            ],
+            "ads": 513000,
+            "adsRatio": 0.89
           },
           {
             "month": 4,
@@ -171536,7 +171316,9 @@
                 "kategori": "Listrik & Air",
                 "nilai": 312500.0
               }
-            ]
+            ],
+            "ads": 306500,
+            "adsRatio": 0.53
           },
           {
             "month": 5,
@@ -172315,7 +172097,9 @@
                 "kategori": "Outsource / Freelancer & Vendor",
                 "nilai": 490000.0
               }
-            ]
+            ],
+            "ads": 413000,
+            "adsRatio": 0.68
           },
           {
             "month": 6,
@@ -173222,7 +173006,9 @@
                 "kategori": "Listrik & Air",
                 "nilai": 347750.0
               }
-            ]
+            ],
+            "ads": 413000,
+            "adsRatio": 0.54
           },
           {
             "month": 7,
@@ -174113,7 +173899,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 202500,
+            "adsRatio": 0.56
           },
           {
             "month": 8,
@@ -174884,7 +174672,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 1000000.0
               }
-            ]
+            ],
+            "ads": 709000,
+            "adsRatio": 1.35
           },
           {
             "month": 9,
@@ -175719,7 +175509,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 1006500,
+            "adsRatio": 0.99
           },
           {
             "month": 10,
@@ -176490,7 +176282,9 @@
                 "kategori": "Listrik & Air",
                 "nilai": 200000.0
               }
-            ]
+            ],
+            "ads": 506500,
+            "adsRatio": 0.96
           },
           {
             "month": 11,
@@ -177189,7 +176983,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 1013000,
+            "adsRatio": 2.21
           },
           {
             "month": 12,
@@ -178120,9 +177916,13 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 1500000.0
               }
-            ]
+            ],
+            "ads": 1002500,
+            "adsRatio": 1.25
           }
-        ]
+        ],
+        "ads": 6905000,
+        "adsRatio": 0.93
       },
       "2024": {
         "year": "2024",
@@ -178880,7 +178680,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 1500000.0
               }
-            ]
+            ],
+            "ads": 1519500,
+            "adsRatio": 3.87
           },
           {
             "month": 2,
@@ -179323,7 +179125,9 @@
                 "kategori": "Office & Cleaning Supplies",
                 "nilai": 30000.0
               }
-            ]
+            ],
+            "ads": 0,
+            "adsRatio": 0.0
           },
           {
             "month": 3,
@@ -180142,7 +179946,9 @@
                 "kategori": "Maintenance Studio & Equipment",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 0,
+            "adsRatio": 0.0
           },
           {
             "month": 4,
@@ -180945,7 +180751,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 1000000,
+            "adsRatio": 1.19
           },
           {
             "month": 5,
@@ -181732,7 +181540,9 @@
                 "kategori": "Listrik & Air",
                 "nilai": 502500.0
               }
-            ]
+            ],
+            "ads": 500000,
+            "adsRatio": 0.75
           },
           {
             "month": 6,
@@ -182447,7 +182257,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 0,
+            "adsRatio": 0.0
           },
           {
             "month": 7,
@@ -182698,7 +182510,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 0,
+            "adsRatio": 0.0
           },
           {
             "month": 8,
@@ -182989,7 +182803,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 540000,
+            "adsRatio": 0.7
           },
           {
             "month": 9,
@@ -183568,7 +183384,9 @@
                 "kategori": "Pengiriman & Logistik",
                 "nilai": 20000.0
               }
-            ]
+            ],
+            "ads": 1350000,
+            "adsRatio": 1.12
           },
           {
             "month": 10,
@@ -184355,7 +184173,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 1500000,
+            "adsRatio": 1.83
           },
           {
             "month": 11,
@@ -185086,7 +184906,9 @@
                 "kategori": "Office & Cleaning Supplies",
                 "nilai": 16000.0
               }
-            ]
+            ],
+            "ads": 1500000,
+            "adsRatio": 2.66
           },
           {
             "month": 12,
@@ -185897,9 +185719,13 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 450000.0
               }
-            ]
+            ],
+            "ads": 2500000,
+            "adsRatio": 2.63
           }
-        ]
+        ],
+        "ads": 10409500,
+        "adsRatio": 1.13
       },
       "2025": {
         "year": "2025",
@@ -186761,7 +186587,9 @@
                 "kategori": "Listrik & Air",
                 "nilai": 438422.0
               }
-            ]
+            ],
+            "ads": 2000000,
+            "adsRatio": 3.49
           },
           {
             "month": 2,
@@ -187532,7 +187360,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 752500.0
               }
-            ]
+            ],
+            "ads": 2000000,
+            "adsRatio": 2.33
           },
           {
             "month": 3,
@@ -188271,7 +188101,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 1000000,
+            "adsRatio": 1.48
           },
           {
             "month": 4,
@@ -188986,7 +188818,9 @@
                 "kategori": "Listrik & Air",
                 "nilai": 203000.0
               }
-            ]
+            ],
+            "ads": 2000000,
+            "adsRatio": 2.61
           },
           {
             "month": 5,
@@ -189733,7 +189567,9 @@
                 "kategori": "Outsource / Freelancer & Vendor",
                 "nilai": 610000.0
               }
-            ]
+            ],
+            "ads": 1500000,
+            "adsRatio": 1.94
           },
           {
             "month": 6,
@@ -190512,7 +190348,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 2000000,
+            "adsRatio": 1.94
           },
           {
             "month": 7,
@@ -190875,7 +190713,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 1000000,
+            "adsRatio": 2.0
           },
           {
             "month": 8,
@@ -191126,7 +190966,9 @@
                 "kategori": "Marketing / Ads / KOL",
                 "nilai": 500000.0
               }
-            ]
+            ],
+            "ads": 500000,
+            "adsRatio": 0.73
           },
           {
             "month": 9,
@@ -191673,7 +191515,9 @@
                 "kategori": "Listrik & Air",
                 "nilai": 503000.0
               }
-            ]
+            ],
+            "ads": 500000,
+            "adsRatio": 0.33
           },
           {
             "month": 10,
@@ -192292,7 +192136,9 @@
                 "kategori": "OPEX Lainnya",
                 "nilai": 0.0
               }
-            ]
+            ],
+            "ads": 1500000,
+            "adsRatio": 2.58
           },
           {
             "month": 11,
@@ -192927,7 +192773,9 @@
                 "kategori": "Maintenance Studio & Equipment",
                 "nilai": 155000.0
               }
-            ]
+            ],
+            "ads": 2000000,
+            "adsRatio": 3.65
           },
           {
             "month": 12,
@@ -193530,9 +193378,13 @@
                 "kategori": "Cetak Foto & Photo Paper",
                 "nilai": 2519500.0
               }
-            ]
+            ],
+            "ads": 2000000,
+            "adsRatio": 1.93
           }
-        ]
+        ],
+        "ads": 18000000,
+        "adsRatio": 1.89
       },
       "2026": {
         "year": "2026",
@@ -193557,7 +193409,9 @@
             "nettProfit": 22350434,
             "margin": 45.46,
             "daily": [],
-            "expenses": []
+            "expenses": [],
+            "ads": 1500000,
+            "adsRatio": 3.05
           },
           {
             "month": 2,
@@ -193571,7 +193425,9 @@
             "nettProfit": 31579801,
             "margin": 49.91,
             "daily": [],
-            "expenses": []
+            "expenses": [],
+            "ads": 2000000,
+            "adsRatio": 3.16
           },
           {
             "month": 3,
@@ -193585,7 +193441,9 @@
             "nettProfit": 57532022,
             "margin": 61.0,
             "daily": [],
-            "expenses": []
+            "expenses": [],
+            "ads": 2000000,
+            "adsRatio": 2.12
           },
           {
             "month": 4,
@@ -193599,7 +193457,9 @@
             "nettProfit": 28343042,
             "margin": 43.88,
             "daily": [],
-            "expenses": []
+            "expenses": [],
+            "ads": 2000000,
+            "adsRatio": 3.1
           },
           {
             "month": 5,
@@ -193613,7 +193473,9 @@
             "nettProfit": 46859660,
             "margin": 61.17,
             "daily": [],
-            "expenses": []
+            "expenses": [],
+            "ads": 2005000,
+            "adsRatio": 2.62
           },
           {
             "month": 6,
@@ -193627,7 +193489,9 @@
             "nettProfit": 75576375,
             "margin": 61.57,
             "daily": [],
-            "expenses": []
+            "expenses": [],
+            "ads": 2002500,
+            "adsRatio": 1.63
           },
           {
             "month": 7,
@@ -193641,7 +193505,9 @@
             "nettProfit": 37542095,
             "margin": 57.42,
             "daily": [],
-            "expenses": []
+            "expenses": [],
+            "ads": 1500000,
+            "adsRatio": 2.29
           },
           {
             "month": 8,
@@ -193655,7 +193521,9 @@
             "nettProfit": 50437771,
             "margin": 57.39,
             "daily": [],
-            "expenses": []
+            "expenses": [],
+            "ads": 3500000,
+            "adsRatio": 3.98
           },
           {
             "month": 9,
@@ -193669,7 +193537,9 @@
             "nettProfit": 144364291,
             "margin": 76.49,
             "daily": [],
-            "expenses": []
+            "expenses": [],
+            "ads": 4000000,
+            "adsRatio": 2.12
           },
           {
             "month": 10,
@@ -193684,7 +193554,9 @@
             "margin": 83.54,
             "status": "Live MTD",
             "daily": [],
-            "expenses": []
+            "expenses": [],
+            "ads": 1500000,
+            "adsRatio": 1.86
           },
           {
             "month": 11,
@@ -193698,7 +193570,9 @@
             "nettProfit": 0,
             "margin": 0.0,
             "daily": [],
-            "expenses": []
+            "expenses": [],
+            "ads": 0,
+            "adsRatio": 0.0
           },
           {
             "month": 12,
@@ -193712,9 +193586,13 @@
             "nettProfit": 0,
             "margin": 0.0,
             "daily": [],
-            "expenses": []
+            "expenses": [],
+            "ads": 0,
+            "adsRatio": 0.0
           }
-        ]
+        ],
+        "ads": 22007500,
+        "adsRatio": 2.46
       }
     }
   }

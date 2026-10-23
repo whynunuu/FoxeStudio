@@ -3444,6 +3444,160 @@ function chartArsipYoY(months, yr, yearsObj) {
 }
 
 
+
+function chartArsipAds(months, yr, yearsObj) {
+  const W = 880, H2 = 230, PL = 64, PR = 40, PT = 45, PB = 35;
+  const prevYrStr = String(parseInt(yr, 10) - 1);
+  const prevData = (yearsObj && yearsObj[prevYrStr]) || null;
+  const prevMonths = prevData ? (prevData.months || []) : null;
+
+  const ptsCur = [];
+  const ptsPrev = [];
+  const deltas = [];
+
+  months.forEach((m, i) => {
+    const curVal = dnum(m.ads || 0);
+    const prevVal = prevMonths && prevMonths[i] ? dnum(prevMonths[i].ads || 0) : 0;
+    const delta = curVal - prevVal;
+    const pct = prevVal > 0 ? (delta / prevVal * 100) : 0;
+    deltas.push({ delta, pct, curVal, prevVal, month: m.month, name: m.name });
+  });
+
+  const maxVal = Math.max(1000000, ...deltas.flatMap(d => [d.curVal, d.prevVal])) * 1.25;
+  const iw = W - PL - PR, ih = H2 - PT - PB, step = iw / 12;
+  const bottomY = H2 - PB;
+  const yy = v => PT + ih - (v / maxVal) * ih;
+
+  deltas.forEach((d, i) => {
+    const cx = PL + step * i + step / 2;
+    ptsCur.push({ x: cx, y: yy(d.curVal), val: d.curVal, delta: d.delta });
+    ptsPrev.push({ x: cx, y: yy(d.prevVal), val: d.prevVal });
+  });
+
+  let g = "";
+  for (let i = 0; i <= 4; i++) {
+    const v = maxVal * i / 4, y = yy(v);
+    g += `<line x1="${PL}" y1="${y.toFixed(1)}" x2="${W - PR}" y2="${y.toFixed(1)}" stroke="var(--grid)" stroke-width="0.8"/>
+    <text x="${PL - 8}" y="${(y + 3.5).toFixed(1)}" text-anchor="end" font-size="9.5" font-family="JetBrains Mono,monospace" fill="var(--muted)">${v >= 1e6 ? (v / 1e6).toFixed(1) + "jt" : num(v)}</text>`;
+  }
+
+  const buildSplinePath = (pts, tension = 0.22) => {
+    if (!pts || !pts.length) return "";
+    if (pts.length === 1) return `M ${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`;
+    const d = [`M ${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`];
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[Math.max(0, i - 1)];
+      const p1 = pts[i];
+      const p2 = pts[i + 1];
+      const p3 = pts[Math.min(pts.length - 1, i + 2)];
+      const cp1x = p1.x + (p2.x - p0.x) * tension;
+      const cp1y = p1.y + (p2.y - p0.y) * tension;
+      const cp2x = p2.x - (p3.x - p1.x) * tension;
+      const cp2y = p2.y - (p3.y - p1.y) * tension;
+      d.push(`C ${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`);
+    }
+    return d.join(" ");
+  };
+
+  const lineCur = ptsCur.length ? buildSplinePath(ptsCur) : "";
+  const areaCur = ptsCur.length ? `${lineCur} L ${ptsCur[ptsCur.length-1].x.toFixed(1)},${bottomY} L ${ptsCur[0].x.toFixed(1)},${bottomY} Z` : "";
+  const linePrev = ptsPrev.length ? buildSplinePath(ptsPrev) : "";
+
+  let dots = "";
+  let callouts = "";
+
+  deltas.forEach((d, i) => {
+    const cx = PL + step * i + step / 2;
+    const yC = yy(d.curVal);
+    const yP = yy(d.prevVal);
+    const isAct = (d.month === arsipMonth);
+
+    if (isAct) {
+      dots += `<line x1="${cx}" y1="${bottomY}" x2="${cx}" y2="${yC - 20}" stroke="var(--warn)" stroke-width="1.6" stroke-dasharray="3 3"/>`;
+    }
+
+    if (prevMonths) {
+      dots += `<circle cx="${cx.toFixed(1)}" cy="${yP.toFixed(1)}" r="${isAct ? 3.5 : 2.5}" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="2 2"/>`;
+    }
+    dots += `<circle cx="${cx.toFixed(1)}" cy="${yC.toFixed(1)}" r="${isAct ? 5.5 : 3.5}" fill="${isAct ? 'var(--warn)' : 'var(--surface)'}" stroke="var(--warn)" stroke-width="${isAct ? 2.5 : 2}"/>`;
+    dots += `<text x="${cx.toFixed(1)}" y="${bottomY + 16}" text-anchor="middle" font-size="10" font-family="Inter,sans-serif" font-weight="${isAct ? 700 : 500}" fill="${isAct ? 'var(--warn)' : 'var(--muted)'}">${d.name.slice(0,3)}</text>`;
+
+    if (d.curVal > 0) {
+      const bW = 46;
+      const bH = 18;
+      const topY = yC - bH - 6;
+      const valStr = d.curVal >= 1e6 ? `${(d.curVal/1e6).toFixed(1)}jt` : `${(d.curVal/1e3).toFixed(0)}rb`;
+
+      callouts += `
+      <g class="callout-ads" style="pointer-events:none;">
+        <rect x="${(cx - bW / 2).toFixed(1)}" y="${topY.toFixed(1)}" width="${bW}" height="${bH}" rx="4" fill="var(--surface)" stroke="var(--warn)" stroke-width="${isAct ? 1.5 : 0.9}" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.2))"/>
+        <text x="${cx.toFixed(1)}" y="${(topY + 12.5).toFixed(1)}" text-anchor="middle" font-size="8.5" font-family="JetBrains Mono,monospace" font-weight="700" fill="var(--warn)">${valStr}</text>
+      </g>`;
+    }
+  });
+
+  const totCurAds = deltas.reduce((s, d) => s + d.curVal, 0);
+  const totPrevAds = deltas.reduce((s, d) => s + d.prevVal, 0);
+  const adsDelta = totCurAds - totPrevAds;
+  const adsGrowth = totPrevAds > 0 ? (adsDelta / totPrevAds * 100) : 0;
+  
+  const sortedAds = [...deltas].sort((a, b) => b.curVal - a.curVal);
+  const topAdsMonth = sortedAds[0] || { name: "—", curVal: 0 };
+
+  return `
+  <div style="width:100%;overflow-x:auto;">
+    <svg viewBox="0 0 ${W} ${H2}" style="width:100%;height:auto;min-width:720px;display:block;">
+      <defs>
+        <linearGradient id="gradArsipAds" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.28"/>
+          <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.01"/>
+        </linearGradient>
+      </defs>
+      ${g}
+      ${areaCur ? `<path d="${areaCur}" fill="url(#gradArsipAds)"/>` : ''}
+      ${prevMonths && linePrev ? `<path d="${linePrev}" fill="none" stroke="var(--muted)" stroke-width="1.6" stroke-dasharray="4 4" opacity="0.6"/>` : ''}
+      ${lineCur ? `<path d="${lineCur}" fill="none" stroke="var(--warn)" stroke-width="2.2"/>` : ''}
+      ${dots}
+      ${callouts}
+    </svg>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:12px;padding-top:10px;border-top:1px dashed var(--hairline);font-size:12px;">
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <span style="display:inline-flex;align-items:center;gap:6px;">
+        <i style="width:14px;height:3px;background:var(--warn);display:inline-block;border-radius:2px;"></i>
+        <b style="color:var(--warn);">Belanja Ads Tahun ${yr}</b>
+      </span>
+      ${prevMonths ? `
+      <span style="display:inline-flex;align-items:center;gap:6px;">
+        <i style="width:14px;height:2px;border-top:2px dashed var(--muted);display:inline-block;"></i>
+        <span class="muted">Acuan Ads Tahun ${prevYrStr}</span>
+      </span>
+      ` : ''}
+    </div>
+    <span class="tiny muted">Puncak Budget Ads: <b style="color:var(--warn);">${topAdsMonth.name} (${rp(topAdsMonth.curVal)})</b></span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));gap:10px;margin-top:12px;">
+    <div style="background:var(--surface2);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
+      <span class="tiny muted" style="display:block;">Total Belanja Ads Setahun</span>
+      <b class="mono" style="font-size:15px;color:var(--warn);">${rp(totCurAds)}</b>
+      <span class="tiny muted" style="display:block;margin-top:2px;">${prevMonths ? `Delta: ${adsDelta>=0?'+':''}${rp(adsDelta)} (${adsGrowth>=0?'+':''}${adsGrowth.toFixed(1)}% YoY)` : 'Baseline Tahun Pertama'}</span>
+    </div>
+    <div style="background:var(--surface2);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
+      <span class="tiny muted" style="display:block;">Rata-rata Budget Bulanan</span>
+      <b class="mono" style="font-size:15px;color:var(--ink);">${rp(totCurAds / (yr === '2026' ? 10 : 12))}</b>
+      <span class="tiny muted" style="display:block;margin-top:2px;">alokasi marketing rutin</span>
+    </div>
+    <div style="background:var(--surface2);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
+      <span class="tiny muted" style="display:block;">Rasio Biaya Ads vs Omzet (MER)</span>
+      <b class="mono" style="font-size:15px;color:var(--good);">${(totCurAds / (months.reduce((s,m)=>s+dnum(m.omzet),0)||1) * 100).toFixed(2)}%</b>
+      <span class="tiny muted" style="display:block;margin-top:2px;">tingkat efisiensi promosi</span>
+    </div>
+  </div>
+  `;
+}
+
 function vArsip(R) {
   if (!S.multiyearArsip && typeof INITIAL_STATE !== "undefined" && INITIAL_STATE.multiyearArsip) {
     S.multiyearArsip = INITIAL_STATE.multiyearArsip;
@@ -3577,6 +3731,20 @@ function vArsip(R) {
     ${chartArsipYoY(mList, arsipYear, yearsObj)}
   </div>
 
+  <!-- KARTU ANALITIK BUDGETING ADS & MARKETING TAHUNAN -->
+  <div class="card" style="margin-bottom:20px;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:6px;">
+      <div>
+        <div class="eyebrow" style="color:var(--warn);">📢 MARKETING BUDGETING &amp; ADS TRACTION</div>
+        <h3 style="margin:2px 0 0;">Kurva Belanja Ads Bulanan — Tahun ${arsipYear} ${arsipYear === '2022' ? '(Fase Awal)' : `vs ${parseInt(arsipYear,10)-1}`}</h3>
+      </div>
+      <span class="pill warn" style="font-size:11px;background:rgba(245,158,11,0.12);color:var(--warn);border-color:rgba(245,158,11,0.3);">Iklan Berbayar (Meta/Instagram)</span>
+    </div>
+    <p class="tiny muted" style="margin-bottom:14px;">Fluktuasi alokasi dana iklan berbayar (garis amber solid) dari bulan Januari sampai Desember ${arsipYear}, komparasi terhadap tahun sebelumnya, serta rasio efisiensi pemasaran terhadap omzet studio.</p>
+    ${chartArsipAds(mList, arsipYear, yearsObj)}
+  </div>
+
+
   <!-- 12 MAP BULAN INTERAKTIF (.mgrid) -->
   <div style="margin-bottom:20px;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
@@ -3597,6 +3765,7 @@ function vArsip(R) {
             <span>Cash: ${rp(m.cash)}</span>
             <span>Trf: ${rp(m.transfer)}</span>
           </div>
+          <div style="font-size:11px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px;"><span>Ads Iklan:</span><b class="mono" style="color:var(--warn);">${m.ads ? rp(m.ads) : "—"}</b></div>
           <div style="border-top:1px dashed var(--hairline);padding-top:6px;display:flex;justify-content:space-between;align-items:center;font-size:11.5px;">
             <span class="tiny muted">Laba Bersih:</span>
             <b class="mono" style="color:var(--good);">${rp(m.nettProfit)}</b>

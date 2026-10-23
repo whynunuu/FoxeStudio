@@ -724,7 +724,9 @@
               "kategori": "Gaji Admin & Fotografer",
               "nilai": 4842315.0
             }
-          ]
+          ],
+          "ads": 300000,
+          "adsRatio": 0.76
         },
         {
           "month": 2,
@@ -1359,7 +1361,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 20000.0
             }
-          ]
+          ],
+          "ads": 300000,
+          "adsRatio": 0.64
         },
         {
           "month": 3,
@@ -2250,7 +2254,9 @@
               "kategori": "Amal & Sosial",
               "nilai": 1316235.0
             }
-          ]
+          ],
+          "ads": 500000,
+          "adsRatio": 0.57
         },
         {
           "month": 4,
@@ -2885,7 +2891,9 @@
               "kategori": "Office & Cleaning Supplies",
               "nilai": 50000.0
             }
-          ]
+          ],
+          "ads": 513000,
+          "adsRatio": 1.61
         },
         {
           "month": 5,
@@ -3560,7 +3568,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 1044500.0
             }
-          ]
+          ],
+          "ads": 513000,
+          "adsRatio": 0.8
         },
         {
           "month": 6,
@@ -4411,7 +4421,9 @@
               "kategori": "Outsource / Freelancer & Vendor",
               "nilai": 105000.0
             }
-          ]
+          ],
+          "ads": 613000,
+          "adsRatio": 0.71
         },
         {
           "month": 7,
@@ -5134,7 +5146,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 100000.0
             }
-          ]
+          ],
+          "ads": 513000,
+          "adsRatio": 1.38
         },
         {
           "month": 8,
@@ -5825,7 +5839,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 513000,
+          "adsRatio": 1.52
         },
         {
           "month": 9,
@@ -6788,7 +6804,9 @@
               "kategori": "Amal & Sosial",
               "nilai": 1738575.0
             }
-          ]
+          ],
+          "ads": 0,
+          "adsRatio": 0.0
         },
         {
           "month": 10,
@@ -7591,7 +7609,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 300000.0
             }
-          ]
+          ],
+          "ads": 206500,
+          "adsRatio": 0.47
         },
         {
           "month": 11,
@@ -8434,7 +8454,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 255550.0
             }
-          ]
+          ],
+          "ads": 206500,
+          "adsRatio": 0.46
         },
         {
           "month": 12,
@@ -9309,9 +9331,13 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 206500,
+          "adsRatio": 0.28
         }
-      ]
+      ],
+      "ads": 4384500,
+      "adsRatio": 0.62
     },
     "2023": {
       "year": "2023",
@@ -10061,7 +10087,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 335875.0
             }
-          ]
+          ],
+          "ads": 513000,
+          "adsRatio": 0.92
         },
         {
           "month": 2,
@@ -10800,7 +10828,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 306500,
+          "adsRatio": 0.48
         },
         {
           "month": 3,
@@ -11603,7 +11633,9 @@
               "kategori": "Pengiriman & Logistik",
               "nilai": 15000.0
             }
-          ]
+          ],
+          "ads": 513000,
+          "adsRatio": 0.89
         },
         {
           "month": 4,
@@ -12350,7 +12382,9 @@
               "kategori": "Listrik & Air",
               "nilai": 312500.0
             }
-          ]
+          ],
+          "ads": 306500,
+          "adsRatio": 0.53
         },
         {
           "month": 5,
@@ -13129,7 +13163,9 @@
               "kategori": "Outsource / Freelancer & Vendor",
               "nilai": 490000.0
             }
-          ]
+          ],
+          "ads": 413000,
+          "adsRatio": 0.68
         },
         {
           "month": 6,
@@ -14036,7 +14072,9 @@
               "kategori": "Listrik & Air",
               "nilai": 347750.0
             }
-          ]
+          ],
+          "ads": 413000,
+          "adsRatio": 0.54
         },
         {
           "month": 7,
@@ -14927,7 +14965,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 202500,
+          "adsRatio": 0.56
         },
         {
           "month": 8,
@@ -15698,7 +15738,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 1000000.0
             }
-          ]
+          ],
+          "ads": 709000,
+          "adsRatio": 1.35
         },
         {
           "month": 9,
@@ -16533,7 +16575,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 1006500,
+          "adsRatio": 0.99
         },
         {
           "month": 10,
@@ -17304,7 +17348,9 @@
               "kategori": "Listrik & Air",
               "nilai": 200000.0
             }
-          ]
+          ],
+          "ads": 506500,
+          "adsRatio": 0.96
         },
         {
           "month": 11,
@@ -18003,7 +18049,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 1013000,
+          "adsRatio": 2.21
         },
         {
           "month": 12,
@@ -18934,9 +18982,13 @@
               "kategori": "OPEX Lainnya",
               "nilai": 1500000.0
             }
-          ]
+          ],
+          "ads": 1002500,
+          "adsRatio": 1.25
         }
-      ]
+      ],
+      "ads": 6905000,
+      "adsRatio": 0.93
     },
     "2024": {
       "year": "2024",
@@ -19694,7 +19746,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 1500000.0
             }
-          ]
+          ],
+          "ads": 1519500,
+          "adsRatio": 3.87
         },
         {
           "month": 2,
@@ -20137,7 +20191,9 @@
               "kategori": "Office & Cleaning Supplies",
               "nilai": 30000.0
             }
-          ]
+          ],
+          "ads": 0,
+          "adsRatio": 0.0
         },
         {
           "month": 3,
@@ -20956,7 +21012,9 @@
               "kategori": "Maintenance Studio & Equipment",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 0,
+          "adsRatio": 0.0
         },
         {
           "month": 4,
@@ -21759,7 +21817,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 1000000,
+          "adsRatio": 1.19
         },
         {
           "month": 5,
@@ -22546,7 +22606,9 @@
               "kategori": "Listrik & Air",
               "nilai": 502500.0
             }
-          ]
+          ],
+          "ads": 500000,
+          "adsRatio": 0.75
         },
         {
           "month": 6,
@@ -23261,7 +23323,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 0,
+          "adsRatio": 0.0
         },
         {
           "month": 7,
@@ -23512,7 +23576,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 0,
+          "adsRatio": 0.0
         },
         {
           "month": 8,
@@ -23803,7 +23869,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 540000,
+          "adsRatio": 0.7
         },
         {
           "month": 9,
@@ -24382,7 +24450,9 @@
               "kategori": "Pengiriman & Logistik",
               "nilai": 20000.0
             }
-          ]
+          ],
+          "ads": 1350000,
+          "adsRatio": 1.12
         },
         {
           "month": 10,
@@ -25169,7 +25239,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 1500000,
+          "adsRatio": 1.83
         },
         {
           "month": 11,
@@ -25900,7 +25972,9 @@
               "kategori": "Office & Cleaning Supplies",
               "nilai": 16000.0
             }
-          ]
+          ],
+          "ads": 1500000,
+          "adsRatio": 2.66
         },
         {
           "month": 12,
@@ -26711,9 +26785,13 @@
               "kategori": "OPEX Lainnya",
               "nilai": 450000.0
             }
-          ]
+          ],
+          "ads": 2500000,
+          "adsRatio": 2.63
         }
-      ]
+      ],
+      "ads": 10409500,
+      "adsRatio": 1.13
     },
     "2025": {
       "year": "2025",
@@ -27575,7 +27653,9 @@
               "kategori": "Listrik & Air",
               "nilai": 438422.0
             }
-          ]
+          ],
+          "ads": 2000000,
+          "adsRatio": 3.49
         },
         {
           "month": 2,
@@ -28346,7 +28426,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 752500.0
             }
-          ]
+          ],
+          "ads": 2000000,
+          "adsRatio": 2.33
         },
         {
           "month": 3,
@@ -29085,7 +29167,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 1000000,
+          "adsRatio": 1.48
         },
         {
           "month": 4,
@@ -29800,7 +29884,9 @@
               "kategori": "Listrik & Air",
               "nilai": 203000.0
             }
-          ]
+          ],
+          "ads": 2000000,
+          "adsRatio": 2.61
         },
         {
           "month": 5,
@@ -30547,7 +30633,9 @@
               "kategori": "Outsource / Freelancer & Vendor",
               "nilai": 610000.0
             }
-          ]
+          ],
+          "ads": 1500000,
+          "adsRatio": 1.94
         },
         {
           "month": 6,
@@ -31326,7 +31414,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 2000000,
+          "adsRatio": 1.94
         },
         {
           "month": 7,
@@ -31689,7 +31779,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 1000000,
+          "adsRatio": 2.0
         },
         {
           "month": 8,
@@ -31940,7 +32032,9 @@
               "kategori": "Marketing / Ads / KOL",
               "nilai": 500000.0
             }
-          ]
+          ],
+          "ads": 500000,
+          "adsRatio": 0.73
         },
         {
           "month": 9,
@@ -32487,7 +32581,9 @@
               "kategori": "Listrik & Air",
               "nilai": 503000.0
             }
-          ]
+          ],
+          "ads": 500000,
+          "adsRatio": 0.33
         },
         {
           "month": 10,
@@ -33106,7 +33202,9 @@
               "kategori": "OPEX Lainnya",
               "nilai": 0.0
             }
-          ]
+          ],
+          "ads": 1500000,
+          "adsRatio": 2.58
         },
         {
           "month": 11,
@@ -33741,7 +33839,9 @@
               "kategori": "Maintenance Studio & Equipment",
               "nilai": 155000.0
             }
-          ]
+          ],
+          "ads": 2000000,
+          "adsRatio": 3.65
         },
         {
           "month": 12,
@@ -34344,9 +34444,13 @@
               "kategori": "Cetak Foto & Photo Paper",
               "nilai": 2519500.0
             }
-          ]
+          ],
+          "ads": 2000000,
+          "adsRatio": 1.93
         }
-      ]
+      ],
+      "ads": 18000000,
+      "adsRatio": 1.89
     },
     "2026": {
       "year": "2026",
@@ -34371,7 +34475,9 @@
           "nettProfit": 22350434,
           "margin": 45.46,
           "daily": [],
-          "expenses": []
+          "expenses": [],
+          "ads": 1500000,
+          "adsRatio": 3.05
         },
         {
           "month": 2,
@@ -34385,7 +34491,9 @@
           "nettProfit": 31579801,
           "margin": 49.91,
           "daily": [],
-          "expenses": []
+          "expenses": [],
+          "ads": 2000000,
+          "adsRatio": 3.16
         },
         {
           "month": 3,
@@ -34399,7 +34507,9 @@
           "nettProfit": 57532022,
           "margin": 61.0,
           "daily": [],
-          "expenses": []
+          "expenses": [],
+          "ads": 2000000,
+          "adsRatio": 2.12
         },
         {
           "month": 4,
@@ -34413,7 +34523,9 @@
           "nettProfit": 28343042,
           "margin": 43.88,
           "daily": [],
-          "expenses": []
+          "expenses": [],
+          "ads": 2000000,
+          "adsRatio": 3.1
         },
         {
           "month": 5,
@@ -34427,7 +34539,9 @@
           "nettProfit": 46859660,
           "margin": 61.17,
           "daily": [],
-          "expenses": []
+          "expenses": [],
+          "ads": 2005000,
+          "adsRatio": 2.62
         },
         {
           "month": 6,
@@ -34441,7 +34555,9 @@
           "nettProfit": 75576375,
           "margin": 61.57,
           "daily": [],
-          "expenses": []
+          "expenses": [],
+          "ads": 2002500,
+          "adsRatio": 1.63
         },
         {
           "month": 7,
@@ -34455,7 +34571,9 @@
           "nettProfit": 37542095,
           "margin": 57.42,
           "daily": [],
-          "expenses": []
+          "expenses": [],
+          "ads": 1500000,
+          "adsRatio": 2.29
         },
         {
           "month": 8,
@@ -34469,7 +34587,9 @@
           "nettProfit": 50437771,
           "margin": 57.39,
           "daily": [],
-          "expenses": []
+          "expenses": [],
+          "ads": 3500000,
+          "adsRatio": 3.98
         },
         {
           "month": 9,
@@ -34483,7 +34603,9 @@
           "nettProfit": 144364291,
           "margin": 76.49,
           "daily": [],
-          "expenses": []
+          "expenses": [],
+          "ads": 4000000,
+          "adsRatio": 2.12
         },
         {
           "month": 10,
@@ -34498,7 +34620,9 @@
           "margin": 83.54,
           "status": "Live MTD",
           "daily": [],
-          "expenses": []
+          "expenses": [],
+          "ads": 1500000,
+          "adsRatio": 1.86
         },
         {
           "month": 11,
@@ -34512,7 +34636,9 @@
           "nettProfit": 0,
           "margin": 0.0,
           "daily": [],
-          "expenses": []
+          "expenses": [],
+          "ads": 0,
+          "adsRatio": 0.0
         },
         {
           "month": 12,
@@ -34526,9 +34652,13 @@
           "nettProfit": 0,
           "margin": 0.0,
           "daily": [],
-          "expenses": []
+          "expenses": [],
+          "ads": 0,
+          "adsRatio": 0.0
         }
-      ]
+      ],
+      "ads": 22007500,
+      "adsRatio": 2.46
     }
   }
 }
