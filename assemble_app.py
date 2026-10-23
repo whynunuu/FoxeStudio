@@ -2600,11 +2600,21 @@ function vTahunan(R) {
     };
   });
 
-  // Metrik Tahunan Komprehensif (Jan s.d. Sep terverifikasi)
+  // Metrik Tahunan Komprehensif (Jan s.d. Sep terverifikasi) & YTD Aktual
   const realMonths = months.filter(m => m.no <= 9 && m.omzet26 != null);
-  const totYtdOmzet = realMonths.reduce((s, m) => s + (m.omzet26 || 0), 0);
+  const totYtdClosed = realMonths.reduce((s, m) => s + (m.omzet26 || 0), 0);
   const countVerified = realMonths.length;
   const sep25 = months.find(m => m.no === 9)?.omzet25 || 151036150;
+
+  // Realisasi live kasir Oktober (Actual MTD s.d. cut-off hari ini)
+  const oktLiveOrders = (S.oktoberLogOrder && S.oktoberLogOrder.orders) || (S.orders || []).filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
+  const oktLiveOmzet = oktLiveOrders.reduce((s, o) => s + dnum(o.total), 0);
+  const totYtdActual = totYtdClosed + oktLiveOmzet;
+  const totActualOrders = 3739 + oktLiveOrders.length;
+
+  // Acuan 2025 untuk 10 Bulan (Jan s.d. Okt 2025)
+  const tot25Actual = months.filter(m => m.no <= 10).reduce((s, m) => s + (m.omzet25 || 0), 0);
+  const yoyActual = tot25Actual ? ((totYtdActual - tot25Actual) / tot25Actual) : null;
 
   // Urutan 12 Kotak: Pinned Bulan Aktif di paling pertama, lalu Januari, Februari, dst.
   const activeMonthObj = months.find(m => m.isCurrent);
@@ -2619,9 +2629,10 @@ function vTahunan(R) {
   <!-- Top KPI Cards -->
   <div class="stats" style="margin-bottom:16px">
     <div class="stat">
-      <span class="k">Omzet Terverifikasi YTD (Jan–Sep ${yr})</span>
-      <span class="v" style="color:var(--accent);">${rp(totYtdOmzet)}</span>
-      <span class="m">9 Bulan Real · 3.739 Order Kasir &amp; Neraca</span>
+      <span class="k">Omzet Aktual YTD (Jan–Okt ${yr} Live)</span>
+      <span class="v" style="color:var(--accent);">${rp(totYtdActual)}</span>
+      <span class="m">10 Bulan Berjalan · ${num(totActualOrders)} Order Kasir &amp; Neraca</span>
+      <span class="tiny muted" style="display:block;margin-top:2px;">(Jan–Sep Final: ${rp(totYtdClosed)} + Okt Live: ${rp(oktLiveOmzet)})</span>
     </div>
     <div class="stat">
       <span class="k">Realisasi ${BULAN[+R.c.bulan.split("-")[1]-1]} ${yr}</span>
@@ -2645,8 +2656,8 @@ function vTahunan(R) {
     </div>
     <div class="stat">
       <span class="k">Status Rekonsiliasi Tahunan</span>
-      <span class="v sm" style="font-size:21px;color:var(--good);">${countVerified} / 12 Terverifikasi</span>
-      <span class="m">Jan–Sep Cocok 100% · Okt Pipeline</span>
+      <span class="v sm" style="font-size:21px;color:var(--good);">10 / 12 Bulan Aktif</span>
+      <span class="m">9 Bulan Rekap Final + 1 Bulan Live</span>
     </div>
   </div>
 
@@ -2850,19 +2861,19 @@ function vTahunan(R) {
           </tr>
         `).join("")}
         <tr class="total">
-          <td colspan="2">TOTAL YTD TERVERIFIKASI (JAN–SEP ${yr})</td>
-          <td class="n mono">${rp(tot25)}</td>
-          <td class="n mono" style="font-weight:700;color:var(--accent);">${rp(totYtdOmzet)}</td>
-          <td class="n mono" style="color:var(--good);">${tot25 ? "+" + pct((totYtdOmzet - tot25) / tot25) : "—"}</td>
+          <td colspan="2">TOTAL YTD AKTUAL (JAN–OKT ${yr} LIVE)</td>
+          <td class="n mono">${rp(tot25Actual)}</td>
+          <td class="n mono" style="font-weight:700;color:var(--accent);">${rp(totYtdActual)}</td>
+          <td class="n mono" style="color:var(--good);">${yoyActual != null ? (yoyActual >= 0 ? "+" : "") + pct(yoyActual) : "—"}</td>
           <td class="n mono">
             <div style="display:flex;align-items:center;gap:7px;justify-content:flex-end;">
               <div style="width:44px;height:5px;background:var(--surface3);border-radius:3px;overflow:hidden;border:1px solid rgba(0,242,254,0.25);">
-                <i style="display:block;height:100%;width:45%;background:linear-gradient(90deg,#00f2fe 0%,#10b981 50%,#a3e635 100%);"></i>
+                <i style="display:block;height:100%;width:55%;background:linear-gradient(90deg,#00f2fe 0%,#10b981 50%,#a3e635 100%);box-shadow:0 0 6px rgba(0,242,254,0.4);"></i>
               </div>
               <b>1.00×</b> avg
             </div>
           </td>
-          <td colspan="3" class="tiny">✅ Januari–September ${yr} telah 100% terverifikasi riil dari Log Order &amp; Neraca (3.739 order). Oktober ${yr} berjalan (Live + Pipeline), November–Desember belum berjalan.</td>
+          <td colspan="3" class="tiny">✅ Realisasi riil aktual Januari s.d. Oktober ${yr} s.d. cut-off hari ini (${num(totActualOrders)} order kasir &amp; neraca terverifikasi).</td>
         </tr>
       </tbody>
     </table></div>
