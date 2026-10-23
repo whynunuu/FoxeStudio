@@ -1236,7 +1236,8 @@ function saveLocal() {
 }
 
 let activeMonth = "2026-10";
-let db=null,downloads=null,room=null,view="tahunan",estMonth=10,adsFilter="ALL",adsQ="";
+let db=null,downloads=null,room=null,view="tahunan",estMonth=10,adsFilter="ALL",adsQ="",arsipYear="2026",arsipMonth=10;
+window.go = function(v){ view=v; render(); window.scrollTo({top:0,behavior:"smooth"}); };
 
 function nkey(s){
   return String(s||"").normalize("NFKD").replace(/[̀-ͯ]/g,"")
@@ -1927,6 +1928,7 @@ function barlist(items,colorVar,valFmt){
 /* ============================ views ============================ */
 const VIEWS=[
   {id:"tahunan",grp:"Ringkasan",label:"Laporan Tahunan",icon:"📅"},
+  {id:"arsip",grp:"Ringkasan",label:"Lemari Arsip",icon:"🗄️"},
   {id:"dash",grp:"Ringkasan",label:"Dashboard (Bulanan)",icon:"📊"},
   {id:"omzet",grp:"Ringkasan",label:"Omzet Harian",icon:"📈"},
   {id:"target",grp:"Ringkasan",label:"Target & Skenario",icon:"🎯"},
@@ -1946,7 +1948,12 @@ const VIEWS=[
 function render(){
   try {
     const R=compute();
-    if(view === "est" && (estMonth === 10 || R.c.bulan === "2026-10") && S.oktoberPipeline){
+    if(view === "arsip"){
+      document.getElementById("tbPeriod").textContent = `Tahun ${arsipYear}`;
+      document.getElementById("tbCut").textContent = `Lemari Arsip Finansial · Pembukuan Kasir & Neraca Biaya`;
+      const st=document.getElementById("tbStatus");
+      if(st){ st.textContent = (arsipYear === "2026" ? "Live YTD" : "Arsip Finansial"); st.className = "pill " + (arsipYear === "2026" ? "prog" : "final"); }
+    } else if(view === "est" && (estMonth === 10 || R.c.bulan === "2026-10") && S.oktoberPipeline){
       document.getElementById("tbPeriod").textContent = "Oktober 2026";
       document.getElementById("tbCut").textContent = `Pipeline ${S.oktoberPipeline.totalBookings} Booking · Reguler & Wisuda UMP`;
       const st=document.getElementById("tbStatus");
@@ -2020,7 +2027,7 @@ function render(){
       });
 
     const viewFn = ({
-      dash:vDash,tahunan:vTahunan,omzet:vOmzet,target:vTarget,trx:vTrx,biaya:vBiaya,
+      dash:vDash,tahunan:vTahunan,arsip:vArsip,omzet:vOmzet,target:vTarget,trx:vTrx,biaya:vBiaya,
       shift:vShift,lead:vLead,kpi:vKpi,gaji:vGaji,crew:vCrew,yoy:vYoy,ads:vAds,est:vEst,set:vSet})[view] || vTahunan;
 
     document.getElementById("views").innerHTML=`<section class="view">${viewFn(R)}</section>`;
@@ -3217,6 +3224,392 @@ function vTahunan(R) {
   <div class="card" style="margin-bottom:20px">
     <h3>Siklus Seasonality &amp; Tren Omzet 12 Bulan (${yr-1} vs ${yr})</h3>
     ${chartTahunanSeasonality(months, yr, avg25)}
+  </div>
+
+  <!-- Shortcut Card Lemari Arsip Finansial (Hybrid Option 3) -->
+  <div class="card" style="margin-bottom:20px;border:1px solid var(--accent);background:linear-gradient(135deg, color-mix(in srgb,var(--accent) 7%,var(--surface)) 0%, var(--surface) 100%);">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <div>
+        <div class="eyebrow" style="color:var(--accent);">🗄️ Arsip Finansial Historis 5 Tahun (2022–2026)</div>
+        <h3 style="margin:4px 0 6px;font-size:18px;">Lemari Arsip &amp; Pembukuan Kasir Multi-Tahun</h3>
+        <p class="tiny muted" style="margin:0;max-width:68ch;line-height:1.55;">Tinjau riwayat pembukuan kasir harian (Cash vs Transfer) dan mutasi beban neraca sejak tahun pertama berdiri (2022) hingga skala saat ini. Data tersimpan rapi per tahun tanpa membebani performa sistem.</p>
+      </div>
+      <button class="btn pri" onclick="go('arsip')" style="display:inline-flex;align-items:center;gap:8px;font-weight:600;padding:10px 18px;">
+        <span>Buka Lemari Arsip</span>
+        <span>➔</span>
+      </button>
+    </div>
+  </div>
+  `;
+}
+
+
+/* ============================ LEMARI ARSIP (2022 - 2026) ============================ */
+window.exportArsipCSV = function(yr) {
+  const cur = (S.multiyearArsip && S.multiyearArsip.years && S.multiyearArsip.years[yr]);
+  if (!cur || !cur.months) {
+    if (typeof showToast === "function") showToast("Data arsip belum tersedia untuk diexport", "warn");
+    return;
+  }
+  let rows = ["Bulan,Nama,Omzet,Cash,Transfer,COGS,OPEX,Total Beban,Laba Bersih,Nett Margin (%)"];
+  cur.months.forEach(m => {
+    rows.push(`${m.month},"${m.name}",${m.omzet || 0},${m.cash || 0},${m.transfer || 0},${m.cogs || 0},${m.opex || 0},${m.outcome || 0},${m.nettProfit || 0},${m.margin || 0}%`);
+  });
+  let csv = rows.join(String.fromCharCode(10));
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `FoxeStudio_Arsip_Keuangan_${yr}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  if (typeof showToast === "function") showToast(`Rekapitulasi Tahun ${yr} berhasil diexport ke CSV.`, "ok");
+};
+
+function chartArsipYear(months, yr) {
+  const W = 860, H2 = 250, PL = 64, PR = 40, PT = 35, PB = 35;
+  const maxO = Math.max(1, ...months.map(m => Math.max(dnum(m.omzet), dnum(m.outcome)))) * 1.15;
+  const iw = W - PL - PR, ih = H2 - PT - PB, step = iw / 12;
+  const bottomY = H2 - PB;
+  const yy = v => PT + ih - (v / maxO) * ih;
+
+  const ptsOmzet = [];
+  const ptsOutflow = [];
+
+  months.forEach((m, i) => {
+    const cx = PL + step * i + step / 2;
+    ptsOmzet.push({x: cx, y: yy(m.omzet || 0)});
+    ptsOutflow.push({x: cx, y: yy(m.outcome || 0)});
+  });
+
+  let g = "";
+  for (let i = 0; i <= 4; i++) {
+    const v = maxO * i / 4, y = yy(v);
+    g += `<line x1="${PL}" y1="${y.toFixed(1)}" x2="${W - PR}" y2="${y.toFixed(1)}" stroke="var(--grid)" stroke-width="0.8"/>
+    <text x="${PL - 8}" y="${(y + 3.5).toFixed(1)}" text-anchor="end" font-size="9.5" font-family="JetBrains Mono,monospace" fill="var(--muted)">${v >= 1e6 ? (v / 1e6).toFixed(0) + "jt" : num(v)}</text>`;
+  }
+
+  const buildSplinePath = (pts, tension = 0.22) => {
+    if (!pts || !pts.length) return "";
+    if (pts.length === 1) return `M ${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`;
+    const d = [`M ${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`];
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[Math.max(0, i - 1)];
+      const p1 = pts[i];
+      const p2 = pts[i + 1];
+      const p3 = pts[Math.min(pts.length - 1, i + 2)];
+      const cp1x = p1.x + (p2.x - p0.x) * tension;
+      const cp1y = p1.y + (p2.y - p0.y) * tension;
+      const cp2x = p2.x - (p3.x - p1.x) * tension;
+      const cp2y = p2.y - (p3.y - p1.y) * tension;
+      d.push(`C ${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`);
+    }
+    return d.join(" ");
+  };
+
+  const lineOmzet = buildSplinePath(ptsOmzet);
+  const areaOmzet = `${lineOmzet} L ${ptsOmzet[ptsOmzet.length-1].x.toFixed(1)},${bottomY} L ${ptsOmzet[0].x.toFixed(1)},${bottomY} Z`;
+
+  const lineOut = buildSplinePath(ptsOutflow);
+  const areaOut = `${lineOut} L ${ptsOutflow[ptsOutflow.length-1].x.toFixed(1)},${bottomY} L ${ptsOutflow[0].x.toFixed(1)},${bottomY} Z`;
+
+  let dots = "";
+  months.forEach((m, i) => {
+    const cx = PL + step * i + step / 2;
+    const yo = yy(m.omzet || 0);
+    const yb = yy(m.outcome || 0);
+    const isAct = (m.month === arsipMonth);
+    dots += `
+    <line x1="${cx}" y1="${bottomY}" x2="${cx}" y2="${Math.min(yo, yb)}" stroke="${isAct?'var(--accent)':'var(--grid)'}" stroke-dasharray="${isAct?'none':'2 3'}" stroke-width="${isAct?1.5:0.8}" opacity="${isAct?0.9:0.4}"/>
+    <circle cx="${cx}" cy="${yo}" r="${isAct?5:3.5}" fill="var(--surface)" stroke="var(--accent)" stroke-width="${isAct?2.5:1.8}"/>
+    <circle cx="${cx}" cy="${yb}" r="${isAct?4.5:3}" fill="var(--surface)" stroke="var(--crit)" stroke-width="${isAct?2:1.5}"/>
+    <text x="${cx}" y="${bottomY + 16}" text-anchor="middle" font-size="10" font-family="Inter,sans-serif" font-weight="${isAct?700:500}" fill="${isAct?'var(--accent)':'var(--muted)'}">${m.name.slice(0,3)}</text>
+    `;
+  });
+
+  return `
+  <div style="width:100%;overflow-x:auto;">
+    <svg viewBox="0 0 ${W} ${H2}" style="width:100%;height:auto;min-width:680px;display:block;">
+      <defs>
+        <linearGradient id="gradArsipOmzet" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.32"/>
+          <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.01"/>
+        </linearGradient>
+        <linearGradient id="gradArsipOut" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--crit)" stop-opacity="0.22"/>
+          <stop offset="100%" stop-color="var(--crit)" stop-opacity="0.01"/>
+        </linearGradient>
+      </defs>
+      ${g}
+      <path d="${areaOmzet}" fill="url(#gradArsipOmzet)"/>
+      <path d="${lineOmzet}" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+      <path d="${areaOut}" fill="url(#gradArsipOut)"/>
+      <path d="${lineOut}" fill="none" stroke="var(--crit)" stroke-width="1.8" stroke-dasharray="4 3"/>
+      ${dots}
+    </svg>
+  </div>
+  <div style="display:flex;justify-content:center;gap:20px;margin-top:10px;font-size:12px;">
+    <span style="display:inline-flex;align-items:center;gap:6px;"><i style="width:12px;height:3px;background:var(--accent);display:inline-block;border-radius:2px;"></i> <b>Omzet Kas Masuk</b></span>
+    <span style="display:inline-flex;align-items:center;gap:6px;"><i style="width:12px;height:3px;background:var(--crit);display:inline-block;border-radius:2px;"></i> <b>Total Beban (COGS + OPEX)</b></span>
+  </div>
+  `;
+}
+
+function vArsip(R) {
+  const arsipData = S.multiyearArsip || {};
+  const yearsObj = arsipData.years || {};
+  const yearKeys = ["2022", "2023", "2024", "2025", "2026"];
+  
+  if (!yearsObj[arsipYear]) {
+    arsipYear = "2026";
+  }
+  const curY = yearsObj[arsipYear] || {omzet:0, cash:0, transfer:0, outcome:0, nettProfit:0, margin:0, months:[]};
+  const mList = curY.months || [];
+  
+  let selM = mList.find(m => m.month === arsipMonth);
+  if (!selM) {
+    selM = mList[0] || {omzet:0, cash:0, transfer:0, outcome:0, nettProfit:0, margin:0, daily:[], expenses:[]};
+    arsipMonth = selM.month || 1;
+  }
+
+  const avgMonthly = arsipYear === "2026" ? (curY.omzet / 10) : (curY.omzet / 12);
+  const cashRatio = curY.omzet > 0 ? (curY.cash / curY.omzet * 100) : 0;
+  const trfRatio = curY.omzet > 0 ? (curY.transfer / curY.omzet * 100) : 0;
+
+  // 5-Year Growth summary for quick bar
+  const summary5 = yearKeys.map(yk => {
+    const yData = yearsObj[yk] || {};
+    return {
+      year: yk,
+      omzet: yData.omzet || 0,
+      outcome: yData.outcome || 0,
+      nett: yData.nettProfit || 0,
+      margin: yData.margin || 0,
+      isCurrent: (yk === arsipYear)
+    };
+  });
+
+  return `
+  <div class="vhead" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;margin-bottom:18px;">
+    <div>
+      <div class="eyebrow">🗄️ Multi-Year Financial Vault · 2022 — 2026</div>
+      <h2>Lemari Arsip Finansial Foxe Studio</h2>
+      <p>Pusat arsip pembukuan kasir harian (Cash vs Transfer) dan mutasi beban neraca (COGS &amp; OPEX) selama 5 tahun perjalanan studio.</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button class="btn sm" onclick="exportArsipCSV('${arsipYear}')" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;">
+        <span>📥 Export CSV (Tahun ${arsipYear})</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- TAB SELECTOR TAHUN (Clean "Tahun 20xx" labels) -->
+  <div style="background:var(--surface);border:1px solid var(--hairline);border-radius:12px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <span style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:0.8px;text-transform:uppercase;">PILIH ARSIP TAHUN:</span>
+      <div class="seg" style="display:inline-flex;gap:6px;flex-wrap:wrap;">
+        ${yearKeys.map(y => `
+          <button class="btn sm ${arsipYear === y ? 'pri' : ''}" style="font-weight:600;padding:7px 16px;font-size:13px;border-radius:8px;" onclick="arsipYear='${y}';render();">
+            📁 Tahun ${y}${y === '2026' ? ' (Live)' : ''}
+          </button>
+        `).join("")}
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;">
+      <span>Status: <b style="color:${arsipYear === '2026' ? 'var(--good)' : 'var(--ink2)'};">${arsipYear === '2026' ? '🟢 Live YTD + Closed Book' : '🔒 Closed Book (Terverifikasi)'}</b></span>
+    </div>
+  </div>
+
+  <!-- RINGKASAN PERJALANAN 5 TAHUN (MINI GROWTH STRIP) -->
+  <div class="card" style="margin-bottom:20px;padding:16px 20px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+      <span class="eyebrow" style="color:var(--accent);">KILAS BALIK 5 TAHUN (2022 — 2026)</span>
+      <span class="tiny muted">Pertumbuhan Omzet 2022 ➔ 2026: <b style="color:var(--good);font-weight:700;">+167.2%</b></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:10px;">
+      ${summary5.map(s => `
+        <div onclick="arsipYear='${s.year}';render();" style="cursor:pointer;padding:12px 14px;border-radius:8px;background:${s.isCurrent ? 'color-mix(in srgb,var(--accent) 12%,var(--surface2))' : 'var(--surface2)'};border:1.5px solid ${s.isCurrent ? 'var(--accent)' : 'var(--hairline)'};transition:all .15s ease;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <b style="font-size:13px;color:${s.isCurrent ? 'var(--accent)' : 'var(--ink)'};">Tahun ${s.year}</b>
+            <span class="pill ${s.isCurrent ? 'prog' : 'neutral'}" style="font-size:10px;padding:2px 7px;">${s.margin.toFixed(1)}% margin</span>
+          </div>
+          <div class="mono" style="font-size:16px;font-weight:700;color:var(--ink);">${rp(s.omzet)}</div>
+          <div class="tiny muted" style="margin-top:2px;">Nett: <span class="mono" style="color:var(--good);">${rp(s.nett)}</span></div>
+        </div>
+      `).join("")}
+    </div>
+  </div>
+
+  <!-- TOP KPI CARDS TAHUN TERPILIH -->
+  <div class="stats" style="margin-bottom:20px">
+    <div class="stat">
+      <span class="k">Total Omzet Tahun ${arsipYear}</span>
+      <span class="v" style="color:var(--accent);">${rp(curY.omzet)}</span>
+      <span class="m">Rata-rata: ${rp(avgMonthly)} / bulan</span>
+    </div>
+    <div class="stat">
+      <span class="k">Proporsi Metode Masuk</span>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-top:2px;">
+        <span class="v sm">${cashRatio.toFixed(0)}% <span class="tiny muted">Cash</span></span>
+        <span style="color:var(--muted);">·</span>
+        <span class="v sm" style="color:var(--accent);">${trfRatio.toFixed(0)}% <span class="tiny muted">Transfer</span></span>
+      </div>
+      <span class="m">Cash: ${rp(curY.cash)} · Trf: ${rp(curY.transfer)}</span>
+      <div class="bar" style="display:flex;height:4px;border-radius:2px;overflow:hidden;background:var(--surface3);margin-top:6px;">
+        <div style="width:${cashRatio.toFixed(1)}%;background:var(--warn);"></div>
+        <div style="width:${trfRatio.toFixed(1)}%;background:var(--accent);"></div>
+      </div>
+    </div>
+    <div class="stat">
+      <span class="k">Total Beban (COGS + OPEX)</span>
+      <span class="v sm" style="color:var(--crit);">${rp(curY.outcome)}</span>
+      <span class="m">COGS: ${rp(curY.cogs)} · OPEX: ${rp(curY.opex)}</span>
+    </div>
+    <div class="stat">
+      <span class="k">Laba Bersih (Nett Profit)</span>
+      <span class="v sm" style="color:var(--good);">${rp(curY.nettProfit)}</span>
+      <span class="m"><span class="pill final" style="font-size:11px;padding:2px 8px;">${curY.margin.toFixed(2)}% Nett Margin</span></span>
+    </div>
+  </div>
+
+  <!-- GRAFIK TREN 12 BULAN TAHUN TERPILIH -->
+  <div class="card" style="margin-bottom:20px;">
+    <h3>Tren 12 Bulan — Tahun ${arsipYear} <span class="eyebrow">Uang Masuk vs Pengeluaran</span></h3>
+    <p class="tiny muted" style="margin-bottom:12px;">Visualisasi fluktuasi omzet kasir (biru) dan beban operasional (merah) dari bulan Januari sampai Desember ${arsipYear}.</p>
+    ${chartArsipYear(mList, arsipYear)}
+  </div>
+
+  <!-- 12 MAP BULAN INTERAKTIF (.mgrid) -->
+  <div style="margin-bottom:20px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+      <h3 style="margin:0;font-size:16px;">12 Berkas Bulan — Tahun ${arsipYear}</h3>
+      <span class="tiny muted">Klik kartu bulan di bawah untuk membuka rincian kasir &amp; belanja neraca bulan tersebut.</span>
+    </div>
+    <div class="mgrid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:12px;">
+      ${mList.map(m => {
+        const isSel = (m.month === arsipMonth);
+        return `
+        <div class="month-card" onclick="arsipMonth=${m.month};render();" style="cursor:pointer;padding:16px 18px;border-radius:12px;background:var(--surface);border:${isSel ? '2px solid var(--accent)' : '1px solid var(--hairline)'};box-shadow:${isSel ? '0 0 16px color-mix(in srgb,var(--accent) 30%,transparent)' : 'none'};transition:all .15s ease;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <b style="font-size:15px;color:${isSel ? 'var(--accent)' : 'var(--ink)'};">${m.name}</b>
+            <span class="pill ${isSel ? 'prog' : 'neutral'}" style="font-size:10.5px;">${isSel ? '● Terbuka' : (m.status || (m.omzet > 0 ? 'Tercatat' : '—'))}</span>
+          </div>
+          <div class="mono" style="font-size:19px;font-weight:700;color:var(--ink);margin-bottom:4px;">${rp(m.omzet)}</div>
+          <div style="font-size:11.5px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px;">
+            <span>Cash: ${rp(m.cash)}</span>
+            <span>Trf: ${rp(m.transfer)}</span>
+          </div>
+          <div style="border-top:1px dashed var(--hairline);padding-top:6px;display:flex;justify-content:space-between;align-items:center;font-size:11.5px;">
+            <span class="tiny muted">Laba Bersih:</span>
+            <b class="mono" style="color:var(--good);">${rp(m.nettProfit)}</b>
+          </div>
+        </div>`;
+      }).join("")}
+    </div>
+  </div>
+
+  <!-- BUKU KASIR & NERACA HARIAN BULAN TERPILIH -->
+  <div class="card" style="margin-bottom:20px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div class="eyebrow" style="color:var(--accent);">RINCIAN TRANSAKSI &amp; BELANJA HARIAN</div>
+        <h3 style="margin:2px 0 0;">Buku Kasir &amp; Neraca — ${selM.name} ${arsipYear}</h3>
+      </div>
+      <!-- Month Quick Picker Pills -->
+      <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        ${mList.map(m => `
+          <button class="btn sm ${m.month === arsipMonth ? 'pri' : ''}" style="padding:4px 9px;font-size:11.5px;" onclick="arsipMonth=${m.month};render();">${m.name.slice(0,3)}</button>
+        `).join("")}
+      </div>
+    </div>
+
+    <div class="two" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px;">
+      <!-- SISI KIRI: BUKU KASIR HARIAN -->
+      <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:10px;padding:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <h4 style="margin:0;font-size:14px;color:var(--ink);">Buku Kasir Harian (Tgl 1–31)</h4>
+          <span class="tiny muted">${(selM.daily || []).length} hari mutasi</span>
+        </div>
+        <div class="tw scrollable" style="max-height:460px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;background:var(--surface);">
+          <table>
+            <thead style="position:sticky;top:0;z-index:2;background:var(--surface3);">
+              <tr>
+                <th>Tgl</th>
+                <th class="n">Cash</th>
+                <th class="n">Transfer</th>
+                <th class="n">Total Masuk</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${(selM.daily && selM.daily.length) ? selM.daily.map(d => `
+                <tr>
+                  <td class="mono">${d.tgl}</td>
+                  <td class="n">${d.cash ? rp(d.cash) : '<span class="muted">—</span>'}</td>
+                  <td class="n">${d.transfer ? rp(d.transfer) : '<span class="muted">—</span>'}</td>
+                  <td class="n" style="font-weight:600;color:var(--ink);">${rp(d.total)}</td>
+                </tr>
+              `).join("") : `
+                <tr><td colspan="4"><div class="empty">Tidak ada mutasi harian kasir tercatat.</div></td></tr>
+              `}
+            </tbody>
+            ${(selM.daily && selM.daily.length) ? `
+            <tfoot>
+              <tr class="total">
+                <td>Total Kasir</td>
+                <td class="n">${rp(selM.cash)}</td>
+                <td class="n">${rp(selM.transfer)}</td>
+                <td class="n" style="font-weight:700;color:var(--accent);">${rp(selM.omzet)}</td>
+              </tr>
+            </tfoot>` : ''}
+          </table>
+        </div>
+      </div>
+
+      <!-- SISI KANAN: BUKU DETAIL BEBAN NERACA -->
+      <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:10px;padding:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <h4 style="margin:0;font-size:14px;color:var(--ink);">Buku Pengeluaran Neraca (COGS &amp; OPEX)</h4>
+          <span class="tiny muted">${(selM.expenses || []).length} pos belanja</span>
+        </div>
+        <div class="tw scrollable" style="max-height:460px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;background:var(--surface);">
+          <table>
+            <thead style="position:sticky;top:0;z-index:2;background:var(--surface3);">
+              <tr>
+                <th>Tgl</th>
+                <th>Deskripsi Pengeluaran</th>
+                <th>Jenis</th>
+                <th class="n">Nilai</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${(selM.expenses && selM.expenses.length) ? selM.expenses.map(e => `
+                <tr>
+                  <td class="mono" style="font-size:11.5px;">${e.tgl}</td>
+                  <td>
+                    <div style="font-weight:500;">${esc(e.desc)}</div>
+                    <div class="tiny muted">${esc(e.kategori || "")}</div>
+                  </td>
+                  <td>
+                    <span class="pill ${e.jenis === 'COGS' ? 'prog' : 'neutral'}" style="font-size:10.5px;padding:2px 7px;">${e.jenis}</span>
+                  </td>
+                  <td class="n mono" style="color:var(--crit);">${rp(e.nilai)}</td>
+                </tr>
+              `).join("") : `
+                <tr><td colspan="4"><div class="empty">Tidak ada rincian belanja operasional tercatat.</div></td></tr>
+              `}
+            </tbody>
+            ${(selM.expenses && selM.expenses.length) ? `
+            <tfoot>
+              <tr class="total">
+                <td colspan="3">Total Pengeluaran (COGS: ${rp(selM.cogs)} + OPEX: ${rp(selM.opex)})</td>
+                <td class="n" style="font-weight:700;color:var(--crit);">${rp(selM.outcome)}</td>
+              </tr>
+            </tfoot>` : ''}
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
   `;
 }

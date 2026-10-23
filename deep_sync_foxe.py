@@ -131,6 +131,13 @@ def run_integration():
     else:
         state = {}
 
+    if "multiyearArsip" not in state and os.path.exists("multiyear_cache.json"):
+        try:
+            with open("multiyear_cache.json", "r", encoding="utf-8") as mcf:
+                state["multiyearArsip"] = json.load(mcf)
+        except Exception:
+            pass
+
     if "sync" not in state:
         state["sync"] = []
 
