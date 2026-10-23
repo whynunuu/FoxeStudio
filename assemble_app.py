@@ -2367,75 +2367,173 @@ function vDash(R){
 }
 
 function chartTahunanSeasonality(months, yr, avg25) {
-  const W = 860, H2 = 250, PL = 64, PR = 60, PT = 24, PB = 38;
-  const maxO = niceMax(Math.max(...months.flatMap(m => [dnum(m.omzet25), dnum(m.proyeksi26), dnum(m.omzet26)])) * 1.08);
-  const iw = W - PL - PR, ih = H2 - PT - PB, step = iw / 12, bw = Math.min(13, step * 0.35);
+  const W = 860, H2 = 290, PL = 64, PR = 60, PT = 48, PB = 40;
+  const maxO = niceMax(Math.max(...months.flatMap(m => [dnum(m.omzet25), dnum(m.proyeksi26), dnum(m.omzet26)])) * 1.12);
+  const iw = W - PL - PR, ih = H2 - PT - PB, step = iw / 12, bw = Math.min(11, step * 0.32);
+  const bottomY = H2 - PB;
   const yy = v => PT + ih - (v / maxO) * ih;
 
-  // Grid lines
+  // Catmull-Rom to Cubic Bezier Smoothing function (Ref Photo 2)
+  const buildSplinePath = (pts, tension = 0.22) => {
+    if (!pts || !pts.length) return "";
+    if (pts.length === 1) return `M ${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`;
+    const d = [`M ${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`];
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[Math.max(0, i - 1)];
+      const p1 = pts[i];
+      const p2 = pts[i + 1];
+      const p3 = pts[Math.min(pts.length - 1, i + 2)];
+      const cp1x = p1.x + (p2.x - p0.x) * tension;
+      const cp1y = p1.y + (p2.y - p0.y) * tension;
+      const cp2x = p2.x - (p3.x - p1.x) * tension;
+      const cp2y = p2.y - (p3.y - p1.y) * tension;
+      d.push(`C ${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`);
+    }
+    return d.join(" ");
+  };
+
+  // Horizontal Grid lines
   let g = "";
   for (let i = 0; i <= 4; i++) {
     const v = maxO * i / 4, y = yy(v);
-    g += `<line x1="${PL}" y1="${y.toFixed(1)}" x2="${W - PR}" y2="${y.toFixed(1)}" stroke="var(--grid)"/>
+    g += `<line x1="${PL}" y1="${y.toFixed(1)}" x2="${W - PR}" y2="${y.toFixed(1)}" stroke="var(--grid)" stroke-width="0.8"/>
     <text x="${PL - 8}" y="${(y + 3.5).toFixed(1)}" text-anchor="end" font-size="9.5" font-family="JetBrains Mono,monospace" fill="var(--muted)">${v >= 1e6 ? (v / 1e6).toFixed(0) + "jt" : num(v)}</text>`;
   }
 
   // Baseline 1.00x horizontal dashed line
   const yAvg = yy(avg25);
-  g += `<line x1="${PL}" y1="${yAvg.toFixed(1)}" x2="${W - PR}" y2="${yAvg.toFixed(1)}" stroke="var(--warn)" stroke-dasharray="3 3" stroke-width="1.2"/>
-  <text x="${W - PR + 6}" y="${(yAvg + 3.5).toFixed(1)}" font-size="9" font-family="JetBrains Mono,monospace" fill="var(--warn)">1.00× (Rata-rata Musiman)</text>`;
+  g += `<line x1="${PL}" y1="${yAvg.toFixed(1)}" x2="${W - PR}" y2="${yAvg.toFixed(1)}" stroke="var(--warn)" stroke-dasharray="4 4" stroke-width="1.2" opacity="0.85"/>
+  <rect x="${W - PR - 140}" y="${(yAvg - 9).toFixed(1)}" width="144" height="18" rx="4" fill="var(--surface)" stroke="var(--warn)" stroke-width="0.8"/>
+  <text x="${W - PR - 68}" y="${(yAvg + 3.5).toFixed(1)}" text-anchor="middle" font-size="9" font-family="JetBrains Mono,monospace" font-weight="600" fill="var(--warn)">1.00× (Rata-rata Musiman)</text>`;
 
-  // Bars and points
-  let bars = "", curvePoints = [];
+  // Points for Seasonality Spline and Bars
+  const ptsSeason = [];
+  let bars = "";
+  let guideLines = "";
+  let callouts = "";
+  let apexDots = "";
+
   months.forEach((m, i) => {
     const cx = PL + step * i + step / 2;
-    // Bar 2025 (Acuan Seasonality)
+    const y25 = yy(m.omzet25);
+
+    // Bar 2025 (Subtle background pillar)
     if (m.omzet25 > 0) {
       const h = (m.omzet25 / maxO) * ih;
-      bars += `<rect x="${(cx - bw - 1).toFixed(1)}" y="${yy(m.omzet25).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="var(--hairline-strong)"/>`;
+      bars += `<rect x="${(cx - bw - 1).toFixed(1)}" y="${y25.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="3" fill="var(--hairline-strong)" opacity="0.45"/>`;
     }
-    // Bar 2026: Realisasi Riil (Jan–Sep) & Pipeline (Okt)
+
+    // Bar 2026: Realisasi Riil & Pipeline
     const val26 = m.omzet26 || m.proyeksi26;
     if (val26 > 0) {
       const h = (val26 / maxO) * ih;
       const isOkt = m.no === 10;
-      bars += `<rect x="${(cx + 1).toFixed(1)}" y="${yy(val26).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="${isOkt ? 'var(--good)' : 'var(--accent)'}" stroke="${isOkt ? 'var(--good)' : 'var(--accent-ink)'}" stroke-width="1.5"${isOkt ? ' opacity=".85" stroke-dasharray="2 2"' : ''}/>`;
+      bars += `<rect x="${(cx + 1).toFixed(1)}" y="${yy(val26).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="3" fill="${isOkt ? 'var(--good)' : 'var(--accent)'}" stroke="${isOkt ? 'var(--good)' : 'var(--accent-ink)'}" stroke-width="1.2" opacity="${isOkt ? '0.75' : '0.85'}" ${isOkt ? 'stroke-dasharray="2 2"' : ''}/>`;
     }
 
     // X Axis Month Label
-    bars += `<text x="${cx.toFixed(1)}" y="${H2 - PB + 14}" text-anchor="middle" font-size="10" font-family="JetBrains Mono,monospace" font-weight="${m.isCurrent || m.no === 10 || m.omzet26 > 0 ? '700' : '500'}" fill="${m.isCurrent ? 'var(--accent)' : (m.no === 10 ? 'var(--good)' : (m.omzet26 > 0 ? 'var(--ink)' : 'var(--muted)'))}">${m.short}</text>`;
+    bars += `<text x="${cx.toFixed(1)}" y="${H2 - PB + 16}" text-anchor="middle" font-size="10" font-family="JetBrains Mono,monospace" font-weight="${m.isCurrent || m.no === 10 || m.omzet26 > 0 ? '700' : '500'}" fill="${m.isCurrent ? '#00f2fe' : (m.no === 10 ? 'var(--good)' : (m.omzet26 > 0 ? 'var(--ink)' : 'var(--muted)'))}">${m.short}</text>`;
 
-    // Seasonality Index Dot (berdasarkan acuan musiman)
+    // Seasonality Point
     const dotY = yy(m.omzet25);
-    curvePoints.push({ x: cx, y: dotY, sIndex: m.sIndex, pill: m.seasonPill });
+    const col = m.seasonPill === 'crit' ? '#a3e635' : (m.seasonPill === 'final' ? '#10b981' : '#00f2fe');
+    ptsSeason.push({ x: cx, y: dotY, sIndex: m.sIndex, pill: m.seasonPill, col });
+
+    // Vertical dashed guide line dropping to baseline (Ref Photo 2)
+    guideLines += `<line x1="${cx.toFixed(1)}" y1="${dotY.toFixed(1)}" x2="${cx.toFixed(1)}" y2="${bottomY.toFixed(1)}" stroke="${col}" stroke-width="1" stroke-dasharray="3 3" opacity="0.35"/>`;
+
+    // Apex Glowing Concentric Dot (Ref Photo 2)
+    apexDots += `
+    <circle cx="${cx.toFixed(1)}" cy="${dotY.toFixed(1)}" r="6.5" fill="${col}" opacity="0.22"/>
+    <circle cx="${cx.toFixed(1)}" cy="${dotY.toFixed(1)}" r="3.5" fill="${col}" stroke="var(--canvas)" stroke-width="1.5" filter="url(#auroraDotGlow)"/>`;
+
+    // Callout Speech Bubble Tag (Ref Photo 2)
+    const bW = m.sIndex >= 2.0 ? 46 : 38;
+    const bH = 20;
+    const bY = dotY - bH - 9;
+    const valText = m.sIndex.toFixed(2) + "×";
+
+    callouts += `
+    <g class="chart-callout" style="pointer-events:none;">
+      <!-- Speech bubble background -->
+      <polygon points="${(cx - 3.5).toFixed(1)},${(bY + bH).toFixed(1)} ${(cx + 3.5).toFixed(1)},${(bY + bH).toFixed(1)} ${cx.toFixed(1)},${(bY + bH + 4.5).toFixed(1)}" fill="var(--surface)" stroke="${col}" stroke-width="1"/>
+      <rect x="${(cx - bW / 2).toFixed(1)}" y="${bY.toFixed(1)}" width="${bW}" height="${bH}" rx="5" fill="var(--surface)" stroke="${col}" stroke-width="1.2" filter="url(#bubbleShadow)"/>
+      <line x1="${(cx - 3).toFixed(1)}" y1="${(bY + bH).toFixed(1)}" x2="${(cx + 3).toFixed(1)}" y2="${(bY + bH).toFixed(1)}" stroke="var(--surface)" stroke-width="1.8"/>
+      <!-- Speech bubble text -->
+      <text x="${cx.toFixed(1)}" y="${(bY + 13.5).toFixed(1)}" text-anchor="middle" font-size="9" font-family="JetBrains Mono,monospace" font-weight="700" fill="${col}">${valText}</text>
+    </g>`;
   });
+
+  // Build smooth Bézier spline paths (Ref Photo 2)
+  const spline25 = buildSplinePath(ptsSeason, 0.22);
+  const area25 = `${spline25} L ${ptsSeason[ptsSeason.length - 1].x.toFixed(1)},${bottomY.toFixed(1)} L ${ptsSeason[0].x.toFixed(1)},${bottomY.toFixed(1)} Z`;
 
   const svgDefs = `
   <defs>
+    <!-- Cyber Aurora Linear Stroke Gradient -->
     <linearGradient id="cyberAuroraGrad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#00f2fe"/>
-      <stop offset="50%" stop-color="#10b981"/>
-      <stop offset="100%" stop-color="#a3e635"/>
+      <stop offset="45%" stop-color="#10b981"/>
+      <stop offset="70%" stop-color="#a3e635"/>
+      <stop offset="100%" stop-color="#00f2fe"/>
     </linearGradient>
+
+    <!-- Translucent Area Gradient (Flowing Mountain Hill - Ref Photo 2) -->
+    <linearGradient id="auroraAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.34"/>
+      <stop offset="40%" stop-color="#10b981" stop-opacity="0.22"/>
+      <stop offset="75%" stop-color="#a3e635" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#00f2fe" stop-opacity="0.0"/>
+    </linearGradient>
+
+    <!-- Glowing Filters -->
+    <filter id="auroraCurveGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="auroraDotGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="bubbleShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.45)"/>
+    </filter>
   </defs>`;
 
-  // Polyline for seasonality with Cyber Aurora gradient
-  let poly = `<polyline fill="none" stroke="url(#cyberAuroraGrad)" stroke-width="2.5" opacity=".85" points="${curvePoints.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ")}"/>`;
-  let dots = curvePoints.map(p => {
-    const col = p.pill === 'crit' ? '#a3e635' : (p.pill === 'final' ? '#10b981' : '#00f2fe');
-    return `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.5" fill="${col}" stroke="var(--surface)" stroke-width="1.5"/>
-    <text x="${p.x.toFixed(1)}" y="${(p.y - 7).toFixed(1)}" text-anchor="middle" font-size="8.5" font-family="JetBrains Mono,monospace" font-weight="600" fill="${col}">${p.sIndex.toFixed(2)}×</text>`;
-  }).join("");
-
   return `
-  <div class="legend">
-    <span><i class="swatch" style="background:linear-gradient(90deg,#00f2fe,#10b981,#a3e635);box-shadow:0 0 6px rgba(0,242,254,0.6)"></i>Trendline Seasonality (Cyber Aurora Kiri ➔ Kanan)</span>
-    <span><i class="swatch" style="background:var(--hairline-strong)"></i>${yr-1} Benchmark Musiman</span>
+  <div class="legend" style="display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:12px;font-size:12px;">
+    <span><i class="swatch" style="background:linear-gradient(90deg,#00f2fe,#10b981,#a3e635);box-shadow:0 0 6px rgba(0,242,254,0.6)"></i>Kurva Spline Seasonality (Cyber Aurora Wave)</span>
+    <span><i class="swatch" style="background:var(--hairline-strong);opacity:0.6;"></i>${yr-1} Benchmark Musiman</span>
     <span><i class="swatch" style="background:var(--accent)"></i>${yr} Terverifikasi Riil (Jan–Sep)</span>
-    <span><i class="swatch" style="background:var(--good);border:1px dashed var(--good)"></i>${yr} Oktober (Pipeline)</span>
-    <span class="muted" style="margin-left:auto;">Garis putus-putus kuning = 1.00× Rata-rata Musiman</span>
+    <span><i class="swatch" style="background:var(--good);border:1px dashed var(--good)"></i>${yr} Oktober (Live)</span>
+    <span class="muted" style="margin-left:auto;display:flex;align-items:center;gap:6px;">
+      <i style="width:14px;height:2px;background:var(--warn);display:inline-block;border-top:1px dashed var(--warn);"></i>
+      1.00× Rata-rata Musiman
+    </span>
   </div>
-  <svg class="chart" viewBox="0 0 ${W} ${H2}" role="img" aria-label="Siklus Seasonality dan Omzet 12 Bulan">${svgDefs}${g}${bars}${poly}${dots}</svg>`;
+  <svg class="chart" viewBox="0 0 ${W} ${H2}" role="img" aria-label="Siklus Seasonality dan Tren Omzet 12 Bulan" style="overflow:visible;">
+    ${svgDefs}
+    ${g}
+    ${bars}
+    <!-- Layer 1: Flowing Glowing Mountain Area Fill (Ref Photo 2) -->
+    <path d="${area25}" fill="url(#auroraAreaGrad)"/>
+    <!-- Layer 2: Continuous Smooth Spline Curve Ridge with Glow (Ref Photo 2) -->
+    <path d="${spline25}" fill="none" stroke="url(#cyberAuroraGrad)" stroke-width="2.8" filter="url(#auroraCurveGlow)"/>
+    <!-- Layer 3: Vertical Dashed Guide Lines (Ref Photo 2) -->
+    ${guideLines}
+    <!-- Layer 4: Glowing Apex Dots (Ref Photo 2) -->
+    ${apexDots}
+    <!-- Layer 5: Speech Bubble Callout Tags (Ref Photo 2) -->
+    ${callouts}
+  </svg>`;
 }
 
 function vTahunan(R) {
