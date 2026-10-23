@@ -619,21 +619,21 @@ html:not([data-theme="dark"]) .theme-switch-knob{transform:translateX(16px);back
 
 /* ---------- Section Tahunan (Annual Dashboard & 12 Month Tiles) ---------- */
 .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px}
-.month-card{background:var(--surface);
+.month-card, .arsip-month-card{background:var(--surface);
   border:1px solid var(--hairline);border-radius:14px;
   padding:20px;display:flex;flex-direction:column;gap:13px;transition:all .22s cubic-bezier(0.16,1,0.3,1);
   position:relative;overflow:hidden;cursor:pointer;box-shadow:var(--shadow)}
-.month-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0;
+.month-card::before, .arsip-month-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0;
   background:var(--hairline);opacity:0.8;
   transition:all .25s ease}
-.month-card:hover{border-color:var(--hairline-strong);transform:translateY(-2px);
+.month-card:hover, .arsip-month-card:hover{border-color:var(--hairline-strong);transform:translateY(-2px);
   box-shadow:0 8px 24px rgba(0,0,0,0.12)}
-.month-card:hover::before{opacity:1;height:3px;background:var(--accent)}
-.month-card.active-month{border:1.5px solid var(--accent);
+.month-card:hover::before, .arsip-month-card:hover::before{opacity:1;height:3px;background:var(--accent)}
+.month-card.active-month, .arsip-month-card.active-month{border:1.5px solid var(--accent);
   background:var(--surface);
   box-shadow:0 0 0 3px var(--accent-soft), var(--shadow);
   position:relative}
-.month-card.active-month::before{height:3px;opacity:1;
+.month-card.active-month::before, .arsip-month-card.active-month::before{height:3px;opacity:1;
   background:var(--accent)}
 .pin-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;letter-spacing:0.6px;
   padding:3px 9px;border-radius:20px;background:var(--accent-soft);
@@ -3237,6 +3237,24 @@ function vTahunan(R) {
 
 
 /* ============================ LEMARI ARSIP (2022 - 2026) ============================ */
+
+window.selectArsipYear = function(y) {
+  arsipYear = y;
+  if (y === "2026" && arsipMonth > 10) {
+    arsipMonth = 10;
+  }
+  render();
+};
+
+window.selectArsipMonth = function(m) {
+  arsipMonth = m;
+  render();
+  setTimeout(() => {
+    const el = document.getElementById("arsipMonthDetailCard");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 40);
+};
+
 window.exportArsipCSV = function(yr) {
   const cur = (S.multiyearArsip && S.multiyearArsip.years && S.multiyearArsip.years[yr]);
   if (!cur || !cur.months) {
@@ -3728,7 +3746,7 @@ function vArsip(R) {
       <span style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:0.8px;text-transform:uppercase;">PILIH ARSIP TAHUN:</span>
       <div class="seg" style="display:inline-flex;gap:6px;flex-wrap:wrap;">
         ${yearKeys.map(y => `
-          <button class="btn sm ${arsipYear === y ? 'pri' : ''}" style="font-weight:600;padding:7px 16px;font-size:13px;border-radius:8px;" onclick="arsipYear='${y}';render();">
+          <button class="btn sm ${arsipYear === y ? 'pri' : ''}" style="font-weight:600;padding:7px 16px;font-size:13px;border-radius:8px;" onclick="selectArsipYear('${y}');">
             📁 Tahun ${y}${y === '2026' ? ' (Live)' : ''}
           </button>
         `).join("")}
@@ -3747,7 +3765,7 @@ function vArsip(R) {
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:10px;">
       ${summary5.map(s => `
-        <div onclick="arsipYear='${s.year}';render();" style="cursor:pointer;padding:12px 14px;border-radius:8px;background:${s.isCurrent ? 'color-mix(in srgb,var(--accent) 12%,var(--surface2))' : 'var(--surface2)'};border:1.5px solid ${s.isCurrent ? 'var(--accent)' : 'var(--hairline)'};transition:all .15s ease;">
+        <div onclick="selectArsipYear('${s.year}');" style="cursor:pointer;padding:12px 14px;border-radius:8px;background:${s.isCurrent ? 'color-mix(in srgb,var(--accent) 12%,var(--surface2))' : 'var(--surface2)'};border:1.5px solid ${s.isCurrent ? 'var(--accent)' : 'var(--hairline)'};transition:all .15s ease;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
             <b style="font-size:13px;color:${s.isCurrent ? 'var(--accent)' : 'var(--ink)'};">Tahun ${s.year}</b>
             <span class="pill ${s.isCurrent ? 'prog' : 'neutral'}" style="font-size:10px;padding:2px 7px;">${s.margin.toFixed(1)}% margin</span>
@@ -3827,7 +3845,7 @@ function vArsip(R) {
       ${mList.map(m => {
         const isSel = (m.month === arsipMonth);
         return `
-        <div class="month-card" onclick="arsipMonth=${m.month};render();" style="cursor:pointer;padding:16px 18px;border-radius:12px;background:var(--surface);border:${isSel ? '2px solid var(--accent)' : '1px solid var(--hairline)'};box-shadow:${isSel ? '0 0 16px color-mix(in srgb,var(--accent) 30%,transparent)' : 'none'};transition:all .15s ease;">
+        <div class="arsip-month-card ${isSel ? 'active-month' : ''}" onclick="selectArsipMonth(${m.month});" style="cursor:pointer;padding:16px 18px;border-radius:12px;background:var(--surface);border:${isSel ? '2px solid var(--accent)' : '1px solid var(--hairline)'};box-shadow:${isSel ? '0 0 16px color-mix(in srgb,var(--accent) 30%,transparent)' : 'none'};transition:all .15s ease;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
             <b style="font-size:15px;color:${isSel ? 'var(--accent)' : 'var(--ink)'};">${m.name}</b>
             <span class="pill ${isSel ? 'prog' : 'neutral'}" style="font-size:10.5px;">${isSel ? '● Terbuka' : (m.status || (m.omzet > 0 ? 'Tercatat' : '—'))}</span>
@@ -3854,7 +3872,7 @@ function vArsip(R) {
   </div>
 
   <!-- BUKU KASIR & NERACA HARIAN BULAN TERPILIH -->
-  <div class="card" style="margin-bottom:20px;">
+  <div class="card" id="arsipMonthDetailCard" style="margin-bottom:20px;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:12px;">
       <div>
         <div class="eyebrow" style="color:var(--accent);">RINCIAN TRANSAKSI &amp; BELANJA HARIAN</div>
@@ -3863,7 +3881,7 @@ function vArsip(R) {
       <!-- Month Quick Picker Pills -->
       <div style="display:flex;gap:4px;flex-wrap:wrap;">
         ${mList.map(m => `
-          <button class="btn sm ${m.month === arsipMonth ? 'pri' : ''}" style="padding:4px 9px;font-size:11.5px;" onclick="arsipMonth=${m.month};render();">${m.name.slice(0,3)}</button>
+          <button class="btn sm ${m.month === arsipMonth ? 'pri' : ''}" style="padding:4px 9px;font-size:11.5px;" onclick="selectArsipMonth(${m.month});">${m.name.slice(0,3)}</button>
         `).join("")}
       </div>
     </div>
@@ -7380,52 +7398,54 @@ function wire(R){
     };
   }
 
-  // Interaksi 12 Kotak Bulan di Section Tahunan
-  document.querySelectorAll(".btn-go-month").forEach(el => {
-    el.onclick = (e) => {
-      e.stopPropagation();
-      const m = +el.dataset.month;
-      if (m >= 1 && m <= 10) {
-        const iso = `2026-${String(m).padStart(2, "0")}`;
-        activeMonth = iso;
-        estMonth = m;
-        view = "dash";
-        render();
-        window.scrollTo({top: 0, behavior: "smooth"});
-        showToast(`📊 Membuka Dashboard Penuh ${BULAN[m - 1]} 2026`, "ok", 2500);
-      } else {
-        const bln = BULAN[m - 1] || "";
-        showToast(`ℹ️ Bulan ${bln} 2026 belum dicocokkan.`, "neutral", 3500);
-      }
-    };
-  });
+  // Interaksi 12 Kotak Bulan di Section Tahunan (hanya saat view === "tahunan")
+  if (view === "tahunan") {
+    document.querySelectorAll(".btn-go-month").forEach(el => {
+      el.onclick = (e) => {
+        e.stopPropagation();
+        const m = +el.dataset.month;
+        if (m >= 1 && m <= 10) {
+          const iso = `2026-${String(m).padStart(2, "0")}`;
+          activeMonth = iso;
+          estMonth = m;
+          view = "dash";
+          render();
+          window.scrollTo({top: 0, behavior: "smooth"});
+          showToast(`📊 Membuka Dashboard Penuh ${BULAN[m - 1]} 2026`, "ok", 2500);
+        } else {
+          const bln = BULAN[m - 1] || "";
+          showToast(`ℹ️ Bulan ${bln} 2026 belum dicocokkan.`, "neutral", 3500);
+        }
+      };
+    });
 
-  document.querySelectorAll(".btn-modal-month").forEach(el => {
-    el.onclick = (e) => {
-      e.stopPropagation();
-      const m = +el.dataset.month;
-      openMonthModal(m);
-    };
-  });
+    document.querySelectorAll(".btn-modal-month").forEach(el => {
+      el.onclick = (e) => {
+        e.stopPropagation();
+        const m = +el.dataset.month;
+        openMonthModal(m);
+      };
+    });
 
-  document.querySelectorAll(".month-card").forEach(el => {
-    el.onclick = (e) => {
-      if (e.target.closest("button")) return;
-      const m = +el.dataset.month;
-      if (m >= 1 && m <= 10) {
-        const iso = `2026-${String(m).padStart(2, "0")}`;
-        activeMonth = iso;
-        estMonth = m;
-        view = "dash";
-        render();
-        window.scrollTo({top: 0, behavior: "smooth"});
-        showToast(`📊 Membuka Dashboard Penuh ${BULAN[m - 1]} 2026`, "ok", 2500);
-      } else {
-        const bln = BULAN[m - 1] || "";
-        showToast(`ℹ️ Bulan ${bln} 2026 belum dicocokkan.`, "neutral", 3500);
-      }
-    };
-  });
+    document.querySelectorAll(".mgrid .month-card").forEach(el => {
+      el.onclick = (e) => {
+        if (e.target.closest("button")) return;
+        const m = +el.dataset.month;
+        if (m >= 1 && m <= 10) {
+          const iso = `2026-${String(m).padStart(2, "0")}`;
+          activeMonth = iso;
+          estMonth = m;
+          view = "dash";
+          render();
+          window.scrollTo({top: 0, behavior: "smooth"});
+          showToast(`📊 Membuka Dashboard Penuh ${BULAN[m - 1]} 2026`, "ok", 2500);
+        } else {
+          const bln = BULAN[m - 1] || "";
+          showToast(`ℹ️ Bulan ${bln} 2026 belum dicocokkan.`, "neutral", 3500);
+        }
+      };
+    });
+  }
 
   // Switcher Tab Periode di Estimasi Omzet (Januari s.d. Oktober 2026)
   const segEm = document.getElementById("segEstMonth");
@@ -9097,7 +9117,7 @@ if (isAuthedOnLoad) {
 }
 
 // Deteksi versi kode baru (deploy baru) -> muat ulang otomatis agar fitur terbaru langsung aktif
-const BUILD_ID = "1792754605";
+const BUILD_ID = "1792756429";
 async function checkNewBuild() {
   if (window.location.protocol === "file:") return;
   try {
