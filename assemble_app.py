@@ -2196,7 +2196,7 @@ function kartuPembaruan(R){
             </svg>
             <span>Kontrol Biaya Sehat</span>
           </div>
-          <span class="pill good" style="font-weight:700;font-size:10px;padding:1px 6px;">✓ ${pct(outcomeRatio)} Aman</span>
+          <span class="pill good" style="font-weight:700;font-size:10px;padding:1px 6px;">✓ ${pct(outcomeRatio)}</span>
         </div>
 
         <!-- KPI Ringkas -->
@@ -2922,7 +2922,7 @@ function vTahunan(R) {
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
-                <span>✅ ${pct(m.outcomeRatio)} Aman</span>
+                <span>✅ ${pct(m.outcomeRatio)}</span>
               </span>
             ` : (m.isEarlyCycle ? `
               <span class="pill prog" style="font-size:10px;padding:2px 7px;display:inline-flex;align-items:center;gap:4px;font-weight:700;white-space:nowrap;" title="Periode Berjalan: Awal bulan (H-${m.cutDayM}), rasio beban sementara ${pct(m.outcomeRatio)}">
@@ -3843,7 +3843,7 @@ function vArsip(R) {
       <span class="v sm" style="color:var(--crit);">${rp(curY.outcome)}</span>
       <div style="display:flex;align-items:center;gap:6px;margin-top:2px;">
         <span class="pill ${annualCostRatio >= 45 ? 'crit' : 'good'}" style="font-size:10px;padding:1px 6px;font-weight:700;">
-          ${annualCostRatio.toFixed(1)}% Rasio ${annualCostRatio >= 45 ? '⚠️ Boncos' : '✅ Aman'}
+          ${annualCostRatio.toFixed(1)}% Rasio ${annualCostRatio >= 45 ? '⚠️' : '✅'}
         </span>
         <span class="tiny muted">${boncosCount} dari ${recordedMonths.length} bulan ≥ 45%</span>
       </div>
@@ -3889,10 +3889,10 @@ function vArsip(R) {
         <div class="eyebrow" style="color:var(--accent);">BERKAS PEMBUKUAN 12 BULAN &amp; AMBANG BATAS EFISIENSI 45%</div>
         <h3 style="margin:2px 0 0;font-size:17px;display:flex;align-items:center;gap:8px;">
           12 Berkas Bulan — Tahun ${arsipYear}
-          ${boncosCount > 0 ? `<span class="pill crit" style="font-size:11px;padding:2px 8px;font-weight:700;">⚠️ ${boncosCount} Bulan Boncos (≥ 45%)</span>` : `<span class="pill good" style="font-size:11px;padding:2px 8px;font-weight:700;">🛡️ 100% Efisien (&lt; 45%)</span>`}
+          ${boncosCount > 0 ? `<span class="pill crit" style="font-size:11px;padding:2px 8px;font-weight:700;">⚠️ ${boncosCount} Bulan (≥ 45%)</span>` : `<span class="pill good" style="font-size:11px;padding:2px 8px;font-weight:700;">🛡️ 100% Efisien (&lt; 45%)</span>`}
         </h3>
         <p class="tiny muted" style="margin:3px 0 0;">
-          Ambang batas sehat studio adalah total beban operasional &le; <b>45%</b> dari omzet. Bulan dengan beban &ge; 45% ditandai merah (Boncos), sedangkan di bawah 45% bertanda hijau (Aman).
+          Ambang batas sehat studio adalah total beban operasional &le; <b>45%</b> dari omzet. Bulan dengan beban &ge; 45% ditandai merah (⚠️), sedangkan di bawah 45% bertanda hijau (🛡️).
         </p>
       </div>
 
@@ -3901,8 +3901,8 @@ function vArsip(R) {
         <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;">Filter:</span>
         <div class="seg" style="display:inline-flex;gap:4px;">
           <button class="btn sm ${arsipBoncosFilter === 'all' ? 'pri' : ''}" onclick="setArsipBoncosFilter('all');" style="padding:4px 10px;font-size:11.5px;font-weight:600;">Semua (${mList.length})</button>
-          <button class="btn sm ${arsipBoncosFilter === 'boncos' ? 'pri' : ''}" onclick="setArsipBoncosFilter('boncos');" style="padding:4px 10px;font-size:11.5px;font-weight:600;${arsipBoncosFilter === 'boncos' ? 'background:var(--crit);border-color:var(--crit);' : ''}">⚠️ Boncos &ge; 45% (${boncosCount})</button>
-          <button class="btn sm ${arsipBoncosFilter === 'safe' ? 'pri' : ''}" onclick="setArsipBoncosFilter('safe');" style="padding:4px 10px;font-size:11.5px;font-weight:600;${arsipBoncosFilter === 'safe' ? 'background:var(--good);border-color:var(--good);' : ''}">🛡️ Aman &lt; 45% (${safeCount})</button>
+          <button class="btn sm ${arsipBoncosFilter === 'boncos' ? 'pri' : ''}" onclick="setArsipBoncosFilter('boncos');" style="padding:4px 10px;font-size:11.5px;font-weight:600;${arsipBoncosFilter === 'boncos' ? 'background:var(--crit);border-color:var(--crit);' : ''}">⚠️ &ge; 45% (${boncosCount})</button>
+          <button class="btn sm ${arsipBoncosFilter === 'safe' ? 'pri' : ''}" onclick="setArsipBoncosFilter('safe');" style="padding:4px 10px;font-size:11.5px;font-weight:600;${arsipBoncosFilter === 'safe' ? 'background:var(--good);border-color:var(--good);' : ''}">🛡️ &lt; 45% (${safeCount})</button>
         </div>
       </div>
     </div>
@@ -3926,8 +3926,8 @@ function vArsip(R) {
               ${isSel ? '<span class="pill prog" style="font-size:10px;padding:2px 6px;">● Dibuka</span>' : ''}
               ${hasData ? (
                 isBoncos 
-                  ? `<span class="pill crit" style="font-size:10px;padding:2px 7px;font-weight:700;background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.4);" title="Rasio Pengeluaran ${costRatioNum.toFixed(1)}% dari Omzet (Melebihi Ambang Batas 45%)">⚠️ Boncos ${costRatioNum.toFixed(1)}%</span>`
-                  : `<span class="pill good" style="font-size:10px;padding:2px 7px;font-weight:700;background:rgba(16,185,129,0.15);color:#34d399;border:1px solid rgba(16,185,129,0.4);" title="Rasio Pengeluaran ${costRatioNum.toFixed(1)}% dari Omzet (Efisien di bawah 45%)">🛡️ Aman ${costRatioNum.toFixed(1)}%</span>`
+                  ? `<span class="pill crit" style="font-size:10px;padding:2px 7px;font-weight:700;background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.4);" title="Rasio Pengeluaran ${costRatioNum.toFixed(1)}% dari Omzet (Melebihi Ambang Batas 45%)">⚠️ ${costRatioNum.toFixed(1)}%</span>`
+                  : `<span class="pill good" style="font-size:10px;padding:2px 7px;font-weight:700;background:rgba(16,185,129,0.15);color:#34d399;border:1px solid rgba(16,185,129,0.4);" title="Rasio Pengeluaran ${costRatioNum.toFixed(1)}% dari Omzet (Efisien di bawah 45%)">🛡️ ${costRatioNum.toFixed(1)}%</span>`
               ) : '<span class="pill neutral" style="font-size:10px;padding:2px 6px;">—</span>'}
             </div>
           </div>
@@ -3950,7 +3950,7 @@ function vArsip(R) {
             <div style="display:flex; justify-content:space-between; align-items:center; font-size:10.5px; margin-bottom:4px;">
               <span style="color:var(--muted); font-size:10px; text-transform:uppercase; font-weight:600;">Rasio Beban (Limit 45%):</span>
               <b class="mono" style="color:${isBoncos ? 'var(--crit)' : 'var(--good)'}; font-size:11px; font-weight:700;">
-                ${costRatioNum.toFixed(1)}% ${isBoncos ? '⚠️ Boncos' : '✅ Aman'}
+                ${costRatioNum.toFixed(1)}% ${isBoncos ? '⚠️' : '✅'}
               </b>
             </div>
             <div style="position:relative; height:6px; background:var(--surface3); border-radius:3px; overflow:hidden;">

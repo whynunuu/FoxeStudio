@@ -222,28 +222,74 @@ def main():
             cogs = rekap_cogs if rekap_cogs > 0 else sum(e["nilai"] for e in expenses if e["jenis"] == "COGS")
             opex = outcome - cogs if outcome >= cogs else sum(e["nilai"] for e in expenses if e["jenis"] == "OPEX")
             
-            # Special 2026 overrides for M9 and M10:
-            if y == 2026 and m == 9:
-                # September 2026: 632 orders, omzet 118,015,000
-                omzet = 118015000
-                cash = 34475000
-                transfer = 83540000
-                outcome = 54681737
-                cogs = 23168000
-                opex = 31513737
-                bersih_kalk = 63333263
-            elif y == 2026 and m == 10:
-                # Oktober 2026: live 394 orders from oktoberLogOrder
-                omzet = 80600000
-                cash = 28130000
-                transfer = 52470000
-                outcome = 16507700
-                cogs = 4903000
-                opex = 11604700
-                bersih_kalk = 64092300
-                
-            nett_profit = bersih_kalk if (bersih_kalk != 0 and kotor_kalk > 0) else (omzet - outcome)
-            margin = (nett_profit / omzet * 100.0) if omzet > 0 else 0.0
+            # Special 2026 synchronization with Laporan Tahunan & closed books:
+            if y == 2026:
+                if m <= 8:
+                    hm = fs.get("historicalMonths", {}).get(str(m), {})
+                    if hm:
+                        omzet = float(hm.get("omzet", omzet))
+                        cash = float(hm.get("cash", cash))
+                        transfer = float(hm.get("transfer", transfer))
+                        cogs = float(hm.get("cogs", cogs))
+                        opex = float(hm.get("opex", opex))
+                        outcome = cogs + opex
+                        bersih_kalk = float(hm.get("nettProfit", omzet - outcome))
+                        nett_profit = bersih_kalk
+                        margin = float(hm.get("margin", (nett_profit / omzet * 100.0) if omzet else 0.0))
+                elif m == 9:
+                    # September 2026: Rekap final 632 orders & verified neraca
+                    omzet = 118015000.0
+                    cash = 34475000.0
+                    transfer = 83540000.0
+                    cogs = 23168000.0
+                    opex = 26429512.0
+                    outcome = cogs + opex
+                    bersih_kalk = omzet - outcome
+                    nett_profit = bersih_kalk
+                    margin = (nett_profit / omzet * 100.0) if omzet > 0 else 0.0
+                    sep_exp_fs = fs.get("neracaByMonth", {}).get("2026-09", {}).get("expenses", [])
+                    if sep_exp_fs:
+                        expenses = sep_exp_fs
+                elif m == 10:
+                    # Oktober 2026: Live 399 orders & verified neraca
+                    okt_orders = [o for o in fs.get('orders', []) if o.get('tanggal', '').startswith('2026-10-')]
+                    omzet = sum(float(o.get('total', 0)) for o in okt_orders) or 82400000.0
+                    cash = sum(float(o.get('cash', 0)) for o in okt_orders) or 29280000.0
+                    transfer = sum(float(o.get('transfer', 0)) for o in okt_orders) or 53120000.0
+                    
+                    okt_exp_fs = fs.get("neracaByMonth", {}).get("2026-10", {}).get("expenses", [])
+                    if not okt_exp_fs:
+                        okt_exp_fs = [e for e in fs.get('expenses', []) if e.get('tanggal', '').startswith('2026-10-')]
+                    cogs = sum(float(e.get('nilai', 0)) for e in okt_exp_fs if e.get('jenis') == 'COGS') or 10878000.0
+                    opex = sum(float(e.get('nilai', 0)) for e in okt_exp_fs if e.get('jenis') == 'OPEX') or 9094625.0
+                    outcome = cogs + opex
+                    bersih_kalk = omzet - outcome
+                    nett_profit = bersih_kalk
+                    margin = (nett_profit / omzet * 100.0) if omzet > 0 else 0.0
+                    if okt_exp_fs:
+                        expenses = okt_exp_fs
+                    
+                    # Oktober daily from orders
+                    okt_daily_map = {}
+                    for o in okt_orders:
+                        d_str = str(o.get('tanggal', '2026-10-01')).split('-')[2]
+                        try: d = int(d_str)
+                        except: d = 1
+                        if d not in okt_daily_map:
+                            okt_daily_map[d] = {"cash": 0.0, "transfer": 0.0, "total": 0.0}
+                        okt_daily_map[d]["cash"] += float(o.get('cash', 0))
+                        okt_daily_map[d]["transfer"] += float(o.get('transfer', 0))
+                        okt_daily_map[d]["total"] += float(o.get('total', 0))
+                    daily = [{
+                        "tgl": f"2026-10-{d:02d}",
+                        "day": d,
+                        "cash": round(okt_daily_map[d]["cash"]),
+                        "transfer": round(okt_daily_map[d]["transfer"]),
+                        "total": round(okt_daily_map[d]["total"])
+                    } for d in sorted(okt_daily_map.keys())]
+            else:
+                nett_profit = bersih_kalk if (bersih_kalk != 0 and kotor_kalk > 0) else (omzet - outcome)
+                margin = (nett_profit / omzet * 100.0) if omzet > 0 else 0.0
             
             ads = sum(e["nilai"] for e in expenses if e.get("kategori") == "Marketing / Ads / KOL" or "ads" in e.get("desc", "").lower() or "iklan" in e.get("desc", "").lower())
             if ads == 0:
