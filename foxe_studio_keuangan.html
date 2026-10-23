@@ -1229,7 +1229,7 @@ function saveLocal() {
 }
 
 let activeMonth = "2026-10";
-let db=null,downloads=null,room=null,view="tahunan",estMonth=10,adsFilter="ALL",adsQ="",arsipYear="2026",arsipMonth=10,arsipExpTab="all",arsipExpSearch="";
+let db=null,downloads=null,room=null,view="tahunan",estMonth=10,adsFilter="ALL",adsQ="",arsipYear="2026",arsipMonth=10,arsipExpTab="all",arsipExpSearch="",arsipBoncosFilter="all";
 window.go = function(v){ view=v; render(); window.scrollTo({top:0,behavior:"smooth"}); };
 
 function nkey(s){
@@ -3253,6 +3253,11 @@ window.selectArsipYear = function(y) {
   }
 };
 
+window.setArsipBoncosFilter = function(f) {
+  arsipBoncosFilter = f;
+  render();
+};
+
 window.selectArsipMonth = function(m) {
   arsipMonth = Number(m);
   render();
@@ -3701,6 +3706,14 @@ function vArsip(R) {
   const cashRatio = curY.omzet > 0 ? (curY.cash / curY.omzet * 100) : 0;
   const trfRatio = curY.omzet > 0 ? (curY.transfer / curY.omzet * 100) : 0;
 
+  // Perhitungan Ambang Batas 45% (Boncos Meter)
+  const recordedMonths = mList.filter(m => (m.omzet || 0) > 0);
+  const boncosMonths = recordedMonths.filter(m => ((m.outcome || 0) / m.omzet * 100) >= 45.0);
+  const safeMonths = recordedMonths.filter(m => ((m.outcome || 0) / m.omzet * 100) < 45.0);
+  const annualCostRatio = curY.omzet > 0 ? (curY.outcome / curY.omzet * 100) : 0;
+  const boncosCount = boncosMonths.length;
+  const safeCount = safeMonths.length;
+
   // Selected month calculations
   const cogsRatio = selM.omzet > 0 ? ((selM.cogs / selM.omzet) * 100).toFixed(1) : "0.0";
   const opexRatio = selM.omzet > 0 ? ((selM.opex / selM.omzet) * 100).toFixed(1) : "0.0";
@@ -3819,7 +3832,13 @@ function vArsip(R) {
     <div class="stat">
       <span class="k">Total Beban (COGS + OPEX)</span>
       <span class="v sm" style="color:var(--crit);">${rp(curY.outcome)}</span>
-      <span class="m">COGS: ${rp(curY.cogs)} · OPEX: ${rp(curY.opex)}</span>
+      <div style="display:flex;align-items:center;gap:6px;margin-top:2px;">
+        <span class="pill ${annualCostRatio >= 45 ? 'crit' : 'good'}" style="font-size:10px;padding:1px 6px;font-weight:700;">
+          ${annualCostRatio.toFixed(1)}% Rasio ${annualCostRatio >= 45 ? '⚠️ Boncos' : '✅ Aman'}
+        </span>
+        <span class="tiny muted">${boncosCount} dari ${recordedMonths.length} bulan ≥ 45%</span>
+      </div>
+      <span class="m" style="margin-top:2px;">COGS: ${rp(curY.cogs)} · OPEX: ${rp(curY.opex)}</span>
     </div>
     <div class="stat">
       <span class="k">Laba Bersih (Nett Profit)</span>
@@ -3854,37 +3873,99 @@ function vArsip(R) {
     ${chartArsipAds(mList, arsipYear, yearsObj)}
   </div>
 
-  <!-- 12 MAP BULAN INTERAKTIF (.mgrid) -->
+  <!-- 12 MAP BULAN INTERAKTIF (.mgrid) & INDIKATOR BEBAN 45% (ALARM BONCOS) -->
   <div style="margin-bottom:20px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-      <h3 style="margin:0;font-size:16px;">12 Berkas Bulan — Tahun ${arsipYear}</h3>
-      <span class="tiny muted">Klik kartu bulan di bawah untuk membuka rincian kasir &amp; belanja neraca bulan tersebut.</span>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px;flex-wrap:wrap;gap:10px;">
+      <div>
+        <div class="eyebrow" style="color:var(--accent);">BERKAS PEMBUKUAN 12 BULAN &amp; AMBANG BATAS EFISIENSI 45%</div>
+        <h3 style="margin:2px 0 0;font-size:17px;display:flex;align-items:center;gap:8px;">
+          12 Berkas Bulan — Tahun ${arsipYear}
+          ${boncosCount > 0 ? `<span class="pill crit" style="font-size:11px;padding:2px 8px;font-weight:700;">⚠️ ${boncosCount} Bulan Boncos (≥ 45%)</span>` : `<span class="pill good" style="font-size:11px;padding:2px 8px;font-weight:700;">🛡️ 100% Efisien (&lt; 45%)</span>`}
+        </h3>
+        <p class="tiny muted" style="margin:3px 0 0;">
+          Ambang batas sehat studio adalah total beban operasional &le; <b>45%</b> dari omzet. Bulan dengan beban &ge; 45% ditandai merah (Boncos), sedangkan di bawah 45% bertanda hijau (Aman).
+        </p>
+      </div>
+
+      <!-- Quick Filter Pills -->
+      <div style="display:flex;align-items:center;gap:6px;background:var(--surface2);padding:4px 8px;border-radius:8px;border:1px solid var(--hairline);">
+        <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;">Filter:</span>
+        <div class="seg" style="display:inline-flex;gap:4px;">
+          <button class="btn sm ${arsipBoncosFilter === 'all' ? 'pri' : ''}" onclick="setArsipBoncosFilter('all');" style="padding:4px 10px;font-size:11.5px;font-weight:600;">Semua (${mList.length})</button>
+          <button class="btn sm ${arsipBoncosFilter === 'boncos' ? 'pri' : ''}" onclick="setArsipBoncosFilter('boncos');" style="padding:4px 10px;font-size:11.5px;font-weight:600;${arsipBoncosFilter === 'boncos' ? 'background:var(--crit);border-color:var(--crit);' : ''}">⚠️ Boncos &ge; 45% (${boncosCount})</button>
+          <button class="btn sm ${arsipBoncosFilter === 'safe' ? 'pri' : ''}" onclick="setArsipBoncosFilter('safe');" style="padding:4px 10px;font-size:11.5px;font-weight:600;${arsipBoncosFilter === 'safe' ? 'background:var(--good);border-color:var(--good);' : ''}">🛡️ Aman &lt; 45% (${safeCount})</button>
+        </div>
+      </div>
     </div>
+
     <div class="mgrid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:12px;">
-      ${mList.map(m => {
+      ${mList.filter(m => {
+        if (arsipBoncosFilter === 'boncos') return m.omzet > 0 && ((m.outcome / m.omzet) * 100) >= 45.0;
+        if (arsipBoncosFilter === 'safe') return m.omzet > 0 && ((m.outcome / m.omzet) * 100) < 45.0;
+        return true;
+      }).map(m => {
         const isSel = (Number(m.month) === Number(arsipMonth));
+        const costRatioNum = m.omzet > 0 ? (m.outcome / m.omzet * 100) : 0;
+        const isBoncos = m.omzet > 0 && (costRatioNum >= 45.0);
+        const isSafe = m.omzet > 0 && (costRatioNum < 45.0);
+        const hasData = m.omzet > 0;
         return `
-        <div class="arsip-month-card ${isSel ? 'active-month' : ''}" onclick="selectArsipMonth(${m.month});" style="cursor:pointer;padding:16px 18px;border-radius:12px;background:var(--surface);border:${isSel ? '2px solid var(--accent)' : '1px solid var(--hairline)'};box-shadow:${isSel ? '0 0 16px color-mix(in srgb,var(--accent) 30%,transparent)' : 'none'};transition:all .15s ease;">
+        <div class="arsip-month-card ${isSel ? 'active-month' : ''}" onclick="selectArsipMonth(${m.month});" style="cursor:pointer;padding:16px 18px;border-radius:12px;background:var(--surface);border:${isSel ? '2px solid var(--accent)' : (isBoncos ? '1.5px solid rgba(239,68,68,0.45)' : '1px solid var(--hairline)')};box-shadow:${isSel ? '0 0 16px color-mix(in srgb,var(--accent) 30%,transparent)' : (isBoncos ? '0 0 10px rgba(239,68,68,0.12)' : 'none')};transition:all .15s ease;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
             <b style="font-size:15px;color:${isSel ? 'var(--accent)' : 'var(--ink)'};">${m.name}</b>
-            <span class="pill ${isSel ? 'prog' : 'neutral'}" style="font-size:10.5px;">${isSel ? '● Sedang Dibuka' : (m.status || (m.omzet > 0 ? 'Tercatat' : '—'))}</span>
+            <div style="display:flex;align-items:center;gap:5px;">
+              ${isSel ? '<span class="pill prog" style="font-size:10px;padding:2px 6px;">● Dibuka</span>' : ''}
+              ${hasData ? (
+                isBoncos 
+                  ? `<span class="pill crit" style="font-size:10px;padding:2px 7px;font-weight:700;background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.4);" title="Rasio Pengeluaran ${costRatioNum.toFixed(1)}% dari Omzet (Melebihi Ambang Batas 45%)">⚠️ Boncos ${costRatioNum.toFixed(1)}%</span>`
+                  : `<span class="pill good" style="font-size:10px;padding:2px 7px;font-weight:700;background:rgba(16,185,129,0.15);color:#34d399;border:1px solid rgba(16,185,129,0.4);" title="Rasio Pengeluaran ${costRatioNum.toFixed(1)}% dari Omzet (Efisien di bawah 45%)">🛡️ Aman ${costRatioNum.toFixed(1)}%</span>`
+              ) : '<span class="pill neutral" style="font-size:10px;padding:2px 6px;">—</span>'}
+            </div>
           </div>
+          
           <div class="mono" style="font-size:19px;font-weight:700;color:var(--ink);margin-bottom:4px;">${rp(m.omzet)}</div>
+          
           <div style="font-size:11.5px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:4px;">
             <span>Cash: ${rp(m.cash)}</span>
             <span>Trf: ${rp(m.transfer)}</span>
           </div>
+          
           <div style="font-size:11px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:4px;">
             <span>COGS: <b class="mono" style="color:var(--accent-ink);">${rp(m.cogs)}</b></span>
             <span>OPEX: <b class="mono" style="color:var(--crit);">${rp(m.opex)}</b></span>
           </div>
+
+          <!-- INDIKATOR AMBANG BATAS 45% (BONCOS METER) -->
+          ${hasData ? `
+          <div style="margin: 6px 0 8px; background: color-mix(in srgb, ${isBoncos ? 'var(--crit)' : 'var(--good)'} 7%, var(--surface2)); padding: 7px 9px; border-radius: 8px; border: 1px solid ${isBoncos ? 'rgba(239,68,68,0.35)' : 'var(--hairline)'};">
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size:10.5px; margin-bottom:4px;">
+              <span style="color:var(--muted); font-size:10px; text-transform:uppercase; font-weight:600;">Rasio Beban (Limit 45%):</span>
+              <b class="mono" style="color:${isBoncos ? 'var(--crit)' : 'var(--good)'}; font-size:11px; font-weight:700;">
+                ${costRatioNum.toFixed(1)}% ${isBoncos ? '⚠️ Boncos' : '✅ Aman'}
+              </b>
+            </div>
+            <div style="position:relative; height:6px; background:var(--surface3); border-radius:3px; overflow:hidden;">
+              <div style="width:${Math.min(100, costRatioNum)}%; height:100%; background:${isBoncos ? 'linear-gradient(90deg, #f59e0b, #ef4444)' : 'linear-gradient(90deg, #00f2fe, #10b981)'}; border-radius:3px;"></div>
+              <!-- Garis Ambang Batas 45% -->
+              <div style="position:absolute; left:45%; top:0; bottom:0; width:2px; background:#faf9f5; box-shadow:0 0 4px rgba(0,0,0,0.8); z-index:2;" title="Ambang Batas Maksimal 45%"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:9px; color:var(--muted); margin-top:3px; font-family:var(--ff-mono);">
+              <span>0%</span>
+              <span style="color:#faf9f5; font-weight:600;">▲ 45% Limit</span>
+              <span>100%</span>
+            </div>
+          </div>
+          ` : ''}
+
           <div style="font-size:11px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px;">
             <span>Ads Iklan:</span><b class="mono" style="color:var(--warn);">${m.ads ? rp(m.ads) : "—"}</b>
           </div>
+          
           <div style="border-top:1px dashed var(--hairline);padding-top:6px;display:flex;justify-content:space-between;align-items:center;font-size:11.5px;">
             <span class="tiny muted">Laba Bersih:</span>
             <b class="mono" style="color:var(--good);">${rp(m.nettProfit)}</b>
           </div>
+          
           <button class="btn sm ${isSel ? 'pri' : 'sub'}" style="width:100%;margin-top:10px;font-size:12px;font-weight:700;display:flex;justify-content:center;align-items:center;gap:6px;padding:6px 10px;">
             ${isSel ? '📂 Sedang Terbuka di Bawah ➔' : '🔍 Buka COGS, OPEX &amp; Kasir ➔'}
           </button>
@@ -3950,6 +4031,30 @@ function vArsip(R) {
         <div class="tiny muted">Total Keluar: <span class="mono" style="color:var(--crit);">${rp(selM.outcome)}</span> (${costRatio}%)</div>
       </div>
     </div>
+
+    <!-- BANNER EVALUASI AMBANG 45% BULAN TERPILIH (BONCOS / AMAN) -->
+    ${selM.omzet > 0 ? `
+    <div style="background:${Number(costRatio) >= 45.0 ? 'color-mix(in srgb,var(--crit) 10%,var(--surface))' : 'color-mix(in srgb,var(--good) 8%,var(--surface))'};border:1.5px solid ${Number(costRatio) >= 45.0 ? 'var(--crit)' : 'var(--good)'};border-radius:10px;padding:12px 16px;margin-bottom:14px;box-shadow:${Number(costRatio) >= 45.0 ? '0 0 16px rgba(239,68,68,0.2)' : 'none'};">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">${Number(costRatio) >= 45.0 ? '⚠️' : '🛡️'}</span>
+          <div>
+            <b style="font-size:14px;color:${Number(costRatio) >= 45.0 ? 'var(--crit)' : 'var(--good)'};">
+              ${Number(costRatio) >= 45.0 ? `Peringatan Efisiensi: Beban Bulan ${selM.name} Mencapai ${costRatio}% (Melebihi Ambang Batas 45%)` : `Efisiensi Sehat: Beban Bulan ${selM.name} Terjaga di ${costRatio}% (Di Bawah Batas 45%)`}
+            </b>
+            <p class="tiny muted" style="margin:2px 0 0;">
+              ${Number(costRatio) >= 45.0 
+                ? `Pengeluaran bulan ini menyerap ${costRatio}% dari total omzet Rp ${selM.omzet.toLocaleString('id-ID')}. Total beban ${rp(selM.outcome)} (COGS: ${rp(selM.cogs)} + OPEX: ${rp(selM.opex)}). Ambang batas ideal studio adalah &le; 45% agar margin bersih tetap di atas 55%.` 
+                : `Pengeluaran bulan ini sangat efisien dengan rasio beban hanya ${costRatio}%, menghasilkan laba bersih ${rp(selM.nettProfit)} (${selM.margin.toFixed(1)}% margin bersih).`}
+            </p>
+          </div>
+        </div>
+        <span class="pill ${Number(costRatio) >= 45.0 ? 'crit' : 'good'}" style="font-size:11.5px;font-weight:700;padding:4px 12px;">
+          ${costRatio}% / Ambang 45%
+        </span>
+      </div>
+    </div>
+    ` : ''}
 
     <!-- STRIP REKAP KATEGORI BEBAN (COGS & OPEX) -->
     <div style="background:var(--surface);border:1px solid var(--hairline);border-radius:10px;padding:12px 16px;margin-bottom:14px;">
@@ -9176,7 +9281,7 @@ if (isAuthedOnLoad) {
 }
 
 // Deteksi versi kode baru (deploy baru) -> muat ulang otomatis agar fitur terbaru langsung aktif
-const BUILD_ID = "1792764047";
+const BUILD_ID = "1792764500";
 async function checkNewBuild() {
   if (window.location.protocol === "file:") return;
   try {
