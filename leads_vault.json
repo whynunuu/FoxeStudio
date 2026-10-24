@@ -298,11 +298,11 @@
     "last_message_at": "2026-10-03 08:26:28",
     "last_customer_msg": "Sisipkan di studio yg kosong aja gapapa",
     "last_admin_msg": "",
-    "summary": "Deal kasir: Graduation (Lunas)",
+    "summary": "Deal kasir: Large Group (Lunas)",
     "ai_recommendation": "Status: DEAL di Kasir Log Order. Siapkan SOP reminder.",
     "estimated_value": 250000,
     "follow_up_count": 0,
-    "paket": "Graduation",
+    "paket": "Large Group",
     "chat_history": [
       {
         "sender": "customer",
