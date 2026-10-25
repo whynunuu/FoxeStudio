@@ -55453,6 +55453,97 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
+    },
+    {
+      "id": "or_415",
+      "tanggal": "2026-10-25",
+      "client": "sofia",
+      "paket": "Pas Foto",
+      "tanggalFoto": "oct",
+      "cash": 0.0,
+      "transfer": 0.0,
+      "total": 0.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_416",
+      "tanggal": "2026-10-25",
+      "client": "Ganisyuri",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-15",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_417",
+      "tanggal": "2026-10-25",
+      "client": "Hana",
+      "paket": "Photofox",
+      "tanggalFoto": "2026-10-25",
+      "cash": 0.0,
+      "transfer": 125000.0,
+      "total": 125000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_418",
+      "tanggal": "2026-10-25",
+      "client": "Cita",
+      "paket": "Single",
+      "tanggalFoto": "2026-10-25",
+      "cash": 150000.0,
+      "transfer": 0.0,
+      "total": 150000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_419",
+      "tanggal": "2026-10-25",
+      "client": "Wildan Ramadhani",
+      "paket": "Packing",
+      "tanggalFoto": "2026-10-04",
+      "cash": 0.0,
+      "transfer": 20000.0,
+      "total": 20000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_420",
+      "tanggal": "2026-10-25",
+      "client": "Suha",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-05",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_421",
+      "tanggal": "2026-10-25",
+      "client": "Acha",
+      "paket": "Packing",
+      "tanggalFoto": "8 sept",
+      "cash": 0.0,
+      "transfer": 20000.0,
+      "total": 20000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -63352,13 +63443,22 @@
       "id": "ex_nrc_43",
       "tanggal": "2026-10-21",
       "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "Marketing / Ads / KOL",
+      "deskripsi": "Ads",
+      "nilai": 500000.0
+    },
+    {
+      "id": "ex_nrc_44",
+      "tanggal": "2026-10-21",
+      "bulan": "2026-10",
       "jenis": "NON-P&L",
       "kategori": "Prive / Owner Draw",
       "deskripsi": "Bon",
       "nilai": 2606200.0
     },
     {
-      "id": "ex_nrc_44",
+      "id": "ex_nrc_45",
       "tanggal": "2026-10-21",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -63367,7 +63467,7 @@
       "nilai": 376625.0
     },
     {
-      "id": "ex_nrc_45",
+      "id": "ex_nrc_46",
       "tanggal": "2026-10-21",
       "bulan": "2026-10",
       "jenis": "Biaya Lainnya",
@@ -67507,7 +67607,7 @@
     {
       "id": "cc_2026-10-25",
       "tanggal": "2026-10-25",
-      "nilai": 0.0
+      "nilai": 150000.0
     },
     {
       "id": "cc_2026-10-26",
@@ -67984,10 +68084,10 @@
     {
       "id": "ld_25",
       "tanggal": "2026-10-25",
-      "leads": 0.0,
-      "dp": 2.0,
-      "sesiFoto": 3.0,
-      "transaksi": 5.0
+      "leads": 24.0,
+      "dp": 4.0,
+      "sesiFoto": 8.0,
+      "transaksi": 12.0
     }
   ],
   "kpi": [
@@ -79730,7 +79830,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 84700000.0
+        "omzet": 85215000.0
       }
     ]
   },
@@ -80078,6 +80178,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261025-1455",
+      "mulai": "2026-10-25T14:55:01.492876+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 421 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 114 pos pengeluaran Neraca, 271 pipeline Okt."
+    },
     {
       "id": "sy_20261025-0941",
       "mulai": "2026-10-25T09:41:36.109749+00:00",
@@ -81297,7 +81403,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-25T09:41:36.109749+00:00"
+    "last_sync": "2026-10-25T14:55:01.492876+00:00"
   },
   "neracaDetail": [
     {
@@ -81860,16 +81966,16 @@
   "oktoberPipeline": {
     "bulan": "2026-10",
     "totalBookings": 271,
-    "potentialOmzet": 88325000.0,
-    "totalDp": 24950000.0,
-    "estimateCashIn": 1675000.0,
-    "remainingCashIn": 1675000.0,
-    "totalPipelineCashIn": 63375000.0,
+    "potentialOmzet": 88075000.0,
+    "totalDp": 25050000.0,
+    "estimateCashIn": 1125000.0,
+    "remainingCashIn": 1125000.0,
+    "totalPipelineCashIn": 63025000.0,
     "breakdown": {
       "reguler": {
         "sesi": 173,
-        "nilai": 52525000.0,
-        "dp": 15800000.0
+        "nilai": 52275000.0,
+        "dp": 15900000.0
       },
       "wisudaDay1": {
         "sesi": 47,
@@ -81884,16 +81990,16 @@
     },
     "statusBreakdown": {
       "done": {
-        "sesi": 252,
-        "nilai": 81950000.0,
-        "dp": 23350000.0,
-        "cashIn": 58800000.0
+        "sesi": 254,
+        "nilai": 82250000.0,
+        "dp": 23450000.0,
+        "cashIn": 59000000.0
       },
       "confirmed": {
-        "sesi": 7,
-        "nilai": 2075000.0,
+        "sesi": 5,
+        "nilai": 1525000.0,
         "dp": 400000.0,
-        "cashIn": 1675000.0
+        "cashIn": 1125000.0
       },
       "reschedule": {
         "sesi": 12,
@@ -88615,12 +88721,12 @@
         "admin": "IN",
         "noHp": "dp 100 limbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 100000.0,
@@ -88629,26 +88735,26 @@
       {
         "id": "sc_bk_168",
         "tgl": "2026-10-25",
-        "waktu": "17:40",
+        "waktu": "18:20",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "cita",
-        "paket": "Family A",
-        "paketRaw": "Family A",
+        "paket": "Single",
+        "paketRaw": "Single",
         "jmlOrang": 1,
-        "harga": 350000.0,
+        "harga": 100000.0,
         "admin": "AL",
         "noHp": "limbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 0.0,
-        "sisaPelunasan": 350000.0,
+        "sisaPelunasan": 100000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -88663,7 +88769,7 @@
         "jmlOrang": 11,
         "harga": 275000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -88672,8 +88778,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 275000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 175000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -94401,6 +94507,97 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": "SAKA"
+      },
+      {
+        "id": "or_415",
+        "tanggal": "2026-10-25",
+        "client": "sofia",
+        "paket": "Pas Foto",
+        "tanggalFoto": "oct",
+        "cash": 0.0,
+        "transfer": 0.0,
+        "total": 0.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_416",
+        "tanggal": "2026-10-25",
+        "client": "Ganisyuri",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-15",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_417",
+        "tanggal": "2026-10-25",
+        "client": "Hana",
+        "paket": "Photofox",
+        "tanggalFoto": "2026-10-25",
+        "cash": 0.0,
+        "transfer": 125000.0,
+        "total": 125000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_418",
+        "tanggal": "2026-10-25",
+        "client": "Cita",
+        "paket": "Single",
+        "tanggalFoto": "2026-10-25",
+        "cash": 150000.0,
+        "transfer": 0.0,
+        "total": 150000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_419",
+        "tanggal": "2026-10-25",
+        "client": "Wildan Ramadhani",
+        "paket": "Packing",
+        "tanggalFoto": "2026-10-04",
+        "cash": 0.0,
+        "transfer": 20000.0,
+        "total": 20000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_420",
+        "tanggal": "2026-10-25",
+        "client": "Suha",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-05",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_421",
+        "tanggal": "2026-10-25",
+        "client": "Acha",
+        "paket": "Packing",
+        "tanggalFoto": "8 sept",
+        "cash": 0.0,
+        "transfer": 20000.0,
+        "total": 20000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -95129,7 +95326,7 @@
       {
         "id": "cc_2026-10-25",
         "tanggal": "2026-10-25",
-        "nilai": 0.0
+        "nilai": 150000.0
       },
       {
         "id": "cc_2026-10-26",
@@ -95358,10 +95555,10 @@
       {
         "id": "ld_25",
         "tanggal": "2026-10-25",
-        "leads": 0.0,
-        "dp": 2.0,
-        "sesiFoto": 3.0,
-        "transaksi": 5.0
+        "leads": 24.0,
+        "dp": 4.0,
+        "sesiFoto": 8.0,
+        "transaksi": 12.0
       },
       {
         "id": "ld_26",
@@ -98328,13 +98525,22 @@
           "id": "ex_nrc_43",
           "tanggal": "2026-10-21",
           "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "Marketing / Ads / KOL",
+          "deskripsi": "Ads",
+          "nilai": 500000.0
+        },
+        {
+          "id": "ex_nrc_44",
+          "tanggal": "2026-10-21",
+          "bulan": "2026-10",
           "jenis": "NON-P&L",
           "kategori": "Prive / Owner Draw",
           "deskripsi": "Bon",
           "nilai": 2606200.0
         },
         {
-          "id": "ex_nrc_44",
+          "id": "ex_nrc_45",
           "tanggal": "2026-10-21",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -98343,7 +98549,7 @@
           "nilai": 376625.0
         },
         {
-          "id": "ex_nrc_45",
+          "id": "ex_nrc_46",
           "tanggal": "2026-10-21",
           "bulan": "2026-10",
           "jenis": "Biaya Lainnya",
@@ -160019,12 +160225,12 @@
         "admin": "IN",
         "noHp": "dp 100 limbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 100000.0,
@@ -160033,26 +160239,26 @@
       {
         "id": "sc_bk_168",
         "tgl": "2026-10-25",
-        "waktu": "17:40",
+        "waktu": "18:20",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "cita",
-        "paket": "Family A",
-        "paketRaw": "Family A",
+        "paket": "Single",
+        "paketRaw": "Single",
         "jmlOrang": 1,
-        "harga": 350000.0,
+        "harga": 100000.0,
         "admin": "AL",
         "noHp": "limbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 0.0,
-        "sisaPelunasan": 350000.0,
+        "sisaPelunasan": 100000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -160067,7 +160273,7 @@
         "jmlOrang": 11,
         "harga": 275000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -160076,8 +160282,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 275000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 175000.0,
         "kategori": "Studio Reguler"
       },
       {
