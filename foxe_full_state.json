@@ -63441,7 +63441,7 @@
     },
     {
       "id": "ex_nrc_43",
-      "tanggal": "2026-10-21",
+      "tanggal": "2026-10-22",
       "bulan": "2026-10",
       "jenis": "OPEX",
       "kategori": "Marketing / Ads / KOL",
@@ -63450,30 +63450,48 @@
     },
     {
       "id": "ex_nrc_44",
-      "tanggal": "2026-10-21",
+      "tanggal": "2026-10-22",
+      "bulan": "2026-10",
+      "jenis": "COGS",
+      "kategori": "Cetak Foto & Photo Paper",
+      "deskripsi": "Cetakan",
+      "nilai": 1811000.0
+    },
+    {
+      "id": "ex_nrc_45",
+      "tanggal": "2026-10-24",
+      "bulan": "2026-10",
+      "jenis": "COGS",
+      "kategori": "Cetak Foto & Photo Paper",
+      "deskripsi": "Cetakan",
+      "nilai": 1627000.0
+    },
+    {
+      "id": "ex_nrc_46",
+      "tanggal": "2026-10-24",
       "bulan": "2026-10",
       "jenis": "NON-P&L",
       "kategori": "Prive / Owner Draw",
       "deskripsi": "Bon",
-      "nilai": 2606200.0
+      "nilai": 3006200.0
     },
     {
-      "id": "ex_nrc_45",
-      "tanggal": "2026-10-21",
+      "id": "ex_nrc_47",
+      "tanggal": "2026-10-24",
       "bulan": "2026-10",
       "jenis": "OPEX",
       "kategori": "Pajak & Perizinan",
       "deskripsi": "Pajak",
-      "nilai": 376625.0
+      "nilai": 418500.0
     },
     {
-      "id": "ex_nrc_46",
-      "tanggal": "2026-10-21",
+      "id": "ex_nrc_48",
+      "tanggal": "2026-10-24",
       "bulan": "2026-10",
       "jenis": "Biaya Lainnya",
       "kategori": "Amal & Sosial",
       "deskripsi": "Amal",
-      "nilai": 1129875.0
+      "nilai": 1255500.0
     },
     {
       "id": "ex_nrc_1",
@@ -80179,6 +80197,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261026-0642",
+      "mulai": "2026-10-26T06:42:24.724655+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 421 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 116 pos pengeluaran Neraca, 271 pipeline Okt."
+    },
+    {
       "id": "sy_20261025-1455",
       "mulai": "2026-10-25T14:55:01.492876+00:00",
       "status": "sukses",
@@ -81403,7 +81427,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-25T14:55:01.492876+00:00"
+    "last_sync": "2026-10-26T06:42:24.724655+00:00"
   },
   "neracaDetail": [
     {
@@ -95614,8 +95638,8 @@
         "id": "kp_1",
         "nama": "ADIF",
         "role": "Fotografer 1",
-        "hariDinilai": 23,
-        "disiplin": 4.87,
+        "hariDinilai": 26,
+        "disiplin": 4.88,
         "akurasi": 5.0,
         "sop": 5.0,
         "client": 5.0,
@@ -95626,19 +95650,19 @@
         "id": "kp_2",
         "nama": "AMEL",
         "role": "Admin 2",
-        "hariDinilai": 22,
-        "disiplin": 4.73,
-        "akurasi": 4.64,
-        "sop": 4.73,
-        "client": 4.82,
-        "produktivitas": 4.45,
+        "hariDinilai": 24,
+        "disiplin": 4.75,
+        "akurasi": 4.62,
+        "sop": 4.75,
+        "client": 4.83,
+        "produktivitas": 4.46,
         "referral": 0
       },
       {
         "id": "kp_3",
         "nama": "INDAH",
         "role": "Admin 1",
-        "hariDinilai": 23,
+        "hariDinilai": 26,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -95650,12 +95674,12 @@
         "id": "kp_4",
         "nama": "SAKA",
         "role": "Fotografer 2",
-        "hariDinilai": 22,
-        "disiplin": 4.95,
+        "hariDinilai": 24,
+        "disiplin": 4.96,
         "akurasi": 5.0,
-        "sop": 4.95,
+        "sop": 4.96,
         "client": 5.0,
-        "produktivitas": 4.82,
+        "produktivitas": 4.83,
         "referral": 0
       }
     ],
@@ -95683,7 +95707,9 @@
           5.0,
           5.0,
           4.0,
-          4.0
+          4.0,
+          5.0,
+          5.0
         ],
         "akurasi": [
           4.0,
@@ -95707,6 +95733,8 @@
           5.0,
           5.0,
           4.0,
+          4.0,
+          5.0,
           4.0
         ],
         "sop": [
@@ -95731,7 +95759,9 @@
           5.0,
           5.0,
           5.0,
-          4.0
+          4.0,
+          5.0,
+          5.0
         ],
         "client": [
           4.0,
@@ -95744,6 +95774,8 @@
           5.0,
           4.0,
           4.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -95779,7 +95811,9 @@
           4.0,
           5.0,
           3.0,
-          3.0
+          3.0,
+          5.0,
+          4.0
         ]
       },
       "ADIF": {
@@ -95806,9 +95840,15 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -95856,9 +95896,15 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "client": [
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -95899,6 +95945,9 @@
           5.0,
           5.0,
           4.0,
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -95933,9 +95982,15 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -95983,6 +96038,9 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "client": [
@@ -96008,9 +96066,15 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "produktivitas": [
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -96059,9 +96123,13 @@
           5.0,
           4.0,
           5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -96107,9 +96175,13 @@
           5.0,
           5.0,
           4.0,
+          5.0,
+          5.0,
           5.0
         ],
         "client": [
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -96155,6 +96227,8 @@
           5.0,
           5.0,
           4.0,
+          5.0,
+          5.0,
           5.0
         ]
       }
@@ -98523,7 +98597,7 @@
         },
         {
           "id": "ex_nrc_43",
-          "tanggal": "2026-10-21",
+          "tanggal": "2026-10-22",
           "bulan": "2026-10",
           "jenis": "OPEX",
           "kategori": "Marketing / Ads / KOL",
@@ -98532,30 +98606,48 @@
         },
         {
           "id": "ex_nrc_44",
-          "tanggal": "2026-10-21",
+          "tanggal": "2026-10-22",
+          "bulan": "2026-10",
+          "jenis": "COGS",
+          "kategori": "Cetak Foto & Photo Paper",
+          "deskripsi": "Cetakan",
+          "nilai": 1811000.0
+        },
+        {
+          "id": "ex_nrc_45",
+          "tanggal": "2026-10-24",
+          "bulan": "2026-10",
+          "jenis": "COGS",
+          "kategori": "Cetak Foto & Photo Paper",
+          "deskripsi": "Cetakan",
+          "nilai": 1627000.0
+        },
+        {
+          "id": "ex_nrc_46",
+          "tanggal": "2026-10-24",
           "bulan": "2026-10",
           "jenis": "NON-P&L",
           "kategori": "Prive / Owner Draw",
           "deskripsi": "Bon",
-          "nilai": 2606200.0
+          "nilai": 3006200.0
         },
         {
-          "id": "ex_nrc_45",
-          "tanggal": "2026-10-21",
+          "id": "ex_nrc_47",
+          "tanggal": "2026-10-24",
           "bulan": "2026-10",
           "jenis": "OPEX",
           "kategori": "Pajak & Perizinan",
           "deskripsi": "Pajak",
-          "nilai": 376625.0
+          "nilai": 418500.0
         },
         {
-          "id": "ex_nrc_46",
-          "tanggal": "2026-10-21",
+          "id": "ex_nrc_48",
+          "tanggal": "2026-10-24",
           "bulan": "2026-10",
           "jenis": "Biaya Lainnya",
           "kategori": "Amal & Sosial",
           "deskripsi": "Amal",
-          "nilai": 1129875.0
+          "nilai": 1255500.0
         }
       ],
       "detail": [
