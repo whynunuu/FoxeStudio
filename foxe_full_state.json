@@ -55661,6 +55661,32 @@
       "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_431",
+      "tanggal": "2026-10-27",
+      "client": "Devinta Khoerunisa",
+      "paket": "Photofox",
+      "tanggalFoto": "2026-10-27",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_432",
+      "tanggal": "2026-10-27",
+      "client": "lutfi",
+      "paket": "Photofox",
+      "tanggalFoto": "2026-10-27",
+      "cash": 100000.0,
+      "transfer": 0.0,
+      "total": 100000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
     }
   ],
   "shifts": [
@@ -62608,8 +62634,8 @@
     },
     {
       "id": "sh_108",
-      "tanggal": "2026-10-28",
-      "nama": "INDAH",
+      "tanggal": "2026-10-27",
+      "nama": "SAKA",
       "slot": 1
     },
     {
@@ -62620,6 +62646,12 @@
     },
     {
       "id": "sh_110",
+      "tanggal": "2026-10-28",
+      "nama": "INDAH",
+      "slot": 1
+    },
+    {
+      "id": "sh_111",
       "tanggal": "2026-10-29",
       "nama": "INDAH",
       "slot": 1
@@ -67812,7 +67844,7 @@
     {
       "id": "cc_2026-10-27",
       "tanggal": "2026-10-27",
-      "nilai": 0.0
+      "nilai": 100000.0
     },
     {
       "id": "cc_2026-10-28",
@@ -68295,10 +68327,10 @@
     {
       "id": "ld_27",
       "tanggal": "2026-10-27",
-      "leads": 0.0,
+      "leads": 24.0,
       "dp": 4.0,
-      "sesiFoto": 1.0,
-      "transaksi": 5.0
+      "sesiFoto": 3.0,
+      "transaksi": 7.0
     }
   ],
   "kpi": [
@@ -80041,7 +80073,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 86490000.0
+        "omzet": 86690000.0
       }
     ]
   },
@@ -80389,6 +80421,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261027-1514",
+      "mulai": "2026-10-27T15:14:50.268490+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 432 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 116 pos pengeluaran Neraca, 273 pipeline Okt."
+    },
     {
       "id": "sy_20261027-1019",
       "mulai": "2026-10-27T10:19:27.869789+00:00",
@@ -81650,7 +81688,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-27T10:19:27.869789+00:00"
+    "last_sync": "2026-10-27T15:14:50.268490+00:00"
   },
   "neracaDetail": [
     {
@@ -82215,8 +82253,8 @@
     "totalBookings": 273,
     "potentialOmzet": 88475000.0,
     "totalDp": 25150000.0,
-    "estimateCashIn": 1250000.0,
-    "remainingCashIn": 1250000.0,
+    "estimateCashIn": 950000.0,
+    "remainingCashIn": 950000.0,
     "totalPipelineCashIn": 63325000.0,
     "breakdown": {
       "reguler": {
@@ -82237,16 +82275,16 @@
     },
     "statusBreakdown": {
       "done": {
-        "sesi": 255,
-        "nilai": 82525000.0,
-        "dp": 23550000.0,
-        "cashIn": 59175000.0
+        "sesi": 257,
+        "nilai": 82925000.0,
+        "dp": 23650000.0,
+        "cashIn": 59475000.0
       },
       "confirmed": {
-        "sesi": 6,
-        "nilai": 1650000.0,
-        "dp": 400000.0,
-        "cashIn": 1250000.0
+        "sesi": 4,
+        "nilai": 1250000.0,
+        "dp": 300000.0,
+        "cashIn": 950000.0
       },
       "reschedule": {
         "sesi": 12,
@@ -89043,12 +89081,12 @@
         "admin": "AL",
         "noHp": "dp 100",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 100000.0,
@@ -89068,12 +89106,12 @@
         "admin": "AL",
         "noHp": "wooden",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 0.0,
         "sisaPelunasan": 200000.0,
@@ -95012,6 +95050,32 @@
         "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_431",
+        "tanggal": "2026-10-27",
+        "client": "Devinta Khoerunisa",
+        "paket": "Photofox",
+        "tanggalFoto": "2026-10-27",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_432",
+        "tanggal": "2026-10-27",
+        "client": "lutfi",
+        "paket": "Photofox",
+        "tanggalFoto": "2026-10-27",
+        "cash": 100000.0,
+        "transfer": 0.0,
+        "total": 100000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
       }
     ],
     "shifts": [
@@ -95659,8 +95723,8 @@
       },
       {
         "id": "sh_108",
-        "tanggal": "2026-10-28",
-        "nama": "INDAH",
+        "tanggal": "2026-10-27",
+        "nama": "SAKA",
         "slot": 1
       },
       {
@@ -95671,6 +95735,12 @@
       },
       {
         "id": "sh_110",
+        "tanggal": "2026-10-28",
+        "nama": "INDAH",
+        "slot": 1
+      },
+      {
+        "id": "sh_111",
         "tanggal": "2026-10-29",
         "nama": "INDAH",
         "slot": 1
@@ -95810,7 +95880,7 @@
       {
         "id": "cc_2026-10-27",
         "tanggal": "2026-10-27",
-        "nilai": 0.0
+        "nilai": 100000.0
       },
       {
         "id": "cc_2026-10-28",
@@ -96045,10 +96115,10 @@
       {
         "id": "ld_27",
         "tanggal": "2026-10-27",
-        "leads": 0.0,
+        "leads": 24.0,
         "dp": 4.0,
-        "sesiFoto": 1.0,
-        "transaksi": 5.0
+        "sesiFoto": 3.0,
+        "transaksi": 7.0
       },
       {
         "id": "ld_28",
@@ -99639,18 +99709,18 @@
           "row_idx": 12,
           "nama": "Saka",
           "job": "Fotografer",
-          "q": 26.0,
+          "q": 27.0,
           "q_raw": 0.0,
-          "actual_shift": 26,
+          "actual_shift": 27,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 1040000.0,
+          "total_gaji": 1080000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 1040000.0,
+          "thp": 1080000.0,
           "status": "Draft"
         },
         {
@@ -99845,13 +99915,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 12550000.0,
+        "total_gaji": 12590000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 12550000.0,
+        "grand_total_thp": 12590000.0,
         "total_karyawan": 12
       }
     },
@@ -109812,18 +109882,18 @@
         "row_idx": 12,
         "nama": "Saka",
         "job": "Fotografer",
-        "q": 26.0,
+        "q": 27.0,
         "q_raw": 0.0,
-        "actual_shift": 26,
+        "actual_shift": 27,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 1040000.0,
+        "total_gaji": 1080000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 1040000.0,
+        "thp": 1080000.0,
         "status": "Draft"
       },
       {
@@ -160842,12 +160912,12 @@
         "admin": "AL",
         "noHp": "dp 100",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 100000.0,
@@ -160867,12 +160937,12 @@
         "admin": "AL",
         "noHp": "wooden",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 0.0,
         "sisaPelunasan": 200000.0,
