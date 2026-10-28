@@ -55726,6 +55726,19 @@
       "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
+    },
+    {
+      "id": "or_436",
+      "tanggal": "2026-10-28",
+      "client": "Zulfa",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-10-28",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
     }
   ],
   "shifts": [
@@ -62706,6 +62719,12 @@
       "tanggal": "2026-10-29",
       "nama": "INDAH",
       "slot": 1
+    },
+    {
+      "id": "sh_114",
+      "tanggal": "2026-10-29",
+      "nama": "ADIF",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -68388,8 +68407,8 @@
       "tanggal": "2026-10-28",
       "leads": 0.0,
       "dp": 2.0,
-      "sesiFoto": 1.0,
-      "transaksi": 3.0
+      "sesiFoto": 2.0,
+      "transaksi": 4.0
     }
   ],
   "kpi": [
@@ -80132,7 +80151,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 86990000.0
+        "omzet": 87090000.0
       }
     ]
   },
@@ -80480,6 +80499,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261028-1111",
+      "mulai": "2026-10-28T11:11:04.397004+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 436 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 116 pos pengeluaran Neraca, 274 pipeline Okt."
+    },
     {
       "id": "sy_20261028-0706",
       "mulai": "2026-10-28T07:06:30.857297+00:00",
@@ -81765,7 +81790,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-28T07:06:30.857297+00:00"
+    "last_sync": "2026-10-28T11:11:04.397004+00:00"
   },
   "neracaDetail": [
     {
@@ -82327,16 +82352,16 @@
   },
   "oktoberPipeline": {
     "bulan": "2026-10",
-    "totalBookings": 273,
-    "potentialOmzet": 88475000.0,
+    "totalBookings": 274,
+    "potentialOmzet": 88825000.0,
     "totalDp": 25150000.0,
-    "estimateCashIn": 950000.0,
-    "remainingCashIn": 950000.0,
-    "totalPipelineCashIn": 63325000.0,
+    "estimateCashIn": 1200000.0,
+    "remainingCashIn": 1200000.0,
+    "totalPipelineCashIn": 63675000.0,
     "breakdown": {
       "reguler": {
-        "sesi": 175,
-        "nilai": 52675000.0,
+        "sesi": 176,
+        "nilai": 53025000.0,
         "dp": 16000000.0
       },
       "wisudaDay1": {
@@ -82352,16 +82377,16 @@
     },
     "statusBreakdown": {
       "done": {
-        "sesi": 257,
-        "nilai": 82925000.0,
-        "dp": 23650000.0,
-        "cashIn": 59475000.0
+        "sesi": 258,
+        "nilai": 83125000.0,
+        "dp": 23750000.0,
+        "cashIn": 59575000.0
       },
       "confirmed": {
         "sesi": 4,
-        "nilai": 1250000.0,
-        "dp": 300000.0,
-        "cashIn": 950000.0
+        "nilai": 1400000.0,
+        "dp": 200000.0,
+        "cashIn": 1200000.0
       },
       "reschedule": {
         "sesi": 12,
@@ -89208,12 +89233,12 @@
         "admin": "IN",
         "noHp": "dp 100 calmblue",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 100000.0,
@@ -89271,6 +89296,31 @@
       },
       {
         "id": "sc_bk_175",
+        "tgl": "2026-10-30",
+        "waktu": "15:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Baskaga",
+        "paket": "Large Group",
+        "paketRaw": "LG 14",
+        "jmlOrang": 14,
+        "harga": 350000.0,
+        "admin": "IN",
+        "noHp": "",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false,
+        "dp": 0.0,
+        "sisaPelunasan": 350000.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_176",
         "tgl": "2026-10-31",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -95192,6 +95242,19 @@
         "pembayaran": "Lunas",
         "admin": "INDAH",
         "fotografer": "SAKA"
+      },
+      {
+        "id": "or_436",
+        "tanggal": "2026-10-28",
+        "client": "Zulfa",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-10-28",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
       }
     ],
     "shifts": [
@@ -95872,6 +95935,12 @@
         "tanggal": "2026-10-29",
         "nama": "INDAH",
         "slot": 1
+      },
+      {
+        "id": "sh_114",
+        "tanggal": "2026-10-29",
+        "nama": "ADIF",
+        "slot": 1
       }
     ],
     "cashControl": [
@@ -96253,8 +96322,8 @@
         "tanggal": "2026-10-28",
         "leads": 0.0,
         "dp": 2.0,
-        "sesiFoto": 1.0,
-        "transaksi": 3.0
+        "sesiFoto": 2.0,
+        "transaksi": 4.0
       },
       {
         "id": "ld_29",
@@ -99818,18 +99887,18 @@
           "row_idx": 10,
           "nama": "Adif",
           "job": "Fotografer",
-          "q": 28.0,
+          "q": 29.0,
           "q_raw": 0.0,
-          "actual_shift": 28,
+          "actual_shift": 29,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 1120000.0,
+          "total_gaji": 1160000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 1120000.0,
+          "thp": 1160000.0,
           "status": "Draft"
         },
         {
@@ -100043,13 +100112,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 12670000.0,
+        "total_gaji": 12710000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 12670000.0,
+        "grand_total_thp": 12710000.0,
         "total_karyawan": 12
       }
     },
@@ -109991,18 +110060,18 @@
         "row_idx": 10,
         "nama": "Adif",
         "job": "Fotografer",
-        "q": 28.0,
+        "q": 29.0,
         "q_raw": 0.0,
-        "actual_shift": 28,
+        "actual_shift": 29,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 1120000.0,
+        "total_gaji": 1160000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 1120000.0,
+        "thp": 1160000.0,
         "status": "Draft"
       },
       {
@@ -161090,12 +161159,12 @@
         "admin": "IN",
         "noHp": "dp 100 calmblue",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false,
         "dp": 100000.0,
         "sisaPelunasan": 100000.0,
@@ -161153,6 +161222,31 @@
       },
       {
         "id": "sc_bk_175",
+        "tgl": "2026-10-30",
+        "waktu": "15:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Baskaga",
+        "paket": "Large Group",
+        "paketRaw": "LG 14",
+        "jmlOrang": 14,
+        "harga": 350000.0,
+        "admin": "IN",
+        "noHp": "",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false,
+        "dp": 0.0,
+        "sisaPelunasan": 350000.0,
+        "kategori": "Studio Reguler"
+      },
+      {
+        "id": "sc_bk_176",
         "tgl": "2026-10-31",
         "waktu": "15:00",
         "studio": "Studio 1",
