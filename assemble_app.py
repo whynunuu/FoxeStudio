@@ -2673,13 +2673,25 @@ function vTahunan(R) {
       cutDayM = 30; // Rekap final September (lewat tgl 15)
       isClosedM = true;
     } else if (info.no === 10) {
-      const oktExp = (S.neracaByMonth && S.neracaByMonth["2026-10"] && S.neracaByMonth["2026-10"].expenses) 
-        ? S.neracaByMonth["2026-10"].expenses 
-        : (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-10-"));
-      oktExp.forEach(e => {
-        if (e.jenis === "COGS") cogsM += dnum(e.nilai);
-        else if (e.jenis === "OPEX") opexM += dnum(e.nilai);
-      });
+      if (isCurrent && R && R.c && R.c.bulan === "2026-10") {
+        cogsM = dnum(R.cogs);
+        opexM = dnum(R.opex);
+      } else {
+        const oktExp = (S.neracaByMonth && S.neracaByMonth["2026-10"] && S.neracaByMonth["2026-10"].expenses) 
+          ? S.neracaByMonth["2026-10"].expenses 
+          : (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-10-"));
+        oktExp.forEach(e => {
+          if (e.jenis === "COGS") cogsM += dnum(e.nilai);
+          else if (e.jenis === "OPEX") opexM += dnum(e.nilai);
+        });
+        const gajiNeraca = oktExp.filter(e => /^gaji/i.test(e.kategori || "")).reduce((s, e) => s + dnum(e.nilai), 0);
+        if (gajiNeraca === 0) {
+          const actR = (S.rosterGajiByMonth && S.rosterGajiByMonth["2026-10"]) || [];
+          const baseGaji = actR.filter(r => /admin|foto|editor|manager|marketing/i.test(r.job || r.posisi || "")).reduce((s, r) => s + dnum(r.total_gaji || (dnum(r.q) * dnum(r.cost)) || r.thp), 0);
+          const bonusCair = R ? dnum(R.bonusCair) : 0;
+          opexM += baseGaji + bonusCair;
+        }
+      }
       hasExpenses = (cogsM > 0 || opexM > 0);
       const oktCutoff = (S.oktoberLogOrder && S.oktoberLogOrder.cutoff) || (S.config && S.config.cutoff && S.config.cutoff.startsWith("2026-10") ? S.config.cutoff : "") || `2026-10-${String(Math.max(1, ...((S.orders||[]).filter(o=>o.tanggal&&o.tanggal.startsWith("2026-10-")&&dnum(o.total)>0).map(o=>parseInt(o.tanggal.split("-")[2],10))||[1]))).padStart(2,"0")}`;
       cutDayM = parseInt(oktCutoff.split("-")[2] || "1", 10);
@@ -2709,6 +2721,8 @@ function vTahunan(R) {
       isFuture: isFuture,
       yoy: yoy,
       hist: hist,
+      cogs: cogsM,
+      opex: opexM,
       totalOutcome: totalOutcome,
       outcomeRatio: outcomeRatio,
       isOutcomeAlert: isOutcomeAlert,
@@ -2758,9 +2772,10 @@ function vTahunan(R) {
   const cogsSep = sepExp.filter(e => e.jenis === "COGS").reduce((s, e) => s + dnum(e.nilai), 0);
   const opexSep = sepExp.filter(e => e.jenis === "OPEX").reduce((s, e) => s + dnum(e.nilai), 0);
 
+  const oktMObj = months.find(m => m.no === 10);
   const oktExp = (S.neracaByMonth && S.neracaByMonth["2026-10"] && S.neracaByMonth["2026-10"].expenses) || (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-10-"));
-  const cogsOkt = oktExp.filter(e => e.jenis === "COGS").reduce((s, e) => s + dnum(e.nilai), 0);
-  const opexOkt = oktExp.filter(e => e.jenis === "OPEX").reduce((s, e) => s + dnum(e.nilai), 0);
+  const cogsOkt = oktMObj ? dnum(oktMObj.cogs) : oktExp.filter(e => e.jenis === "COGS").reduce((s, e) => s + dnum(e.nilai), 0);
+  const opexOkt = oktMObj ? dnum(oktMObj.opex) : oktExp.filter(e => e.jenis === "OPEX").reduce((s, e) => s + dnum(e.nilai), 0);
 
   const totCogs26 = cogsJanAug + cogsSep + cogsOkt;
   const totOpex26 = opexJanAug + opexSep + opexOkt;
