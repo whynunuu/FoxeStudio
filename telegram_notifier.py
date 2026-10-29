@@ -15,20 +15,18 @@ import urllib.parse
 import sys
 import datetime
 import re
-import html
 from collections import defaultdict, Counter
 
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
 DEFAULT_TOKEN = "8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s"
-DEFAULT_CHAT_ID = 1608969830
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "telegram_config.json")
 
 def load_config():
     token = os.environ.get("TELEGRAM_BOT_TOKEN")
     chat_id_env = os.environ.get("TELEGRAM_CHAT_ID")
-    chat_id = int(chat_id_env) if chat_id_env and chat_id_env.lstrip("-").isdigit() else None
+    chat_id = int(chat_id_env) if chat_id_env and chat_id_env.isdigit() else None
 
     cfg = {}
     if os.path.exists(CONFIG_FILE):
@@ -39,7 +37,7 @@ def load_config():
             pass
     return {
         "token": token or cfg.get("token", DEFAULT_TOKEN),
-        "chat_id": chat_id or cfg.get("chat_id") or DEFAULT_CHAT_ID
+        "chat_id": chat_id or cfg.get("chat_id")
     }
 
 def save_config(cfg):
@@ -234,7 +232,7 @@ def build_summary_message(state, bulan=None):
         table_lines.append(f"{'STATUS BUDGET CAP':<24} {'ALERT KRITIS':>19}")
     elif is_after_day_15 and grand_total > 0 and (cogs_tot + opex_tot > 0):
         table_lines.append("--------------------------------------------")
-        table_lines.append(f"{'OUTCOME RATIO (<45%)':<24} {f'{outcome_ratio:.1f}% ✅':>19}")
+        table_lines.append(f"{'OUTCOME RATIO (&lt;45%)':<24} {f'{outcome_ratio:.1f}% ✅':>19}")
         table_lines.append(f"{'STATUS BUDGET CAP':<24} {'PASSED (AMAN)':>19}")
 
     # Section Estimate Omzet Sampai Akhir Bulan (Unrealized Cash In & Omzet)
@@ -243,7 +241,7 @@ def build_summary_message(state, bulan=None):
         if b.get("tgl") and b.get("tgl") > cutoff and b.get("tgl").startswith(cutoff[:7])
     ]
     if future_bookings:
-        unrealized_cash_in = sum(b.get("harga", 0) for b in future_bookings)
+        unrealized_cash_in = sum(float(b.get("harga", 0) or 0) for b in future_bookings)
         total_dp_future = 0.0
         sisa_pelunasan = 0.0
         for b in future_bookings:
@@ -342,8 +340,8 @@ def build_summary_message(state, bulan=None):
     if tomorrow_bookings:
         limit_b = 12
         for idx, b in enumerate(tomorrow_bookings[:limit_b], 1):
-            nama = html.escape(str(b.get("nama", "Klien")))
-            paket = html.escape(str(b.get("paket") or b.get("paketRaw") or "Sesi Foto"))
+            nama = b.get("nama", "Klien")
+            paket = b.get("paket") or b.get("paketRaw") or "Sesi Foto"
             nohp = str(b.get("noHp", "")).lower()
             if "lunas" in nohp:
                 status = "Lunas"
@@ -355,9 +353,9 @@ def build_summary_message(state, bulan=None):
             
             adm_code = str(b.get("admin", "")).strip().upper()
             admin_map = {"IN": "INDAH", "AM": "AMEL", "AD": "ADDEL", "AL": "ADEL", "AMEL": "AMEL", "INDAH": "INDAH", "ADDEL": "ADDEL"}
-            adm_name = html.escape(str(admin_map.get(adm_code, adm_code) if adm_code else "-"))
-            waktu = html.escape(str(b.get("waktu", "")))
-            studio = html.escape(str(b.get("studio", "") or b.get("studioNama", "")))
+            adm_name = admin_map.get(adm_code, adm_code) if adm_code else "-"
+            waktu = b.get("waktu", "")
+            studio = b.get("studio", "") or b.get("studioNama", "")
             extra_info = f" | {waktu} @ {studio}" if waktu and studio else ""
             booking_lines.append(f"{idx}. <b>{nama}</b> | {paket} ({status} | Adm: {adm_name}{extra_info})")
         if len(tomorrow_bookings) > limit_b:
@@ -381,7 +379,7 @@ def build_summary_message(state, bulan=None):
             f"• <b>Jumat, 03 Okt</b> : <b>{len(w_d1)} Sesi Foto</b> (5 Backdrop Wisuda)\n"
             f"• <b>Sabtu, 04 Okt</b> : <b>{len(w_d2)} Sesi Foto</b> (5 Backdrop Wisuda)\n"
             f"• <b>Total Gelombang</b> : <b>{len(w_d1) + len(w_d2)} Sesi Terdaftar</b> (Potensi Kas: Rp 48,65 jt)\n"
-            f"• <b>Kesiapan Roster</b> : Siaga 5 Fotografer &amp; Asisten per hari.\n"
+            f"• <b>Kesiapan Roster</b> : Siaga 5 Fotografer & Asisten per hari.\n"
         )
     else:
         # 2. Jika event sebelumnya sudah lewat (Expired), cari momentum marketing terdekat berikutnya yang AKTIF (dalam jendela H-10)
@@ -402,10 +400,10 @@ def build_summary_message(state, bulan=None):
                 countdown_str = ""
 
             if 0 <= days_diff <= 10:
-                ev_action = html.escape(str(next_ev.get("action", "EVENT")))
-                ev_momentum = html.escape(str(next_ev.get("momentum", "Agenda Marketing")))
-                ev_paket = html.escape(str(next_ev.get("paket", "Paket Studio")))
-                ev_alasan = str(next_ev.get("alasan", ""))
+                ev_action = next_ev.get("action", "EVENT")
+                ev_momentum = next_ev.get("momentum", "Agenda Marketing")
+                ev_paket = next_ev.get("paket", "Paket Studio")
+                ev_alasan = next_ev.get("alasan", "")
                 badge_icon = "📢" if ev_action == "BOOST" else "🎯"
                 event_reminder_block = (
                     f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
@@ -415,7 +413,7 @@ def build_summary_message(state, bulan=None):
                     f"• <b>Aksi Ads</b> : {ev_action} ({ev_paket})\n"
                 )
                 if ev_alasan:
-                    short_alasan = html.escape(ev_alasan[:85] + "..." if len(ev_alasan) > 85 else ev_alasan)
+                    short_alasan = ev_alasan[:85] + "..." if len(ev_alasan) > 85 else ev_alasan
                     event_reminder_block += f"• <i>Catatan</i> : {short_alasan}\n"
 
     outcome_alert_block = ""
@@ -426,20 +424,40 @@ def build_summary_message(state, bulan=None):
             f"• <b>Total Omzet</b>  : {rp(grand_total)}\n"
             f"• <b>Total Beban</b>  : {rp(outcome_tot)} (COGS {rp(cogs_tot)} + OPEX {rp(opex_tot)})\n"
             f"• <b>Estimasi Nett</b> : {rp(nett_profit)}\n"
-            f"<i>Perhatian: Pengeluaran operasional studio telah menyerap ≥ 45% omzet. Segera perketat anggaran dan audit pos belanja COGS &amp; OPEX!</i>\n\n"
+            f"<i>Perhatian: Pengeluaran operasional studio telah menyerap ≥ 45% omzet. Segera perketat anggaran dan audit pos belanja COGS & OPEX!</i>\n\n"
             f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
         )
+
+    # Analisis Transaksi Riil vs Mutasi Kasir
+    client_orders = defaultdict(list)
+    for o in orders:
+        c_clean = o.get("client", "").strip().lower()
+        if c_clean and c_clean not in ["-", "none", "keterangan"]:
+            client_orders[c_clean].append(o)
+
+    real_orders_cnt = len(client_orders)
+    lunas_orders_cnt = 0
+    dp_active_cnt = 0
+    for c, ords in client_orders.items():
+        types = set(o.get("pembayaran", "").strip() for o in ords)
+        if "Lunas" in types:
+            lunas_orders_cnt += 1
+        elif "DP" in types:
+            dp_active_cnt += 1
+        else:
+            lunas_orders_cnt += 1
 
     now = datetime.datetime.now()
     now_str = f"{now.day:02d} {BULAN_NAMA[now.month-1]} {now.year}, {now.strftime('%H:%M')} WIB"
 
     full_msg = (
         f"{outcome_alert_block}"
-        f"<pre>{html.escape(table_block)}</pre>\n\n"
-        f"🎯 <b>LEADS (s.d. {cutoff_day} {month_short}):</b>\n"
-        f"• Leads   : <b>{int(total_leads)}</b>\n"
-        f"• DP      : <b>{int(total_dp)}</b>\n"
-        f"• Transaksi: <b>{len(orders)}</b>\n\n"
+        f"<pre>{table_block}</pre>\n\n"
+        f"🎯 <b>LEADS &amp; TRANSAKSI (s.d. {cutoff_day} {month_short}):</b>\n"
+        f"• Leads       : <b>{int(total_leads)}</b>\n"
+        f"• DP Leads    : <b>{int(total_dp)}</b>\n"
+        f"• Order Riil  : <b>{real_orders_cnt} Sesi</b> ({lunas_orders_cnt} Lunas, {dp_active_cnt} DP Aktif)\n"
+        f"• Mutasi Kasir: <b>{len(orders)}x bayar</b>\n\n"
         f"👥 <b>ROSTER SHIFT (aktual s.d. {cutoff_day} {month_short}):</b>\n"
         f"{shift_block}\n\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
@@ -449,7 +467,7 @@ def build_summary_message(state, bulan=None):
         f"Total Jadwal Besok: <b>{total_klien_besok} Klien</b>\n\n"
         f"{event_reminder_block}"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"📌 <i>Sumber: Foxe Studio — Schedule &amp; Log Order {month_label.title()}.xlsm</i>\n"
+        f"📌 <i>Sumber: Foxe Studio — Schedule & Log Order {month_label.title()}.xlsm</i>\n"
         f"🕒 <i>Last Updated: {now_str}</i>\n"
         f"👉 <a href=\"https://whynunuu.github.io/FoxeStudio/\"><b>Buka Dashboard Live Foxe Studio</b></a>"
     )

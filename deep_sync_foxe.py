@@ -125,21 +125,33 @@ def run_integration():
     print(f"Waktu mulai: {now.strftime('%Y-%m-%d %H:%M:%S')}")
     
     state_file = "foxe_full_state.json"
+    state = {}
     if os.path.exists(state_file):
-        with open(state_file, "r", encoding="utf-8") as f:
-            state = json.load(f)
-    else:
-        state = {}
-
-    if os.path.exists("multiyear_cache.json"):
         try:
-            with open("multiyear_cache.json", "r", encoding="utf-8") as mcf:
-                state["multiyearArsip"] = json.load(mcf)
-        except Exception:
-            pass
+            with open(state_file, "r", encoding="utf-8") as f:
+                state = json.load(f)
+        except Exception as err:
+            print(f"[WARN] Gagal membaca {state_file}: {err}. Mencoba backup...")
+            bak_file = state_file + ".bak"
+            if os.path.exists(bak_file):
+                try:
+                    with open(bak_file, "r", encoding="utf-8") as fb:
+                        state = json.load(fb)
+                    print("[OK] Berhasil pulihkan state dari backup.")
+                except Exception as b_err:
+                    print(f"[ERROR] Backup juga gagal: {b_err}")
 
     if "sync" not in state:
         state["sync"] = []
+
+    if "multiyearArsip" not in state or not state["multiyearArsip"]:
+        if os.path.exists("multiyear_cache.json"):
+            try:
+                with open("multiyear_cache.json", "r", encoding="utf-8") as mcf:
+                    state["multiyearArsip"] = json.load(mcf)
+                print("[OK] multiyearArsip dimuat dari multiyear_cache.json.")
+            except Exception as e_mcf:
+                print(f"[WARN] Gagal memuat multiyear_cache.json: {e_mcf}")
 
     # STEP 3: Tulis sync status 'berjalan'
     current_sync = {
@@ -186,9 +198,8 @@ def run_integration():
         b_wisuda_sept = sept_wisuda.get("bookings", [])
         print(f"[OK] Wisuda September terurai: {len(b_wisuda_sept)} sesi booking (UIN: {sept_wisuda['breakdown']['uin_day1']['sesi']+sept_wisuda['breakdown']['uin_day2']['sesi']}, UNSOED: {sept_wisuda['breakdown']['unsoed_day1']['sesi']+sept_wisuda['breakdown']['unsoed_day2']['sesi']}).")
 
-        # Gabungkan ke bookings resmi September & urutkan berdasarkan tanggal dan waktu
+        # Gabungkan ke bookings resmi September
         res_f2_bookings = res_f2_bookings + b_wisuda_sept
-        res_f2_bookings.sort(key=lambda b: (str(b.get("tgl") or ""), str(b.get("waktu") or ""), str(b.get("id") or "")))
         print(f"[OK] Total Jadwal Terpadu September: {len(res_f2_bookings)} sesi booking.")
 
         # STEP 7: Jalankan Parser File Neraca (COGS, OPEX, Log Debit Kredit & Gaji Karyawan)
@@ -377,11 +388,6 @@ def run_integration():
         current_sync["status"] = "sukses"
         current_sync["ringkas"] = f"Integrasi berhasil: {len(res_f1['orders'])} order Sep, {len(res_f1_okt['orders'])} order Okt, {len(res_f2_bookings)} jadwal terpadu Sep (termasuk 141 wisuda), {neraca_count} pos pengeluaran Neraca, {okt_pipeline['totalBookings']} pipeline Okt."
 
-        print("\n[5/5] Menyimpan state dan merender artefak...")
-        with open("foxe_full_state.json", "w", encoding="utf-8") as f:
-            json.dump(state, f, ensure_ascii=False, indent=2)
-        print("[OK] foxe_full_state.json tersimpan.")
-
         # Rekonsiliasi Leads CRM dengan data Log Order & Schedule terbaru
         try:
             from agentic_lead_engine import AgenticLeadEngine
@@ -391,6 +397,22 @@ def run_integration():
             print(f"[OK] Rekonsiliasi Leads CRM berhasil ({clean_res.get('total_cleaned', 0)} leads diperbarui di leads_vault.json).")
         except Exception as l_err:
             print(f"[WARN] Rekonsiliasi Leads CRM dilewati: {l_err}")
+
+        print("\n[5/5] Menyimpan state dan merender artefak...")
+        try:
+            import shutil
+            if os.path.exists("foxe_full_state.json"):
+                shutil.copy2("foxe_full_state.json", "foxe_full_state.json.bak")
+            with open("foxe_full_state.json.tmp", "w", encoding="utf-8") as f:
+                json.dump(state, f, ensure_ascii=False, indent=2)
+            os.replace("foxe_full_state.json.tmp", "foxe_full_state.json")
+            if os.path.exists("/opt/rag-stack/"):
+                shutil.copy2("foxe_full_state.json", "/opt/rag-stack/foxe_full_state.json")
+            print("[OK] foxe_full_state.json tersimpan atomic dan disinkronkan.")
+        except Exception as e_save:
+            print(f"[ERROR] Gagal atomic save: {e_save}")
+            with open("foxe_full_state.json", "w", encoding="utf-8") as f:
+                json.dump(state, f, ensure_ascii=False, indent=2)
 
         # Render index.html
         import subprocess

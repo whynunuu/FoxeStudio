@@ -1386,6 +1386,30 @@ function compute(targetMonth){
   const roster=new Set(shift.filter(s=>s.total>0).map(s=>s.nama));
   const offRoster={admin:admin.arr.filter(a=>!roster.has(a.nama)),fotografer:fotografer.arr.filter(f=>!roster.has(f.nama))};
 
+  // target & bonus
+  const tiers=[...c.targets].sort((a,b)=>a.omzet-b.omzet).map(t=>({...t,pool:t.omzet*t.persen}));
+  let tierAktif=null; tiers.forEach(t=>{if(omzet>=t.omzet)tierAktif=t});
+  const tierBerikut=tiers.find(t=>omzet<t.omzet)||null;
+  const pool=tierAktif?tierAktif.pool:0;
+
+  // KPI
+  const posisi=S.kpi.length?S.kpi:[];
+  const bobot=posisi.length?1/posisi.length:0;
+  const kpi=posisi.map(k=>{
+    const dinilai=[k.akurasi,k.sop,k.client,k.produktivitas].every(v=>v!==null&&v!==undefined&&v!=="")&&(k.disiplin!==null&&k.disiplin!=="");
+    if(!dinilai) return {...k,dinilai:false,basic:null,inJob:null,operasional:null,opPersen:null,totalKPI:null,bonusMax:pool*bobot,bonusCair:0,bobot};
+    const basic=dnum(k.disiplin);
+    const inJob=((dnum(k.akurasi)+dnum(k.sop)+dnum(k.client)+dnum(k.produktivitas))/4)*3;
+    const operasional=basic+inJob;
+    const referral=dnum(k.referral);
+    const totalKPI=operasional+referral;
+    const bonusMax=pool*bobot;
+    return {...k,dinilai:true,basic,inJob,operasional,opPersen:operasional/20,referral,totalKPI,
+      totalPersen:totalKPI/100,bonusMax,bonusCair:bonusMax*(totalKPI/100),bobot};});
+  const kpiDinilai=kpi.filter(k=>k.dinilai);
+  const avgOp=kpiDinilai.length?kpiDinilai.reduce((s,k)=>s+k.opPersen,0)/kpiDinilai.length:null;
+  const bonusCair=kpi.reduce((s,k)=>s+(k.bonusCair||0),0);
+
   // biaya
   let ex = [];
   if (S.neracaByMonth && S.neracaByMonth[mStr] && Array.isArray(S.neracaByMonth[mStr].expenses) && S.neracaByMonth[mStr].expenses.length) {
@@ -1408,9 +1432,18 @@ function compute(targetMonth){
   const biayaLain=ex.filter(e=>e.kategori==="Biaya Lainnya").reduce((s,e)=>s+dnum(e.nilai),0);
   const nonPL=sumJ("NON-P&L");
   const belumKategori=ex.filter(e=>!e.jenis||!e.kategori).length;
-  const opex=opexNeraca+kasbon;
 
   const gajiNeraca=ex.filter(e=>/^gaji/i.test(e.kategori||"")).reduce((s,e)=>s+dnum(e.nilai),0);
+  // Gaji operasional dinamis dari roster jika belum dicatat di Neraca
+  const dynamicRosterGaji=(gajiNeraca>0)?0:(()=>{
+    const actR=(S.neracaByMonth&&S.neracaByMonth[mStr]&&S.neracaByMonth[mStr].rosterGaji&&S.neracaByMonth[mStr].rosterGaji.length)
+      ?S.neracaByMonth[mStr].rosterGaji
+      :(isOkt?((S.rosterGajiByMonth&&S.rosterGajiByMonth["2026-10"])||[]):(S.rosterGaji||[]));
+    const baseGaji = actR.filter(r=>/admin|foto|editor|manager|marketing/i.test(r.job||r.posisi||"")).reduce((s,r)=>s+dnum(r.total_gaji||(dnum(r.q)*dnum(r.cost))||r.thp),0);
+    const insentifBonus = dnum(bonusCair);
+    return baseGaji + insentifBonus;
+  })();
+  const opex=opexNeraca+kasbon+dynamicRosterGaji;
   const prAll=[...S.payroll].sort((a,b)=>String(b.bulan||"").localeCompare(String(a.bulan||"")));
   const acuan=prAll.find(p=>p.terisi&&p.bulan!==c.bulan)||prAll.find(p=>p.terisi)||null;
   const TETAP=/manager|editor|marketing|tetap/i;
@@ -1443,29 +1476,7 @@ function compute(targetMonth){
   const rekonBeda=rekon.filter(r=>r.selisih!==null&&r.selisih!==0);
   const rekonAda=rekon.filter(r=>r.ctrl!==null).length;
 
-  // target & bonus
-  const tiers=[...c.targets].sort((a,b)=>a.omzet-b.omzet).map(t=>({...t,pool:t.omzet*t.persen}));
-  let tierAktif=null; tiers.forEach(t=>{if(omzet>=t.omzet)tierAktif=t});
-  const tierBerikut=tiers.find(t=>omzet<t.omzet)||null;
-  const pool=tierAktif?tierAktif.pool:0;
-
-  // KPI
-  const posisi=S.kpi.length?S.kpi:[];
-  const bobot=posisi.length?1/posisi.length:0;
-  const kpi=posisi.map(k=>{
-    const dinilai=[k.akurasi,k.sop,k.client,k.produktivitas].every(v=>v!==null&&v!==undefined&&v!=="")&&(k.disiplin!==null&&k.disiplin!=="");
-    if(!dinilai) return {...k,dinilai:false,basic:null,inJob:null,operasional:null,opPersen:null,totalKPI:null,bonusMax:pool*bobot,bonusCair:0,bobot};
-    const basic=dnum(k.disiplin);
-    const inJob=((dnum(k.akurasi)+dnum(k.sop)+dnum(k.client)+dnum(k.produktivitas))/4)*3;
-    const operasional=basic+inJob;
-    const referral=dnum(k.referral);
-    const totalKPI=operasional+referral;
-    const bonusMax=pool*bobot;
-    return {...k,dinilai:true,basic,inJob,operasional,opPersen:operasional/20,referral,totalKPI,
-      totalPersen:totalKPI/100,bonusMax,bonusCair:bonusMax*(totalKPI/100),bobot};});
-  const kpiDinilai=kpi.filter(k=>k.dinilai);
-  const avgOp=kpiDinilai.length?kpiDinilai.reduce((s,k)=>s+k.opPersen,0)/kpiDinilai.length:null;
-  const bonusCair=kpi.reduce((s,k)=>s+(k.bonusCair||0),0);
+  // (target & KPI dipindahkan ke atas sebelum biaya)
 
   // lead
   const ld=S.leads.filter(l=>inRange(l.tanggal)).sort((a,b)=>a.tanggal<b.tanggal?-1:1);
@@ -4509,17 +4520,93 @@ function kartuPaket(R){
 }
 
 function vBiaya(R){
-  const grup=(j,kats,extra)=>{const rows=kats.map(k=>({k,v:R.ex.filter(e=>e.kategori===k).reduce((s,e)=>s+dnum(e.nilai),0)}));
-    if(extra)extra.forEach(x=>rows.push(x));
-    const tot=rows.reduce((s,r)=>s+r.v,0);
+  const grup=(j,kats,extra)=>{
+    const rows=kats.map(k=>{
+      let v = 0;
+      let isDinamis = false;
+
+      // 1. Cek pengeluaran riil di R.ex berdasarkan nama kategori atau alias resmi
+      if (R.ex && R.ex.length) {
+        v = R.ex.filter(e => {
+          const cat = (e.kategori || "").trim();
+          if (cat === k) return true;
+          // Alias COGS
+          if (k === "Outsource / Freelancer Produksi") {
+            return cat === "Outsource / Freelancer & Vendor" || /outsource|freelance.*produksi/i.test(cat);
+          }
+          if (k === "Transport Produksi Langsung") {
+            return /transport.*produksi/i.test(cat);
+          }
+          // Alias OPEX
+          if (k === "Transport Operasional") {
+            return cat === "Transport & Operasional Lapangan" || /^transport/i.test(cat) || /^bensin/i.test(cat);
+          }
+          if (k === "Bank / Admin Fee") {
+            return cat === "Biaya Admin Bank & Finansial" || /admin.*bank|bank.*fee/i.test(cat);
+          }
+          if (k === "Sewa Studio") {
+            return /sewa.*studio|sewa.*gedung/i.test(cat);
+          }
+          return false;
+        }).reduce((s, e) => s + dnum(e.nilai), 0);
+      }
+
+      // 2. Gaji Dinamis dari Roster jika v === 0 (misal bulan berjalan belum closing gaji di Neraca)
+      if (j === "OPEX") {
+        const rList = R.rosterGaji || [];
+        const sumJob = (pat) => rList.filter(r => pat.test(r.job || r.posisi || "")).reduce((s, r) => s + dnum(r.thp || r.total_gaji), 0);
+
+        const sumBaseJob = (pat) => rList.filter(r => pat.test(r.job || r.posisi || "")).reduce((s, r) => s + dnum(r.total_gaji || (dnum(r.q)*dnum(r.cost)) || r.thp), 0);
+        if (k === "Gaji Admin" && v === 0) {
+          const gAdmin = sumBaseJob(/admin/i);
+          if (gAdmin > 0) { v = gAdmin; isDinamis = true; }
+          else {
+            const gNeraca = R.ex.filter(e => /admin.*foto|foto.*admin/i.test(e.kategori || "")).reduce((s, e) => s + dnum(e.nilai), 0);
+            if (gNeraca > 0) { v = Math.round(gNeraca * 0.5); isDinamis = true; }
+          }
+        } else if (k === "Gaji Fotografer" && v === 0) {
+          const gFoto = sumBaseJob(/foto/i);
+          if (gFoto > 0) { v = gFoto; isDinamis = true; }
+          else {
+            const gNeraca = R.ex.filter(e => /admin.*foto|foto.*admin/i.test(e.kategori || "")).reduce((s, e) => s + dnum(e.nilai), 0);
+            if (gNeraca > 0) { v = Math.round(gNeraca * 0.5); isDinamis = true; }
+          }
+        } else if (k === "Gaji Editor" && v === 0) {
+          const gEd = sumBaseJob(/editor/i);
+          if (gEd > 0) { v = gEd; isDinamis = true; }
+        } else if ((k === "Gaji Manager & Marketing" || k === "Gaji Manajemen") && v === 0) {
+          const gMan = sumBaseJob(/manager|marketing/i);
+          if (gMan > 0) { v = gMan; isDinamis = true; }
+        } else if (k === "Overtime / Insentif" && v === 0) {
+          const rBonus = rList.reduce((s, r) => s + dnum(r.bonus_kpi) + dnum(r.additional) + dnum(r.bonus), 0);
+          const val = rBonus > 0 ? rBonus : (dnum(R.bonusCair) || 0);
+          if (val > 0) { v = val; isDinamis = true; }
+        }
+      }
+
+      return { k, v, isDinamis };
+    });
+
+    if (extra) extra.forEach(x => rows.push(x));
+    const tot = rows.reduce((s, r) => s + r.v, 0);
+
     return `<div class="tw"><table><thead><tr><th>Kategori ${j}</th><th class="n">Total</th><th class="n">% omzet</th></tr></thead><tbody>
-      ${rows.map(r=>`<tr><td>${r.k}</td><td class="n">${r.v?rp(r.v):'<span class="muted">—</span>'}</td>
-        <td class="n muted">${r.v&&R.omzet?pct(r.v/R.omzet):""}</td></tr>`).join("")}
+      ${rows.map(r => `<tr>
+        <td>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span>${r.k}</span>
+            ${r.isDinamis ? '<span class="pill prog" style="font-size:9px;padding:1px 5px;font-weight:600" title="Dihitung dinamis dari shift & roster gaji berjalan">Dinamis</span>' : ''}
+          </div>
+        </td>
+        <td class="n">${r.v ? rp(r.v) : '<span class="muted">—</span>'}</td>
+        <td class="n muted">${r.v && R.omzet ? pct(r.v / R.omzet) : ""}</td>
+      </tr>`).join("")}
     </tbody>
     <tfoot>
-      <tr class="total"><td>Total ${j}</td><td class="n">${rp(tot)}</td><td class="n">${R.omzet?pct(tot/R.omzet):""}</td></tr>
+      <tr class="total"><td>Total ${j}</td><td class="n">${rp(tot)}</td><td class="n">${R.omzet ? pct(tot / R.omzet) : ""}</td></tr>
     </tfoot>
-    </table></div>`};
+    </table></div>`;
+  };
   return `
   <div class="vhead" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:14px">
     <div>
@@ -4567,8 +4654,14 @@ function vBiaya(R){
       <div class="f"><label>&nbsp;</label><button class="btn pri" type="submit">Simpan</button></div>
     </form>
   </div>
-  <div class="two" style="margin-bottom:14px">${grup("COGS",KAT_COGS)}${
-      grup("OPEX",KAT_OPEX,R.kasbon?[{k:"Kasbon Karyawan",v:R.kasbon}]:null)}</div>
+  ${(()=>{
+    const rList = R.rosterGaji || [];
+    const gMan = rList.filter(r => /manager|marketing/i.test(r.job || r.posisi || "")).reduce((s, r) => s + dnum(r.total_gaji || (dnum(r.q)*dnum(r.cost)) || r.thp), 0);
+    const extraOpex = [];
+    if (gMan > 0) extraOpex.push({ k: "Gaji Manager & Marketing", v: gMan, isDinamis: true });
+    if (R.kasbon) extraOpex.push({ k: "Kasbon Karyawan", v: R.kasbon, isDinamis: false });
+    return `<div class="two" style="margin-bottom:14px">${grup("COGS",KAT_COGS)}${grup("OPEX",KAT_OPEX,extraOpex)}</div>`;
+  })()}
   <div class="tw scrollable" style="max-height:480px;overflow-y:auto;border:1px solid var(--hairline);border-radius:8px;"><table><thead style="position:sticky;top:0;z-index:3;background:var(--surface2);"><tr><th>Tgl</th><th>Deskripsi</th><th>Jenis</th><th>Kategori</th>
     <th class="n">Nilai</th><th>Status</th><th style="width:40px;text-align:center"></th></tr></thead><tbody>
     ${R.ex.length?[...R.ex].sort((a,b)=>(b.tanggal||"")<(a.tanggal||"")?-1:(b.tanggal||"")>(a.tanggal||"")?1:dnum(a.urutan)-dnum(b.urutan)).map(e=>{
