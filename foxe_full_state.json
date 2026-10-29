@@ -62788,6 +62788,18 @@
     {
       "id": "sh_114",
       "tanggal": "2026-10-29",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_115",
+      "tanggal": "2026-10-29",
+      "nama": "ADIF",
+      "slot": 1
+    },
+    {
+      "id": "sh_116",
+      "tanggal": "2026-10-29",
       "nama": "ADIF",
       "slot": 1
     }
@@ -80573,6 +80585,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261029-0850",
+      "mulai": "2026-10-29T08:50:51.482982+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 441 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 116 pos pengeluaran Neraca, 276 pipeline Okt."
+    },
+    {
       "id": "sy_20261029-0728",
       "mulai": "2026-10-29T07:28:50.159550+00:00",
       "status": "sukses",
@@ -81875,7 +81893,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-29T07:28:50.159550+00:00"
+    "last_sync": "2026-10-29T08:50:51.482982+00:00"
   },
   "neracaDetail": [
     {
@@ -82439,15 +82457,15 @@
     "bulan": "2026-10",
     "totalBookings": 276,
     "potentialOmzet": 89025000.0,
-    "totalDp": 25350000.0,
-    "estimateCashIn": 1100000.0,
-    "remainingCashIn": 1100000.0,
-    "totalPipelineCashIn": 63675000.0,
+    "totalDp": 25450000.0,
+    "estimateCashIn": 1000000.0,
+    "remainingCashIn": 1000000.0,
+    "totalPipelineCashIn": 63575000.0,
     "breakdown": {
       "reguler": {
         "sesi": 178,
         "nilai": 53225000.0,
-        "dp": 16200000.0
+        "dp": 16300000.0
       },
       "wisudaDay1": {
         "sesi": 47,
@@ -82470,8 +82488,8 @@
       "confirmed": {
         "sesi": 4,
         "nilai": 1300000.0,
-        "dp": 200000.0,
-        "cashIn": 1100000.0
+        "dp": 300000.0,
+        "cashIn": 1000000.0
       },
       "reschedule": {
         "sesi": 12,
@@ -89391,7 +89409,7 @@
         "jmlOrang": 1,
         "harga": 400000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -89400,8 +89418,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 400000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 300000.0,
         "kategori": "Studio Reguler"
       },
       {
@@ -96139,6 +96157,18 @@
       {
         "id": "sh_114",
         "tanggal": "2026-10-29",
+        "nama": "AMEL",
+        "slot": 1
+      },
+      {
+        "id": "sh_115",
+        "tanggal": "2026-10-29",
+        "nama": "ADIF",
+        "slot": 1
+      },
+      {
+        "id": "sh_116",
+        "tanggal": "2026-10-29",
         "nama": "ADIF",
         "slot": 1
       }
@@ -100087,18 +100117,18 @@
           "row_idx": 10,
           "nama": "Adif",
           "job": "Fotografer",
-          "q": 29.0,
+          "q": 30.0,
           "q_raw": 0.0,
-          "actual_shift": 29,
+          "actual_shift": 30,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 1160000.0,
+          "total_gaji": 1200000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 1160000.0,
+          "thp": 1200000.0,
           "status": "Draft"
         },
         {
@@ -100125,18 +100155,18 @@
           "row_idx": 14,
           "nama": "Amel",
           "job": "Admin",
-          "q": 26.0,
+          "q": 27.0,
           "q_raw": 0.0,
-          "actual_shift": 26,
+          "actual_shift": 27,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 1040000.0,
+          "total_gaji": 1080000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 1040000.0,
+          "thp": 1080000.0,
           "status": "Draft"
         },
         {
@@ -100312,13 +100342,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 12710000.0,
+        "total_gaji": 12790000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 12710000.0,
+        "grand_total_thp": 12790000.0,
         "total_karyawan": 12
       }
     },
@@ -110260,18 +110290,18 @@
         "row_idx": 10,
         "nama": "Adif",
         "job": "Fotografer",
-        "q": 29.0,
+        "q": 30.0,
         "q_raw": 0.0,
-        "actual_shift": 29,
+        "actual_shift": 30,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 1160000.0,
+        "total_gaji": 1200000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 1160000.0,
+        "thp": 1200000.0,
         "status": "Draft"
       },
       {
@@ -110298,18 +110328,18 @@
         "row_idx": 14,
         "nama": "Amel",
         "job": "Admin",
-        "q": 26.0,
+        "q": 27.0,
         "q_raw": 0.0,
-        "actual_shift": 26,
+        "actual_shift": 27,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 1040000.0,
+        "total_gaji": 1080000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 1040000.0,
+        "thp": 1080000.0,
         "status": "Draft"
       },
       {
@@ -161432,7 +161462,7 @@
         "jmlOrang": 1,
         "harga": 400000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -161441,8 +161471,8 @@
         "statusBadge": "prog",
         "isDone": false,
         "isReschedule": false,
-        "dp": 0.0,
-        "sisaPelunasan": 400000.0,
+        "dp": 100000.0,
+        "sisaPelunasan": 300000.0,
         "kategori": "Studio Reguler"
       },
       {
