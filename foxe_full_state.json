@@ -56012,6 +56012,19 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_458",
+      "tanggal": "2026-10-31",
+      "client": "Andhien",
+      "paket": "Photofox",
+      "tanggalFoto": "2026-11-08",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -68699,10 +68712,10 @@
     {
       "id": "ld_31",
       "tanggal": "2026-10-31",
-      "leads": 0.0,
-      "dp": 3.0,
+      "leads": 23.0,
+      "dp": 4.0,
       "sesiFoto": 4.0,
-      "transaksi": 7.0
+      "transaksi": 8.0
     }
   ],
   "kpi": [
@@ -80445,7 +80458,7 @@
       {
         "tahun": 2026,
         "no": 10,
-        "omzet": 91695000.0
+        "omzet": 91795000.0
       }
     ]
   },
@@ -80793,6 +80806,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261031-2243",
+      "mulai": "2026-10-31T15:43:11.547670+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 109 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
     {
       "id": "sy_20261031-1828",
       "mulai": "2026-10-31T11:28:34.567709+00:00",
@@ -81574,7 +81593,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-31T11:28:34.567709+00:00"
+    "last_sync": "2026-10-31T15:43:11.547670+00:00"
   },
   "neracaDetail": [
     {
@@ -95690,6 +95709,19 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_458",
+        "tanggal": "2026-10-31",
+        "client": "Andhien",
+        "paket": "Photofox",
+        "tanggalFoto": "2026-11-08",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -96839,10 +96871,10 @@
       {
         "id": "ld_31",
         "tanggal": "2026-10-31",
-        "leads": 0.0,
-        "dp": 3.0,
+        "leads": 23.0,
+        "dp": 4.0,
         "sesiFoto": 4.0,
-        "transaksi": 7.0
+        "transaksi": 8.0
       }
     ],
     "kpi": [
