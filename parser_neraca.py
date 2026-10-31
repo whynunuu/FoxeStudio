@@ -16,6 +16,7 @@ import os
 import openpyxl
 
 NERACA_SHEET_ID = "1dvnCNyfZI5z-12081XJjGCVLtMaQpUStYT61qU3orKM"
+FOOTER_KEYWORDS = ["bon", "gaji karyawan", "pajak", "amal", "setor", "total", "saldo akhir", "nominal"]
 
 def classify_expense(desc):
     d = str(desc or "").lower().strip()
@@ -124,7 +125,7 @@ def parse_neraca(filepath="file_neraca.xlsx", sheet_name="September 2026", actua
     # Col 21 (U): Keterangan Keluar
 
     for r_idx, row in enumerate(ws.iter_rows(values_only=True)):
-        if r_idx < 9 or r_idx > 130:
+        if r_idx < 9:
             continue
 
         # 1. Parse Section Gaji Karyawan (Kolom 32 s.d. 42 / AF s.d. AP baris 9 s.d. 27)
@@ -187,12 +188,14 @@ def parse_neraca(filepath="file_neraca.xlsx", sheet_name="September 2026", actua
         ket_masuk = row[19]
         ket_keluar = row[20]
         
-        # Tanggal merge/vertikal
+        # Tanggal merge/vertikal & deteksi reset footer
         if tgl_val is not None and str(tgl_val).strip() != "":
             try:
                 parsed_day = int(float(str(tgl_val).strip()))
                 if 1 <= parsed_day <= 31:
                     current_tgl = parsed_day
+                elif parsed_day == 0:
+                    current_tgl = None
             except:
                 pass
                 

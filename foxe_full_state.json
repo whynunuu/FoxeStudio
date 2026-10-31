@@ -63638,42 +63638,6 @@
       "nilai": 560000.0
     },
     {
-      "id": "ex_nrc_65",
-      "tanggal": "2026-09-30",
-      "bulan": "2026-09",
-      "jenis": "NON-P&L",
-      "kategori": "Prive / Owner Draw",
-      "deskripsi": "Bon",
-      "nilai": 3314000.0
-    },
-    {
-      "id": "ex_nrc_66",
-      "tanggal": "2026-09-30",
-      "bulan": "2026-09",
-      "jenis": "OPEX",
-      "kategori": "Gaji Admin & Fotografer",
-      "deskripsi": "Gaji Karyawan",
-      "nilai": 12901307.0
-    },
-    {
-      "id": "ex_nrc_67",
-      "tanggal": "2026-09-30",
-      "bulan": "2026-09",
-      "jenis": "OPEX",
-      "kategori": "Pajak & Perizinan",
-      "deskripsi": "Pajak",
-      "nilai": 590075.0
-    },
-    {
-      "id": "ex_nrc_68",
-      "tanggal": "2026-09-30",
-      "bulan": "2026-09",
-      "jenis": "Biaya Lainnya",
-      "kategori": "Amal & Sosial",
-      "deskripsi": "Amal",
-      "nilai": 1770225.0
-    },
-    {
       "id": "ex_nrc_1",
       "tanggal": "2026-10-01",
       "bulan": "2026-10",
@@ -64077,33 +64041,6 @@
       "kategori": "Cetak Foto & Photo Paper",
       "deskripsi": "Cetakan",
       "nilai": 1627000.0
-    },
-    {
-      "id": "ex_nrc_46",
-      "tanggal": "2026-10-27",
-      "bulan": "2026-10",
-      "jenis": "NON-P&L",
-      "kategori": "Prive / Owner Draw",
-      "deskripsi": "Bon",
-      "nilai": 3006200.0
-    },
-    {
-      "id": "ex_nrc_47",
-      "tanggal": "2026-10-27",
-      "bulan": "2026-10",
-      "jenis": "OPEX",
-      "kategori": "Pajak & Perizinan",
-      "deskripsi": "Pajak",
-      "nilai": 433450.0
-    },
-    {
-      "id": "ex_nrc_48",
-      "tanggal": "2026-10-27",
-      "bulan": "2026-10",
-      "jenis": "Biaya Lainnya",
-      "kategori": "Amal & Sosial",
-      "deskripsi": "Amal",
-      "nilai": 1300350.0
     },
     {
       "id": "ex_nrc_1",
@@ -80857,6 +80794,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261031-1828",
+      "mulai": "2026-10-31T11:28:34.567709+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 457 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 109 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
+    {
       "id": "sy_20261031-1824",
       "mulai": "2026-10-31T11:24:34.282220+00:00",
       "status": "sukses",
@@ -81631,7 +81574,7 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-31T11:24:34.282220+00:00"
+    "last_sync": "2026-10-31T11:28:34.567709+00:00"
   },
   "neracaDetail": [
     {
@@ -98727,42 +98670,6 @@
           "kategori": "Outsource / Freelancer & Vendor",
           "deskripsi": "Ruslan",
           "nilai": 560000.0
-        },
-        {
-          "id": "ex_nrc_65",
-          "tanggal": "2026-09-30",
-          "bulan": "2026-09",
-          "jenis": "NON-P&L",
-          "kategori": "Prive / Owner Draw",
-          "deskripsi": "Bon",
-          "nilai": 3314000.0
-        },
-        {
-          "id": "ex_nrc_66",
-          "tanggal": "2026-09-30",
-          "bulan": "2026-09",
-          "jenis": "OPEX",
-          "kategori": "Gaji Admin & Fotografer",
-          "deskripsi": "Gaji Karyawan",
-          "nilai": 12901307.0
-        },
-        {
-          "id": "ex_nrc_67",
-          "tanggal": "2026-09-30",
-          "bulan": "2026-09",
-          "jenis": "OPEX",
-          "kategori": "Pajak & Perizinan",
-          "deskripsi": "Pajak",
-          "nilai": 590075.0
-        },
-        {
-          "id": "ex_nrc_68",
-          "tanggal": "2026-09-30",
-          "bulan": "2026-09",
-          "jenis": "Biaya Lainnya",
-          "kategori": "Amal & Sosial",
-          "deskripsi": "Amal",
-          "nilai": 1770225.0
         }
       ],
       "detail": [
@@ -100223,33 +100130,6 @@
           "kategori": "Cetak Foto & Photo Paper",
           "deskripsi": "Cetakan",
           "nilai": 1627000.0
-        },
-        {
-          "id": "ex_nrc_46",
-          "tanggal": "2026-10-27",
-          "bulan": "2026-10",
-          "jenis": "NON-P&L",
-          "kategori": "Prive / Owner Draw",
-          "deskripsi": "Bon",
-          "nilai": 3006200.0
-        },
-        {
-          "id": "ex_nrc_47",
-          "tanggal": "2026-10-27",
-          "bulan": "2026-10",
-          "jenis": "OPEX",
-          "kategori": "Pajak & Perizinan",
-          "deskripsi": "Pajak",
-          "nilai": 433450.0
-        },
-        {
-          "id": "ex_nrc_48",
-          "tanggal": "2026-10-27",
-          "bulan": "2026-10",
-          "jenis": "Biaya Lainnya",
-          "kategori": "Amal & Sosial",
-          "deskripsi": "Amal",
-          "nilai": 1300350.0
         }
       ],
       "detail": [
