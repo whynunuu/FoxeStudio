@@ -208,7 +208,10 @@ def parse_neraca(filepath="file_neraca.xlsx", sheet_name="September 2026", actua
         
         # Simpan ke baris detail neraca (debit / kredit) untuk baris log harian (r_idx <= 64)
         has_content = (nominal_masuk > 0 or nominal_keluar > 0 or desc_masuk != "" or desc_keluar != "")
-        if r_idx <= 64 and current_tgl is not None and has_content:
+        desc_k_low = desc_keluar.lower()
+        desc_m_low = desc_masuk.lower()
+        is_summary = any(k in desc_k_low or k in desc_m_low for k in ["total", "nominal", "balance"])
+        if r_idx <= 100 and current_tgl is not None and has_content and not is_summary:
             first_of_day = (current_tgl != prev_tgl)
             prev_tgl = current_tgl
             
