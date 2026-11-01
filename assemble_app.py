@@ -8712,13 +8712,17 @@ function checkSavedAuth() {
   try {
     try { localStorage.removeItem(AUTH_KEY); } catch(e){}
 
-    const isLocal = window.location.protocol === "file:" ||
-      !window.location.hostname ||
-      window.location.hostname === "localhost" ||
-      window.location.hostname === "127.0.0.1" ||
-      !window.location.hostname.includes("github.io") ||
-      window.self !== window.top;
-    if (isLocal) return true;
+    // Anti-Clickjacking: If embedded in an external iframe, block embedding
+    if (window.self !== window.top) {
+      try {
+        if (window.top.location.hostname !== window.self.location.hostname) {
+          window.top.location = window.self.location;
+          return false;
+        }
+      } catch (e) {
+        return false;
+      }
+    }
 
     const sessionToken = sessionStorage.getItem("foxe_session_auth");
     if (sessionToken && VALID_HASHES.includes(sessionToken)) {
@@ -8757,9 +8761,14 @@ async function verifyPin() {
       }
     } catch(e){}
   }
-  if (!isValid && typeof btoa === "function" && btoa(enteredPin) === "MzYzNjM2") {
-    isValid = true;
-    validToken = VALID_HASHES[0];
+  if (!isValid && typeof hashPin === "function") {
+    try {
+      const fallbackHash = await hashPin(enteredPin);
+      if (VALID_HASHES.includes(fallbackHash)) {
+        isValid = true;
+        validToken = fallbackHash;
+      }
+    } catch(e){}
   }
   if (isValid) {
     try {

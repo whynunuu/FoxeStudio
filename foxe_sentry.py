@@ -28,7 +28,16 @@ try:
     from telegram_notifier import send_telegram_message, load_config
 except ImportError:
     send_telegram_message = None
-    load_config = lambda: {"token": "8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s", "chat_id": 1608969830}
+    def load_config():
+        sec_path = os.path.join(os.path.dirname(__file__), "foxe_secrets.json")
+        if os.path.exists(sec_path):
+            try:
+                with open(sec_path, "r", encoding="utf-8") as sf:
+                    data = json.load(sf)
+                    return {"token": data.get("TELEGRAM_BOT_TOKEN", ""), "chat_id": data.get("TELEGRAM_CHAT_ID")}
+            except Exception:
+                pass
+        return {"token": os.environ.get("TELEGRAM_BOT_TOKEN", ""), "chat_id": os.environ.get("TELEGRAM_CHAT_ID")}
 
 # 11 File Operasional Wajib
 REQUIRED_OPERATIONAL_FILES = [

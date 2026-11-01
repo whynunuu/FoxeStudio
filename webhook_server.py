@@ -36,7 +36,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -153,10 +153,15 @@ def get_leads(request: Request):
 
 @app.get("/api/trigger-reminder")
 @app.post("/api/trigger-reminder")
-def trigger_reminder_endpoint(hour: Optional[str] = None):
+def trigger_reminder_endpoint(request: Request, hour: Optional[str] = None):
     """
     Endpoint pemicu reminder manual/tes via WhatsApp & Telegram.
+    Dilindungi autentikasi header X-Foxe-Secret atau query key.
     """
+    api_key = request.headers.get("X-Foxe-Secret") or request.query_params.get("key")
+    expected_secret = os.environ.get("FOXE_API_SECRET", "foxe_sec_2026_safe")
+    if api_key != expected_secret:
+        return JSONResponse(status_code=403, content={"status": "error", "message": "Unauthorized: Invalid or missing API secret"})
     now_wib = datetime.datetime.now(WIB)
     hour_label = hour or f"{now_wib.strftime('%H:%M')} WIB"
     result = engine.send_followup_reminder(current_hour_str=hour_label)

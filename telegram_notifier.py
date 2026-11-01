@@ -22,11 +22,26 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 DEFAULT_TOKEN = "8809193335:AAER1t9MAnVSyIRJSWqHpFwaoFe4hYmcZ1s"
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "telegram_config.json")
+SECRETS_FILE = os.path.join(os.path.dirname(__file__), "foxe_secrets.json")
 
 def load_config():
     token = os.environ.get("TELEGRAM_BOT_TOKEN")
     chat_id_env = os.environ.get("TELEGRAM_CHAT_ID")
     chat_id = int(chat_id_env) if chat_id_env and chat_id_env.isdigit() else None
+
+    # Priority check: Local secure git-ignored secrets vault
+    if (not token or not chat_id) and os.path.exists(SECRETS_FILE):
+        try:
+            with open(SECRETS_FILE, "r", encoding="utf-8") as sf:
+                s_data = json.load(sf)
+                if not token:
+                    token = s_data.get("TELEGRAM_BOT_TOKEN")
+                if not chat_id and s_data.get("TELEGRAM_CHAT_ID"):
+                    cid_raw = str(s_data.get("TELEGRAM_CHAT_ID"))
+                    if cid_raw.isdigit():
+                        chat_id = int(cid_raw)
+        except Exception:
+            pass
 
     cfg = {}
     if os.path.exists(CONFIG_FILE):

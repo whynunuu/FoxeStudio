@@ -6726,9 +6726,14 @@
           }
         } catch(e){}
       }
-      if (!isValid && typeof btoa === "function" && btoa(enteredPin) === "MTEyMjMz") {
-        isValid = true;
-        validToken = VALID_HASHES[0];
+      if (!isValid && typeof hashPin === "function") {
+        try {
+          const fallbackHash = await hashPin(enteredPin);
+          if (VALID_HASHES.includes(fallbackHash)) {
+            isValid = true;
+            validToken = fallbackHash;
+          }
+        } catch(e){}
       }
 
       if (isValid) {
