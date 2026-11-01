@@ -124,7 +124,11 @@ def build_summary_message(state, bulan=None):
 
     # Auto-detect bulan jika tidak ditentukan secara eksplisit
     if not bulan:
-        if ok_lo and ok_lo.get("orders"):
+        if cfg.get("bulan"):
+            bulan = cfg.get("bulan")
+        elif datetime.datetime.now().month == 11 or state.get("novemberLogOrder", {}).get("orders"):
+            bulan = "2026-11"
+        elif ok_lo and ok_lo.get("orders"):
             bulan = "2026-10"
         elif cfg.get("cutoff", "").startswith("2026-10"):
             bulan = "2026-10"
