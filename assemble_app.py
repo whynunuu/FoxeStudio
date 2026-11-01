@@ -892,7 +892,8 @@ tr.active-row td{background:color-mix(in srgb,var(--accent) 5%,var(--surface));f
         <span class="pill prog" id="tbStatus">Progressive</span>
         <div class="seg" id="tbMonthSwitcher" style="margin-left:4px;display:inline-flex;align-items:center;">
           <select id="selActiveMonth" aria-label="Pilih Periode Bulan" style="font-weight:600;padding:5px 12px;font-size:12px;background:var(--surface);border:1px solid var(--hairline-strong);border-radius:8px;color:var(--ink);cursor:pointer;outline:none;">
-            <option value="2026-10">📅 Oktober 2026 (Live &amp; Pipeline)</option>
+            <option value="2026-11">📅 November 2026 (Live &amp; Pipeline)</option>
+            <option value="2026-10">📅 Oktober 2026 (Rekap Final)</option>
             <option value="2026-09">📅 September 2026 (Rekap Final)</option>
             <option value="2026-08">📅 Agustus 2026 (Closed Book)</option>
             <option value="2026-07">📅 Juli 2026 (Closed Book)</option>
@@ -1237,8 +1238,8 @@ function saveLocal() {
   }
 }
 
-let activeMonth = "2026-10";
-let db=null,downloads=null,room=null,view="tahunan",estMonth=10,adsFilter="ALL",adsQ="",arsipYear="2026",arsipMonth=10,arsipExpTab="all",arsipExpSearch="",arsipBoncosFilter="all";
+let activeMonth = (typeof INITIAL_STATE !== "undefined" && INITIAL_STATE.config && INITIAL_STATE.config.bulan) || "2026-11";
+let db=null,downloads=null,room=null,view="tahunan",estMonth=11,adsFilter="ALL",adsQ="",arsipYear="2026",arsipMonth=10,arsipExpTab="all",arsipExpSearch="",arsipBoncosFilter="all";
 window.go = function(v){ view=v; render(); window.scrollTo({top:0,behavior:"smooth"}); };
 
 function nkey(s){

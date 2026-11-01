@@ -45,6 +45,8 @@ WISUDA_UNSOED_9SEP_FILE_ID = "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn"
 
 # Sumber Jadwal Oktober 2026 (Reguler & Wisuda UMP 3 & 4 Okt)
 SCHEDULE_OKT_SHEET_ID = "17QPAAhmPZqkomwajFhAw3JBmDyBFuklfNMqyVqlK484"
+LOG_ORDER_NOV_FILE_ID = "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK"
+SCHEDULE_NOV_SHEET_ID = "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw"
 WISUDA_3OKT_FILE_ID = "1sRILPoZD09Rm5aKn6tswNxvxOiRkSu4Z"
 WISUDA_4OKT_FILE_ID = "1hDeuOh-6fnsP7vzWAl4HVwlYoEumu1hA"
 
@@ -172,6 +174,8 @@ def run_integration():
         p_f2 = download_gsheet(SCHEDULE_SHEET_ID, "file2.xlsx") or "file2.xlsx"
         p_neraca = download_gsheet(NERACA_SHEET_ID, "file_neraca.xlsx") or "file_neraca.xlsx"
         p_f2_okt = download_gsheet(SCHEDULE_OKT_SHEET_ID, "file2_okt.xlsx") or "file2_okt.xlsx"
+        p_f1_nov = download_gdrive(LOG_ORDER_NOV_FILE_ID, "file1_nov.xlsm") or "file1_nov.xlsm"
+        p_f2_nov = download_gsheet(SCHEDULE_NOV_SHEET_ID, "file2_nov.xlsx") or "file2_nov.xlsx"
         p_w3 = download_gsheet(WISUDA_3OKT_FILE_ID, "file_wisuda_3okt.xlsx") or "file_wisuda_3okt.xlsx"
         p_w4 = download_gsheet(WISUDA_4OKT_FILE_ID, "file_wisuda_4okt.xlsx") or "file_wisuda_4okt.xlsx"
         p_w_uin1 = download_gsheet(WISUDA_UIN_1SEP_FILE_ID, "file_wisuda_uin_1sep.xlsx") or "file_wisuda_uin_1sep.xlsx"
@@ -187,6 +191,9 @@ def run_integration():
         res_f1_okt = parse_log_order(p_f1_okt, bulan="2026-10")
         print(f"[OK] File 1 Okt terurai: {len(res_f1_okt['orders'])} transaksi, {len(res_f1_okt['shifts'])} shift, cutoff {res_f1_okt['cutoff']}.")
 
+        res_f1_nov = parse_log_order(p_f1_nov, bulan="2026-11")
+        print(f"[OK] File 1 Nov terurai: {len(res_f1_nov['orders'])} transaksi, {len(res_f1_nov['shifts'])} shift, cutoff {res_f1_nov['cutoff']}.")
+
         # STEP 6: Jalankan Parser File 2 (Schedule) & Merge Booking Wisuda September
         print("\n[3/5] Menjalankan parser_schedule.py (File 2 & Wisuda September)...")
         existing_bk = (state.get("schedule") or {}).get("bookings", [])
@@ -201,6 +208,9 @@ def run_integration():
         # Gabungkan ke bookings resmi September
         res_f2_bookings = res_f2_bookings + b_wisuda_sept
         print(f"[OK] Total Jadwal Terpadu September: {len(res_f2_bookings)} sesi booking.")
+
+        res_f2_nov_bookings = parse_schedule(p_f2_nov, bulan="2026-11")
+        print(f"[OK] Schedule November terurai: {len(res_f2_nov_bookings)} jadwal booking reguler.")
 
         # STEP 7: Jalankan Parser File Neraca (COGS, OPEX, Log Debit Kredit & Gaji Karyawan)
         print("\n[4/5] Menjalankan parser_neraca.py (File Neraca September & Oktober)...")
@@ -218,29 +228,46 @@ def run_integration():
 
         res_neraca_sep = parse_neraca(p_neraca, sheet_name="September 2026", actual_shifts=actual_shifts_sep)
 
-        # Parse Oktober 2026 jika sheet ada di spreadsheet
+        # Parse Oktober & November 2026 jika sheet ada di spreadsheet
+        actual_shifts_nov = {}
+        for s in res_f1_nov.get("shifts", []):
+            nm = str(s.get("nama") or "").upper().strip()
+            if nm:
+                actual_shifts_nov[nm] = actual_shifts_nov.get(nm, 0) + s.get("slot", 1)
+
         import openpyxl
         wb_nrc = openpyxl.load_workbook(p_neraca, read_only=True)
         res_neraca_okt = None
         if "Oktober 2026" in wb_nrc.sheetnames:
             res_neraca_okt = parse_neraca(p_neraca, sheet_name="Oktober 2026", actual_shifts=actual_shifts_okt)
             print(f"[OK] Sheet Oktober 2026 berhasil diikat: {len(res_neraca_okt['expenses'])} pos biaya, {len(res_neraca_okt['detail'])} mutasi detail, {len(res_neraca_okt['rosterGaji'])} karyawan roster.")
+
+        res_neraca_nov = None
+        if "November 2026" in wb_nrc.sheetnames:
+            res_neraca_nov = parse_neraca(p_neraca, sheet_name="November 2026", actual_shifts=actual_shifts_nov)
+            print(f"[OK] Sheet November 2026 berhasil diikat: {len(res_neraca_nov['expenses'])} pos biaya, {len(res_neraca_nov['detail'])} mutasi detail, {len(res_neraca_nov['rosterGaji'])} karyawan roster.")
+        else:
+            print("[INFO] Sheet November 2026 belum ada di Neraca (akan disinkronkan saat tim finance update tgl 3/5).")
         wb_nrc.close()
 
         # Gabungkan struktur Neraca multi-bulan
         state["neracaByMonth"] = {
             "2026-09": res_neraca_sep,
-            "2026-10": res_neraca_okt if res_neraca_okt else {"expenses": [], "detail": [], "summary": {}, "rosterGaji": [], "rosterSummary": {}}
+            "2026-10": res_neraca_okt if res_neraca_okt else {"expenses": [], "detail": [], "summary": {}, "rosterGaji": [], "rosterSummary": {}},
+            "2026-11": res_neraca_nov if res_neraca_nov else {"expenses": [], "detail": [], "summary": {}, "rosterGaji": [], "rosterSummary": {}}
         }
 
         all_expenses = list(res_neraca_sep.get("expenses", []))
         if res_neraca_okt:
             all_expenses.extend(res_neraca_okt.get("expenses", []))
+        if res_neraca_nov:
+            all_expenses.extend(res_neraca_nov.get("expenses", []))
         state["expenses"] = all_expenses
 
         state["rosterGajiByMonth"] = {
             "2026-09": res_neraca_sep.get("rosterGaji", []),
-            "2026-10": res_neraca_okt.get("rosterGaji", []) if res_neraca_okt else []
+            "2026-10": res_neraca_okt.get("rosterGaji", []) if res_neraca_okt else [],
+            "2026-11": res_neraca_nov.get("rosterGaji", []) if res_neraca_nov else []
         }
 
         # Simpan default untuk kompatibilitas
@@ -267,6 +294,7 @@ def run_integration():
         sch_by_month = dict(hist_res.get("scheduleByMonth", {}))
         sch_by_month["2026-09"] = res_f2_bookings if res_f2_bookings else state.get("schedule", {}).get("bookings", [])
         sch_by_month["2026-10"] = okt_pipeline.get("bookings", [])
+        sch_by_month["2026-11"] = res_f2_nov_bookings
         state["scheduleByMonth"] = sch_by_month
 
         # Gabungkan Neraca bulanan dan Roster Gaji bulanan
@@ -293,18 +321,20 @@ def run_integration():
                 })
         sep_omz = sum(o.get("total", 0) for o in res_f1["orders"] if o.get("tanggal", "").startswith("2026-09-")) or 118015000
         h_2026.append({"tahun": 2026, "no": 9, "omzet": sep_omz})
-        okt_live_omz = sum(o.get("total", 0) for o in res_f1_okt["orders"] if o.get("tanggal", "").startswith("2026-10-")) or 16170000
+        okt_live_omz = sum(o.get("total", 0) for o in res_f1_okt["orders"] if o.get("tanggal", "").startswith("2026-10-")) or 91695000
         h_2026.append({"tahun": 2026, "no": 10, "omzet": okt_live_omz})
+        nov_live_omz = sum(o.get("total", 0) for o in res_f1_nov["orders"] if o.get("tanggal", "").startswith("2026-11-"))
+        h_2026.append({"tahun": 2026, "no": 11, "omzet": nov_live_omz})
         state["history"]["months"] = h_2025 + h_2026
 
-        # STEP 8: Perbarui State Gabungan
-        active_days = [int(o["tanggal"].split("-")[2]) for o in res_f1["orders"] if o["tanggal"].startswith("2026-09-") and int(o["tanggal"].split("-")[2]) <= 30]
-        latest_day = max(active_days) if active_days else 19
-        cutoff_date = f"2026-09-{latest_day:02d}"
+        # STEP 8: Perbarui State Gabungan (November 2026 Aktif Live)
+        active_days_nov = [int(o["tanggal"].split("-")[2]) for o in res_f1_nov["orders"] if o.get("tanggal", "").startswith("2026-11-")]
+        latest_day_nov = max(active_days_nov) if active_days_nov else 1
+        cutoff_date_nov = f"2026-11-{latest_day_nov:02d}"
 
         cfg = state.get("config", {})
-        cfg["bulan"] = "2026-09"
-        cfg["cutoff"] = cutoff_date
+        cfg["bulan"] = "2026-11"
+        cfg["cutoff"] = cutoff_date_nov
         cfg["status"] = "Progressive"
         if "targets" not in cfg:
             cfg["targets"] = [
@@ -314,13 +344,14 @@ def run_integration():
             ]
         state["config"] = cfg
         state["oktoberLogOrder"] = res_f1_okt
+        state["novemberLogOrder"] = res_f1_nov
         hist_orders = hist_res.get("historicalOrders", [])
         hist_shifts = hist_res.get("historicalShifts", [])
-        state["orders"] = hist_orders + res_f1["orders"] + res_f1_okt["orders"]
-        state["shifts"] = hist_shifts + res_f1["shifts"] + res_f1_okt["shifts"]
-        state["cashControl"] = res_f1["cashControl"] + res_f1_okt["cashControl"]
-        state["leads"] = res_f1["leads"] + [l for l in res_f1_okt["leads"] if l.get("transaksi") or l.get("dp") or l.get("leads")]
-        state["kpi"] = res_f1["kpi"]
+        state["orders"] = hist_orders + res_f1["orders"] + res_f1_okt["orders"] + res_f1_nov["orders"]
+        state["shifts"] = hist_shifts + res_f1["shifts"] + res_f1_okt["shifts"] + res_f1_nov["shifts"]
+        state["cashControl"] = res_f1["cashControl"] + res_f1_okt["cashControl"] + res_f1_nov["cashControl"]
+        state["leads"] = res_f1["leads"] + [l for l in res_f1_okt["leads"] if l.get("transaksi") or l.get("dp") or l.get("leads")] + [l for l in res_f1_nov["leads"] if l.get("transaksi") or l.get("dp") or l.get("leads")]
+        state["kpi"] = res_f1_nov["kpi"] if (res_f1_nov.get("kpi") and any(k.get("hariDinilai", 0) > 0 for k in res_f1_nov["kpi"])) else res_f1_okt["kpi"]
 
         # Injeksi otomatis Bonus KPI dari Sheet 9 ke Roster Gaji (Adif, Saka, Amel, Indah)
         kpi_list = state.get("kpi", [])
@@ -381,6 +412,8 @@ def run_integration():
             "wisuda_uin_2sep_id": WISUDA_UIN_2SEP_FILE_ID,
             "wisuda_unsoed_8sep_id": WISUDA_UNSOED_8SEP_FILE_ID,
             "wisuda_unsoed_9sep_id": WISUDA_UNSOED_9SEP_FILE_ID,
+            "file1_nov_id": LOG_ORDER_NOV_FILE_ID,
+            "file2_nov_id": SCHEDULE_NOV_SHEET_ID,
             "last_sync": now.astimezone(datetime.timezone.utc).isoformat()
         }
 

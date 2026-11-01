@@ -1,7 +1,7 @@
 {
   "config": {
-    "bulan": "2026-09",
-    "cutoff": "2026-09-30",
+    "bulan": "2026-11",
+    "cutoff": "2026-11-01",
     "status": "Progressive",
     "targets": [
       {
@@ -56025,6 +56025,19 @@
       "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_1",
+      "tanggal": "2026-11-01",
+      "client": "Yuli",
+      "paket": "Family B",
+      "tanggalFoto": "2026-11-05",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -63071,6 +63084,18 @@
       "tanggal": "2026-10-31",
       "nama": "ADIF",
       "slot": 1
+    },
+    {
+      "id": "sh_1",
+      "tanggal": "2026-11-01",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_2",
+      "tanggal": "2026-11-01",
+      "nama": "SAKA",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -63814,12 +63839,12 @@
     },
     {
       "id": "ex_nrc_19",
-      "tanggal": "2026-10-07",
+      "tanggal": "2026-10-06",
       "bulan": "2026-10",
-      "jenis": "OPEX",
-      "kategori": "Software / Subscription",
-      "deskripsi": "Adobe",
-      "nilai": 315500.0
+      "jenis": "COGS",
+      "kategori": "Outsource / Freelancer & Vendor",
+      "deskripsi": "Abror Freelance",
+      "nilai": 150000.0
     },
     {
       "id": "ex_nrc_20",
@@ -63828,10 +63853,19 @@
       "jenis": "OPEX",
       "kategori": "Software / Subscription",
       "deskripsi": "Adobe",
-      "nilai": 628500.0
+      "nilai": 315500.0
     },
     {
       "id": "ex_nrc_21",
+      "tanggal": "2026-10-07",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "Software / Subscription",
+      "deskripsi": "Adobe",
+      "nilai": 628500.0
+    },
+    {
+      "id": "ex_nrc_22",
       "tanggal": "2026-10-07",
       "bulan": "2026-10",
       "jenis": "COGS",
@@ -63840,7 +63874,16 @@
       "nilai": 15000.0
     },
     {
-      "id": "ex_nrc_22",
+      "id": "ex_nrc_23",
+      "tanggal": "2026-10-07",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Rent Cam",
+      "nilai": 100000.0
+    },
+    {
+      "id": "ex_nrc_24",
       "tanggal": "2026-10-08",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -63849,7 +63892,7 @@
       "nilai": 503000.0
     },
     {
-      "id": "ex_nrc_23",
+      "id": "ex_nrc_25",
       "tanggal": "2026-10-08",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -63858,7 +63901,7 @@
       "nilai": 200000.0
     },
     {
-      "id": "ex_nrc_24",
+      "id": "ex_nrc_26",
       "tanggal": "2026-10-08",
       "bulan": "2026-10",
       "jenis": "COGS",
@@ -63867,7 +63910,7 @@
       "nilai": 50000.0
     },
     {
-      "id": "ex_nrc_25",
+      "id": "ex_nrc_27",
       "tanggal": "2026-10-09",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -63876,7 +63919,7 @@
       "nilai": 12000.0
     },
     {
-      "id": "ex_nrc_26",
+      "id": "ex_nrc_28",
       "tanggal": "2026-10-09",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -63885,7 +63928,7 @@
       "nilai": 46000.0
     },
     {
-      "id": "ex_nrc_27",
+      "id": "ex_nrc_29",
       "tanggal": "2026-10-11",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -63894,7 +63937,7 @@
       "nilai": 750000.0
     },
     {
-      "id": "ex_nrc_28",
+      "id": "ex_nrc_30",
       "tanggal": "2026-10-11",
       "bulan": "2026-10",
       "jenis": "COGS",
@@ -63903,7 +63946,7 @@
       "nilai": 1856000.0
     },
     {
-      "id": "ex_nrc_29",
+      "id": "ex_nrc_31",
       "tanggal": "2026-10-11",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -63912,7 +63955,7 @@
       "nilai": 55000.0
     },
     {
-      "id": "ex_nrc_30",
+      "id": "ex_nrc_32",
       "tanggal": "2026-10-12",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -63921,7 +63964,7 @@
       "nilai": 500000.0
     },
     {
-      "id": "ex_nrc_31",
+      "id": "ex_nrc_33",
       "tanggal": "2026-10-12",
       "bulan": "2026-10",
       "jenis": "COGS",
@@ -63930,7 +63973,7 @@
       "nilai": 950000.0
     },
     {
-      "id": "ex_nrc_32",
+      "id": "ex_nrc_34",
       "tanggal": "2026-10-15",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -63939,7 +63982,7 @@
       "nilai": 154000.0
     },
     {
-      "id": "ex_nrc_33",
+      "id": "ex_nrc_35",
       "tanggal": "2026-10-15",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -63948,7 +63991,7 @@
       "nilai": 8000.0
     },
     {
-      "id": "ex_nrc_34",
+      "id": "ex_nrc_36",
       "tanggal": "2026-10-16",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -63957,7 +64000,7 @@
       "nilai": 503000.0
     },
     {
-      "id": "ex_nrc_35",
+      "id": "ex_nrc_37",
       "tanggal": "2026-10-17",
       "bulan": "2026-10",
       "jenis": "COGS",
@@ -63966,7 +64009,7 @@
       "nilai": 1436000.0
     },
     {
-      "id": "ex_nrc_36",
+      "id": "ex_nrc_38",
       "tanggal": "2026-10-17",
       "bulan": "2026-10",
       "jenis": "COGS",
@@ -63975,7 +64018,7 @@
       "nilai": 40000.0
     },
     {
-      "id": "ex_nrc_37",
+      "id": "ex_nrc_39",
       "tanggal": "2026-10-18",
       "bulan": "2026-10",
       "jenis": "COGS",
@@ -63984,7 +64027,7 @@
       "nilai": 595000.0
     },
     {
-      "id": "ex_nrc_38",
+      "id": "ex_nrc_40",
       "tanggal": "2026-10-19",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -63993,7 +64036,7 @@
       "nilai": 500000.0
     },
     {
-      "id": "ex_nrc_39",
+      "id": "ex_nrc_41",
       "tanggal": "2026-10-20",
       "bulan": "2026-10",
       "jenis": "COGS",
@@ -64002,7 +64045,7 @@
       "nilai": 2954000.0
     },
     {
-      "id": "ex_nrc_40",
+      "id": "ex_nrc_42",
       "tanggal": "2026-10-20",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -64011,7 +64054,7 @@
       "nilai": 154000.0
     },
     {
-      "id": "ex_nrc_41",
+      "id": "ex_nrc_43",
       "tanggal": "2026-10-21",
       "bulan": "2026-10",
       "jenis": "COGS",
@@ -64020,7 +64063,7 @@
       "nilai": 950000.0
     },
     {
-      "id": "ex_nrc_42",
+      "id": "ex_nrc_44",
       "tanggal": "2026-10-21",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -64029,7 +64072,7 @@
       "nilai": 75000.0
     },
     {
-      "id": "ex_nrc_43",
+      "id": "ex_nrc_45",
       "tanggal": "2026-10-22",
       "bulan": "2026-10",
       "jenis": "OPEX",
@@ -64038,7 +64081,7 @@
       "nilai": 500000.0
     },
     {
-      "id": "ex_nrc_44",
+      "id": "ex_nrc_46",
       "tanggal": "2026-10-22",
       "bulan": "2026-10",
       "jenis": "COGS",
@@ -64047,13 +64090,112 @@
       "nilai": 1811000.0
     },
     {
-      "id": "ex_nrc_45",
+      "id": "ex_nrc_47",
       "tanggal": "2026-10-24",
       "bulan": "2026-10",
       "jenis": "COGS",
       "kategori": "Cetak Foto & Photo Paper",
       "deskripsi": "Cetakan",
       "nilai": 1627000.0
+    },
+    {
+      "id": "ex_nrc_48",
+      "tanggal": "2026-10-27",
+      "bulan": "2026-10",
+      "jenis": "COGS",
+      "kategori": "Cetak Foto & Photo Paper",
+      "deskripsi": "Cetakan",
+      "nilai": 2294500.0
+    },
+    {
+      "id": "ex_nrc_49",
+      "tanggal": "2026-10-27",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "Office & Cleaning Supplies",
+      "deskripsi": "Galon",
+      "nilai": 8000.0
+    },
+    {
+      "id": "ex_nrc_50",
+      "tanggal": "2026-10-28",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "Maintenance Studio & Equipment",
+      "deskripsi": "Serv Exhaust",
+      "nilai": 200000.0
+    },
+    {
+      "id": "ex_nrc_51",
+      "tanggal": "2026-10-29",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Sign Toilet",
+      "nilai": 146450.0
+    },
+    {
+      "id": "ex_nrc_52",
+      "tanggal": "2026-10-29",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "Maintenance Studio & Equipment",
+      "deskripsi": "Dop Paralon",
+      "nilai": 112000.0
+    },
+    {
+      "id": "ex_nrc_53",
+      "tanggal": "2026-10-30",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "Konsumsi Crew",
+      "deskripsi": "Kopi Tukang",
+      "nilai": 20000.0
+    },
+    {
+      "id": "ex_nrc_54",
+      "tanggal": "2026-10-30",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Add Edit Sept",
+      "nilai": 240000.0
+    },
+    {
+      "id": "ex_nrc_55",
+      "tanggal": "2026-10-30",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Add Edit",
+      "nilai": 270000.0
+    },
+    {
+      "id": "ex_nrc_56",
+      "tanggal": "2026-10-31",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 403000.0
+    },
+    {
+      "id": "ex_nrc_57",
+      "tanggal": "2026-10-31",
+      "bulan": "2026-10",
+      "jenis": "COGS",
+      "kategori": "Outsource / Freelancer & Vendor",
+      "deskripsi": "Ruslan",
+      "nilai": 560000.0
+    },
+    {
+      "id": "ex_nrc_58",
+      "tanggal": "2026-10-31",
+      "bulan": "2026-10",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Gdrive 1 Tahun",
+      "nilai": 3500000.0
     },
     {
       "id": "ex_nrc_1",
@@ -68218,6 +68360,161 @@
       "id": "cc_2026-10-31",
       "tanggal": "2026-10-31",
       "nilai": 675000.0
+    },
+    {
+      "id": "cc_2026-11-01",
+      "tanggal": "2026-11-01",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-02",
+      "tanggal": "2026-11-02",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-03",
+      "tanggal": "2026-11-03",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-04",
+      "tanggal": "2026-11-04",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-05",
+      "tanggal": "2026-11-05",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-06",
+      "tanggal": "2026-11-06",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-07",
+      "tanggal": "2026-11-07",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-08",
+      "tanggal": "2026-11-08",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-09",
+      "tanggal": "2026-11-09",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-10",
+      "tanggal": "2026-11-10",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-11",
+      "tanggal": "2026-11-11",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-12",
+      "tanggal": "2026-11-12",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-13",
+      "tanggal": "2026-11-13",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-14",
+      "tanggal": "2026-11-14",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-15",
+      "tanggal": "2026-11-15",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-16",
+      "tanggal": "2026-11-16",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-17",
+      "tanggal": "2026-11-17",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-18",
+      "tanggal": "2026-11-18",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-19",
+      "tanggal": "2026-11-19",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-20",
+      "tanggal": "2026-11-20",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-21",
+      "tanggal": "2026-11-21",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-22",
+      "tanggal": "2026-11-22",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-23",
+      "tanggal": "2026-11-23",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-24",
+      "tanggal": "2026-11-24",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-25",
+      "tanggal": "2026-11-25",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-26",
+      "tanggal": "2026-11-26",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-27",
+      "tanggal": "2026-11-27",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-28",
+      "tanggal": "2026-11-28",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-29",
+      "tanggal": "2026-11-29",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-30",
+      "tanggal": "2026-11-30",
+      "nilai": 0.0
+    },
+    {
+      "id": "cc_2026-11-31",
+      "tanggal": "2026-11-31",
+      "nilai": 0.0
     }
   ],
   "leads": [
@@ -68716,6 +69013,38 @@
       "dp": 4.0,
       "sesiFoto": 4.0,
       "transaksi": 8.0
+    },
+    {
+      "id": "ld_1",
+      "tanggal": "2026-11-01",
+      "leads": 0.0,
+      "dp": 1.0,
+      "sesiFoto": 0.0,
+      "transaksi": 1.0
+    },
+    {
+      "id": "ld_3",
+      "tanggal": "2026-11-03",
+      "leads": 0.0,
+      "dp": 3.0,
+      "sesiFoto": 0.0,
+      "transaksi": 3.0
+    },
+    {
+      "id": "ld_13",
+      "tanggal": "2026-11-13",
+      "leads": 20.0,
+      "dp": 0.0,
+      "sesiFoto": 0.0,
+      "transaksi": 0.0
+    },
+    {
+      "id": "ld_17",
+      "tanggal": "2026-11-17",
+      "leads": 0.0,
+      "dp": 4.0,
+      "sesiFoto": 21.0,
+      "transaksi": 25.0
     }
   ],
   "kpi": [
@@ -68723,48 +69052,48 @@
       "id": "kp_1",
       "nama": "ADIF",
       "role": "Fotografer 1",
-      "hariDinilai": 28,
+      "hariDinilai": 15,
       "disiplin": 5.0,
-      "akurasi": 5.0,
-      "sop": 4.96,
-      "client": 5.0,
-      "produktivitas": 4.82,
+      "akurasi": 4.9,
+      "sop": 4.9,
+      "client": 4.9,
+      "produktivitas": 4.9,
       "referral": 0
     },
     {
       "id": "kp_2",
       "nama": "AMEL",
       "role": "Admin 2",
-      "hariDinilai": 29,
-      "disiplin": 4.93,
-      "akurasi": 4.97,
-      "sop": 4.86,
-      "client": 5.0,
-      "produktivitas": 4.59,
+      "hariDinilai": 15,
+      "disiplin": 5.0,
+      "akurasi": 4.9,
+      "sop": 4.9,
+      "client": 4.9,
+      "produktivitas": 4.9,
       "referral": 0
     },
     {
       "id": "kp_3",
       "nama": "INDAH",
       "role": "Admin 1",
-      "hariDinilai": 31,
+      "hariDinilai": 15,
       "disiplin": 5.0,
-      "akurasi": 5.0,
-      "sop": 5.0,
-      "client": 4.97,
-      "produktivitas": 5.0,
+      "akurasi": 4.9,
+      "sop": 4.9,
+      "client": 4.9,
+      "produktivitas": 4.9,
       "referral": 0
     },
     {
       "id": "kp_4",
       "nama": "SAKA",
       "role": "Fotografer 2",
-      "hariDinilai": 32,
-      "disiplin": 4.94,
-      "akurasi": 4.97,
-      "sop": 5.0,
-      "client": 5.0,
-      "produktivitas": 4.88,
+      "hariDinilai": 15,
+      "disiplin": 5.0,
+      "akurasi": 4.9,
+      "sop": 4.9,
+      "client": 4.9,
+      "produktivitas": 4.9,
       "referral": 0
     }
   ],
@@ -80459,6 +80788,11 @@
         "tahun": 2026,
         "no": 10,
         "omzet": 91795000.0
+      },
+      {
+        "tahun": 2026,
+        "no": 11,
+        "omzet": 100000.0
       }
     ]
   },
@@ -80806,6 +81140,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261101-1353",
+      "mulai": "2026-11-01T06:53:56.851245+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 122 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
     {
       "id": "sy_20261031-2243",
       "mulai": "2026-10-31T15:43:11.547670+00:00",
@@ -81593,7 +81933,9 @@
     "wisuda_uin_2sep_id": "1QAJ6bRYkpawktaQFSdrPXcTEou0e1RTQ",
     "wisuda_unsoed_8sep_id": "14zX-ykMTFlff29otmXIlNbl9dF5Eu1vL",
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
-    "last_sync": "2026-10-31T15:43:11.547670+00:00"
+    "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
+    "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
+    "last_sync": "2026-11-01T06:53:56.851245+00:00"
   },
   "neracaDetail": [
     {
@@ -89539,12 +89881,12 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1120000.0,
-      "bonus_kpi": 347112.0,
+      "bonus_kpi": 344750.0,
       "additional": 0.0,
       "bonus": 346981.0,
       "hukuman": 0.0,
       "bon": 700000.0,
-      "thp": 1114093.0,
+      "thp": 1111731.0,
       "status": "Draft"
     },
     {
@@ -89558,12 +89900,12 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1280000.0,
-      "bonus_kpi": 346981.0,
+      "bonus_kpi": 344750.0,
       "additional": 0.0,
       "bonus": 346544.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1973525.0,
+      "thp": 1971294.0,
       "status": "Draft"
     },
     {
@@ -89577,12 +89919,12 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1160000.0,
-      "bonus_kpi": 341162.0,
+      "bonus_kpi": 344750.0,
       "additional": 0.0,
       "bonus": 340769.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1841931.0,
+      "thp": 1845519.0,
       "status": "Draft"
     },
     {
@@ -89596,12 +89938,12 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1240000.0,
-      "bonus_kpi": 349606.0,
+      "bonus_kpi": 344750.0,
       "additional": 0.0,
       "bonus": 349475.0,
       "hukuman": 0.0,
       "bon": 250000.0,
-      "thp": 1689081.0,
+      "thp": 1684225.0,
       "status": "Draft"
     },
     {
@@ -89759,12 +90101,12 @@
   ],
   "rosterSummary": {
     "total_gaji": 13430000.0,
-    "total_bonus_kpi": 1384861.0,
+    "total_bonus_kpi": 1379000.0,
     "total_additional": 0.0,
     "total_bonus": 2065307.0,
     "total_hukuman": 0.0,
     "total_bon": 3314000.0,
-    "grand_total_thp": 13566168.0,
+    "grand_total_thp": 13560307.0,
     "total_karyawan": 12
   },
   "oktoberLogOrder": {
@@ -96882,8 +97224,8 @@
         "id": "kp_1",
         "nama": "ADIF",
         "role": "Fotografer 1",
-        "hariDinilai": 30,
-        "disiplin": 4.9,
+        "hariDinilai": 33,
+        "disiplin": 4.91,
         "akurasi": 5.0,
         "sop": 5.0,
         "client": 5.0,
@@ -96894,12 +97236,12 @@
         "id": "kp_2",
         "nama": "AMEL",
         "role": "Admin 2",
-        "hariDinilai": 27,
-        "disiplin": 4.78,
-        "akurasi": 4.67,
-        "sop": 4.78,
-        "client": 4.85,
-        "produktivitas": 4.52,
+        "hariDinilai": 31,
+        "disiplin": 4.74,
+        "akurasi": 4.65,
+        "sop": 4.68,
+        "client": 4.87,
+        "produktivitas": 4.39,
         "referral": 0
       },
       {
@@ -96918,10 +97260,10 @@
         "id": "kp_4",
         "nama": "SAKA",
         "role": "Fotografer 2",
-        "hariDinilai": 28,
-        "disiplin": 4.96,
+        "hariDinilai": 29,
+        "disiplin": 4.97,
         "akurasi": 5.0,
-        "sop": 4.96,
+        "sop": 4.97,
         "client": 5.0,
         "produktivitas": 4.86,
         "referral": 0
@@ -96956,7 +97298,11 @@
           5.0,
           5.0,
           5.0,
-          5.0
+          5.0,
+          5.0,
+          5.0,
+          4.0,
+          4.0
         ],
         "akurasi": [
           4.0,
@@ -96985,7 +97331,11 @@
           4.0,
           5.0,
           5.0,
-          5.0
+          5.0,
+          5.0,
+          5.0,
+          4.0,
+          4.0
         ],
         "sop": [
           4.0,
@@ -97014,7 +97364,11 @@
           5.0,
           5.0,
           5.0,
-          5.0
+          5.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0
         ],
         "client": [
           4.0,
@@ -97027,6 +97381,10 @@
           5.0,
           4.0,
           4.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -97072,7 +97430,11 @@
           4.0,
           5.0,
           5.0,
-          5.0
+          5.0,
+          3.0,
+          3.0,
+          4.0,
+          4.0
         ]
       },
       "ADIF": {
@@ -97106,9 +97468,15 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -97170,9 +97538,15 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "client": [
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -97220,6 +97594,9 @@
           5.0,
           5.0,
           4.0,
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -97433,9 +97810,11 @@
           5.0,
           5.0,
           5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -97493,9 +97872,11 @@
           5.0,
           5.0,
           5.0,
+          5.0,
           5.0
         ],
         "client": [
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -97547,6 +97928,7 @@
           5.0,
           5.0,
           4.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -99527,12 +99909,12 @@
           "cost": 40000.0,
           "is_fixed": false,
           "total_gaji": 1120000.0,
-          "bonus_kpi": 347112.0,
+          "bonus_kpi": 344750.0,
           "additional": 0.0,
           "bonus": 346981.0,
           "hukuman": 0.0,
           "bon": 700000.0,
-          "thp": 1114093.0,
+          "thp": 1111731.0,
           "status": "Draft"
         },
         {
@@ -99546,12 +99928,12 @@
           "cost": 40000.0,
           "is_fixed": false,
           "total_gaji": 1280000.0,
-          "bonus_kpi": 346981.0,
+          "bonus_kpi": 344750.0,
           "additional": 0.0,
           "bonus": 346544.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 1973525.0,
+          "thp": 1971294.0,
           "status": "Draft"
         },
         {
@@ -99565,12 +99947,12 @@
           "cost": 40000.0,
           "is_fixed": false,
           "total_gaji": 1160000.0,
-          "bonus_kpi": 341162.0,
+          "bonus_kpi": 344750.0,
           "additional": 0.0,
           "bonus": 340769.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 1841931.0,
+          "thp": 1845519.0,
           "status": "Draft"
         },
         {
@@ -99584,12 +99966,12 @@
           "cost": 40000.0,
           "is_fixed": false,
           "total_gaji": 1240000.0,
-          "bonus_kpi": 349606.0,
+          "bonus_kpi": 344750.0,
           "additional": 0.0,
           "bonus": 349475.0,
           "hukuman": 0.0,
           "bon": 250000.0,
-          "thp": 1689081.0,
+          "thp": 1684225.0,
           "status": "Draft"
         },
         {
@@ -99747,12 +100129,12 @@
       ],
       "rosterSummary": {
         "total_gaji": 13430000.0,
-        "total_bonus_kpi": 1384861.0,
+        "total_bonus_kpi": 1379000.0,
         "total_additional": 0.0,
         "total_bonus": 2065307.0,
         "total_hukuman": 0.0,
         "total_bon": 3314000.0,
-        "grand_total_thp": 13566168.0,
+        "grand_total_thp": 13560307.0,
         "total_karyawan": 12
       }
     },
@@ -99922,12 +100304,12 @@
         },
         {
           "id": "ex_nrc_19",
-          "tanggal": "2026-10-07",
+          "tanggal": "2026-10-06",
           "bulan": "2026-10",
-          "jenis": "OPEX",
-          "kategori": "Software / Subscription",
-          "deskripsi": "Adobe",
-          "nilai": 315500.0
+          "jenis": "COGS",
+          "kategori": "Outsource / Freelancer & Vendor",
+          "deskripsi": "Abror Freelance",
+          "nilai": 150000.0
         },
         {
           "id": "ex_nrc_20",
@@ -99936,10 +100318,19 @@
           "jenis": "OPEX",
           "kategori": "Software / Subscription",
           "deskripsi": "Adobe",
-          "nilai": 628500.0
+          "nilai": 315500.0
         },
         {
           "id": "ex_nrc_21",
+          "tanggal": "2026-10-07",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "Software / Subscription",
+          "deskripsi": "Adobe",
+          "nilai": 628500.0
+        },
+        {
+          "id": "ex_nrc_22",
           "tanggal": "2026-10-07",
           "bulan": "2026-10",
           "jenis": "COGS",
@@ -99948,7 +100339,16 @@
           "nilai": 15000.0
         },
         {
-          "id": "ex_nrc_22",
+          "id": "ex_nrc_23",
+          "tanggal": "2026-10-07",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "OPEX Lainnya",
+          "deskripsi": "Rent Cam",
+          "nilai": 100000.0
+        },
+        {
+          "id": "ex_nrc_24",
           "tanggal": "2026-10-08",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -99957,7 +100357,7 @@
           "nilai": 503000.0
         },
         {
-          "id": "ex_nrc_23",
+          "id": "ex_nrc_25",
           "tanggal": "2026-10-08",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -99966,7 +100366,7 @@
           "nilai": 200000.0
         },
         {
-          "id": "ex_nrc_24",
+          "id": "ex_nrc_26",
           "tanggal": "2026-10-08",
           "bulan": "2026-10",
           "jenis": "COGS",
@@ -99975,7 +100375,7 @@
           "nilai": 50000.0
         },
         {
-          "id": "ex_nrc_25",
+          "id": "ex_nrc_27",
           "tanggal": "2026-10-09",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -99984,7 +100384,7 @@
           "nilai": 12000.0
         },
         {
-          "id": "ex_nrc_26",
+          "id": "ex_nrc_28",
           "tanggal": "2026-10-09",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -99993,7 +100393,7 @@
           "nilai": 46000.0
         },
         {
-          "id": "ex_nrc_27",
+          "id": "ex_nrc_29",
           "tanggal": "2026-10-11",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -100002,7 +100402,7 @@
           "nilai": 750000.0
         },
         {
-          "id": "ex_nrc_28",
+          "id": "ex_nrc_30",
           "tanggal": "2026-10-11",
           "bulan": "2026-10",
           "jenis": "COGS",
@@ -100011,7 +100411,7 @@
           "nilai": 1856000.0
         },
         {
-          "id": "ex_nrc_29",
+          "id": "ex_nrc_31",
           "tanggal": "2026-10-11",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -100020,7 +100420,7 @@
           "nilai": 55000.0
         },
         {
-          "id": "ex_nrc_30",
+          "id": "ex_nrc_32",
           "tanggal": "2026-10-12",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -100029,7 +100429,7 @@
           "nilai": 500000.0
         },
         {
-          "id": "ex_nrc_31",
+          "id": "ex_nrc_33",
           "tanggal": "2026-10-12",
           "bulan": "2026-10",
           "jenis": "COGS",
@@ -100038,7 +100438,7 @@
           "nilai": 950000.0
         },
         {
-          "id": "ex_nrc_32",
+          "id": "ex_nrc_34",
           "tanggal": "2026-10-15",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -100047,7 +100447,7 @@
           "nilai": 154000.0
         },
         {
-          "id": "ex_nrc_33",
+          "id": "ex_nrc_35",
           "tanggal": "2026-10-15",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -100056,7 +100456,7 @@
           "nilai": 8000.0
         },
         {
-          "id": "ex_nrc_34",
+          "id": "ex_nrc_36",
           "tanggal": "2026-10-16",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -100065,7 +100465,7 @@
           "nilai": 503000.0
         },
         {
-          "id": "ex_nrc_35",
+          "id": "ex_nrc_37",
           "tanggal": "2026-10-17",
           "bulan": "2026-10",
           "jenis": "COGS",
@@ -100074,7 +100474,7 @@
           "nilai": 1436000.0
         },
         {
-          "id": "ex_nrc_36",
+          "id": "ex_nrc_38",
           "tanggal": "2026-10-17",
           "bulan": "2026-10",
           "jenis": "COGS",
@@ -100083,7 +100483,7 @@
           "nilai": 40000.0
         },
         {
-          "id": "ex_nrc_37",
+          "id": "ex_nrc_39",
           "tanggal": "2026-10-18",
           "bulan": "2026-10",
           "jenis": "COGS",
@@ -100092,7 +100492,7 @@
           "nilai": 595000.0
         },
         {
-          "id": "ex_nrc_38",
+          "id": "ex_nrc_40",
           "tanggal": "2026-10-19",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -100101,7 +100501,7 @@
           "nilai": 500000.0
         },
         {
-          "id": "ex_nrc_39",
+          "id": "ex_nrc_41",
           "tanggal": "2026-10-20",
           "bulan": "2026-10",
           "jenis": "COGS",
@@ -100110,7 +100510,7 @@
           "nilai": 2954000.0
         },
         {
-          "id": "ex_nrc_40",
+          "id": "ex_nrc_42",
           "tanggal": "2026-10-20",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -100119,7 +100519,7 @@
           "nilai": 154000.0
         },
         {
-          "id": "ex_nrc_41",
+          "id": "ex_nrc_43",
           "tanggal": "2026-10-21",
           "bulan": "2026-10",
           "jenis": "COGS",
@@ -100128,7 +100528,7 @@
           "nilai": 950000.0
         },
         {
-          "id": "ex_nrc_42",
+          "id": "ex_nrc_44",
           "tanggal": "2026-10-21",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -100137,7 +100537,7 @@
           "nilai": 75000.0
         },
         {
-          "id": "ex_nrc_43",
+          "id": "ex_nrc_45",
           "tanggal": "2026-10-22",
           "bulan": "2026-10",
           "jenis": "OPEX",
@@ -100146,7 +100546,7 @@
           "nilai": 500000.0
         },
         {
-          "id": "ex_nrc_44",
+          "id": "ex_nrc_46",
           "tanggal": "2026-10-22",
           "bulan": "2026-10",
           "jenis": "COGS",
@@ -100155,13 +100555,112 @@
           "nilai": 1811000.0
         },
         {
-          "id": "ex_nrc_45",
+          "id": "ex_nrc_47",
           "tanggal": "2026-10-24",
           "bulan": "2026-10",
           "jenis": "COGS",
           "kategori": "Cetak Foto & Photo Paper",
           "deskripsi": "Cetakan",
           "nilai": 1627000.0
+        },
+        {
+          "id": "ex_nrc_48",
+          "tanggal": "2026-10-27",
+          "bulan": "2026-10",
+          "jenis": "COGS",
+          "kategori": "Cetak Foto & Photo Paper",
+          "deskripsi": "Cetakan",
+          "nilai": 2294500.0
+        },
+        {
+          "id": "ex_nrc_49",
+          "tanggal": "2026-10-27",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "Office & Cleaning Supplies",
+          "deskripsi": "Galon",
+          "nilai": 8000.0
+        },
+        {
+          "id": "ex_nrc_50",
+          "tanggal": "2026-10-28",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "Maintenance Studio & Equipment",
+          "deskripsi": "Serv Exhaust",
+          "nilai": 200000.0
+        },
+        {
+          "id": "ex_nrc_51",
+          "tanggal": "2026-10-29",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "OPEX Lainnya",
+          "deskripsi": "Sign Toilet",
+          "nilai": 146450.0
+        },
+        {
+          "id": "ex_nrc_52",
+          "tanggal": "2026-10-29",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "Maintenance Studio & Equipment",
+          "deskripsi": "Dop Paralon",
+          "nilai": 112000.0
+        },
+        {
+          "id": "ex_nrc_53",
+          "tanggal": "2026-10-30",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "Konsumsi Crew",
+          "deskripsi": "Kopi Tukang",
+          "nilai": 20000.0
+        },
+        {
+          "id": "ex_nrc_54",
+          "tanggal": "2026-10-30",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "OPEX Lainnya",
+          "deskripsi": "Add Edit Sept",
+          "nilai": 240000.0
+        },
+        {
+          "id": "ex_nrc_55",
+          "tanggal": "2026-10-30",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "OPEX Lainnya",
+          "deskripsi": "Add Edit",
+          "nilai": 270000.0
+        },
+        {
+          "id": "ex_nrc_56",
+          "tanggal": "2026-10-31",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "Listrik & Air",
+          "deskripsi": "Listrik",
+          "nilai": 403000.0
+        },
+        {
+          "id": "ex_nrc_57",
+          "tanggal": "2026-10-31",
+          "bulan": "2026-10",
+          "jenis": "COGS",
+          "kategori": "Outsource / Freelancer & Vendor",
+          "deskripsi": "Ruslan",
+          "nilai": 560000.0
+        },
+        {
+          "id": "ex_nrc_58",
+          "tanggal": "2026-10-31",
+          "bulan": "2026-10",
+          "jenis": "OPEX",
+          "kategori": "OPEX Lainnya",
+          "deskripsi": "Gdrive 1 Tahun",
+          "nilai": 3500000.0
         }
       ],
       "detail": [
@@ -100365,23 +100864,23 @@
         },
         {
           "id": "det_nrc_19",
-          "tgl": 7,
-          "tanggal_iso": "2026-10-07",
-          "first_of_day": true,
-          "masuk": 1450000.0,
-          "keluar": 315500.0,
-          "balance": 32558500.0,
+          "tgl": 6,
+          "tanggal_iso": "2026-10-06",
+          "first_of_day": false,
+          "masuk": 0.0,
+          "keluar": 150000.0,
+          "balance": 31274000.0,
           "ket_masuk": "Transfer",
-          "ket_keluar": "Adobe"
+          "ket_keluar": "Abror Freelance"
         },
         {
           "id": "det_nrc_20",
           "tgl": 7,
           "tanggal_iso": "2026-10-07",
-          "first_of_day": false,
-          "masuk": 125000.0,
-          "keluar": 628500.0,
-          "balance": 32055000.0,
+          "first_of_day": true,
+          "masuk": 1450000.0,
+          "keluar": 315500.0,
+          "balance": 32408500.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Adobe"
         },
@@ -100390,491 +100889,590 @@
           "tgl": 7,
           "tanggal_iso": "2026-10-07",
           "first_of_day": false,
+          "masuk": 125000.0,
+          "keluar": 628500.0,
+          "balance": 31905000.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Adobe"
+        },
+        {
+          "id": "det_nrc_22",
+          "tgl": 7,
+          "tanggal_iso": "2026-10-07",
+          "first_of_day": false,
           "masuk": 0.0,
           "keluar": 15000.0,
-          "balance": 32040000.0,
+          "balance": 31890000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Rent Batrei"
         },
         {
-          "id": "det_nrc_22",
-          "tgl": 8,
-          "tanggal_iso": "2026-10-08",
-          "first_of_day": true,
-          "masuk": 2360000.0,
-          "keluar": 503000.0,
-          "balance": 33897000.0,
-          "ket_masuk": "Transfer",
-          "ket_keluar": "Listrik"
-        },
-        {
           "id": "det_nrc_23",
-          "tgl": 8,
-          "tanggal_iso": "2026-10-08",
+          "tgl": 7,
+          "tanggal_iso": "2026-10-07",
           "first_of_day": false,
-          "masuk": 400000.0,
-          "keluar": 200000.0,
-          "balance": 34097000.0,
+          "masuk": 0.0,
+          "keluar": 100000.0,
+          "balance": 31790000.0,
           "ket_masuk": "Transfer",
-          "ket_keluar": "Addel Admin"
+          "ket_keluar": "Rent Cam"
         },
         {
           "id": "det_nrc_24",
           "tgl": 8,
           "tanggal_iso": "2026-10-08",
+          "first_of_day": true,
+          "masuk": 2360000.0,
+          "keluar": 503000.0,
+          "balance": 33647000.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Listrik"
+        },
+        {
+          "id": "det_nrc_25",
+          "tgl": 8,
+          "tanggal_iso": "2026-10-08",
+          "first_of_day": false,
+          "masuk": 400000.0,
+          "keluar": 200000.0,
+          "balance": 33847000.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Addel Admin"
+        },
+        {
+          "id": "det_nrc_26",
+          "tgl": 8,
+          "tanggal_iso": "2026-10-08",
           "first_of_day": false,
           "masuk": 0.0,
           "keluar": 50000.0,
-          "balance": 34047000.0,
+          "balance": 33797000.0,
           "ket_masuk": "Cash",
           "ket_keluar": "Batrei"
         },
         {
-          "id": "det_nrc_25",
+          "id": "det_nrc_27",
           "tgl": 9,
           "tanggal_iso": "2026-10-09",
           "first_of_day": true,
           "masuk": 1930000.0,
           "keluar": 12000.0,
-          "balance": 35965000.0,
+          "balance": 35715000.0,
           "ket_masuk": "Cash",
           "ket_keluar": "Galon"
         },
         {
-          "id": "det_nrc_26",
+          "id": "det_nrc_28",
           "tgl": 9,
           "tanggal_iso": "2026-10-09",
           "first_of_day": false,
           "masuk": 200000.0,
           "keluar": 46000.0,
-          "balance": 36119000.0,
+          "balance": 35869000.0,
           "ket_masuk": "Cash",
           "ket_keluar": "gunting & pengharum"
         },
         {
-          "id": "det_nrc_27",
+          "id": "det_nrc_29",
           "tgl": 10,
           "tanggal_iso": "2026-10-10",
           "first_of_day": true,
           "masuk": 2015000.0,
+          "keluar": 0.0,
+          "balance": 37884000.0,
+          "ket_masuk": "",
+          "ket_keluar": ""
+        },
+        {
+          "id": "det_nrc_30",
+          "tgl": 10,
+          "tanggal_iso": "2026-10-10",
+          "first_of_day": false,
+          "masuk": 250000.0,
           "keluar": 0.0,
           "balance": 38134000.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
         {
-          "id": "det_nrc_28",
-          "tgl": 10,
-          "tanggal_iso": "2026-10-10",
-          "first_of_day": false,
-          "masuk": 250000.0,
-          "keluar": 0.0,
-          "balance": 38384000.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
-        },
-        {
-          "id": "det_nrc_29",
+          "id": "det_nrc_31",
           "tgl": 11,
           "tanggal_iso": "2026-10-11",
           "first_of_day": true,
           "masuk": 2450000.0,
           "keluar": 750000.0,
-          "balance": 40084000.0,
+          "balance": 39834000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Listrik"
         },
         {
-          "id": "det_nrc_30",
+          "id": "det_nrc_32",
           "tgl": 11,
           "tanggal_iso": "2026-10-11",
           "first_of_day": false,
           "masuk": 1335000.0,
           "keluar": 1856000.0,
-          "balance": 39563000.0,
+          "balance": 39313000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Cetakan"
         },
         {
-          "id": "det_nrc_31",
+          "id": "det_nrc_33",
           "tgl": 11,
           "tanggal_iso": "2026-10-11",
           "first_of_day": false,
           "masuk": 0.0,
           "keluar": 55000.0,
-          "balance": 39508000.0,
+          "balance": 39258000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Dop Paralon"
-        },
-        {
-          "id": "det_nrc_32",
-          "tgl": 12,
-          "tanggal_iso": "2026-10-12",
-          "first_of_day": true,
-          "masuk": 1070000.0,
-          "keluar": 0.0,
-          "balance": 40578000.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
-        },
-        {
-          "id": "det_nrc_33",
-          "tgl": 12,
-          "tanggal_iso": "2026-10-12",
-          "first_of_day": false,
-          "masuk": 400000.0,
-          "keluar": 500000.0,
-          "balance": 40478000.0,
-          "ket_masuk": "Transfer",
-          "ket_keluar": "Ads"
         },
         {
           "id": "det_nrc_34",
           "tgl": 12,
           "tanggal_iso": "2026-10-12",
+          "first_of_day": true,
+          "masuk": 1070000.0,
+          "keluar": 0.0,
+          "balance": 40328000.0,
+          "ket_masuk": "",
+          "ket_keluar": ""
+        },
+        {
+          "id": "det_nrc_35",
+          "tgl": 12,
+          "tanggal_iso": "2026-10-12",
+          "first_of_day": false,
+          "masuk": 400000.0,
+          "keluar": 500000.0,
+          "balance": 40228000.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Ads"
+        },
+        {
+          "id": "det_nrc_36",
+          "tgl": 12,
+          "tanggal_iso": "2026-10-12",
           "first_of_day": false,
           "masuk": 0.0,
           "keluar": 950000.0,
-          "balance": 39528000.0,
+          "balance": 39278000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Frame"
         },
         {
-          "id": "det_nrc_35",
+          "id": "det_nrc_37",
           "tgl": 13,
           "tanggal_iso": "2026-10-13",
           "first_of_day": true,
           "masuk": 570000.0,
           "keluar": 0.0,
-          "balance": 40098000.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
-        },
-        {
-          "id": "det_nrc_36",
-          "tgl": 13,
-          "tanggal_iso": "2026-10-13",
-          "first_of_day": false,
-          "masuk": 525000.0,
-          "keluar": 0.0,
-          "balance": 40623000.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
-        },
-        {
-          "id": "det_nrc_37",
-          "tgl": 14,
-          "tanggal_iso": "2026-10-14",
-          "first_of_day": true,
-          "masuk": 660000.0,
-          "keluar": 0.0,
-          "balance": 41283000.0,
+          "balance": 39848000.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
         {
           "id": "det_nrc_38",
-          "tgl": 14,
-          "tanggal_iso": "2026-10-14",
+          "tgl": 13,
+          "tanggal_iso": "2026-10-13",
           "first_of_day": false,
-          "masuk": 150000.0,
+          "masuk": 525000.0,
           "keluar": 0.0,
-          "balance": 41433000.0,
+          "balance": 40373000.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
         {
           "id": "det_nrc_39",
+          "tgl": 14,
+          "tanggal_iso": "2026-10-14",
+          "first_of_day": true,
+          "masuk": 660000.0,
+          "keluar": 0.0,
+          "balance": 41033000.0,
+          "ket_masuk": "",
+          "ket_keluar": ""
+        },
+        {
+          "id": "det_nrc_40",
+          "tgl": 14,
+          "tanggal_iso": "2026-10-14",
+          "first_of_day": false,
+          "masuk": 150000.0,
+          "keluar": 0.0,
+          "balance": 41183000.0,
+          "ket_masuk": "",
+          "ket_keluar": ""
+        },
+        {
+          "id": "det_nrc_41",
           "tgl": 15,
           "tanggal_iso": "2026-10-15",
           "first_of_day": true,
           "masuk": 1325000.0,
           "keluar": 154000.0,
-          "balance": 42604000.0,
+          "balance": 42354000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Cat Limbo"
         },
         {
-          "id": "det_nrc_40",
+          "id": "det_nrc_42",
           "tgl": 15,
           "tanggal_iso": "2026-10-15",
           "first_of_day": false,
           "masuk": 1075000.0,
           "keluar": 8000.0,
-          "balance": 43671000.0,
+          "balance": 43421000.0,
           "ket_masuk": "Cash",
           "ket_keluar": "Galon"
         },
         {
-          "id": "det_nrc_41",
+          "id": "det_nrc_43",
           "tgl": 16,
           "tanggal_iso": "2026-10-16",
           "first_of_day": true,
           "masuk": 1750000.0,
           "keluar": 503000.0,
-          "balance": 44918000.0,
+          "balance": 44668000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Listrik"
         },
         {
-          "id": "det_nrc_42",
+          "id": "det_nrc_44",
           "tgl": 16,
           "tanggal_iso": "2026-10-16",
           "first_of_day": false,
           "masuk": 800000.0,
           "keluar": 0.0,
-          "balance": 45718000.0,
+          "balance": 45468000.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
         {
-          "id": "det_nrc_43",
+          "id": "det_nrc_45",
           "tgl": 17,
           "tanggal_iso": "2026-10-17",
           "first_of_day": true,
           "masuk": 3705000.0,
           "keluar": 1436000.0,
-          "balance": 47987000.0,
+          "balance": 47737000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Cetakan"
         },
         {
-          "id": "det_nrc_44",
+          "id": "det_nrc_46",
           "tgl": 17,
           "tanggal_iso": "2026-10-17",
           "first_of_day": false,
           "masuk": 2940000.0,
           "keluar": 40000.0,
-          "balance": 50887000.0,
+          "balance": 50637000.0,
           "ket_masuk": "Cash",
           "ket_keluar": "Batrei Rent"
         },
         {
-          "id": "det_nrc_45",
+          "id": "det_nrc_47",
           "tgl": 18,
           "tanggal_iso": "2026-10-18",
           "first_of_day": true,
           "masuk": 775000.0,
           "keluar": 595000.0,
-          "balance": 51067000.0,
+          "balance": 50817000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Ruslan"
         },
         {
-          "id": "det_nrc_46",
+          "id": "det_nrc_48",
           "tgl": 18,
           "tanggal_iso": "2026-10-18",
           "first_of_day": false,
           "masuk": 1950000.0,
           "keluar": 0.0,
-          "balance": 53017000.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
-        },
-        {
-          "id": "det_nrc_47",
-          "tgl": 19,
-          "tanggal_iso": "2026-10-19",
-          "first_of_day": true,
-          "masuk": 2015000.0,
-          "keluar": 500000.0,
-          "balance": 54532000.0,
-          "ket_masuk": "Tranfer",
-          "ket_keluar": "Ads"
-        },
-        {
-          "id": "det_nrc_48",
-          "tgl": 19,
-          "tanggal_iso": "2026-10-19",
-          "first_of_day": false,
-          "masuk": 670000.0,
-          "keluar": 0.0,
-          "balance": 55202000.0,
+          "balance": 52767000.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
         {
           "id": "det_nrc_49",
+          "tgl": 19,
+          "tanggal_iso": "2026-10-19",
+          "first_of_day": true,
+          "masuk": 2015000.0,
+          "keluar": 500000.0,
+          "balance": 54282000.0,
+          "ket_masuk": "Tranfer",
+          "ket_keluar": "Ads"
+        },
+        {
+          "id": "det_nrc_50",
+          "tgl": 19,
+          "tanggal_iso": "2026-10-19",
+          "first_of_day": false,
+          "masuk": 670000.0,
+          "keluar": 0.0,
+          "balance": 54952000.0,
+          "ket_masuk": "",
+          "ket_keluar": ""
+        },
+        {
+          "id": "det_nrc_51",
           "tgl": 20,
           "tanggal_iso": "2026-10-20",
           "first_of_day": true,
           "masuk": 1150000.0,
           "keluar": 2954000.0,
-          "balance": 53398000.0,
+          "balance": 53148000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Cetakan"
         },
         {
-          "id": "det_nrc_50",
+          "id": "det_nrc_52",
           "tgl": 20,
           "tanggal_iso": "2026-10-20",
           "first_of_day": false,
           "masuk": 225000.0,
           "keluar": 154000.0,
-          "balance": 53469000.0,
-          "ket_masuk": "Transfer",
-          "ket_keluar": "Cat Limbo"
-        },
-        {
-          "id": "det_nrc_51",
-          "tgl": 21,
-          "tanggal_iso": "2026-10-21",
-          "first_of_day": true,
-          "masuk": 2410000.0,
-          "keluar": 950000.0,
-          "balance": 54929000.0,
-          "ket_masuk": "Transfer",
-          "ket_keluar": "Frame"
-        },
-        {
-          "id": "det_nrc_52",
-          "tgl": 21,
-          "tanggal_iso": "2026-10-21",
-          "first_of_day": false,
-          "masuk": 875000.0,
-          "keluar": 75000.0,
-          "balance": 55729000.0,
+          "balance": 53219000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Cat Limbo"
         },
         {
           "id": "det_nrc_53",
+          "tgl": 21,
+          "tanggal_iso": "2026-10-21",
+          "first_of_day": true,
+          "masuk": 2410000.0,
+          "keluar": 950000.0,
+          "balance": 54679000.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Frame"
+        },
+        {
+          "id": "det_nrc_54",
+          "tgl": 21,
+          "tanggal_iso": "2026-10-21",
+          "first_of_day": false,
+          "masuk": 875000.0,
+          "keluar": 75000.0,
+          "balance": 55479000.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Cat Limbo"
+        },
+        {
+          "id": "det_nrc_55",
           "tgl": 22,
           "tanggal_iso": "2026-10-22",
           "first_of_day": true,
           "masuk": 3095000.0,
           "keluar": 500000.0,
-          "balance": 58324000.0,
+          "balance": 58074000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Ads"
         },
         {
-          "id": "det_nrc_54",
+          "id": "det_nrc_56",
           "tgl": 22,
           "tanggal_iso": "2026-10-22",
           "first_of_day": false,
           "masuk": 1230000.0,
           "keluar": 1811000.0,
-          "balance": 57743000.0,
+          "balance": 57493000.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Cetakan"
         },
         {
-          "id": "det_nrc_55",
+          "id": "det_nrc_57",
           "tgl": 23,
           "tanggal_iso": "2026-10-23",
           "first_of_day": true,
           "masuk": 1650000.0,
           "keluar": 0.0,
-          "balance": 59393000.0,
+          "balance": 59143000.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
         {
-          "id": "det_nrc_56",
+          "id": "det_nrc_58",
           "tgl": 23,
           "tanggal_iso": "2026-10-23",
           "first_of_day": false,
           "masuk": 1150000.0,
           "keluar": 0.0,
-          "balance": 60543000.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
-        },
-        {
-          "id": "det_nrc_57",
-          "tgl": 24,
-          "tanggal_iso": "2026-10-24",
-          "first_of_day": true,
-          "masuk": 1250000.0,
-          "keluar": 1627000.0,
-          "balance": 60166000.0,
-          "ket_masuk": "Transfer",
-          "ket_keluar": "Cetakan"
-        },
-        {
-          "id": "det_nrc_58",
-          "tgl": 24,
-          "tanggal_iso": "2026-10-24",
-          "first_of_day": false,
-          "masuk": 475000.0,
-          "keluar": 0.0,
-          "balance": 60641000.0,
+          "balance": 60293000.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
         {
           "id": "det_nrc_59",
-          "tgl": 25,
-          "tanggal_iso": "2026-10-25",
+          "tgl": 24,
+          "tanggal_iso": "2026-10-24",
           "first_of_day": true,
-          "masuk": 890000.0,
-          "keluar": 0.0,
-          "balance": 61531000.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
+          "masuk": 1250000.0,
+          "keluar": 1627000.0,
+          "balance": 59916000.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Cetakan"
         },
         {
           "id": "det_nrc_60",
-          "tgl": 25,
-          "tanggal_iso": "2026-10-25",
+          "tgl": 24,
+          "tanggal_iso": "2026-10-24",
           "first_of_day": false,
-          "masuk": 150000.0,
+          "masuk": 475000.0,
           "keluar": 0.0,
-          "balance": 61681000.0,
+          "balance": 60391000.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
         {
           "id": "det_nrc_61",
-          "tgl": 26,
-          "tanggal_iso": "2026-10-26",
+          "tgl": 25,
+          "tanggal_iso": "2026-10-25",
           "first_of_day": true,
-          "masuk": 200000.0,
+          "masuk": 890000.0,
           "keluar": 0.0,
-          "balance": 61881000.0,
+          "balance": 61281000.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
         {
           "id": "det_nrc_62",
-          "tgl": 26,
-          "tanggal_iso": "2026-10-26",
+          "tgl": 25,
+          "tanggal_iso": "2026-10-25",
           "first_of_day": false,
-          "masuk": 525000.0,
+          "masuk": 150000.0,
           "keluar": 0.0,
-          "balance": 62406000.0,
+          "balance": 61431000.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
         {
           "id": "det_nrc_63",
-          "tgl": 27,
-          "tanggal_iso": "2026-10-27",
+          "tgl": 26,
+          "tanggal_iso": "2026-10-26",
           "first_of_day": true,
-          "masuk": 650000.0,
+          "masuk": 200000.0,
           "keluar": 0.0,
-          "balance": 63056000.0,
+          "balance": 61631000.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
         {
           "id": "det_nrc_64",
+          "tgl": 26,
+          "tanggal_iso": "2026-10-26",
+          "first_of_day": false,
+          "masuk": 525000.0,
+          "keluar": 0.0,
+          "balance": 62156000.0,
+          "ket_masuk": "",
+          "ket_keluar": ""
+        },
+        {
+          "id": "det_nrc_65",
+          "tgl": 27,
+          "tanggal_iso": "2026-10-27",
+          "first_of_day": true,
+          "masuk": 650000.0,
+          "keluar": 2294500.0,
+          "balance": 60511500.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Cetakan"
+        },
+        {
+          "id": "det_nrc_66",
           "tgl": 27,
           "tanggal_iso": "2026-10-27",
           "first_of_day": false,
           "masuk": 100000.0,
-          "keluar": 0.0,
-          "balance": 63156000.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
+          "keluar": 8000.0,
+          "balance": 60603500.0,
+          "ket_masuk": "Cash",
+          "ket_keluar": "Galon"
+        },
+        {
+          "id": "det_nrc_67",
+          "tgl": 28,
+          "tanggal_iso": "2026-10-28",
+          "first_of_day": true,
+          "masuk": 700000.0,
+          "keluar": 200000.0,
+          "balance": 61103500.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Serv Exhaust"
+        },
+        {
+          "id": "det_nrc_68",
+          "tgl": 29,
+          "tanggal_iso": "2026-10-29",
+          "first_of_day": true,
+          "masuk": 950000.0,
+          "keluar": 146450.0,
+          "balance": 61907050.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Sign Toilet"
+        },
+        {
+          "id": "det_nrc_69",
+          "tgl": 29,
+          "tanggal_iso": "2026-10-29",
+          "first_of_day": false,
+          "masuk": 0.0,
+          "keluar": 112000.0,
+          "balance": 61795050.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Dop Paralon"
+        },
+        {
+          "id": "det_nrc_70",
+          "tgl": 30,
+          "tanggal_iso": "2026-10-30",
+          "first_of_day": true,
+          "masuk": 200000.0,
+          "keluar": 20000.0,
+          "balance": 61975050.0,
+          "ket_masuk": "Cash",
+          "ket_keluar": "Kopi Tukang"
+        },
+        {
+          "id": "det_nrc_71",
+          "tgl": 30,
+          "tanggal_iso": "2026-10-30",
+          "first_of_day": false,
+          "masuk": 350000.0,
+          "keluar": 240000.0,
+          "balance": 62085050.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Add Edit Sept"
+        },
+        {
+          "id": "det_nrc_72",
+          "tgl": 30,
+          "tanggal_iso": "2026-10-30",
+          "first_of_day": false,
+          "masuk": 0.0,
+          "keluar": 270000.0,
+          "balance": 61815050.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Add Edit"
+        },
+        {
+          "id": "det_nrc_73",
+          "tgl": 31,
+          "tanggal_iso": "2026-10-31",
+          "first_of_day": true,
+          "masuk": 2230000.0,
+          "keluar": 403000.0,
+          "balance": 63642050.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Listrik"
         }
       ],
       "summary": {
-        "total_masuk": 86690000.0,
-        "total_keluar": 23534000.0,
-        "ending_balance": 63156000.0,
-        "total_rows": 64
+        "total_masuk": 91120000.0,
+        "total_keluar": 27477950.0,
+        "ending_balance": 63642050.0,
+        "total_rows": 73
       },
       "rosterGaji": [
         {
@@ -100883,17 +101481,17 @@
           "nama": "Adif",
           "job": "Fotografer",
           "q": 33.0,
-          "q_raw": 0.0,
+          "q_raw": 33.0,
           "actual_shift": 33,
           "cost": 40000.0,
           "is_fixed": false,
           "total_gaji": 1320000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
-          "bonus": 0.0,
+          "bonus": 252896.0,
           "hukuman": 0.0,
-          "bon": 0.0,
-          "thp": 1320000.0,
+          "bon": 200000.0,
+          "thp": 1372896.0,
           "status": "Draft"
         },
         {
@@ -100902,17 +101500,17 @@
           "nama": "Saka",
           "job": "Fotografer",
           "q": 29.0,
-          "q_raw": 0.0,
+          "q_raw": 29.0,
           "actual_shift": 29,
           "cost": 40000.0,
           "is_fixed": false,
           "total_gaji": 1160000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
-          "bonus": 0.0,
+          "bonus": 252801.0,
           "hukuman": 0.0,
-          "bon": 0.0,
-          "thp": 1160000.0,
+          "bon": 250000.0,
+          "thp": 1162801.0,
           "status": "Draft"
         },
         {
@@ -100921,17 +101519,17 @@
           "nama": "Amel",
           "job": "Admin",
           "q": 31.0,
-          "q_raw": 0.0,
+          "q_raw": 31.0,
           "actual_shift": 31,
           "cost": 40000.0,
           "is_fixed": false,
           "total_gaji": 1240000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
-          "bonus": 0.0,
+          "bonus": 248561.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 1240000.0,
+          "thp": 1488561.0,
           "status": "Draft"
         },
         {
@@ -100940,17 +101538,267 @@
           "nama": "Indah",
           "job": "Admin",
           "q": 31.0,
-          "q_raw": 0.0,
+          "q_raw": 31.0,
           "actual_shift": 31,
           "cost": 40000.0,
           "is_fixed": false,
           "total_gaji": 1240000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
+          "bonus": 254713.0,
+          "hukuman": 0.0,
+          "bon": 250000.0,
+          "thp": 1244713.0,
+          "status": "Draft"
+        },
+        {
+          "id": "pay_5",
+          "row_idx": 20,
+          "nama": "Fadel",
+          "job": "Manager",
+          "q": 1.0,
+          "q_raw": 1.0,
+          "actual_shift": 0,
+          "cost": 1850000.0,
+          "is_fixed": true,
+          "total_gaji": 1850000.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
+          "bonus": 252801.0,
+          "hukuman": 0.0,
+          "bon": 2056200.0,
+          "thp": 46601.0,
+          "status": "Draft"
+        },
+        {
+          "id": "pay_6",
+          "row_idx": 21,
+          "nama": "Fame",
+          "job": "Editor",
+          "q": 1.0,
+          "q_raw": 1.0,
+          "actual_shift": 0,
+          "cost": 1300000.0,
+          "is_fixed": true,
+          "total_gaji": 1300000.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
+          "bonus": 252801.0,
+          "hukuman": 0.0,
+          "bon": 450000.0,
+          "thp": 1102801.0,
+          "status": "Draft"
+        },
+        {
+          "id": "pay_7",
+          "row_idx": 22,
+          "nama": "Pentil",
+          "job": "Marketing",
+          "q": 1.0,
+          "q_raw": 1.0,
+          "actual_shift": 0,
+          "cost": 1000000.0,
+          "is_fixed": true,
+          "total_gaji": 1000000.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 1240000.0,
+          "thp": 1000000.0,
+          "status": "Draft"
+        },
+        {
+          "id": "pay_8",
+          "row_idx": 23,
+          "nama": "FOXE TO FOLX",
+          "job": "Khusus",
+          "q": 1.0,
+          "q_raw": 1.0,
+          "actual_shift": 0,
+          "cost": 4000000.0,
+          "is_fixed": true,
+          "total_gaji": 4000000.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
+          "bonus": 0.0,
+          "hukuman": 0.0,
+          "bon": 0.0,
+          "thp": 4000000.0,
+          "status": "Draft"
+        },
+        {
+          "id": "pay_9",
+          "row_idx": 24,
+          "nama": "Pentil",
+          "job": "BackUp",
+          "q": 0.0,
+          "q_raw": 0.0,
+          "actual_shift": 0,
+          "cost": 40000.0,
+          "is_fixed": false,
+          "total_gaji": 0.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
+          "bonus": 0.0,
+          "hukuman": 0.0,
+          "bon": 0.0,
+          "thp": 0.0,
+          "status": "Draft"
+        },
+        {
+          "id": "pay_10",
+          "row_idx": 25,
+          "nama": "Fame/Vero",
+          "job": "BackUp",
+          "q": 4.0,
+          "q_raw": 4.0,
+          "actual_shift": 0,
+          "cost": 40000.0,
+          "is_fixed": false,
+          "total_gaji": 160000.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
+          "bonus": 0.0,
+          "hukuman": 0.0,
+          "bon": 0.0,
+          "thp": 160000.0,
+          "status": "Draft"
+        },
+        {
+          "id": "pay_11",
+          "row_idx": 26,
+          "nama": "Fadel",
+          "job": "BackUp",
+          "q": 2.0,
+          "q_raw": 2.0,
+          "actual_shift": 0,
+          "cost": 40000.0,
+          "is_fixed": false,
+          "total_gaji": 80000.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
+          "bonus": 0.0,
+          "hukuman": 0.0,
+          "bon": 0.0,
+          "thp": 80000.0,
+          "status": "Draft"
+        },
+        {
+          "id": "pay_12",
+          "row_idx": 27,
+          "nama": "Aiz",
+          "job": "Khusus",
+          "q": 0.0,
+          "q_raw": 0.0,
+          "actual_shift": 0,
+          "cost": 0.0,
+          "is_fixed": false,
+          "total_gaji": 0.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
+          "bonus": 0.0,
+          "hukuman": 0.0,
+          "bon": 0.0,
+          "thp": 0.0,
+          "status": "Draft"
+        }
+      ],
+      "rosterSummary": {
+        "total_gaji": 13350000.0,
+        "total_bonus_kpi": 0.0,
+        "total_additional": 0.0,
+        "total_bonus": 1514573.0,
+        "total_hukuman": 0.0,
+        "total_bon": 3206200.0,
+        "grand_total_thp": 11658373.0,
+        "total_karyawan": 12
+      }
+    },
+    "2026-11": {
+      "expenses": [],
+      "detail": [],
+      "summary": {
+        "total_masuk": 0.0,
+        "total_keluar": 0.0,
+        "ending_balance": 0.0,
+        "total_rows": 0
+      },
+      "rosterGaji": [
+        {
+          "id": "pay_1",
+          "row_idx": 10,
+          "nama": "Adif",
+          "job": "Fotografer",
+          "q": 0.0,
+          "q_raw": 0.0,
+          "actual_shift": 0,
+          "cost": 40000.0,
+          "is_fixed": false,
+          "total_gaji": 0.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
+          "bonus": 0.0,
+          "hukuman": 0.0,
+          "bon": 0.0,
+          "thp": 0.0,
+          "status": "Draft"
+        },
+        {
+          "id": "pay_2",
+          "row_idx": 12,
+          "nama": "Saka",
+          "job": "Fotografer",
+          "q": 1.0,
+          "q_raw": 0.0,
+          "actual_shift": 1,
+          "cost": 40000.0,
+          "is_fixed": false,
+          "total_gaji": 40000.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
+          "bonus": 0.0,
+          "hukuman": 0.0,
+          "bon": 0.0,
+          "thp": 40000.0,
+          "status": "Draft"
+        },
+        {
+          "id": "pay_3",
+          "row_idx": 14,
+          "nama": "Amel",
+          "job": "Admin",
+          "q": 1.0,
+          "q_raw": 0.0,
+          "actual_shift": 1,
+          "cost": 40000.0,
+          "is_fixed": false,
+          "total_gaji": 40000.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
+          "bonus": 0.0,
+          "hukuman": 0.0,
+          "bon": 0.0,
+          "thp": 40000.0,
+          "status": "Draft"
+        },
+        {
+          "id": "pay_4",
+          "row_idx": 16,
+          "nama": "Indah",
+          "job": "Admin",
+          "q": 0.0,
+          "q_raw": 0.0,
+          "actual_shift": 0,
+          "cost": 40000.0,
+          "is_fixed": false,
+          "total_gaji": 0.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
+          "bonus": 0.0,
+          "hukuman": 0.0,
+          "bon": 0.0,
+          "thp": 0.0,
           "status": "Draft"
         },
         {
@@ -101107,13 +101955,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 13110000.0,
+        "total_gaji": 8230000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 13110000.0,
+        "grand_total_thp": 8230000.0,
         "total_karyawan": 12
       }
     },
@@ -110831,12 +111679,12 @@
         "cost": 40000.0,
         "is_fixed": false,
         "total_gaji": 1120000.0,
-        "bonus_kpi": 347112.0,
+        "bonus_kpi": 344750.0,
         "additional": 0.0,
         "bonus": 346981.0,
         "hukuman": 0.0,
         "bon": 700000.0,
-        "thp": 1114093.0,
+        "thp": 1111731.0,
         "status": "Draft"
       },
       {
@@ -110850,12 +111698,12 @@
         "cost": 40000.0,
         "is_fixed": false,
         "total_gaji": 1280000.0,
-        "bonus_kpi": 346981.0,
+        "bonus_kpi": 344750.0,
         "additional": 0.0,
         "bonus": 346544.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 1973525.0,
+        "thp": 1971294.0,
         "status": "Draft"
       },
       {
@@ -110869,12 +111717,12 @@
         "cost": 40000.0,
         "is_fixed": false,
         "total_gaji": 1160000.0,
-        "bonus_kpi": 341162.0,
+        "bonus_kpi": 344750.0,
         "additional": 0.0,
         "bonus": 340769.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 1841931.0,
+        "thp": 1845519.0,
         "status": "Draft"
       },
       {
@@ -110888,12 +111736,12 @@
         "cost": 40000.0,
         "is_fixed": false,
         "total_gaji": 1240000.0,
-        "bonus_kpi": 349606.0,
+        "bonus_kpi": 344750.0,
         "additional": 0.0,
         "bonus": 349475.0,
         "hukuman": 0.0,
         "bon": 250000.0,
-        "thp": 1689081.0,
+        "thp": 1684225.0,
         "status": "Draft"
       },
       {
@@ -111056,17 +111904,17 @@
         "nama": "Adif",
         "job": "Fotografer",
         "q": 33.0,
-        "q_raw": 0.0,
+        "q_raw": 33.0,
         "actual_shift": 33,
         "cost": 40000.0,
         "is_fixed": false,
         "total_gaji": 1320000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
-        "bonus": 0.0,
+        "bonus": 252896.0,
         "hukuman": 0.0,
-        "bon": 0.0,
-        "thp": 1320000.0,
+        "bon": 200000.0,
+        "thp": 1372896.0,
         "status": "Draft"
       },
       {
@@ -111075,17 +111923,17 @@
         "nama": "Saka",
         "job": "Fotografer",
         "q": 29.0,
-        "q_raw": 0.0,
+        "q_raw": 29.0,
         "actual_shift": 29,
         "cost": 40000.0,
         "is_fixed": false,
         "total_gaji": 1160000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
-        "bonus": 0.0,
+        "bonus": 252801.0,
         "hukuman": 0.0,
-        "bon": 0.0,
-        "thp": 1160000.0,
+        "bon": 250000.0,
+        "thp": 1162801.0,
         "status": "Draft"
       },
       {
@@ -111094,17 +111942,17 @@
         "nama": "Amel",
         "job": "Admin",
         "q": 31.0,
-        "q_raw": 0.0,
+        "q_raw": 31.0,
         "actual_shift": 31,
         "cost": 40000.0,
         "is_fixed": false,
         "total_gaji": 1240000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
-        "bonus": 0.0,
+        "bonus": 248561.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 1240000.0,
+        "thp": 1488561.0,
         "status": "Draft"
       },
       {
@@ -111113,17 +111961,247 @@
         "nama": "Indah",
         "job": "Admin",
         "q": 31.0,
-        "q_raw": 0.0,
+        "q_raw": 31.0,
         "actual_shift": 31,
         "cost": 40000.0,
         "is_fixed": false,
         "total_gaji": 1240000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
+        "bonus": 254713.0,
+        "hukuman": 0.0,
+        "bon": 250000.0,
+        "thp": 1244713.0,
+        "status": "Draft"
+      },
+      {
+        "id": "pay_5",
+        "row_idx": 20,
+        "nama": "Fadel",
+        "job": "Manager",
+        "q": 1.0,
+        "q_raw": 1.0,
+        "actual_shift": 0,
+        "cost": 1850000.0,
+        "is_fixed": true,
+        "total_gaji": 1850000.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
+        "bonus": 252801.0,
+        "hukuman": 0.0,
+        "bon": 2056200.0,
+        "thp": 46601.0,
+        "status": "Draft"
+      },
+      {
+        "id": "pay_6",
+        "row_idx": 21,
+        "nama": "Fame",
+        "job": "Editor",
+        "q": 1.0,
+        "q_raw": 1.0,
+        "actual_shift": 0,
+        "cost": 1300000.0,
+        "is_fixed": true,
+        "total_gaji": 1300000.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
+        "bonus": 252801.0,
+        "hukuman": 0.0,
+        "bon": 450000.0,
+        "thp": 1102801.0,
+        "status": "Draft"
+      },
+      {
+        "id": "pay_7",
+        "row_idx": 22,
+        "nama": "Pentil",
+        "job": "Marketing",
+        "q": 1.0,
+        "q_raw": 1.0,
+        "actual_shift": 0,
+        "cost": 1000000.0,
+        "is_fixed": true,
+        "total_gaji": 1000000.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 1240000.0,
+        "thp": 1000000.0,
+        "status": "Draft"
+      },
+      {
+        "id": "pay_8",
+        "row_idx": 23,
+        "nama": "FOXE TO FOLX",
+        "job": "Khusus",
+        "q": 1.0,
+        "q_raw": 1.0,
+        "actual_shift": 0,
+        "cost": 4000000.0,
+        "is_fixed": true,
+        "total_gaji": 4000000.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
+        "bonus": 0.0,
+        "hukuman": 0.0,
+        "bon": 0.0,
+        "thp": 4000000.0,
+        "status": "Draft"
+      },
+      {
+        "id": "pay_9",
+        "row_idx": 24,
+        "nama": "Pentil",
+        "job": "BackUp",
+        "q": 0.0,
+        "q_raw": 0.0,
+        "actual_shift": 0,
+        "cost": 40000.0,
+        "is_fixed": false,
+        "total_gaji": 0.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
+        "bonus": 0.0,
+        "hukuman": 0.0,
+        "bon": 0.0,
+        "thp": 0.0,
+        "status": "Draft"
+      },
+      {
+        "id": "pay_10",
+        "row_idx": 25,
+        "nama": "Fame/Vero",
+        "job": "BackUp",
+        "q": 4.0,
+        "q_raw": 4.0,
+        "actual_shift": 0,
+        "cost": 40000.0,
+        "is_fixed": false,
+        "total_gaji": 160000.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
+        "bonus": 0.0,
+        "hukuman": 0.0,
+        "bon": 0.0,
+        "thp": 160000.0,
+        "status": "Draft"
+      },
+      {
+        "id": "pay_11",
+        "row_idx": 26,
+        "nama": "Fadel",
+        "job": "BackUp",
+        "q": 2.0,
+        "q_raw": 2.0,
+        "actual_shift": 0,
+        "cost": 40000.0,
+        "is_fixed": false,
+        "total_gaji": 80000.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
+        "bonus": 0.0,
+        "hukuman": 0.0,
+        "bon": 0.0,
+        "thp": 80000.0,
+        "status": "Draft"
+      },
+      {
+        "id": "pay_12",
+        "row_idx": 27,
+        "nama": "Aiz",
+        "job": "Khusus",
+        "q": 0.0,
+        "q_raw": 0.0,
+        "actual_shift": 0,
+        "cost": 0.0,
+        "is_fixed": false,
+        "total_gaji": 0.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
+        "bonus": 0.0,
+        "hukuman": 0.0,
+        "bon": 0.0,
+        "thp": 0.0,
+        "status": "Draft"
+      }
+    ],
+    "2026-11": [
+      {
+        "id": "pay_1",
+        "row_idx": 10,
+        "nama": "Adif",
+        "job": "Fotografer",
+        "q": 0.0,
+        "q_raw": 0.0,
+        "actual_shift": 0,
+        "cost": 40000.0,
+        "is_fixed": false,
+        "total_gaji": 0.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
+        "bonus": 0.0,
+        "hukuman": 0.0,
+        "bon": 0.0,
+        "thp": 0.0,
+        "status": "Draft"
+      },
+      {
+        "id": "pay_2",
+        "row_idx": 12,
+        "nama": "Saka",
+        "job": "Fotografer",
+        "q": 1.0,
+        "q_raw": 0.0,
+        "actual_shift": 1,
+        "cost": 40000.0,
+        "is_fixed": false,
+        "total_gaji": 40000.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
+        "bonus": 0.0,
+        "hukuman": 0.0,
+        "bon": 0.0,
+        "thp": 40000.0,
+        "status": "Draft"
+      },
+      {
+        "id": "pay_3",
+        "row_idx": 14,
+        "nama": "Amel",
+        "job": "Admin",
+        "q": 1.0,
+        "q_raw": 0.0,
+        "actual_shift": 1,
+        "cost": 40000.0,
+        "is_fixed": false,
+        "total_gaji": 40000.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
+        "bonus": 0.0,
+        "hukuman": 0.0,
+        "bon": 0.0,
+        "thp": 40000.0,
+        "status": "Draft"
+      },
+      {
+        "id": "pay_4",
+        "row_idx": 16,
+        "nama": "Indah",
+        "job": "Admin",
+        "q": 0.0,
+        "q_raw": 0.0,
+        "actual_shift": 0,
+        "cost": 40000.0,
+        "is_fixed": false,
+        "total_gaji": 0.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
+        "bonus": 0.0,
+        "hukuman": 0.0,
+        "bon": 0.0,
+        "thp": 0.0,
         "status": "Draft"
       },
       {
@@ -162389,6 +163467,470 @@
         "dp": 100000.0,
         "sisaPelunasan": 350000.0,
         "kategori": "Studio Reguler"
+      }
+    ],
+    "2026-11": [
+      {
+        "id": "sc_bk_1",
+        "tgl": "2026-11-01",
+        "waktu": "09:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Abed Cinemoon",
+        "paket": "Studio rent",
+        "paketRaw": "Studio rent",
+        "jmlOrang": 1,
+        "harga": 0.0,
+        "admin": "AL",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_2",
+        "tgl": "2026-11-02",
+        "waktu": "16:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "PPG UMP D",
+        "paket": "Large Group",
+        "paketRaw": "LG 29",
+        "jmlOrang": 29,
+        "harga": 725000.0,
+        "admin": "AL",
+        "noHp": "",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_3",
+        "tgl": "2026-11-02",
+        "waktu": "18:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "ester",
+        "paket": "Large Group",
+        "paketRaw": "LG 7",
+        "jmlOrang": 7,
+        "harga": 175000.0,
+        "admin": "AL",
+        "noHp": "limbo",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_4",
+        "tgl": "2026-11-02",
+        "waktu": "19:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Dept. Internal HIMAKOM UNSOED",
+        "paket": "Large Group",
+        "paketRaw": "LG 63",
+        "jmlOrang": 63,
+        "harga": 1575000.0,
+        "admin": "AL",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_5",
+        "tgl": "2026-11-03",
+        "waktu": "11:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Naura",
+        "paket": "Large Group",
+        "paketRaw": "LG 30",
+        "jmlOrang": 30,
+        "harga": 750000.0,
+        "admin": "IN",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_6",
+        "tgl": "2026-11-03",
+        "waktu": "17:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Nana",
+        "paket": "Large Group",
+        "paketRaw": "LG 46",
+        "jmlOrang": 46,
+        "harga": 1150000.0,
+        "admin": "IN",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_7",
+        "tgl": "2026-11-03",
+        "waktu": "19:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Denta Ailsya",
+        "paket": "Large Group",
+        "paketRaw": "LG 30",
+        "jmlOrang": 30,
+        "harga": 750000.0,
+        "admin": "AL",
+        "noHp": "",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_8",
+        "tgl": "2026-11-05",
+        "waktu": "12:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "gatsby pwt",
+        "paket": "Large Group",
+        "paketRaw": "LG 12",
+        "jmlOrang": 12,
+        "harga": 300000.0,
+        "admin": "AL",
+        "noHp": "dp 100 limbo",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_9",
+        "tgl": "2026-11-05",
+        "waktu": "14:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Elsan",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "AL",
+        "noHp": "dp 100 wooden",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_10",
+        "tgl": "2026-11-05",
+        "waktu": "16:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "suha",
+        "paket": "Large Group",
+        "paketRaw": "LG 7",
+        "jmlOrang": 7,
+        "harga": 175000.0,
+        "admin": "AL",
+        "noHp": "dp 100 limbo",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_11",
+        "tgl": "2026-11-05",
+        "waktu": "16:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Yuli",
+        "paket": "Family B",
+        "paketRaw": "Family B",
+        "jmlOrang": 1,
+        "harga": 450000.0,
+        "admin": "AL",
+        "noHp": "",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_12",
+        "tgl": "2026-11-06",
+        "waktu": "15:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Baskaga",
+        "paket": "Large Group",
+        "paketRaw": "LG 14",
+        "jmlOrang": 14,
+        "harga": 350000.0,
+        "admin": "IN",
+        "noHp": "dp 100 limbo",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_13",
+        "tgl": "2026-11-08",
+        "waktu": "10:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Muhammad Irsyad",
+        "paket": "Large Group",
+        "paketRaw": "LG 37",
+        "jmlOrang": 37,
+        "harga": 925000.0,
+        "admin": "AL",
+        "noHp": "dp 100 limbo",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_14",
+        "tgl": "2026-11-08",
+        "waktu": "12:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Andhien",
+        "paket": "Photofox",
+        "paketRaw": "Photofox",
+        "jmlOrang": 1,
+        "harga": 200000.0,
+        "admin": "AL",
+        "noHp": "dp 100 limbo",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_15",
+        "tgl": "2026-11-14",
+        "waktu": "13:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Faiz",
+        "paket": "Studio Rent",
+        "paketRaw": "Studio Rent",
+        "jmlOrang": 1,
+        "harga": 450000.0,
+        "admin": "DIP",
+        "noHp": "DP 100",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_16",
+        "tgl": "2026-11-15",
+        "waktu": "16:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Ganisyuri",
+        "paket": "Large Group",
+        "paketRaw": "LG 21",
+        "jmlOrang": 21,
+        "harga": 525000.0,
+        "admin": "AL",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_17",
+        "tgl": "2026-11-21",
+        "waktu": "09:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Rohis Smansa",
+        "paket": "Large Group",
+        "paketRaw": "LG 50",
+        "jmlOrang": 50,
+        "harga": 1250000.0,
+        "admin": "IN",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_18",
+        "tgl": "2026-11-22",
+        "waktu": "10:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Feroz (KF Medis)",
+        "paket": "Large Group",
+        "paketRaw": "LG 25",
+        "jmlOrang": 25,
+        "harga": 625000.0,
+        "admin": "AL",
+        "noHp": "dp 100 limbo",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_19",
+        "tgl": "2026-11-24",
+        "waktu": "13:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Lutfih Kharisma",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "AL",
+        "noHp": "dp 100 wooden",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_20",
+        "tgl": "2026-11-24",
+        "waktu": "13:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Reviyan Aula",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "IN",
+        "noHp": "dp 100 limbo",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_21",
+        "tgl": "2026-11-24",
+        "waktu": "14:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Muzaki Eka",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "IN",
+        "noHp": "dp 100 calmblue",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
       }
     ]
   },
@@ -214885,5 +216427,496 @@
         ]
       }
     }
+  },
+  "novemberLogOrder": {
+    "orders": [
+      {
+        "id": "or_1",
+        "tanggal": "2026-11-01",
+        "client": "Yuli",
+        "paket": "Family B",
+        "tanggalFoto": "2026-11-05",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      }
+    ],
+    "shifts": [
+      {
+        "id": "sh_1",
+        "tanggal": "2026-11-01",
+        "nama": "AMEL",
+        "slot": 1
+      },
+      {
+        "id": "sh_2",
+        "tanggal": "2026-11-01",
+        "nama": "SAKA",
+        "slot": 1
+      }
+    ],
+    "cashControl": [
+      {
+        "id": "cc_2026-11-01",
+        "tanggal": "2026-11-01",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-02",
+        "tanggal": "2026-11-02",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-03",
+        "tanggal": "2026-11-03",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-04",
+        "tanggal": "2026-11-04",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-05",
+        "tanggal": "2026-11-05",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-06",
+        "tanggal": "2026-11-06",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-07",
+        "tanggal": "2026-11-07",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-08",
+        "tanggal": "2026-11-08",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-09",
+        "tanggal": "2026-11-09",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-10",
+        "tanggal": "2026-11-10",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-11",
+        "tanggal": "2026-11-11",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-12",
+        "tanggal": "2026-11-12",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-13",
+        "tanggal": "2026-11-13",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-14",
+        "tanggal": "2026-11-14",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-15",
+        "tanggal": "2026-11-15",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-16",
+        "tanggal": "2026-11-16",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-17",
+        "tanggal": "2026-11-17",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-18",
+        "tanggal": "2026-11-18",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-19",
+        "tanggal": "2026-11-19",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-20",
+        "tanggal": "2026-11-20",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-21",
+        "tanggal": "2026-11-21",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-22",
+        "tanggal": "2026-11-22",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-23",
+        "tanggal": "2026-11-23",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-24",
+        "tanggal": "2026-11-24",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-25",
+        "tanggal": "2026-11-25",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-26",
+        "tanggal": "2026-11-26",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-27",
+        "tanggal": "2026-11-27",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-28",
+        "tanggal": "2026-11-28",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-29",
+        "tanggal": "2026-11-29",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-30",
+        "tanggal": "2026-11-30",
+        "nilai": 0.0
+      },
+      {
+        "id": "cc_2026-11-31",
+        "tanggal": "2026-11-31",
+        "nilai": 0.0
+      }
+    ],
+    "leads": [
+      {
+        "id": "ld_1",
+        "tanggal": "2026-11-01",
+        "leads": 0.0,
+        "dp": 1.0,
+        "sesiFoto": 0.0,
+        "transaksi": 1.0
+      },
+      {
+        "id": "ld_2",
+        "tanggal": "2026-11-02",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_3",
+        "tanggal": "2026-11-03",
+        "leads": 0.0,
+        "dp": 3.0,
+        "sesiFoto": 0.0,
+        "transaksi": 3.0
+      },
+      {
+        "id": "ld_4",
+        "tanggal": "2026-11-04",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_5",
+        "tanggal": "2026-11-05",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_6",
+        "tanggal": "2026-11-06",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_7",
+        "tanggal": "2026-11-07",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_8",
+        "tanggal": "2026-11-08",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_9",
+        "tanggal": "2026-11-09",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_10",
+        "tanggal": "2026-11-10",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_11",
+        "tanggal": "2026-11-11",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_12",
+        "tanggal": "2026-11-12",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_13",
+        "tanggal": "2026-11-13",
+        "leads": 20.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_14",
+        "tanggal": "2026-11-14",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_15",
+        "tanggal": "2026-11-15",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_16",
+        "tanggal": "2026-11-16",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_17",
+        "tanggal": "2026-11-17",
+        "leads": 0.0,
+        "dp": 4.0,
+        "sesiFoto": 21.0,
+        "transaksi": 25.0
+      },
+      {
+        "id": "ld_18",
+        "tanggal": "2026-11-18",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_19",
+        "tanggal": "2026-11-19",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_20",
+        "tanggal": "2026-11-21",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_21",
+        "tanggal": "2026-11-22",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_22",
+        "tanggal": "2026-11-23",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_23",
+        "tanggal": "2026-11-24",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_24",
+        "tanggal": "2026-11-25",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_25",
+        "tanggal": "2026-11-26",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_26",
+        "tanggal": "2026-11-27",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_27",
+        "tanggal": "2026-11-28",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_28",
+        "tanggal": "2026-11-29",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_29",
+        "tanggal": "2026-11-30",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      },
+      {
+        "id": "ld_30",
+        "tanggal": "2026-11-31",
+        "leads": 0.0,
+        "dp": 0.0,
+        "sesiFoto": 0.0,
+        "transaksi": 0.0
+      }
+    ],
+    "kpi": [
+      {
+        "id": "kp_1",
+        "nama": "ADIF",
+        "role": "Fotografer 1",
+        "hariDinilai": 15,
+        "disiplin": 5.0,
+        "akurasi": 4.9,
+        "sop": 4.9,
+        "client": 4.9,
+        "produktivitas": 4.9,
+        "referral": 0
+      },
+      {
+        "id": "kp_2",
+        "nama": "AMEL",
+        "role": "Admin 2",
+        "hariDinilai": 15,
+        "disiplin": 5.0,
+        "akurasi": 4.9,
+        "sop": 4.9,
+        "client": 4.9,
+        "produktivitas": 4.9,
+        "referral": 0
+      },
+      {
+        "id": "kp_3",
+        "nama": "INDAH",
+        "role": "Admin 1",
+        "hariDinilai": 15,
+        "disiplin": 5.0,
+        "akurasi": 4.9,
+        "sop": 4.9,
+        "client": 4.9,
+        "produktivitas": 4.9,
+        "referral": 0
+      },
+      {
+        "id": "kp_4",
+        "nama": "SAKA",
+        "role": "Fotografer 2",
+        "hariDinilai": 15,
+        "disiplin": 5.0,
+        "akurasi": 4.9,
+        "sop": 4.9,
+        "client": 4.9,
+        "produktivitas": 4.9,
+        "referral": 0
+      }
+    ],
+    "kpi_raw": {
+      "AMEL": {
+        "disiplin": [],
+        "akurasi": [],
+        "sop": [],
+        "client": [],
+        "produktivitas": []
+      }
+    },
+    "cutoff": "2026-11-01",
+    "hariBerjalan": 1
   }
 }
