@@ -1249,11 +1249,21 @@ function nkey(s){
 
 /* ============================ perhitungan inti ============================ */
 function compute(targetMonth){
-  const mStr = targetMonth || activeMonth || "2026-10";
+  const mStr = targetMonth || activeMonth || "2026-11";
+  const isNov = (mStr === "2026-11");
   const isOkt = (mStr === "2026-10");
   const isSep = (mStr === "2026-09");
   const [y,m] = mStr.split("-").map(Number);
   const dim = new Date(y,m,0).getDate();
+  let novMaxDay = 1;
+  (S.orders || []).forEach(o => {
+    if (o.tanggal && o.tanggal.startsWith("2026-11-") && dnum(o.total) > 0) {
+      const d = parseInt(o.tanggal.split("-")[2], 10);
+      if (d > novMaxDay && d <= 30) novMaxDay = d;
+    }
+  });
+  const dynamicNovCut = `2026-11-${String(novMaxDay).padStart(2, "0")}`;
+  const novCut = (S.novemberLogOrder && S.novemberLogOrder.cutoff) ? S.novemberLogOrder.cutoff : dynamicNovCut;
   let oktMaxDay = 1;
   (S.orders || []).forEach(o => {
     if (o.tanggal && o.tanggal.startsWith("2026-10-") && dnum(o.total) > 0) {
@@ -1265,11 +1275,14 @@ function compute(targetMonth){
   const oktCut = (S.oktoberLogOrder && S.oktoberLogOrder.cutoff) ? S.oktoberLogOrder.cutoff : dynamicOktCut;
   let cutoff = `${mStr}-${String(dim).padStart(2,"0")}`;
   let status = "Final";
-  if (isOkt) {
-    cutoff = oktCut;
+  if (isNov) {
+    cutoff = novCut;
     status = "Progressive";
+  } else if (isOkt) {
+    cutoff = oktCut;
+    status = "Final (Rekap)";
   } else if (isSep) {
-    cutoff = (S.config && S.config.cutoff) ? S.config.cutoff : "2026-09-30";
+    cutoff = "2026-09-30";
     status = "Final (Rekap)";
   } else {
     cutoff = `${mStr}-${String(dim).padStart(2,"0")}`;
@@ -1277,7 +1290,7 @@ function compute(targetMonth){
   }
   const cut = new Date(cutoff+"T00:00:00");
   const cutDay = cut.getDate();
-  const hariBerjalan = isOkt ? cutDay : dim;
+  const hariBerjalan = isNov ? cutDay : dim;
   const inRange = d => d && d.startsWith(mStr) && d <= cutoff;
 
   const c = {
@@ -2002,6 +2015,7 @@ function render(){
       selM.onchange = (e) => {
         activeMonth = e.target.value;
         estMonth = +activeMonth.split("-")[1];
+        if (view === "tahunan") view = "dash";
         render();
         window.scrollTo({top: 0, behavior: "smooth"});
         showToast(`📅 Beralih ke periode: ${BULAN[estMonth-1]} 2026`, "ok", 2500);
@@ -2631,6 +2645,17 @@ function vTahunan(R) {
         : (okp ? `Pipeline (${okp.totalBookings} Booking)` : (oktOmzet > 0 ? `Live (${oktOrders.length} Order)` : "Belum Dicocokkan"));
       statusPill = "crit";
       yoy = o25 ? ((proyeksi26 - o25) / o25) : null;
+    } else if (info.no === 11) {
+      const novOrders = S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-11-"));
+      const novBks = (S.scheduleByMonth && S.scheduleByMonth["2026-11"]) || [];
+      const novOmzet = novOrders.reduce((s, o) => s + dnum(o.total), 0);
+      o26 = novOmzet;
+      proyeksi26 = novOmzet;
+      status = (novOrders.length > 0 && novBks.length > 0)
+        ? `Live (${novOrders.length} Order) + Pipeline (${novBks.length} Booking)`
+        : (novBks.length > 0 ? `Pipeline (${novBks.length} Booking)` : (novOrders.length > 0 ? `Live (${novOrders.length} Order)` : "Live (Bulan Berjalan)"));
+      statusPill = "prog";
+      yoy = o25 ? ((novOmzet - o25) / o25) : null;
     } else {
       const mIso = `2026-${String(info.no).padStart(2, '0')}`;
       const mOrders = S.orders.filter(o => o.tanggal && o.tanggal.startsWith(mIso));
@@ -2904,20 +2929,25 @@ function vTahunan(R) {
                    <span class="msub" style="color:var(--good);margin-top:2px;font-weight:600;">Rekap Final Terverifikasi · Nett: ${rp(63333263)} (Margin 53.7%)</span>`;
       } else if (m.no === 10 && S.oktoberPipeline) {
         const sisaCashIn = S.oktoberPipeline.remainingCashIn != null ? S.oktoberPipeline.remainingCashIn : (S.oktoberPipeline.statusBreakdown ? S.oktoberPipeline.statusBreakdown.confirmed.cashIn : S.oktoberPipeline.estimateCashIn);
-        subText = `<span class="msub" style="color:var(--accent);">Live: ${rp(m.omzet26)} · Sisa Pelunasan: ${rp(sisaCashIn)}</span>`;
+        subText = `<span class="msub" style="color:var(--accent);">Rekap Final: ${rp(m.omzet26)} · Sisa Pelunasan: ${rp(sisaCashIn)}</span>`;
+      } else if (m.no === 11) {
+        const novBks = (S.scheduleByMonth && S.scheduleByMonth["2026-11"]) || [];
+        subText = `<span class="msub" style="color:var(--accent);">Live: ${rp(m.omzet26)} · Pipeline: ${novBks.length} Booking Terjadwal</span>`;
       } else {
         subText = `<span class="msub muted">Belum dicocokkan (—) · Acuan ${yr-1}: ${rp(m.omzet25)}</span>`;
       }
 
       let btnLabel = "";
       if (m.isCurrent) {
-        btnLabel = `👉 Buka Dashboard ${m.label} (Live) ➔`;
+        btnLabel = `⚡ Buka Dashboard ${m.label} (Live) ➔`;
       } else if (m.hist) {
-        btnLabel = `👉 Buka Dashboard ${m.short} ➔`;
+        btnLabel = `📊 Buka Dashboard ${m.short} ➔`;
+      } else if (m.no === 11) {
+        btnLabel = "⚡ Buka Dashboard November (Live) ➔";
       } else if (m.no === 10) {
-        btnLabel = "📅 Buka Dashboard Oktober (Live) ➔";
+        btnLabel = "📅 Buka Dashboard Oktober (Rekap Final) ➔";
       } else if (m.no === 9) {
-        btnLabel = "📊 Buka Dashboard September (Rekap) ➔";
+        btnLabel = "📊 Buka Dashboard September (Rekap Final) ➔";
       } else {
         btnLabel = "Belum Berjalan (—)";
       }
@@ -3280,8 +3310,8 @@ function vTahunan(R) {
 
 window.selectArsipYear = function(y) {
   arsipYear = String(y);
-  if (arsipYear === "2026" && Number(arsipMonth) > 10) {
-    arsipMonth = 10;
+  if (arsipYear === "2026" && Number(arsipMonth) > 11) {
+    arsipMonth = 11;
   }
   render();
   if (typeof showToast === "function") {
@@ -4285,7 +4315,8 @@ function vOmzet(R){
     <div style="display:flex;align-items:center;gap:6px;background:var(--surface2);padding:4px 8px;border-radius:8px">
       <span style="font-size:11px;font-weight:600;color:var(--muted);">PERIODE:</span>
       <select id="selOmzetMonth" style="background:var(--surface);border:1px solid var(--hairline-strong);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--ink);cursor:pointer;font-weight:600;outline:none;" onchange="activeMonth=this.value;render()">
-        <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Oktober 2026 (Live)</option>
+        <option value="2026-11" ${R.c.bulan==='2026-11'?'selected':''}>📅 November 2026 (Live &amp; Pipeline)</option>
+        <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Oktober 2026 (Rekap Final)</option>
         <option value="2026-09" ${R.c.bulan==='2026-09'?'selected':''}>📅 September 2026 (Final)</option>
         <option value="2026-08" ${R.c.bulan==='2026-08'?'selected':''}>📅 Agustus 2026 (Closed)</option>
         <option value="2026-07" ${R.c.bulan==='2026-07'?'selected':''}>📅 Juli 2026 (Closed)</option>
@@ -4400,7 +4431,8 @@ function vTrx(R){
     <div style="display:flex;align-items:center;gap:6px;background:var(--surface2);padding:4px 8px;border-radius:8px">
       <span style="font-size:11px;font-weight:600;color:var(--muted);">PERIODE:</span>
       <select id="selTrxMonth" style="background:var(--surface);border:1px solid var(--hairline-strong);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--ink);cursor:pointer;font-weight:600;outline:none;" onchange="activeMonth=this.value;render()">
-        <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Oktober 2026 (Live)</option>
+        <option value="2026-11" ${R.c.bulan==='2026-11'?'selected':''}>📅 November 2026 (Live &amp; Pipeline)</option>
+        <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Oktober 2026 (Rekap Final)</option>
         <option value="2026-09" ${R.c.bulan==='2026-09'?'selected':''}>📅 September 2026 (Final)</option>
         <option value="2026-08" ${R.c.bulan==='2026-08'?'selected':''}>📅 Agustus 2026 (Closed)</option>
         <option value="2026-07" ${R.c.bulan==='2026-07'?'selected':''}>📅 Juli 2026 (Closed)</option>
@@ -4633,7 +4665,8 @@ function vBiaya(R){
     <div style="display:flex;align-items:center;gap:6px;background:var(--surface2);padding:4px 8px;border-radius:8px">
       <span style="font-size:11px;font-weight:600;color:var(--muted);">PERIODE:</span>
       <select id="selBiayaMonth" style="background:var(--surface);border:1px solid var(--hairline-strong);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--ink);cursor:pointer;font-weight:600;outline:none;" onchange="activeMonth=this.value;render()">
-        <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Oktober 2026 (Live Neraca)</option>
+        <option value="2026-11" ${R.c.bulan==='2026-11'?'selected':''}>📅 November 2026 (Live Neraca)</option>
+        <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Oktober 2026 (Rekap Final)</option>
         <option value="2026-09" ${R.c.bulan==='2026-09'?'selected':''}>📅 September 2026 (Final)</option>
         <option value="2026-08" ${R.c.bulan==='2026-08'?'selected':''}>📅 Agustus 2026 (Closed)</option>
         <option value="2026-07" ${R.c.bulan==='2026-07'?'selected':''}>📅 Juli 2026 (Closed)</option>
@@ -4796,7 +4829,8 @@ function vShift(R){
     <div style="display:flex;align-items:center;gap:6px;background:var(--surface2);padding:4px 8px;border-radius:8px">
       <span style="font-size:11px;font-weight:600;color:var(--muted);">PERIODE:</span>
       <select id="selShiftMonth" style="background:var(--surface);border:1px solid var(--hairline-strong);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--ink);cursor:pointer;font-weight:600;outline:none;" onchange="activeMonth=this.value;render()">
-        <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Oktober 2026 (Live)</option>
+        <option value="2026-11" ${R.c.bulan==='2026-11'?'selected':''}>📅 November 2026 (Live)</option>
+        <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Oktober 2026 (Rekap Final)</option>
         <option value="2026-09" ${R.c.bulan==='2026-09'?'selected':''}>📅 September 2026 (Final)</option>
         <option value="2026-08" ${R.c.bulan==='2026-08'?'selected':''}>📅 Agustus 2026 (Closed)</option>
         <option value="2026-07" ${R.c.bulan==='2026-07'?'selected':''}>📅 Juli 2026 (Closed)</option>
@@ -5520,7 +5554,8 @@ function vAds(R){
       <p>Rencana pelepasan budget iklan berbayar, playbook tim, serta roadmap kalender marketing terintegrasi 2026/2027.</p>
     </div>
     <div style="display:flex;gap:6px;background:var(--surface2);padding:4px;border-radius:8px">
-      <button class="btn btn-sm ${selBulan==='2026-10'?'btn-pri':'btn-sub'}" onclick="activeMonth='2026-10';estMonth=10;render()">📅 Oktober 2026 (Live Tracker)</button>
+      <button class="btn btn-sm ${selBulan==='2026-11'?'btn-pri':'btn-sub'}" onclick="activeMonth='2026-11';estMonth=11;render()">📅 November 2026 (Live Tracker)</button>
+      <button class="btn btn-sm ${selBulan==='2026-10'?'btn-pri':'btn-sub'}" onclick="activeMonth='2026-10';estMonth=10;render()">📅 Oktober 2026 (Rekap)</button>
       <button class="btn btn-sm ${selBulan==='2026-09'?'btn-pri':'btn-sub'}" onclick="activeMonth='2026-09';estMonth=9;render()">📅 September 2026 (Arsip)</button>
     </div>
   </div>
@@ -5673,7 +5708,8 @@ function vEst(R){
   const isOkt = (activeMonth === "2026-10" || R.c.bulan === "2026-10");
 
   const mList = [
-    {iso: "2026-10", em: 10, label: "Oktober 2026", sub: `${okp ? okp.totalBookings : 164} Booking · Pipeline Live`},
+    {iso: "2026-11", em: 11, label: "November 2026", sub: "21 Booking · Pipeline Live"},
+    {iso: "2026-10", em: 10, label: "Oktober 2026", sub: `${okp ? okp.totalBookings : 458} Booking · Rekap Final`},
     {iso: "2026-09", em: 9, label: "September 2026", sub: "191 Booking · 5 Batal"},
     {iso: "2026-08", em: 8, label: "Agustus 2026", sub: "223 Booking · 10 Batal"},
     {iso: "2026-07", em: 7, label: "Juli 2026", sub: "168 Booking · 5 Batal"},
@@ -6830,7 +6866,8 @@ function vGaji(R){
       <div style="display:flex;align-items:center;gap:6px;background:var(--surface2);padding:3px 8px;border-radius:7px">
         <span style="font-size:11px;font-weight:600;color:var(--muted);">PERIODE:</span>
         <select id="selGajiMonth" style="background:var(--surface);border:1px solid var(--hairline-strong);border-radius:6px;padding:3px 8px;font-size:11.5px;color:var(--ink);cursor:pointer;font-weight:600;outline:none;" onchange="activeMonth=this.value;render()">
-          <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Okt 2026</option>
+          <option value="2026-11" ${R.c.bulan==='2026-11'?'selected':''}>📅 Nov 2026 (Live)</option>
+          <option value="2026-10" ${R.c.bulan==='2026-10'?'selected':''}>📅 Okt 2026 (Rekap)</option>
           <option value="2026-09" ${R.c.bulan==='2026-09'?'selected':''}>📅 Sep 2026</option>
           <option value="2026-08" ${R.c.bulan==='2026-08'?'selected':''}>📅 Ags 2026</option>
           <option value="2026-07" ${R.c.bulan==='2026-07'?'selected':''}>📅 Jul 2026</option>
@@ -7555,6 +7592,16 @@ function wire(R){
     const m = +monthNum;
     const hist = S.historicalMonths && (S.historicalMonths[m] || S.historicalMonths[String(m)]);
     if (!hist) {
+      if (m === 9 || m === 10 || m === 11) {
+        const iso = `2026-${String(m).padStart(2, "0")}`;
+        activeMonth = iso;
+        estMonth = m;
+        view = "dash";
+        render();
+        window.scrollTo({top: 0, behavior: "smooth"});
+        showToast(`📊 Membuka Dashboard Penuh ${BULAN[m - 1]} 2026`, "ok", 2500);
+        return;
+      }
       const bln = BULAN[m - 1] || `Bulan ${m}`;
       showToast(`ℹ️ Data laporan ${bln} 2026 belum dicocokkan.`, "neutral", 3500);
       return;
@@ -7686,7 +7733,7 @@ function wire(R){
       el.onclick = (e) => {
         e.stopPropagation();
         const m = +el.dataset.month;
-        if (m >= 1 && m <= 10) {
+        if (m >= 1 && m <= 11) {
           const iso = `2026-${String(m).padStart(2, "0")}`;
           activeMonth = iso;
           estMonth = m;
@@ -7696,7 +7743,7 @@ function wire(R){
           showToast(`📊 Membuka Dashboard Penuh ${BULAN[m - 1]} 2026`, "ok", 2500);
         } else {
           const bln = BULAN[m - 1] || "";
-          showToast(`ℹ️ Bulan ${bln} 2026 belum dicocokkan.`, "neutral", 3500);
+          showToast(`ℹ️ Bulan ${bln} 2026 belum berjalan.`, "neutral", 3500);
         }
       };
     });
@@ -7713,7 +7760,7 @@ function wire(R){
       el.onclick = (e) => {
         if (e.target.closest("button")) return;
         const m = +el.dataset.month;
-        if (m >= 1 && m <= 10) {
+        if (m >= 1 && m <= 11) {
           const iso = `2026-${String(m).padStart(2, "0")}`;
           activeMonth = iso;
           estMonth = m;
@@ -7723,7 +7770,7 @@ function wire(R){
           showToast(`📊 Membuka Dashboard Penuh ${BULAN[m - 1]} 2026`, "ok", 2500);
         } else {
           const bln = BULAN[m - 1] || "";
-          showToast(`ℹ️ Bulan ${bln} 2026 belum dicocokkan.`, "neutral", 3500);
+          showToast(`ℹ️ Bulan ${bln} 2026 belum berjalan.`, "neutral", 3500);
         }
       };
     });
