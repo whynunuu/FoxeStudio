@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Foxe Studio Keuangan — Master Replica Blueprint & System Specification</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --primary: #0080c8;
+    --primary-dark: #005f96;
+    --canvas: #ffffff;
+    --surface: #f8fafc;
+    --surface-border: #e2e8f0;
+    --ink: #0f172a;
+    --ink-muted: #64748b;
+    --success: #15803d;
+    --success-bg: #dcfce7;
+    --warning: #b45309;
+    --warning-bg: #fef3c7;
+    --danger: #b91c1c;
+    --danger-bg: #fee2e2;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 20mm 16mm;
+    @bottom-right {
+      content: "Halaman " counter(page) " dari " counter(pages);
+      font-family: 'Inter', sans-serif;
+      font-size: 8pt;
+      color: #94a3b8;
+    }
+  }
+
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink);
+    background: var(--canvas);
+    line-height: 1.6;
+    font-size: 10pt;
+    margin: 0;
+    padding: 24px;
+  }
+
+  .cover {
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 24px;
+    margin-bottom: 30px;
+  }
+  .cover h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 26pt;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+  }
+  .cover .subtitle {
+    font-size: 11pt;
+    color: var(--primary-dark);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .cover .meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 8.5pt;
+    color: var(--ink-muted);
+    background: var(--surface);
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--surface-border);
+  }
+  .meta-bar span strong { color: var(--ink); }
+
+  h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18pt;
+    font-weight: 700;
+    color: var(--ink);
+    border-bottom: 1.5px solid var(--surface-border);
+    padding-bottom: 6px;
+    margin-top: 36px;
+    margin-bottom: 14px;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-top: 20px;
+    margin-bottom: 8px;
+    page-break-after: avoid;
+  }
+  p, li {
+    font-size: 9.5pt;
+    color: #334155;
+    margin: 6px 0;
+  }
+  ul, ol {
+    padding-left: 20px;
+    margin: 8px 0;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+  .card.highlight {
+    border-left: 4px solid var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+  th, td {
+    padding: 7px 10px;
+    border: 1px solid var(--surface-border);
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: #f1f5f9;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 8.2pt;
+  }
+  code {
+    background: #f1f5f9;
+    color: #0369a1;
+    padding: 2px 5px;
+    border-radius: 4px;
+  }
+  pre {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 12px 14px;
+    border-radius: 6px;
+    overflow-x: auto;
+    line-height: 1.45;
+    margin: 12px 0;
+    page-break-inside: avoid;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 12px;
+    font-size: 7.5pt;
+    font-weight: 600;
+  }
+  .pill.success { background: var(--success-bg); color: var(--success); }
+  .pill.warning { background: var(--warning-bg); color: var(--warning); }
+  .pill.danger { background: var(--danger-bg); color: var(--danger); }
+  .pill.info { background: #e0f2fe; color: #0369a1; }
+
+  .page-break { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>Foxe Studio Keuangan</h1>
+  <div class="subtitle">Master Replica Blueprint & System Architecture Specification</div>
+  <div class="meta-bar">
+    <span><strong>Versi:</strong> 3.2.0 (Production Master)</span>
+    <span><strong>Tanggal:</strong> 09 Oktober 2026</span>
+    <span><strong>Sifat:</strong> Autonomous Financial Operations</span>
+    <span><strong>Target:</strong> Studio Branch Cloning & AI Deployment</span>
+  </div>
+</div>
+
+<h2>1. Executive Summary</h2>
+<p><strong>Foxe Studio Keuangan</strong> adalah sistem otomasi operasional keuangan, audit rekonsiliasi kasir, pelacakan pipeline jadwal foto, dan CRM penagihan prospek berbasis <em>serverless single-page application</em> (SPA). Arsitektur ini dirancang khusus untuk studio foto komersial dengan intensitas transaksi harian tinggi, fluktuasi musiman yang tajam (Super Peak Wisuda), serta pembagian peran kru shift dinamis.</p>
+
+<div class="card highlight">
+  <strong>Pilar Utama Nilai Sistem:</strong>
+  <ul>
+    <li><strong>Biaya Infrastruktur Nol (Zero Hosting Cost):</strong> Berjalan penuh di atas GitHub Pages gratis, ditenagai file database statis <code>foxe_full_state.json</code> sebagai <em>Single Source of Truth</em>.</li>
+    <li><strong>Sinkronisasi Cloud Otonom:</strong> Bekerja di background melalui GitHub Actions crons (08:30, 12:00, 15:00, 18:00, 21:00, 21:30 WIB) dan Railway worker tanpa perlu laptop studio menyala 24 jam.</li>
+    <li><strong>Audit Kasir Zero-Guesswork:</strong> Memvalidasi rumus kasir <code>Kas Tunai + Transfer Bank == Total Omzet</code> secara otomatis dengan batas toleransi selisih maksimum Rp 1.000.</li>
+    <li><strong>Pencegahan Ghost Slots:</strong> Memisahkan sesi reschedule (label Orange) agar sisa pelunasan tidak dihitung ganda, sekaligus menjaga masa aktif DP klien selama 30 hari di CRM.</li>
+  </ul>
+</div>
+
+<h2>2. MD: Master Operational & Workflow Rules</h2>
+<p>Dokumen ini adalah aturan wajib yang ditanamkan pada file <code>AGENTS.md</code> atau <code>SYSTEM_RULES.md</code> di repositori proyek kloning:</p>
+
+<h3>A. Trigger Kata Kunci: "ayo kerja"</h3>
+<p>Jika pengguna mengirim instruksi <strong>"ayo kerja"</strong>, <strong>"update data"</strong>, atau <strong>"sinkronkan data"</strong>, Agent wajib mengeksekusi pipeline terpadu:</p>
+<ol>
+  <li><strong>Eksekusi Deep Sync (<code>python deep_sync_foxe.py</code>):</strong>
+    <ul>
+      <li>Unduh 11 sumber operasional resmi Google Drive (Log Order Sept/Okt, Schedule Reguler, Schedule Wisuda, Neraca).</li>
+      <li>Hitung total shift aktual fotografer dan asisten s.d. cut-off hari ini.</li>
+      <li>Parse section Detail Neraca (kolom P s.d. U) untuk klasifikasi COGS & OPEX serta Buku Detail Kas (Debet/Kredit).</li>
+      <li>Gunakan cache instan <code>historical_cache.json</code> (&lt; 0.01 detik) untuk arsip Jan–Ags.</li>
+      <li>Simpan <code>foxe_full_state.json</code>, kompilasi <code>index.html</code>, dan kirim notifikasi Telegram via <code>@NunuFxBot</code>.</li>
+    </ul>
+  </li>
+  <li><strong>Deploy Otomatis ke Git:</strong>
+    <pre><code>git add foxe_full_state.json index.html assemble_app.py file*.xlsx file*.xlsm parser_*.py deep_sync_foxe.py telegram_notifier.py AGENTS.md GEMINI.md PRD.md
+git commit -m "Auto-sync data update"
+git push origin main</code></pre>
+  </li>
+  <li><strong>Laporan Hasil:</strong> Menampilkan ringkasan metrik hari ini dan link website live (PIN: <code>363636</code>).</li>
+</ol>
+
+<h3>B. Standar Desain Fit-In & Anti-Tabrakan (Rule 4)</h3>
+<ul>
+  <li><strong>Lebar Kontainer (<code>.view</code>):</strong> Wajib menggunakan <code>max-width: 1600px; width: 100%; margin: 0 auto; padding: 28px 32px 80px;</code>. Dilarang membatasi ke 1200px kaku agar tidak muncul ruang kosong.</li>
+  <li><strong>Grid Adaptif:</strong> Menggunakan <code>repeat(auto-fit, minmax(360px, 1fr))</code> dengan breakpoint di <code>1080px</code>.</li>
+  <li><strong>Scrollable Table:</strong> Seluruh tabel data panjang (Log Order, Detail Neraca, Leads, Jadwal) wajib dibungkus kontainer scrollable (<code>max-height: 460px – 520px; overflow-y: auto;</code>) dengan sticky table header (<code>thead</code>).</li>
+</ul>
+
+<h3>C. Standarisasi 5 Sandi Warna Sel Jadwal (Anti-Ghost Slot)</h3>
+<table>
+  <thead>
+    <tr><th>Warna</th><th>Kode Hex</th><th>Status</th><th>Perlakuan Finansial & Operasional</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>⚪ Putih</td><td><code>FFFFFFFF</code></td><td><span class="pill info">Slot Kosong</span></td><td>Tersedia untuk calon klien baru. Tidak ada nilai finansial.</td></tr>
+    <tr><td>🟢 Hijau</td><td><code>FF00FF00</code></td><td><span class="pill success">Confirmed Booking</span></td><td>Masuk potensi omzet dan estimasi sisa pelunasan cash-in riil.</td></tr>
+    <tr><td>🔵 Cyan</td><td><code>FF00FFFF</code></td><td><span class="pill info">Selesai / Hadir</span></td><td>Klien sudah foto. Nilai uang sudah terealisasi penuh di kasir fisik.</td></tr>
+    <tr><td>🟠 Orange</td><td><code>FFFF9900</code></td><td><span class="pill warning">Reschedule / Pending</span></td><td>Sisa pelunasan dinetralkan Rp 0. <strong>DP tetap berlaku 30 hari</strong> dan dialihkan ke CRM Recovery.</td></tr>
+    <tr><td>🔴 Merah</td><td><code>FFFF0000</code></td><td><span class="pill danger">Full / Tutup</span></td><td>Batas operasional atau kuota penuh. Otomatis dikecualikan dari booking klien.</td></tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h2>3. R-C-T-O Framework (Kerangka Kerja Prompt)</h2>
+<div class="card">
+  <p><strong>[R] ROLE:</strong> Autonomous Chief Financial Officer (CFO) & Systems Architect AI untuk studio foto komersial profesional.</p>
+  <p><strong>[C] CONTEXT:</strong> Studio beroperasi dengan multi-file spreadsheet Google Drive (transaksi kasir, jadwal reguler, jadwal wisuda massal, neraca pengeluaran). Pembayaran menggunakan DP saat booking dan pelunasan di hari foto. Sistem menggunakan arsitektur serverless static SPA tanpa biaya hosting server.</p>
+  <p><strong>[T] TASK:</strong> Menjalankan ingestion 11 berkas Google Drive, parsing dengan deteksi 5 sandi warna jadwal, rekonsiliasi kasir Kas + Transfer = Omzet, penyusunan single source of truth <code>foxe_full_state.json</code>, kompilasi visual <code>index.html</code>, deploy otomatis Git, pengiriman struk kasir Telegram 44 kolom, dan audit jam malam Foxe Sentry.</p>
+  <p><strong>[O] OUTPUT:</strong> State JSON bersih tanpa nilai NaN, dashboard web responsif fit-in 1600px, struk kasir Telegram presisi rata kanan dengan kalkulasi sisa estimasi omzet akhir bulan, dan review terstruktur 5 poin.</p>
+</div>
+
+<h2>4. Gambaran Flow Kerja & Arsitektur Pipeline</h2>
+<pre><code>[Google Drive 11 File Excel]  ──►  [deep_sync_foxe.py (Orkestrator)]
+                                          │
+    ┌─────────────────────────────────────┴─────────────────────────────────────┐
+    ▼                                     ▼                                     ▼
+[parser_log_order.py]            [parser_schedule.py]                 [parser_neraca.py]
+Kas, Transfer, Kru Shift         Deteksi 5 Warna Sel (⚪🟢🔵🟠🔴)     COGS, OPEX (Kolom P-U)
+    │                                     │                                     │
+    └─────────────────────────────────────┬─────────────────────────────────────┘
+                                          ▼
+                             [foxe_sentry.py (Audit Gate)]
+                         Kas + Transfer == Omzet? Toleransi <= 1rb
+                                          │
+                    ┌─────────────────────┴─────────────────────┐
+             (Ada Selisih)                               (100% Valid)
+                    ▼                                           ▼
+         [🚨 TELEGRAM ALERT]                         [foxe_full_state.json]
+         (Deploy DITAHAN)                                       │
+                                                ┌───────────────┴───────────────┐
+                                                ▼                               ▼
+                                       [assemble_app.py]              [telegram_notifier.py]
+                                                ▼                               ▼
+                                          [index.html]                  [Struk Closing Bot]
+                                                ▼
+                                    [GitHub Pages Deploy]</code></pre>
+
+<h2>5. Project Tree (Struktur Modul Repositori)</h2>
+<div class="card">
+<pre><code>FoxeStudio-Clone/
+├── .github/workflows/
+│   ├── daily_sync.yml             # Cron sync 5x sehari (08:30, 12, 15, 18, 21 WIB)
+│   ├── leads_reminder.yml         # Cron reminder follow-up leads (10, 14, 20 WIB)
+│   └── nightly_sentry.yml         # Cron audit jam malam (21:30 & 00:00 WIB)
+├── core_engine/
+│   ├── deep_sync_foxe.py          # Download 11 file GDrive & pipeline orchestrator
+│   ├── build_full_state.py        # Aggregator data kasir, jadwal, dan neraca
+│   ├── assemble_app.py            # Compiler visual index.html & bumper BUILD_ID
+│   └── foxe_sentry.py             # Security validator & reconcile guard
+├── parsers/
+│   ├── parser_log_order.py        # Parser Kasir (Kas, Transfer, Diskon, Shift kru)
+│   ├── parser_schedule.py         # Parser Jadwal Reguler & Wisuda (5 warna sel)
+│   ├── parser_neraca.py           # Parser Neraca (COGS, OPEX, Debet/Kredit kolom P-U)
+│   ├── parser_historical.py       # Parser kompilasi arsip Jan–Ags
+│   └── agentic_lead_engine.py     # Parser funnel CRM leads WhatsApp & tren paket
+├── notifiers/
+│   ├── telegram_notifier.py       # Generator struk kasir monospace & Telegram bot
+│   ├── trigger_leads_reminder.py  # Pengirim pengingat follow-up prospek studio
+│   └── quota_notifier.py          # Monitor kuota booking & kapasitas kru
+├── web/
+│   ├── index.html                 # Dashboard Keuangan Utama (GitHub Pages SPA)
+│   ├── flow.html                  # Dashboard CRM Leads & Analisis Permintaan
+│   └── logo_foxe.png              # Aset identitas visual studio
+├── state_and_cache/
+│   ├── foxe_full_state.json       # Single Source of Truth live state
+│   ├── historical_cache.json      # Cache arsip instan Jan–Ags (&lt; 0.01 detik)
+│   └── leads_vault.json           # Basis data prospek CRM
+└── docs_and_memory/
+    ├── AGENTS.md                  # Aturan operasional & workflow agen AI
+    ├── GEMINI.md                  # Panduan memori sistem & anti-desync
+    ├── PRD.md                     # Product Requirement Document resmi
+    └── FOXE_SENTRY.md             # Protokol audit & eskalasi krisis</code></pre>
+</div>
+
+<div class="page-break"></div>
+
+<h2>6. Product Requirement Document (PRD) Resmi</h2>
+<p><strong>Tujuan Produk:</strong> Menyediakan sistem intelijen keuangan studio foto yang menyatukan rekonsiliasi kasir harian, penjadwalan multi-backdrop wisuda, manajemen honor kru, dan follow-up prospek tanpa ketergantungan pada server berbayar.</p>
+
+<h3>Fitur Inti & Spesifikasi:</h3>
+<ul>
+  <li><strong>FR-1 (Landing Laporan Tahunan):</strong> Menampilkan Seasonality Index 12 bulan (garis tengah 1.00×), tabel perbandingan tahunan, serta isolasi bulan non-aktif dengan badge <code>Belum Dicocokkan</code>.</li>
+  <li><strong>FR-2 (Rekonsiliasi Kasir Dinamis):</strong> Mengaudit formula <code>Omzet = Kas + Transfer</code> dengan cut-off otomatis mengikuti hari transaksi terakhir.</li>
+  <li><strong>FR-3 (Sandi Warna Jadwal):</strong> Menyaring slot 🟠 (Orange) dari sisa pelunasan agar tidak over-estimasi, namun mencatat masa tenggang DP 30 hari di CRM.</li>
+  <li><strong>FR-4 (Neraca COGS & OPEX):</strong> Mengambil biaya murni dari kolom P s.d. U File Neraca, memisahkannya menjadi biaya pokok penjualan (COGS) dan operasional (OPEX), serta menampilkan Buku Detail Kas.</li>
+  <li><strong>FR-5 (Roster Kru & Shift):</strong> Menghitung total shift kehadiran aktual fotografer dan asisten untuk estimasi beban upah shift.</li>
+  <li><strong>FR-6 (CRM Leads & Analisis Permintaan):</strong> Melacak funnel MTD (Hot, Warm, Cold, Closed, Win Rate) dan memetakan paket paling diminati (Wisuda, Family, Large Group, Self Photo).</li>
+  <li><strong>FR-7 (Struk Telegram Monospace):</strong> Mengirimkan struk kasir 44 kolom lengkap dengan rincian <em>Unrealized Cash-In</em>, <em>DP (-)</em>, <em>Total Pelunasan</em>, dan <em>Estimasi Omzet Akhir Bulan</em>.</li>
+</ul>
+
+<h3>Formula Finansial Baku:</h3>
+<div class="card">
+  <p>$$	ext{Omzet Realized (MTD)} = \sum 	ext{Kas Tunai} + \sum 	ext{Transfer Bank}$$</p>
+  <p>$$	ext{Unrealized Cash-In} = \sum_{	ext{Slot Hijau}} 	ext{Harga Paket Booking H+1 s.d. Akhir Bulan}$$</p>
+  <p>$$	ext{Sisa Pelunasan Riil} = 	ext{Unrealized Cash-In} - \sum_{	ext{Slot Hijau}} 	ext{DP Diterima}$$</p>
+  <p>$$	ext{Estimasi Omzet Akhir Bulan} = 	ext{Omzet Realized} + 	ext{Sisa Pelunasan Riil}$$</p>
+  <p>$$	ext{Estimasi Nett Profit} = 	ext{Omzet Realized} - (	ext{COGS} + 	ext{OPEX} + 	ext{Beban Payroll Kru})$$</p>
+</div>
+
+<h2>7. Panduan Duplikasi & Setup Proyek</h2>
+<ol>
+  <li><strong>Kloning Repositori:</strong> Buat repositori baru di GitHub dan clone ke komputer lokal.</li>
+  <li><strong>Pasang GitHub Secrets:</strong> Masukkan <code>TELEGRAM_BOT_TOKEN</code> dan <code>TELEGRAM_CHAT_ID</code> di menu Settings repositori.</li>
+  <li><strong>Hubungkan Google Drive:</strong> Buka <code>core_engine/deep_sync_foxe.py</code> dan perbarui daftar File ID sesuai spreadsheet studio baru Anda.</li>
+  <li><strong>Eksekusi Kompilasi Awal:</strong>
+    <pre><code>pip install -r config_and_secrets/requirements.txt
+python core_engine/deep_sync_foxe.py
+python core_engine/assemble_app.py</code></pre>
+  </li>
+  <li><strong>Aktifkan GitHub Pages:</strong> Pilih branch <code>main</code> sebagai sumber deployment. Dashboard web Anda langsung aktif!</li>
+</ol>
+
+</body>
+</html>
