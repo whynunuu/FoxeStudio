@@ -9165,11 +9165,17 @@ async function fastRefresh(silent = false) {
     
     const curSyncId = (S.sync && S.sync[0] && S.sync[0].id) || "";
     const newSyncId = (latest.sync && latest.sync[0] && latest.sync[0].id) || "";
+    const curOrdersLen = (S.orders && S.orders.length) || 0;
+    const newOrdersLen = (latest.orders && latest.orders.length) || 0;
+    const curCutoff = (S.config && S.config.cutoff) || "";
+    const newCutoff = (latest.config && latest.config.cutoff) || "";
+    const curNovLen = (S.novemberLogOrder && S.novemberLogOrder.orders && S.novemberLogOrder.orders.length) || 0;
+    const newNovLen = (latest.novemberLogOrder && latest.novemberLogOrder.orders && latest.novemberLogOrder.orders.length) || 0;
     const curOktLen = (S.oktoberLogOrder && S.oktoberLogOrder.orders && S.oktoberLogOrder.orders.length) || 0;
     const newOktLen = (latest.oktoberLogOrder && latest.oktoberLogOrder.orders && latest.oktoberLogOrder.orders.length) || 0;
     const curBkLen = (S.oktoberPipeline && S.oktoberPipeline.totalBookings) || 0;
     const newBkLen = (latest.oktoberPipeline && latest.oktoberPipeline.totalBookings) || 0;
-    const hasChanged = !silent || (newSyncId !== curSyncId) || (newOktLen !== curOktLen) || (newBkLen !== curBkLen);
+    const hasChanged = !silent || (newSyncId !== curSyncId) || (newOrdersLen !== curOrdersLen) || (newCutoff !== curCutoff) || (newNovLen !== curNovLen) || (newOktLen !== curOktLen) || (newBkLen !== curBkLen);
 
     if (hasChanged) {
       S = latest;

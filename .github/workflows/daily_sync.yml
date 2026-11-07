@@ -26,6 +26,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 0
 
       - name: Pull Latest Main Branch
         run: |
@@ -53,7 +54,8 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add foxe_full_state.json index.html leads_vault.json file1.xlsm file1_okt.xlsm file2.xlsx file_neraca.xlsx file2_okt.xlsx file_wisuda_3okt.xlsx file_wisuda_4okt.xlsx file_wisuda_uin_1sep.xlsx file_wisuda_uin_2sep.xlsx file_wisuda_unsoed_8sep.xlsx file_wisuda_unsoed_9sep.xlsx
+          git add -u
+          git add file*.xlsm file*.xlsx foxe_full_state.json foxe_full_state.json.bak index.html leads_vault.json
           git diff --staged --quiet || (git commit -m "Auto-sync Google Drive (Cloud Cron) [skip ci]" && git pull --rebase -X theirs origin main && git push origin main)
 
       - name: Setup GitHub Pages
