@@ -56909,6 +56909,84 @@
       "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_69",
+      "tanggal": "2026-11-07",
+      "client": "Dafina Kanaka Kharisna",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-07",
+      "cash": 1050000.0,
+      "transfer": 0.0,
+      "total": 1050000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_70",
+      "tanggal": "2026-11-07",
+      "client": "Zaenal",
+      "paket": "Single",
+      "tanggalFoto": "2026-11-08",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_71",
+      "tanggal": "2026-11-07",
+      "client": "Nanda Intan",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-07",
+      "cash": 125000.0,
+      "transfer": 0.0,
+      "total": 125000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_72",
+      "tanggal": "2026-11-07",
+      "client": "SULTHONI DZAKIR",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-11-24",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_73",
+      "tanggal": "2026-11-07",
+      "client": "Atri",
+      "paket": "Family B",
+      "tanggalFoto": null,
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_74",
+      "tanggal": "2026-11-07",
+      "client": "Lina Muji Rahayu",
+      "paket": "Single",
+      "tanggalFoto": "2026-11-07",
+      "cash": 0.0,
+      "transfer": 50000.0,
+      "total": 50000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -69490,7 +69568,7 @@
     {
       "id": "cc_2026-11-07",
       "tanggal": "2026-11-07",
-      "nilai": 0.0
+      "nilai": 1175000.0
     },
     {
       "id": "cc_2026-11-08",
@@ -70162,9 +70240,9 @@
       "id": "ld_7",
       "tanggal": "2026-11-07",
       "leads": 0.0,
-      "dp": 1.0,
-      "sesiFoto": 1.0,
-      "transaksi": 2.0
+      "dp": 3.0,
+      "sesiFoto": 5.0,
+      "transaksi": 8.0
     },
     {
       "id": "ld_13",
@@ -81928,7 +82006,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 13525000.0
+        "omzet": 15050000.0
       }
     ]
   },
@@ -82277,10 +82355,16 @@
   ],
   "sync": [
     {
-      "id": "sy_20261107-0733",
-      "mulai": "2026-11-07T07:33:10.207278+00:00",
+      "id": "sy_20261107-1137",
+      "mulai": "2026-11-07T11:37:14.731104+00:00",
       "status": "berjalan",
       "ringkas": "Sinkronisasi sedang berlangsung..."
+    },
+    {
+      "id": "sy_20261107-0733",
+      "mulai": "2026-11-07T07:33:10.207278+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 131 pos pengeluaran Neraca, 279 pipeline Okt."
     },
     {
       "id": "sy_20261107-1047",
@@ -83221,7 +83305,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-07T03:47:48.180409+00:00"
+    "last_sync": "2026-11-07T07:33:10.207278+00:00"
   },
   "neracaDetail": [
     {
@@ -165700,12 +165784,12 @@
         "admin": "AL",
         "noHp": "dp 100 concrete",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
@@ -165722,12 +165806,12 @@
         "admin": "AL",
         "noHp": "lunas",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
@@ -165842,6 +165926,28 @@
       },
       {
         "id": "sc_bk_42",
+        "tgl": "2026-11-08",
+        "waktu": "14:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Zaenal",
+        "paket": "Single",
+        "paketRaw": "Single",
+        "jmlOrang": 1,
+        "harga": 100000.0,
+        "admin": "AL",
+        "noHp": "",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_43",
         "tgl": "2026-11-10",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -165863,7 +165969,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_43",
+        "id": "sc_bk_44",
         "tgl": "2026-11-14",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -165885,7 +165991,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_44",
+        "id": "sc_bk_45",
         "tgl": "2026-11-15",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -165907,7 +166013,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_45",
+        "id": "sc_bk_46",
         "tgl": "2026-11-15",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -165929,7 +166035,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_46",
+        "id": "sc_bk_47",
         "tgl": "2026-11-21",
         "waktu": "09:00",
         "studio": "Studio 1",
@@ -165951,7 +166057,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_47",
+        "id": "sc_bk_48",
         "tgl": "2026-11-22",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -165973,7 +166079,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_48",
+        "id": "sc_bk_49",
         "tgl": "2026-11-24",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -165995,7 +166101,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_49",
+        "id": "sc_bk_50",
         "tgl": "2026-11-24",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -166017,7 +166123,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_50",
+        "id": "sc_bk_51",
         "tgl": "2026-11-24",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -166039,7 +166145,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_51",
+        "id": "sc_bk_52",
         "tgl": "2026-11-24",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -166061,7 +166167,29 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_52",
+        "id": "sc_bk_53",
+        "tgl": "2026-11-24",
+        "waktu": "14:00",
+        "studio": "Studio 2",
+        "studioNama": "Studio 2",
+        "nama": "SULTHONI DZAKIR",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "AL",
+        "noHp": "dp 100 concrete",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_54",
         "tgl": "2026-11-26",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -166083,7 +166211,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_53",
+        "id": "sc_bk_55",
         "tgl": "2026-11-26",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -219485,6 +219613,84 @@
         "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_69",
+        "tanggal": "2026-11-07",
+        "client": "Dafina Kanaka Kharisna",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-07",
+        "cash": 1050000.0,
+        "transfer": 0.0,
+        "total": 1050000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_70",
+        "tanggal": "2026-11-07",
+        "client": "Zaenal",
+        "paket": "Single",
+        "tanggalFoto": "2026-11-08",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_71",
+        "tanggal": "2026-11-07",
+        "client": "Nanda Intan",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-07",
+        "cash": 125000.0,
+        "transfer": 0.0,
+        "total": 125000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_72",
+        "tanggal": "2026-11-07",
+        "client": "SULTHONI DZAKIR",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-11-24",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_73",
+        "tanggal": "2026-11-07",
+        "client": "Atri",
+        "paket": "Family B",
+        "tanggalFoto": null,
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_74",
+        "tanggal": "2026-11-07",
+        "client": "Lina Muji Rahayu",
+        "paket": "Single",
+        "tanggalFoto": "2026-11-07",
+        "cash": 0.0,
+        "transfer": 50000.0,
+        "total": 50000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
       }
     ],
     "shifts": [
@@ -219679,7 +219885,7 @@
       {
         "id": "cc_2026-11-07",
         "tanggal": "2026-11-07",
-        "nilai": 0.0
+        "nilai": 1175000.0
       },
       {
         "id": "cc_2026-11-08",
@@ -219855,9 +220061,9 @@
         "id": "ld_7",
         "tanggal": "2026-11-07",
         "leads": 0.0,
-        "dp": 1.0,
-        "sesiFoto": 1.0,
-        "transaksi": 2.0
+        "dp": 3.0,
+        "sesiFoto": 5.0,
+        "transaksi": 8.0
       },
       {
         "id": "ld_8",
