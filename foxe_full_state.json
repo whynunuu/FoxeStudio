@@ -1,7 +1,7 @@
 {
   "config": {
     "bulan": "2026-11",
-    "cutoff": "2026-11-08",
+    "cutoff": "2026-11-09",
     "status": "Progressive",
     "targets": [
       {
@@ -57273,6 +57273,71 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
+    },
+    {
+      "id": "or_97",
+      "tanggal": "2026-11-09",
+      "client": "Eizza",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-11-24",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_98",
+      "tanggal": "2026-11-09",
+      "client": "biomed 1",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-09",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_99",
+      "tanggal": "2026-11-09",
+      "client": "Rio Chairil Anam",
+      "paket": "Photofox",
+      "tanggalFoto": "2026-11-09",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_100",
+      "tanggal": "2026-11-09",
+      "client": "Rio Chairil Anam",
+      "paket": "Photofox",
+      "tanggalFoto": "2026-11-09",
+      "cash": 150000.0,
+      "transfer": 0.0,
+      "total": 150000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_101",
+      "tanggal": "2026-11-09",
+      "client": "Ruhuy Asoy",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-09",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -64511,6 +64576,18 @@
       "tanggal": "2026-11-08",
       "nama": "ADIF",
       "slot": 1
+    },
+    {
+      "id": "sh_33",
+      "tanggal": "2026-11-09",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_34",
+      "tanggal": "2026-11-09",
+      "nama": "ADIF",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -69918,7 +69995,7 @@
     {
       "id": "cc_2026-11-09",
       "tanggal": "2026-11-09",
-      "nilai": 0.0
+      "nilai": 150000.0
     },
     {
       "id": "cc_2026-11-10",
@@ -70593,6 +70670,14 @@
       "transaksi": 13.0
     },
     {
+      "id": "ld_9",
+      "tanggal": "2026-11-09",
+      "leads": 0.0,
+      "dp": 4.0,
+      "sesiFoto": 1.0,
+      "transaksi": 5.0
+    },
+    {
       "id": "ld_13",
       "tanggal": "2026-11-13",
       "leads": 20.0,
@@ -70614,7 +70699,7 @@
       "id": "kp_1",
       "nama": "ADIF",
       "role": "Fotografer 1",
-      "hariDinilai": 6,
+      "hariDinilai": 8,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -70626,7 +70711,7 @@
       "id": "kp_2",
       "nama": "AMEL",
       "role": "Admin 2",
-      "hariDinilai": 5,
+      "hariDinilai": 8,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -70638,7 +70723,7 @@
       "id": "kp_3",
       "nama": "INDAH",
       "role": "Admin 1",
-      "hariDinilai": 7,
+      "hariDinilai": 8,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -70650,7 +70735,7 @@
       "id": "kp_4",
       "nama": "SAKA",
       "role": "Fotografer 2",
-      "hariDinilai": 6,
+      "hariDinilai": 8,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -82354,7 +82439,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 18325000.0
+        "omzet": 18875000.0
       }
     ]
   },
@@ -82702,6 +82787,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261109-0825",
+      "mulai": "2026-11-09T08:25:43.106226+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 133 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
     {
       "id": "sy_20261108-1844",
       "mulai": "2026-11-08T18:44:36.565913+00:00",
@@ -83743,7 +83834,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-08T18:44:36.565913+00:00"
+    "last_sync": "2026-11-09T08:25:43.106226+00:00"
   },
   "neracaDetail": [
     {
@@ -103782,18 +103873,18 @@
           "row_idx": 10,
           "nama": "Adif",
           "job": "Fotografer",
-          "q": 8.0,
+          "q": 9.0,
           "q_raw": 0.0,
-          "actual_shift": 8,
+          "actual_shift": 9,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 320000.0,
+          "total_gaji": 360000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 320000.0,
+          "thp": 360000.0,
           "status": "Draft"
         },
         {
@@ -103820,18 +103911,18 @@
           "row_idx": 14,
           "nama": "Amel",
           "job": "Admin",
-          "q": 8.0,
+          "q": 9.0,
           "q_raw": 0.0,
-          "actual_shift": 8,
+          "actual_shift": 9,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 320000.0,
+          "total_gaji": 360000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 320000.0,
+          "thp": 360000.0,
           "status": "Draft"
         },
         {
@@ -104007,13 +104098,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 9430000.0,
+        "total_gaji": 9510000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 9430000.0,
+        "grand_total_thp": 9510000.0,
         "total_karyawan": 12
       }
     },
@@ -114185,18 +114276,18 @@
         "row_idx": 10,
         "nama": "Adif",
         "job": "Fotografer",
-        "q": 8.0,
+        "q": 9.0,
         "q_raw": 0.0,
-        "actual_shift": 8,
+        "actual_shift": 9,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 320000.0,
+        "total_gaji": 360000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 320000.0,
+        "thp": 360000.0,
         "status": "Draft"
       },
       {
@@ -114223,18 +114314,18 @@
         "row_idx": 14,
         "nama": "Amel",
         "job": "Admin",
-        "q": 8.0,
+        "q": 9.0,
         "q_raw": 0.0,
-        "actual_shift": 8,
+        "actual_shift": 9,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 320000.0,
+        "total_gaji": 360000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 320000.0,
+        "thp": 360000.0,
         "status": "Draft"
       },
       {
@@ -166581,6 +166672,28 @@
       {
         "id": "sc_bk_49",
         "tgl": "2026-11-09",
+        "waktu": "12:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Rio Chairil Anam",
+        "paket": "Photofox",
+        "paketRaw": "Photofox",
+        "jmlOrang": 1,
+        "harga": 200000.0,
+        "admin": "AL",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_50",
+        "tgl": "2026-11-09",
         "waktu": "16:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -166601,7 +166714,29 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_50",
+        "id": "sc_bk_51",
+        "tgl": "2026-11-09",
+        "waktu": "17:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "biomed 1",
+        "paket": "Large Group",
+        "paketRaw": "LG 8",
+        "jmlOrang": 8,
+        "harga": 200000.0,
+        "admin": "AL",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_52",
         "tgl": "2026-11-09",
         "waktu": "19:00",
         "studio": "Studio 1",
@@ -166623,7 +166758,29 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_51",
+        "id": "sc_bk_53",
+        "tgl": "2026-11-09",
+        "waktu": "20:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "ruhuy asoy",
+        "paket": "Large Group",
+        "paketRaw": "LG 9",
+        "jmlOrang": 9,
+        "harga": 225000.0,
+        "admin": "AL",
+        "noHp": "dp 100 limbo",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_54",
         "tgl": "2026-11-10",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -166645,7 +166802,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_52",
+        "id": "sc_bk_55",
         "tgl": "2026-11-14",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -166667,7 +166824,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_53",
+        "id": "sc_bk_56",
         "tgl": "2026-11-15",
         "waktu": "09:00",
         "studio": "Studio 1",
@@ -166689,7 +166846,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_54",
+        "id": "sc_bk_57",
         "tgl": "2026-11-15",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -166711,7 +166868,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_55",
+        "id": "sc_bk_58",
         "tgl": "2026-11-15",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -166733,7 +166890,29 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_56",
+        "id": "sc_bk_59",
+        "tgl": "2026-11-17",
+        "waktu": "19:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Minpor",
+        "paket": "Large Group",
+        "paketRaw": "LG 20",
+        "jmlOrang": 20,
+        "harga": 500000.0,
+        "admin": "AL",
+        "noHp": "",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_60",
         "tgl": "2026-11-21",
         "waktu": "09:00",
         "studio": "Studio 1",
@@ -166755,7 +166934,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_57",
+        "id": "sc_bk_61",
         "tgl": "2026-11-22",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -166777,7 +166956,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_58",
+        "id": "sc_bk_62",
         "tgl": "2026-11-24",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -166799,7 +166978,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_59",
+        "id": "sc_bk_63",
         "tgl": "2026-11-24",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -166821,7 +167000,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_60",
+        "id": "sc_bk_64",
         "tgl": "2026-11-24",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -166843,7 +167022,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_61",
+        "id": "sc_bk_65",
         "tgl": "2026-11-24",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -166865,7 +167044,29 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_62",
+        "id": "sc_bk_66",
+        "tgl": "2026-11-24",
+        "waktu": "13:40",
+        "studio": "Studio 2",
+        "studioNama": "Studio 2",
+        "nama": "- Eizza",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "AL",
+        "noHp": "wooden",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_67",
         "tgl": "2026-11-24",
         "waktu": "14:00",
         "studio": "Studio 2",
@@ -166887,7 +167088,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_63",
+        "id": "sc_bk_68",
         "tgl": "2026-11-26",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -166909,7 +167110,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_64",
+        "id": "sc_bk_69",
         "tgl": "2026-11-26",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -220675,6 +220876,71 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": "ADIF"
+      },
+      {
+        "id": "or_97",
+        "tanggal": "2026-11-09",
+        "client": "Eizza",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-11-24",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_98",
+        "tanggal": "2026-11-09",
+        "client": "biomed 1",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-09",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_99",
+        "tanggal": "2026-11-09",
+        "client": "Rio Chairil Anam",
+        "paket": "Photofox",
+        "tanggalFoto": "2026-11-09",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_100",
+        "tanggal": "2026-11-09",
+        "client": "Rio Chairil Anam",
+        "paket": "Photofox",
+        "tanggalFoto": "2026-11-09",
+        "cash": 150000.0,
+        "transfer": 0.0,
+        "total": 150000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_101",
+        "tanggal": "2026-11-09",
+        "client": "Ruhuy Asoy",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-09",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -220869,6 +221135,18 @@
         "tanggal": "2026-11-08",
         "nama": "ADIF",
         "slot": 1
+      },
+      {
+        "id": "sh_33",
+        "tanggal": "2026-11-09",
+        "nama": "AMEL",
+        "slot": 1
+      },
+      {
+        "id": "sh_34",
+        "tanggal": "2026-11-09",
+        "nama": "ADIF",
+        "slot": 1
       }
     ],
     "cashControl": [
@@ -220915,7 +221193,7 @@
       {
         "id": "cc_2026-11-09",
         "tanggal": "2026-11-09",
-        "nilai": 0.0
+        "nilai": 150000.0
       },
       {
         "id": "cc_2026-11-10",
@@ -221097,9 +221375,9 @@
         "id": "ld_9",
         "tanggal": "2026-11-09",
         "leads": 0.0,
-        "dp": 0.0,
-        "sesiFoto": 0.0,
-        "transaksi": 0.0
+        "dp": 4.0,
+        "sesiFoto": 1.0,
+        "transaksi": 5.0
       },
       {
         "id": "ld_10",
@@ -221275,7 +221553,7 @@
         "id": "kp_1",
         "nama": "ADIF",
         "role": "Fotografer 1",
-        "hariDinilai": 6,
+        "hariDinilai": 8,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -221287,7 +221565,7 @@
         "id": "kp_2",
         "nama": "AMEL",
         "role": "Admin 2",
-        "hariDinilai": 5,
+        "hariDinilai": 8,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -221299,7 +221577,7 @@
         "id": "kp_3",
         "nama": "INDAH",
         "role": "Admin 1",
-        "hariDinilai": 7,
+        "hariDinilai": 8,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -221311,7 +221589,7 @@
         "id": "kp_4",
         "nama": "SAKA",
         "role": "Fotografer 2",
-        "hariDinilai": 6,
+        "hariDinilai": 8,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -221327,9 +221605,15 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -221341,6 +221625,9 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "client": [
@@ -221348,9 +221635,15 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "produktivitas": [
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -221366,9 +221659,11 @@
           5.0,
           5.0,
           5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -221384,6 +221679,7 @@
           5.0,
           5.0,
           5.0,
+          5.0,
           5.0
         ],
         "client": [
@@ -221393,9 +221689,11 @@
           5.0,
           5.0,
           5.0,
+          5.0,
           5.0
         ],
         "produktivitas": [
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -221412,9 +221710,13 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -221428,6 +221730,8 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "client": [
@@ -221436,9 +221740,13 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "produktivitas": [
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -221454,9 +221762,13 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -221470,9 +221782,13 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "client": [
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -221486,11 +221802,13 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
           5.0
         ]
       }
     },
-    "cutoff": "2026-11-08",
-    "hariBerjalan": 8
+    "cutoff": "2026-11-09",
+    "hariBerjalan": 9
   }
 }
