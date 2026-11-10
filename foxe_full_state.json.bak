@@ -57494,6 +57494,19 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
+    },
+    {
+      "id": "or_114",
+      "tanggal": "2026-11-10",
+      "client": "Muhammad Irsyad",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-10",
+      "cash": 1100000.0,
+      "transfer": 0.0,
+      "total": 1100000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -70210,7 +70223,7 @@
     {
       "id": "cc_2026-11-10",
       "tanggal": "2026-11-10",
-      "nilai": 0.0
+      "nilai": 1100000.0
     },
     {
       "id": "cc_2026-11-11",
@@ -70892,8 +70905,8 @@
       "tanggal": "2026-11-10",
       "leads": 0.0,
       "dp": 3.0,
-      "sesiFoto": 1.0,
-      "transaksi": 4.0
+      "sesiFoto": 2.0,
+      "transaksi": 5.0
     },
     {
       "id": "ld_13",
@@ -82657,7 +82670,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 20400000.0
+        "omzet": 21500000.0
       }
     ]
   },
@@ -83006,10 +83019,16 @@
   ],
   "sync": [
     {
-      "id": "sy_20261110-1323",
-      "mulai": "2026-11-10T13:23:33.753673+00:00",
+      "id": "sy_20261110-2045",
+      "mulai": "2026-11-10T20:45:26.614078+00:00",
       "status": "berjalan",
       "ringkas": "Sinkronisasi sedang berlangsung..."
+    },
+    {
+      "id": "sy_20261110-1323",
+      "mulai": "2026-11-10T13:23:33.753673+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 135 pos pengeluaran Neraca, 279 pipeline Okt."
     },
     {
       "id": "sy_20261110-0840",
@@ -84076,7 +84095,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-10T08:40:42.743397+00:00"
+    "last_sync": "2026-11-10T13:23:33.753673+00:00"
   },
   "neracaDetail": [
     {
@@ -167097,7 +167116,7 @@
       {
         "id": "sc_bk_55",
         "tgl": "2026-11-10",
-        "waktu": "15:00",
+        "waktu": "15:20",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "Muhammad Irsyad",
@@ -221500,6 +221519,19 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": "SAKA"
+      },
+      {
+        "id": "or_114",
+        "tanggal": "2026-11-10",
+        "client": "Muhammad Irsyad",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-10",
+        "cash": 1100000.0,
+        "transfer": 0.0,
+        "total": 1100000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
       }
     ],
     "shifts": [
@@ -221793,7 +221825,7 @@
       {
         "id": "cc_2026-11-10",
         "tanggal": "2026-11-10",
-        "nilai": 0.0
+        "nilai": 1100000.0
       },
       {
         "id": "cc_2026-11-11",
@@ -221979,8 +222011,8 @@
         "tanggal": "2026-11-10",
         "leads": 0.0,
         "dp": 3.0,
-        "sesiFoto": 1.0,
-        "transaksi": 4.0
+        "sesiFoto": 2.0,
+        "transaksi": 5.0
       },
       {
         "id": "ld_11",
