@@ -57416,6 +57416,32 @@
       "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
+    },
+    {
+      "id": "or_108",
+      "tanggal": "2026-11-09",
+      "client": "Raden Ajeng Nayla",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-11",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_109",
+      "tanggal": "2026-11-09",
+      "client": "Ruhuy Asoy",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-09",
+      "cash": 0.0,
+      "transfer": 0.0,
+      "total": 0.0,
+      "pembayaran": "",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
     }
   ],
   "shifts": [
@@ -70768,10 +70794,10 @@
     {
       "id": "ld_9",
       "tanggal": "2026-11-09",
-      "leads": 0.0,
-      "dp": 7.0,
+      "leads": 26.0,
+      "dp": 8.0,
       "sesiFoto": 4.0,
-      "transaksi": 11.0
+      "transaksi": 12.0
     },
     {
       "id": "ld_13",
@@ -82535,7 +82561,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 19800000.0
+        "omzet": 19900000.0
       }
     ]
   },
@@ -82884,10 +82910,16 @@
   ],
   "sync": [
     {
-      "id": "sy_20261109-2320",
-      "mulai": "2026-11-09T23:20:57.881728+00:00",
+      "id": "sy_20261110-0840",
+      "mulai": "2026-11-10T08:40:42.743397+00:00",
       "status": "berjalan",
       "ringkas": "Sinkronisasi sedang berlangsung..."
+    },
+    {
+      "id": "sy_20261109-2320",
+      "mulai": "2026-11-09T23:20:57.881728+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 133 pos pengeluaran Neraca, 279 pipeline Okt."
     },
     {
       "id": "sy_20261109-1344",
@@ -83942,7 +83974,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-09T13:44:30.515305+00:00"
+    "last_sync": "2026-11-09T23:20:57.881728+00:00"
   },
   "neracaDetail": [
     {
@@ -166879,12 +166911,12 @@
         "admin": "AL",
         "noHp": "dp 100 limbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
@@ -166911,6 +166943,28 @@
       },
       {
         "id": "sc_bk_55",
+        "tgl": "2026-11-11",
+        "waktu": "19:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Raden Ajeng Nayla",
+        "paket": "Large Group",
+        "paketRaw": "LG 10",
+        "jmlOrang": 10,
+        "harga": 250000.0,
+        "admin": "IN",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_56",
         "tgl": "2026-11-14",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -166932,7 +166986,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_56",
+        "id": "sc_bk_57",
         "tgl": "2026-11-15",
         "waktu": "09:00",
         "studio": "Studio 1",
@@ -166954,7 +167008,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_57",
+        "id": "sc_bk_58",
         "tgl": "2026-11-15",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -166976,7 +167030,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_58",
+        "id": "sc_bk_59",
         "tgl": "2026-11-15",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -166998,7 +167052,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_59",
+        "id": "sc_bk_60",
         "tgl": "2026-11-17",
         "waktu": "19:00",
         "studio": "Studio 1",
@@ -167020,7 +167074,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_60",
+        "id": "sc_bk_61",
         "tgl": "2026-11-21",
         "waktu": "09:00",
         "studio": "Studio 1",
@@ -167042,7 +167096,29 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_61",
+        "id": "sc_bk_62",
+        "tgl": "2026-11-21",
+        "waktu": "16:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Pancar",
+        "paket": "Large Group",
+        "paketRaw": "LG 40",
+        "jmlOrang": 40,
+        "harga": 1000000.0,
+        "admin": "IN",
+        "noHp": "",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_63",
         "tgl": "2026-11-22",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -167064,7 +167140,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_62",
+        "id": "sc_bk_64",
         "tgl": "2026-11-24",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -167086,7 +167162,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_63",
+        "id": "sc_bk_65",
         "tgl": "2026-11-24",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -167108,7 +167184,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_64",
+        "id": "sc_bk_66",
         "tgl": "2026-11-24",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -167130,7 +167206,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_65",
+        "id": "sc_bk_67",
         "tgl": "2026-11-24",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -167152,7 +167228,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_66",
+        "id": "sc_bk_68",
         "tgl": "2026-11-24",
         "waktu": "13:40",
         "studio": "Studio 2",
@@ -167174,7 +167250,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_67",
+        "id": "sc_bk_69",
         "tgl": "2026-11-24",
         "waktu": "14:00",
         "studio": "Studio 2",
@@ -167196,7 +167272,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_68",
+        "id": "sc_bk_70",
         "tgl": "2026-11-26",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -167218,7 +167294,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_69",
+        "id": "sc_bk_71",
         "tgl": "2026-11-26",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -221127,6 +221203,32 @@
         "pembayaran": "Lunas",
         "admin": "INDAH",
         "fotografer": "SAKA"
+      },
+      {
+        "id": "or_108",
+        "tanggal": "2026-11-09",
+        "client": "Raden Ajeng Nayla",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-11",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_109",
+        "tanggal": "2026-11-09",
+        "client": "Ruhuy Asoy",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-09",
+        "cash": 0.0,
+        "transfer": 0.0,
+        "total": 0.0,
+        "pembayaran": "",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
       }
     ],
     "shifts": [
@@ -221578,10 +221680,10 @@
       {
         "id": "ld_9",
         "tanggal": "2026-11-09",
-        "leads": 0.0,
-        "dp": 7.0,
+        "leads": 26.0,
+        "dp": 8.0,
         "sesiFoto": 4.0,
-        "transaksi": 11.0
+        "transaksi": 12.0
       },
       {
         "id": "ld_10",
