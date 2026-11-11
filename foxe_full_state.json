@@ -57598,6 +57598,32 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "ADIF"
+    },
+    {
+      "id": "or_122",
+      "tanggal": "2026-11-11",
+      "client": "Aisha",
+      "paket": "Photofox",
+      "tanggalFoto": "2026-11-11",
+      "cash": 60000.0,
+      "transfer": 0.0,
+      "total": 60000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_123",
+      "tanggal": "2026-11-11",
+      "client": "Raden Ajeng",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-11",
+      "cash": 0.0,
+      "transfer": 150000.0,
+      "total": 150000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -70355,7 +70381,7 @@
     {
       "id": "cc_2026-11-11",
       "tanggal": "2026-11-11",
-      "nilai": 150000.0
+      "nilai": 210000.0
     },
     {
       "id": "cc_2026-11-12",
@@ -71034,6 +71060,14 @@
       "dp": 3.0,
       "sesiFoto": 2.0,
       "transaksi": 5.0
+    },
+    {
+      "id": "ld_11",
+      "tanggal": "2026-11-11",
+      "leads": 14.0,
+      "dp": 4.0,
+      "sesiFoto": 4.0,
+      "transaksi": 9.0
     },
     {
       "id": "ld_13",
@@ -82797,7 +82831,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 22675000.0
+        "omzet": 22885000.0
       }
     ]
   },
@@ -83145,6 +83179,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261111-2112",
+      "mulai": "2026-11-11T21:12:11.733688+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 135 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
     {
       "id": "sy_20261111-1234",
       "mulai": "2026-11-11T12:34:07.794643+00:00",
@@ -84234,7 +84274,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-11T12:34:07.794643+00:00"
+    "last_sync": "2026-11-11T21:12:11.733688+00:00"
   },
   "neracaDetail": [
     {
@@ -167332,12 +167372,12 @@
         "admin": "IN",
         "noHp": "dp 100 limbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
@@ -167354,12 +167394,12 @@
         "admin": "IN",
         "noHp": "dp 100",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
@@ -221850,6 +221890,32 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": "ADIF"
+      },
+      {
+        "id": "or_122",
+        "tanggal": "2026-11-11",
+        "client": "Aisha",
+        "paket": "Photofox",
+        "tanggalFoto": "2026-11-11",
+        "cash": 60000.0,
+        "transfer": 0.0,
+        "total": 60000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_123",
+        "tanggal": "2026-11-11",
+        "client": "Raden Ajeng",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-11",
+        "cash": 0.0,
+        "transfer": 150000.0,
+        "total": 150000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
       }
     ],
     "shifts": [
@@ -222184,7 +222250,7 @@
       {
         "id": "cc_2026-11-11",
         "tanggal": "2026-11-11",
-        "nilai": 150000.0
+        "nilai": 210000.0
       },
       {
         "id": "cc_2026-11-12",
@@ -222371,10 +222437,10 @@
       {
         "id": "ld_11",
         "tanggal": "2026-11-11",
-        "leads": 0.0,
-        "dp": 0.0,
-        "sesiFoto": 0.0,
-        "transaksi": 0.0
+        "leads": 14.0,
+        "dp": 4.0,
+        "sesiFoto": 4.0,
+        "transaksi": 9.0
       },
       {
         "id": "ld_12",
