@@ -2796,6 +2796,7 @@ function vTahunan(R) {
   // Acuan 2025 untuk 11 Bulan (Jan s.d. Nov 2025)
   const tot25Actual = months.filter(m => m.no <= 11).reduce((s, m) => s + (m.omzet25 || 0), 0);
   const diffLive11 = totYtdActual - tot25Actual;
+  const diffLive10 = diffLive11;
   const yoyActual = tot25Actual ? ((totYtdActual - tot25Actual) / tot25Actual) : null;
 
   // Acuan Full 1 Tahun Penuh 2025 (12 Bulan Jan s.d. Des 2025)
@@ -3087,11 +3088,11 @@ function vTahunan(R) {
 
         <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:10px;margin-bottom:4px;">
           <div>
-            <span class="tiny muted" style="display:block;">Tahun Ini (Jan–Okt ${yr} Live)</span>
+            <span class="tiny muted" style="display:block;">Tahun Ini (Jan–Nov ${yr} Live)</span>
             <b class="mono" style="font-size:19px;color:var(--ink);">${rp(totYtdActual)}</b>
           </div>
           <div style="text-align:right;">
-            <span class="tiny muted" style="display:block;">Acuan Tahun Lalu (Jan–Okt ${yr-1})</span>
+            <span class="tiny muted" style="display:block;">Acuan Tahun Lalu (Jan–Nov ${yr-1})</span>
             <span class="mono" style="font-size:14px;color:var(--muted);font-weight:600;">${rp(tot25Actual)}</span>
           </div>
         </div>
@@ -3102,10 +3103,10 @@ function vTahunan(R) {
 
         <div style="display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--ink2);">
           <span>Surplus Pertumbuhan Kas:</span>
-          <b class="mono" style="color:var(--good);font-weight:700;">+${rp(diffLive10)}</b>
+          <b class="mono" style="color:var(--good);font-weight:700;">+${rp(diffLive11)}</b>
         </div>
         <p class="tiny muted" style="margin:6px 0 0;line-height:1.4;">
-          Performa 10 bulan pertama ${yr} tumbuh pesat <b>+${(yoyActual*100).toFixed(1)}%</b> dibanding periode 10 bulan yang sama pada tahun ${yr-1}.
+          Performa 11 bulan pertama ${yr} tumbuh pesat <b>+${(yoyActual*100).toFixed(1)}%</b> dibanding periode 11 bulan yang sama pada tahun ${yr-1}.
         </p>
       </div>
 
@@ -3115,7 +3116,7 @@ function vTahunan(R) {
           <div>
             <span class="eyebrow" style="color:#00f2fe;font-size:10.5px;">INDIKATOR 2 · TOLOK UKUR FULL TAHUN LALU</span>
             <div style="font-size:14.5px;font-weight:700;color:var(--ink);margin-top:2px;">
-              Full 12 Bulan ${yr-1} vs Live ${yr} (10 Bulan)
+              Full 12 Bulan ${yr-1} vs Live ${yr} (11 Bulan)
             </div>
           </div>
           <span class="pill good" style="font-size:11px;font-weight:700;background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.4);">
@@ -3125,7 +3126,7 @@ function vTahunan(R) {
 
         <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:10px;margin-bottom:4px;">
           <div>
-            <span class="tiny muted" style="display:block;">Realisasi Berjalan (10 Bulan ${yr})</span>
+            <span class="tiny muted" style="display:block;">Realisasi Berjalan (11 Bulan ${yr})</span>
             <b class="mono" style="font-size:19px;color:#00f2fe;">${rp(totYtdActual)}</b>
           </div>
           <div style="text-align:right;">
@@ -3143,7 +3144,7 @@ function vTahunan(R) {
           <b class="mono" style="color:var(--good);font-weight:700;">+${rp(surplusFull)}</b>
         </div>
         <p class="tiny muted" style="margin:6px 0 0;line-height:1.4;">
-          Baru berjalan 10 bulan, omzet ${yr} sudah <b>100% melampaui</b> total omzet 12 bulan penuh tahun ${yr-1} (surplus <b>${rp(surplusFull)}</b> sebelum November–Desember dimulai).
+          Baru berjalan 11 bulan, omzet ${yr} sudah <b>100% melampaui</b> total omzet 12 bulan penuh tahun ${yr-1} (surplus <b>${rp(surplusFull)}</b> sebelum November–Desember dimulai).
         </p>
       </div>
     </div>
@@ -3169,8 +3170,8 @@ function vTahunan(R) {
             <thead>
               <tr style="background:var(--surface2);">
                 <th>Metrik Finansial</th>
-                <th class="n">Tahun 2025 (10 Bln)</th>
-                <th class="n">Tahun 2026 (Live 10 Bln)</th>
+                <th class="n">Tahun 2025 (11 Bln)</th>
+                <th class="n">Tahun 2026 (Live 11 Bln)</th>
                 <th class="n">Perubahan</th>
               </tr>
             </thead>
@@ -3279,7 +3280,7 @@ function vTahunan(R) {
           </tr>
         `).join("")}
         <tr class="total">
-          <td colspan="2">TOTAL YTD AKTUAL (JAN–OKT ${yr} LIVE)</td>
+          <td colspan="2">TOTAL YTD AKTUAL (JAN–NOV ${yr} LIVE)</td>
           <td class="n mono">${rp(tot25Actual)}</td>
           <td class="n mono" style="font-weight:700;color:var(--accent);">${rp(totYtdActual)}</td>
           <td class="n mono" style="color:var(--good);">${yoyActual != null ? (yoyActual >= 0 ? "+" : "") + pct(yoyActual) : "—"}</td>
@@ -9562,7 +9563,7 @@ if (isAuthedOnLoad) {
 }
 
 // Deteksi versi kode baru (deploy baru) -> muat ulang otomatis agar fitur terbaru langsung aktif
-const BUILD_ID = "1794499971";
+const BUILD_ID = "1794500344";
 async function checkNewBuild() {
   if (window.location.protocol === "file:") return;
   try {
