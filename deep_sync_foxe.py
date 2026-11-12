@@ -417,6 +417,14 @@ def run_integration():
             "last_sync": now.astimezone(datetime.timezone.utc).isoformat()
         }
 
+        # STEP 10: Sinkronkan Multiyear Cache (2022 s.d. 2026 Nov Live)
+        try:
+            from update_multiyear_2026 import sync_multiyear_cache
+            state = sync_multiyear_cache(state) or state
+            print("[OK] multiyearArsip & multiyear_cache.json disinkronkan ke November 2026 Live.")
+        except Exception as my_err:
+            print(f"[WARN] Gagal sinkron multiyear: {my_err}")
+
         # STEP 11: Tutup sync -> status 'sukses'
         current_sync["status"] = "sukses"
         current_sync["ringkas"] = f"Integrasi berhasil: {len(res_f1['orders'])} order Sep, {len(res_f1_okt['orders'])} order Okt, {len(res_f2_bookings)} jadwal terpadu Sep (termasuk 141 wisuda), {neraca_count} pos pengeluaran Neraca, {okt_pipeline['totalBookings']} pipeline Okt."
@@ -453,7 +461,7 @@ def run_integration():
         print("[OK] index.html berhasil dirakit ulang!")
 
         # Salin ke direktori artifact conversation jika ada (lingkungan lokal Antigravity)
-        for c_id in ["a9b8acb9-5ee7-437b-8fa7-362a5c8bfb84", "a202e1d1-7772-49fd-ab2a-7c3772959edd", "b33216a3-0a5f-4df8-aff3-aeef2408089b", "cab0ebc5-5150-4303-bbe6-c97db01a1692"]:
+        for c_id in ["a6e12579-a5c3-4902-b644-cd0292034410", "a9b8acb9-5ee7-437b-8fa7-362a5c8bfb84", "a202e1d1-7772-49fd-ab2a-7c3772959edd", "b33216a3-0a5f-4df8-aff3-aeef2408089b", "cab0ebc5-5150-4303-bbe6-c97db01a1692"]:
             art_dir = os.path.join(r"C:\Users\ASUS\.gemini\antigravity\brain", c_id)
             if os.path.exists(art_dir):
                 target_file = os.path.join(art_dir, "foxe_studio_keuangan.html")

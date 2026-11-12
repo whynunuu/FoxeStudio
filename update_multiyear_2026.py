@@ -1,6 +1,6 @@
 """
 Updates multiyear_cache.json and foxe_full_state.json with full daily cash/transfer
-and full detailed COGS & OPEX expenses for 2026 (Jan–Okt).
+and full detailed COGS & OPEX expenses for 2026 (Jan–Nov Live).
 """
 
 import json
@@ -67,21 +67,41 @@ def norm_exp(raw_list, iso_prefix):
         })
     return norm
 
-def main():
-    print("Reading data sources...")
-    with open("multiyear_cache.json", "r", encoding="utf-8") as f:
+def sync_multiyear_cache(state=None):
+    """
+    Synchronizes multiyear_cache.json and state['multiyearArsip']
+    with the latest 2026 data up to November live.
+    """
+    my_path = "multiyear_cache.json"
+    if not os.path.exists(my_path):
+        print(f"[WARN] {my_path} tidak ditemukan.")
+        return state
+
+    with open(my_path, "r", encoding="utf-8") as f:
         my = json.load(f)
 
-    with open("foxe_full_state.json", "r", encoding="utf-8") as f:
-        fs = json.load(f)
+    if state is None:
+        fs_path = "foxe_full_state.json"
+        if not os.path.exists(fs_path):
+            print(f"[WARN] {fs_path} tidak ditemukan.")
+            return None
+        with open(fs_path, "r", encoding="utf-8") as f:
+            state = json.load(f)
 
-    with open("historical_cache.json", "r", encoding="utf-8") as f:
-        hc = json.load(f)
+    hc = {}
+    if os.path.exists("historical_cache.json"):
+        with open("historical_cache.json", "r", encoding="utf-8") as f:
+            hc = json.load(f)
 
-    nb = fs.get("neracaByMonth", {})
+    nb = state.get("neracaByMonth", {})
     ho = hc.get("historicalOrders", [])
-    so = fs.get("orders", [])
-    oo = fs.get("oktoberLogOrder", {}).get("orders", [])
+    so = state.get("orders", [])
+    oo = state.get("oktoberLogOrder", {}).get("orders", [])
+    if not oo:
+        oo = [o for o in so if o.get("tanggal", "").startswith("2026-10-")]
+    no = state.get("novemberLogOrder", {}).get("orders", [])
+    if not no:
+        no = [o for o in so if o.get("tanggal", "").startswith("2026-11-")]
 
     m_list = my["years"]["2026"]["months"]
     y_omz = 0
@@ -107,11 +127,24 @@ def main():
             raw_exp = nb.get(iso, {}).get("expenses", [])
             m_obj["expenses"] = norm_exp(raw_exp, iso)
             m_obj["daily"] = build_daily(oo, iso)
+            m_obj["omzet"] = sum(d["total"] for d in m_obj["daily"])
+            m_obj["cash"] = sum(d["cash"] for d in m_obj["daily"])
+            m_obj["transfer"] = sum(d["transfer"] for d in m_obj["daily"])
+        elif m == 11:
+            raw_exp = nb.get(iso, {}).get("expenses", [])
+            m_obj["expenses"] = norm_exp(raw_exp, iso)
+            m_obj["daily"] = build_daily(no, iso)
+            m_obj["omzet"] = sum(d["total"] for d in m_obj["daily"])
+            m_obj["cash"] = sum(d["cash"] for d in m_obj["daily"])
+            m_obj["transfer"] = sum(d["transfer"] for d in m_obj["daily"])
         else:
             m_obj["expenses"] = []
             m_obj["daily"] = []
-        
-        if m <= 10:
+            m_obj["omzet"] = 0
+            m_obj["cash"] = 0
+            m_obj["transfer"] = 0
+
+        if m <= 11:
             cg = sum(e["nilai"] for e in m_obj["expenses"] if e["jenis"] == "COGS")
             op = sum(e["nilai"] for e in m_obj["expenses"] if e["jenis"] == "OPEX")
             outc = cg + op
@@ -119,14 +152,14 @@ def main():
             nt = omz - outc
             mg = (nt / omz * 100.0) if omz > 0 else 0.0
             ads = sum(e["nilai"] for e in m_obj["expenses"] if e.get("kategori") == "Marketing / Ads / KOL" or "ads" in e.get("desc", "").lower() or "iklan" in e.get("desc", "").lower())
-            
+
             m_obj["cogs"] = cg
             m_obj["opex"] = op
             m_obj["outcome"] = outc
             m_obj["nettProfit"] = nt
             m_obj["margin"] = round(mg, 2)
             m_obj["ads"] = ads
-            
+
             y_omz += omz
             y_cash += m_obj["cash"]
             y_trf += m_obj["transfer"]
@@ -134,8 +167,6 @@ def main():
             y_op += op
             y_out += outc
             y_nt += nt
-            
-            print(f"2026 M{m:02d} ({m_obj['name']}): Omzet={omz:,.0f} | COGS={cg:,.0f} ({len([e for e in m_obj['expenses'] if e['jenis']=='COGS'])}) | OPEX={op:,.0f} ({len([e for e in m_obj['expenses'] if e['jenis']=='OPEX'])}) | Ads={ads:,.0f} | Daily={len(m_obj['daily'])}")
 
     y_mg = (y_nt / y_omz * 100.0) if y_omz > 0 else 0.0
     my["years"]["2026"]["omzet"] = y_omz
@@ -147,16 +178,21 @@ def main():
     my["years"]["2026"]["nettProfit"] = y_nt
     my["years"]["2026"]["margin"] = round(y_mg, 2)
 
-    # Save to multiyear_cache.json
-    with open("multiyear_cache.json", "w", encoding="utf-8") as f:
+    with open(my_path, "w", encoding="utf-8") as f:
         json.dump(my, f, ensure_ascii=False, indent=2)
-    print("Saved multiyear_cache.json successfully.")
 
-    # Sync to foxe_full_state.json
-    fs["multiyearArsip"] = my
+    state["multiyearArsip"] = my
+    return state
+
+def main():
+    print("Reading data sources...")
+    with open("foxe_full_state.json", "r", encoding="utf-8") as f:
+        fs = json.load(f)
+
+    fs = sync_multiyear_cache(fs)
     with open("foxe_full_state.json", "w", encoding="utf-8") as f:
         json.dump(fs, f, ensure_ascii=False, indent=2)
-    print("Synced to foxe_full_state.json successfully.")
+    print("Multiyear cache & foxe_full_state.json successfully updated for 2026 (Jan–Nov Live)!")
 
 if __name__ == "__main__":
     main()

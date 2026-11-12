@@ -1239,7 +1239,7 @@ function saveLocal() {
 }
 
 let activeMonth = (typeof INITIAL_STATE !== "undefined" && INITIAL_STATE.config && INITIAL_STATE.config.bulan) || "2026-11";
-let db=null,downloads=null,room=null,view="tahunan",estMonth=11,adsFilter="ALL",adsQ="",arsipYear="2026",arsipMonth=10,arsipExpTab="all",arsipExpSearch="",arsipBoncosFilter="all";
+let db=null,downloads=null,room=null,view="tahunan",estMonth=11,adsFilter="ALL",adsQ="",arsipYear="2026",arsipMonth=11,arsipExpTab="all",arsipExpSearch="",arsipBoncosFilter="all";
 window.go = function(v){ view=v; render(); window.scrollTo({top:0,behavior:"smooth"}); };
 
 function nkey(s){
@@ -1984,7 +1984,7 @@ function render(){
       document.getElementById("tbPeriod").textContent = "Oktober 2026";
       document.getElementById("tbCut").textContent = `Pipeline ${S.oktoberPipeline.totalBookings} Booking · Reguler & Wisuda UMP`;
       const st=document.getElementById("tbStatus");
-      if(st){ st.textContent="Pipeline"; st.className="pill prog"; }
+      if(st){ st.textContent="Rekap Final"; st.className="pill final"; }
     } else if(view === "est"){
       const eYr = R.c.bulan.split("-")[0];
       const eMn = BULAN[+R.c.bulan.split("-")[1] - 1] || "";
@@ -1994,14 +1994,14 @@ function render(){
       document.getElementById("tbPeriod").textContent = `${eMn} ${eYr}`;
       document.getElementById("tbCut").textContent = `Schedule ${curBks.length} Sesi (${wasteN} Batal/Waste) · ${eMn} ${eYr}`;
       const st=document.getElementById("tbStatus");
-      if(st){ st.textContent = (R.c.bulan === "2026-09" ? "Sisa Jadwal" : "Arsip Schedule"); st.className = "pill " + (R.c.bulan === "2026-09" ? "crit" : "final"); }
+      if(st){ st.textContent = (R.c.bulan === "2026-11" ? "Schedule Live" : (R.c.bulan === "2026-09" ? "Sisa Jadwal" : "Arsip Schedule")); st.className = "pill " + (R.c.bulan === "2026-11" ? "prog" : (R.c.bulan === "2026-09" ? "crit" : "final")); }
     } else if(view === "ads"){
       const aYr = R.c.bulan.split("-")[0];
       const aMn = BULAN[+R.c.bulan.split("-")[1] - 1] || "";
       document.getElementById("tbPeriod").textContent = `${aMn} ${aYr}`;
       document.getElementById("tbCut").textContent = `Meta Ads Tracker & Kalender 2026/2027 · ${aMn} ${aYr}`;
       const st=document.getElementById("tbStatus");
-      if(st){ st.textContent = (R.c.bulan === "2026-10" ? "Live Tracker" : "Arsip"); st.className = "pill " + (R.c.bulan === "2026-10" ? "prog" : "final"); }
+      if(st){ st.textContent = (R.c.bulan === "2026-11" ? "Live Tracker" : "Arsip"); st.className = "pill " + (R.c.bulan === "2026-11" ? "prog" : "final"); }
     } else {
       document.getElementById("tbPeriod").textContent=BULAN[+R.c.bulan.split("-")[1]-1]+" "+R.c.bulan.split("-")[0];
       document.getElementById("tbCut").textContent=`s.d. ${R.cutDay} ${BULAN[+R.c.bulan.split("-")[1]-1]} · ${R.hariBerjalan}/${R.dim} hari`;
@@ -2383,22 +2383,43 @@ function vDash(R){
         ].map(([k,v])=>`<tr><td>${k}</td><td class="n">${v}</td></tr>`).join("")}
       </tbody></table></div></div>
   </div>
-  ${S.oktoberPipeline ? (() => {
-    const oktOrders = (S.oktoberLogOrder && S.oktoberLogOrder.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
-    const oktOmzetLive = oktOrders.reduce((s, o) => s + dnum(o.total), 0);
-    const sisaCashIn = S.oktoberPipeline.remainingCashIn != null ? S.oktoberPipeline.remainingCashIn : (S.oktoberPipeline.statusBreakdown ? S.oktoberPipeline.statusBreakdown.confirmed.cashIn : S.oktoberPipeline.estimateCashIn);
-    return `
-  <div class="card" style="margin-top:16px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-      <div>
-        <div class="eyebrow" style="color:var(--accent);">Forward Outlook · Realisasi Live &amp; Pipeline</div>
-        <h3 style="margin:2px 0 4px;font-size:16px;">Oktober 2026: Realisasi Kasir ${rp(oktOmzetLive)} (${oktOrders.length} Order) &amp; Pipeline ${S.oktoberPipeline.totalBookings} Booking</h3>
-        <p class="tiny muted" style="margin:0;">Realisasi live kasir s.d. hari ini telah mencapai <b>${rp(oktOmzetLive)}</b> dari <b>${oktOrders.length} transaksi</b>. Total potensi nilai paket <b>${rp(S.oktoberPipeline.potentialOmzet)}</b> dengan sisa pelunasan terjadwal <b>${rp(sisaCashIn)}</b> (${S.oktoberPipeline.breakdown.wisudaDay1.sesi + S.oktoberPipeline.breakdown.wisudaDay2.sesi} Wisuda UMP + ${S.oktoberPipeline.breakdown.reguler.sesi} Studio Reguler).</p>
-      </div>
-      <button class="btn pri sm" id="btnDashToOkt" style="padding:6px 14px;font-size:12px;">Buka Oktober (Live &amp; Pipeline) ➔</button>
-    </div>
-  </div>`;
-  })() : ""}`;
+  ${(() => {
+    const isNov = (R.c.bulan === "2026-11");
+    if (isNov) {
+      const novOrders = (S.novemberLogOrder && S.novemberLogOrder.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-11-"));
+      const novOmzetLive = novOrders.reduce((s, o) => s + dnum(o.total), 0);
+      const novBks = (S.scheduleByMonth && S.scheduleByMonth["2026-11"]) || [];
+      const novSisaPelunasan = novBks.filter(b => b.statusColor !== "orange" && !b.isDone && b.tgl > R.c.cutoff).reduce((s, b) => s + dnum(b.sisaPelunasan || b.harga), 0);
+      const novPotensi = novOmzetLive + novSisaPelunasan;
+      return `
+      <div class="card" style="margin-top:16px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div class="eyebrow" style="color:var(--accent);">Forward Outlook · Realisasi Live &amp; Schedule</div>
+            <h3 style="margin:2px 0 4px;font-size:16px;">November 2026: Realisasi Kasir ${rp(novOmzetLive)} (${novOrders.length} Order) &amp; Schedule ${novBks.length} Sesi</h3>
+            <p class="tiny muted" style="margin:0;">Realisasi live kasir s.d. cut-off hari ini telah mencapai <b>${rp(novOmzetLive)}</b> dari <b>${novOrders.length} transaksi</b>. Total potensi nilai berjalan diproyeksikan <b>${rp(novPotensi)}</b> dengan ${novBks.length} sesi booking studio reguler.</p>
+          </div>
+          <button class="btn pri sm" onclick="activeMonth='2026-11';estMonth=11;go('est');" style="padding:6px 14px;font-size:12px;">Buka Schedule November ➔</button>
+        </div>
+      </div>`;
+    } else if (S.oktoberPipeline) {
+      const oktOrders = (S.oktoberLogOrder && S.oktoberLogOrder.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
+      const oktOmzetLive = oktOrders.reduce((s, o) => s + dnum(o.total), 0);
+      const sisaCashIn = S.oktoberPipeline.remainingCashIn != null ? S.oktoberPipeline.remainingCashIn : (S.oktoberPipeline.statusBreakdown ? S.oktoberPipeline.statusBreakdown.confirmed.cashIn : S.oktoberPipeline.estimateCashIn);
+      return `
+      <div class="card" style="margin-top:16px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div class="eyebrow" style="color:var(--accent);">Forward Outlook · Realisasi Live &amp; Pipeline</div>
+            <h3 style="margin:2px 0 4px;font-size:16px;">Oktober 2026: Realisasi Kasir ${rp(oktOmzetLive)} (${oktOrders.length} Order) &amp; Pipeline ${S.oktoberPipeline.totalBookings} Booking</h3>
+            <p class="tiny muted" style="margin:0;">Realisasi live kasir s.d. hari ini telah mencapai <b>${rp(oktOmzetLive)}</b> dari <b>${oktOrders.length} transaksi</b>. Total potensi nilai paket <b>${rp(S.oktoberPipeline.potentialOmzet)}</b> dengan sisa pelunasan terjadwal <b>${rp(sisaCashIn)}</b> (${S.oktoberPipeline.breakdown.wisudaDay1.sesi + S.oktoberPipeline.breakdown.wisudaDay2.sesi} Wisuda UMP + ${S.oktoberPipeline.breakdown.reguler.sesi} Studio Reguler).</p>
+          </div>
+          <button class="btn pri sm" id="btnDashToOkt" style="padding:6px 14px;font-size:12px;">Buka Oktober (Live &amp; Pipeline) ➔</button>
+        </div>
+      </div>`;
+    }
+    return "";
+  })()}`;
 }
 
 function chartTahunanSeasonality(months, yr, avg25) {
@@ -2699,28 +2720,39 @@ function vTahunan(R) {
       cutDayM = 30; // Rekap final September (lewat tgl 15)
       isClosedM = true;
     } else if (info.no === 10) {
-      if (isCurrent && R && R.c && R.c.bulan === "2026-10") {
+      const oktExp = (S.neracaByMonth && S.neracaByMonth["2026-10"] && S.neracaByMonth["2026-10"].expenses) 
+        ? S.neracaByMonth["2026-10"].expenses 
+        : (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-10-"));
+      oktExp.forEach(e => {
+        if (e.jenis === "COGS") cogsM += dnum(e.nilai);
+        else if (e.jenis === "OPEX") opexM += dnum(e.nilai);
+      });
+      hasExpenses = (cogsM > 0 || opexM > 0);
+      cutDayM = 31;
+      isClosedM = true;
+    } else if (info.no === 11) {
+      if (isCurrent && R && R.c && R.c.bulan === "2026-11") {
         cogsM = dnum(R.cogs);
         opexM = dnum(R.opex);
       } else {
-        const oktExp = (S.neracaByMonth && S.neracaByMonth["2026-10"] && S.neracaByMonth["2026-10"].expenses) 
-          ? S.neracaByMonth["2026-10"].expenses 
-          : (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-10-"));
-        oktExp.forEach(e => {
+        const novExp = (S.neracaByMonth && S.neracaByMonth["2026-11"] && S.neracaByMonth["2026-11"].expenses) 
+          ? S.neracaByMonth["2026-11"].expenses 
+          : (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-11-"));
+        novExp.forEach(e => {
           if (e.jenis === "COGS") cogsM += dnum(e.nilai);
           else if (e.jenis === "OPEX") opexM += dnum(e.nilai);
         });
-        const gajiNeraca = oktExp.filter(e => /^gaji/i.test(e.kategori || "")).reduce((s, e) => s + dnum(e.nilai), 0);
+        const gajiNeraca = novExp.filter(e => /^gaji/i.test(e.kategori || "")).reduce((s, e) => s + dnum(e.nilai), 0);
         if (gajiNeraca === 0) {
-          const actR = (S.rosterGajiByMonth && S.rosterGajiByMonth["2026-10"]) || [];
+          const actR = (S.rosterGajiByMonth && S.rosterGajiByMonth["2026-11"]) || [];
           const baseGaji = actR.filter(r => /admin|foto|editor|manager|marketing/i.test(r.job || r.posisi || "")).reduce((s, r) => s + dnum(r.total_gaji || (dnum(r.q) * dnum(r.cost)) || r.thp), 0);
           const bonusCair = R ? dnum(R.bonusCair) : 0;
           opexM += baseGaji + bonusCair;
         }
       }
       hasExpenses = (cogsM > 0 || opexM > 0);
-      const oktCutoff = (S.oktoberLogOrder && S.oktoberLogOrder.cutoff) || (S.config && S.config.cutoff && S.config.cutoff.startsWith("2026-10") ? S.config.cutoff : "") || `2026-10-${String(Math.max(1, ...((S.orders||[]).filter(o=>o.tanggal&&o.tanggal.startsWith("2026-10-")&&dnum(o.total)>0).map(o=>parseInt(o.tanggal.split("-")[2],10))||[1]))).padStart(2,"0")}`;
-      cutDayM = parseInt(oktCutoff.split("-")[2] || "1", 10);
+      const novCutoff = (S.novemberLogOrder && S.novemberLogOrder.cutoff) || (S.config && S.config.cutoff && S.config.cutoff.startsWith("2026-11") ? S.config.cutoff : "") || `2026-11-${String(Math.max(1, ...((S.orders||[]).filter(o=>o.tanggal&&o.tanggal.startsWith("2026-11-")&&dnum(o.total)>0).map(o=>parseInt(o.tanggal.split("-")[2],10))||[1]))).padStart(2,"0")}`;
+      cutDayM = parseInt(novCutoff.split("-")[2] || "1", 10);
       isClosedM = false;
     }
 
@@ -2758,21 +2790,21 @@ function vTahunan(R) {
     };
   });
 
-  // Metrik Tahunan Komprehensif (Jan s.d. Sep terverifikasi) & YTD Aktual
-  const realMonths = months.filter(m => m.no <= 9 && m.omzet26 != null);
-  const totYtdClosed = realMonths.reduce((s, m) => s + (m.omzet26 || 0), 0);
-  const countVerified = realMonths.length;
-  const sep25 = months.find(m => m.no === 9)?.omzet25 || 150786150;
+  // Metrik Tahunan Komprehensif (Jan s.d. Okt terverifikasi) & YTD Aktual
+  const closedMonths = months.filter(m => m.no <= 10 && m.omzet26 != null);
+  const totYtdClosed = closedMonths.reduce((s, m) => s + (m.omzet26 || 0), 0);
+  const countVerified = closedMonths.length;
 
-  // Realisasi live kasir Oktober (Actual MTD s.d. cut-off hari ini)
+  // Realisasi live kasir November (Actual MTD s.d. cut-off hari ini)
+  const novLiveOrders = (S.novemberLogOrder && S.novemberLogOrder.orders) || (S.orders || []).filter(o => o.tanggal && o.tanggal.startsWith("2026-11-"));
+  const novLiveOmzet = novLiveOrders.reduce((s, o) => s + dnum(o.total), 0);
+  const totYtdActual = totYtdClosed + novLiveOmzet;
   const oktLiveOrders = (S.oktoberLogOrder && S.oktoberLogOrder.orders) || (S.orders || []).filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
-  const oktLiveOmzet = oktLiveOrders.reduce((s, o) => s + dnum(o.total), 0);
-  const totYtdActual = totYtdClosed + oktLiveOmzet;
-  const totActualOrders = 3739 + oktLiveOrders.length;
+  const totActualOrders = (months.filter(m=>m.no<=9).reduce((s,m)=>s+(m.hist?m.hist.ordersCount:0),0) || 3739) + oktLiveOrders.length + novLiveOrders.length;
 
-  // Acuan 2025 untuk 10 Bulan (Jan s.d. Okt 2025)
-  const tot25Actual = months.filter(m => m.no <= 10).reduce((s, m) => s + (m.omzet25 || 0), 0);
-  const diffLive10 = totYtdActual - tot25Actual;
+  // Acuan 2025 untuk 11 Bulan (Jan s.d. Nov 2025)
+  const tot25Actual = months.filter(m => m.no <= 11).reduce((s, m) => s + (m.omzet25 || 0), 0);
+  const diffLive11 = totYtdActual - tot25Actual;
   const yoyActual = tot25Actual ? ((totYtdActual - tot25Actual) / tot25Actual) : null;
 
   // Acuan Full 1 Tahun Penuh 2025 (12 Bulan Jan s.d. Des 2025)
@@ -2781,15 +2813,15 @@ function vTahunan(R) {
   const surplusFull = totYtdActual - tot25Full;
 
   // Komparasi Finansial: Bersih terhadap Kotor (2025 vs 2026)
-  // Data Finansial 2025 (10 Bulan)
-  const b25Cogs = [9200000, 9600000, 10400000, 10200000, 11000000, 10800000, 10600000, 11800000, 23221500, 9500000].reduce((a,b)=>a+b, 0);
-  const b25Opex = [16500000, 16800000, 17200000, 17000000, 18000000, 17800000, 17500000, 18500000, 21144209, 12000000].reduce((a,b)=>a+b, 0);
+  // Data Finansial 2025 (11 Bulan)
+  const b25Cogs = [9200000, 9600000, 10400000, 10200000, 11000000, 10800000, 10600000, 11800000, 23221500, 9500000, 9400000].reduce((a,b)=>a+b, 0);
+  const b25Opex = [16500000, 16800000, 17200000, 17000000, 18000000, 17800000, 17500000, 18500000, 21144209, 12000000, 12500000].reduce((a,b)=>a+b, 0);
   const b25Outcome = b25Cogs + b25Opex;
   const b25Nett = tot25Actual - b25Outcome;
   const b25Margin = tot25Actual ? (b25Nett / tot25Actual) * 100 : 0;
   const b25OutcomeRatio = tot25Actual ? (b25Outcome / tot25Actual) * 100 : 0;
 
-  // Data Finansial 2026 (10 Bulan Live)
+  // Data Finansial 2026 (11 Bulan Live)
   const hmList = Object.values(S.historicalMonths || {});
   const cogsJanAug = hmList.reduce((s, m) => s + dnum(m.cogs), 0);
   const opexJanAug = hmList.reduce((s, m) => s + dnum(m.opex), 0);
@@ -2803,8 +2835,13 @@ function vTahunan(R) {
   const cogsOkt = oktMObj ? dnum(oktMObj.cogs) : oktExp.filter(e => e.jenis === "COGS").reduce((s, e) => s + dnum(e.nilai), 0);
   const opexOkt = oktMObj ? dnum(oktMObj.opex) : oktExp.filter(e => e.jenis === "OPEX").reduce((s, e) => s + dnum(e.nilai), 0);
 
-  const totCogs26 = cogsJanAug + cogsSep + cogsOkt;
-  const totOpex26 = opexJanAug + opexSep + opexOkt;
+  const novMObj = months.find(m => m.no === 11);
+  const novExp = (S.neracaByMonth && S.neracaByMonth["2026-11"] && S.neracaByMonth["2026-11"].expenses) || (S.expenses || []).filter(e => e.tanggal && e.tanggal.startsWith("2026-11-"));
+  const cogsNov = novMObj ? dnum(novMObj.cogs) : novExp.filter(e => e.jenis === "COGS").reduce((s, e) => s + dnum(e.nilai), 0);
+  const opexNov = novMObj ? dnum(novMObj.opex) : novExp.filter(e => e.jenis === "OPEX").reduce((s, e) => s + dnum(e.nilai), 0);
+
+  const totCogs26 = cogsJanAug + cogsSep + cogsOkt + cogsNov;
+  const totOpex26 = opexJanAug + opexSep + opexOkt + opexNov;
   const totOutcome26 = totCogs26 + totOpex26;
   const totNett26 = totYtdActual - totOutcome26;
   const margin26 = totYtdActual ? (totNett26 / totYtdActual) * 100 : 0;
@@ -2825,10 +2862,10 @@ function vTahunan(R) {
   <!-- Top KPI Cards -->
   <div class="stats" style="margin-bottom:16px">
     <div class="stat">
-      <span class="k">Omzet Aktual YTD (Jan–Okt ${yr} Live)</span>
+      <span class="k">Omzet Aktual YTD (Jan–Nov ${yr} Live)</span>
       <span class="v" style="color:var(--accent);">${rp(totYtdActual)}</span>
-      <span class="m">10 Bulan Berjalan · ${num(totActualOrders)} Order Kasir &amp; Neraca</span>
-      <span class="tiny muted" style="display:block;margin-top:2px;">(Jan–Sep Final: ${rp(totYtdClosed)} + Okt Live: ${rp(oktLiveOmzet)})</span>
+      <span class="m">11 Bulan Berjalan · ${num(totActualOrders)} Order Kasir &amp; Neraca</span>
+      <span class="tiny muted" style="display:block;margin-top:2px;">(Jan–Okt Rekap/Final: ${rp(totYtdClosed)} + Nov Live: ${rp(novLiveOmzet)})</span>
     </div>
     <div class="stat">
       <span class="k">Realisasi ${BULAN[+R.c.bulan.split("-")[1]-1]} ${yr}</span>
@@ -2837,23 +2874,21 @@ function vTahunan(R) {
       <div class="bar"><i style="width:${Math.min(100, (R.omzet/(R.proyeksi||1))*100).toFixed(0)}%"></i></div>
     </div>
     <div class="stat">
-      <span class="k">Oktober ${yr} (Live + Sisa Pipeline)</span>
+      <span class="k">November ${yr} (Live Kasir &amp; Schedule)</span>
       <span class="v sm" style="color:var(--good);">${(() => {
-        const oktOrders = (S.oktoberLogOrder && S.oktoberLogOrder.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
-        const oktOmzetLive = oktOrders.reduce((s, o) => s + dnum(o.total), 0);
-        const sisaCashIn = S.oktoberPipeline ? (S.oktoberPipeline.remainingCashIn != null ? S.oktoberPipeline.remainingCashIn : (S.oktoberPipeline.statusBreakdown ? S.oktoberPipeline.statusBreakdown.confirmed.cashIn : S.oktoberPipeline.estimateCashIn)) : 0;
-        return rp(oktOmzetLive + sisaCashIn);
+        const novBks = (S.scheduleByMonth && S.scheduleByMonth["2026-11"]) || [];
+        const sisaCashIn = novBks.filter(b => b.statusColor !== "orange" && !b.isDone && b.tgl > R.c.cutoff).reduce((s, b) => s + dnum(b.sisaPelunasan || b.harga), 0);
+        return rp(novLiveOmzet + sisaCashIn);
       })()}</span>
       <span class="m">${(() => {
-        const oktOrders = (S.oktoberLogOrder && S.oktoberLogOrder.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-10-"));
-        const sisaSesi = S.oktoberPipeline ? (S.oktoberPipeline.statusBreakdown ? S.oktoberPipeline.statusBreakdown.confirmed.sesi : S.oktoberPipeline.totalBookings) : 0;
-        return `${oktOrders.length} Realized · ${sisaSesi} Sisa Terjadwal`;
+        const novBks = (S.scheduleByMonth && S.scheduleByMonth["2026-11"]) || [];
+        return `${novLiveOrders.length} Realized · ${novBks.length} Sesi Terjadwal`;
       })()}</span>
     </div>
     <div class="stat">
       <span class="k">Status Rekonsiliasi Tahunan</span>
-      <span class="v sm" style="font-size:21px;color:var(--good);">10 / 12 Bulan Aktif</span>
-      <span class="m">9 Bulan Rekap Final + 1 Bulan Live</span>
+      <span class="v sm" style="font-size:21px;color:var(--good);">11 / 12 Bulan Aktif</span>
+      <span class="m">10 Bulan Rekap Final + 1 Bulan Live</span>
     </div>
   </div>
 
@@ -3038,7 +3073,7 @@ function vTahunan(R) {
       </div>
       <div style="display:flex;gap:8px;align-items:center;">
         <span class="pill good" style="font-size:11.5px;padding:4px 12px;font-weight:700;">
-          🎉 Omzet 10 Bulan ${yr} Melampaui Rekor Full 1 Tahun ${yr-1}
+          🎉 Omzet 11 Bulan ${yr} Melampaui Rekor Full 1 Tahun ${yr-1}
         </span>
       </div>
     </div>
@@ -3049,9 +3084,9 @@ function vTahunan(R) {
       <div style="background:var(--surface2);border:1px solid var(--hairline);border-radius:10px;padding:14px 16px;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
           <div>
-            <span class="eyebrow" style="color:var(--accent);font-size:10.5px;">INDIKATOR 1 · PERIODE BERJALAN (10 BULAN)</span>
+            <span class="eyebrow" style="color:var(--accent);font-size:10.5px;">INDIKATOR 1 · PERIODE BERJALAN (11 BULAN)</span>
             <div style="font-size:14.5px;font-weight:700;color:var(--ink);margin-top:2px;">
-              Jan–Okt ${yr-1} vs Jan–Okt ${yr} Live
+              Jan–Nov ${yr-1} vs Jan–Nov ${yr} Live
             </div>
           </div>
           <span class="pill good" style="font-size:11px;font-weight:700;">
@@ -3736,7 +3771,7 @@ function chartArsipAds(months, yr, yearsObj) {
     </div>
     <div style="background:var(--surface2);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
       <span class="tiny muted" style="display:block;">Rata-rata Budget Bulanan</span>
-      <b class="mono" style="font-size:15px;color:var(--ink);">${rp(totCurAds / (yr === '2026' ? 10 : 12))}</b>
+      <b class="mono" style="font-size:15px;color:var(--ink);">${rp(totCurAds / (mList.filter(m => (m.omzet || 0) > 0).length || 11))}</b>
       <span class="tiny muted" style="display:block;margin-top:2px;">alokasi marketing rutin</span>
     </div>
     <div style="background:var(--surface2);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
@@ -3768,7 +3803,8 @@ function vArsip(R) {
     arsipMonth = selM.month || 1;
   }
 
-  const avgMonthly = arsipYear === "2026" ? (curY.omzet / 10) : (curY.omzet / 12);
+  const activeMonthsCount = mList.filter(m => (m.omzet || 0) > 0).length || (arsipYear === "2026" ? 11 : 12);
+  const avgMonthly = curY.omzet / activeMonthsCount;
   const cashRatio = curY.omzet > 0 ? (curY.cash / curY.omzet * 100) : 0;
   const trfRatio = curY.omzet > 0 ? (curY.transfer / curY.omzet * 100) : 0;
 
@@ -4400,18 +4436,38 @@ function vTarget(R){
       <tr class="total"><td colspan="3">Total cair</td>
         ${R.tiers.map(t=>`<td class="n">${rp(R.kpi.reduce((s,k)=>s+(k.dinilai?t.pool*k.bobot*(k.totalKPI/100):0),0))}</td>`).join("")}</tr>
     </tbody></table></div></div>
-  ${S.oktoberPipeline ? `
-  <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-      <div>
-        <div class="eyebrow" style="color:var(--accent);">Kesiapan Target Bulan Depan</div>
-        <h3 style="margin:2px 0 4px;font-size:16px;">Target Q4 / Oktober 2026: Modal Terkunci ${rp(S.oktoberPipeline.potentialOmzet)}</h3>
-        <p class="tiny muted" style="margin:0;">Dengan <b>${S.oktoberPipeline.totalBookings} booking terdaftar</b> dan estimasi pelunasan kas masuk <b>${rp(S.oktoberPipeline.estimateCashIn)}</b>, Foxe Studio memiliki modal awal kokoh mengejar target bulan depan.</p>
-      </div>
-      <button class="btn pri sm" id="btnTargetToOkt" style="padding:6px 14px;font-size:12px;">Buka Pipeline Oktober ➔</button>
-    </div>
-  </div>
-  ` : ""}`;
+  ${(() => {
+    if (R.c.bulan === "2026-11") {
+      const novOrders = (S.novemberLogOrder && S.novemberLogOrder.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-11-"));
+      const novOmzetLive = novOrders.reduce((s, o) => s + dnum(o.total), 0);
+      const novBks = (S.scheduleByMonth && S.scheduleByMonth["2026-11"]) || [];
+      const novSisaPelunasan = novBks.filter(b => b.statusColor !== "orange" && !b.isDone && b.tgl > R.c.cutoff).reduce((s, b) => s + dnum(b.sisaPelunasan || b.harga), 0);
+      return `
+      <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div class="eyebrow" style="color:var(--accent);">Kesiapan Target Q4 · November 2026</div>
+            <h3 style="margin:2px 0 4px;font-size:16px;">Target Q4 / November 2026: Realisasi Kasir ${rp(novOmzetLive)} &amp; Modal Jadwal ${rp(novSisaPelunasan)}</h3>
+            <p class="tiny muted" style="margin:0;">Dengan <b>${novOrders.length} transaksi kasir masuk</b> dan <b>${novBks.length} booking terjadwal</b>, studio terus aktif mengejar pencapaian Tier target bulan ini.</p>
+          </div>
+          <button class="btn pri sm" onclick="activeMonth='2026-11';estMonth=11;go('est');" style="padding:6px 14px;font-size:12px;">Buka Schedule November ➔</button>
+        </div>
+      </div>`;
+    } else if (S.oktoberPipeline) {
+      return `
+      <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div class="eyebrow" style="color:var(--accent);">Kesiapan Target Bulan Depan</div>
+            <h3 style="margin:2px 0 4px;font-size:16px;">Target Q4 / Oktober 2026: Modal Terkunci ${rp(S.oktoberPipeline.potentialOmzet)}</h3>
+            <p class="tiny muted" style="margin:0;">Dengan <b>${S.oktoberPipeline.totalBookings} booking terdaftar</b> dan estimasi pelunasan kas masuk <b>${rp(S.oktoberPipeline.estimateCashIn)}</b>, Foxe Studio memiliki modal awal kokoh mengejar target bulan depan.</p>
+          </div>
+          <button class="btn pri sm" id="btnTargetToOkt" style="padding:6px 14px;font-size:12px;">Buka Pipeline Oktober ➔</button>
+        </div>
+      </div>`;
+    }
+    return "";
+  })()}`;
 }
 
 function vTrx(R){
@@ -4873,18 +4929,35 @@ function vShift(R){
       <td class="n">${num(R.shiftTot)}</td></tr>
   </tfoot>
   </table></div>
-  ${S.oktoberPipeline ? `
-  <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-      <div>
-        <div class="eyebrow" style="color:var(--accent);">Kesiapan Roster Shift Mendatang</div>
-        <h3 style="margin:2px 0 4px;font-size:16px;">Super Peak Wisuda UMP: 3 &amp; 4 Oktober 2026</h3>
-        <p class="tiny muted" style="margin:0;">Terdaftar <b>70 sesi di hari Sabtu (3 Okt)</b> dan <b>64 sesi di hari Minggu (4 Okt)</b> pada 5 spot backdrop. Pastikan seluruh kru fotografer dan admin dijadwalkan.</p>
-      </div>
-      <button class="btn pri sm" id="btnShiftToOkt" style="padding:6px 14px;font-size:12px;">Lihat Jadwal Wisuda UMP ➔</button>
-    </div>
-  </div>
-  ` : ""}`;
+  ${(() => {
+    if (R.c.bulan === "2026-11") {
+      const novShifts = (S.novemberLogOrder && S.novemberLogOrder.shifts) || S.shifts.filter(s => s.tanggal && s.tanggal.startsWith("2026-11-"));
+      const totSlotNov = novShifts.reduce((s, x) => s + dnum(x.slot), 0);
+      return `
+      <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div class="eyebrow" style="color:var(--accent);">Roster Shift · November 2026</div>
+            <h3 style="margin:2px 0 4px;font-size:16px;">Shift November 2026: ${totSlotNov} Slot Shift Berjalan</h3>
+            <p class="tiny muted" style="margin:0;">Roster shift kru studio aktif berjalan s.d. cut-off hari ini (${R.c.cutoff}).</p>
+          </div>
+        </div>
+      </div>`;
+    } else if (S.oktoberPipeline) {
+      return `
+      <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div class="eyebrow" style="color:var(--accent);">Kesiapan Roster Shift Mendatang</div>
+            <h3 style="margin:2px 0 4px;font-size:16px;">Super Peak Wisuda UMP: 3 &amp; 4 Oktober 2026</h3>
+            <p class="tiny muted" style="margin:0;">Terdaftar <b>70 sesi di hari Sabtu (3 Okt)</b> dan <b>64 sesi di hari Minggu (4 Okt)</b> pada 5 spot backdrop. Pastikan seluruh kru fotografer dan admin dijadwalkan.</p>
+          </div>
+          <button class="btn pri sm" id="btnShiftToOkt" style="padding:6px 14px;font-size:12px;">Lihat Jadwal Wisuda UMP ➔</button>
+        </div>
+      </div>`;
+    }
+    return "";
+  })()}`;
 }
 
 function vLead(R){
@@ -5097,18 +5170,35 @@ function vCrew(R){
         <td class="tiny muted">${R.offRoster.fotografer.map(x=>esc(x.nama)+": "+x.n).join(", ")||"—"}</td><td class="tiny">Tetap dihitung sebagai assignment.</td></tr>
       <tr><td>Transaksi Rp0</td><td class="n">${num(R.rp0)}</td><td class="tiny muted">order tercatat tanpa uang masuk</td><td class="tiny">Ikut jumlah transaksi, tidak menambah omzet.</td></tr>
     </tbody></table></div></div>
-  ${S.oktoberPipeline ? `
-  <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-      <div>
-        <div class="eyebrow" style="color:var(--accent);">Prospek Kru &amp; Paket Bulan Depan</div>
-        <h3 style="margin:2px 0 4px;font-size:16px;">Pipeline Booking Oktober 2026: ${S.oktoberPipeline.totalBookings} Booking Terdaftar</h3>
-        <p class="tiny muted" style="margin:0;">Sebanyak <b>${S.oktoberPipeline.breakdown.wisudaDay1.sesi + S.oktoberPipeline.breakdown.wisudaDay2.sesi} sesi wisuda</b> di 5 spot backdrop siap dilayani pada 3 &amp; 4 Oktober, plus <b>${S.oktoberPipeline.breakdown.reguler.sesi} sesi studio reguler</b>.</p>
-      </div>
-      <button class="btn pri sm" id="btnCrewToOkt" style="padding:6px 14px;font-size:12px;">Buka Rincian Pipeline Oktober ➔</button>
-    </div>
-  </div>
-  ` : ""}`;
+  ${(() => {
+    if (R.c.bulan === "2026-11") {
+      const novBks = (S.scheduleByMonth && S.scheduleByMonth["2026-11"]) || [];
+      return `
+      <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div class="eyebrow" style="color:var(--accent);">Operasional Kru · November 2026</div>
+            <h3 style="margin:2px 0 4px;font-size:16px;">Roster Operasional Kru November 2026: ${novBks.length} Booking Terjadwal</h3>
+            <p class="tiny muted" style="margin:0;">Kru studio siap melayani <b>${novBks.length} sesi booking reguler</b> sepanjang bulan November 2026.</p>
+          </div>
+          <button class="btn pri sm" onclick="activeMonth='2026-11';estMonth=11;go('est');" style="padding:6px 14px;font-size:12px;">Buka Schedule November ➔</button>
+        </div>
+      </div>`;
+    } else if (S.oktoberPipeline) {
+      return `
+      <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div class="eyebrow" style="color:var(--accent);">Prospek Kru &amp; Paket Bulan Depan</div>
+            <h3 style="margin:2px 0 4px;font-size:16px;">Pipeline Booking Oktober 2026: ${S.oktoberPipeline.totalBookings} Booking Terdaftar</h3>
+            <p class="tiny muted" style="margin:0;">Sebanyak <b>${S.oktoberPipeline.breakdown.wisudaDay1.sesi + S.oktoberPipeline.breakdown.wisudaDay2.sesi} sesi wisuda</b> di 5 spot backdrop siap dilayani pada 3 &amp; 4 Oktober, plus <b>${S.oktoberPipeline.breakdown.reguler.sesi} sesi studio reguler</b>.</p>
+          </div>
+          <button class="btn pri sm" id="btnCrewToOkt" style="padding:6px 14px;font-size:12px;">Buka Rincian Pipeline Oktober ➔</button>
+        </div>
+      </div>`;
+    }
+    return "";
+  })()}`;
 }
 
 function vYoy(R){
@@ -5211,18 +5301,37 @@ function vYoy(R){
         <td class="tiny">Portfolio YoY</td><td><span class="pill prog">Pending</span></td></tr>
     </tbody></table></div>
   </div>
-  ${S.oktoberPipeline ? `
-  <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-      <div>
-        <div class="eyebrow" style="color:var(--accent);">Forward Outlook YoY</div>
-        <h3 style="margin:2px 0 4px;font-size:16px;">Pipeline Booking Oktober ${yr}: ${S.oktoberPipeline.totalBookings} Booking</h3>
-        <p class="tiny muted" style="margin:0;">Modal pipeline terdaftar mencapai potensi omzet <b>${rp(S.oktoberPipeline.potentialOmzet)}</b> dengan estimasi pelunasan kas masuk <b>${rp(S.oktoberPipeline.estimateCashIn)}</b>.</p>
-      </div>
-      <button class="btn pri sm" id="btnYoyToOkt" style="padding:6px 14px;font-size:12px;">Buka Pipeline Oktober ➔</button>
-    </div>
-  </div>
-  ` : ""}`;
+  ${(() => {
+    if (R.c.bulan === "2026-11") {
+      const novOrders = (S.novemberLogOrder && S.novemberLogOrder.orders) || S.orders.filter(o => o.tanggal && o.tanggal.startsWith("2026-11-"));
+      const novOmzetLive = novOrders.reduce((s, o) => s + dnum(o.total), 0);
+      const novBks = (S.scheduleByMonth && S.scheduleByMonth["2026-11"]) || [];
+      return `
+      <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div class="eyebrow" style="color:var(--accent);">Komparasi YoY · November 2026</div>
+            <h3 style="margin:2px 0 4px;font-size:16px;">November ${yr}: Realisasi Kasir ${rp(novOmzetLive)} (${novOrders.length} Order)</h3>
+            <p class="tiny muted" style="margin:0;">Realisasi kasir live MTD terus bertumbuh dengan ${novBks.length} jadwal booking reguler.</p>
+          </div>
+          <button class="btn pri sm" onclick="activeMonth='2026-11';estMonth=11;go('est');" style="padding:6px 14px;font-size:12px;">Buka Schedule November ➔</button>
+        </div>
+      </div>`;
+    } else if (S.oktoberPipeline) {
+      return `
+      <div class="card" style="margin-top:14px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 3%,var(--surface));">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div class="eyebrow" style="color:var(--accent);">Forward Outlook YoY</div>
+            <h3 style="margin:2px 0 4px;font-size:16px;">Pipeline Booking Oktober ${yr}: ${S.oktoberPipeline.totalBookings} Booking</h3>
+            <p class="tiny muted" style="margin:0;">Modal pipeline terdaftar mencapai potensi omzet <b>${rp(S.oktoberPipeline.potentialOmzet)}</b> dengan estimasi pelunasan kas masuk <b>${rp(S.oktoberPipeline.estimateCashIn)}</b>.</p>
+          </div>
+          <button class="btn pri sm" id="btnYoyToOkt" style="padding:6px 14px;font-size:12px;">Buka Pipeline Oktober ➔</button>
+        </div>
+      </div>`;
+    }
+    return "";
+  })()}`;
 }
 
 function formBaseline(b,mn,yr){
@@ -5249,7 +5358,8 @@ function chartYoY(R,H,yr){
   const cur=+R.c.bulan.split("-")[1];
   rows.forEach(r=>{
     if(r.no===cur) r.b=R.proyeksi;
-    if(r.no===10 && S.oktoberPipeline) r.b=S.oktoberPipeline.potentialOmzet;
+    if(r.no===10 && cur > 10) r.b=(H.find(m=>m.tahun===yr&&m.no===10)||{}).omzet || 91795000;
+    else if(r.no===10 && S.oktoberPipeline) r.b=S.oktoberPipeline.potentialOmzet;
   });
   const max=niceMax(Math.max(...rows.flatMap(r=>[dnum(r.a),dnum(r.b)])));
   const iw=W-PL-PR, ih=H2-PT-PB, step=iw/12, bw=Math.min(11,step*.34);
