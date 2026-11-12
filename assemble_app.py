@@ -3772,7 +3772,7 @@ function chartArsipAds(months, yr, yearsObj) {
     </div>
     <div style="background:var(--surface2);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
       <span class="tiny muted" style="display:block;">Rata-rata Budget Bulanan</span>
-      <b class="mono" style="font-size:15px;color:var(--ink);">${rp(totCurAds / (mList.filter(m => (m.omzet || 0) > 0).length || 11))}</b>
+      <b class="mono" style="font-size:15px;color:var(--ink);">${rp(totCurAds / ((months || []).filter(m => (m.omzet || 0) > 0).length || 11))}</b>
       <span class="tiny muted" style="display:block;margin-top:2px;">alokasi marketing rutin</span>
     </div>
     <div style="background:var(--surface2);padding:10px 14px;border-radius:8px;border:1px solid var(--hairline);">
