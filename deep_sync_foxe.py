@@ -464,9 +464,12 @@ def run_integration():
         for c_id in ["a6e12579-a5c3-4902-b644-cd0292034410", "a9b8acb9-5ee7-437b-8fa7-362a5c8bfb84", "a202e1d1-7772-49fd-ab2a-7c3772959edd", "b33216a3-0a5f-4df8-aff3-aeef2408089b", "cab0ebc5-5150-4303-bbe6-c97db01a1692"]:
             art_dir = os.path.join(r"C:\Users\ASUS\.gemini\antigravity\brain", c_id)
             if os.path.exists(art_dir):
-                target_file = os.path.join(art_dir, "foxe_studio_keuangan.html")
-                shutil.copy("index.html", target_file)
-                print(f"[OK] Artifact disalin ke: {target_file}")
+                try:
+                    target_file = os.path.join(art_dir, "foxe_studio_keuangan.html")
+                    shutil.copy("index.html", target_file)
+                    print(f"[OK] Artifact disalin ke: {target_file}")
+                except Exception as copy_err:
+                    print(f"[WARN] Lewati salin artifact ke {c_id}: {copy_err}")
 
         # Kirim notifikasi otomatis ke Telegram (jika bot & chat sudah terhubung dan bukan mode silent)
         if "--no-tg" not in sys.argv and "--silent" not in sys.argv:
