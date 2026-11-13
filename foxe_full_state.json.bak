@@ -57819,6 +57819,19 @@
       "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_139",
+      "tanggal": "2026-11-13",
+      "client": "Legacy",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-15",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -71300,9 +71313,9 @@
       "id": "ld_13",
       "tanggal": "2026-11-13",
       "leads": 20.0,
-      "dp": 1.0,
+      "dp": 2.0,
       "sesiFoto": 0.0,
-      "transaksi": 1.0
+      "transaksi": 2.0
     },
     {
       "id": "ld_17",
@@ -83058,7 +83071,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 26060000.0
+        "omzet": 26160000.0
       }
     ]
   },
@@ -83407,10 +83420,16 @@
   ],
   "sync": [
     {
-      "id": "sy_20261113-0829",
-      "mulai": "2026-11-13T08:29:56.286920+00:00",
+      "id": "sy_20261113-1257",
+      "mulai": "2026-11-13T12:57:14.278902+00:00",
       "status": "berjalan",
       "ringkas": "Sinkronisasi sedang berlangsung..."
+    },
+    {
+      "id": "sy_20261113-0829",
+      "mulai": "2026-11-13T08:29:56.286920+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 135 pos pengeluaran Neraca, 279 pipeline Okt."
     },
     {
       "id": "sy_20261113-1340",
@@ -84471,7 +84490,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-13T06:40:52.081727+00:00"
+    "last_sync": "2026-11-13T08:29:56.286920+00:00"
   },
   "neracaDetail": [
     {
@@ -167976,6 +167995,28 @@
       {
         "id": "sc_bk_74",
         "tgl": "2026-11-17",
+        "waktu": "18:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Legacy",
+        "paket": "Large Group",
+        "paketRaw": "LG 11",
+        "jmlOrang": 11,
+        "harga": 275000.0,
+        "admin": "AL",
+        "noHp": "dp 100 concrete",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_75",
+        "tgl": "2026-11-17",
         "waktu": "19:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -167996,7 +168037,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_75",
+        "id": "sc_bk_76",
         "tgl": "2026-11-17",
         "waktu": "19:40",
         "studio": "Studio 1",
@@ -168018,7 +168059,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_76",
+        "id": "sc_bk_77",
         "tgl": "2026-11-20",
         "waktu": "17:00",
         "studio": "Studio 1",
@@ -168040,7 +168081,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_77",
+        "id": "sc_bk_78",
         "tgl": "2026-11-21",
         "waktu": "09:00",
         "studio": "Studio 1",
@@ -168062,7 +168103,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_78",
+        "id": "sc_bk_79",
         "tgl": "2026-11-21",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -168084,7 +168125,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_79",
+        "id": "sc_bk_80",
         "tgl": "2026-11-22",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -168106,7 +168147,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_80",
+        "id": "sc_bk_81",
         "tgl": "2026-11-24",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -168128,7 +168169,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_81",
+        "id": "sc_bk_82",
         "tgl": "2026-11-24",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -168150,7 +168191,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_82",
+        "id": "sc_bk_83",
         "tgl": "2026-11-24",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -168172,7 +168213,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_83",
+        "id": "sc_bk_84",
         "tgl": "2026-11-24",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -168194,7 +168235,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_84",
+        "id": "sc_bk_85",
         "tgl": "2026-11-24",
         "waktu": "13:40",
         "studio": "Studio 2",
@@ -168216,7 +168257,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_85",
+        "id": "sc_bk_86",
         "tgl": "2026-11-24",
         "waktu": "14:00",
         "studio": "Studio 2",
@@ -168238,7 +168279,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_86",
+        "id": "sc_bk_87",
         "tgl": "2026-11-26",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -168260,7 +168301,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_87",
+        "id": "sc_bk_88",
         "tgl": "2026-11-26",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -212459,13 +212500,13 @@
       },
       "2026": {
         "year": "2026",
-        "omzet": 859843450,
+        "omzet": 859943450,
         "cash": 280111000,
-        "transfer": 579732450,
+        "transfer": 579832450,
         "cogs": 149348000,
         "opex": 200978250,
         "outcome": 350326250,
-        "nettProfit": 509517200,
+        "nettProfit": 509617200,
         "margin": 59.26,
         "months": [
           {
@@ -219696,14 +219737,14 @@
           {
             "month": 11,
             "name": "November",
-            "omzet": 26060000,
+            "omzet": 26160000,
             "cash": 5840000,
-            "transfer": 20220000,
+            "transfer": 20320000,
             "cogs": 2701000,
             "opex": 6228920,
             "outcome": 8929920,
-            "nettProfit": 17130080,
-            "margin": 65.73,
+            "nettProfit": 17230080,
+            "margin": 65.86,
             "ads": 1000000,
             "rekapItems": [],
             "pembagian": {
@@ -219801,8 +219842,8 @@
                 "tgl": "2026-11-13",
                 "day": 13,
                 "cash": 0,
-                "transfer": 100000,
-                "total": 100000
+                "transfer": 200000,
+                "total": 200000
               }
             ],
             "expenses": [
@@ -221735,6 +221776,19 @@
         "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_139",
+        "tanggal": "2026-11-13",
+        "client": "Legacy",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-15",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -222297,9 +222351,9 @@
         "id": "ld_13",
         "tanggal": "2026-11-13",
         "leads": 20.0,
-        "dp": 1.0,
+        "dp": 2.0,
         "sesiFoto": 0.0,
-        "transaksi": 1.0
+        "transaksi": 2.0
       },
       {
         "id": "ld_14",
