@@ -1,7 +1,7 @@
 {
   "config": {
     "bulan": "2026-11",
-    "cutoff": "2026-11-13",
+    "cutoff": "2026-11-14",
     "status": "Progressive",
     "targets": [
       {
@@ -57871,6 +57871,123 @@
       "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_143",
+      "tanggal": "2026-11-14",
+      "client": "Sahlan",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-14",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_144",
+      "tanggal": "2026-11-14",
+      "client": "El",
+      "paket": "Photofox",
+      "tanggalFoto": "2026-11-14",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_145",
+      "tanggal": "2026-11-14",
+      "client": "Arga",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-11-15",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_146",
+      "tanggal": "2026-11-14",
+      "client": "El",
+      "paket": "Photofox",
+      "tanggalFoto": "2026-11-14",
+      "cash": 0.0,
+      "transfer": 125000.0,
+      "total": 125000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_147",
+      "tanggal": "2026-11-14",
+      "client": "dea",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-11-14",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_148",
+      "tanggal": "2026-11-14",
+      "client": "zakky",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-11-14",
+      "cash": 0.0,
+      "transfer": 350000.0,
+      "total": 350000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_149",
+      "tanggal": "2026-11-14",
+      "client": "Melati",
+      "paket": "Pas Foto",
+      "tanggalFoto": "2026-11-14",
+      "cash": 0.0,
+      "transfer": 0.0,
+      "total": 0.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_150",
+      "tanggal": "2026-11-14",
+      "client": "Bilqis",
+      "paket": "Photofox",
+      "tanggalFoto": "2026-11-14",
+      "cash": 125000.0,
+      "transfer": 0.0,
+      "total": 125000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_151",
+      "tanggal": "2026-11-14",
+      "client": "dapong",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-18",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -65229,6 +65346,18 @@
       "tanggal": "2026-11-13",
       "nama": "ADIF",
       "slot": 1
+    },
+    {
+      "id": "sh_53",
+      "tanggal": "2026-11-14",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_54",
+      "tanggal": "2026-11-14",
+      "nama": "SAKA",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -70679,7 +70808,7 @@
     {
       "id": "cc_2026-11-14",
       "tanggal": "2026-11-14",
-      "nilai": 0.0
+      "nilai": 125000.0
     },
     {
       "id": "cc_2026-11-15",
@@ -83122,7 +83251,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 26410000.0
+        "omzet": 27510000.0
       }
     ]
   },
@@ -83470,6 +83599,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261114-0750",
+      "mulai": "2026-11-14T07:50:42.025265+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 135 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
     {
       "id": "sy_20261113-2049",
       "mulai": "2026-11-13T20:49:37.255458+00:00",
@@ -84547,7 +84682,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-13T20:49:37.255458+00:00"
+    "last_sync": "2026-11-14T07:50:42.025265+00:00"
   },
   "neracaDetail": [
     {
@@ -104722,25 +104857,6 @@
           "row_idx": 12,
           "nama": "Saka",
           "job": "Fotografer",
-          "q": 12.0,
-          "q_raw": 0.0,
-          "actual_shift": 12,
-          "cost": 40000.0,
-          "is_fixed": false,
-          "total_gaji": 480000.0,
-          "bonus_kpi": 0.0,
-          "additional": 0.0,
-          "bonus": 0.0,
-          "hukuman": 0.0,
-          "bon": 0.0,
-          "thp": 480000.0,
-          "status": "Draft"
-        },
-        {
-          "id": "pay_3",
-          "row_idx": 14,
-          "nama": "Amel",
-          "job": "Admin",
           "q": 13.0,
           "q_raw": 0.0,
           "actual_shift": 13,
@@ -104753,6 +104869,25 @@
           "hukuman": 0.0,
           "bon": 0.0,
           "thp": 520000.0,
+          "status": "Draft"
+        },
+        {
+          "id": "pay_3",
+          "row_idx": 14,
+          "nama": "Amel",
+          "job": "Admin",
+          "q": 14.0,
+          "q_raw": 0.0,
+          "actual_shift": 14,
+          "cost": 40000.0,
+          "is_fixed": false,
+          "total_gaji": 560000.0,
+          "bonus_kpi": 0.0,
+          "additional": 0.0,
+          "bonus": 0.0,
+          "hukuman": 0.0,
+          "bon": 0.0,
+          "thp": 560000.0,
           "status": "Draft"
         },
         {
@@ -104928,13 +105063,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 10230000.0,
+        "total_gaji": 10310000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 10230000.0,
+        "grand_total_thp": 10310000.0,
         "total_karyawan": 12
       }
     },
@@ -115125,25 +115260,6 @@
         "row_idx": 12,
         "nama": "Saka",
         "job": "Fotografer",
-        "q": 12.0,
-        "q_raw": 0.0,
-        "actual_shift": 12,
-        "cost": 40000.0,
-        "is_fixed": false,
-        "total_gaji": 480000.0,
-        "bonus_kpi": 0.0,
-        "additional": 0.0,
-        "bonus": 0.0,
-        "hukuman": 0.0,
-        "bon": 0.0,
-        "thp": 480000.0,
-        "status": "Draft"
-      },
-      {
-        "id": "pay_3",
-        "row_idx": 14,
-        "nama": "Amel",
-        "job": "Admin",
         "q": 13.0,
         "q_raw": 0.0,
         "actual_shift": 13,
@@ -115156,6 +115272,25 @@
         "hukuman": 0.0,
         "bon": 0.0,
         "thp": 520000.0,
+        "status": "Draft"
+      },
+      {
+        "id": "pay_3",
+        "row_idx": 14,
+        "nama": "Amel",
+        "job": "Admin",
+        "q": 14.0,
+        "q_raw": 0.0,
+        "actual_shift": 14,
+        "cost": 40000.0,
+        "is_fixed": false,
+        "total_gaji": 560000.0,
+        "bonus_kpi": 0.0,
+        "additional": 0.0,
+        "bonus": 0.0,
+        "hukuman": 0.0,
+        "bon": 0.0,
+        "thp": 560000.0,
         "status": "Draft"
       },
       {
@@ -167876,6 +168011,28 @@
       {
         "id": "sc_bk_66",
         "tgl": "2026-11-14",
+        "waktu": "12:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "El",
+        "paket": "Photofox",
+        "paketRaw": "Photofox",
+        "jmlOrang": 1,
+        "harga": 200000.0,
+        "admin": "AL",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_67",
+        "tgl": "2026-11-14",
         "waktu": "13:20",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -167887,16 +168044,16 @@
         "admin": "DIP",
         "noHp": "lunas 50k",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
-        "id": "sc_bk_67",
+        "id": "sc_bk_68",
         "tgl": "2026-11-14",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -167909,6 +168066,28 @@
         "admin": "IN",
         "noHp": "dp 100 limbo",
         "manual": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_69",
+        "tgl": "2026-11-14",
+        "waktu": "14:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Sahlan",
+        "paket": "Large Group",
+        "paketRaw": "LG 12",
+        "jmlOrang": 12,
+        "harga": 300000.0,
+        "admin": "AL",
+        "noHp": "dp 100 limbo",
+        "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
         "statusSesi": "confirmed",
@@ -167918,7 +168097,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_68",
+        "id": "sc_bk_70",
         "tgl": "2026-11-14",
         "waktu": "15:20",
         "studio": "Studio 1",
@@ -167940,7 +168119,29 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_69",
+        "id": "sc_bk_71",
+        "tgl": "2026-11-14",
+        "waktu": "18:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Dea",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "AL",
+        "noHp": "concrete",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_72",
         "tgl": "2026-11-15",
         "waktu": "09:00",
         "studio": "Studio 1",
@@ -167962,7 +168163,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_70",
+        "id": "sc_bk_73",
         "tgl": "2026-11-15",
         "waktu": "11:00",
         "studio": "Studio 1",
@@ -167984,7 +168185,29 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_71",
+        "id": "sc_bk_74",
+        "tgl": "2026-11-15",
+        "waktu": "14:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Arga",
+        "paket": "Graduation",
+        "paketRaw": "Graduation",
+        "jmlOrang": 1,
+        "harga": 350000.0,
+        "admin": "AL",
+        "noHp": "dp 100 calmblue",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_75",
         "tgl": "2026-11-15",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -168006,7 +168229,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_72",
+        "id": "sc_bk_76",
         "tgl": "2026-11-15",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -168028,7 +168251,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_73",
+        "id": "sc_bk_77",
         "tgl": "2026-11-17",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -168050,7 +168273,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_74",
+        "id": "sc_bk_78",
         "tgl": "2026-11-17",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -168072,7 +168295,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_75",
+        "id": "sc_bk_79",
         "tgl": "2026-11-17",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -168094,7 +168317,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_76",
+        "id": "sc_bk_80",
         "tgl": "2026-11-17",
         "waktu": "18:20",
         "studio": "Studio 1",
@@ -168116,7 +168339,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_77",
+        "id": "sc_bk_81",
         "tgl": "2026-11-17",
         "waktu": "19:00",
         "studio": "Studio 1",
@@ -168138,7 +168361,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_78",
+        "id": "sc_bk_82",
         "tgl": "2026-11-17",
         "waktu": "19:40",
         "studio": "Studio 1",
@@ -168160,7 +168383,29 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_79",
+        "id": "sc_bk_83",
+        "tgl": "2026-11-18",
+        "waktu": "18:40",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Dapong",
+        "paket": "Large Group",
+        "paketRaw": "LG 9",
+        "jmlOrang": 9,
+        "harga": 225000.0,
+        "admin": "AL",
+        "noHp": "dp 100 limbo",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_84",
         "tgl": "2026-11-20",
         "waktu": "17:00",
         "studio": "Studio 1",
@@ -168182,7 +168427,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_80",
+        "id": "sc_bk_85",
         "tgl": "2026-11-21",
         "waktu": "09:00",
         "studio": "Studio 1",
@@ -168204,7 +168449,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_81",
+        "id": "sc_bk_86",
         "tgl": "2026-11-21",
         "waktu": "16:40",
         "studio": "Studio 1",
@@ -168226,7 +168471,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_82",
+        "id": "sc_bk_87",
         "tgl": "2026-11-22",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -168248,7 +168493,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_83",
+        "id": "sc_bk_88",
         "tgl": "2026-11-24",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -168270,7 +168515,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_84",
+        "id": "sc_bk_89",
         "tgl": "2026-11-24",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -168292,7 +168537,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_85",
+        "id": "sc_bk_90",
         "tgl": "2026-11-24",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -168314,7 +168559,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_86",
+        "id": "sc_bk_91",
         "tgl": "2026-11-24",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -168336,7 +168581,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_87",
+        "id": "sc_bk_92",
         "tgl": "2026-11-24",
         "waktu": "13:40",
         "studio": "Studio 2",
@@ -168358,7 +168603,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_88",
+        "id": "sc_bk_93",
         "tgl": "2026-11-24",
         "waktu": "14:00",
         "studio": "Studio 2",
@@ -168380,7 +168625,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_89",
+        "id": "sc_bk_94",
         "tgl": "2026-11-26",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -168402,7 +168647,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_90",
+        "id": "sc_bk_95",
         "tgl": "2026-11-26",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -212601,14 +212846,14 @@
       },
       "2026": {
         "year": "2026",
-        "omzet": 860193450,
-        "cash": 280111000,
-        "transfer": 580082450,
+        "omzet": 861293450,
+        "cash": 280236000,
+        "transfer": 581057450,
         "cogs": 149348000,
         "opex": 200978250,
         "outcome": 350326250,
-        "nettProfit": 509867200,
-        "margin": 59.27,
+        "nettProfit": 510967200,
+        "margin": 59.33,
         "months": [
           {
             "month": 1,
@@ -219838,14 +220083,14 @@
           {
             "month": 11,
             "name": "November",
-            "omzet": 26410000,
-            "cash": 5840000,
-            "transfer": 20570000,
+            "omzet": 27510000,
+            "cash": 5965000,
+            "transfer": 21545000,
             "cogs": 2701000,
             "opex": 6228920,
             "outcome": 8929920,
-            "nettProfit": 17480080,
-            "margin": 66.19,
+            "nettProfit": 18580080,
+            "margin": 67.54,
             "ads": 1000000,
             "rekapItems": [],
             "pembagian": {
@@ -219945,6 +220190,13 @@
                 "cash": 0,
                 "transfer": 450000,
                 "total": 450000
+              },
+              {
+                "tgl": "2026-11-14",
+                "day": 14,
+                "cash": 125000,
+                "transfer": 975000,
+                "total": 1100000
               }
             ],
             "expenses": [
@@ -221929,6 +222181,123 @@
         "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_143",
+        "tanggal": "2026-11-14",
+        "client": "Sahlan",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-14",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_144",
+        "tanggal": "2026-11-14",
+        "client": "El",
+        "paket": "Photofox",
+        "tanggalFoto": "2026-11-14",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_145",
+        "tanggal": "2026-11-14",
+        "client": "Arga",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-11-15",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_146",
+        "tanggal": "2026-11-14",
+        "client": "El",
+        "paket": "Photofox",
+        "tanggalFoto": "2026-11-14",
+        "cash": 0.0,
+        "transfer": 125000.0,
+        "total": 125000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_147",
+        "tanggal": "2026-11-14",
+        "client": "dea",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-11-14",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_148",
+        "tanggal": "2026-11-14",
+        "client": "zakky",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-11-14",
+        "cash": 0.0,
+        "transfer": 350000.0,
+        "total": 350000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_149",
+        "tanggal": "2026-11-14",
+        "client": "Melati",
+        "paket": "Pas Foto",
+        "tanggalFoto": "2026-11-14",
+        "cash": 0.0,
+        "transfer": 0.0,
+        "total": 0.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_150",
+        "tanggal": "2026-11-14",
+        "client": "Bilqis",
+        "paket": "Photofox",
+        "tanggalFoto": "2026-11-14",
+        "cash": 125000.0,
+        "transfer": 0.0,
+        "total": 125000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_151",
+        "tanggal": "2026-11-14",
+        "client": "dapong",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-18",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -222243,6 +222612,18 @@
         "tanggal": "2026-11-13",
         "nama": "ADIF",
         "slot": 1
+      },
+      {
+        "id": "sh_53",
+        "tanggal": "2026-11-14",
+        "nama": "AMEL",
+        "slot": 1
+      },
+      {
+        "id": "sh_54",
+        "tanggal": "2026-11-14",
+        "nama": "SAKA",
+        "slot": 1
       }
     ],
     "cashControl": [
@@ -222314,7 +222695,7 @@
       {
         "id": "cc_2026-11-14",
         "tanggal": "2026-11-14",
-        "nilai": 0.0
+        "nilai": 125000.0
       },
       {
         "id": "cc_2026-11-15",
@@ -222984,7 +223365,7 @@
         ]
       }
     },
-    "cutoff": "2026-11-13",
-    "hariBerjalan": 13
+    "cutoff": "2026-11-14",
+    "hariBerjalan": 14
   }
 }

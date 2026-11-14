@@ -71363,7 +71363,7 @@
     {
       "id": "ld_13",
       "tanggal": "2026-11-13",
-      "leads": 20.0,
+      "leads": 27.0,
       "dp": 4.0,
       "sesiFoto": 1.0,
       "transaksi": 5.0
@@ -83471,10 +83471,16 @@
   ],
   "sync": [
     {
-      "id": "sy_20261113-2049",
-      "mulai": "2026-11-13T20:49:37.255458+00:00",
+      "id": "sy_20261114-0750",
+      "mulai": "2026-11-14T07:50:42.025265+00:00",
       "status": "berjalan",
       "ringkas": "Sinkronisasi sedang berlangsung..."
+    },
+    {
+      "id": "sy_20261113-2049",
+      "mulai": "2026-11-13T20:49:37.255458+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 135 pos pengeluaran Neraca, 279 pipeline Okt."
     },
     {
       "id": "sy_20261113-1257",
@@ -84547,7 +84553,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-13T12:57:14.278902+00:00"
+    "last_sync": "2026-11-13T20:49:37.255458+00:00"
   },
   "neracaDetail": [
     {
@@ -222502,7 +222508,7 @@
       {
         "id": "ld_13",
         "tanggal": "2026-11-13",
-        "leads": 20.0,
+        "leads": 27.0,
         "dp": 4.0,
         "sesiFoto": 1.0,
         "transaksi": 5.0
