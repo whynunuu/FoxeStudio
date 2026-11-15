@@ -58183,6 +58183,32 @@
       "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_167",
+      "tanggal": "2026-11-15",
+      "client": "wulan fadilillah",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-16",
+      "cash": 0.0,
+      "transfer": 125000.0,
+      "total": 125000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_168",
+      "tanggal": "2026-11-15",
+      "client": "Ganisyuri",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-16",
+      "cash": 0.0,
+      "transfer": 425000.0,
+      "total": 425000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -71741,8 +71767,8 @@
       "tanggal": "2026-11-15",
       "leads": 0.0,
       "dp": 2.0,
-      "sesiFoto": 7.0,
-      "transaksi": 9.0
+      "sesiFoto": 9.0,
+      "transaksi": 11.0
     },
     {
       "id": "ld_17",
@@ -83498,7 +83524,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 30575000.0
+        "omzet": 31125000.0
       }
     ]
   },
@@ -83846,6 +83872,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261115-0954",
+      "mulai": "2026-11-15T09:54:55.967678+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 135 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
     {
       "id": "sy_20261115-0810",
       "mulai": "2026-11-15T08:10:43.405366+00:00",
@@ -84899,7 +84931,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-15T08:10:43.405366+00:00"
+    "last_sync": "2026-11-15T09:54:55.967678+00:00"
   },
   "neracaDetail": [
     {
@@ -168503,12 +168535,12 @@
         "admin": "AL",
         "noHp": "dp 100",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
@@ -213129,14 +213161,14 @@
       },
       "2026": {
         "year": "2026",
-        "omzet": 864358450,
+        "omzet": 864908450,
         "cash": 281491000,
-        "transfer": 582867450,
+        "transfer": 583417450,
         "cogs": 149348000,
         "opex": 200978250,
         "outcome": 350326250,
-        "nettProfit": 514032200,
-        "margin": 59.47,
+        "nettProfit": 514582200,
+        "margin": 59.5,
         "months": [
           {
             "month": 1,
@@ -220366,14 +220398,14 @@
           {
             "month": 11,
             "name": "November",
-            "omzet": 30575000,
+            "omzet": 31125000,
             "cash": 7220000,
-            "transfer": 23355000,
+            "transfer": 23905000,
             "cogs": 2701000,
             "opex": 6228920,
             "outcome": 8929920,
-            "nettProfit": 21645080,
-            "margin": 70.79,
+            "nettProfit": 22195080,
+            "margin": 71.31,
             "ads": 1000000,
             "rekapItems": [],
             "pembagian": {
@@ -220485,8 +220517,8 @@
                 "tgl": "2026-11-15",
                 "day": 15,
                 "cash": 1080000,
-                "transfer": 1160000,
-                "total": 2240000
+                "transfer": 1710000,
+                "total": 2790000
               }
             ],
             "expenses": [
@@ -222783,6 +222815,32 @@
         "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_167",
+        "tanggal": "2026-11-15",
+        "client": "wulan fadilillah",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-16",
+        "cash": 0.0,
+        "transfer": 125000.0,
+        "total": 125000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_168",
+        "tanggal": "2026-11-15",
+        "client": "Ganisyuri",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-16",
+        "cash": 0.0,
+        "transfer": 425000.0,
+        "total": 425000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
       }
     ],
     "shifts": [
@@ -223422,8 +223480,8 @@
         "tanggal": "2026-11-15",
         "leads": 0.0,
         "dp": 2.0,
-        "sesiFoto": 7.0,
-        "transaksi": 9.0
+        "sesiFoto": 9.0,
+        "transaksi": 11.0
       },
       {
         "id": "ld_16",
