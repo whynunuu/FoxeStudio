@@ -83873,6 +83873,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261115-0956",
+      "mulai": "2026-11-15T09:56:16.830642+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 135 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
+    {
       "id": "sy_20261115-0954",
       "mulai": "2026-11-15T09:54:55.967678+00:00",
       "status": "sukses",
@@ -84931,7 +84937,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-15T09:54:55.967678+00:00"
+    "last_sync": "2026-11-15T09:56:16.830642+00:00"
   },
   "neracaDetail": [
     {
