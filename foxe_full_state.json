@@ -58219,7 +58219,20 @@
       "cash": 0.0,
       "transfer": 100000.0,
       "total": 100000.0,
-      "pembayaran": "Lunas",
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_170",
+      "tanggal": "2026-11-15",
+      "client": "PMR SMPN 2 PWT",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-22",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
     }
@@ -66847,6 +66860,60 @@
       "nilai": 1200000.0
     },
     {
+      "id": "ex_nrc_14",
+      "tanggal": "2026-11-09",
+      "bulan": "2026-11",
+      "jenis": "OPEX",
+      "kategori": "Maintenance Studio & Equipment",
+      "deskripsi": "Serv Exhaust",
+      "nilai": 110000.0
+    },
+    {
+      "id": "ex_nrc_15",
+      "tanggal": "2026-11-11",
+      "bulan": "2026-11",
+      "jenis": "OPEX",
+      "kategori": "Marketing / Ads / KOL",
+      "deskripsi": "Ads",
+      "nilai": 500000.0
+    },
+    {
+      "id": "ex_nrc_16",
+      "tanggal": "2026-11-11",
+      "bulan": "2026-11",
+      "jenis": "COGS",
+      "kategori": "Frame / Album / Packaging",
+      "deskripsi": "Frame",
+      "nilai": 950000.0
+    },
+    {
+      "id": "ex_nrc_17",
+      "tanggal": "2026-11-12",
+      "bulan": "2026-11",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Cat Abu Calmblue",
+      "nilai": 256500.0
+    },
+    {
+      "id": "ex_nrc_18",
+      "tanggal": "2026-11-12",
+      "bulan": "2026-11",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 750000.0
+    },
+    {
+      "id": "ex_nrc_19",
+      "tanggal": "2026-11-12",
+      "bulan": "2026-11",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 503000.0
+    },
+    {
       "id": "ex_nrc_1",
       "tanggal": "2026-01-01",
       "bulan": "2026-01",
@@ -71779,9 +71846,9 @@
       "id": "ld_15",
       "tanggal": "2026-11-15",
       "leads": 0.0,
-      "dp": 2.0,
-      "sesiFoto": 10.0,
-      "transaksi": 12.0
+      "dp": 4.0,
+      "sesiFoto": 9.0,
+      "transaksi": 13.0
     },
     {
       "id": "ld_17",
@@ -71797,7 +71864,7 @@
       "id": "kp_1",
       "nama": "ADIF",
       "role": "Fotografer 1",
-      "hariDinilai": 13,
+      "hariDinilai": 15,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -71809,7 +71876,7 @@
       "id": "kp_2",
       "nama": "AMEL",
       "role": "Admin 2",
-      "hariDinilai": 11,
+      "hariDinilai": 15,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -71821,7 +71888,7 @@
       "id": "kp_3",
       "nama": "INDAH",
       "role": "Admin 1",
-      "hariDinilai": 13,
+      "hariDinilai": 15,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -71833,7 +71900,7 @@
       "id": "kp_4",
       "nama": "SAKA",
       "role": "Fotografer 2",
-      "hariDinilai": 11,
+      "hariDinilai": 15,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -83537,7 +83604,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 31225000.0
+        "omzet": 31325000.0
       }
     ]
   },
@@ -83885,6 +83952,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261115-1940",
+      "mulai": "2026-11-15T19:40:21.620486+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 141 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
     {
       "id": "sy_20261115-1236",
       "mulai": "2026-11-15T12:36:53.820610+00:00",
@@ -84956,7 +85029,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-15T12:36:53.820610+00:00"
+    "last_sync": "2026-11-15T19:40:21.620486+00:00"
   },
   "neracaDetail": [
     {
@@ -104854,6 +104927,60 @@
           "kategori": "OPEX Lainnya",
           "deskripsi": "Fiber Atap Concrete",
           "nilai": 1200000.0
+        },
+        {
+          "id": "ex_nrc_14",
+          "tanggal": "2026-11-09",
+          "bulan": "2026-11",
+          "jenis": "OPEX",
+          "kategori": "Maintenance Studio & Equipment",
+          "deskripsi": "Serv Exhaust",
+          "nilai": 110000.0
+        },
+        {
+          "id": "ex_nrc_15",
+          "tanggal": "2026-11-11",
+          "bulan": "2026-11",
+          "jenis": "OPEX",
+          "kategori": "Marketing / Ads / KOL",
+          "deskripsi": "Ads",
+          "nilai": 500000.0
+        },
+        {
+          "id": "ex_nrc_16",
+          "tanggal": "2026-11-11",
+          "bulan": "2026-11",
+          "jenis": "COGS",
+          "kategori": "Frame / Album / Packaging",
+          "deskripsi": "Frame",
+          "nilai": 950000.0
+        },
+        {
+          "id": "ex_nrc_17",
+          "tanggal": "2026-11-12",
+          "bulan": "2026-11",
+          "jenis": "OPEX",
+          "kategori": "OPEX Lainnya",
+          "deskripsi": "Cat Abu Calmblue",
+          "nilai": 256500.0
+        },
+        {
+          "id": "ex_nrc_18",
+          "tanggal": "2026-11-12",
+          "bulan": "2026-11",
+          "jenis": "OPEX",
+          "kategori": "Listrik & Air",
+          "deskripsi": "Listrik",
+          "nilai": 750000.0
+        },
+        {
+          "id": "ex_nrc_19",
+          "tanggal": "2026-11-12",
+          "bulan": "2026-11",
+          "jenis": "OPEX",
+          "kategori": "Listrik & Air",
+          "deskripsi": "Listrik",
+          "nilai": 503000.0
         }
       ],
       "detail": [
@@ -105039,10 +105166,10 @@
           "tanggal_iso": "2026-11-09",
           "first_of_day": true,
           "masuk": 1295000.0,
-          "keluar": 0.0,
-          "balance": 9415080.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
+          "keluar": 110000.0,
+          "balance": 9305080.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Serv Exhaust"
         },
         {
           "id": "det_nrc_18",
@@ -105051,7 +105178,7 @@
           "first_of_day": false,
           "masuk": 405000.0,
           "keluar": 0.0,
-          "balance": 9820080.0,
+          "balance": 9710080.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -105062,7 +105189,7 @@
           "first_of_day": true,
           "masuk": 500000.0,
           "keluar": 0.0,
-          "balance": 10320080.0,
+          "balance": 10210080.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -105073,7 +105200,7 @@
           "first_of_day": false,
           "masuk": 1100000.0,
           "keluar": 0.0,
-          "balance": 11420080.0,
+          "balance": 11310080.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -105083,10 +105210,10 @@
           "tanggal_iso": "2026-11-11",
           "first_of_day": true,
           "masuk": 1050000.0,
-          "keluar": 0.0,
-          "balance": 12470080.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
+          "keluar": 500000.0,
+          "balance": 11860080.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Ads"
         },
         {
           "id": "det_nrc_22",
@@ -105094,17 +105221,50 @@
           "tanggal_iso": "2026-11-11",
           "first_of_day": false,
           "masuk": 210000.0,
-          "keluar": 0.0,
-          "balance": 12680080.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
+          "keluar": 950000.0,
+          "balance": 11120080.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Frame"
+        },
+        {
+          "id": "det_nrc_23",
+          "tgl": 12,
+          "tanggal_iso": "2026-11-12",
+          "first_of_day": true,
+          "masuk": 0.0,
+          "keluar": 256500.0,
+          "balance": 10863580.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Cat Abu Calmblue"
+        },
+        {
+          "id": "det_nrc_24",
+          "tgl": 12,
+          "tanggal_iso": "2026-11-12",
+          "first_of_day": false,
+          "masuk": 0.0,
+          "keluar": 750000.0,
+          "balance": 10113580.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Listrik"
+        },
+        {
+          "id": "det_nrc_25",
+          "tgl": 12,
+          "tanggal_iso": "2026-11-12",
+          "first_of_day": false,
+          "masuk": 0.0,
+          "keluar": 503000.0,
+          "balance": 9610580.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Listrik"
         }
       ],
       "summary": {
         "total_masuk": 21610000.0,
-        "total_keluar": 8929920.0,
-        "ending_balance": 12680080.0,
-        "total_rows": 22
+        "total_keluar": 11999420.0,
+        "ending_balance": 9610580.0,
+        "total_rows": 25
       },
       "rosterGaji": [
         {
@@ -213252,14 +213412,14 @@
       },
       "2026": {
         "year": "2026",
-        "omzet": 865008450,
+        "omzet": 865108450,
         "cash": 281491000,
-        "transfer": 583517450,
-        "cogs": 149348000,
-        "opex": 200978250,
-        "outcome": 350326250,
-        "nettProfit": 514682200,
-        "margin": 59.5,
+        "transfer": 583617450,
+        "cogs": 150298000,
+        "opex": 203097750,
+        "outcome": 353395750,
+        "nettProfit": 511712700,
+        "margin": 59.15,
         "months": [
           {
             "month": 1,
@@ -220489,15 +220649,15 @@
           {
             "month": 11,
             "name": "November",
-            "omzet": 31225000,
+            "omzet": 31325000,
             "cash": 7220000,
-            "transfer": 24005000,
-            "cogs": 2701000,
-            "opex": 6228920,
-            "outcome": 8929920,
-            "nettProfit": 22295080,
-            "margin": 71.4,
-            "ads": 1000000,
+            "transfer": 24105000,
+            "cogs": 3651000,
+            "opex": 8348420,
+            "outcome": 11999420,
+            "nettProfit": 19325580,
+            "margin": 61.69,
+            "ads": 1500000,
             "rekapItems": [],
             "pembagian": {
               "investor": 0,
@@ -220608,8 +220768,8 @@
                 "tgl": "2026-11-15",
                 "day": 15,
                 "cash": 1080000,
-                "transfer": 1810000,
-                "total": 2890000
+                "transfer": 1910000,
+                "total": 2990000
               }
             ],
             "expenses": [
@@ -220716,6 +220876,54 @@
                 "jenis": "OPEX",
                 "kategori": "OPEX Lainnya",
                 "nilai": 1200000
+              },
+              {
+                "tgl": "2026-11-09",
+                "day": 9,
+                "desc": "Serv Exhaust",
+                "jenis": "OPEX",
+                "kategori": "Maintenance Studio & Equipment",
+                "nilai": 110000
+              },
+              {
+                "tgl": "2026-11-11",
+                "day": 11,
+                "desc": "Ads",
+                "jenis": "OPEX",
+                "kategori": "Marketing / Ads / KOL",
+                "nilai": 500000
+              },
+              {
+                "tgl": "2026-11-11",
+                "day": 11,
+                "desc": "Frame",
+                "jenis": "COGS",
+                "kategori": "Frame / Album / Packaging",
+                "nilai": 950000
+              },
+              {
+                "tgl": "2026-11-12",
+                "day": 12,
+                "desc": "Cat Abu Calmblue",
+                "jenis": "OPEX",
+                "kategori": "OPEX Lainnya",
+                "nilai": 256500
+              },
+              {
+                "tgl": "2026-11-12",
+                "day": 12,
+                "desc": "Listrik",
+                "jenis": "OPEX",
+                "kategori": "Listrik & Air",
+                "nilai": 750000
+              },
+              {
+                "tgl": "2026-11-12",
+                "day": 12,
+                "desc": "Listrik",
+                "jenis": "OPEX",
+                "kategori": "Listrik & Air",
+                "nilai": 503000
               }
             ],
             "sheetName": null
@@ -222942,7 +223150,20 @@
         "cash": 0.0,
         "transfer": 100000.0,
         "total": 100000.0,
-        "pembayaran": "Lunas",
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_170",
+        "tanggal": "2026-11-15",
+        "client": "PMR SMPN 2 PWT",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-22",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
       }
@@ -223583,9 +223804,9 @@
         "id": "ld_15",
         "tanggal": "2026-11-15",
         "leads": 0.0,
-        "dp": 2.0,
-        "sesiFoto": 10.0,
-        "transaksi": 12.0
+        "dp": 4.0,
+        "sesiFoto": 9.0,
+        "transaksi": 13.0
       },
       {
         "id": "ld_16",
@@ -223713,7 +223934,7 @@
         "id": "kp_1",
         "nama": "ADIF",
         "role": "Fotografer 1",
-        "hariDinilai": 13,
+        "hariDinilai": 15,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -223725,7 +223946,7 @@
         "id": "kp_2",
         "nama": "AMEL",
         "role": "Admin 2",
-        "hariDinilai": 11,
+        "hariDinilai": 15,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -223737,7 +223958,7 @@
         "id": "kp_3",
         "nama": "INDAH",
         "role": "Admin 1",
-        "hariDinilai": 13,
+        "hariDinilai": 15,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -223749,7 +223970,7 @@
         "id": "kp_4",
         "nama": "SAKA",
         "role": "Fotografer 2",
-        "hariDinilai": 11,
+        "hariDinilai": 15,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -223761,6 +223982,10 @@
     "kpi_raw": {
       "AMEL": {
         "disiplin": [
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -223784,9 +224009,17 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "sop": [
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -223810,9 +224043,17 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "produktivitas": [
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -223840,9 +224081,13 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -223870,6 +224115,8 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "client": [
@@ -223885,9 +224132,13 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "produktivitas": [
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -223915,9 +224166,17 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -223941,6 +224200,10 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "client": [
@@ -223954,9 +224217,17 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "produktivitas": [
+          5.0,
+          5.0,
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -223984,9 +224255,13 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -224014,6 +224289,8 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "client": [
@@ -224029,9 +224306,13 @@
           5.0,
           5.0,
           5.0,
+          5.0,
+          5.0,
           5.0
         ],
         "produktivitas": [
+          5.0,
+          5.0,
           5.0,
           5.0,
           5.0,

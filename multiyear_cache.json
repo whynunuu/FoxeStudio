@@ -44140,14 +44140,14 @@
     },
     "2026": {
       "year": "2026",
-      "omzet": 865008450,
+      "omzet": 865108450,
       "cash": 281491000,
-      "transfer": 583517450,
-      "cogs": 149348000,
-      "opex": 200978250,
-      "outcome": 350326250,
-      "nettProfit": 514682200,
-      "margin": 59.5,
+      "transfer": 583617450,
+      "cogs": 150298000,
+      "opex": 203097750,
+      "outcome": 353395750,
+      "nettProfit": 511712700,
+      "margin": 59.15,
       "months": [
         {
           "month": 1,
@@ -51377,15 +51377,15 @@
         {
           "month": 11,
           "name": "November",
-          "omzet": 31225000,
+          "omzet": 31325000,
           "cash": 7220000,
-          "transfer": 24005000,
-          "cogs": 2701000,
-          "opex": 6228920,
-          "outcome": 8929920,
-          "nettProfit": 22295080,
-          "margin": 71.4,
-          "ads": 1000000,
+          "transfer": 24105000,
+          "cogs": 3651000,
+          "opex": 8348420,
+          "outcome": 11999420,
+          "nettProfit": 19325580,
+          "margin": 61.69,
+          "ads": 1500000,
           "rekapItems": [],
           "pembagian": {
             "investor": 0,
@@ -51496,8 +51496,8 @@
               "tgl": "2026-11-15",
               "day": 15,
               "cash": 1080000,
-              "transfer": 1810000,
-              "total": 2890000
+              "transfer": 1910000,
+              "total": 2990000
             }
           ],
           "expenses": [
@@ -51604,6 +51604,54 @@
               "jenis": "OPEX",
               "kategori": "OPEX Lainnya",
               "nilai": 1200000
+            },
+            {
+              "tgl": "2026-11-09",
+              "day": 9,
+              "desc": "Serv Exhaust",
+              "jenis": "OPEX",
+              "kategori": "Maintenance Studio & Equipment",
+              "nilai": 110000
+            },
+            {
+              "tgl": "2026-11-11",
+              "day": 11,
+              "desc": "Ads",
+              "jenis": "OPEX",
+              "kategori": "Marketing / Ads / KOL",
+              "nilai": 500000
+            },
+            {
+              "tgl": "2026-11-11",
+              "day": 11,
+              "desc": "Frame",
+              "jenis": "COGS",
+              "kategori": "Frame / Album / Packaging",
+              "nilai": 950000
+            },
+            {
+              "tgl": "2026-11-12",
+              "day": 12,
+              "desc": "Cat Abu Calmblue",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 256500
+            },
+            {
+              "tgl": "2026-11-12",
+              "day": 12,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 750000
+            },
+            {
+              "tgl": "2026-11-12",
+              "day": 12,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
             }
           ],
           "sheetName": null
