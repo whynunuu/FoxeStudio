@@ -58038,8 +58038,34 @@
       "transfer": 100000.0,
       "total": 100000.0,
       "pembayaran": "DP",
-      "admin": "",
+      "admin": "INDAH",
       "fotografer": ""
+    },
+    {
+      "id": "or_156",
+      "tanggal": "2026-11-14",
+      "client": "Iin Nila",
+      "paket": "Maternity",
+      "tanggalFoto": "2026-11-15",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_157",
+      "tanggal": "2026-11-14",
+      "client": "offy arlita",
+      "paket": "Couple B",
+      "tanggalFoto": "2026-11-15",
+      "cash": 100000.0,
+      "transfer": 0.0,
+      "total": 100000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
     }
   ],
   "shifts": [
@@ -70872,7 +70898,7 @@
     {
       "id": "cc_2026-11-14",
       "tanggal": "2026-11-14",
-      "nilai": 200000.0
+      "nilai": 300000.0
     },
     {
       "id": "cc_2026-11-15",
@@ -71560,6 +71586,14 @@
       "dp": 4.0,
       "sesiFoto": 1.0,
       "transaksi": 5.0
+    },
+    {
+      "id": "ld_14",
+      "tanggal": "2026-11-14",
+      "leads": 28.0,
+      "dp": 7.0,
+      "sesiFoto": 8.0,
+      "transaksi": 15.0
     },
     {
       "id": "ld_17",
@@ -83315,7 +83349,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 28135000.0
+        "omzet": 28335000.0
       }
     ]
   },
@@ -83664,10 +83698,16 @@
   ],
   "sync": [
     {
-      "id": "sy_20261114-1900",
-      "mulai": "2026-11-14T19:00:46.042999+00:00",
+      "id": "sy_20261115-0810",
+      "mulai": "2026-11-15T08:10:43.405366+00:00",
       "status": "berjalan",
       "ringkas": "Sinkronisasi sedang berlangsung..."
+    },
+    {
+      "id": "sy_20261114-1900",
+      "mulai": "2026-11-14T19:00:46.042999+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 135 pos pengeluaran Neraca, 279 pipeline Okt."
     },
     {
       "id": "sy_20261114-1954",
@@ -84710,7 +84750,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-14T12:54:40.298784+00:00"
+    "last_sync": "2026-11-14T19:00:46.042999+00:00"
   },
   "neracaDetail": [
     {
@@ -168246,7 +168286,7 @@
         "jmlOrang": 1,
         "harga": 350000.0,
         "admin": "IN",
-        "noHp": "",
+        "noHp": "dp 100 limbo",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -212918,14 +212958,14 @@
       },
       "2026": {
         "year": "2026",
-        "omzet": 861568450,
-        "cash": 280311000,
-        "transfer": 581257450,
+        "omzet": 862118450,
+        "cash": 280411000,
+        "transfer": 581707450,
         "cogs": 149348000,
         "opex": 200978250,
         "outcome": 350326250,
-        "nettProfit": 511242200,
-        "margin": 59.34,
+        "nettProfit": 511792200,
+        "margin": 59.36,
         "months": [
           {
             "month": 1,
@@ -220155,14 +220195,14 @@
           {
             "month": 11,
             "name": "November",
-            "omzet": 27785000,
-            "cash": 6040000,
-            "transfer": 21745000,
+            "omzet": 28335000,
+            "cash": 6140000,
+            "transfer": 22195000,
             "cogs": 2701000,
             "opex": 6228920,
             "outcome": 8929920,
-            "nettProfit": 18855080,
-            "margin": 67.86,
+            "nettProfit": 19405080,
+            "margin": 68.48,
             "ads": 1000000,
             "rekapItems": [],
             "pembagian": {
@@ -220266,9 +220306,9 @@
               {
                 "tgl": "2026-11-14",
                 "day": 14,
-                "cash": 200000,
-                "transfer": 1175000,
-                "total": 1375000
+                "cash": 300000,
+                "transfer": 1625000,
+                "total": 1925000
               }
             ],
             "expenses": [
@@ -222420,8 +222460,34 @@
         "transfer": 100000.0,
         "total": 100000.0,
         "pembayaran": "DP",
-        "admin": "",
+        "admin": "INDAH",
         "fotografer": ""
+      },
+      {
+        "id": "or_156",
+        "tanggal": "2026-11-14",
+        "client": "Iin Nila",
+        "paket": "Maternity",
+        "tanggalFoto": "2026-11-15",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_157",
+        "tanggal": "2026-11-14",
+        "client": "offy arlita",
+        "paket": "Couple B",
+        "tanggalFoto": "2026-11-15",
+        "cash": 100000.0,
+        "transfer": 0.0,
+        "total": 100000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
       }
     ],
     "shifts": [
@@ -222831,7 +222897,7 @@
       {
         "id": "cc_2026-11-14",
         "tanggal": "2026-11-14",
-        "nilai": 200000.0
+        "nilai": 300000.0
       },
       {
         "id": "cc_2026-11-15",
@@ -223027,10 +223093,10 @@
       {
         "id": "ld_14",
         "tanggal": "2026-11-14",
-        "leads": 0.0,
-        "dp": 0.0,
-        "sesiFoto": 0.0,
-        "transaksi": 0.0
+        "leads": 28.0,
+        "dp": 7.0,
+        "sesiFoto": 8.0,
+        "transaksi": 15.0
       },
       {
         "id": "ld_15",
