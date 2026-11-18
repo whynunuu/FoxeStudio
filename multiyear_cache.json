@@ -44140,14 +44140,14 @@
     },
     "2026": {
       "year": "2026",
-      "omzet": 870183450,
+      "omzet": 871558450,
       "cash": 282266000,
-      "transfer": 587917450,
-      "cogs": 150298000,
-      "opex": 203097750,
-      "outcome": 353395750,
-      "nettProfit": 516787700,
-      "margin": 59.39,
+      "transfer": 589292450,
+      "cogs": 151961500,
+      "opex": 204368750,
+      "outcome": 356330250,
+      "nettProfit": 515228200,
+      "margin": 59.12,
       "months": [
         {
           "month": 1,
@@ -51377,14 +51377,14 @@
         {
           "month": 11,
           "name": "November",
-          "omzet": 36400000,
+          "omzet": 37775000,
           "cash": 7995000,
-          "transfer": 28405000,
-          "cogs": 3651000,
-          "opex": 8348420,
-          "outcome": 11999420,
-          "nettProfit": 24400580,
-          "margin": 67.03,
+          "transfer": 29780000,
+          "cogs": 5314500,
+          "opex": 9619420,
+          "outcome": 14933920,
+          "nettProfit": 22841080,
+          "margin": 60.47,
           "ads": 1500000,
           "rekapItems": [],
           "pembagian": {
@@ -51512,6 +51512,13 @@
               "cash": 775000,
               "transfer": 2425000,
               "total": 3200000
+            },
+            {
+              "tgl": "2026-11-18",
+              "day": 18,
+              "cash": 0,
+              "transfer": 1375000,
+              "total": 1375000
             }
           ],
           "expenses": [
@@ -51662,10 +51669,34 @@
             {
               "tgl": "2026-11-12",
               "day": 12,
+              "desc": "Tukang",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 100000
+            },
+            {
+              "tgl": "2026-11-12",
+              "day": 12,
               "desc": "Listrik",
               "jenis": "OPEX",
               "kategori": "Listrik & Air",
               "nilai": 503000
+            },
+            {
+              "tgl": "2026-11-13",
+              "day": 13,
+              "desc": "Maintanance Atap",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 1171000
+            },
+            {
+              "tgl": "2026-11-15",
+              "day": 15,
+              "desc": "Cetakan",
+              "jenis": "COGS",
+              "kategori": "Cetak Foto & Photo Paper",
+              "nilai": 1663500
             }
           ],
           "sheetName": null
