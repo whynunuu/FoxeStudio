@@ -58690,6 +58690,19 @@
       "pembayaran": "DP",
       "admin": "INDAH",
       "fotografer": ""
+    },
+    {
+      "id": "or_206",
+      "tanggal": "2026-11-18",
+      "client": "Abil",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-18",
+      "cash": 0.0,
+      "transfer": 275000.0,
+      "total": 275000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
     }
   ],
   "shifts": [
@@ -72431,8 +72444,8 @@
       "tanggal": "2026-11-18",
       "leads": 19.0,
       "dp": 3.0,
-      "sesiFoto": 7.0,
-      "transaksi": 10.0
+      "sesiFoto": 8.0,
+      "transaksi": 11.0
     }
   ],
   "kpi": [
@@ -84180,7 +84193,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 38250000.0
+        "omzet": 38525000.0
       }
     ]
   },
@@ -84528,6 +84541,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261118-2146",
+      "mulai": "2026-11-18T21:46:35.812741+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 144 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
     {
       "id": "sy_20261118-1345",
       "mulai": "2026-11-18T13:45:58.488017+00:00",
@@ -85653,7 +85672,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-18T13:45:58.488017+00:00"
+    "last_sync": "2026-11-18T21:46:35.812741+00:00"
   },
   "neracaDetail": [
     {
@@ -169886,7 +169905,7 @@
         "jmlOrang": 13,
         "harga": 325000.0,
         "admin": "IN",
-        "noHp": "",
+        "noHp": "dp 100",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -214492,14 +214511,14 @@
       },
       "2026": {
         "year": "2026",
-        "omzet": 872033450,
+        "omzet": 872308450,
         "cash": 282266000,
-        "transfer": 589767450,
+        "transfer": 590042450,
         "cogs": 151961500,
         "opex": 204368750,
         "outcome": 356330250,
-        "nettProfit": 515703200,
-        "margin": 59.14,
+        "nettProfit": 515978200,
+        "margin": 59.15,
         "months": [
           {
             "month": 1,
@@ -221729,14 +221748,14 @@
           {
             "month": 11,
             "name": "November",
-            "omzet": 38250000,
+            "omzet": 38525000,
             "cash": 7995000,
-            "transfer": 30255000,
+            "transfer": 30530000,
             "cogs": 5314500,
             "opex": 9619420,
             "outcome": 14933920,
-            "nettProfit": 23316080,
-            "margin": 60.96,
+            "nettProfit": 23591080,
+            "margin": 61.24,
             "ads": 1500000,
             "rekapItems": [],
             "pembagian": {
@@ -221869,8 +221888,8 @@
                 "tgl": "2026-11-18",
                 "day": 18,
                 "cash": 0,
-                "transfer": 1850000,
-                "total": 1850000
+                "transfer": 2125000,
+                "total": 2125000
               }
             ],
             "expenses": [
@@ -224746,6 +224765,19 @@
         "pembayaran": "DP",
         "admin": "INDAH",
         "fotografer": ""
+      },
+      {
+        "id": "or_206",
+        "tanggal": "2026-11-18",
+        "client": "Abil",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-18",
+        "cash": 0.0,
+        "transfer": 275000.0,
+        "total": 275000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
       }
     ],
     "shifts": [
@@ -225487,8 +225519,8 @@
         "tanggal": "2026-11-18",
         "leads": 19.0,
         "dp": 3.0,
-        "sesiFoto": 7.0,
-        "transaksi": 10.0
+        "sesiFoto": 8.0,
+        "transaksi": 11.0
       },
       {
         "id": "ld_19",
