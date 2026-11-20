@@ -14,6 +14,7 @@ Tugas & Fungsi:
 import os
 import sys
 import json
+import re
 import time
 import datetime
 import urllib.request
@@ -357,7 +358,7 @@ class FoxeSentry:
     def check_cp5_web_and_live_ping(self):
         self.log("CP-5", "Memeriksa build index.html dan live endpoint...")
 
-        # 1. Cek index.html lokal
+        # 1. Cek index.html lokal (+ aset Vite SPA jika berbasis Pearl Prism Frost)
         if not os.path.exists(INDEX_HTML):
             self.critical_errors.append({
                 "cp": "CP-5 (Web Build)",
@@ -367,7 +368,47 @@ class FoxeSentry:
             })
         else:
             sz = os.path.getsize(INDEX_HTML)
-            if sz < 20000:
+            try:
+                with open(INDEX_HTML, "r", encoding="utf-8") as f_idx:
+                    html_txt = f_idx.read()
+            except Exception:
+                html_txt = ""
+
+            if 'id="root"' in html_txt and "./assets/" in html_txt:
+                refs = sorted(set(re.findall(r'(?:src|href)=["\'](\./assets/[^"\']+)["\']', html_txt)))
+                required_glass = [
+                    "./assets/glass/padlock-3d-titanium.png",
+                    "./assets/glass/logo-foxe.png",
+                ]
+                check_paths = sorted(set(refs + required_glass))
+                missing_assets = []
+                total_bytes = sz
+                for rel in check_paths:
+                    norm_rel = rel[2:] if rel.startswith("./") else rel
+                    if not os.path.isfile(norm_rel) or os.path.getsize(norm_rel) <= 0:
+                        missing_assets.append(rel)
+                    elif rel in refs:
+                        total_bytes += os.path.getsize(norm_rel)
+
+                if missing_assets:
+                    self.critical_errors.append({
+                        "cp": "CP-5 (Web Build)",
+                        "file": INDEX_HTML,
+                        "desc": f"Aset Pearl Prism SPA hilang atau kosong: {', '.join(missing_assets)}",
+                        "action": "Pastikan folder assets/ lengkap dan jalankan ulang 'python assemble_app.py'."
+                    })
+                elif total_bytes < 50000:
+                    self.critical_errors.append({
+                        "cp": "CP-5 (Web Build)",
+                        "file": INDEX_HTML,
+                        "desc": f"Payload bundle SPA terlalu kecil ({total_bytes} bytes). Kemungkinan build korup.",
+                        "action": "Build ulang SPA dan jalankan assemble_app.py."
+                    })
+                else:
+                    self.passed_checks.append(
+                        f"Web Frontend: Pearl Prism SPA Siap & Utuh (HTML + {len(refs)} aset, {total_bytes//1024} KB)"
+                    )
+            elif sz < 20000:
                 self.critical_errors.append({
                     "cp": "CP-5 (Web Build)",
                     "file": INDEX_HTML,
