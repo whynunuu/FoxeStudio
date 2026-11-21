@@ -59028,6 +59028,32 @@
       "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_232",
+      "tanggal": "2026-11-21",
+      "client": "Putri",
+      "paket": "Couple A",
+      "tanggalFoto": "2026-11-22",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_233",
+      "tanggal": "2026-11-21",
+      "client": "Pancar",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-21",
+      "cash": 0.0,
+      "transfer": 800000.0,
+      "total": 800000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -66578,6 +66604,18 @@
       "tanggal": "2026-11-21",
       "nama": "ADIF",
       "slot": 1
+    },
+    {
+      "id": "sh_85",
+      "tanggal": "2026-11-22",
+      "nama": "INDAH",
+      "slot": 1
+    },
+    {
+      "id": "sh_86",
+      "tanggal": "2026-11-22",
+      "nama": "INDAH",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -72853,6 +72891,14 @@
       "dp": 4.0,
       "sesiFoto": 3.0,
       "transaksi": 8.0
+    },
+    {
+      "id": "ld_21",
+      "tanggal": "2026-11-21",
+      "leads": 23.0,
+      "dp": 3.0,
+      "sesiFoto": 4.0,
+      "transaksi": 7.0
     }
   ],
   "kpi": [
@@ -84600,7 +84646,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 44610000.0
+        "omzet": 45510000.0
       }
     ]
   },
@@ -84949,10 +84995,16 @@
   ],
   "sync": [
     {
-      "id": "sy_20261121-1320",
-      "mulai": "2026-11-21T13:20:03.108917+00:00",
+      "id": "sy_20261121-2026",
+      "mulai": "2026-11-21T20:26:27.062211+00:00",
       "status": "berjalan",
       "ringkas": "Sinkronisasi sedang berlangsung..."
+    },
+    {
+      "id": "sy_20261121-1320",
+      "mulai": "2026-11-21T13:20:03.108917+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 144 pos pengeluaran Neraca, 279 pipeline Okt."
     },
     {
       "id": "sy_20261121-0834",
@@ -86133,7 +86185,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-21T08:34:48.020434+00:00"
+    "last_sync": "2026-11-21T13:20:03.108917+00:00"
   },
   "neracaDetail": [
     {
@@ -106515,18 +106567,18 @@
           "row_idx": 16,
           "nama": "Indah",
           "job": "Admin",
-          "q": 20.0,
+          "q": 22.0,
           "q_raw": 0.0,
-          "actual_shift": 20,
+          "actual_shift": 22,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 800000.0,
+          "total_gaji": 880000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 800000.0,
+          "thp": 880000.0,
           "status": "Draft"
         },
         {
@@ -106683,13 +106735,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 11510000.0,
+        "total_gaji": 11590000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 11510000.0,
+        "grand_total_thp": 11590000.0,
         "total_karyawan": 12
       }
     },
@@ -116918,18 +116970,18 @@
         "row_idx": 16,
         "nama": "Indah",
         "job": "Admin",
-        "q": 20.0,
+        "q": 22.0,
         "q_raw": 0.0,
-        "actual_shift": 20,
+        "actual_shift": 22,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 800000.0,
+        "total_gaji": 880000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 800000.0,
+        "thp": 880000.0,
         "status": "Draft"
       },
       {
@@ -170588,12 +170640,12 @@
         "admin": "IN",
         "noHp": "dp 100",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
@@ -170621,6 +170673,28 @@
       {
         "id": "sc_bk_111",
         "tgl": "2026-11-22",
+        "waktu": "12:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Putri",
+        "paket": "Couple A",
+        "paketRaw": "Couple A",
+        "jmlOrang": 1,
+        "harga": 150000.0,
+        "admin": "IN",
+        "noHp": "dp 100 limbo",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_112",
+        "tgl": "2026-11-22",
         "waktu": "13:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
@@ -170641,7 +170715,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_112",
+        "id": "sc_bk_113",
         "tgl": "2026-11-22",
         "waktu": "14:20",
         "studio": "Studio 1",
@@ -170663,7 +170737,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_113",
+        "id": "sc_bk_114",
         "tgl": "2026-11-23",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -170685,7 +170759,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_114",
+        "id": "sc_bk_115",
         "tgl": "2026-11-24",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -170707,7 +170781,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_115",
+        "id": "sc_bk_116",
         "tgl": "2026-11-24",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -170729,7 +170803,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_116",
+        "id": "sc_bk_117",
         "tgl": "2026-11-24",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -170751,7 +170825,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_117",
+        "id": "sc_bk_118",
         "tgl": "2026-11-24",
         "waktu": "14:00",
         "studio": "Studio 1",
@@ -170773,7 +170847,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_118",
+        "id": "sc_bk_119",
         "tgl": "2026-11-24",
         "waktu": "15:00",
         "studio": "Studio 1",
@@ -170795,7 +170869,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_119",
+        "id": "sc_bk_120",
         "tgl": "2026-11-24",
         "waktu": "12:00",
         "studio": "Studio 2",
@@ -170817,7 +170891,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_120",
+        "id": "sc_bk_121",
         "tgl": "2026-11-24",
         "waktu": "13:20",
         "studio": "Studio 2",
@@ -170839,7 +170913,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_121",
+        "id": "sc_bk_122",
         "tgl": "2026-11-24",
         "waktu": "13:40",
         "studio": "Studio 2",
@@ -170861,7 +170935,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_122",
+        "id": "sc_bk_123",
         "tgl": "2026-11-24",
         "waktu": "14:00",
         "studio": "Studio 2",
@@ -170883,7 +170957,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_123",
+        "id": "sc_bk_124",
         "tgl": "2026-11-24",
         "waktu": "13:20",
         "studio": "Studio 3",
@@ -170905,7 +170979,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_124",
+        "id": "sc_bk_125",
         "tgl": "2026-11-25",
         "waktu": "19:00",
         "studio": "Studio 1",
@@ -170927,7 +171001,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_125",
+        "id": "sc_bk_126",
         "tgl": "2026-11-26",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -170949,7 +171023,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_126",
+        "id": "sc_bk_127",
         "tgl": "2026-11-26",
         "waktu": "13:00",
         "studio": "Studio 1",
@@ -170971,7 +171045,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_127",
+        "id": "sc_bk_128",
         "tgl": "2026-11-26",
         "waktu": "13:20",
         "studio": "Studio 1",
@@ -170993,7 +171067,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_128",
+        "id": "sc_bk_129",
         "tgl": "2026-11-26",
         "waktu": "13:40",
         "studio": "Studio 1",
@@ -171015,7 +171089,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_129",
+        "id": "sc_bk_130",
         "tgl": "2026-11-29",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -171037,7 +171111,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_130",
+        "id": "sc_bk_131",
         "tgl": "2026-11-29",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -215236,14 +215310,14 @@
       },
       "2026": {
         "year": "2026",
-        "omzet": 878393450,
+        "omzet": 879293450,
         "cash": 284716000,
-        "transfer": 593677450,
+        "transfer": 594577450,
         "cogs": 151961500,
         "opex": 204368750,
         "outcome": 356330250,
-        "nettProfit": 522063200,
-        "margin": 59.43,
+        "nettProfit": 522963200,
+        "margin": 59.48,
         "months": [
           {
             "month": 1,
@@ -222473,14 +222547,14 @@
           {
             "month": 11,
             "name": "November",
-            "omzet": 44610000,
+            "omzet": 45510000,
             "cash": 10445000,
-            "transfer": 34165000,
+            "transfer": 35065000,
             "cogs": 5314500,
             "opex": 9619420,
             "outcome": 14933920,
-            "nettProfit": 29676080,
-            "margin": 66.52,
+            "nettProfit": 30576080,
+            "margin": 67.19,
             "ads": 1500000,
             "rekapItems": [],
             "pembagian": {
@@ -222634,8 +222708,8 @@
                 "tgl": "2026-11-21",
                 "day": 21,
                 "cash": 1150000,
-                "transfer": 300000,
-                "total": 1450000
+                "transfer": 1200000,
+                "total": 2350000
               }
             ],
             "expenses": [
@@ -225849,6 +225923,32 @@
         "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_232",
+        "tanggal": "2026-11-21",
+        "client": "Putri",
+        "paket": "Couple A",
+        "tanggalFoto": "2026-11-22",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_233",
+        "tanggal": "2026-11-21",
+        "client": "Pancar",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-21",
+        "cash": 0.0,
+        "transfer": 800000.0,
+        "total": 800000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "ADIF"
       }
     ],
     "shifts": [
@@ -226355,6 +226455,18 @@
         "tanggal": "2026-11-21",
         "nama": "ADIF",
         "slot": 1
+      },
+      {
+        "id": "sh_85",
+        "tanggal": "2026-11-22",
+        "nama": "INDAH",
+        "slot": 1
+      },
+      {
+        "id": "sh_86",
+        "tanggal": "2026-11-22",
+        "nama": "INDAH",
+        "slot": 1
       }
     ],
     "cashControl": [
@@ -226678,10 +226790,10 @@
       {
         "id": "ld_21",
         "tanggal": "2026-11-21",
-        "leads": 0.0,
-        "dp": 0.0,
-        "sesiFoto": 0.0,
-        "transaksi": 0.0
+        "leads": 23.0,
+        "dp": 3.0,
+        "sesiFoto": 4.0,
+        "transaksi": 7.0
       },
       {
         "id": "ld_22",
