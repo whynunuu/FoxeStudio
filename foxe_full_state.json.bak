@@ -59015,6 +59015,19 @@
       "pembayaran": "Lunas",
       "admin": "AMEL",
       "fotografer": "SAKA"
+    },
+    {
+      "id": "or_231",
+      "tanggal": "2026-11-21",
+      "client": "Karina Putri",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-25",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -66551,7 +66564,19 @@
     {
       "id": "sh_82",
       "tanggal": "2026-11-21",
+      "nama": "INDAH",
+      "slot": 1
+    },
+    {
+      "id": "sh_83",
+      "tanggal": "2026-11-21",
       "nama": "SAKA",
+      "slot": 1
+    },
+    {
+      "id": "sh_84",
+      "tanggal": "2026-11-21",
+      "nama": "ADIF",
       "slot": 1
     }
   ],
@@ -84575,7 +84600,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 44510000.0
+        "omzet": 44610000.0
       }
     ]
   },
@@ -84924,10 +84949,16 @@
   ],
   "sync": [
     {
-      "id": "sy_20261121-0834",
-      "mulai": "2026-11-21T08:34:48.020434+00:00",
+      "id": "sy_20261121-1320",
+      "mulai": "2026-11-21T13:20:03.108917+00:00",
       "status": "berjalan",
       "ringkas": "Sinkronisasi sedang berlangsung..."
+    },
+    {
+      "id": "sy_20261121-0834",
+      "mulai": "2026-11-21T08:34:48.020434+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 144 pos pengeluaran Neraca, 279 pipeline Okt."
     },
     {
       "id": "sy_20261121-1414",
@@ -86102,7 +86133,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-21T07:14:24.285796+00:00"
+    "last_sync": "2026-11-21T08:34:48.020434+00:00"
   },
   "neracaDetail": [
     {
@@ -106427,18 +106458,18 @@
           "row_idx": 10,
           "nama": "Adif",
           "job": "Fotografer",
-          "q": 20.0,
+          "q": 21.0,
           "q_raw": 0.0,
-          "actual_shift": 20,
+          "actual_shift": 21,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 800000.0,
+          "total_gaji": 840000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 800000.0,
+          "thp": 840000.0,
           "status": "Draft"
         },
         {
@@ -106484,18 +106515,18 @@
           "row_idx": 16,
           "nama": "Indah",
           "job": "Admin",
-          "q": 19.0,
+          "q": 20.0,
           "q_raw": 0.0,
-          "actual_shift": 19,
+          "actual_shift": 20,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 760000.0,
+          "total_gaji": 800000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 760000.0,
+          "thp": 800000.0,
           "status": "Draft"
         },
         {
@@ -106652,13 +106683,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 11430000.0,
+        "total_gaji": 11510000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 11430000.0,
+        "grand_total_thp": 11510000.0,
         "total_karyawan": 12
       }
     },
@@ -116830,18 +116861,18 @@
         "row_idx": 10,
         "nama": "Adif",
         "job": "Fotografer",
-        "q": 20.0,
+        "q": 21.0,
         "q_raw": 0.0,
-        "actual_shift": 20,
+        "actual_shift": 21,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 800000.0,
+        "total_gaji": 840000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 800000.0,
+        "thp": 840000.0,
         "status": "Draft"
       },
       {
@@ -116887,18 +116918,18 @@
         "row_idx": 16,
         "nama": "Indah",
         "job": "Admin",
-        "q": 19.0,
+        "q": 20.0,
         "q_raw": 0.0,
-        "actual_shift": 19,
+        "actual_shift": 20,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 760000.0,
+        "total_gaji": 800000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 760000.0,
+        "thp": 800000.0,
         "status": "Draft"
       },
       {
@@ -215205,13 +215236,13 @@
       },
       "2026": {
         "year": "2026",
-        "omzet": 878293450,
+        "omzet": 878393450,
         "cash": 284716000,
-        "transfer": 593577450,
+        "transfer": 593677450,
         "cogs": 151961500,
         "opex": 204368750,
         "outcome": 356330250,
-        "nettProfit": 521963200,
+        "nettProfit": 522063200,
         "margin": 59.43,
         "months": [
           {
@@ -222442,14 +222473,14 @@
           {
             "month": 11,
             "name": "November",
-            "omzet": 44510000,
+            "omzet": 44610000,
             "cash": 10445000,
-            "transfer": 34065000,
+            "transfer": 34165000,
             "cogs": 5314500,
             "opex": 9619420,
             "outcome": 14933920,
-            "nettProfit": 29576080,
-            "margin": 66.45,
+            "nettProfit": 29676080,
+            "margin": 66.52,
             "ads": 1500000,
             "rekapItems": [],
             "pembagian": {
@@ -222603,8 +222634,8 @@
                 "tgl": "2026-11-21",
                 "day": 21,
                 "cash": 1150000,
-                "transfer": 200000,
-                "total": 1350000
+                "transfer": 300000,
+                "total": 1450000
               }
             ],
             "expenses": [
@@ -225805,6 +225836,19 @@
         "pembayaran": "Lunas",
         "admin": "AMEL",
         "fotografer": "SAKA"
+      },
+      {
+        "id": "or_231",
+        "tanggal": "2026-11-21",
+        "client": "Karina Putri",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-25",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -226297,7 +226341,19 @@
       {
         "id": "sh_82",
         "tanggal": "2026-11-21",
+        "nama": "INDAH",
+        "slot": 1
+      },
+      {
+        "id": "sh_83",
+        "tanggal": "2026-11-21",
         "nama": "SAKA",
+        "slot": 1
+      },
+      {
+        "id": "sh_84",
+        "tanggal": "2026-11-21",
+        "nama": "ADIF",
         "slot": 1
       }
     ],
