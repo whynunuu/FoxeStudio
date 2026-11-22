@@ -67916,6 +67916,42 @@
       "nilai": 1663500.0
     },
     {
+      "id": "ex_nrc_23",
+      "tanggal": "2026-11-17",
+      "bulan": "2026-11",
+      "jenis": "OPEX",
+      "kategori": "Maintenance Studio & Equipment",
+      "deskripsi": "Cat Limbo",
+      "nilai": 154000.0
+    },
+    {
+      "id": "ex_nrc_24",
+      "tanggal": "2026-11-18",
+      "bulan": "2026-11",
+      "jenis": "OPEX",
+      "kategori": "Marketing / Ads / KOL",
+      "deskripsi": "Ads",
+      "nilai": 500000.0
+    },
+    {
+      "id": "ex_nrc_25",
+      "tanggal": "2026-11-19",
+      "bulan": "2026-11",
+      "jenis": "COGS",
+      "kategori": "Frame / Album / Packaging",
+      "deskripsi": "Frame",
+      "nilai": 950000.0
+    },
+    {
+      "id": "ex_nrc_26",
+      "tanggal": "2026-11-20",
+      "bulan": "2026-11",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 503000.0
+    },
+    {
       "id": "ex_nrc_1",
       "tanggal": "2026-01-01",
       "bulan": "2026-01",
@@ -72906,7 +72942,7 @@
       "id": "kp_1",
       "nama": "ADIF",
       "role": "Fotografer 1",
-      "hariDinilai": 18,
+      "hariDinilai": 19,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -72918,7 +72954,7 @@
       "id": "kp_2",
       "nama": "AMEL",
       "role": "Admin 2",
-      "hariDinilai": 17,
+      "hariDinilai": 18,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -72930,7 +72966,7 @@
       "id": "kp_3",
       "nama": "INDAH",
       "role": "Admin 1",
-      "hariDinilai": 17,
+      "hariDinilai": 18,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -72942,7 +72978,7 @@
       "id": "kp_4",
       "nama": "SAKA",
       "role": "Fotografer 2",
-      "hariDinilai": 16,
+      "hariDinilai": 17,
       "disiplin": 5.0,
       "akurasi": 5.0,
       "sop": 5.0,
@@ -84995,10 +85031,16 @@
   ],
   "sync": [
     {
-      "id": "sy_20261121-2026",
-      "mulai": "2026-11-21T20:26:27.062211+00:00",
+      "id": "sy_20261122-0830",
+      "mulai": "2026-11-22T08:30:21.591122+00:00",
       "status": "berjalan",
       "ringkas": "Sinkronisasi sedang berlangsung..."
+    },
+    {
+      "id": "sy_20261121-2026",
+      "mulai": "2026-11-21T20:26:27.062211+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 148 pos pengeluaran Neraca, 279 pipeline Okt."
     },
     {
       "id": "sy_20261121-1320",
@@ -86185,7 +86227,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-21T13:20:03.108917+00:00"
+    "last_sync": "2026-11-21T20:26:27.062211+00:00"
   },
   "neracaDetail": [
     {
@@ -106164,6 +106206,42 @@
           "kategori": "Cetak Foto & Photo Paper",
           "deskripsi": "Cetakan",
           "nilai": 1663500.0
+        },
+        {
+          "id": "ex_nrc_23",
+          "tanggal": "2026-11-17",
+          "bulan": "2026-11",
+          "jenis": "OPEX",
+          "kategori": "Maintenance Studio & Equipment",
+          "deskripsi": "Cat Limbo",
+          "nilai": 154000.0
+        },
+        {
+          "id": "ex_nrc_24",
+          "tanggal": "2026-11-18",
+          "bulan": "2026-11",
+          "jenis": "OPEX",
+          "kategori": "Marketing / Ads / KOL",
+          "deskripsi": "Ads",
+          "nilai": 500000.0
+        },
+        {
+          "id": "ex_nrc_25",
+          "tanggal": "2026-11-19",
+          "bulan": "2026-11",
+          "jenis": "COGS",
+          "kategori": "Frame / Album / Packaging",
+          "deskripsi": "Frame",
+          "nilai": 950000.0
+        },
+        {
+          "id": "ex_nrc_26",
+          "tanggal": "2026-11-20",
+          "bulan": "2026-11",
+          "jenis": "OPEX",
+          "kategori": "Listrik & Air",
+          "deskripsi": "Listrik",
+          "nilai": 503000.0
         }
       ],
       "detail": [
@@ -106315,9 +106393,9 @@
           "tgl": 7,
           "tanggal_iso": "2026-11-07",
           "first_of_day": false,
-          "masuk": 0.0,
+          "masuk": 1275000.0,
           "keluar": 154000.0,
-          "balance": 8921080.0,
+          "balance": 10196080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Cat Limbo"
         },
@@ -106328,7 +106406,7 @@
           "first_of_day": true,
           "masuk": 1325000.0,
           "keluar": 1751000.0,
-          "balance": 8495080.0,
+          "balance": 9770080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Cetakan"
         },
@@ -106339,7 +106417,7 @@
           "first_of_day": false,
           "masuk": 825000.0,
           "keluar": 1200000.0,
-          "balance": 8120080.0,
+          "balance": 9395080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Fiber Atap Concrete"
         },
@@ -106350,7 +106428,7 @@
           "first_of_day": true,
           "masuk": 1295000.0,
           "keluar": 110000.0,
-          "balance": 9305080.0,
+          "balance": 10580080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Serv Exhaust"
         },
@@ -106361,7 +106439,7 @@
           "first_of_day": false,
           "masuk": 405000.0,
           "keluar": 0.0,
-          "balance": 9710080.0,
+          "balance": 10985080.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -106372,7 +106450,7 @@
           "first_of_day": true,
           "masuk": 500000.0,
           "keluar": 0.0,
-          "balance": 10210080.0,
+          "balance": 11485080.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -106383,7 +106461,7 @@
           "first_of_day": false,
           "masuk": 1100000.0,
           "keluar": 0.0,
-          "balance": 11310080.0,
+          "balance": 12585080.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -106394,7 +106472,7 @@
           "first_of_day": true,
           "masuk": 1050000.0,
           "keluar": 500000.0,
-          "balance": 11860080.0,
+          "balance": 13135080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Ads"
         },
@@ -106405,7 +106483,7 @@
           "first_of_day": false,
           "masuk": 210000.0,
           "keluar": 950000.0,
-          "balance": 11120080.0,
+          "balance": 12395080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Frame"
         },
@@ -106416,7 +106494,7 @@
           "first_of_day": true,
           "masuk": 2575000.0,
           "keluar": 256500.0,
-          "balance": 13438580.0,
+          "balance": 14713580.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Cat Abu Calmblue"
         },
@@ -106425,9 +106503,9 @@
           "tgl": 12,
           "tanggal_iso": "2026-11-12",
           "first_of_day": false,
-          "masuk": 350000.0,
+          "masuk": 500000.0,
           "keluar": 750000.0,
-          "balance": 13038580.0,
+          "balance": 14463580.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Listrik"
         },
@@ -106438,7 +106516,7 @@
           "first_of_day": false,
           "masuk": 0.0,
           "keluar": 100000.0,
-          "balance": 12938580.0,
+          "balance": 14363580.0,
           "ket_masuk": "Cash",
           "ket_keluar": "Tukang"
         },
@@ -106449,7 +106527,7 @@
           "first_of_day": false,
           "masuk": 0.0,
           "keluar": 503000.0,
-          "balance": 12435580.0,
+          "balance": 13860580.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Listrik"
         },
@@ -106460,7 +106538,7 @@
           "first_of_day": true,
           "masuk": 450000.0,
           "keluar": 1171000.0,
-          "balance": 11714580.0,
+          "balance": 13139580.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Maintanance Atap"
         },
@@ -106471,7 +106549,7 @@
           "first_of_day": true,
           "masuk": 1625000.0,
           "keluar": 0.0,
-          "balance": 13339580.0,
+          "balance": 14764580.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -106482,7 +106560,7 @@
           "first_of_day": false,
           "masuk": 300000.0,
           "keluar": 0.0,
-          "balance": 13639580.0,
+          "balance": 15064580.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -106493,16 +106571,93 @@
           "first_of_day": true,
           "masuk": 1910000.0,
           "keluar": 1663500.0,
-          "balance": 13886080.0,
+          "balance": 15311080.0,
           "ket_masuk": "Trasfer",
           "ket_keluar": "Cetakan"
+        },
+        {
+          "id": "det_nrc_31",
+          "tgl": 15,
+          "tanggal_iso": "2026-11-15",
+          "first_of_day": false,
+          "masuk": 1080000.0,
+          "keluar": 503000.0,
+          "balance": 15888080.0,
+          "ket_masuk": "",
+          "ket_keluar": ""
+        },
+        {
+          "id": "det_nrc_32",
+          "tgl": 16,
+          "tanggal_iso": "2026-11-16",
+          "first_of_day": true,
+          "masuk": 1875000.0,
+          "keluar": 0.0,
+          "balance": 17763080.0,
+          "ket_masuk": "",
+          "ket_keluar": ""
+        },
+        {
+          "id": "det_nrc_33",
+          "tgl": 17,
+          "tanggal_iso": "2026-11-17",
+          "first_of_day": true,
+          "masuk": 2425000.0,
+          "keluar": 154000.0,
+          "balance": 20034080.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Cat Limbo"
+        },
+        {
+          "id": "det_nrc_34",
+          "tgl": 17,
+          "tanggal_iso": "2026-11-17",
+          "first_of_day": false,
+          "masuk": 775000.0,
+          "keluar": 0.0,
+          "balance": 20809080.0,
+          "ket_masuk": "",
+          "ket_keluar": ""
+        },
+        {
+          "id": "det_nrc_35",
+          "tgl": 18,
+          "tanggal_iso": "2026-11-18",
+          "first_of_day": true,
+          "masuk": 2125000.0,
+          "keluar": 500000.0,
+          "balance": 22434080.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Ads"
+        },
+        {
+          "id": "det_nrc_36",
+          "tgl": 19,
+          "tanggal_iso": "2026-11-19",
+          "first_of_day": true,
+          "masuk": 1935000.0,
+          "keluar": 950000.0,
+          "balance": 23419080.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Frame"
+        },
+        {
+          "id": "det_nrc_37",
+          "tgl": 20,
+          "tanggal_iso": "2026-11-20",
+          "first_of_day": true,
+          "masuk": 1400000.0,
+          "keluar": 503000.0,
+          "balance": 24316080.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Listrik"
         }
       ],
       "summary": {
-        "total_masuk": 28820000.0,
-        "total_keluar": 14933920.0,
-        "ending_balance": 13886080.0,
-        "total_rows": 30
+        "total_masuk": 41860000.0,
+        "total_keluar": 17543920.0,
+        "ending_balance": 24316080.0,
+        "total_rows": 37
       },
       "rosterGaji": [
         {
@@ -215313,11 +215468,11 @@
         "omzet": 879293450,
         "cash": 284716000,
         "transfer": 594577450,
-        "cogs": 151961500,
-        "opex": 204368750,
-        "outcome": 356330250,
-        "nettProfit": 522963200,
-        "margin": 59.48,
+        "cogs": 152911500,
+        "opex": 205525750,
+        "outcome": 358437250,
+        "nettProfit": 520856200,
+        "margin": 59.24,
         "months": [
           {
             "month": 1,
@@ -222550,12 +222705,12 @@
             "omzet": 45510000,
             "cash": 10445000,
             "transfer": 35065000,
-            "cogs": 5314500,
-            "opex": 9619420,
-            "outcome": 14933920,
-            "nettProfit": 30576080,
-            "margin": 67.19,
-            "ads": 1500000,
+            "cogs": 6264500,
+            "opex": 10776420,
+            "outcome": 17040920,
+            "nettProfit": 28469080,
+            "margin": 62.56,
+            "ads": 2000000,
             "rekapItems": [],
             "pembagian": {
               "investor": 0,
@@ -222888,6 +223043,38 @@
                 "jenis": "COGS",
                 "kategori": "Cetak Foto & Photo Paper",
                 "nilai": 1663500
+              },
+              {
+                "tgl": "2026-11-17",
+                "day": 17,
+                "desc": "Cat Limbo",
+                "jenis": "OPEX",
+                "kategori": "Maintenance Studio & Equipment",
+                "nilai": 154000
+              },
+              {
+                "tgl": "2026-11-18",
+                "day": 18,
+                "desc": "Ads",
+                "jenis": "OPEX",
+                "kategori": "Marketing / Ads / KOL",
+                "nilai": 500000
+              },
+              {
+                "tgl": "2026-11-19",
+                "day": 19,
+                "desc": "Frame",
+                "jenis": "COGS",
+                "kategori": "Frame / Album / Packaging",
+                "nilai": 950000
+              },
+              {
+                "tgl": "2026-11-20",
+                "day": 20,
+                "desc": "Listrik",
+                "jenis": "OPEX",
+                "kategori": "Listrik & Air",
+                "nilai": 503000
               }
             ],
             "sheetName": null
@@ -226881,7 +227068,7 @@
         "id": "kp_1",
         "nama": "ADIF",
         "role": "Fotografer 1",
-        "hariDinilai": 18,
+        "hariDinilai": 19,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -226893,7 +227080,7 @@
         "id": "kp_2",
         "nama": "AMEL",
         "role": "Admin 2",
-        "hariDinilai": 17,
+        "hariDinilai": 18,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -226905,7 +227092,7 @@
         "id": "kp_3",
         "nama": "INDAH",
         "role": "Admin 1",
-        "hariDinilai": 17,
+        "hariDinilai": 18,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -226917,7 +227104,7 @@
         "id": "kp_4",
         "nama": "SAKA",
         "role": "Fotografer 2",
-        "hariDinilai": 16,
+        "hariDinilai": 17,
         "disiplin": 5.0,
         "akurasi": 5.0,
         "sop": 5.0,
@@ -226929,6 +227116,7 @@
     "kpi_raw": {
       "AMEL": {
         "disiplin": [
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -227042,6 +227230,7 @@
           5.0,
           5.0,
           5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
@@ -227138,6 +227327,7 @@
           5.0,
           5.0,
           5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
@@ -227215,6 +227405,7 @@
       },
       "ADIF": {
         "disiplin": [
+          5.0,
           5.0,
           5.0,
           5.0,
