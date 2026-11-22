@@ -68059,6 +68059,15 @@
     },
     {
       "id": "ex_nrc_23",
+      "tanggal": "2026-11-15",
+      "bulan": "2026-11",
+      "jenis": "OPEX",
+      "kategori": "Listrik & Air",
+      "deskripsi": "Listrik",
+      "nilai": 503000.0
+    },
+    {
+      "id": "ex_nrc_24",
       "tanggal": "2026-11-17",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -68067,7 +68076,16 @@
       "nilai": 154000.0
     },
     {
-      "id": "ex_nrc_24",
+      "id": "ex_nrc_25",
+      "tanggal": "2026-11-17",
+      "bulan": "2026-11",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Tukang",
+      "nilai": 50000.0
+    },
+    {
+      "id": "ex_nrc_26",
       "tanggal": "2026-11-18",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -68076,7 +68094,7 @@
       "nilai": 500000.0
     },
     {
-      "id": "ex_nrc_25",
+      "id": "ex_nrc_27",
       "tanggal": "2026-11-19",
       "bulan": "2026-11",
       "jenis": "COGS",
@@ -68085,7 +68103,7 @@
       "nilai": 950000.0
     },
     {
-      "id": "ex_nrc_26",
+      "id": "ex_nrc_28",
       "tanggal": "2026-11-20",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -85181,6 +85199,12 @@
   ],
   "sync": [
     {
+      "id": "sy_20261122-2039",
+      "mulai": "2026-11-22T20:39:06.456633+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 150 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
+    {
       "id": "sy_20261122-1311",
       "mulai": "2026-11-22T13:11:48.243844+00:00",
       "status": "sukses",
@@ -86383,7 +86407,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-22T13:11:48.243844+00:00"
+    "last_sync": "2026-11-22T20:39:06.456633+00:00"
   },
   "neracaDetail": [
     {
@@ -106365,6 +106389,15 @@
         },
         {
           "id": "ex_nrc_23",
+          "tanggal": "2026-11-15",
+          "bulan": "2026-11",
+          "jenis": "OPEX",
+          "kategori": "Listrik & Air",
+          "deskripsi": "Listrik",
+          "nilai": 503000.0
+        },
+        {
+          "id": "ex_nrc_24",
           "tanggal": "2026-11-17",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106373,7 +106406,16 @@
           "nilai": 154000.0
         },
         {
-          "id": "ex_nrc_24",
+          "id": "ex_nrc_25",
+          "tanggal": "2026-11-17",
+          "bulan": "2026-11",
+          "jenis": "OPEX",
+          "kategori": "OPEX Lainnya",
+          "deskripsi": "Tukang",
+          "nilai": 50000.0
+        },
+        {
+          "id": "ex_nrc_26",
           "tanggal": "2026-11-18",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106382,7 +106424,7 @@
           "nilai": 500000.0
         },
         {
-          "id": "ex_nrc_25",
+          "id": "ex_nrc_27",
           "tanggal": "2026-11-19",
           "bulan": "2026-11",
           "jenis": "COGS",
@@ -106391,7 +106433,7 @@
           "nilai": 950000.0
         },
         {
-          "id": "ex_nrc_26",
+          "id": "ex_nrc_28",
           "tanggal": "2026-11-20",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106739,8 +106781,8 @@
           "masuk": 1080000.0,
           "keluar": 503000.0,
           "balance": 15888080.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Listrik"
         },
         {
           "id": "det_nrc_32",
@@ -106770,10 +106812,10 @@
           "tanggal_iso": "2026-11-17",
           "first_of_day": false,
           "masuk": 775000.0,
-          "keluar": 0.0,
-          "balance": 20809080.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
+          "keluar": 50000.0,
+          "balance": 20759080.0,
+          "ket_masuk": "Cash",
+          "ket_keluar": "Tukang"
         },
         {
           "id": "det_nrc_35",
@@ -106782,7 +106824,7 @@
           "first_of_day": true,
           "masuk": 2125000.0,
           "keluar": 500000.0,
-          "balance": 22434080.0,
+          "balance": 22384080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Ads"
         },
@@ -106793,7 +106835,7 @@
           "first_of_day": true,
           "masuk": 1935000.0,
           "keluar": 950000.0,
-          "balance": 23419080.0,
+          "balance": 23369080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Frame"
         },
@@ -106804,15 +106846,15 @@
           "first_of_day": true,
           "masuk": 1400000.0,
           "keluar": 503000.0,
-          "balance": 24316080.0,
+          "balance": 24266080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Listrik"
         }
       ],
       "summary": {
         "total_masuk": 41860000.0,
-        "total_keluar": 17543920.0,
-        "ending_balance": 24316080.0,
+        "total_keluar": 17593920.0,
+        "ending_balance": 24266080.0,
         "total_rows": 37
       },
       "rosterGaji": [
@@ -215691,10 +215733,10 @@
         "cash": 285666000,
         "transfer": 597152450,
         "cogs": 152911500,
-        "opex": 205525750,
-        "outcome": 358437250,
-        "nettProfit": 524381200,
-        "margin": 59.4,
+        "opex": 206078750,
+        "outcome": 358990250,
+        "nettProfit": 523828200,
+        "margin": 59.34,
         "months": [
           {
             "month": 1,
@@ -222928,10 +222970,10 @@
             "cash": 11395000,
             "transfer": 37640000,
             "cogs": 6264500,
-            "opex": 10776420,
-            "outcome": 17040920,
-            "nettProfit": 31994080,
-            "margin": 65.25,
+            "opex": 11329420,
+            "outcome": 17593920,
+            "nettProfit": 31441080,
+            "margin": 64.12,
             "ads": 2000000,
             "rekapItems": [],
             "pembagian": {
@@ -223274,12 +223316,28 @@
                 "nilai": 1663500
               },
               {
+                "tgl": "2026-11-15",
+                "day": 15,
+                "desc": "Listrik",
+                "jenis": "OPEX",
+                "kategori": "Listrik & Air",
+                "nilai": 503000
+              },
+              {
                 "tgl": "2026-11-17",
                 "day": 17,
                 "desc": "Cat Limbo",
                 "jenis": "OPEX",
                 "kategori": "Maintenance Studio & Equipment",
                 "nilai": 154000
+              },
+              {
+                "tgl": "2026-11-17",
+                "day": 17,
+                "desc": "Tukang",
+                "jenis": "OPEX",
+                "kategori": "OPEX Lainnya",
+                "nilai": 50000
               },
               {
                 "tgl": "2026-11-18",

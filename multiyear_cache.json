@@ -44144,10 +44144,10 @@
       "cash": 285666000,
       "transfer": 597152450,
       "cogs": 152911500,
-      "opex": 205525750,
-      "outcome": 358437250,
-      "nettProfit": 524381200,
-      "margin": 59.4,
+      "opex": 206078750,
+      "outcome": 358990250,
+      "nettProfit": 523828200,
+      "margin": 59.34,
       "months": [
         {
           "month": 1,
@@ -51381,10 +51381,10 @@
           "cash": 11395000,
           "transfer": 37640000,
           "cogs": 6264500,
-          "opex": 10776420,
-          "outcome": 17040920,
-          "nettProfit": 31994080,
-          "margin": 65.25,
+          "opex": 11329420,
+          "outcome": 17593920,
+          "nettProfit": 31441080,
+          "margin": 64.12,
           "ads": 2000000,
           "rekapItems": [],
           "pembagian": {
@@ -51727,12 +51727,28 @@
               "nilai": 1663500
             },
             {
+              "tgl": "2026-11-15",
+              "day": 15,
+              "desc": "Listrik",
+              "jenis": "OPEX",
+              "kategori": "Listrik & Air",
+              "nilai": 503000
+            },
+            {
               "tgl": "2026-11-17",
               "day": 17,
               "desc": "Cat Limbo",
               "jenis": "OPEX",
               "kategori": "Maintenance Studio & Equipment",
               "nilai": 154000
+            },
+            {
+              "tgl": "2026-11-17",
+              "day": 17,
+              "desc": "Tukang",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 50000
             },
             {
               "tgl": "2026-11-18",
