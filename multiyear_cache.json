@@ -44140,14 +44140,14 @@
     },
     "2026": {
       "year": "2026",
-      "omzet": 882818450,
+      "omzet": 883018450,
       "cash": 285666000,
-      "transfer": 597152450,
+      "transfer": 597352450,
       "cogs": 152911500,
-      "opex": 206078750,
-      "outcome": 358990250,
-      "nettProfit": 523828200,
-      "margin": 59.34,
+      "opex": 206328750,
+      "outcome": 359240250,
+      "nettProfit": 523778200,
+      "margin": 59.32,
       "months": [
         {
           "month": 1,
@@ -51377,14 +51377,14 @@
         {
           "month": 11,
           "name": "November",
-          "omzet": 49035000,
+          "omzet": 49235000,
           "cash": 11395000,
-          "transfer": 37640000,
+          "transfer": 37840000,
           "cogs": 6264500,
-          "opex": 11329420,
-          "outcome": 17593920,
-          "nettProfit": 31441080,
-          "margin": 64.12,
+          "opex": 11579420,
+          "outcome": 17843920,
+          "nettProfit": 31391080,
+          "margin": 63.76,
           "ads": 2000000,
           "rekapItems": [],
           "pembagian": {
@@ -51547,6 +51547,13 @@
               "cash": 950000,
               "transfer": 2575000,
               "total": 3525000
+            },
+            {
+              "tgl": "2026-11-23",
+              "day": 23,
+              "cash": 0,
+              "transfer": 200000,
+              "total": 200000
             }
           ],
           "expenses": [
@@ -51661,6 +51668,14 @@
               "jenis": "OPEX",
               "kategori": "Maintenance Studio & Equipment",
               "nilai": 110000
+            },
+            {
+              "tgl": "2026-11-09",
+              "day": 9,
+              "desc": "Vero Art Konten Birthday",
+              "jenis": "OPEX",
+              "kategori": "OPEX Lainnya",
+              "nilai": 250000
             },
             {
               "tgl": "2026-11-11",

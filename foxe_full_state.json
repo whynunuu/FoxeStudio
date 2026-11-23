@@ -1,7 +1,7 @@
 {
   "config": {
     "bulan": "2026-11",
-    "cutoff": "2026-11-22",
+    "cutoff": "2026-11-23",
     "status": "Progressive",
     "targets": [
       {
@@ -59184,6 +59184,32 @@
       "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "SAKA"
+    },
+    {
+      "id": "or_244",
+      "tanggal": "2026-11-23",
+      "client": "Elpro Juice",
+      "paket": "Studio Rent",
+      "tanggalFoto": "2026-11-27",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_245",
+      "tanggal": "2026-11-23",
+      "client": "Aksaraloka",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-26",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -66758,6 +66784,30 @@
       "tanggal": "2026-11-22",
       "nama": "SAKA",
       "slot": 1
+    },
+    {
+      "id": "sh_89",
+      "tanggal": "2026-11-23",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_90",
+      "tanggal": "2026-11-23",
+      "nama": "INDAH",
+      "slot": 1
+    },
+    {
+      "id": "sh_91",
+      "tanggal": "2026-11-23",
+      "nama": "SAKA",
+      "slot": 1
+    },
+    {
+      "id": "sh_92",
+      "tanggal": "2026-11-23",
+      "nama": "SAKA",
+      "slot": 1
     }
   ],
   "expenses": [
@@ -67987,6 +68037,15 @@
     },
     {
       "id": "ex_nrc_15",
+      "tanggal": "2026-11-09",
+      "bulan": "2026-11",
+      "jenis": "OPEX",
+      "kategori": "OPEX Lainnya",
+      "deskripsi": "Vero Art Konten Birthday",
+      "nilai": 250000.0
+    },
+    {
+      "id": "ex_nrc_16",
       "tanggal": "2026-11-11",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -67995,7 +68054,7 @@
       "nilai": 500000.0
     },
     {
-      "id": "ex_nrc_16",
+      "id": "ex_nrc_17",
       "tanggal": "2026-11-11",
       "bulan": "2026-11",
       "jenis": "COGS",
@@ -68004,7 +68063,7 @@
       "nilai": 950000.0
     },
     {
-      "id": "ex_nrc_17",
+      "id": "ex_nrc_18",
       "tanggal": "2026-11-12",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -68013,7 +68072,7 @@
       "nilai": 256500.0
     },
     {
-      "id": "ex_nrc_18",
+      "id": "ex_nrc_19",
       "tanggal": "2026-11-12",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -68022,7 +68081,7 @@
       "nilai": 750000.0
     },
     {
-      "id": "ex_nrc_19",
+      "id": "ex_nrc_20",
       "tanggal": "2026-11-12",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -68031,7 +68090,7 @@
       "nilai": 100000.0
     },
     {
-      "id": "ex_nrc_20",
+      "id": "ex_nrc_21",
       "tanggal": "2026-11-12",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -68040,7 +68099,7 @@
       "nilai": 503000.0
     },
     {
-      "id": "ex_nrc_21",
+      "id": "ex_nrc_22",
       "tanggal": "2026-11-13",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -68049,7 +68108,7 @@
       "nilai": 1171000.0
     },
     {
-      "id": "ex_nrc_22",
+      "id": "ex_nrc_23",
       "tanggal": "2026-11-15",
       "bulan": "2026-11",
       "jenis": "COGS",
@@ -68058,7 +68117,7 @@
       "nilai": 1663500.0
     },
     {
-      "id": "ex_nrc_23",
+      "id": "ex_nrc_24",
       "tanggal": "2026-11-15",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -68067,7 +68126,7 @@
       "nilai": 503000.0
     },
     {
-      "id": "ex_nrc_24",
+      "id": "ex_nrc_25",
       "tanggal": "2026-11-17",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -68076,7 +68135,7 @@
       "nilai": 154000.0
     },
     {
-      "id": "ex_nrc_25",
+      "id": "ex_nrc_26",
       "tanggal": "2026-11-17",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -68085,7 +68144,7 @@
       "nilai": 50000.0
     },
     {
-      "id": "ex_nrc_26",
+      "id": "ex_nrc_27",
       "tanggal": "2026-11-18",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -68094,7 +68153,7 @@
       "nilai": 500000.0
     },
     {
-      "id": "ex_nrc_27",
+      "id": "ex_nrc_28",
       "tanggal": "2026-11-19",
       "bulan": "2026-11",
       "jenis": "COGS",
@@ -68103,7 +68162,7 @@
       "nilai": 950000.0
     },
     {
-      "id": "ex_nrc_28",
+      "id": "ex_nrc_29",
       "tanggal": "2026-11-20",
       "bulan": "2026-11",
       "jenis": "OPEX",
@@ -73103,6 +73162,14 @@
       "dp": 4.0,
       "sesiFoto": 6.0,
       "transaksi": 10.0
+    },
+    {
+      "id": "ld_23",
+      "tanggal": "2026-11-23",
+      "leads": 0.0,
+      "dp": 2.0,
+      "sesiFoto": 0.0,
+      "transaksi": 2.0
     }
   ],
   "kpi": [
@@ -73122,12 +73189,12 @@
       "id": "kp_2",
       "nama": "AMEL",
       "role": "Admin 2",
-      "hariDinilai": 18,
+      "hariDinilai": 19,
       "disiplin": 5.0,
-      "akurasi": 5.0,
-      "sop": 5.0,
-      "client": 5.0,
-      "produktivitas": 5.0,
+      "akurasi": 4.89,
+      "sop": 4.89,
+      "client": 4.94,
+      "produktivitas": 4.89,
       "referral": 0
     },
     {
@@ -73146,12 +73213,12 @@
       "id": "kp_4",
       "nama": "SAKA",
       "role": "Fotografer 2",
-      "hariDinilai": 17,
+      "hariDinilai": 18,
       "disiplin": 5.0,
-      "akurasi": 5.0,
-      "sop": 5.0,
-      "client": 5.0,
-      "produktivitas": 5.0,
+      "akurasi": 4.88,
+      "sop": 4.88,
+      "client": 4.94,
+      "produktivitas": 4.88,
       "referral": 0
     }
   ],
@@ -84850,7 +84917,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 49035000.0
+        "omzet": 49235000.0
       }
     ]
   },
@@ -85198,6 +85265,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261123-0929",
+      "mulai": "2026-11-23T09:29:20.000995+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 151 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
     {
       "id": "sy_20261122-2039",
       "mulai": "2026-11-22T20:39:06.456633+00:00",
@@ -86407,7 +86480,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-22T20:39:06.456633+00:00"
+    "last_sync": "2026-11-23T09:29:20.000995+00:00"
   },
   "neracaDetail": [
     {
@@ -94372,12 +94445,12 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1280000.0,
-      "bonus_kpi": 350000.0,
+      "bonus_kpi": 344488.0,
       "additional": 0.0,
       "bonus": 346544.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1976544.0,
+      "thp": 1971032.0,
       "status": "Draft"
     },
     {
@@ -94391,12 +94464,12 @@
       "cost": 40000.0,
       "is_fixed": false,
       "total_gaji": 1160000.0,
-      "bonus_kpi": 350000.0,
+      "bonus_kpi": 344881.0,
       "additional": 0.0,
       "bonus": 340769.0,
       "hukuman": 0.0,
       "bon": 0.0,
-      "thp": 1850769.0,
+      "thp": 1845650.0,
       "status": "Draft"
     },
     {
@@ -94573,12 +94646,12 @@
   ],
   "rosterSummary": {
     "total_gaji": 13430000.0,
-    "total_bonus_kpi": 1400000.0,
+    "total_bonus_kpi": 1389369.0,
     "total_additional": 0.0,
     "total_bonus": 2065307.0,
     "total_hukuman": 0.0,
     "total_bon": 3314000.0,
-    "grand_total_thp": 13581307.0,
+    "grand_total_thp": 13570676.0,
     "total_karyawan": 12
   },
   "oktoberLogOrder": {
@@ -104400,12 +104473,12 @@
           "cost": 40000.0,
           "is_fixed": false,
           "total_gaji": 1280000.0,
-          "bonus_kpi": 350000.0,
+          "bonus_kpi": 344488.0,
           "additional": 0.0,
           "bonus": 346544.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 1976544.0,
+          "thp": 1971032.0,
           "status": "Draft"
         },
         {
@@ -104419,12 +104492,12 @@
           "cost": 40000.0,
           "is_fixed": false,
           "total_gaji": 1160000.0,
-          "bonus_kpi": 350000.0,
+          "bonus_kpi": 344881.0,
           "additional": 0.0,
           "bonus": 340769.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 1850769.0,
+          "thp": 1845650.0,
           "status": "Draft"
         },
         {
@@ -104601,12 +104674,12 @@
       ],
       "rosterSummary": {
         "total_gaji": 13430000.0,
-        "total_bonus_kpi": 1400000.0,
+        "total_bonus_kpi": 1389369.0,
         "total_additional": 0.0,
         "total_bonus": 2065307.0,
         "total_hukuman": 0.0,
         "total_bon": 3314000.0,
-        "grand_total_thp": 13581307.0,
+        "grand_total_thp": 13570676.0,
         "total_karyawan": 12
       }
     },
@@ -106317,6 +106390,15 @@
         },
         {
           "id": "ex_nrc_15",
+          "tanggal": "2026-11-09",
+          "bulan": "2026-11",
+          "jenis": "OPEX",
+          "kategori": "OPEX Lainnya",
+          "deskripsi": "Vero Art Konten Birthday",
+          "nilai": 250000.0
+        },
+        {
+          "id": "ex_nrc_16",
           "tanggal": "2026-11-11",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106325,7 +106407,7 @@
           "nilai": 500000.0
         },
         {
-          "id": "ex_nrc_16",
+          "id": "ex_nrc_17",
           "tanggal": "2026-11-11",
           "bulan": "2026-11",
           "jenis": "COGS",
@@ -106334,7 +106416,7 @@
           "nilai": 950000.0
         },
         {
-          "id": "ex_nrc_17",
+          "id": "ex_nrc_18",
           "tanggal": "2026-11-12",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106343,7 +106425,7 @@
           "nilai": 256500.0
         },
         {
-          "id": "ex_nrc_18",
+          "id": "ex_nrc_19",
           "tanggal": "2026-11-12",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106352,7 +106434,7 @@
           "nilai": 750000.0
         },
         {
-          "id": "ex_nrc_19",
+          "id": "ex_nrc_20",
           "tanggal": "2026-11-12",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106361,7 +106443,7 @@
           "nilai": 100000.0
         },
         {
-          "id": "ex_nrc_20",
+          "id": "ex_nrc_21",
           "tanggal": "2026-11-12",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106370,7 +106452,7 @@
           "nilai": 503000.0
         },
         {
-          "id": "ex_nrc_21",
+          "id": "ex_nrc_22",
           "tanggal": "2026-11-13",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106379,7 +106461,7 @@
           "nilai": 1171000.0
         },
         {
-          "id": "ex_nrc_22",
+          "id": "ex_nrc_23",
           "tanggal": "2026-11-15",
           "bulan": "2026-11",
           "jenis": "COGS",
@@ -106388,7 +106470,7 @@
           "nilai": 1663500.0
         },
         {
-          "id": "ex_nrc_23",
+          "id": "ex_nrc_24",
           "tanggal": "2026-11-15",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106397,7 +106479,7 @@
           "nilai": 503000.0
         },
         {
-          "id": "ex_nrc_24",
+          "id": "ex_nrc_25",
           "tanggal": "2026-11-17",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106406,7 +106488,7 @@
           "nilai": 154000.0
         },
         {
-          "id": "ex_nrc_25",
+          "id": "ex_nrc_26",
           "tanggal": "2026-11-17",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106415,7 +106497,7 @@
           "nilai": 50000.0
         },
         {
-          "id": "ex_nrc_26",
+          "id": "ex_nrc_27",
           "tanggal": "2026-11-18",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106424,7 +106506,7 @@
           "nilai": 500000.0
         },
         {
-          "id": "ex_nrc_27",
+          "id": "ex_nrc_28",
           "tanggal": "2026-11-19",
           "bulan": "2026-11",
           "jenis": "COGS",
@@ -106433,7 +106515,7 @@
           "nilai": 950000.0
         },
         {
-          "id": "ex_nrc_28",
+          "id": "ex_nrc_29",
           "tanggal": "2026-11-20",
           "bulan": "2026-11",
           "jenis": "OPEX",
@@ -106636,10 +106718,10 @@
           "tanggal_iso": "2026-11-09",
           "first_of_day": false,
           "masuk": 405000.0,
-          "keluar": 0.0,
-          "balance": 10985080.0,
-          "ket_masuk": "",
-          "ket_keluar": ""
+          "keluar": 250000.0,
+          "balance": 10735080.0,
+          "ket_masuk": "Transfer",
+          "ket_keluar": "Vero Art Konten Birthday"
         },
         {
           "id": "det_nrc_19",
@@ -106648,7 +106730,7 @@
           "first_of_day": true,
           "masuk": 500000.0,
           "keluar": 0.0,
-          "balance": 11485080.0,
+          "balance": 11235080.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -106659,7 +106741,7 @@
           "first_of_day": false,
           "masuk": 1100000.0,
           "keluar": 0.0,
-          "balance": 12585080.0,
+          "balance": 12335080.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -106670,7 +106752,7 @@
           "first_of_day": true,
           "masuk": 1050000.0,
           "keluar": 500000.0,
-          "balance": 13135080.0,
+          "balance": 12885080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Ads"
         },
@@ -106681,7 +106763,7 @@
           "first_of_day": false,
           "masuk": 210000.0,
           "keluar": 950000.0,
-          "balance": 12395080.0,
+          "balance": 12145080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Frame"
         },
@@ -106692,7 +106774,7 @@
           "first_of_day": true,
           "masuk": 2575000.0,
           "keluar": 256500.0,
-          "balance": 14713580.0,
+          "balance": 14463580.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Cat Abu Calmblue"
         },
@@ -106703,7 +106785,7 @@
           "first_of_day": false,
           "masuk": 500000.0,
           "keluar": 750000.0,
-          "balance": 14463580.0,
+          "balance": 14213580.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Listrik"
         },
@@ -106714,7 +106796,7 @@
           "first_of_day": false,
           "masuk": 0.0,
           "keluar": 100000.0,
-          "balance": 14363580.0,
+          "balance": 14113580.0,
           "ket_masuk": "Cash",
           "ket_keluar": "Tukang"
         },
@@ -106725,7 +106807,7 @@
           "first_of_day": false,
           "masuk": 0.0,
           "keluar": 503000.0,
-          "balance": 13860580.0,
+          "balance": 13610580.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Listrik"
         },
@@ -106736,7 +106818,7 @@
           "first_of_day": true,
           "masuk": 450000.0,
           "keluar": 1171000.0,
-          "balance": 13139580.0,
+          "balance": 12889580.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Maintanance Atap"
         },
@@ -106747,7 +106829,7 @@
           "first_of_day": true,
           "masuk": 1625000.0,
           "keluar": 0.0,
-          "balance": 14764580.0,
+          "balance": 14514580.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -106758,7 +106840,7 @@
           "first_of_day": false,
           "masuk": 300000.0,
           "keluar": 0.0,
-          "balance": 15064580.0,
+          "balance": 14814580.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -106769,7 +106851,7 @@
           "first_of_day": true,
           "masuk": 1910000.0,
           "keluar": 1663500.0,
-          "balance": 15311080.0,
+          "balance": 15061080.0,
           "ket_masuk": "Trasfer",
           "ket_keluar": "Cetakan"
         },
@@ -106780,7 +106862,7 @@
           "first_of_day": false,
           "masuk": 1080000.0,
           "keluar": 503000.0,
-          "balance": 15888080.0,
+          "balance": 15638080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Listrik"
         },
@@ -106791,7 +106873,7 @@
           "first_of_day": true,
           "masuk": 1875000.0,
           "keluar": 0.0,
-          "balance": 17763080.0,
+          "balance": 17513080.0,
           "ket_masuk": "",
           "ket_keluar": ""
         },
@@ -106802,7 +106884,7 @@
           "first_of_day": true,
           "masuk": 2425000.0,
           "keluar": 154000.0,
-          "balance": 20034080.0,
+          "balance": 19784080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Cat Limbo"
         },
@@ -106813,7 +106895,7 @@
           "first_of_day": false,
           "masuk": 775000.0,
           "keluar": 50000.0,
-          "balance": 20759080.0,
+          "balance": 20509080.0,
           "ket_masuk": "Cash",
           "ket_keluar": "Tukang"
         },
@@ -106824,7 +106906,7 @@
           "first_of_day": true,
           "masuk": 2125000.0,
           "keluar": 500000.0,
-          "balance": 22384080.0,
+          "balance": 22134080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Ads"
         },
@@ -106835,7 +106917,7 @@
           "first_of_day": true,
           "masuk": 1935000.0,
           "keluar": 950000.0,
-          "balance": 23369080.0,
+          "balance": 23119080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Frame"
         },
@@ -106846,15 +106928,15 @@
           "first_of_day": true,
           "masuk": 1400000.0,
           "keluar": 503000.0,
-          "balance": 24266080.0,
+          "balance": 24016080.0,
           "ket_masuk": "Transfer",
           "ket_keluar": "Listrik"
         }
       ],
       "summary": {
         "total_masuk": 41860000.0,
-        "total_keluar": 17593920.0,
-        "ending_balance": 24266080.0,
+        "total_keluar": 17843920.0,
+        "ending_balance": 24016080.0,
         "total_rows": 37
       },
       "rosterGaji": [
@@ -106882,18 +106964,18 @@
           "row_idx": 12,
           "nama": "Saka",
           "job": "Fotografer",
-          "q": 22.0,
+          "q": 24.0,
           "q_raw": 0.0,
-          "actual_shift": 22,
+          "actual_shift": 24,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 880000.0,
+          "total_gaji": 960000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 880000.0,
+          "thp": 960000.0,
           "status": "Draft"
         },
         {
@@ -106901,18 +106983,18 @@
           "row_idx": 14,
           "nama": "Amel",
           "job": "Admin",
-          "q": 22.0,
+          "q": 23.0,
           "q_raw": 0.0,
-          "actual_shift": 22,
+          "actual_shift": 23,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 880000.0,
+          "total_gaji": 920000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 880000.0,
+          "thp": 920000.0,
           "status": "Draft"
         },
         {
@@ -106920,18 +107002,18 @@
           "row_idx": 16,
           "nama": "Indah",
           "job": "Admin",
-          "q": 22.0,
+          "q": 23.0,
           "q_raw": 0.0,
-          "actual_shift": 22,
+          "actual_shift": 23,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 880000.0,
+          "total_gaji": 920000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 880000.0,
+          "thp": 920000.0,
           "status": "Draft"
         },
         {
@@ -107088,13 +107170,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 11670000.0,
+        "total_gaji": 11830000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 11670000.0,
+        "grand_total_thp": 11830000.0,
         "total_karyawan": 12
       }
     },
@@ -116831,12 +116913,12 @@
         "cost": 40000.0,
         "is_fixed": false,
         "total_gaji": 1280000.0,
-        "bonus_kpi": 350000.0,
+        "bonus_kpi": 344488.0,
         "additional": 0.0,
         "bonus": 346544.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 1976544.0,
+        "thp": 1971032.0,
         "status": "Draft"
       },
       {
@@ -116850,12 +116932,12 @@
         "cost": 40000.0,
         "is_fixed": false,
         "total_gaji": 1160000.0,
-        "bonus_kpi": 350000.0,
+        "bonus_kpi": 344881.0,
         "additional": 0.0,
         "bonus": 340769.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 1850769.0,
+        "thp": 1845650.0,
         "status": "Draft"
       },
       {
@@ -117285,18 +117367,18 @@
         "row_idx": 12,
         "nama": "Saka",
         "job": "Fotografer",
-        "q": 22.0,
+        "q": 24.0,
         "q_raw": 0.0,
-        "actual_shift": 22,
+        "actual_shift": 24,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 880000.0,
+        "total_gaji": 960000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 880000.0,
+        "thp": 960000.0,
         "status": "Draft"
       },
       {
@@ -117304,18 +117386,18 @@
         "row_idx": 14,
         "nama": "Amel",
         "job": "Admin",
-        "q": 22.0,
+        "q": 23.0,
         "q_raw": 0.0,
-        "actual_shift": 22,
+        "actual_shift": 23,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 880000.0,
+        "total_gaji": 920000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 880000.0,
+        "thp": 920000.0,
         "status": "Draft"
       },
       {
@@ -117323,18 +117405,18 @@
         "row_idx": 16,
         "nama": "Indah",
         "job": "Admin",
-        "q": 22.0,
+        "q": 23.0,
         "q_raw": 0.0,
-        "actual_shift": 22,
+        "actual_shift": 23,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 880000.0,
+        "total_gaji": 920000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 880000.0,
+        "thp": 920000.0,
         "status": "Draft"
       },
       {
@@ -171409,7 +171491,7 @@
         "jmlOrang": 40,
         "harga": 1000000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -171487,6 +171569,28 @@
       },
       {
         "id": "sc_bk_132",
+        "tgl": "2026-11-27",
+        "waktu": "09:30",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "elpro juice",
+        "paket": "Studio Rent",
+        "paketRaw": "Studio Rent",
+        "jmlOrang": 1,
+        "harga": 450000.0,
+        "admin": "AL",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_133",
         "tgl": "2026-11-28",
         "waktu": "09:30",
         "studio": "Studio 1",
@@ -171508,7 +171612,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_133",
+        "id": "sc_bk_134",
         "tgl": "2026-11-29",
         "waktu": "10:00",
         "studio": "Studio 1",
@@ -171530,7 +171634,7 @@
         "isReschedule": false
       },
       {
-        "id": "sc_bk_134",
+        "id": "sc_bk_135",
         "tgl": "2026-11-29",
         "waktu": "16:00",
         "studio": "Studio 1",
@@ -215729,14 +215833,14 @@
       },
       "2026": {
         "year": "2026",
-        "omzet": 882818450,
+        "omzet": 883018450,
         "cash": 285666000,
-        "transfer": 597152450,
+        "transfer": 597352450,
         "cogs": 152911500,
-        "opex": 206078750,
-        "outcome": 358990250,
-        "nettProfit": 523828200,
-        "margin": 59.34,
+        "opex": 206328750,
+        "outcome": 359240250,
+        "nettProfit": 523778200,
+        "margin": 59.32,
         "months": [
           {
             "month": 1,
@@ -222966,14 +223070,14 @@
           {
             "month": 11,
             "name": "November",
-            "omzet": 49035000,
+            "omzet": 49235000,
             "cash": 11395000,
-            "transfer": 37640000,
+            "transfer": 37840000,
             "cogs": 6264500,
-            "opex": 11329420,
-            "outcome": 17593920,
-            "nettProfit": 31441080,
-            "margin": 64.12,
+            "opex": 11579420,
+            "outcome": 17843920,
+            "nettProfit": 31391080,
+            "margin": 63.76,
             "ads": 2000000,
             "rekapItems": [],
             "pembagian": {
@@ -223136,6 +223240,13 @@
                 "cash": 950000,
                 "transfer": 2575000,
                 "total": 3525000
+              },
+              {
+                "tgl": "2026-11-23",
+                "day": 23,
+                "cash": 0,
+                "transfer": 200000,
+                "total": 200000
               }
             ],
             "expenses": [
@@ -223250,6 +223361,14 @@
                 "jenis": "OPEX",
                 "kategori": "Maintenance Studio & Equipment",
                 "nilai": 110000
+              },
+              {
+                "tgl": "2026-11-09",
+                "day": 9,
+                "desc": "Vero Art Konten Birthday",
+                "jenis": "OPEX",
+                "kategori": "OPEX Lainnya",
+                "nilai": 250000
               },
               {
                 "tgl": "2026-11-11",
@@ -226553,6 +226672,32 @@
         "pembayaran": "Lunas",
         "admin": "INDAH",
         "fotografer": "SAKA"
+      },
+      {
+        "id": "or_244",
+        "tanggal": "2026-11-23",
+        "client": "Elpro Juice",
+        "paket": "Studio Rent",
+        "tanggalFoto": "2026-11-27",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_245",
+        "tanggal": "2026-11-23",
+        "client": "Aksaraloka",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-26",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -227083,6 +227228,30 @@
         "tanggal": "2026-11-22",
         "nama": "SAKA",
         "slot": 1
+      },
+      {
+        "id": "sh_89",
+        "tanggal": "2026-11-23",
+        "nama": "AMEL",
+        "slot": 1
+      },
+      {
+        "id": "sh_90",
+        "tanggal": "2026-11-23",
+        "nama": "INDAH",
+        "slot": 1
+      },
+      {
+        "id": "sh_91",
+        "tanggal": "2026-11-23",
+        "nama": "SAKA",
+        "slot": 1
+      },
+      {
+        "id": "sh_92",
+        "tanggal": "2026-11-23",
+        "nama": "SAKA",
+        "slot": 1
       }
     ],
     "cashControl": [
@@ -227423,9 +227592,9 @@
         "id": "ld_23",
         "tanggal": "2026-11-23",
         "leads": 0.0,
-        "dp": 0.0,
+        "dp": 2.0,
         "sesiFoto": 0.0,
-        "transaksi": 0.0
+        "transaksi": 2.0
       },
       {
         "id": "ld_24",
@@ -227509,12 +227678,12 @@
         "id": "kp_2",
         "nama": "AMEL",
         "role": "Admin 2",
-        "hariDinilai": 18,
+        "hariDinilai": 19,
         "disiplin": 5.0,
-        "akurasi": 5.0,
-        "sop": 5.0,
-        "client": 5.0,
-        "produktivitas": 5.0,
+        "akurasi": 4.89,
+        "sop": 4.89,
+        "client": 4.94,
+        "produktivitas": 4.89,
         "referral": 0
       },
       {
@@ -227533,18 +227702,19 @@
         "id": "kp_4",
         "nama": "SAKA",
         "role": "Fotografer 2",
-        "hariDinilai": 17,
+        "hariDinilai": 18,
         "disiplin": 5.0,
-        "akurasi": 5.0,
-        "sop": 5.0,
-        "client": 5.0,
-        "produktivitas": 5.0,
+        "akurasi": 4.88,
+        "sop": 4.88,
+        "client": 4.94,
+        "produktivitas": 4.88,
         "referral": 0
       }
     ],
     "kpi_raw": {
       "AMEL": {
         "disiplin": [
+          5.0,
           5.0,
           5.0,
           5.0,
@@ -227581,7 +227751,8 @@
           5.0,
           5.0,
           5.0,
-          5.0
+          5.0,
+          3.0
         ],
         "sop": [
           5.0,
@@ -227600,7 +227771,8 @@
           5.0,
           5.0,
           5.0,
-          5.0
+          5.0,
+          3.0
         ],
         "client": [
           5.0,
@@ -227619,7 +227791,8 @@
           5.0,
           5.0,
           5.0,
-          5.0
+          5.0,
+          4.0
         ],
         "produktivitas": [
           5.0,
@@ -227638,7 +227811,8 @@
           5.0,
           5.0,
           5.0,
-          5.0
+          5.0,
+          3.0
         ]
       },
       "INDAH": {
@@ -227757,6 +227931,7 @@
           5.0,
           5.0,
           5.0,
+          5.0,
           5.0
         ],
         "akurasi": [
@@ -227775,7 +227950,8 @@
           5.0,
           5.0,
           5.0,
-          5.0
+          5.0,
+          3.0
         ],
         "sop": [
           5.0,
@@ -227793,7 +227969,8 @@
           5.0,
           5.0,
           5.0,
-          5.0
+          5.0,
+          3.0
         ],
         "client": [
           5.0,
@@ -227811,7 +227988,8 @@
           5.0,
           5.0,
           5.0,
-          5.0
+          5.0,
+          4.0
         ],
         "produktivitas": [
           5.0,
@@ -227829,7 +228007,8 @@
           5.0,
           5.0,
           5.0,
-          5.0
+          5.0,
+          3.0
         ]
       },
       "ADIF": {
@@ -227936,7 +228115,7 @@
         ]
       }
     },
-    "cutoff": "2026-11-22",
-    "hariBerjalan": 22
+    "cutoff": "2026-11-23",
+    "hariBerjalan": 23
   }
 }
