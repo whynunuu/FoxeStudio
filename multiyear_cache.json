@@ -44140,14 +44140,14 @@
     },
     "2026": {
       "year": "2026",
-      "omzet": 888783450,
+      "omzet": 890508450,
       "cash": 287676000,
-      "transfer": 601107450,
+      "transfer": 602832450,
       "cogs": 152911500,
       "opex": 206328750,
       "outcome": 359240250,
-      "nettProfit": 529543200,
-      "margin": 59.58,
+      "nettProfit": 531268200,
+      "margin": 59.66,
       "months": [
         {
           "month": 1,
@@ -51377,14 +51377,14 @@
         {
           "month": 11,
           "name": "November",
-          "omzet": 55000000,
+          "omzet": 56725000,
           "cash": 13405000,
-          "transfer": 41595000,
+          "transfer": 43320000,
           "cogs": 6264500,
           "opex": 11579420,
           "outcome": 17843920,
-          "nettProfit": 37156080,
-          "margin": 67.56,
+          "nettProfit": 38881080,
+          "margin": 68.54,
           "ads": 2000000,
           "rekapItems": [],
           "pembagian": {
@@ -51566,8 +51566,8 @@
               "tgl": "2026-11-25",
               "day": 25,
               "cash": 0,
-              "transfer": 360000,
-              "total": 360000
+              "transfer": 2085000,
+              "total": 2085000
             }
           ],
           "expenses": [

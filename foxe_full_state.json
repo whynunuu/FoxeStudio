@@ -59574,6 +59574,58 @@
       "pembayaran": "DP",
       "admin": "AMEL",
       "fotografer": ""
+    },
+    {
+      "id": "or_274",
+      "tanggal": "2026-11-25",
+      "client": "Danica",
+      "paket": "Photofox",
+      "tanggalFoto": "2026-12-05",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "AMEL",
+      "fotografer": ""
+    },
+    {
+      "id": "or_275",
+      "tanggal": "2026-11-25",
+      "client": "Rachel",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-25",
+      "cash": 0.0,
+      "transfer": 0.0,
+      "total": 0.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_276",
+      "tanggal": "2026-11-25",
+      "client": "Abiyuna",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-25",
+      "cash": 0.0,
+      "transfer": 150000.0,
+      "total": 150000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
+    },
+    {
+      "id": "or_277",
+      "tanggal": "2026-11-25",
+      "client": "Karina putri",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-25",
+      "cash": 0.0,
+      "transfer": 1475000.0,
+      "total": 1475000.0,
+      "pembayaran": "Lunas",
+      "admin": "AMEL",
+      "fotografer": "ADIF"
     }
   ],
   "shifts": [
@@ -73606,10 +73658,10 @@
     {
       "id": "ld_25",
       "tanggal": "2026-11-25",
-      "leads": 0.0,
-      "dp": 1.0,
-      "sesiFoto": 2.0,
-      "transaksi": 3.0
+      "leads": 20.0,
+      "dp": 2.0,
+      "sesiFoto": 5.0,
+      "transaksi": 7.0
     }
   ],
   "kpi": [
@@ -85357,7 +85409,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 55000000.0
+        "omzet": 56725000.0
       }
     ]
   },
@@ -85705,6 +85757,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261125-1525",
+      "mulai": "2026-11-25T15:25:43.084562+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 151 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
     {
       "id": "sy_20261125-1009",
       "mulai": "2026-11-25T10:09:22.147468+00:00",
@@ -86944,7 +87002,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-25T10:09:22.147468+00:00"
+    "last_sync": "2026-11-25T15:25:43.084562+00:00"
   },
   "neracaDetail": [
     {
@@ -171979,12 +172037,12 @@
         "admin": "IN",
         "noHp": "lunas wooden",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
@@ -172001,12 +172059,12 @@
         "admin": "IN",
         "noHp": "dp 100",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
@@ -172021,14 +172079,14 @@
         "jmlOrang": 57,
         "harga": 1425000.0,
         "admin": "AL",
-        "noHp": "",
+        "noHp": "dp 100",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
@@ -216495,14 +216553,14 @@
       },
       "2026": {
         "year": "2026",
-        "omzet": 888783450,
+        "omzet": 890508450,
         "cash": 287676000,
-        "transfer": 601107450,
+        "transfer": 602832450,
         "cogs": 152911500,
         "opex": 206328750,
         "outcome": 359240250,
-        "nettProfit": 529543200,
-        "margin": 59.58,
+        "nettProfit": 531268200,
+        "margin": 59.66,
         "months": [
           {
             "month": 1,
@@ -223732,14 +223790,14 @@
           {
             "month": 11,
             "name": "November",
-            "omzet": 55000000,
+            "omzet": 56725000,
             "cash": 13405000,
-            "transfer": 41595000,
+            "transfer": 43320000,
             "cogs": 6264500,
             "opex": 11579420,
             "outcome": 17843920,
-            "nettProfit": 37156080,
-            "margin": 67.56,
+            "nettProfit": 38881080,
+            "margin": 68.54,
             "ads": 2000000,
             "rekapItems": [],
             "pembagian": {
@@ -223921,8 +223979,8 @@
                 "tgl": "2026-11-25",
                 "day": 25,
                 "cash": 0,
-                "transfer": 360000,
-                "total": 360000
+                "transfer": 2085000,
+                "total": 2085000
               }
             ],
             "expenses": [
@@ -227738,6 +227796,58 @@
         "pembayaran": "DP",
         "admin": "AMEL",
         "fotografer": ""
+      },
+      {
+        "id": "or_274",
+        "tanggal": "2026-11-25",
+        "client": "Danica",
+        "paket": "Photofox",
+        "tanggalFoto": "2026-12-05",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "AMEL",
+        "fotografer": ""
+      },
+      {
+        "id": "or_275",
+        "tanggal": "2026-11-25",
+        "client": "Rachel",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-25",
+        "cash": 0.0,
+        "transfer": 0.0,
+        "total": 0.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_276",
+        "tanggal": "2026-11-25",
+        "client": "Abiyuna",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-25",
+        "cash": 0.0,
+        "transfer": 150000.0,
+        "total": 150000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
+      },
+      {
+        "id": "or_277",
+        "tanggal": "2026-11-25",
+        "client": "Karina putri",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-25",
+        "cash": 0.0,
+        "transfer": 1475000.0,
+        "total": 1475000.0,
+        "pembayaran": "Lunas",
+        "admin": "AMEL",
+        "fotografer": "ADIF"
       }
     ],
     "shifts": [
@@ -228707,10 +228817,10 @@
       {
         "id": "ld_25",
         "tanggal": "2026-11-25",
-        "leads": 0.0,
-        "dp": 1.0,
-        "sesiFoto": 2.0,
-        "transaksi": 3.0
+        "leads": 20.0,
+        "dp": 2.0,
+        "sesiFoto": 5.0,
+        "transaksi": 7.0
       },
       {
         "id": "ld_26",
