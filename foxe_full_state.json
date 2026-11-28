@@ -1,7 +1,7 @@
 {
   "config": {
     "bulan": "2026-11",
-    "cutoff": "2026-11-27",
+    "cutoff": "2026-11-28",
     "status": "Progressive",
     "targets": [
       {
@@ -59821,6 +59821,123 @@
       "pembayaran": "Lunas",
       "admin": "INDAH",
       "fotografer": "ADIF"
+    },
+    {
+      "id": "or_293",
+      "tanggal": "2026-11-28",
+      "client": "Daffa Mukti Arridho",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-12-12",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_294",
+      "tanggal": "2026-11-28",
+      "client": "Nailah",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-28",
+      "cash": 0.0,
+      "transfer": 200000.0,
+      "total": 200000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_295",
+      "tanggal": "2026-11-28",
+      "client": "Vian Vinanda",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-12-15",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_296",
+      "tanggal": "2026-11-28",
+      "client": "Claresta",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-12-12",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_297",
+      "tanggal": "2026-11-28",
+      "client": "Melvi Indana",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-12-12",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_298",
+      "tanggal": "2026-11-28",
+      "client": "Melisa",
+      "paket": "Maternity",
+      "tanggalFoto": "2026-11-28",
+      "cash": 250000.0,
+      "transfer": 0.0,
+      "total": 250000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_299",
+      "tanggal": "2026-11-28",
+      "client": "Nurlaila",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-28",
+      "cash": 325000.0,
+      "transfer": 0.0,
+      "total": 325000.0,
+      "pembayaran": "Lunas",
+      "admin": "INDAH",
+      "fotografer": "SAKA"
+    },
+    {
+      "id": "or_300",
+      "tanggal": "2026-11-28",
+      "client": "Syifa",
+      "paket": "Large Group",
+      "tanggalFoto": "2026-11-30",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
+    },
+    {
+      "id": "or_301",
+      "tanggal": "2026-11-28",
+      "client": "Winan Rizky F",
+      "paket": "Graduation",
+      "tanggalFoto": "2026-12-12",
+      "cash": 0.0,
+      "transfer": 100000.0,
+      "total": 100000.0,
+      "pembayaran": "DP",
+      "admin": "INDAH",
+      "fotografer": ""
     }
   ],
   "shifts": [
@@ -67525,7 +67642,19 @@
     {
       "id": "sh_110",
       "tanggal": "2026-11-28",
+      "nama": "AMEL",
+      "slot": 1
+    },
+    {
+      "id": "sh_111",
+      "tanggal": "2026-11-28",
       "nama": "SAKA",
+      "slot": 1
+    },
+    {
+      "id": "sh_112",
+      "tanggal": "2026-11-28",
+      "nama": "ADIF",
       "slot": 1
     }
   ],
@@ -73191,7 +73320,7 @@
     {
       "id": "cc_2026-11-28",
       "tanggal": "2026-11-28",
-      "nilai": 0.0
+      "nilai": 575000.0
     },
     {
       "id": "cc_2026-11-29",
@@ -73921,6 +74050,14 @@
       "dp": 2.0,
       "sesiFoto": 4.0,
       "transaksi": 6.0
+    },
+    {
+      "id": "ld_28",
+      "tanggal": "2026-11-28",
+      "leads": 0.0,
+      "dp": 6.0,
+      "sesiFoto": 3.0,
+      "transaksi": 9.0
     }
   ],
   "kpi": [
@@ -85668,7 +85805,7 @@
       {
         "tahun": 2026,
         "no": 11,
-        "omzet": 60800000.0
+        "omzet": 62175000.0
       }
     ]
   },
@@ -86016,6 +86153,12 @@
     }
   ],
   "sync": [
+    {
+      "id": "sy_20261128-0910",
+      "mulai": "2026-11-28T09:10:39.114245+00:00",
+      "status": "sukses",
+      "ringkas": "Integrasi berhasil: 632 order Sep, 458 order Okt, 332 jadwal terpadu Sep (termasuk 141 wisuda), 151 pos pengeluaran Neraca, 279 pipeline Okt."
+    },
     {
       "id": "sy_20261127-1451",
       "mulai": "2026-11-27T14:51:57.361196+00:00",
@@ -87285,7 +87428,7 @@
     "wisuda_unsoed_9sep_id": "17v-GjdUESuSWDFmduvweCzCe5Cg7QtNn",
     "file1_nov_id": "1PzwR4Z_H_36ey4pD891XnhOS_AyYxlDK",
     "file2_nov_id": "1GthM8cXx2Rm-Qplpc4iYu-jP24JtO3EGDgd3nO5epYw",
-    "last_sync": "2026-11-27T14:51:57.361196+00:00"
+    "last_sync": "2026-11-28T09:10:39.114245+00:00"
   },
   "neracaDetail": [
     {
@@ -107827,18 +107970,18 @@
           "row_idx": 10,
           "nama": "Adif",
           "job": "Fotografer",
-          "q": 27.0,
+          "q": 28.0,
           "q_raw": 0.0,
-          "actual_shift": 27,
+          "actual_shift": 28,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 1080000.0,
+          "total_gaji": 1120000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 1080000.0,
+          "thp": 1120000.0,
           "status": "Draft"
         },
         {
@@ -107865,18 +108008,18 @@
           "row_idx": 14,
           "nama": "Amel",
           "job": "Admin",
-          "q": 27.0,
+          "q": 28.0,
           "q_raw": 0.0,
-          "actual_shift": 27,
+          "actual_shift": 28,
           "cost": 40000.0,
           "is_fixed": false,
-          "total_gaji": 1080000.0,
+          "total_gaji": 1120000.0,
           "bonus_kpi": 0.0,
           "additional": 0.0,
           "bonus": 0.0,
           "hukuman": 0.0,
           "bon": 0.0,
-          "thp": 1080000.0,
+          "thp": 1120000.0,
           "status": "Draft"
         },
         {
@@ -108052,13 +108195,13 @@
         }
       ],
       "rosterSummary": {
-        "total_gaji": 12550000.0,
+        "total_gaji": 12630000.0,
         "total_bonus_kpi": 0.0,
         "total_additional": 0.0,
         "total_bonus": 0.0,
         "total_hukuman": 0.0,
         "total_bon": 0.0,
-        "grand_total_thp": 12550000.0,
+        "grand_total_thp": 12630000.0,
         "total_karyawan": 12
       }
     },
@@ -118230,18 +118373,18 @@
         "row_idx": 10,
         "nama": "Adif",
         "job": "Fotografer",
-        "q": 27.0,
+        "q": 28.0,
         "q_raw": 0.0,
-        "actual_shift": 27,
+        "actual_shift": 28,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 1080000.0,
+        "total_gaji": 1120000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 1080000.0,
+        "thp": 1120000.0,
         "status": "Draft"
       },
       {
@@ -118268,18 +118411,18 @@
         "row_idx": 14,
         "nama": "Amel",
         "job": "Admin",
-        "q": 27.0,
+        "q": 28.0,
         "q_raw": 0.0,
-        "actual_shift": 27,
+        "actual_shift": 28,
         "cost": 40000.0,
         "is_fixed": false,
-        "total_gaji": 1080000.0,
+        "total_gaji": 1120000.0,
         "bonus_kpi": 0.0,
         "additional": 0.0,
         "bonus": 0.0,
         "hukuman": 0.0,
         "bon": 0.0,
-        "thp": 1080000.0,
+        "thp": 1120000.0,
         "status": "Draft"
       },
       {
@@ -172661,12 +172804,12 @@
         "admin": "IN",
         "noHp": "dp 100 limbo",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
@@ -172683,40 +172826,18 @@
         "admin": "AL",
         "noHp": "Concrete",
         "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
         "isReschedule": false
       },
       {
         "id": "sc_bk_143",
         "tgl": "2026-11-28",
-        "waktu": "16:00",
-        "studio": "Studio 1",
-        "studioNama": "Studio 1",
-        "nama": "Naila",
-        "paket": "Large Group",
-        "paketRaw": "LG 15",
-        "jmlOrang": 15,
-        "harga": 375000.0,
-        "admin": "IN",
-        "noHp": "dp 100",
-        "manual": false,
-        "color": "HIJAU",
-        "statusColor": "hijau",
-        "statusSesi": "confirmed",
-        "statusLabel": "Terjadwal",
-        "statusBadge": "prog",
-        "isDone": false,
-        "isReschedule": false
-      },
-      {
-        "id": "sc_bk_144",
-        "tgl": "2026-11-28",
-        "waktu": "18:00",
+        "waktu": "12:00",
         "studio": "Studio 1",
         "studioNama": "Studio 1",
         "nama": "Nurlaila Bazarwati",
@@ -172724,6 +172845,28 @@
         "paketRaw": "LG 7",
         "jmlOrang": 7,
         "harga": 175000.0,
+        "admin": "IN",
+        "noHp": "dp 100",
+        "manual": false,
+        "color": "BIRU",
+        "statusColor": "biru",
+        "statusSesi": "done",
+        "statusLabel": "Selesai / Hadir",
+        "statusBadge": "crit",
+        "isDone": true,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_144",
+        "tgl": "2026-11-28",
+        "waktu": "16:20",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Naila",
+        "paket": "Large Group",
+        "paketRaw": "LG 15",
+        "jmlOrang": 15,
+        "harga": 375000.0,
         "admin": "IN",
         "noHp": "dp 100",
         "manual": false,
@@ -172880,6 +173023,28 @@
         "harga": 50000.0,
         "admin": "AL",
         "noHp": "lunas",
+        "manual": false,
+        "color": "HIJAU",
+        "statusColor": "hijau",
+        "statusSesi": "confirmed",
+        "statusLabel": "Terjadwal",
+        "statusBadge": "prog",
+        "isDone": false,
+        "isReschedule": false
+      },
+      {
+        "id": "sc_bk_152",
+        "tgl": "2026-11-30",
+        "waktu": "19:00",
+        "studio": "Studio 1",
+        "studioNama": "Studio 1",
+        "nama": "Syifa",
+        "paket": "Large Group",
+        "paketRaw": "LG 20",
+        "jmlOrang": 20,
+        "harga": 500000.0,
+        "admin": "IN",
+        "noHp": "dp 100",
         "manual": false,
         "color": "HIJAU",
         "statusColor": "hijau",
@@ -217067,14 +217232,14 @@
       },
       "2026": {
         "year": "2026",
-        "omzet": 894583450,
-        "cash": 289076000,
-        "transfer": 605507450,
+        "omzet": 895958450,
+        "cash": 289651000,
+        "transfer": 606307450,
         "cogs": 152911500,
         "opex": 206328750,
         "outcome": 359240250,
-        "nettProfit": 535343200,
-        "margin": 59.84,
+        "nettProfit": 536718200,
+        "margin": 59.9,
         "months": [
           {
             "month": 1,
@@ -224304,14 +224469,14 @@
           {
             "month": 11,
             "name": "November",
-            "omzet": 60800000,
-            "cash": 14805000,
-            "transfer": 45995000,
+            "omzet": 62175000,
+            "cash": 15380000,
+            "transfer": 46795000,
             "cogs": 6264500,
             "opex": 11579420,
             "outcome": 17843920,
-            "nettProfit": 42956080,
-            "margin": 70.65,
+            "nettProfit": 44331080,
+            "margin": 71.3,
             "ads": 2000000,
             "rekapItems": [],
             "pembagian": {
@@ -224509,6 +224674,13 @@
                 "cash": 0,
                 "transfer": 2075000,
                 "total": 2075000
+              },
+              {
+                "tgl": "2026-11-28",
+                "day": 28,
+                "cash": 575000,
+                "transfer": 800000,
+                "total": 1375000
               }
             ],
             "expenses": [
@@ -228571,6 +228743,123 @@
         "pembayaran": "Lunas",
         "admin": "INDAH",
         "fotografer": "ADIF"
+      },
+      {
+        "id": "or_293",
+        "tanggal": "2026-11-28",
+        "client": "Daffa Mukti Arridho",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-12-12",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_294",
+        "tanggal": "2026-11-28",
+        "client": "Nailah",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-28",
+        "cash": 0.0,
+        "transfer": 200000.0,
+        "total": 200000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_295",
+        "tanggal": "2026-11-28",
+        "client": "Vian Vinanda",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-12-15",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_296",
+        "tanggal": "2026-11-28",
+        "client": "Claresta",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-12-12",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_297",
+        "tanggal": "2026-11-28",
+        "client": "Melvi Indana",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-12-12",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_298",
+        "tanggal": "2026-11-28",
+        "client": "Melisa",
+        "paket": "Maternity",
+        "tanggalFoto": "2026-11-28",
+        "cash": 250000.0,
+        "transfer": 0.0,
+        "total": 250000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_299",
+        "tanggal": "2026-11-28",
+        "client": "Nurlaila",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-28",
+        "cash": 325000.0,
+        "transfer": 0.0,
+        "total": 325000.0,
+        "pembayaran": "Lunas",
+        "admin": "INDAH",
+        "fotografer": "SAKA"
+      },
+      {
+        "id": "or_300",
+        "tanggal": "2026-11-28",
+        "client": "Syifa",
+        "paket": "Large Group",
+        "tanggalFoto": "2026-11-30",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
+      },
+      {
+        "id": "or_301",
+        "tanggal": "2026-11-28",
+        "client": "Winan Rizky F",
+        "paket": "Graduation",
+        "tanggalFoto": "2026-12-12",
+        "cash": 0.0,
+        "transfer": 100000.0,
+        "total": 100000.0,
+        "pembayaran": "DP",
+        "admin": "INDAH",
+        "fotografer": ""
       }
     ],
     "shifts": [
@@ -229231,7 +229520,19 @@
       {
         "id": "sh_110",
         "tanggal": "2026-11-28",
+        "nama": "AMEL",
+        "slot": 1
+      },
+      {
+        "id": "sh_111",
+        "tanggal": "2026-11-28",
         "nama": "SAKA",
+        "slot": 1
+      },
+      {
+        "id": "sh_112",
+        "tanggal": "2026-11-28",
+        "nama": "ADIF",
         "slot": 1
       }
     ],
@@ -229374,7 +229675,7 @@
       {
         "id": "cc_2026-11-28",
         "tanggal": "2026-11-28",
-        "nilai": 0.0
+        "nilai": 575000.0
       },
       {
         "id": "cc_2026-11-29",
@@ -229613,9 +229914,9 @@
         "id": "ld_28",
         "tanggal": "2026-11-28",
         "leads": 0.0,
-        "dp": 0.0,
-        "sesiFoto": 0.0,
-        "transaksi": 0.0
+        "dp": 6.0,
+        "sesiFoto": 3.0,
+        "transaksi": 9.0
       },
       {
         "id": "ld_29",
@@ -230242,7 +230543,7 @@
         ]
       }
     },
-    "cutoff": "2026-11-27",
-    "hariBerjalan": 27
+    "cutoff": "2026-11-28",
+    "hariBerjalan": 28
   }
 }
